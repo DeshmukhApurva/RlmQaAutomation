@@ -1,0 +1,33 @@
+---
+ 
+CSMNetOps_EETEST2:
+ userName: "qa-csmnetops-eetest2@servicesource.com"
+ pwd: "pass@word1"
+ Role: "CSM NetOps" 
+ Server: "EEtest2"
+ Instance: "CSMNetOps_EETEST2"
+ Name: "QA CSMNetOps"
+ 
+CSM_EETEST2:
+ userName: "qa-csm-eetest2@servicesource.com"
+ pwd: "pass@word1"
+ Role: "CSM"
+ Server: "EEtest2"
+ Instance: "CSM_EETEST2"
+ Name: "QA CSM"
+ 
+CSMNetOps_EETEST4:
+ userName: "qa-csmnetops-eetest4@servicesource.com"
+ pwd: "pass@word2"
+ Role: "CSM NetOps"
+ Server: "EEtest4"
+ Instance: "CSMNetOps_EETEST4"
+ Name: "QA CSMNetOps"
+ 
+CSM_EETEST4:
+ userName: "qa-csm-eetest4@servicesource.com"
+ pwd: "pass@word2"
+ Role: "CSM"
+ Server: "EEtest4"
+ Instance: "CSM_EETEST4"
+ Name: "QA CSM"

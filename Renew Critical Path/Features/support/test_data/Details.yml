@@ -1,0 +1,434 @@
+---
+OpportunityGeneration:
+ Fieldvalue1: "Stage"
+ Operator1: "="
+ Value1: "Closed Won"
+ Fieldvalue2: "Amount"
+ Operator2: ">="
+ Value2: 10000
+ Fieldvalue3: "Quantity"
+ Operator3: ">="
+ Value3: 2
+ section: 0
+ row: 0
+ RenewalOpp: "SourceOpp_renewalOpp"
+ 
+newOpportunity:
+ Opportunity Name: "CA_CP_SourceOpp"
+ Stage: "Needs Analysis"
+ Close Date: "7/13/2017"
+ 
+RenewableProducts:
+ Fieldvalue1: "Created Date" 
+ Operator1: ">"
+ value1: "Yesterday"
+ Fieldvalue2: "Product Name"
+ Operator2: "LIKE"
+ Value2: "Product"
+ Fieldvalue3: "Deleted"
+ Operator3: "="
+ Value3: "false"
+ Fieldvalue4: "Active"
+ Operator4: "="
+ Value4: "true"
+ Fieldvalue5: "Product Name"
+ Operator5: "LIKE"
+ Value5: ""
+ wFieldvalue1: "Deleted"
+ wOperator1 : "--None--"
+ section: 1
+ row: 3 
+ addRow: 4
+
+AssetGeneration:
+ Fieldvalue1: "Quantity"
+ Operator1: ">"
+ Value1: "1"
+ Fieldvalue2: "Asset Name"
+ Operator2: "LIKE"
+ Value2: "SourceAsset"
+ Fieldvalue3: "Price"
+ Operator3: ">"
+ Value3: "500"
+ section: 1
+ row: 0
+
+#instance specific 
+Sourceopp:
+ Name: "SourceOpportunity"
+ 
+Wrongdetails:
+ Fieldvalue1: "Quantity"
+ Operator1: ">"
+ Value1: 
+
+OppGenerationDetails:
+ Name: "RenewalOpp_Opportunity"
+ Probability (%): 20 
+ Description: "Opportunity generated from source opportunity"
+ 
+WrongOppGenerationDetails:
+ Name: ""
+ Probability (%): ""
+ Close Date: "" 
+ Description: ""
+ 
+
+SourceOppDetails:
+ product1: "GenWatt Diesel 10kW" 
+ lineDescription1: m
+ qty1: "1.00"
+ SP1: "$5,000.00"
+ 
+Product:
+ SingleProductCheckboxIndex: 3
+ MultipleProductCheckboxIndex: 5
+ productName: "Installation: Industrial - High"
+ ProductQuantity: 4
+ 
+ProductOpportunity:
+ SingleProductCheckboxIndex: 10
+ MultipleProductCheckboxIndex: 9
+ SecondProductCheckboxIndex: 3
+ ProductQuantity: 3
+ ResolvedOpportunity: "PES_Ren"
+ DeletingOpporunity: "PES Opp1AB"
+ 
+Asset:
+ Asset1: "CA_CP_Asset"
+ Asset2: "PES"
+ salesPrice1: "10500"
+ salesPrice2: "80500"
+ lineDesc1: "product with sales price 10500"
+ lineDesc2: "product with sales price 80500" 
+ product1: "SLA: Platinum"
+ qty1: "10.00"
+ SP1: "10500"
+ 
+CreateAssetOpportunity:
+ Name: "Asset_Opportunity"
+ Description: "The Opportunity is generated from Asset by selecting two asset"
+ Probability (%): 20
+ Close Date: "1/26/2017"
+ 
+
+AssetDetails:
+ OpportunityName: "RenewNetOpsTesting"
+ FilterLogic: "1 AND 2 AND 3"
+ FirstAssetFieldValue: "Quantity"
+ FirstAssetOperator: "="
+ FirstAssetValue: "1"
+ SecondAssetFieldValue: "Asset Name"
+ SecondAssetOperator: "LIKE"
+ SecondAssetValue: "RenewNetOpsAsset"
+ ThirdAssetFieldValue: "Price"
+ ThirdAssetOperator: ">"
+ ThirdAssetValue: "100"
+ AllAssetOperator: "ALL"
+ AddFilterLogicAssetText: "Add Filter Logic"
+ AndVisibleAssetText: "display: table-cell;"
+ SearchAndAddAssetVisibleText: "AND"
+ AssetContractCheckboxIndex: 0
+ AssetPrice: 1500
+ AssetSearchCriteria: "Assets"
+
+
+ServiceContractDetails:
+ ServiceFilterLogic: "1 AND 2 AND 3"
+ FirstServiceFieldValue: "Quantity"
+ FirstServiceOperator: "="
+ FirstServiceValue: "1"
+ SecondServiceFieldValue: "Sales Price"
+ SecondServiceOperator: ">"
+ SecondServiceValue: "1000"
+ ThirdServiceFieldValue: "Status"
+ ThirdServiceOperator: "="
+ ThirdServiceValue: "true"
+ AllServiceOperator: "ALL"
+ AddFilterLogicText: "Add Filter Logic"
+ AndVisibleServiceText: "display: table-cell;"
+ ServiceContractCheckboxIndex: 1
+ ServiceContractName: "RenewNetOpsService"
+ ServiceContractAccountName: "QA Test"
+ ServiceContractLineItem: "Line Items"
+ ServiceContractTerm: "11"
+ ServiceContractShippingAndHandling: "1500"
+ ServiceContractTax: "150"
+
+
+SearchAndAddCriteria:
+ SearchCriteria: "OppUpdateAsset"
+ RenewalRelationshipFieldValue: "Renewal Status"
+ RenewalRelationshipOperator: "="
+ RenewalRelationshipValue: "Open"
+ RenewalRelationshipValue1: "Won"
+ RenewalRelationshipValue2: "Lost"
+ AddAssetCheckboxIndex: 1
+ AddServiceContractCheckboxIndex: 1
+
+
+
+SplitOpportunity:
+ SplitOpportunityName: "SplitOpportunity"
+ SingleProductCheckboxIndex: 1
+ MultipleProductCheckboxIndex: 2
+ ProductQuantity: 1
+ ProductSalesPrice: 5000
+ ProductDropDownOpportunity: "Existing Opportunity"
+ FirstProductCheckboxIndex: 1
+ SecondProductCheckboxIndex: 2
+ TargetOpportunityName: "sourceopportunity01"
+ TargetOpportunityCloseDate: "4/5/2017"
+ TargetOpportunityStage: "Prospecting"
+ TargetOpportunityOwnerID: "QA RenewNetOps"
+ TargetOpportunityProbability: 10
+ TargetOpportunityNameErrorMessage: "Opportunity Name: You must enter a value"
+ TargetOpportunityCloseDateErrorMessage: "Close Date: You must enter a value"
+ TargetOpportunityStageErrorMessage: "Opportunity Owner: You must enter a value"
+ TargetOpportunityOwnerIDErrorMessage: "Stage: You must enter a value"
+ TargetOpportunityProbabilityErrorMessage: "Probability (%): You must enter a value"
+ SelectTargetOpportunity: "QA_Auto_Test"
+ ProbabilityField: "Probability (%)"
+ ProductValidationMessage: "Please select at least one Opportunity Line to proceed"
+
+
+
+
+RenewalOpportunityFields:
+ OpportunityNameField: "Opportunity Name"
+ AccountNameField: "Account Name"
+ TypeField: "Type"
+ EarliestExpirationDateField: "Earliest Expiration Date"
+ ExpirationQuarterField: "Expiration Quarter"
+ ExpirationYearField: "Expiration Year"
+ OpportunityOwnerField: "Opportunity Owner"
+ RenewalField: "Renewal"
+ StageField: "Stage"
+ CloseDateField: "Close Date"
+ RenewalTargetField: "Renewal Target"
+ ProbabilityField: "Probability (%)"
+ ExpectedRevenueField: "Expected Revenue"
+ AmountField: "Amount"
+ DaysUntilExpirationField: "Days Until Expiration"
+ DIAContactedField: "DIA Contacted"
+ DIAQuotedField: "DIA Quoted"
+ DIAClosedField: "DIA Closed"
+ ConversionRateField: "Conversion Rate"
+ LossRateField: "Loss Rate"
+ DestinationRenewalOpportunityField: "Destination Renewal Opportunity"
+ FirstContactDateField: "First Contact Date"
+ FirstQuoteDateField: "First Quote Date"
+ ResolutionDateField: "Resolution Date"
+ AddsAmountField: "Adds Amount"
+ AddsRatioField: "Adds Ratio"
+ ConversionDeltaField: "Conversion Delta"
+ CreatedByField: "Created By"
+ DestinationServiceContractField: "Destination Service Contract"
+ ConsolidatedField: "Consolidated"
+ RenewalTargetLostField: "Renewal Target - Lost"
+ RenewalTargetResolvedField: "Renewal Target - Resolved"
+ RenewalTargetWonField: "Renewal Target - Won"
+ LastModifiedByField: "Last Modified By"
+ SetTheNewDateRange: "4/2/2017"
+
+
+MergeOpportunity:
+ FirstOpportunityCheckboxIndex: 0
+ SecondOpportunityCheckboxIndex: 1
+ RenewalStage: "Closed Won"
+ CurrencyCode: "$"
+ NewMergeOpportunity: "Merge_Opportunity"
+ OpportunityCloseDate: "4/15/2017"
+ MergeOpportunityStageValue: "Prospecting"
+ MergeAmount: "3500"
+
+
+AddOnRenewalOpportunity:
+ AddOnRenewalOpportunityName: "Test_Auto13"
+ RenewalOpportunityCloseDate: "4/15/2017"
+ NewOpportunityName: "QATesting_Auto"
+ OpportunityStageValue: "Prospecting"
+ DestinationRenewalOpportunity: "SourceOpp"
+ SourceOpportunityStageValue: "Prospecting"
+ SourceOpportunityStageValue1: "Closed Won"
+ DestinationServiceContract: "Test_QA_SC"
+
+
+RenewalRelationship:
+ RenewalRelationshipCoveredAsset: "CA_CP_Asset"
+ RenewalRelationshipCoveredProduct: "Product A"
+ RenewalRelationshipAssetName: "CA_CP_Asset"
+  
+
+
+OppFieldsCriteria:
+ Fieldvalue1: "Stage"
+ Operator1: "="
+ Value1: "Closed Won"
+ Fieldvalue2: "Amount"
+ Operator2: ">="
+ Value2: 1000
+ Fieldvalue3: "Quantity"
+ Operator3: ">"
+ Value3: 2
+
+Sourceopp:
+ Name: "SourceOpp"
+ Stage: "Closed Won"
+
+ProductFieldsCriteria:
+ Fieldvalue1: "Active"
+ Operator1: "="
+ Value1: "true"
+ Fieldvalue2: "Product Code"
+ Operator2: "LIKE"
+ Value2: "Product"
+ Fieldvalue3: "Product Family"
+ Operator3: "LIKE"
+ Value3: "Product"
+ Fieldvalue4: "Product Name"
+ Operator4: "LIKE"
+ Value4: "Product"
+
+OppFields:
+ DateField: "Resolution Date"
+ PicklistField: "Stage"
+ BooleanField: "Private"
+ NumberField: "Quantity"
+ CurrencyField: "Amount"
+ TextField: "Name"
+
+OppFieldsParam:
+ rowNum: 0
+ section: 0
+
+ProductFields:
+ TextField: "Product Code"
+ PicklistField: "Product Family"
+ BooleanField: "Active"
+
+ProductFieldsParam:
+ rowNum: 0
+ section: 1
+
+ServiceContractFieldsParam:
+ section: 2
+
+Operators:
+ DateField: "--None--,=,>,>=,<,<=,!=,LIKE,IN,NOT IN"
+ PicklistField: "--None--,=,>,>=,<,<=,!=,LIKE,IN,NOT IN"
+ BooleanField: "--None--,=,!="
+ NumberField: "--None--,=,>,>=,<,<=,!=,LIKE,IN,NOT IN"
+ CurrencyField: "--None--,=,>,>=,<,<=,!=,LIKE,IN,NOT IN"
+ TextField: "--None--,=,>,>=,<,<=,!=,LIKE,IN,NOT IN"
+
+AssetsParam:
+ list: ".assetBlock"
+ sectionNum: 1
+
+
+Assetscols:
+ Columns: "Account Name,Asset Name,Serial Number,Product Name,Quantity,Price (USD),Status,Start Date,End Date,Renewal Opportunity,Stage,Close Date"
+ 
+Service Contractscols:
+ Columns: "Account Name,Contract Name,Contract Number,Line Item Number,Product Name,Quantity,Total Price (USD),Status,Start Date,End Date,Renewal Opportunity,Stage,Close Date"
+
+RenewableOpportunityDetails:
+ Product: "Product B"
+ Opportunity Name: "Opportunity"
+ Account Name: "QA Test"
+ Stage: "Needs Analysis"
+ Close Date: "12/13/2017"
+ ResolvedOpportunity: "SourceOpp_renewalOpp"
+ section: 0
+ 
+
+FilterLogic:
+ FirstAssetCheckboxIndex: 1
+ FirstGroupingCheckboxIndex: 0
+ SecondAssetCheckboxIndex: 0
+ FilterName: "Murugan Sankaran"
+ BatchGenerationGeneratedCount: 0
+ BatchGenerationCompletedStatus: "Completed"
+ BatchGenerationFailedStatus: "Failed"
+ BatchGenerationFailureMessages: "Required fields are missing: [StageName], Product does not belong to selected Pricebook, field integrity exception: unknown (total price must be specified), field integrity exception: TotalPrice (total price must be specified),ServiceSource1__REN_End_Date__c: field mapped to Close Date is null"
+
+ 
+SCcolumns: 
+ readcols: "Contract Number,CreatedBy,Created Date,Deleted,Discount,Grand Total,LastModifiedBy,Last Modified Date,Last Referenced Date,Last Viewed Date,Pricebook2,Service Contract ID,Status,System Modstamp" 
+ 
+CreateSC:
+ SCfirst: "Merge SC"
+ SCsecond: "Merge Test SC"
+ SCthird: "Merge ServiceContract"
+
+ServiceContracts:
+ qty1: "5.00"
+ SP1: "$500.00"
+
+SCOppGenerationDetails:
+ Name: "SC_Opp"
+ Probability (%): 20
+ Close Date: "1/27/2017"
+ Description: "Opportunity generated from Service Contract"
+ 
+InstallBaseDataRules:
+ IBDRMappingOpportunity: "IBDR_Opportunity"
+ IBDRServiceContractMapping: "IBDR_Service_Contract"
+ IBDRAssetNameMapping: "Opportunity Product Name"
+ FirstIBDRFieldValue: "Amount"
+ FirstIBDROperator: ">="
+ FirstIBDRValue: "1000"
+ SecondIBDRFieldValue: "Stage"
+ SecondIBDROperator: "="
+ SecondIBDRValue: "Closed Won"
+ ThirdIBDRFieldValue: "Quantity"
+ ThirdIBDROperator: ">"
+ ThirdIBDRValue: "2"
+ IBDRProductField: "Product Name"
+ IBDRProductOperator: "LIKE"
+ IBDRProductValue: "Product"
+ AddFilterLogicIBDRText: "Add Filter Logic"
+ NewIBDROpportunity: "PES_IBDR_Opportunity"
+ IBDROpportunityCloseDate: "4/15/2017"
+ IBDROpportunityStageValue: "Prospecting"
+
+WithinFiscalYear:
+ StartDate: "6/4/2016"
+ EndDate: "8/4/2016"
+
+BeyondFiscalYear:
+ StartDate: "2/4/2016"
+ EndDate: "3/4/2016"
+
+InsideFiscalYear:
+ StartDate: "6/2/2016"
+ EndDate: "8/4/2016"
+
+OutsideFiscalYear:
+ StartDate: "6/2/2017"
+ EndDate: "8/4/2017"
+
+ManageRenewalsOpportunity:
+  ManageRenewalProductFirstIndex: "0"
+  ManageRenewalProductSecondIndex: "1"
+  ManageRenewalColumnField1: "Existing Product"
+  ManageRenewalColumnField2: "Asset"
+  ManageRenewalColumnField3: "Quantity"
+  ManageRenewalColumnField4: "Previous Price (USD)"
+  ManageRenewalColumnField5: "Total Price (USD)"
+  ManageRenewalColumnField6: "Renewal Target (USD)"
+  ManageRenewalColumnField7: "Renewal Status"
+  ManageRenewalColumnField8: "Created Date"
+  ManageRenewalColumnField9: "Existing Start Date"
+  ManageRenewalColumnField10: "Existing End Date"
+  ManageRenewalColumnField11: "Expiration Quarter Year"
+  ManageRenewalColumnField12: "Expiration Quarter"
+  ManageRenewalColumnField13: "Expiration Year"
+  ManageRenewalColumnField14: "Source Opportunity"
+  ManageRenewalColumnField15: "Previous Opportunity"
+  ManageRenewalColumnField16: "Renewal Opportunity"
+  ManageRenewalColumnField17: "Renewal Product Line ID"
+  RenewalStatusOpen: "Open"
+  RenewalStatusLost: "Lost"
+  RenewalStatusWon: "Won"

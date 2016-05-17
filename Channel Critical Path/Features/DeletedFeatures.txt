@@ -1,0 +1,81 @@
+@DeletedFeatures
+Feature: All features related to OEM user - Partner Opportunity - Set Primary Partner
+
+Background: Login to the Application
+ 	Given that I navigate to the CRM application
+	Then I should land on CRM home page
+	
+@SetPrimary
+Scenario: Rally-ID: CHLOEM-029 :Set Partner opportunity as Primary
+	When I Navigate to "Opportunities" tab	
+	Then I select the "RenewalOpportunity"
+	Then I set the "First" Partner opportunity as primary
+	Then I set the "Second" Partner opportunity as primary
+
+@SyncQuote
+Scenario: Rally-ID: CHLOEM-030 :Primary quote sync if new opportunity selected as primary opportunity
+	When I Navigate to "Opportunities" tab	
+	Then I select the "RenewalOpportunity"
+	Then I set the "First" Partner opportunity as primary
+	Then I verify that newly selected quote (By Channel user)is get set as primary quote but syncing flag is false
+
+@RemovePrimary
+Scenario: Rally-ID: CHLOEM-033 :Remove Primary
+	When I Navigate to "Opportunities" tab	
+	Then I select the "RenewalOpportunity"
+	Then I set the "First" Partner opportunity as Remove primary
+	Then I set the "Second" Partner opportunity as Remove primary
+
+@AddPartnerOpp
+Scenario: Rally-ID: CHLOEM-032:Set as Primary from Add New Partner opportunity page.
+	When I Navigate to "Opportunities" tab	
+	Then I select the "RenewalOpportunity"
+	And I click on "Add New Partner Opportunity" button
+	And I add New Partner Opportunity
+
+@SyncBehaviour
+Scenario: Rally-ID: CHLOEM-034:Syncing Behavior-Fields to be sync.
+	When I Navigate to "Opportunities" tab	
+	Then I select the "RenewalOpportunity"
+	Then I set the "First" Partner opportunity as primary
+	Then I change the values of selected Partner opportunity
+	
+	
+@DeletedFeatures
+Feature: All features related to Opportunities - Opportunity Grid
+
+Background: Login to the Application
+    Given that I navigate to the CRM application
+    Then I should land on CRM home page
+	
+
+@set_partner_primary_quote
+Scenario: Rally Test Case ID:CHLUSR-042,CHLUSR-043 : Opportunity - Set the Partner primary quote,Primary partner opportunity quote sync with the master opportunity
+   When I click on "Opportunities" tab
+   And I select the "All Quarters" filter
+   And I select the "Open Opportunities with Quotes" filter value
+   Then I should able to see the "Opportunity Grid" columns
+   When I verify the "Latest Quote" and "Amount" column
+   And I verify the selected quote is set as primary quote
+   And user logs out from channel partner community
+   And user login in to "OEM" application
+   Then I should able to see the "OEM" home page
+   When I click on "Opportunities" link
+   And I open the existing opportunity
+   Then I should able to see the partner opportunity list
+   And I should able to see the newly selected quote marked as primary
+
+
+@no_primary_partner_quote
+Scenario: Rally Test Case ID: CHLUSR-044: Opportunity - Non Primary partner opportunity quote should NOT sync with the master opportunity
+   When I click on "Opportunities" tab
+   Then I should able to see the "Opportunity Grid" columns
+   When I verify the "Latest Quote" and "Amount" column
+   And I verify the selected quote is set as primary quote
+   And user logs out from channel partner community
+   And user login in to "OEM" application
+   Then I should able to see the "OEM" home page
+   When I click on "Opportunities" link
+   And I open the existing opportunity
+   Then I should able to see the partner opportunity list
+   And I should able to see the newly selected quote not marked as primary

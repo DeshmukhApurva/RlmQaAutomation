@@ -1,0 +1,51 @@
+---
+RENEW_19:
+ userName: "qa-renew-csmdev19@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "RenewDEV19"
+
+RENEWNETOPS_19:
+ userName: "qa-renewnetops-csmdev19@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "RenewNetOpDEV19"
+
+RENEW_20:
+ userName: "qa-renew-csmdev20@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "RenewDEV20"
+
+RENEWNETOPS_20:
+ userName: "qa-renewnetops-csmdev20@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "RenewNetOpDEV20"
+
+RENEW_25:
+ userName: "qa-renew-csmdev25@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "RenewDEV25"
+
+RENEWNETOPS_25:
+ userName: "qa-renewnetops-csmdev25@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "RenewNetOpDEV25"
+
+RENEW_EETEST2:
+ userName: "qa-renew-eetest2@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "RenewEEtest2"
+
+RENEWNETOPS_EETEST2:
+ userName: "qa-renewnetops-eetest2@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "RenewNetOpEEtest2"
+
+RENEW_EETEST4:
+ userName: "qa-renew-eetest4@servicesource.com"
+ pwd: "pass@word2"
+ Instance: "RenewEEtest4"
+
+RENEWNETOPS_EETEST4:
+ userName: "qa-renewnetops-eetest4@servicesource.com"
+ pwd: "pass@word2"
+ Instance: "RenewNetOpEEtest4"
+

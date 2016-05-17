@@ -1,0 +1,16 @@
+---
+Reference:
+ SPTemplate: "APT-000000"
+ SuccessPlan: "SP-000050"
+ Play: "PN-0000000"
+ Account: "University Of Canada"
+ FCCategory: "PES FCG Overview"
+ Playbook: "PES PlayBook" 
+ emailContact: "Sydney Sheldon"
+ FCView: "PES FC Task"
+ FCGroup: "PES Indicator Group"
+ TaskType: "Call"
+ AdditionalAccount: "FURNITURE INC"
+ AdditionalContactName: "Steve Gilbert"
+ FCWidgetView: "FC for Widgets"
+ FocusCategoryLookupValue: "QA CSM"

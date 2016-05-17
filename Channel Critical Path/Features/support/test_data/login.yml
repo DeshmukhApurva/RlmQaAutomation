@@ -1,0 +1,116 @@
+---
+CHANNELNETOPS_DEV19:
+ userName: "qa-channelnetops-csmdev19@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "ChannelNetOpDEV19"
+ url: "https://login.salesforce.com/"
+
+CHANNELMANAGER_DEV19:
+ userName: "qa-channelmanager-csmdev19@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "ChannelManagerDEV19"
+ url: "https://login.salesforce.com/"
+
+CHANNELPARTNER_DEV19:
+ userName: "qa-channelpartner-csmdev19@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "ChannelPartnerDEV19"
+ url: "https://csmdev19-developer-edition.na16.force.com/ServiceSource1__CHL_PartnerLogin"
+ Name: "QA ChannelPartner"
+ oem_url: "https://login.salesforce.com/"
+ oem_userName: "qa-channelmanager-csmdev19@servicesource.com"
+ oem_pwd: "pass@word1"
+
+ADMIN_DEV19:
+ url: "https://login.salesforce.com/"
+ userName: "senthilj-csmdev19@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "ChannelManagerDEV19"
+
+CHANNELNETOPS_DEV20:
+ userName: "qa-channelnetops-csmdev20@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "ChannelNetOpDEV20"
+ url: "https://login.salesforce.com/"
+
+CHANNELMANAGER_DEV20:
+ userName: "qa-channelmanager-csmdev20@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "ChannelManagerDEV20"
+ url: "https://login.salesforce.com/"
+
+CHANNELPARTNER_DEV20:
+ userName: "qa-channelpartner-csmdev20@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "ChannelPartnerDEV20"
+ url: "https://csmdev20-developer-edition.na16.force.com/ServiceSource1__CHL_PartnerLogin"
+ Name: "QA ChannelPartner"
+ oem_url: "https://login.salesforce.com/"
+ oem_userName: "qa-channelmanager-csmdev20@servicesource.com"
+ oem_pwd: "pass@word1"
+ 
+CHANNELNETOPS_DEV25:
+ userName: "qa-channelnetops-csmdev25@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "ChannelNetOpDEV25"
+ url: "https://login.salesforce.com/"
+
+CHANNELMANAGER_DEV25:
+ userName: "qa-channelmanager-csmdev25@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "ChannelManagerDEV25"
+ url: "https://login.salesforce.com/"
+
+CHANNELPARTNER_DEV25:
+ userName: "qa-channelpartner-csmdev25@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "ChannelPartnerDEV25"
+ url: "https://csmdev25-developer-edition.na17.force.com/ServiceSource1__CHL_PartnerLogin"
+ Name: "QA ChannelPartner"
+ oem_url: "https://login.salesforce.com/"
+ oem_userName: "qa-channelmanager-csmdev25@servicesource.com"
+ oem_pwd: "pass@word1"
+
+CHANNELNETOPS_EETEST2:
+ userName: "qa-channelnetops-eetest2@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "ChannelNetOpEETEST2"
+ url: "https://login.salesforce.com/"
+
+CHANNELMANAGER_EETEST2:
+ userName: "qa-channelmanager-eetest2@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "ChannelManagerEETEST2"
+ url: "https://login.salesforce.com/"
+
+CHANNELPARTNER_EETEST2:
+ userName: "qa-channelpartner-eetest2@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "ChannelPartnerEETEST2"
+ url: "https://eetest2.force.com/ServiceSource1__CHL_PartnerLogin"
+ Name: "QA ChannelPartner"
+ oem_url: "https://login.salesforce.com/"
+ oem_userName: "qa-channelmanager-eetest2@servicesource.com"
+ oem_pwd: "pass@word1"
+
+CHANNELNETOPS_EETEST4:
+ userName: "qa-channelnetops-eetest4@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "ChannelNetOpEETEST4"
+ url: "https://login.salesforce.com/"
+
+CHANNELMANAGER_EETEST4:
+ userName: "qa-channelmanager-eetest4@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "ChannelManagerEETEST4"
+ url: "https://login.salesforce.com/"
+
+CHANNELPARTNER_EETEST4:
+ userName: "qa-channelpartner-eetest4@servicesource.com"
+ pwd: "pass@word1"
+ Instance: "ChannelPartnerEETEST4"
+ url: "https://eetest4.force.com/ServiceSource1__CHL_PartnerLogin"
+ Name: "QA ChannelPartner"
+ oem_url: "https://login.salesforce.com/"
+ oem_userName: "qa-channelmanager-eetest4@servicesource.com"
+ oem_pwd: "pass@word1"

@@ -1,0 +1,259 @@
+---
+Status FieldsGrid:
+ Cols: "Action,Field Display Name,Field Name"
+ Text: "Select the fields that should cause the Needs Status Update to change from TRUE to FALSE. This will occur if ANY of these fields are changed."
+ StageField: "Sales Stage"
+
+Number of Days Between Updates:
+ WrongValue: -1
+ CorrectValue: 10
+ CorrectText: "Opportunity Status Log data has been saved."
+ IncorrectText: "Number of Days should be greater than or equal to 0."
+ Section: 5
+
+Days Before Expiration:
+ WrongValue: ""
+ CorrectValue: 30
+ IncorrectText: "Opportunity Status Log data has been saved."
+ CorrectText: "Opportunity Status Log data has been saved."
+ Section: 6
+
+PredefinedFilters:
+ filters: "My Open Requests,My Closed Requests,All Requests"
+ defaultfilter: "My Open Requests"
+ status: "Closed"
+ 
+Action Tiles:
+ tiles: "See New Opportunities,Update Opportunity Status,See Completed Requests,Start New Request"
+
+Expiration Quarter:
+ filterIndex: 0 
+
+
+Country:
+ filterIndex: 1 
+
+
+Reseller Rep:
+ filterIndex: 2
+
+
+Distributor Rep:
+ filterIndex: 3
+ 
+
+SalesStages:
+ Unavailablestages: "Perception Analysis,Needs Analysis"
+ CorrectText: "Opportunity Status Log data has been saved."
+
+ 
+AddPartnerOpportunity:
+ PartnerOpportunityName: "PES_Add_Partner"
+ PartnerAccount1FieldName: "Partner Account 1"
+ PartnerAccount2FieldName: "Partner Account 2"
+ PartnerAccount1ContactFieldName: "Partner Account 1 Contact"
+ PartnerAccount2ContactFieldName: "Partner Account 2 Contact"
+
+NewSalesRequest:
+ NewRequestField1: "Subject"
+ NewRequestField2: "Account"
+ NewRequestField3: "Related To"
+ NewRequestField4: "Request Type"
+ NewRequestField5: "Priority"
+ NewRequestField6: "Message"
+ NewRequestField7: "Attachment"
+ RelatedToSelectField1: "Quote"
+ RelatedToSelectField2: "Asset"
+ RelatedToSelectField3: "Service Contract"
+ RelatedToSelectRelatedField1: "Testing_Quote"
+ RelatedToSelectRelatedField2: "Partner_Asset"
+ RelatedToSelectRelatedField3: "Partner_Service_Contact"
+ SelectRequestTypeField1: "Data Update"
+ SelectRequestTypeField2: "Pricing Request"
+ SelectRequestTypeField3: "Data Access"
+ SelectPriorityField1: "Medium"
+ SelectPriorityField2: "Low"
+
+RequestGrid:
+ RenewalSalesRequestGridField1: "Request Type"
+ RenewalSalesRequestGridField2: "Request Number"
+ RenewalSalesRequestGridField3: "Account"
+ RenewalSalesRequestGridField4: "Status"
+ RenewalSalesRequestGridField5: "Date Opened"
+ RenewalSalesRequestGridField6: "Date Closed"
+ RenewalSalesRequestGridField7: "From"
+ RenewalSalesRequestGridField8: "Description"
+ RenewalSalesRequestGridField9: "Subject"
+ RenewalSalesRequestGridField10: "Related To"
+ SortAscendingOrder: "Sort Ascending"
+ SortDescendingOrder: "Sort Descending"
+
+
+OpportunityModule:
+ OpportunityGridField1: "Name"
+ OpportunityGridField2: "Account"
+ OpportunityGridField3: "Sales Stage"
+ OpportunityGridField4: "Probability"
+ OpportunityGridField5: "Amount"
+ OpportunityGridField6: "Expiration Date"
+ OpportunityGridField7: "Close Date"
+ OpportunityGridField8: "Reseller Rep"
+ OpportunityGridField9: "Distributor Rep"
+ OpportunityGridField10: "Latest Quote"
+ OpportunityGridField11: "Status"
+ OpportunityGridField12: "Update Status"
+ UpdateOpportunitySalesStage: "Prospecting"
+ UpdateOpportunityProbability: "20"
+ UpdateOpportunityCloseDate: "2017-03-25"
+ UpdateOpportunityResellerRep: "PES Channel Account"
+ UpdateOpportunityDistributorRep: "PES Channel Account"
+ UpdateOpportunityNewStatus: "TRUE"
+ OpportunityRipStatus: "None"
+ NeedStatusUpdateOpportunitySalesStage: "Closed Won"
+ NeedStatusUpdateOpportunityProbability: "30"
+ DefaultPaginationValue: "25"
+ OpportunityAccount: "PES Channel Account"
+ OpportunitySalesStage1: "Closed Won"
+ OpportunitySalesStage2: "Closed Lost"
+
+
+
+RenewalOpportunitySubTab:
+ RenewalOpportunityField1: "Existing End Date"
+ RenewalOpportunityField2: "Existing Start Date"
+ RenewalOpportunityField3: "Renewal Target"
+ RenewalOpportunityField4: "Previous Price"
+ RenewalOpportunityField5: "Product Name"
+ RenewalOpportunityField6: "Asset Name"
+ RenewalOpportunityField7: "Serial Number"
+ RenewalOpportunityField8: "Renewal Status"
+
+
+DetailsOpportunitySubTab:
+ DetailsOpportunityField1: "Opportunity Name"
+ DetailsOpportunityField2: "Account"
+ DetailsOpportunityField3: "Sales Stage"
+ DetailsOpportunityField4: "Probability (%)"
+ DetailsOpportunityField5: "Renewal Target"
+ DetailsOpportunityField6: "Amount"
+ DetailsOpportunityField7: "Partner Account 2 Type"
+ DetailsOpportunityField8: "Partner Account 1 Contact"
+ DetailsOpportunityField9: "Email"
+ DetailsOpportunityField10: "Earliest Expiration Date"
+ DetailsOpportunityField11: "Close Date"
+ DetailsOpportunityField12: "Owner"
+ DetailsOpportunityField13: "Partner Account 1"
+ DetailsOpportunityField14: "Partner Account 1 Type"
+ DetailsOpportunityField15: "Partner Account 2"
+ DetailsOpportunityField16: "Owner ID"
+ DetailsOpportunityField17: "Name"
+ DetailsOpportunityField18: "Partner Opportunity"
+ CurrencyCode1: "USD"
+ CurrencyCode2: "EUR"
+ CurrencyCode3: "$"
+
+
+ContactsOpportunitySubTab:
+ ContactsOpportunityField1: "Email"
+ ContactsOpportunityField2: "Last Name"
+ ContactsOpportunityExport: "Export all data as CSV"
+
+
+AccountDetailsPage:
+ AssetTabField1: "Asset Name"
+ AssetTabField2: "Serial Number"
+ AssetTabField3: "Product I D"
+ AssetTabField4: "Quantity"
+ AssetTabField5: "Price"
+ AssetTabField6: "Status"
+ AssetTabField7: "Start Date"
+ AssetTabField8: "End Date"
+ ContractsTabField1: "Contract Name"
+ ContractsTabField2: "Contract Number"
+ ContractsTabField3: "Line Item Number"
+ ContractsTabField4: "Product I D"
+ ContractsTabField5: "Quantity"
+ ContractsTabField6: "Total Price"
+ ContractsTabField7: "Status"
+ ContractsTabField8: "Start Date"
+ ContractsTabField9: "End Date"
+
+
+RequestDetailsPage:
+ RequestDeatilsField1: "Case Number"
+ RequestDeatilsField2: "Case Type"
+ RequestDeatilsField3: "Account Name"
+ RequestDeatilsField4: "Related To"
+ RequestDeatilsField5: "Subject"
+ RequestDeatilsField6: "Description"
+ RequestDeatilsField7: "Status"
+ RequestDeatilsField8: "Priority"
+ RequestDeatilsField9: "Created Date"
+ RequestDeatilsField10: "Last Updated by"
+ RequestDeatilsField11: "Closed Date"
+ AttachmentPageField1: "File Name"
+ AttachmentPageField2: "Created Date"
+ AttachmentPageField3: "Created By"
+ NotesSendText: "Send"
+ AttachFileText: "Attach Files"
+
+PartnerOpportunity:
+ First: 0
+ Second: 1
+ Amount: "5000.00"
+ SalesStage: "Value Proposition"
+ NewPartnerOpp: "PesPartnerOpp"
+
+BulkUpdate:
+ PartnerOpportunity: "Portal Agreement"
+ Sales Stage: "Negotiation/Review"
+ Probability: "15"
+ Reseller Rep: "PES Channel User"
+ Distributor Rep: "PES Channel User"
+ Status: "Set Probability as 15%"
+
+NeedStatusUpdate:
+ PartnerOpportunity: "Partner_Channel_Opportunity"
+ Status: "Set Sales Stage as Negotiation/Review"
+
+ExpirationQuarter:
+ CurrentQuarter: "Q1 2016"
+ ChangedQuarter: "Q2 2016"
+ AllQuarter: "All Quarters"
+
+contactsSubtab:
+ PartnerOpportunity: "Portal Agreement"
+ SortAscendingOrder: "Sort Ascending"
+
+QuoteOpportunitySubTab:
+ QuoteOpportunityField1: "Quote Number"
+ QuoteOpportunityField2: "Quote Name"
+ QuoteOpportunityField3: "Expiration Date"
+ QuoteOpportunityField4: "Line Items"
+ QuoteOpportunityField5: "Discount"
+ QuoteOpportunityField6: "Subtotal" 
+ QuoteOpportunityField7: "Total Price"
+ QuoteOpportunityField8: "Primary Quote"
+
+SplitOpportunity:
+ SplitOpportunityName: "PES_SplitOpp"
+ SingleProductCheckboxIndex: 1
+ MultipleProductCheckboxIndex: 2
+ ProductQuantity: 1
+ ProductSalesPrice: 5000
+ ProductDropDownOpportunity: "Existing Opportunity"
+ FirstProductCheckboxIndex: 1
+ SecondProductCheckboxIndex: 2
+ TargetOpportunityName: "OpportunitySplit"
+ TargetOpportunityCloseDate: "4/5/2017"
+ TargetOpportunityStage: "Prospecting"
+ TargetOpportunityOwnerID: "QA ChannelManager"
+ TargetOpportunityProbability: 10
+ TargetOpportunityNameErrorMessage: "Opportunity Name: You must enter a value"
+ TargetOpportunityCloseDateErrorMessage: "Close Date: You must enter a value"
+ TargetOpportunityStageErrorMessage: "Opportunity Owner: You must enter a value"
+ TargetOpportunityOwnerIDErrorMessage: "Stage: You must enter a value"
+ TargetOpportunityProbabilityErrorMessage: "Probability (%): You must enter a value"
+ SelectTargetOpportunity: "PES_TargetOpp"
+ ProbabilityField: "Probability (%)"
+ ProductValidationMessage: "Please select at least one Opportunity Line to proceed"

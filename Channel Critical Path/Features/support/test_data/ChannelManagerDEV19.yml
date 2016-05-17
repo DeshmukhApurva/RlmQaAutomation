@@ -1,0 +1,31 @@
+---
+RenewalOpportunity:
+ Name: "PES_CHL_Opp"
+
+PartnerOpportunity:
+ First: "Portal Agreement"
+ Second: "Partner Agreement"
+ NewPartnerOpp: "PesPartnerOpp"
+
+PartnerAccount:
+ AccountName: "PES Channel Account"
+ ContactName: "PES Channel User"
+
+
+AddPartnerOpportunity:
+ PartnerOpportunityName: "PES_Add_Partner"
+ PartnerAccount1Name: "PES Channel Account"
+ PartnerAccount2Name: "PES Channel Account"
+ PartnerAccount1Contact: "PES Channel User"
+ PartnerAccount2Contact: "PES Channel User"
+ PartnerAccount1HierarchyName: "PartnerAccount1"
+ PartnerAccount1HierarchyContact: "Con1PA1"
+
+SplitOpportunity:
+ SplitOpportunityName: "PES_SplitOpp"
+ TargetOpportunityOwnerID: "QA ChannelManager"
+ SelectTargetOpportunity: "PES_TargetOpp"
+
+Pricebooks:
+ first: "Standard Price Book"
+ second: "Test_PriceBook"

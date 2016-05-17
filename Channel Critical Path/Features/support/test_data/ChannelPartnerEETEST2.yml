@@ -1,0 +1,62 @@
+---
+DefaultAccounts:
+ account: "PES Channel Account"
+ accountNumber: "QA-0001"
+
+Expiration Quarter:
+ presentQuarter: "Q1 2016"
+ filterValues: "Q1 2016,Q2 2016,Q3 2016,Q4 2016"
+
+Country:
+ filterValues: "USA"
+
+Reseller Rep:
+ filterValues: "PES Channel User"
+
+Distributor Rep:
+ filterValues: "PES Channel User"
+
+Opportunity Pipeline:
+ Quarter: "Q1 2016"
+ Country: "USA"
+ Reseller Rep: "PES Channel User"
+ Distributor Rep: "PES Channel User"
+
+
+AddPartnerOpportunity:
+ PartnerOpportunityName: "PES_Add_Partner"
+ PartnerAccount1Name: "PES Channel Account"
+ PartnerAccount2Name: "PES Channel Account"
+ PartnerAccount1Contact: "PES Channel User"
+ PartnerAccount2Contact: "PES Channel User"
+ PartnerAccount1HierarchyName: "PartnerAccount1"
+ PartnerAccount1HierarchyContact: "Con1PA1"
+
+RenewalOpportunity:
+ Name: "PES_CHL_Opp"
+
+PartnerOpportunity:
+ First: "Portal Agreement"
+ Second: "Partner Agreement"
+
+Incumbent:
+ Name: "PES_CHL_Opp - Incumbent"
+
+NonIncumbent:
+ Name: "PES_CHL_Opp - NonIncumbent"
+
+FromMaster:
+ Name: "PES_CHL_Opp - Incumbent"
+ Sales Stage: "Prospecting"
+
+ToMaster:
+ Name: "PES_CHL_Opp - NonIncumbent"
+ Sales Stage: "Qualification"
+
+setPrimary:
+ Name: "PES_Quote"
+
+NeedStatusUpdate:
+ Name: "PES_Pipeline_Opportunity"
+ PartnerOpp: "PES_NeedStatusUpdate"
+

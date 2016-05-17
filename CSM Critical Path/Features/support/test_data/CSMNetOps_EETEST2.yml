@@ -1,0 +1,17 @@
+---
+Reference:
+ SPTemplate: "APT-000000"
+ SuccessPlan: "SP-000049"
+# SuccessPlan: "SP-000455"
+ Play: "PN-0000000"
+ Account: "Action Machinery Co"
+ FCCategory: "PES FCG Overview"
+ Playbook: "PES PlayBook" 
+ emailContact: "Kevin Danials"
+ FCView: "PES FC Task"
+ FCGroup: "PES Indicator Group"
+ TaskType: "Call"
+ AdditionalAccount: "DATACOMM INC"
+ AdditionalContactName: "Martin Liner"
+ FCWidgetView: "PES FC for Widgets"
+ FocusCategoryLookupValue: "CSM NetOps"

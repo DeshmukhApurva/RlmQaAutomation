@@ -1,0 +1,90 @@
+---
+Reference:
+ SuccessPlan: "SP-000002"
+ Account: "PE Wealth"
+
+AssetsRef:
+ Name: "PEW Asset"
+ Status: "Installed" 
+ ClosedDate: ""
+ Stage: ""
+
+Service ContractsRef:
+ Name: "PEW SC"
+ Status: "Inactive" 
+ ClosedDate: ""
+ Stage: ""
+
+Pricebooks:
+ first: "Standard Price Book"
+ second: "Test_PriceBook"
+
+
+AssetDetails:
+ OpportunityName: "RenewNetOpsTesting"
+ SecondAssetValue: "RenewNetOpsAsset"
+
+SplitOpportunity:
+ SplitOpportunityName: "SplitOpportunity"
+ SelectTargetOpportunity: "SourceOpportunity"
+ TargetOpportunityOwnerID: "QA RenewNetOps"
+
+MergeOpportunity:
+ CurrencyCode: "EUR"
+
+ServiceContractDetails:
+ ServiceContractName: "RenewNetOpsService"
+ ServiceContractAccountName: "QA Test"
+ ServiceContractLineItem: "Line Items"
+
+AddOnRenewalOpportunity:
+ AddOnRenewalOpportunityName: "RenewNetOpsService"
+ DestinationRenewalOpportunity: "SourceOpportunity"
+ DestinationServiceContract: "RenewNetOpsService"
+
+RenewalRelationship:
+ RenewalRelationshipCoveredAsset: "CA_CP_Asset"
+ RenewalRelationshipCoveredProduct: "Product A"
+ RenewalRelationshipAssetName: "RenewNetOpsAsset"
+
+ 
+ 
+ServiceContracts:
+ Product1: "Product B"
+ Contract Name: "SourceServiceContract"
+
+generateOpp:
+ OppName: "PesSrcOpp"
+ 
+newOpportunity:
+ Account Name: "QA Test"
+ 
+ProductOpportunity:
+ ProductA: "Product A"
+ ProductB: "Product B"
+ CoveredAsset: "CA_CP_Asset"
+ CoveredProduct: "Product B"
+
+Asset:
+ Asset1: "CA_CP_Asset"
+ Asset2: "PESAsset"
+ productName: "Product A"
+
+CreateAssetOpportunity:
+ Owner ID: "QA RenewNetOps"
+ 
+CreateSC:
+ ServiceContractAccountName: "QA Test"
+
+InstallBaseDataRules:
+ IBDRAccountName: "QA Test"
+ IBDRCoveredAsset: "IBDRAsset"
+ IBDRCoveredProduct: "Product B"
+
+FiscalOpp:
+ Name: "FiscalOpportunity"
+
+ManageRenewalsOpportunity:
+ RenewalRelationshipOpportunity: "PES_Renewal_Opportunity"
+ InvalidRenewalRelationshipOpportunity: "PES_Invalid_RR"
+

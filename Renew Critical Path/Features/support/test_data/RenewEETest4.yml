@@ -1,0 +1,81 @@
+---
+Reference:
+ SuccessPlan: "SP-000385"
+ Account: "Revenue Industries"
+
+AssetsRef:
+ Name: "RI Asset"
+ Status: "Installed"
+ ClosedDate: ""
+ Stage: ""
+
+Service ContractsRef:
+ Name: "RI SC"
+ Status: "Inactive"
+ ClosedDate: ""
+ Stage: ""
+
+Pricebooks:
+ first: "Standard Price Book"
+ second: "Test_PriceBook"
+
+
+AssetDetails:
+ OpportunityName: "RenewTesting"
+ SecondAssetValue: "RenewAsset"
+
+SplitOpportunity:
+ SplitOpportunityName: "SplitOpportunity"
+ SelectTargetOpportunity: "SourceOpportunity"
+ TargetOpportunityOwnerID: "QA Renew"
+
+MergeOpportunity:
+ CurrencyCode: "$"
+
+ServiceContractDetails:
+ ServiceContractName: "RenewService"
+ ServiceContractAccountName: "GE Force"
+
+AddOnRenewalOpportunity:
+ AddOnRenewalOpportunityName: "RenewService"
+ DestinationRenewalOpportunity: "SourceOpportunity"
+ DestinationServiceContract: "RenewService"
+
+RenewalRelationship:
+ RenewalRelationshipCoveredAsset: "CA_CP_Asset"
+ RenewalRelationshipCoveredProduct: "Product A"
+ RenewalRelationshipAssetName: "RenewAsset"
+ 
+ServiceContracts:
+ Product1: "Product B"
+ Contract Name: "SourceSCRenew"
+ 
+CreateSC:
+ ServiceContractAccountName: "GE Force"
+ 
+generateOpp:
+ OppName: "PesSrcOpp"
+ 
+newOpportunity:
+ Account Name: "GE Force"
+ 
+ProductOpportunity:
+ ProductA: "Product A"
+ ProductB: "Product B"
+ CoveredAsset: "CA_CP_Asset"
+ CoveredProduct: "Product B"
+
+Asset:
+ Asset1: "CA_CP_AssetRenew"
+ Asset2: "PESAssetRenew"
+ productName: "Product A"
+ 
+CreateAssetOpportunity:
+ Owner ID: "QA Renew"
+
+FiscalOpp:
+ Name: "FiscalOpportunity"
+
+ManageRenewalsOpportunity:
+ RenewalRelationshipOpportunity: "PES_Renewal_Opportunity"
+ InvalidRenewalRelationshipOpportunity: "PES_Invalid_RR"

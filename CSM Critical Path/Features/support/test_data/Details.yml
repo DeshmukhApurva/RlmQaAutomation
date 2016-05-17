@@ -1,0 +1,183 @@
+---
+Account Details:
+ Account Name: "Central Steel"
+ Website: "www.positiveedge.net" 
+ 
+Account:
+ Account Name: "PES MediumIndustries"
+ Website: "www.positiveedgeindustries.net" 
+ Phone: "9999999999"
+ Annual Revenue: 501000
+ 
+Contact Details:
+ First Name: "PesFirstName"
+ Last Name: "PesLName1"
+ Title: "Engineer"
+ 
+
+Opportunity Details:
+ Opportunity Name: "SuccessPlan Opp1"
+ Close Date: "8/31/2016"
+ 
+PlayBook Details:
+ Display Name: "PES Play Book"
+ Short Description: "Risk Description"
+ 
+SPTPlayBook Details:
+ Display Name: "PB1 for SPT"
+ Short Description: "Risk Description"
+ 
+SPTPlayBookEdit Details:
+ Display Name: "PB1 for SPT"
+ NewDisplay Name: "Updated PB1 for SPT"
+ 
+Play Details:
+ Display Name: "Play for Account" 
+ Short Description: "High Risk Description"
+ Object: "Account"
+
+PlayforPB Details:
+ Display Name: "Play1 for PlayBook" 
+ Short Description: "High Risk Description"
+ Object: "Account"
+ 
+Play Delete:
+ Display Name: "PlayTesting" 
+ 
+Play Tasks:
+ TaskName: "PES Play Task"
+ Type: "Call"
+ Description: "Enquiry of Play"
+ AssignTo: "CSM Manager"
+ Days: 10
+
+
+Focus Category:
+ Display Name: "PES Test FC"
+ FocusCategoryName: "Testing_PES_1"
+
+
+FocusCategoryDetails:
+ AddFilterLogicAssetText: "Add Filter Logic"
+ FocusCategoryFieldValue: "Owner ID"
+ FocusCategoryOperator: "="
+ FocusCategoryValue: "User"
+
+
+
+FC View:
+ Display Name: "PES New FC View" 
+ 
+IndicatorGroup:
+ Name: "CSM Indicator Group" 
+ 
+Focus Category for use:
+ Display Name: "PES FCat"
+ 
+ 
+Focus Category Group:
+ Group Name: "PES FCGroup"
+ FoucsCategoryGroupName: "PES_Focus_Category_1"
+ col1: "FC Col1"
+ col2: "FC Col2"
+ col3: "FC Col3"
+ 
+Renewal Insights:
+ - Available
+ - Unresolved
+ - Resolved
+ - Lost
+ - Won
+ - Conversion
+ - Added
+ - Total
+ 
+HamburgerMenu:
+ - Edit View
+ - Hide Charts and Tiles
+ - Hide Inactive Categories
+ 
+SuccessPlan:
+ Phase Start Date: "8/31/2016"
+ Display Name: "PES Success Plan"
+
+TemplateforSP:
+ TemplateName: "SP Template"
+
+ 
+EditSuccessPlan:
+ Display Name: "Edited SuccessPlan"
+ 
+SPT:
+ Template Name: "PES New SPlan Template"
+ PhaseName: "PES SP Template Phase"
+ Days: 20
+ Indicator: "Health Status"
+ OppStage: "Close Date"
+ Criteria1 Type: "Success" 
+ Criteria2 Type: "Meet"
+ Criteria3 Type: "Fail"
+ Criteria1: "Healthy"
+ Criteria2: "Low Adoption"
+ Criteria3: "Pending Churn"
+
+Taskdetails:
+ Task Name: "Call"
+ Account: "Action Machinery Co"
+ Tasktype: "Call"
+ DueDate: "12/11/2015"
+ CommentsValue: "Success Task for call"
+ 
+PlayBookForSP:
+ Display Name: "PlayBook for SP"
+
+AccountForSPCreate:
+ Name: "SPAccount"
+ Annual Revenue: "5000000"
+
+PlayforSP:
+ Display Name: "Play for SP"
+ Short Description: "Play for SP Description"
+ Object: "Account"
+ PlayCriteria: "9000"
+ PlayCriteriaField: "Annual Revenue"
+ PlayTaskName: "Play Task for SP"
+
+
+CreateTaskFields:
+ NotStartedStatusfield: "Not Started"
+ InProgressStatusfield: "In Progress"
+ CompletedStatusfield: "Completed"
+ WaitingStatusfield: "Waiting on someone else"
+ DeferredStatusfield: "Deferred"
+ SucessPlanDetailsWidget: "Success Plan Details"
+ SucessPlanDetailsWidget1: "Current Phase"
+ SucessPlanDetailsWidget2: "Success Plan"
+ SucessPlanDetailsWidget3: "Renewal Date"
+ SucessPlanDetailsWidget4: "Account Manager"
+ SucessPlanDetailsWidget5: "Support Contact"
+ CSMAdminCustomFields1: "Success Plan Account Manager Replacement"
+ CSMAdminCustomFields2: "Success Plan CSM Manager Replacement"
+ CSMAdminCustomFields3: "Success Plan CSM Replacement"
+ CSMAdminCustomFields4: "Success Plan Exec Sponsor Replacement"
+ CSMAdminCustomFields5: "Success Plan Filter Attribute"
+ CSMAdminCustomFields6: "Success Plan Renewal Manager Replacement"
+ CSMAdminCustomFields7: "Success Plan Renewal Rep Replacement"
+ CSMAdminCustomFields8: "Success Plan Support Contact Replacement"
+ DetailsSubTabDefaultLabels1: "Current Phase"
+ DetailsSubTabDefaultLabels2: "Account Owner"
+ DetailsSubTabDefaultLabels3: "Related Account"
+ DetailsSubTabDefaultLabels4: "Phase Start Date"
+ DetailsSubTabDefaultLabels5: "Display Name"
+ DetailsSubTabDefaultLabels6: "Support Contact"
+ DetailsSubTabDefaultLabels7: "Renewal Rep"
+ DetailsSubTabDefaultLabels8: "CSM"
+ DetailsSubTabDefaultLabels9: "Renewal Manager"
+ DetailsSubTabDefaultLabels10: "CSM Manager"
+ DetailsSubTabDefaultLabels11: "Exec Sponsor"
+ DetailsSubTabDefaultLabels12: "Account Manager"
+ DetailsSubTabDefaultLabels13: "Customer Success Manager"
+ ActionFilterField: "Related To Account"
+ SucessPlanRelatedToField: "Account"
+ ActionDefaultFilterField: "Has Play"
+ AccountName1: "TestAccount"
