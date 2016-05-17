@@ -53,3 +53,12 @@ def getReference(yamlInfo)
 	myoptions = YAML.load_file(yamlinput)
 	myoptions[yamlInfo]
 end
+
+def getExpirationYears(noOfPlusMinusYears)
+  ary = Array.new(2*noOfPlusMinusYears + 1)
+  current_year = Date.today.year
+  ary.each_index do |i|
+      ary[i] = (current_year -(noOfPlusMinusYears - i)).to_s
+   end
+   return ary
+end

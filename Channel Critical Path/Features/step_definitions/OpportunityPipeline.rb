@@ -3,7 +3,7 @@
 
 And(/^I check the default filter for "(.*?)"$/) do |arg|
 	begin
-		sleep 5
+		sleep 3
 		arg1 = getReference arg
 		defaultFilter = arg1["presentQuarter"]
 		menuOptions = Array.new
@@ -17,19 +17,19 @@ And(/^I check the default filter for "(.*?)"$/) do |arg|
 					else
 						puts "Failed to see #{defaultFilter} as default value on #{arg}"
 					end
-					sleep 2
+					sleep 1
 					all(".ui-select-match-close").each do |text|
 						text.click
-						sleep 3				
+						sleep 1
 					end	
 					puts "Cleared all the filters on #{arg}"
 				end
 			end
-			sleep 3
+			sleep 1
 		end
 		
 		all("input[role='combobox']")[0].click
-		sleep 5
+		sleep 3
 		
 		all(".ui-select-choices-row-inner").each do |menu|
 			menuOptions << menu.first("span").text
@@ -44,12 +44,15 @@ end
 
 And(/^I verify "(.*?)" filter on Opportunity Pipeline chart$/) do |arg|
 	begin
-		sleep 5
+		sleep 2
 		
 		arg1 = getReference arg
 		arg2 = getDetails arg
 		index = arg2["filterIndex"]
 		filter = arg1["filterValues"].split(",")
+    if arg == "Expiration Year"
+      filter = getExpirationYears(10)
+    end 
 		menuOptions = Array.new
 		
 		within(:css, ".pull-left.clearfix") do
@@ -57,20 +60,20 @@ And(/^I verify "(.*?)" filter on Opportunity Pipeline chart$/) do |arg|
 				if all(".ui-select-match-close").count > 0
 					all(".ui-select-match-close").each do |text|
 						text.click
-						sleep 3				
+						sleep 1				
 					end	
 					puts "Cleared all the filters on #{arg}"
 				else
 					puts "No filter is applied on #{arg}"
 				end
 			end
-			sleep 3
+			sleep 1
 		
 		
 			if arg != "Expiration Quarter"
 				
 				all("input[role='combobox']")[index].click
-				sleep 5
+				sleep 1
 				
 				all(".ui-select-choices-row-inner").each do |menu|
 					menuOptions << menu.first("span").text
@@ -88,15 +91,15 @@ And(/^I verify "(.*?)" filter on Opportunity Pipeline chart$/) do |arg|
 			filter.each do |value|
 				all("input[role='combobox']")[index].send_keys value
 				puts "Selected #{value} as #{arg} filter"
-				sleep 3
+				sleep 1
 				
 				all("input[role='combobox']")[index].send_keys :enter
-				sleep 3
+				sleep 1
 			end
 			
 			click_on "Go"
 			puts "Clicked on Go"
-			sleep 5
+			sleep 3
 		end
 		
 		

@@ -7,10 +7,11 @@ Background: Login to the Application
     Then I should land on CRM home page
 
 @verifyFilters	
-Scenario: Rally Test Case ID: TC4433,TC4434,TC4435,TC4436,TC4444,TC4445,TC4446,TC4447,TC4448,TC4449,TC4450,TC4452 : Opportunity Pipeline - Expiration Quarter, Opportunity Pipeline - Country, Opportunity Pipeline - Reseller Rep, Opportunity Pipeline - Distributor Rep, Opportunity Pipeline - Clear all the filters, Opportunity Pipeline - Expiration Quarter Filter,Opportunity Pipeline - Country Filter,Opportunity Pipeline - Reseller Rep Filter:Account OWD is Public,Opportunity Pipeline - Reseller Rep Filter:Account OWD is Private,Opportunity Pipeline - Distributor Rep Filter:Account OWD is Public,Opportunity Pipeline - Distributor Rep Filter:Account OWD is Private,Opportunity Pipeline - Try various filter combinations
+Scenario: Rally Test Case ID: TC4433,TC4434,TC4435,TC4436,TC4444,TC4445,TC4446,TC4447,TC4448,TC4449,TC4450,TC4452, TC5858, TC5859, TC5860, TC5861, TC5862, TC5863 : Opportunity Pipeline - Expiration Quarter, Opportunity Pipeline - Country, Opportunity Pipeline - Reseller Rep, Opportunity Pipeline - Distributor Rep, Opportunity Pipeline - Clear all the filters, Opportunity Pipeline - Expiration Quarter Filter,Opportunity Pipeline - Country Filter,Opportunity Pipeline - Reseller Rep Filter:Account OWD is Public,Opportunity Pipeline - Reseller Rep Filter:Account OWD is Private,Opportunity Pipeline - Distributor Rep Filter:Account OWD is Public,Opportunity Pipeline - Distributor Rep Filter:Account OWD is Private,Opportunity Pipeline - Try various filter combinations
 	When I Navigate to "Overview" tab
 	And I check the default filter for "Expiration Quarter"
 	And I verify "Expiration Quarter" filter on Opportunity Pipeline chart
+	And I verify "Expiration Year" filter on Opportunity Pipeline chart
 	And I verify "Country" filter on Opportunity Pipeline chart
 	And I verify "Reseller Rep" filter on Opportunity Pipeline chart
 	And I verify "Distributor Rep" filter on Opportunity Pipeline chart

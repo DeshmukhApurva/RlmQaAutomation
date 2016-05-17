@@ -4,8 +4,11 @@ DefaultAccounts:
  accountNumber: "QA-0001"
 
 Expiration Quarter:
- presentQuarter: "Q1 2016"
- filterValues: "Q1 2016,Q2 2016,Q3 2016,Q4 2016"
+ presentQuarter: "Q1"
+ filterValues: "Q1,Q2,Q3,Q4"
+
+Expiration Year:
+ filterValues: "2006"
 
 Country:
  filterValues: "USA"
@@ -17,7 +20,8 @@ Distributor Rep:
  filterValues: "PES Channel User"
 
 Opportunity Pipeline:
- Quarter: "Q1 2016"
+ Quarter: "Q1"
+ Quarter Year: "2016"
  Country: "USA"
  Reseller Rep: "PES Channel User"
  Distributor Rep: "PES Channel User"

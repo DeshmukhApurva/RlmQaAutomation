@@ -29,17 +29,20 @@ Action Tiles:
 Expiration Quarter:
  filterIndex: 0 
 
+Expiration Year:
+ filterIndex: 1
+
 
 Country:
- filterIndex: 1 
+ filterIndex: 2 
 
 
 Reseller Rep:
- filterIndex: 2
+ filterIndex: 3
 
 
 Distributor Rep:
- filterIndex: 3
+ filterIndex: 4
  
 
 SalesStages:
