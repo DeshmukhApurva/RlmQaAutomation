@@ -51,7 +51,7 @@ And(/^I verify "(.*?)" filter on Opportunity Pipeline chart$/) do |arg|
 		index = arg2["filterIndex"]
 		filter = arg1["filterValues"].split(",")
     if arg == "Expiration Year"
-      filter = getExpirationYears(10)
+      filter = getExpirationYears(1)
     end 
 		menuOptions = Array.new
 		
@@ -189,10 +189,21 @@ And(/^I verify the orange chart$/) do
 			blueLegendText = all(".highcharts-legend-item")[1].first("text").first("tspan").text
 			sleep 3
 			
-			if all(".highcharts-legend-item")[1].first("rect")[:fill] == "#40ADD1"
-				all(".highcharts-tracker")[0].hover
-				sleep 2
-				
+			if all(".highcharts-legend-item")[0].first("rect")[:fill] == "#CCC"
+        all(".highcharts-legend-item")[0].click
+      end
+      if all(".highcharts-legend-item")[1].first("rect")[:fill] == "#40ADD1"
+        all(".highcharts-legend-item")[1].click
+        puts "Disabled #{blueLegendText} legend"
+      end
+      sleep 5
+      if all(".highcharts-legend-item")[0].first("rect")[:fill] == "#FA9241" and all(".highcharts-tracker").count > 0
+        sleep 3
+
+			  all(".highcharts-tracker")[0].first("rect").hover
+				puts "hover on Orange bar"
+				sleep  2
+								
 				within(".highcharts-tooltip") do
 					salesStage = first("text").first("tspan").text
 					puts "Sales Stage: #{salesStage}"
@@ -203,17 +214,46 @@ And(/^I verify the orange chart$/) do
 					totalAmount = first("text").all("tspan")[2].text
 					puts "#{totalAmount}"
 					sleep 3
-			    end	
-				all(".highcharts-legend-item")[1].click
-				puts "Disabled #{blueLegendText} legend"
-				sleep 3
+			  end	
 				all(".highcharts-tracker")[0].click
 				puts "Clicked on Orange bar"
 				
-				sleep 5
+				sleep 15
 		
 				if page.has_css? (".view-heading-section")
 					puts "Successfully navigated to Opportunity page"
+          allAmountDiv = all(:xpath, "//*[contains(@id, '-uiGrid-00V1-cell')]")
+          allMsrpDiv = all(:xpath, "//*[contains(@id, '-uiGrid-00V2-cell')]")
+          allExpirationDatesDiv = all(:xpath, "//*[contains(@id, '-uiGrid-000C-cell')]")
+          totalRec = allExpirationDatesDiv.count
+          puts "Total #{totalRec} records searched: "
+          if totalRec > 0
+            
+            if allAmountDiv.count < 1
+              putstr "Amount field is not visible." 
+            end
+            if allMsrpDiv.count < 1
+              putstr "MSRP field is not visible." 
+            end
+
+            yearFilter = getExpirationYears(1)
+            rowData = '0'
+            allExpirationDatesDiv.each do |row|
+              isValidData = false
+              yearFilter.each do |fData|
+                rowData = row.first("div").text
+                puts "Check filter year: #{fData} with row Expiration-Date: #{rowData}"
+                if rowData.include? fData
+                  isValidData = true
+                  break
+                end
+              end
+              if !isValidData
+                putstr "Search Failed: Row is not matching with filter. [Year of #{rowData} is not in #{yearFilter}] " 
+                break
+              end
+            end
+          end
 				else
 					putstr "Failed to navigate to Opportunity page"
 				end
@@ -256,7 +296,7 @@ And(/^I verify the orange chart$/) do
         puts "Sales stage is not present for the selected opportunity to verify"
       end
 			else
-				puts "Blue Legend is not available" 
+				puts "Orange Legend is not available" 
 			end
 		else
 			puts "Legends are not available"
@@ -278,13 +318,21 @@ And(/^I verify the blue chart$/) do
 			puts "Blue colored Legend text is : #{blueLegendText}"
 			sleep 3
 			
-			if all(".highcharts-legend-item")[0].first("rect")[:fill] == "#FA9241"
-        sleep 4
-				all(".highcharts-tracker")[1].hover
-				sleep 2
-        puts "hover on blue bar"
-        all(".highcharts-tracker")[1].hover
+      if all(".highcharts-legend-item")[0].first("rect")[:fill] == "#FA9241"
+        all(".highcharts-legend-item")[0].click
+      end
+      if all(".highcharts-legend-item")[1].first("rect")[:fill] == "#CCC"
+        all(".highcharts-legend-item")[1].click
+        puts "Disabled #{orangeLegendText} legend"
+      end
+      sleep 5
+      if all(".highcharts-legend-item")[1].first("rect")[:fill] == "#40ADD1" and all(".highcharts-tracker").count > 0
+        all(".highcharts-legend-item")[0].click
+        puts "Disabled #{orangeLegendText} legend"
         sleep 2
+        all(".highcharts-tracker")[0].first("rect").hover
+				puts "hover on blue bar"
+        sleep 4
 
 				within(".highcharts-tooltip") do
 					salesStage = first("text").first("tspan").text
@@ -295,18 +343,47 @@ And(/^I verify the blue chart$/) do
 					puts "Currency of Logged in User : #{currency}"
 					totalAmount = first("text").all("tspan")[2].text
 					puts "#{totalAmount}"
-					sleep 3
+					#sleep 1
 			    end	
-				all(".highcharts-legend-item")[0].click
-				puts "Disabled #{orangeLegendText} legend"
-				sleep 3
 				all(".highcharts-tracker")[0].click
 				puts "Clicked on Blue bar"
 				
-				sleep 5
+				sleep 15
 				
 				if page.has_css? (".view-heading-section")
 					puts "Successfully navigated to Opportunity page"
+          allAmountDiv = all(:xpath, "//*[contains(@id, '-uiGrid-00V1-cell')]")
+          allMsrpDiv = all(:xpath, "//*[contains(@id, '-uiGrid-00V2-cell')]")
+          allExpirationDatesDiv = all(:xpath, "//*[contains(@id, '-uiGrid-000C-cell')]")
+          totalRec = allExpirationDatesDiv.count
+          puts "Total #{totalRec} records searched: "
+          if totalRec > 0
+            
+            if allAmountDiv.count < 1
+              putstr "Amount field is not visible." 
+            end
+            if allMsrpDiv.count < 1
+              putstr "MSRP field is not visible." 
+            end
+            
+            yearFilter = getExpirationYears(1)
+            rowData = '0'
+            allExpirationDatesDiv.each do |row|
+              isValidData = false
+              yearFilter.each do |fData|
+                rowData = row.first("div").text
+                puts "Check filter year: #{fData} with row Expiration-Date: #{rowData}"
+                if rowData.include? fData
+                  isValidData = true
+                  break
+                end
+              end
+              if !isValidData
+                putstr "Search Failed: Row is not matching with filter. [Year of #{rowData} is not in #{yearFilter}] " 
+                break
+              end
+            end
+  				end
 				else
 					putstr "Failed to navigate to Opportunity page"
 				end
@@ -323,7 +400,7 @@ And(/^I verify the blue chart$/) do
 				end
 				
 			else
-				puts "Orange Legend is not available" 
+				puts "Blue Legend is not available" 
 			end
 		else
 			puts "Legends are not available"

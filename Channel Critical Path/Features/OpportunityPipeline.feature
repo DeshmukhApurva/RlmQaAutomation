@@ -24,6 +24,9 @@ Scenario: Rally Test Case ID: TC4433,TC4434,TC4435,TC4436,TC4444,TC4445,TC4446,T
 @verifyCharts
 Scenario: Rally Test Case ID: TC4437,TC4438,TC4439,TC4440,TC4441,TC4442,TC4443,TC4470,TC4471,TC4523,TC4524,TC4525,TC4529,TC4530 : Opportunity Pipeline - Orange color portion,Opportunity Pipeline - Blue color portion,Opportunity Pipeline - Click on Chart (Orange color),Opportunity Pipeline - Click on Chart (Blue color),Opportunity Pipeline - Hover over chart,Opportunity Pipeline - Hover over chart in multi currency org,Opportunity Pipeline - Data display definition,Opportunity - Visibility of selected "Available to Partner" sales stages in Opportunity Pipeline,Opportunity - Click on chart and check visibility of selected "Available to Partner" sales stages in Opportunity Pipeline,Portal Overview Page: Sales Stages not to display in Pipeline Chart,Portal Overview Page: Sales Stages to display in Pipeline Chart,Portal Overview Page: Bar(Orange and Blue) and its value for Sales Stages display in Pipeline Chart,Pipeline Chart: Click on pipeline chart when Sales Stage is available to partner and Display in Pipeline,Pipeline Chart: Click on pipeline chart when Sales Stage is available not available to partner but available to Display in Pipeline
   When I Navigate to "Overview" tab
+  	Then I clear all the filters
+  	And I verify "Expiration Quarter" filter on Opportunity Pipeline chart
+  	And I verify "Expiration Year" filter on Opportunity Pipeline chart
     And I verify data display on charts
     When I Navigate to "Overview" tab
 	And I verify the orange chart
