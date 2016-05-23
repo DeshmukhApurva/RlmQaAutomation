@@ -629,19 +629,36 @@ Then(/^I should not able to see the "([^"]*)" dialogue box$/) do |status|
   end
 end
 
-
-And(/^I select the "([^"]*)" filter$/) do |filter|
+And(/^I verify the current expiration quarter value in Expiration Quarter filter$/) do
   begin
     sleep 6
-    find("div[placeholder='Select Quarter...']").click
-    sleep 5
-    find("input[placeholder='Select Quarter...']").send_keys filter
-    puts "Successfully see the #{filter} filter"
-    sleep 5
-    find("input[placeholder='Select Quarter...']").send_keys :enter
-    sleep 5
+    expirationQuarter = getDetails "ExpirationQuarter"
+    currentQuarter = expirationQuarter['CurrentQuarter']
+    sleep 1
+    within all(".ui-select-match")[1] do
+      if find(:css, ".ng-binding.ng-scope").text == currentQuarter
+        puts "Expiration quarter contains current quarter '#{currentQuarter}' by default."
+      end
+    end
   rescue Exception => ex
-    putstr "Error occurred while selecting the #{filter} filter"
+  putstr "Error occurred while verifying the '#{currentQuarter}'"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I verify the current expiration year value in Expiration Year filter$/) do
+  begin
+    sleep 6
+    expirationQuarter = getDetails "ExpirationQuarter"
+    currentYear = expirationQuarter['CurrentYear']
+    sleep 1
+    within all(".ui-select-match")[2] do
+      if find(:css, ".ng-binding.ng-scope").text == currentYear
+        puts "Expiration year contains current year '#{currentYear}' by default."
+      end
+    end
+  rescue Exception => ex
+    putstr "Error occurred while verifying the '#{currentYear}'"
     putstr_withScreen  ex.message
   end
 end
@@ -915,9 +932,10 @@ And(/^I update the "([^"]*)" sales field$/) do |title|
         sleep 3
         find("div[placeholder='Choose...']").click
         sleep 3
-        find("input[placeholder='Choose...']").send_keys arg["NeedStatusUpdateOpportunitySalesStage"]
-        sleep 3
-        find("input[placeholder='Choose...']").send_keys :enter
+        click_on(arg["NeedStatusUpdateOpportunitySalesStage"])
+        #find("input[placeholder='Choose...']").send_keys arg["NeedStatusUpdateOpportunitySalesStage"]
+        #sleep 3
+        #find("input[placeholder='Choose...']").send_keys :enter
         sleep 5
         puts "Successfully updated the #{title} value"
         sleep 3

@@ -10,7 +10,8 @@ Background: Login to the Application
 @opportunity_filters
 Scenario: Rally Test Case ID: TC4361,TC4362,TC4363,TC4364,TC4365,TC4366 : Opportunity - Open opportunities,Closed opportunities,Won opportunities,Lost opportunities,Needs Status Update,Expiration Quarter and opportunity filter these two filters should work together 
    When I click on "Opportunities" tab
-   And I select the "All Quarters" filter
+   And I verify the current expiration quarter value in Expiration Quarter filter
+   And I verify the current expiration year value in Expiration Year filter
    And I select the "Open Opportunities" filter value
    Then I should able to see the all the renewal partner opportunities associated to the account
    And I select the "Closed Opportunities" filter value

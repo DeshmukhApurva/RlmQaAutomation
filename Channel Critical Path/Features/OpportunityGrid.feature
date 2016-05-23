@@ -34,7 +34,8 @@ Scenario: Rally Test Case ID: TC4367,TC4368,TC4369,TC4370,TC4371,TC4372: Opportu
 @editing_field_opportunity
 Scenario: Rally Test Case ID: TC4373,TC4374,TC4375,TC4376,TC4377 : Opportunity - Inline field editing
    When I click on "Opportunities" tab
-   And I select the "All Quarters" filter
+   And I verify the current expiration quarter value in Expiration Quarter filter
+   And I verify the current expiration year value in Expiration Year filter
    And I select the "Open Opportunities" filter value
    And I update the "PES_Add_Partner" column values
    Then I verify the "Reseller Rep" and "Distributor Rep" column where Rep is not yet selected
@@ -44,7 +45,8 @@ Scenario: Rally Test Case ID: TC4373,TC4374,TC4375,TC4376,TC4377 : Opportunity -
 @update_the_status_fields
 Scenario: Rally Test Case ID: TC4378,TC4379,TC4380 : Update the status (True to False),Change the field which is not defined on admin screen and check the needs update flag,Update Status date display(flag is False)
    When I click on "Opportunities" tab
-   And I select the "All Quarters" filter
+   And I verify the current expiration quarter value in Expiration Quarter filter
+   And I verify the current expiration year value in Expiration Year filter
    And I select the "Need Status Updates" filter value
    And I update the "Sales Stage" sales field
    Then I verify the updated "Sales Stage" sales field
@@ -74,7 +76,8 @@ Scenario: Rally Test Case ID: TC4381,TC4382,TC4383,TC4384,TC4385 : Opportunity -
 @download_quote_attachment
 Scenario: Rally Test Case ID: TC4461,TC4462,TC4463 : Opportunity grid - Download attachment - Sales Force Quotes pdf
     When I click on "Opportunities" tab
-    And I select the "All Quarters" filter
+    And I verify the current expiration quarter value in Expiration Quarter filter
+    And I verify the current expiration year value in Expiration Year filter
     Then I should able to see the "Opportunity Grid" columns
     When I search with the "PES_Add_Partner_Attachment" opportunities
     Then I should able to see the "Opportunity Grid" columns

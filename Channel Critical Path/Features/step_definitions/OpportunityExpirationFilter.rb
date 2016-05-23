@@ -4,8 +4,6 @@
 Then (/^I check the current expiration quarter and expiration year results$/) do
 	begin
 	arg1 = getDetails "ExpirationQuarter"
-    inputCount = all(".ui-select-match").count
-    puts "quarter and year - '#{inputCount}'"
 		within all(".ui-select-match")[1] do
 			if find(:css, ".ng-binding.ng-scope").text == arg1['CurrentQuarter']
 				puts "Expiration quarter is in current quarter '#{arg1['CurrentQuarter']}'."
