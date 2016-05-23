@@ -11,3 +11,5 @@ start cmd /k call Channel_Critical_Path chrome AccountsModule CHANNELPARTNER_DEV
 start cmd /k call Channel_Critical_Path chrome OpportunitiesModule CHANNELPARTNER_DEV19
 start cmd /k call Channel_Critical_Path chrome OverviewModule CHANNELPARTNER_DEV19
 start cmd /k call Channel_Critical_Path chrome RequestsModule CHANNELPARTNER_DEV19
+
+start cmd /k call Channel_Critical_Path firefox OpportunityPipelineFeature CHANNELPARTNER_EETEST2

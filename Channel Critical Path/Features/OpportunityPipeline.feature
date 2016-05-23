@@ -28,10 +28,50 @@ Scenario: Rally Test Case ID: TC4437,TC4438,TC4439,TC4440,TC4441,TC4442,TC4443,T
   	And I verify "Expiration Quarter" filter on Opportunity Pipeline chart
   	And I verify "Expiration Year" filter on Opportunity Pipeline chart
     And I verify data display on charts
-    When I Navigate to "Overview" tab
+  	
+  	When I log into "CHANNELNETOPS_EETEST2" details
+  	When I Navigate to "ServiceSource Setup" tab
+	And I click on "Channel Portal Configuration" link
+	And Set Enable Two Tier Pricing check box to "true" value
+	And I click on "Save"
+	When I Navigate to "Accounts" tab
+ 	And I set Partner Account Type on Account ID "0011a00000KahZM" to "Reseller" type
+ 	When I log into "CHANNELPARTNER_EETEST2" details
+  	When I Navigate to "Overview" tab
+	And I verify the blue chart when Account is "Reseller" and Enable Two Tier Pricing is "true" set
+
+  	When I log into "CHANNELNETOPS_EETEST2" details
+  	When I Navigate to "ServiceSource Setup" tab
+	And I click on "Channel Portal Configuration" link
+	And Set Enable Two Tier Pricing check box to "false" value
+	And I click on "Save"
+ 	When I log into "CHANNELPARTNER_EETEST2" details
+  	When I Navigate to "Overview" tab
+	And I verify the blue chart when Account is "Reseller" and Enable Two Tier Pricing is "false" set
+#
+  	When I log into "CHANNELNETOPS_EETEST2" details
+  	When I Navigate to "ServiceSource Setup" tab
+	And I click on "Channel Portal Configuration" link
+	And Set Enable Two Tier Pricing check box to "true" value
+	And I click on "Save"
+	When I Navigate to "Accounts" tab
+ 	And I set Partner Account Type on Account ID "0011a00000KahZM" to "Distributor" type
+ 	When I log into "CHANNELPARTNER_EETEST2" details
+  	When I Navigate to "Overview" tab
+	And I verify the blue chart when Account is "Distributor" and Enable Two Tier Pricing is "true" set
+#
+  	When I log into "CHANNELNETOPS_EETEST2" details
+  	When I Navigate to "ServiceSource Setup" tab
+	And I click on "Channel Portal Configuration" link
+	And Set Enable Two Tier Pricing check box to "false" value
+	And I click on "Save"
+ 	When I log into "CHANNELPARTNER_EETEST2" details
+  	When I Navigate to "Overview" tab
+	And I verify the blue chart when Account is "Distributor" and Enable Two Tier Pricing is "false" set
+ 
+  	When I Navigate to "Overview" tab
 	And I verify the orange chart
-	When I Navigate to "Overview" tab
-	And I verify the blue chart
+
 	
 	
 @filterPreservation

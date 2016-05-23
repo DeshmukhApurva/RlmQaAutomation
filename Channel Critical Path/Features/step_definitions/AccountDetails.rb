@@ -1,8 +1,6 @@
 #All Accounts - Account Details specific Step definitions
 #All Scenario mentioned in AccountDetails.feature
 
-
-
 Then(/^I should able to see the "([^"]*)" page columns$/) do |tab_name|
   begin
     sleep 5
@@ -66,7 +64,6 @@ Then(/^I should able to see the "([^"]*)" page columns$/) do |tab_name|
     putstr_withScreen  ex.message
   end
 end
-
 
 Then(/^I should able to see the "([^"]*)" page fields$/) do |tab_name|
   begin
@@ -161,6 +158,34 @@ Then(/^I verify the the grid scroll up and scroll down and pagination$/) do
     end
   rescue Exception => ex
     putstr "Error occurred while verifying the scroll up and scroll down the page and default pagination value"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I set Partner Account Type on Account ID "(.*?)" to "(.*?)" type$/) do |accountId, accountType|
+  begin
+    sleep 5
+    sufixUrl = "#{accountId}/e?retURL=#{accountId}"
+    url = page.current_url.to_s
+    url = url.sub('001/o', sufixUrl)
+    #url.sub!('001/o',sufixUrl )
+    puts url
+    visit url
+    sleep 5
+    #xPathStr = "//*/td[text()='Partner Account Type']/following-sibling::td/span/select/option[value='#{accountType}']"
+    #puts xPathStr
+    if page.has_content?("Partner Account Type")
+      puts "--1"
+      option_xpath = "//*[@id='00N1a000008V0bK']/option[@value='#{accountType}']"
+      find(:xpath, option_xpath).click
+      puts "--2"
+      sleep 2
+      all(:xpath, "//*/input[@name='save']")[0].click
+
+      sleep 5
+    end
+  rescue Exception => ex
+    putstr "Error occurred while changing account Type #{accountType} to for Account id: #{accountId}"
     putstr_withScreen  ex.message
   end
 end

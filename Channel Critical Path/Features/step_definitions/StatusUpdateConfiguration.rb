@@ -320,3 +320,15 @@ Then(/^I move Sales stages again from "(.*?)" to "(.*?)"$/) do |item1,item2|
 		putstr_withScreen ex.message
 	end
 end
+
+And(/^Set Enable Two Tier Pricing check box to "(.*?)" value$/) do |arg|
+  sleep 5
+  checkboxVal = find(:xpath, "//*[contains(@id, 'in_tier_pricing')]").value
+  if arg == 'true'
+    find(:xpath, "//*[contains(@id, 'in_tier_pricing')]").set(true)
+  else
+    find(:xpath, "//*[contains(@id, 'in_tier_pricing')]").set(false)
+  end
+  puts "Changed 2 Tier Pricing check box to : #{arg}"
+  sleep 2
+end
