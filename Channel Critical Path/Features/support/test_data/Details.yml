@@ -220,9 +220,11 @@ NeedStatusUpdate:
  Status: "Set Sales Stage as Negotiation/Review"
 
 ExpirationQuarter:
- CurrentQuarter: "Q1 2016"
- ChangedQuarter: "Q2 2016"
- AllQuarter: "All Quarters"
+ CurrentQuarter: "Q2"
+ ChangedQuarter: "3"
+ CurrentYear: "2016"
+ ChangedYear: "2017"
+ #AllQuarter: "All Quarters"
 
 contactsSubtab:
  PartnerOpportunity: "Portal Agreement"

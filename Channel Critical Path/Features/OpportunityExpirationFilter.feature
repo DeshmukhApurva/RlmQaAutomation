@@ -9,5 +9,5 @@ Background: Login to the Application
 @VerifyExpirationQuarter
 Scenario: Rally-ID: TC4360 : Opportunity - Expiration filter
 	When I click on "Opportunities" link
-	Then I check the current expiration quarter results
-	And I verify after the expiration quarter results
+	Then I check the current expiration quarter and expiration year results
+	And I verify after the expiration quarter and expiration year results
