@@ -441,7 +441,7 @@ And(/^I verify the blue chart when Account is "(.*?)" and Enable Two Tier Pricin
             amt = amt.sub(' USD', '')
             amt = amt.sub('Total: ', '')
             amt = amt.sub(',', '').to_f
-            if(amt != amountColTotal || amt != msrpColTotal)
+            if(amt != amountColTotal && amt != msrpColTotal)
               putstr "Calculated amount is mismatch with Amount on tool-tip: #{amt}. Amount Col Total = #{amountColTotal}, MSRP Col Total = #{msrpColTotal} for #{accountType} Account Type where 2 Tire flag enabled = #{isTierPriceEnabled}."
             end
           end
