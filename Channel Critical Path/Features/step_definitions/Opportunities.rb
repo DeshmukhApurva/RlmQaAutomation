@@ -415,8 +415,10 @@ When(/^I click on "([^"]*)" icon$/) do |icon|
    if rowcount > 0
      within all(".ui-grid-canvas")[1] do
       within all("div[role='gridcell']")[12] do
-        sleep 3
-        first("div").first("div").click
+        sleep 5
+        first("div").click
+        sleep 2
+        first("div").click
       end
     end
     sleep 5
