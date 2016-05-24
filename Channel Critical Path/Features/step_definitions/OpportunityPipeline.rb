@@ -297,6 +297,7 @@ And(/^I verify the blue chart when Account is "(.*?)" and Enable Two Tier Pricin
         puts "hover on blue bar"
         sleep 4
         salesStage = ''
+        oppAmount = ''
         totalAmount = ''
         currencyType = ''
         within(".highcharts-tooltip") do
@@ -310,10 +311,16 @@ And(/^I verify the blue chart when Account is "(.*?)" and Enable Two Tier Pricin
           puts "#{totalAmount}"
           #sleep 1
         end
-        all(".highcharts-tracker")[0].click
+        if (all(".highcharts-tracker")[0][:visibility] == "visible")
+          all(".highcharts-tracker")[0].first("rect").click
+        elsif (all(".highcharts-tracker")[1][:visibility] == "visible")
+          all(".highcharts-tracker")[0].first("rect").click
+        else
+          putstr "Some issue in reading chart bar"
+        end
         puts "Clicked on Blue bar"
 
-        sleep 15
+        sleep 20
         amountColIndex = -1
         msrpColIndex = -1
 
@@ -431,10 +438,11 @@ And(/^I verify the blue chart when Account is "(.*?)" and Enable Two Tier Pricin
             end
             puts "Calculated amountColTotal = #{amountColTotal}, msrpColTotal = #{msrpColTotal}, Amount on tool-tip: #{totalAmount}."
             amt = totalAmount
-            amt = amt.sub('USD', '')
+            amt = amt.sub(' USD', '')
+            amt = amt.sub('Total: ', '')
             amt = amt.sub(',', '').to_f
             if(amt != amountColTotal || amt != msrpColTotal)
-              putstr "Calculated amount is mismatch with Amount on tool-tip: #{totalAmount}. Amount Col Total = #{amountColTotal}, MSRP Col Total = #{msrpColTotal} for #{accountType} Account Type where 2 Tire flag enabled = #{isTierPriceEnabled}."
+              putstr "Calculated amount is mismatch with Amount on tool-tip: #{amt}. Amount Col Total = #{amountColTotal}, MSRP Col Total = #{msrpColTotal} for #{accountType} Account Type where 2 Tire flag enabled = #{isTierPriceEnabled}."
             end
           end
         else
@@ -450,7 +458,7 @@ And(/^I verify the blue chart when Account is "(.*?)" and Enable Two Tier Pricin
   rescue Exception => ex
     putstr "Error while verifying Blue chart"
     putstr_withScreen  ex.message
-    putstr_withScreen ex.backtrace
+    #putstr_withScreen ex.backtrace
   end
 end
 
@@ -629,10 +637,10 @@ And(/^I verify the blue chart$/) do
           puts "#{totalAmount}"
           #sleep 1
         end
-        all(".highcharts-tracker")[0].click
+        all(".highcharts-tracker")[1].click
         puts "Clicked on Blue bar"
 
-        sleep 15
+        sleep 20
 
         if page.has_css? (".view-heading-section")
           puts "Successfully navigated to Opportunity page"
