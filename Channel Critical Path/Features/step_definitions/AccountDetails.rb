@@ -168,20 +168,14 @@ And(/^I set Partner Account Type on Account ID "(.*?)" to "(.*?)" type$/) do |ac
     sufixUrl = "#{accountId}/e?retURL=#{accountId}"
     url = page.current_url.to_s
     url = url.sub('001/o', sufixUrl)
-    #url.sub!('001/o',sufixUrl )
     puts url
     visit url
     sleep 5
-    #xPathStr = "//*/td[text()='Partner Account Type']/following-sibling::td/span/select/option[value='#{accountType}']"
-    #puts xPathStr
     if page.has_content?("Partner Account Type")
-      puts "--1"
       option_xpath = "//*[@id='00N1a000008V0bK']/option[@value='#{accountType}']"
       find(:xpath, option_xpath).click
-      puts "--2"
       sleep 2
       all(:xpath, "//*/input[@name='save']")[0].click
-
       sleep 5
     end
   rescue Exception => ex

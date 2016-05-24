@@ -51,7 +51,7 @@ And(/^I verify "(.*?)" filter on Opportunity Pipeline chart$/) do |arg|
     index = arg2["filterIndex"]
     filter = arg1["filterValues"].split(",")
     if arg == "Expiration Year"
-      filter = getExpirationYears(1)
+      filter = getExpirationYears(10)
     end
     menuOptions = Array.new
 
@@ -219,41 +219,6 @@ And(/^I verify the orange chart$/) do
 
         if page.has_css? (".view-heading-section")
           puts "Successfully navigated to Opportunity page"
-
-          puts find(:xpath, "//*/div[@class='ui-grid-canvas']/div/div[5]").text
-
-          allAmountDiv = all(:xpath, "//*[contains(@id, '-uiGrid-00V1-cell')]")
-          allMsrpDiv = all(:xpath, "//*[contains(@id, '-uiGrid-00V2-cell')]")
-          allExpirationDatesDiv = all(:xpath, "//*[contains(@id, '-uiGrid-000C-cell')]")
-          totalRec = allExpirationDatesDiv.count
-          puts "Total #{totalRec} records searched: "
-          if totalRec > 0
-
-            if allAmountDiv.count < 1
-              putstr "Amount field is not visible."
-            end
-            if allMsrpDiv.count < 1
-              putstr "MSRP field is not visible."
-            end
-
-            yearFilter = getExpirationYears(1)
-            rowData = '0'
-            allExpirationDatesDiv.each do |row|
-              isValidData = false
-              yearFilter.each do |fData|
-                rowData = row.first("div").text
-                puts "Check filter year: #{fData} with row Expiration-Date: #{rowData}"
-                if rowData.include? fData
-                  isValidData = true
-                  break
-                end
-              end
-              if !isValidData
-                putstr "Search Failed: Row is not matching with filter. [Year of #{rowData} is not in #{yearFilter}] "
-                break
-              end
-            end
-          end
         else
           putstr "Failed to navigate to Opportunity page"
         end
@@ -331,14 +296,16 @@ And(/^I verify the blue chart when Account is "(.*?)" and Enable Two Tier Pricin
         all(".highcharts-tracker")[0].first("rect").hover
         puts "hover on blue bar"
         sleep 4
-
+        salesStage = ''
+        totalAmount = ''
+        currencyType = ''
         within(".highcharts-tooltip") do
           salesStage = first("text").first("tspan").text
           puts "Sales Stage: #{salesStage}"
           oppAmount = first("text").all("tspan")[1].text
           puts "#{oppAmount}"
-          currency = first("text").all("tspan")[2].text[-3, 3]
-          puts "Currency of Logged in User : #{currency}"
+          currencyType = first("text").all("tspan")[2].text[-3, 3]
+          puts "Currency of Logged in User : #{currencyType}"
           totalAmount = first("text").all("tspan")[2].text
           puts "#{totalAmount}"
           #sleep 1
@@ -350,7 +317,7 @@ And(/^I verify the blue chart when Account is "(.*?)" and Enable Two Tier Pricin
         amountColIndex = -1
         msrpColIndex = -1
 
-        yearFilter = getExpirationYears(1)
+        yearFilter = getExpirationYears(10)
         if page.has_css? (".view-heading-section")
           puts "Successfully navigated to Opportunity page"
           # If Enable 2 Tier Pricing is FALSE, MSRP field will not display but Amount, latestQuote field will be display for Reseller & Distributor both.
@@ -453,7 +420,7 @@ And(/^I verify the blue chart when Account is "(.*?)" and Enable Two Tier Pricin
                     break
                   end
                   sleep 1
-                  if row.has_css?".btn-round-sm.srevicon-pencil.ng-isolate-scope.btn-blu"                    
+                  if row.has_css?".btn-round-sm.srevicon-pencil.ng-isolate-scope.btn-blu"
                     #puts "Need Status Update button is not available"
                   else
                     putstr "Need Status Update button is available"
@@ -462,7 +429,13 @@ And(/^I verify the blue chart when Account is "(.*?)" and Enable Two Tier Pricin
                 # Row validation ends here
               end
             end
-            puts "Calculated amountColTotal = #{amountColTotal}, msrpColTotal = #{msrpColTotal}"
+            puts "Calculated amountColTotal = #{amountColTotal}, msrpColTotal = #{msrpColTotal}, Amount on tool-tip: #{totalAmount}."
+            amt = totalAmount
+            amt = amt.sub('USD', '')
+            amt = amt.sub(',', '').to_f
+            if(amt != amountColTotal || amt != msrpColTotal)
+              putstr "Calculated amount is mismatch with Amount on tool-tip: #{totalAmount}. Amount Col Total = #{amountColTotal}, MSRP Col Total = #{msrpColTotal} for #{accountType} Account Type where 2 Tire flag enabled = #{isTierPriceEnabled}."
+            end
           end
         else
           putstr "Failed to navigate to Opportunity page"
@@ -619,16 +592,16 @@ And(/^I verify that filters Preserved or not$/) do
   end
 end
 
-And(/^I verify the blue chart$/) do 
+And(/^I verify the blue chart$/) do
   begin
     sleep 3
-    
+
     if all(".highcharts-legend-item").count > 0
       orangeLegendText = all(".highcharts-legend-item")[0].first("text").first("tspan").text
       blueLegendText = all(".highcharts-legend-item")[1].first("text").first("tspan").text
       puts "Blue colored Legend text is : #{blueLegendText}"
       sleep 3
-      
+
       if all(".highcharts-legend-item")[0].first("rect")[:fill] == "#FA9241"
         all(".highcharts-legend-item")[0].click
       end
@@ -655,12 +628,12 @@ And(/^I verify the blue chart$/) do
           totalAmount = first("text").all("tspan")[2].text
           puts "#{totalAmount}"
           #sleep 1
-          end 
+        end
         all(".highcharts-tracker")[0].click
         puts "Clicked on Blue bar"
-        
+
         sleep 15
-        
+
         if page.has_css? (".view-heading-section")
           puts "Successfully navigated to Opportunity page"
           allAmountDiv = all(:xpath, "//*[contains(@id, '-uiGrid-00V1-cell')]")
@@ -669,15 +642,15 @@ And(/^I verify the blue chart$/) do
           totalRec = allExpirationDatesDiv.count
           puts "Total #{totalRec} records searched: "
           if totalRec > 0
-            
+
             if allAmountDiv.count < 1
-              putstr "Amount field is not visible." 
+              putstr "Amount field is not visible."
             end
             if allMsrpDiv.count < 1
-              putstr "MSRP field is not visible." 
+              putstr "MSRP field is not visible."
             end
-            
-            yearFilter = getExpirationYears(1)
+
+            yearFilter = getExpirationYears(10)
             rowData = '0'
             allExpirationDatesDiv.each do |row|
               isValidData = false
@@ -690,7 +663,7 @@ And(/^I verify the blue chart$/) do
                 end
               end
               if !isValidData
-                putstr "Search Failed: Row is not matching with filter. [Year of #{rowData} is not in #{yearFilter}] " 
+                putstr "Search Failed: Row is not matching with filter. [Year of #{rowData} is not in #{yearFilter}] "
                 break
               end
             end
@@ -698,7 +671,7 @@ And(/^I verify the blue chart$/) do
         else
           putstr "Failed to navigate to Opportunity page"
         end
-        
+
         within all(".ui-grid-canvas")[1] do
           within all("div[role='gridcell']")[12] do
             sleep 3
@@ -709,14 +682,14 @@ And(/^I verify the blue chart$/) do
             end
           end
         end
-        
+
       else
-        puts "Blue Legend is not available" 
+        puts "Blue Legend is not available"
       end
     else
       puts "Legends are not available"
     end
-    
+
   rescue Exception => ex
     putstr "Error while verifying Blue chart"
     putstr_withScreen  ex.message
