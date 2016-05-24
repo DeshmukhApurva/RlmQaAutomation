@@ -5,16 +5,6 @@ Then (/^I Select the Partner Opportunity with sync "(.*?)" and Update$/) do |arg
   begin
     arg1 = getReference argument1
     presentIndex = Array.new
-    within all(".ui-select-match")[1] do
-      find(:css, ".ng-binding.ng-scope").click
-      sleep 3
-    end
-    sleep 3
-    find("input[placeholder='Select Quarter...']").send_keys "All Quarters"
-    sleep 3
-    puts "Successfully Set as All Quarters"
-    find("input[placeholder='Select Quarter...']").send_keys :enter
-    sleep 5
     find("input[placeholder='Search Opportunities...']").send_keys arg1['Name']
     sleep 3
     puts "Successfully see the Partner Agreement Opportunity"
@@ -95,11 +85,6 @@ Then (/^I Select the Partner Opportunity and bulkupdate with sync "(.*?)"$/) do 
       sleep 3
     end
     sleep 3
-    find("input[placeholder='Select Quarter...']").send_keys "All Quarters"
-    sleep 3
-    puts "Successfully Set as All Quarters"
-    find("input[placeholder='Select Quarter...']").send_keys :enter
-    sleep 5
     find("input[placeholder='Search Opportunities...']").send_keys arg1['Name']
     sleep 3
     puts "Successfully see the Partner Agreement Opportunity"
@@ -223,16 +208,6 @@ Then (/^I Select the Partner Opportunity to set primary$/) do
   begin
     arg1 = getReference "setPrimary"
     presentIndex = Array.new
-    within all(".ui-select-match")[1] do
-      find(:css, ".ng-binding.ng-scope").click
-      sleep 3
-    end
-    sleep 3
-    find("input[placeholder='Select Quarter...']").send_keys "All Quarters"
-    sleep 3
-    puts "Successfully Set as All Quarters"
-    find("input[placeholder='Select Quarter...']").send_keys :enter
-    sleep 5
     find("input[placeholder='Search Opportunities...']").send_keys arg1['Name']
     sleep 3
     puts "Successfully see the Partner Agreement Opportunity"

@@ -23,7 +23,6 @@ Scenario: Rally Test Case ID: TC4361,TC4362,TC4363,TC4364,TC4365,TC4366 : Opport
    And I select the "Lost Opportunities" filter value
    Then I should able to see the all the renewal partner opportunities associated to the account
    And I should able to see the "CLosed Lost" lost opportunities
-   And I select the "Q2 2016" filter
    And I select the "Need Status Updates" filter value
    Then I should able to see the all the renewal partner opportunities associated to the account
    And I update the "Sales Stage" sales field

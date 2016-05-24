@@ -9,6 +9,8 @@ Background: Login to the Application
 @ToMasteropp
 Scenario: Rally-ID : TC4511 : Opportunity Page- Auto update of MO when PO (PO is having Syncing value as "TO Master Opportunity")  gets updated from Channel Community.
     When I click on "Opportunities" link
+    And I verify the current expiration quarter value in Expiration Quarter filter
+    And I verify the current expiration year value in Expiration Year filter
     Then I Select the Partner Opportunity with sync "ToMaster" and Update
     When user logs out from channel partner community
     And user login in to "OEM" application
@@ -20,6 +22,8 @@ Scenario: Rally-ID : TC4511 : Opportunity Page- Auto update of MO when PO (PO is
 @bulkUpdate
 Scenario: Rally-ID: TC4512,TC4522 : Opportunity Page: Auto update of MO when user perform bulk update of Opporuntities (Opp having Syncing value as "TO Master Opportunity") from Channel Community, Syncing partner opportunity quote sync with the master opportunity
   When I click on "Opportunities" link
+  And I verify the current expiration quarter value in Expiration Quarter filter
+  And I verify the current expiration year value in Expiration Year filter
   Then I Select the Partner Opportunity and bulkupdate with sync "ToMaster"
   When user logs out from channel partner community
   And user login in to "OEM" application

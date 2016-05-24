@@ -4,11 +4,6 @@
 Then (/^I Select the "(.*?)" Partner Opportunity$/) do |argument1|
     begin
         arg1 = getReference argument1
-        within all(".ui-select-match")[1] do
-          find(:css, ".ng-binding.ng-scope").click
-          sleep 3
-        end
-        sleep 5
         find("input[placeholder='Search Opportunities...']").send_keys arg1['Name']
         sleep 3
         puts "Successfully see the Partner Agreement Opportunity"

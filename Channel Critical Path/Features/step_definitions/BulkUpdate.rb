@@ -11,10 +11,6 @@ And (/^I select the opportunity for field update for "(.*?)"$/) do |data|
 		else
 			puts "BulkUpdate Option is not visible."
 		end
-		within all(".ui-select-match")[1] do
-			find(:css, ".ng-binding.ng-scope").click
-			sleep 3
-		end
 		sleep 5
 		find("input[placeholder='Search Opportunities...']").send_keys arg1['PartnerOpportunity']
 		sleep 3
@@ -366,16 +362,6 @@ Then(/^I select one or more the opportunity "([^"]*)" and verify opportunity for
 begin
 	rowcount = 0				
 	presentIndex = Array.new
-	within all(".ui-select-match")[1] do
-		find(:css, ".ng-binding.ng-scope").click
-		sleep 3
-	end
-	sleep 3		
-	find("input[placeholder='Select Quarter...']").send_keys "Q2 2016"
-	sleep 3
-	puts "Successfully Set as 'Q2 2016'"
-	find("input[placeholder='Select Quarter...']").send_keys :enter
-	sleep 5	
 	
 	within all(".ui-grid-canvas")[1] do
 		rowcount = all(".ui-grid-row").count		
@@ -536,16 +522,6 @@ Then(/^I select one or more the opportunity "([^"]*)" and verify opportunity for
 	begin	
 		rowcount = 0				
 		presentIndex = Array.new
-		within all(".ui-select-match")[1] do
-			find(:css, ".ng-binding.ng-scope").click
-			sleep 3
-		end
-		sleep 3		
-		find("input[placeholder='Select Quarter...']").send_keys "Q2 2016"
-		sleep 3
-		puts "Successfully Set as 'Q2 2016'"
-		find("input[placeholder='Select Quarter...']").send_keys :enter
-		sleep 5	
 		
 		within all(".ui-grid-canvas")[1] do
 			rowcount = all(".ui-grid-row").count		
