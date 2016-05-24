@@ -9,6 +9,8 @@ Background: Login to the Application
 @BulkUpdate
 Scenario: Rally-ID: TC4386 :Opportunity Bulk Update Div
 	When I click on "Opportunities" link
+	And I verify the current expiration quarter value in Expiration Quarter filter
+   	And I verify the current expiration year value in Expiration Year filter
 	And I select the opportunity for field update for "BulkUpdate"
 	Then I verify the Bulk Update window
 
@@ -51,6 +53,8 @@ Scenario: Rally-ID: TC4387,TC4388,TC4389,TC4390,TC4391 : Bulk Update - Field upd
 @BulkUpdateNotes
 Scenario: Rally-ID: TC4393,TC4394 : Bulk Update - Update with Notes,Do not select any opportunity record.
 	When I click on "Opportunities" link
+	And I verify the current expiration quarter value in Expiration Quarter filter
+   	And I verify the current expiration year value in Expiration Year filter
 	And I select the opportunity for field update for "NeedStatusUpdate"
 	When I click on the "Update" button
 	And I update the notes for particular Opportunity

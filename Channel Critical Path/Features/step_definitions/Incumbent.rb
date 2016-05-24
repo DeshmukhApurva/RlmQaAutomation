@@ -8,11 +8,6 @@ Then (/^I Select the "(.*?)" Partner Opportunity$/) do |argument1|
           find(:css, ".ng-binding.ng-scope").click
           sleep 3
         end
-        sleep 3
-        find("input[placeholder='Select Quarter...']").send_keys "All Quarters"
-        sleep 3
-        puts "Successfully Set as All Quarters"
-        find("input[placeholder='Select Quarter...']").send_keys :enter
         sleep 5
         find("input[placeholder='Search Opportunities...']").send_keys arg1['Name']
         sleep 3

@@ -933,9 +933,6 @@ And(/^I update the "([^"]*)" sales field$/) do |title|
         find("div[placeholder='Choose...']").click
         sleep 3
         click_on(arg["NeedStatusUpdateOpportunitySalesStage"])
-        #find("input[placeholder='Choose...']").send_keys arg["NeedStatusUpdateOpportunitySalesStage"]
-        #sleep 3
-        #find("input[placeholder='Choose...']").send_keys :enter
         sleep 5
         puts "Successfully updated the #{title} value"
         sleep 3

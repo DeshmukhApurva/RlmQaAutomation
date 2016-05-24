@@ -9,7 +9,8 @@ Background: Login to the Application
 @primary_quote_field
 Scenario: Rally Test Case ID: TC4548,TC4549,TC4550,TC4552 : Quotes Tab: Checkbox for Primary Quote field of Quote record,Selecting Primary Quote field checkbox,Selecting Primary Quote field checkbox for other Quote record if Primary Quote field checkbox is already checked for any other Quote record,Updating Amount and Quote fields of Opportunity tab as per Primary Quote field checkbox selected on Quotes tab
     When I click on "Opportunities" tab
-    And I select the "All Quarters" filter
+   	And I verify the current expiration quarter value in Expiration Quarter filter
+   	And I verify the current expiration year value in Expiration Year filter
     And I search with the "PES_Add_Partner" opportunities
     Then I verify the "Quotes" opportunity fields
     And I sort "Latest Quote" in "Ascending" order
@@ -18,7 +19,8 @@ Scenario: Rally Test Case ID: TC4548,TC4549,TC4550,TC4552 : Quotes Tab: Checkbox
     Then I should able to see the "Quotes" quote fields
     When I select the "Primary Quote" checkbox field
     When I click on "Opportunities" tab
-    And I select the "All Quarters" filter
+   	And I verify the current expiration quarter value in Expiration Quarter filter
+   	And I verify the current expiration year value in Expiration Year filter
     And I search with the "PES_Add_Partner" opportunities
     And I sort "Latest Quote" in "Ascending" order
     Then I verify the Amount and Quote field value of partner opportunity
@@ -27,7 +29,8 @@ Scenario: Rally Test Case ID: TC4548,TC4549,TC4550,TC4552 : Quotes Tab: Checkbox
 @selecting_primary_quote
 Scenario: Rally Test Case ID: TC4551,TC4553 : When PO Syncing as "To Master Opportunity",Selecting Primary Quote field checkbox for Quote record,When PO Syncing as "From Master Opportunity" or not Syncing, Selecting Primary Quote field checkbox for Quote record
     When I click on "Opportunities" tab
-    And I select the "All Quarters" filter
+   	And I verify the current expiration quarter value in Expiration Quarter filter
+   	And I verify the current expiration year value in Expiration Year filter
     And I search with the "PES_Add_Partner" opportunities
     And I sort "Latest Quote" in "Ascending" order
     And I navigate to the "Quotes" opportunity sub tab
