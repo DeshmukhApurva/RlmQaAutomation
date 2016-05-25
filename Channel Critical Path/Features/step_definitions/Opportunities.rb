@@ -678,7 +678,7 @@ And(/^I select the "([^"]*)" filter value$/) do |filter|
     find("div[placeholder='Select Opportunity Type...']").click
     sleep 5
     find("input[placeholder='Select Opportunity Type...']").send_keys filter
-    sleep 3
+    sleep 10
     puts "Successfully see the #{filter} filter"
     find("input[placeholder='Select Opportunity Type...']").send_keys :arrow_down
     sleep 5
@@ -2617,6 +2617,52 @@ Then(/^I should able to see the download "([^"]*)" attachment$/) do |quote|
     sleep 5
     puts "Successfully see the download #{quote} attachment"
     sleep 8
+  rescue Exception => ex
+    putstr "Error occurred while verifying the download #{quote} attachment"
+    putstr_withScreen  ex.message
+  end
+end
+
+Then(/^I select all quarter values in Expiration Quarter filter$/) do 
+  begin
+    allExpQrtrArg = getReference "Expiration Quarter"
+    allExpQuarters = allExpQrtrArg["filterValues"].split(",")
+    sleep 3
+    # Set all available quarters in expiration quarter
+    within all(".ui-select-match")[1] do
+      find(:css, ".close.ui-select-match-close").click      
+    end
+    sleep 1
+    allExpQuarters.each do |value|
+      find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[1]/div/div/div/input").click
+      sleep 1
+      click_on(value)
+      sleep 1
+    end
+    puts "Selected all available expiration quarters"
+  rescue Exception => ex
+    putstr "Error occurred while verifying the download #{quote} attachment"
+    putstr_withScreen  ex.message
+  end
+end
+
+Then(/^I select all expiration year value in Expiration Year filter$/) do 
+  begin
+    allYears = getExpirationYears(10)
+    sleep 3
+    # Set all available years in expiration year
+    within all(".ui-select-match")[2] do
+      find(:css, ".close.ui-select-match-close").click      
+    end
+    sleep 1
+    allYears.each do |value|
+      find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[2]/div/div/div/input").click
+      sleep 1
+      click_on(value)
+      sleep 1
+    end
+    puts "Selected all available expiration years"
+    sleep 3
   rescue Exception => ex
     putstr "Error occurred while verifying the download #{quote} attachment"
     putstr_withScreen  ex.message
