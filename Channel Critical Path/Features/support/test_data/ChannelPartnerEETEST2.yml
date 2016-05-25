@@ -44,7 +44,7 @@ PartnerOpportunity:
  Second: "Partner Agreement"
 
 Incumbent:
- Name: "PES_CHL_Opp - Incumbent"
+ Name: "PES_CHL_Opp_Incumbent" 
 
 NonIncumbent:
  Name: "PES_CHL_Opp - NonIncumbent"
