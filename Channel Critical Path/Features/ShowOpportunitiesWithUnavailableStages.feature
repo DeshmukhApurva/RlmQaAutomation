@@ -9,7 +9,7 @@ Background: Login to the Application
 
 
 @update_sales_stage_opportunities
-Scenario: Rally Test Case ID: TC4534,TC4535,TC4536,TC4537,TC4539 : Opportunities Tab: "Show Opportunities with Unavailable Stages" checkbox is Checked, Error message when user inline edits the PO if "Show Opportunities with Unavailable Stages" checkbox is Checked
+Scenario: Rally Test Case ID: TC4534,TC4535,TC4536,TC4537,TC4539, TC5856 : Opportunities Tab: "Show Opportunities with Unavailable Stages" checkbox is Checked, Error message when user inline edits the PO if "Show Opportunities with Unavailable Stages" checkbox is Checked
      When I click on "Opportunities" tab
      Then I should able to see the "Opportunity Grid" columns
    	 When I verify the current expiration quarter value in Expiration Quarter filter
