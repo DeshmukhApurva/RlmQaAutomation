@@ -91,3 +91,23 @@ Scenario: Rally Test Case ID: TC4311,TC4319 : Add New Partner Opportunity - Chec
     And I select the "Incumbent" checkbox
     And I click on the "Grant Access"
     Then I should be able to see the partner account hierarchy details
+    
+@HidePartnerAccount1_2Type
+Scenario: Rally Test Case ID: TS5457,TS5458 : Two Tier Pricing - Check box enabled to hide partner account type picklists on create partner opportunity page
+	When I Navigate to "ServiceSource Setup" tab
+	And I click on "Channel Portal Configuration" link
+	Then I "Check" the "Enable 2 Tier Pricing" checkbox
+	When user logout from "OEM" application
+	When I log into "CHANNELMANAGER_EETEST2" details
+	When I Navigate to "Accounts" tab
+	Then I "Hide" partner account 1_2 picklist on PO
+
+@ShowPartnerAccount1_2Type	
+Scenario: Rally Test Case ID: TS5457,TS5458 : Two Tier Pricing - Check box disabled to show partner account type picklists on create partner opportunity page
+	When I Navigate to "ServiceSource Setup" tab
+	And I click on "Channel Portal Configuration" link
+	Then I "Uncheck" the "Enable 2 Tier Pricing" checkbox
+	When user logout from "OEM" application
+	When I log into "CHANNELMANAGER_EETEST2" details
+	When I Navigate to "Accounts" tab
+	Then I "Show" partner account 1_2 picklist on PO    
