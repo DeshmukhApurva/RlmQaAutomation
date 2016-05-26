@@ -39,7 +39,7 @@ Scenario: Rally-ID: Login as OEM user and set the NeedStatusUpdate button as tru
 	And I set the Needs Status Update as true
 	
 @Update
-Scenario:Rally-ID: TC4392 : BulkUpdate-verify Update is working or not
+Scenario: Rally-ID: TC4392 : BulkUpdate-verify Update is working or not
 	When I click on "Opportunities" link
 	Then I select one or more the opportunity "Update" and verify opportunity for "BulkUpdate" when status is true	
 
