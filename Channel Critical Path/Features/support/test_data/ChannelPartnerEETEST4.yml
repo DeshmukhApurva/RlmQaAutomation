@@ -59,3 +59,12 @@ setPrimary:
 NeedStatusUpdate:
  Name: "PES_Pipeline_Opportunity"
  PartnerOpp: "PES_NeedStatusUpdate"
+ 
+TwoTier:
+  ResellerAccount: "Automation Reseller"
+  DistributorAccount: "Automation Distributor"
+  Account: "TwoTierAutomation"
+  RenewalOpportunity: "TwoTierAutomationRO"
+  PartnerOpportunity: "TwoTierAutomationRO-TwoTierAutomation"
+  ResellerQuote: "TwoTierAutomationROR"
+  DistributorQuote: "TwoTierAutomationROD"
