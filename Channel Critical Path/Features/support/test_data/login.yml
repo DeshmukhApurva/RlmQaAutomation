@@ -96,7 +96,6 @@ CHANNELPARTNER_EETEST2:
 ADMIN_EETEST4:
  userName: "devuser-ee4@comitydesigns.com"
  pwd: "passw0rd"
- Instance: ""
  url: "https://login.salesforce.com/"
 
 CHANNELNETOPS_EETEST4:
@@ -122,7 +121,7 @@ CHANNELPARTNER_EETEST4:
  oem_userName: "qa-channelmanager-eetest4@servicesource.com"
  oem_pwd: "pass@word1"
  
-CHANNELPARTNER__EETEST4_DISTRIBUTOR:
+CPEETEST4DIST:
  userName: "Distributor_PU@comitydesigns.com"
  pwd: "pass@word1"
  Instance: "ChannelPartnerEETEST4"
@@ -134,7 +133,7 @@ CHANNELPARTNER__EETEST4_DISTRIBUTOR:
  oem_userName: "qa-channelmanager-eetest4@servicesource.com"
  oem_pwd: "pass@word1"
 
-CHANNELPARTNER__EETEST4_RESELLER:
+CPEETEST4RES:
  userName: "Reseller_PU@comitydesigns.com"
  pwd: "pass@word1"
  Instance: "ChannelPartnerEETEST4"
@@ -144,4 +143,4 @@ CHANNELPARTNER__EETEST4_RESELLER:
  PartnerType: "Reseller"
  oem_url: "https://login.salesforce.com/"
  oem_userName: "qa-channelmanager-eetest4@servicesource.com"
- oem_pwd: "pass@word1" oem_pwd: "pass@word1"
+ oem_pwd: "pass@word1"
