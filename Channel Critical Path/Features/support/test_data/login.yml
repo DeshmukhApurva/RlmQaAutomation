@@ -93,6 +93,12 @@ CHANNELPARTNER_EETEST2:
  oem_userName: "qa-channelmanager-eetest2@servicesource.com"
  oem_pwd: "pass@word1"
 
+ADMIN_EETEST4:
+ userName: "devuser-ee4@comitydesigns.com"
+ pwd: "passw0rd"
+ Instance: ""
+ url: "https://login.salesforce.com/"
+
 CHANNELNETOPS_EETEST4:
  userName: "qa-channelnetops-eetest4@servicesource.com"
  pwd: "pass@word1"
@@ -111,6 +117,31 @@ CHANNELPARTNER_EETEST4:
  Instance: "ChannelPartnerEETEST4"
  url: "https://eetest4.force.com/ServiceSource1__CHL_PartnerLogin"
  Name: "QA ChannelPartner"
+ Account: "PES Channel Account"
  oem_url: "https://login.salesforce.com/"
  oem_userName: "qa-channelmanager-eetest4@servicesource.com"
  oem_pwd: "pass@word1"
+ 
+CHANNELPARTNER__EETEST4_DISTRIBUTOR:
+ userName: "Distributor_PU@comitydesigns.com"
+ pwd: "pass@word1"
+ Instance: "ChannelPartnerEETEST4"
+ url: "https://eetest4.force.com/ServiceSource1__CHL_PartnerLogin"
+ Account: "Automation Distributor"
+ Name: "QA ChannelPartner"
+ PartnerType: "Distributor"
+ oem_url: "https://login.salesforce.com/"
+ oem_userName: "qa-channelmanager-eetest4@servicesource.com"
+ oem_pwd: "pass@word1"
+
+CHANNELPARTNER__EETEST4_RESELLER:
+ userName: "Reseller_PU@comitydesigns.com"
+ pwd: "pass@word1"
+ Instance: "ChannelPartnerEETEST4"
+ url: "https://eetest4.force.com/ServiceSource1__CHL_PartnerLogin"
+ Account: "Automation Reseller"
+ Name: "QA ChannelPartner"
+ PartnerType: "Reseller"
+ oem_url: "https://login.salesforce.com/"
+ oem_userName: "qa-channelmanager-eetest4@servicesource.com"
+ oem_pwd: "pass@word1" oem_pwd: "pass@word1"

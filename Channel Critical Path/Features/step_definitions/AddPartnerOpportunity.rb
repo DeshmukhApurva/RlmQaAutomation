@@ -740,3 +740,50 @@ Then(/^I should be able to see the partner account hierarchy details$/) do
     putstr_withScreen  ex.message
   end
 end
+
+And(/^I "(.*?)" partner account 1_2 picklist on PO$/) do |arg1|
+  begin
+    sleep 5
+    arg = getReference "TwoTier"
+    sleep 2
+    select("My Accounts", :from => "fcf")
+    if page.has_selector?(:xpath, '//*[@id="filter_element"]/div/span/span[1]/input')
+      click_on('Go!')
+    end
+
+    sleep 2
+    ResellerAccount = arg["Account"]
+    puts ResellerAccount.chr
+    click_on(ResellerAccount.chr)
+    sleep 2
+    if page.has_content?(Account.chr)
+      puts "Successfully see the #{Account.chr} on Account Tab"
+    else
+      putstr "Failed to see the #{Account.chr} on Account Tab"
+    end
+
+    first(:link, arg["Account"]).click
+    sleep(3)
+
+    first(:link, arg["RenewalOpportunity"]).click
+    sleep(3)
+
+    click_on("New Partner Opportunity")
+    sleep(3)
+    
+    if arg1 == "Hide"
+      page.should_not have_css('option[value="Reseller"]')
+      if page.should_not have_css('option[value="Reseller"]')
+        puts "Successfully verified Partner Account 1 & 2 Type"      
+      end
+    else
+      page.should have_css('option[value="Reseller"]')
+      if page.should have_css('option[value="Reseller"]')
+        puts "Successfully verified Partner Account 1 & 2 Type"
+      end
+    end
+  rescue Exception => ex
+    putstr "Error occurred while selecting the products"
+    putstr_withScreen  ex.message
+  end
+end
