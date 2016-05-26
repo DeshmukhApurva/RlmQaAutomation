@@ -434,30 +434,36 @@ end
 
 Then(/^I should be able to see the "([^"]*)" and "([^"]*)" buttons$/) do |button_text1, button_text2|
   begin
-    sleep 5
-    rowcount = all(".ui-grid-row.ng-scope").count
+   sleep 5
+   rowcount = all(".ui-grid-row.ng-scope").count
     if rowcount > 0
-      sleep 5
-      within(".btns-update-status") do
-      no_change = all("button")[0].text
-      update = all("button")[1].text
-      sleep 3
-      if no_change == button_text1
-        puts "Successfully see the #{button_text1} button"
-      else
-        putstr "Failed to see the #{button_text1} button"
-      end
-      sleep 5
-      if update == button_text2
-        puts "Successfully see the #{button_text2} button"
-      else
-        putstr "Failed to see the #{button_text2} button"
+     sleep 5
+      within all(".ui-grid-canvas")[1] do
+        within all("div[role='gridcell']")[12] do
+          sleep 5
+          first("div").first("div").click
+          sleep 1
+          no_change = find(:xpath, "//div[2]/div/div/button[1]").text
+          puts "#{no_change}"
+          update = find(:xpath, "//div[2]/div/div/button[2]").text
+          puts "#{update}"
+          if no_change == button_text1
+            puts "Successfully see the #{button_text1} button"
+          else
+            putstr "Failed to see the #{button_text1} button"
+          end
+          sleep 5
+          if update == button_text2
+            puts "Successfully see the #{button_text2} button"
+          else
+            putstr "Failed to see the #{button_text2} button"
+          end
       end
     end
     sleep 5
     within all(".ui-grid-canvas")[1] do
       within all("div[role='gridcell']")[12] do
-        sleep 3
+        sleep 5
         first("div").first("div").click
       end
     end
