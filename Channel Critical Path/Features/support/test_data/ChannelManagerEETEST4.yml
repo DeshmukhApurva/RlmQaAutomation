@@ -29,3 +29,12 @@ SplitOpportunity:
 Pricebooks:
  first: "Standard Price Book"
  second: "Test_PriceBook"
+
+TwoTier:
+  ResellerAccount: "Automation Reseller"
+  DistributorAccount: "Automation Distributor"
+  Account: "TwoTierAutomation"
+  RenewalOpportunity: "TwoTierAutomationRO"
+  PartnerOpportunity: "TwoTierAutomationRO-TwoTierAutomation"
+  ResellerQuote: "TwoTierAutomationROR"
+  DistributorQuote: "TwoTierAutomationROD"
