@@ -30,4 +30,4 @@ Scenario: Rally Test Case ID: TC4290,TC4291,TC4292 : Channel Portal Configuratio
 Scenario: Rally Test Case ID: TS5457,TS5458 : Channel Portal Config - Check the "Enable 2 Tier Pricing" checkbox.
 	When I Navigate to "ServiceSource Setup" tab 
 	And I click on "Channel Portal Configuration" link
-	And I verify "Enable 2 Tier Pricing" checkbox	
+	And I verify "Enable 2 Tier Pricing" checkbox

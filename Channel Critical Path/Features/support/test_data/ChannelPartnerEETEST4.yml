@@ -4,8 +4,11 @@ DefaultAccounts:
  accountNumber: "QA-0001"
 
 Expiration Quarter:
- presentQuarter: "Q1 2016"
- filterValues: "Q1 2016,Q2 2016,Q3 2016,Q4 2016"
+ presentQuarter: "Q1"
+ filterValues: "Q1,Q2,Q3,Q4"
+
+Expiration Year:
+ filterValues: "2016,2017,2018"
 
 Country:
  filterValues: "USA"
@@ -17,7 +20,7 @@ Distributor Rep:
  filterValues: "PES Channel User"
 
 Opportunity Pipeline:
- Quarter: "Q1 2016"
+ Quarter: "Q1"
  Country: "USA"
  Reseller Rep: "PES Channel User"
  Distributor Rep: "PES Channel User"
@@ -68,3 +71,5 @@ TwoTier:
   PartnerOpportunity: "TwoTierAutomationRO-TwoTierAutomation"
   ResellerQuote: "TwoTierAutomationROR"
   DistributorQuote: "TwoTierAutomationROD"
+  ResellerQuoteNumber: "  00000869"
+  DistributorQuoteNumber: "00000870"
