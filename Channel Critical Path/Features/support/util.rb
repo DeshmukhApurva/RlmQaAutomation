@@ -1,7 +1,10 @@
 require 'rubygems'
 require 'rspec/expectations'
 require 'Capybara'
+require 'Restforce'
+require 'openssl'
 
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 $Opp = Time.now.utc.to_i.to_s
 
 def putstr(s)
@@ -61,4 +64,25 @@ def getExpirationYears(noOfPlusMinusYears)
       ary[i] = (current_year -(noOfPlusMinusYears - i)).to_s
    end
    return ary
+end
+begin
+  Restforce.configure do |config|
+    config.api_version = "36.0"
+    # ...
+  end
+  client = Restforce.new :username => 'amit-csmdev07@comitydesigns.com',
+    :password       => 'Passw0rd',
+    :security_token => 'Gq1XDz3NcJessTy8n9H3rGTK',
+    :client_id      => '3MVG9fMtCkV6eLhdTHzExvFId0bZutnJg30N.KV_OFKhgrEgIip4kq6HzduedM7RPBRcNWGDkgrTyyNrVpVJm',
+    :client_secret  => '7847893736189474237'
+  puts "#{client}"
+  accounts = client.query("select p.Number, f.Name from Period p, p.FiscalYearSettings f where Type = 'Quarter' and p.StartDate <=today and p.EndDate >=today limit 1")
+  if accounts.first.nil?
+    fiscalYearMonthList = client.query("select FiscalYearStartMonth from Organization where id='00Dj0000000HEmn'")
+    fiscalYearMonth = fiscalYearMonthList.first
+    currentQuarter = ((Date.today.month - fiscalYearMonth.FiscalYearStartMonth)/3) + 1
+  else
+    currentQuarter = accounts.first.Number
+  end
+  puts "#{currentQuarter}"
 end

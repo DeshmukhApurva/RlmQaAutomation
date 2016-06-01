@@ -6,82 +6,82 @@ Then(/^I should able to see the "([^"]*)" columns$/) do |grid|
     sleep 5
     arg = getDetails "OpportunityModule"
     sleep 5
-    if page.has_content?(arg["OpportunityModuleField1"])
-      puts "Successfully see the #{arg["OpportunityModuleField1"]} request grid name"
+    if page.has_content?(arg["OpportunityGridField1"])
+      puts "Successfully see the #{arg["OpportunityGridField1"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityModuleField1"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityGridField1"]} request grid name"
     end
     sleep 3
-    if page.has_content?(arg["OpportunityModuleField2"])
-      puts "Successfully see the #{arg["OpportunityModuleField2"]} request grid name"
+    if page.has_content?(arg["OpportunityGridField2"])
+      puts "Successfully see the #{arg["OpportunityGridField2"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityModuleField2"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityGridField2"]} request grid name"
     end
     sleep 3
 
     if page.has_content?(arg["OpportunityModuleField3"])
-      puts "Successfully see the #{arg["OpportunityModuleField3"]} request grid name"
+      puts "Successfully see the #{arg["OpportunityGridField3"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityModuleField3"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityGridField3"]} request grid name"
     end
     sleep 3
 
     if page.has_content?(arg["OpportunityModuleField4"])
-      puts "Successfully see the #{arg["OpportunityModuleField4"]} request grid name"
+      puts "Successfully see the #{arg["OpportunityGridField4"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityModuleField4"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityGridField4"]} request grid name"
     end
     sleep 3
 
     if page.has_content?(arg["OpportunityModuleField5"])
-      puts "Successfully see the #{arg["OpportunityModuleField5"]} request grid name"
+      puts "Successfully see the #{arg["OpportunityGridField5"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityModuleField5"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityMGridField5"]} request grid name"
     end
     sleep 3
 
     if page.has_content?(arg["OpportunityModuleField6"])
-      puts "Successfully see the #{arg["OpportunityModuleField6"]} request grid name"
+      puts "Successfully see the #{arg["OpportunityGridField6"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityModuleField6"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityGridField6"]} request grid name"
     end
     sleep 3
 
     if page.has_content?(arg["OpportunityModuleField7"])
-      puts "Successfully see the #{arg["OpportunityModuleField7"]} request grid name"
+      puts "Successfully see the #{arg["OpportunityGridField7"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityModuleField7"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityGridField7"]} request grid name"
     end
     sleep 3
 
     if page.has_content?(arg["OpportunityModuleField8"])
-      puts "Successfully see the #{arg["OpportunityModuleField8"]} request grid name"
+      puts "Successfully see the #{arg["OpportunityGridField8"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityModuleField8"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityGridField8"]} request grid name"
     end
     sleep 3
     if page.has_content?(arg["OpportunityModuleField9"])
-      puts "Successfully see the #{arg["OpportunityModuleField9"]} request grid name"
+      puts "Successfully see the #{arg["OpportunityGridField9"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityModuleField9"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityGridField9"]} request grid name"
     end
     sleep 3
     if page.has_content?(arg["OpportunityModuleField10"])
-      puts "Successfully see the #{arg["OpportunityModuleField10"]} request grid name"
+      puts "Successfully see the #{arg["OpportunityGridField10"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityModuleField10"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityGridField10"]} request grid name"
     end
     sleep 3
     if page.has_content?(arg["OpportunityModuleField11"])
-      puts "Successfully see the #{arg["OpportunityModuleField11"]} request grid name"
+      puts "Successfully see the #{arg["OpportunityGridField11"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityModuleField11"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityGridField11"]} request grid name"
     end
     sleep 3
     if page.has_content?(arg["OpportunityModuleField12"])
-      puts "Successfully see the #{arg["OpportunityModuleField12"]} request grid name"
+      puts "Successfully see the #{arg["OpportunityGridField12"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityModuleField12"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityGridField12"]} request grid name"
     end
     sleep 5
   rescue Exception => ex
@@ -444,9 +444,7 @@ Then(/^I should be able to see the "([^"]*)" and "([^"]*)" buttons$/) do |button
           first("div").first("div").click
           sleep 1
           no_change = find(:xpath, "//div[2]/div/div/button[1]").text
-          puts "#{no_change}"
           update = find(:xpath, "//div[2]/div/div/button[2]").text
-          puts "#{update}"
           if no_change == button_text1
             puts "Successfully see the #{button_text1} button"
           else
@@ -798,7 +796,7 @@ Then(/^I verify the "([^"]*)" and "([^"]*)" column where Rep is not yet selected
   begin
     sleep 5
     arg = getDetails "OpportunityModule"
-    sleep 3
+    sleep 5
     rowcount = all(".ui-grid-row.ng-scope").count
     if rowcount > 0
     reseller = all("div[role='gridcell']")[7].text

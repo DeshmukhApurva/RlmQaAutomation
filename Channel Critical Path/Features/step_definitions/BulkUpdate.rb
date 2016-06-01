@@ -2,36 +2,39 @@
 #All Scenario mentioned in BulkUpdate.feature
 
 And (/^I select the opportunity for field update for "(.*?)"$/) do |data|
-	begin		
-		arg1 = getDetails data
-		find('.srevicon-dots-md').click		
-		sleep 3
-		if page.has_content?"Edit Selected"
-			putstr "BulkUpdate Option is visible,Test case failed"
-		else
-			puts "BulkUpdate Option is not visible."
-		end
-		sleep 5
-		find("input[placeholder='Search Opportunities...']").send_keys arg1['PartnerOpportunity']
-		sleep 3
-		puts "Successfully see the Partner Agreement Opportunity"
-		sleep 2		
-		find(".ui-grid-disable-selection").click
-		sleep 3
-		find('.srevicon-dots-md').click		
-		sleep 3
-		find('.uib-dropdown-menu').click
-		sleep 3
-	rescue Exception => ex
-		puts "Error in selecting the opportunity for field updates"
-		putstr_withScreen  ex.message
-	end
-end
-
+  begin   
+      arg1 = getDetails data
+      find('.srevicon-dots-md').click   
+      sleep 3
+      if page.has_content?"Edit Selected"
+        putstr "BulkUpdate Option is visible,Test case failed"
+      else
+         puts "BulkUpdate Option is not visible."
+      end
+      sleep 5
+      find("input[placeholder='Search Opportunities...']").send_keys arg1['PartnerOpportunity']
+      sleep 3
+      puts "Successfully see the Partner Agreement Opportunity"
+      sleep 2   
+      find(".ui-grid-disable-selection").click
+      sleep 3
+      within(".btn-group.ng-scope.dropdown") do
+        find('.srevicon-dots-md').click 
+        sleep 2
+        find(:xpath, "//div[1]/div[2]/div/div[2]/div/div/div[1]/div[4]/ul/li/a").click
+        sleep 2
+      end
+    
+    rescue Exception => ex
+      puts "Error in selecting the opportunity for field updates"
+      putstr_withScreen  ex.message
+    end
+  end
+  
 Then (/^I verify the Bulk Update window$/) do 
 	begin
     sleep 3
-	arg1 = getDetails "BulkUpdate"
+    arg1 = getDetails "BulkUpdate"
 	within(".modal-content") do 
 		if page.has_content? "Update Opportunities"
 			puts "Navigated to Bulk Update edit page"
