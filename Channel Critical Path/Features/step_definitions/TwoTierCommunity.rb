@@ -70,3 +70,104 @@ And(/^I verify "(.*?)" Quote$/) do |partnerType|
     puts ex.message
   end
 end
+
+And(/^I Set "(.*?)" Quote as primary$/) do |quoteType|
+  begin
+    allTwoTierData = getReference "TwoTier"
+    Capybara.ignore_hidden_elements = true
+    
+    if quoteType == "Reseller"
+      if page.should have_content(allTwoTierData["ResellerQuoteNumber"])
+        puts "#{allTwoTierData["ResellerQuote"]} has been verified successfully."
+      end
+      
+      find(:xpath, "//a[text()=#{allTwoTierData["ResellerQuoteNumber"]}]/parent::div/parent::div/following-sibling::div/div/label").click
+    elsif quoteType == "Distributor"
+      sleep 4
+      
+      puts find(:xpath, "//a[text()=#{allTwoTierData["DistributorQuoteNumber"]}]/parent::div/parent::div/following-sibling::div/div/input[id()=\'cb-uiGrid-005S\']", visible: false).checked?
+      
+      puts find(:xpath, '//a[text()=#{allTwoTierData["DistributorQuoteNumber"]}]/parent::div/parent::div/following-sibling::div/div/label').text
+      if find(:xpath, '//a[text()=#{allTwoTierData["DistributorQuoteNumber"]}]/parent::div/parent::div/following-sibling::div/div/label[contains(text()="after")]')
+        raise "#{allTwoTierData["DistributorQuote"]} is already Primary Quote."
+      else
+      end
+    elsif quoteType == "NonPrimary"
+      
+    end
+
+  rescue Exception => ex
+    puts "Error occured whilte verifying quotes"
+    puts ex.message
+  end
+end
+
+And(/^I "(.*?)" verify Reseller and Distributor Quotes in Related To Quote field$/) do |partnerType|
+  begin
+    sleep 3
+    allTwoTierData = getReference "TwoTier"
+    sleep 2
+
+    # Select Search Quote...
+    find("div[placeholder='Select...']").click
+    find("input[placeholder='Select...']").send_keys "Quote"
+    find("input[placeholder='Select...']").send_keys :enter
+    puts "Successfully selected the Quote in Related To"
+    sleep 4
+
+    if partnerType == "Distributor"
+      #Verify Distributor Quote value
+      find("div[placeholder='Search Quote...']").click
+      sleep 2
+      find("input[placeholder='Search Quote...']").send_keys [:control, 'a'], :backspace
+      sleep 1
+      find("input[placeholder='Search Quote...']").send_keys allTwoTierData["DistributorQuote"]
+      sleep 1
+      find("input[placeholder='Search Quote...']").send_keys :enter
+      sleep 2
+      puts "Successfully enter the #{allTwoTierData["DistributorQuote"]} value"
+      sleep 2
+
+      #Verify Reseller Quote value
+      find("div[placeholder='Search Quote...']").click
+      sleep 2
+      find("input[placeholder='Search Quote...']").send_keys [:control, 'a'], :backspace
+      sleep 1
+      find("input[placeholder='Search Quote...']").send_keys allTwoTierData["ResellerQuote"]
+      sleep 1
+      find("input[placeholder='Search Quote...']").send_keys :enter
+      sleep 2
+      puts "Successfully enter the #{allTwoTierData["ResellerQuote"]} value"
+      sleep 2
+    elsif  partnerType == "Reseller"
+      #Verify Reseller Quote value
+      find("div[placeholder='Search Quote...']").click
+      sleep 2
+      find("input[placeholder='Search Quote...']").send_keys [:control, 'a'], :backspace
+      sleep 1
+      find("input[placeholder='Search Quote...']").send_keys allTwoTierData["ResellerQuote"]
+      sleep 1
+      find("input[placeholder='Search Quote...']").send_keys :enter
+      sleep 2
+      puts "Successfully enter the #{allTwoTierData["ResellerQuote"]} value"
+      sleep 2
+
+      #Verify Distributor Quote value
+      find("div[placeholder='Search Quote...']").click
+      sleep 2
+      find("input[placeholder='Search Quote...']").send_keys [:control, 'a'], :backspace
+      sleep 1
+      find("input[placeholder='Search Quote...']").send_keys allTwoTierData["DistributorQuote"]
+      sleep 2
+      puts page.has_xpath?("//div/a/div/span")
+      if page.has_xpath?("//div/a/div/span")
+        raise "#{allTwoTierData["DistributorQuote"]} is visible to Reseller"
+      end
+      sleep 2
+    end
+
+  rescue Exception => ex
+    putstr "Error occurred while selecting the Related To field value Reseller and Distributor Quotes"
+    putstr_withScreen  ex.message
+  end
+end
