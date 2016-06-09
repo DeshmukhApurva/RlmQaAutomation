@@ -42,14 +42,15 @@ And(/^I select one or more product from the grid$/) do
     click_on 'Select'
     puts "Successfully select the product"
     sleep 6
+    #find(:xpath,"//*[@id='editPage']/table").find(:xpath,"//input[contains(@id, 'Quantity')][1]").set arg["ProductQuantity"]
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[3]/input").set arg["ProductQuantity"]
-    sleep 5
-    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[6]/input").set arg["ProductSalesPrice"]
-    sleep 5
+    sleep 1
+#    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[6]/input").set arg["ProductSalesPrice"] # It will be set by Mapping on admin setup
+#    sleep 5
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[3]/input").set arg["ProductQuantity"]
-    sleep 5
-    find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[6]/input").set arg["ProductSalesPrice"]
-    sleep 5
+    sleep 1
+#    find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[6]/input").set arg["ProductSalesPrice"]
+#    sleep 5
     all(:xpath,'//td/input[@value=" Save "]')[0].click
     sleep 6
   rescue Exception => ex

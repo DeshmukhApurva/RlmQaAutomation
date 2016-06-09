@@ -7,14 +7,14 @@ Background: Login to the Application
 	Then I should land on CRM home page
 
 @renVerifyAssetCount
-Scenario:Rally Test Case ID: TC3272 : Success Plan - Asset tab
+Scenario: Rally Test Case ID: TC3272 : Success Plan - Asset tab
 	When I click on "Success Plans" link
 	Then I select the created SuccessPlan
 	Then I click on "Assets" subtab
 	Then I verify the count of all "Assets"
 
 @renVerifyGrid
-Scenario:Rally Test Case ID: TC3275,TC3276,TC3278 : Success Plan - Show/Hide Columns, Success Plan - View all Asset field columns, Success Plan - Asset tab Verify Pagination
+Scenario: Rally Test Case ID: TC3275,TC3276,TC3278 : Success Plan - Show/Hide Columns, Success Plan - View all Asset field columns, Success Plan - Asset tab Verify Pagination
 	When I click on "Success Plans" link
 	Then I select the created SuccessPlan
 	Then I click on "Assets" subtab
@@ -23,7 +23,7 @@ Scenario:Rally Test Case ID: TC3275,TC3276,TC3278 : Success Plan - Show/Hide Col
 	Then I verify pagination
 	
 @renVerifyRenOppfields
-Scenario:Rally Test Case ID: TC3273,TC3274,TC3277 : Success Plan - Renewal Opportunity Status, Success Plan - Close Date Verification, Success Plan - Renewal Opportunity Sales Stage
+Scenario: Rally Test Case ID: TC3273,TC3274,TC3277 : Success Plan - Renewal Opportunity Status, Success Plan - Close Date Verification, Success Plan - Renewal Opportunity Sales Stage
 	When I click on "Success Plans" link
 	Then I select the created SuccessPlan
 	Then I click on "Assets" subtab

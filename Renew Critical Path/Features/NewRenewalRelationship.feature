@@ -7,7 +7,7 @@ Background: Login to the Application
 	Then I should land on CRM home page
 
 @InsideFiscalYear
-Scenario:Rally -ID: TC4674: Renewal Relationship - End Date in fiscal year range
+Scenario: Rally -ID: TC4674: Renewal Relationship - End Date in fiscal year range
   When I Navigate to "Opportunities" tab
   Then I select the opportunity to set the date
   Then I edit the renewal relationship "InsideFiscalYear"
@@ -15,7 +15,7 @@ Scenario:Rally -ID: TC4674: Renewal Relationship - End Date in fiscal year range
   And I clear the renewal relationship date fields
 
 @OutsideFiscalYear
-Scenario:Rally -ID: TC4675,TC4676: Renewal Relationship - End Date outside fiscal year range - Std Fiscal Year is set
+Scenario: Rally -ID: TC4675,TC4676: Renewal Relationship - End Date outside fiscal year range - Std Fiscal Year is set
   When I Navigate to "Opportunities" tab
   Then I select the opportunity to set the date
   Then I edit the renewal relationship "OutsideFiscalYear"

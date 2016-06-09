@@ -199,11 +199,11 @@ begin
 		within all('.list')[0] do 
 			tr = all(".dataRow")
 			tr.each do |row|
-				if (row.all(".dataCell")[0].text.include? $generate_opportunity_product)
-					puts "#{$generate_opportunity_product} is same in source Opportunity"
-				else
-					putstr "#{$generate_opportunity_product} is not same in source Opportunity"
-				end        
+#				if (row.all(".dataCell")[0].text.include? $generate_opportunity_product)
+#					puts "#{$generate_opportunity_product} is same in source Opportunity"
+#				else
+#					putstr "#{$generate_opportunity_product} is not same in source Opportunity"
+#				end        
 				break
 			end
 		end
@@ -213,6 +213,7 @@ begin
 	end
 	rescue Exception => ex
 		puts "Error in verifying the opportunity"
+putstr ex.backtrace.inspect  
 		putstr_withScreen  ex.message
 	end
 end
@@ -958,21 +959,22 @@ Then (/^I generate new opportunity from the asset$/) do
 		row.all(".dataCell")[5].first("input").set(arg1["lineDesc1"])
 	end
   sleep 4
-  within all(".opportunityBlock")[1] do
-    within(".pbBody") do
-      if first("tbody").first(".dataRow").all("td").count > 0
-        $generate_opportunity_product = first("tbody").first(".dataRow").all("td")[1].first("span").text
-      else
-        puts "No Opportunity Products Available"
-      end
-    end
-  end
+#  within all(".opportunityBlock")[1] do
+#    within(".pbBody") do
+#      if first("tbody").first(".dataRow").all("td").count > 0
+#        $generate_opportunity_product = first("tbody").first(".dataRow").all("td")[1].first("span").text
+#      else
+#        puts "No Opportunity Products Available"
+#      end
+#    end
+#  end
   sleep 4
 	click_on "Save"
 	puts "New Opportunity is generated"
   sleep 4
 	rescue Exception => ex	
 		putstr "Error in generating new opportunity from the asset"
+		putstr ex.backtrace.inspect  
 		putstr_withScreen  ex.message
 	end
 end
