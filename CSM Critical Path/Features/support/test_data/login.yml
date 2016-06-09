@@ -31,3 +31,19 @@ CSM_EETEST4:
  Server: "EEtest4"
  Instance: "CSM_EETEST4"
  Name: "QA CSM"
+ 
+CSMNetOps_DEV25:
+ userName: "pes-csmnetopsuser25@csm.com"
+ pwd: "pass@word1"
+ Role: "CSM NetOps"
+ Server: "Dev25"
+ Instance: "CSMNetOps_DEV25"
+ Name: "QA CSMNetOps"
+ 
+CSM_DEV25:
+ userName: "pes-csmuser25@csm.com"
+ pwd: "pass@word1"
+ Role: "CSM"
+ Server: "CSM_DEV25"
+ Instance: "CSM_DEV25"
+ Name: "QA CSM"
