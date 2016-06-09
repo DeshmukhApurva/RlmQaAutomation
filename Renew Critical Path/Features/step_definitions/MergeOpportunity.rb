@@ -87,7 +87,7 @@ And(/^I select the opportunities those are having same currency and same pricebo
     count = 0
     $product.each do |product|
       sleep 5
-      if product['amount'].to_s.include?arg["CurrencyCode"].to_s
+      if product['amount'].to_s.include? arg["CurrencyCode"].to_s
         puts "Successfully see the same currency opportunity"
         count = count + 1
         product['opportunity_checkbox'].click
@@ -152,7 +152,7 @@ And(/^I select two opportunities$/) do
           sleep 5
           unless checkbox.checked?
             checkbox.click
-            puts "Successfully enabled the the opportunity"
+            puts "Successfully enabled the opportunity"
             break
           else
             puts "Opportunity is already enabled"
@@ -169,7 +169,7 @@ And(/^I select two opportunities$/) do
           sleep 5
           unless checkbox.checked?
             checkbox.click
-            puts "Successfully enabled the the opportunity"
+            puts "Successfully enabled the opportunity"
             break
           else
             puts "Opportunity is already enabled"
@@ -556,7 +556,7 @@ end
 Then(/^I should able to see the different price book "([^"]*)" alert message$/) do |alert_message|
   begin
     sleep 5
-    if page.driver.browser.switch_to.alert.text.to_s.include?alert_message.to_s
+    if page.driver.browser.switch_to.alert.text.to_s.include? alert_message.to_s
       puts "Successfully see the different price book #{alert_message} alert message"
       page.driver.browser.switch_to.alert.accept
     else
@@ -621,5 +621,131 @@ And(/^I navigate to the merge opportunity section$/) do
   rescue Exception => ex
      putstr "Error occurred while selecting the Alphabetic pagination"
      putstr_withScreen  ex.message
+  end
+end
+
+And(/^I create the new opportunity with "(.*?)"$/) do |data|
+  begin
+    sleep 5
+    arg = getDetails "MergeOpportunity"
+    arg1 = getReference "newOpportunity"
+	oppName = arg["NewMergeOpportunity"] + '_' +data
+    sleep 5
+    # $new_merge_opportunity = "#{arg["NewMergeOpportunity"]} #{Time.now.strftime('%m%d_%H%M_%S')}"
+    # sleep 4
+    within all(".pbSubsection")[0] do
+      sleep 3
+      all("input[type='text']")[0].set oppName
+      sleep 4
+      all("input[type='text']")[1].set arg1["Account Name"]
+      sleep 4
+      all("input[type='text']")[3].set arg["OpportunityCloseDate"]
+      sleep 3
+      all("input[type='text']")[6].set arg["MergeAmount"]
+      sleep 3
+      find("#opp11").select arg["MergeOpportunityStageValue"]
+    end
+    sleep 5
+    within("#bottomButtonRow") do
+      click_on 'Save'
+    end
+    sleep 3
+    puts "Successfully created the #{oppName} opportunity"
+  rescue Exception => ex
+    putstr "Error occurred while entering the mandatory details in #{oppName} opportunity page"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I select "(.*?)" view and click on Go$/) do |view|
+	begin
+		select view, :from => "fcf"
+		sleep 5
+		within(".fBody") do
+			click_on "Go!"
+		end
+	rescue Exception => ex
+		putstr "Error occurred while selecting #{view}"
+		putstr_withScreen  ex.message
+	end
+end
+
+And(/^I select an Opportunity with "(.*?)"$/) do |data|
+	begin
+		arg = getDetails "MergeOpportunity"
+		oppName = arg["NewMergeOpportunity"] + '_' + data
+		
+		sleep 5
+		foundCount = ""
+			begin  
+				within(".x-grid3-body") do
+					tr = all(".x-grid3-row")
+					tr.each do |row|
+					  if row.all("td")[2].text == oppName
+						#row.all("td")[0].all('a')[0].click
+						row.first('input[type=checkbox]').set(true)
+						puts "Successfully selected the Opportunity #{oppName}"
+						foundCount = "found"
+						break
+					  end	
+					end
+				end
+				if page.has_css?('.next')
+					find(".next").click
+					sleep 5
+				else
+					break
+				end
+			end until (page.has_css?('.nextoff'))
+			if foundCount==""
+				within(".x-grid3-body") do
+					tr = all(".x-grid3-row")
+					tr.each do |row|				
+					 if row.all("td")[2].text == oppName
+						#row.all("td")[0].all('a')[0].click
+						row.first('input[type=checkbox]').set(true)
+						puts "Successfully selected the Opportunity #{oppName}"
+						foundCount = "found"
+						break
+					  end	
+					end
+				end
+			end
+		sleep 5
+	rescue Exception => ex
+		putstr "Error occurred while selecting an Opportunity #{oppName}"
+		putstr_withScreen  ex.message
+	end
+end
+
+
+When(/^I delete opportunity with "(.*?)"$/) do |data|
+  begin
+    sleep 6
+    arg = getDetails "MergeOpportunity"
+	oppName = arg["NewMergeOpportunity"] + '_' +data
+    result = false
+    all(:xpath, '//div/table/tbody/tr/td[4]/div/a/span').each do |activity|
+      if activity.text == oppName
+        puts "Successfully see the Opportunity"
+        activity.click
+        puts "Successfully opened the #{oppName} Opportunity"
+        result = true
+        break
+      end
+    end
+    putstr "Failed to see the #{oppName} Opportunity" unless result
+    sleep 8
+    within("#bottomButtonRow") do
+      click_on 'Delete'
+    end
+    sleep 6
+    page.driver.browser.switch_to.alert.accept
+    sleep 5
+    puts "Successfully deleted the #{oppName} Opportunity"
+    sleep 5
+  rescue Exception => ex
+    putstr "Error occurred while deleting the opportunity"
+    putstr_withScreen  ex.message
   end
 end

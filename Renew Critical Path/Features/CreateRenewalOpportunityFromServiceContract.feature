@@ -20,4 +20,5 @@ Scenario: Rally Test Case-ID: TC3738,TC3739,TC3740,TC3741,TC3742 : Verify renewa
 Scenario: Rally Test Case-ID: TC3743 : Create Renewal Opp page - Mandatory Messages
 	When I Navigate to "Service Contracts" tab	
 	Then I select the Source Service Contract for Opportunity Generation from ServiceContract
+	And I click on "Generate Opportunity" button to Generate Opportunity
 	Then I check for the errors to be displayed while generating opportunity for serviceContract

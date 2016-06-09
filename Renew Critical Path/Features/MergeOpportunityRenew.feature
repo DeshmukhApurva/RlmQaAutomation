@@ -97,27 +97,32 @@ Scenario: Rally Test Case ID: TC3216,TC3217,TC3223,TC3224,TC3225 : Merge Opportu
 Scenario: Rally Test Case ID: TC3226 - Merge Opportunities - Validation Message (Different Pricebook)
 	When I click on "Opportunities" link
 	And I click on "New" button
-	And I create the new opportunity
+	And I create the new opportunity with "StndrdPB"
 	And I click on "Choose Price Book" button
 	When I choose the "Standard Price Book" Price book for the product
 	When I click on "Opportunities" link
 	And I click on "New" button
-	And I create the new opportunity
+	And I create the new opportunity with "TestPB"
 	And I click on "Choose Price Book" button
 	When I choose the "Test_PriceBook" Price book for the product
 	When I click on "Opportunities" link
-	And I click on "Go!" button from opportunity page
-	And I navigate to the merge opportunity section
-	And I select the opportunities
-	And I select two different price book opportunities
+	#And I click on "Go!" button from opportunity page
+	#And I navigate to the merge opportunity section
+	#And I select the opportunities
+	#And I select two different price book opportunities
+	And I select "My Opportunities" view and click on Go
+	And I select an Opportunity with "StndrdPB"
+	And I select an Opportunity with "TestPB"
 	And I click on "Merge" button
 	Then I should able to see the different price book "The Selected Opportunities must have matching Pricebooks." alert message
 	When I click on "Opportunities" link
 	And I click on "Go!" button from opportunity page
 	And I navigate to the merge opportunity section
-	When I delete the created different price book opportunity
+	#When I delete the created different price book opportunity
+	When I delete opportunity with "StndrdPB"
 	When I click on "Opportunities" link
 	And I click on "Go!" button from opportunity page
 	And I navigate to the merge opportunity section
 	And I select the opportunities
-	When I delete the created different price book opportunity
+	#When I delete the created different price book opportunity
+	When I delete opportunity with "TestPB"

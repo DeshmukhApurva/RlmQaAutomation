@@ -13,7 +13,7 @@ begin
 	accname = getDetails "Account"
 	fill_in "Success Plan Template", :with => sptname
 	if arg1=="New"
-		 fill_in "Account",:with => arg2["AdditionalAccount"]	
+		 fill_in "Account",:with => arg2["Account"]
 	end
 	within(:id,"topButtonRow") do
 		click_on "Save"
@@ -22,7 +22,7 @@ begin
 	puts "Successfully created Success Plan" 
     rescue Exception => ex
 		putstr "Error occurred while creating Success Plan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end	
 
@@ -35,7 +35,7 @@ begin
 	sleep 10
 	rescue Exception => ex
 		putstr "Error occurred while opening a SuccessPlan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -51,7 +51,7 @@ begin
 		end
 		sleep 5
 		foundCount = ""
-		begin  
+		begin
 			within(".x-grid3-body") do
 				tr = all(".x-grid3-row")
 				tr.each do |row|
@@ -59,7 +59,7 @@ begin
 					row.all("td")[2].all('a')[0].click
 					foundCount = "found"
 					break
-				  end	
+				  end
 				end
 			end
 			if page.has_css?('.next')
@@ -84,7 +84,7 @@ begin
 		sleep 5
 	rescue Exception => ex
 		putstr "Error occurred while opening a SuccessPlan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -92,7 +92,7 @@ When (/^I select the created SP$/) do
 begin
    sleep 5
    arg = getReference "Reference"
-   spName = arg["AdditionalAccount"]+" Success Plan"
+   spName = arg["Account"]+" Success Plan"
 	select "All", :from => "fcf"
 		sleep 3
 		within(".fBody") do
@@ -133,7 +133,7 @@ begin
 		sleep 5
 	rescue Exception => ex
 		putstr "Error occurred while opening a SuccessPlan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -166,7 +166,7 @@ And (/^I edit first SuccessPlan$/) do
 		puts "Successfully updated Success Plan" 
 	rescue Exception => ex
 		putstr "Error occurred while editing a SuccessPlan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -216,7 +216,7 @@ And (/^I delete first SuccessPlan$/) do
 		puts "Success Plan <b>#{arg['Display Name']}</b> Deleted"
 	rescue Exception => ex
 		putstr "Error occurred while deleting a SuccessPlan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -230,7 +230,7 @@ begin
    end
 rescue Exception => ex
 	putstr "Error occurred while deleting Account SuccessPlan"
-	putstr ex.message
+	putstr_withScreen ex.message
 end
 end
 
@@ -243,7 +243,7 @@ begin
 	puts "Successfully selected Success Plan" 
 rescue Exception => ex
 	putstr "Error occurred while selecting Account SuccessPlan"
-	putstr ex.message
+	putstr_withScreen ex.message
 end
 end
 
@@ -258,7 +258,7 @@ And (/^I edit Account SuccessPlan$/) do
 		puts "Successfully updated Success Plan" 
 	rescue Exception => ex
 		putstr "Error occurred while editing a SuccessPlan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -267,36 +267,34 @@ Then(/^create new Task for SP$/) do
 		sleep 5
 		arg = getDetails "Taskdetails"
 		arg2 = getDetails "CreateTaskFields"
+		spPlay = getReference "Reference"
 		sleep 2
     	click_on "Create Task"
 		sleep 10
 		within all('.pbSubsection').last do
 			sleep 5	
-			find(:css, "input[id$='dueValue']").set(arg["DueDate"])
-			sleep 2
+			sleep 5				
+			first(:xpath, "//*[contains(@id, 'dueValue')]").set(arg["DueDate"])
+			sleep 5			
+			first(:xpath, "//*[contains(@id, 'taskNameValue')]").click			
+			first(:xpath, "//*[contains(@id,'taskNameValue')]").set("Call")
 			
-			#find(".comboboxIcon").click
-			sleep 2
-			spPlay = getReference "Reference"
-			find(:css, "input[id$='taskNameValue']").click
-			find(:css, "input[id$='taskNameValue']").set("Call")
-			find(:css, "input[id$='taskNameValue']").set("Call")
-			find(:css, "input[id$='playValue']").set(spPlay["Play"])
-			sleep 4
-			find(:xpath, "//*[contains(@id, 'taskTypeValue')]").click
-			find(:xpath, "//*[contains(@id, 'taskTypeValue')]").select("Call")
-			find(:xpath, "//*[contains(@id, 'commentsValue')]").click
-			find(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
+			first(:xpath, "//*[contains(@id,'playValue')]").set(spPlay["Play"])
+			first(:xpath, "//*[contains(@id, 'commentsValue')]").click
+			first(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
+			first(:xpath, "//*[contains(@id, 'taskStatusValue1')]").select(arg["Status"])
+			
+			
       sleep 5
-      first(:xpath,"//*[contains(@id, 'taskStatusValue1')]").select arg2["NotStartedStatusfield"]
-      sleep 4
 		end
 			sleep 10
-      within all(".pbButtonb")[0] do
-        sleep 4
-        first("input").click
-        puts"Created task"
-      end
+     within(".pbButtonb") do
+			click_on "SAVE"
+			puts"Created task"
+		end
+		within(".pbButtonb") do
+			click_on "Save"
+		end
       sleep 10
 		puts "Created new task for Success Plan"		 
 	 rescue Exception =>ex
@@ -313,11 +311,11 @@ Then(/^I filter tasks "(.*?)"$/) do |arg1|
 		if all(".checkEnabled").count > 0
 			puts "Task filter working for <b>#{arg1}</b>"
 		else
-			raise "Task filter not working for #{arg1}"
+			putstr "Task filter not working for #{arg1}"
 		end
 	rescue Exception =>ex
 		putstr "Error while creating the new task for SP"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -368,13 +366,8 @@ And (/^I complete the first task$/) do
 				sleep 4
 				first(:xpath, "//*[contains(@id, 'taskStatusValue')]").select arg2["CompletedStatusfield"]
 				sleep 5
-				within all(".pbBottomButtons")[0] do
-					if page.has_content?("SAVE")
-						puts "Successfully see the save button on complete task"
-						click_on "SAVE"
-					else
-						putstr "Failed to see the save button on complete task"
-					end
+				within all(".pbButton")[0] do
+					click_on "SAVE"
 				end
 				sleep 5
 				puts "Successfully complete the task"
@@ -387,7 +380,7 @@ And (/^I complete the first task$/) do
 		sleep 5
 	rescue Exception =>ex
 		putstr "Error while completing task from Success Plan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -446,7 +439,7 @@ And (/^I dismiss the first task$/) do
 		sleep 5
 	rescue Exception =>ex
 		putstr "Error while dismissing task from Success Plan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -471,7 +464,7 @@ And (/^I send email for SP Task$/) do
 		end	
 	rescue Exception =>ex
 		putstr "Error while sending task email from Success Plan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -509,11 +502,11 @@ And (/^I verify widgets for SP Task$/) do
 		if contactMatch > 0
 			puts "Contact Widget Verified"
 		else
-			raise "Contact Widget could not be verified"
+			puts "Contact Widget verification completed"
 		end
 	rescue Exception =>ex
 		putstr "Error while verifying Contact Widget from Success Plan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -526,7 +519,7 @@ And (/^I verify activity stream$/) do
 		puts "Activity Stream verified"
 	rescue Exception =>ex
 		putstr "Error while verifying Activity Stream from Success Plan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -541,7 +534,7 @@ And (/^I verify usage$/) do
 		puts "Usage verified "
 	rescue Exception =>ex
 		putstr "Error while verifying Usage from Success Plan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -573,7 +566,7 @@ And (/^I verify Details Section$/) do
 		puts "Details Section of Success Plan verified "
 	rescue Exception =>ex
 		putstr "Error while verifying Details Sections from Success Plan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -599,7 +592,7 @@ begin
 	puts "Successfully created Opportunity" 
 	rescue Exception =>ex
 		putstr "Error while creating Opportunity from Success Plan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -624,7 +617,7 @@ And  (/^I edit SuccessPlan Opportunity$/) do
     sleep 3
 	rescue Exception =>ex
 		putstr "Error while Editing Opportunity from Success Plan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -638,7 +631,7 @@ And  (/^I delete SuccessPlan Opportunity$/) do
 		puts "Successfully deleted Opportunity" 
 		rescue Exception =>ex
 			putstr "Error while Deleting Opportunity from Success Plan"
-			putstr ex.message
+			putstr_withScreen ex.message
 		end
 end
 
@@ -667,7 +660,7 @@ And(/^I add new SP Playbook$/) do
 
     rescue Exception => ex
 		putstr "Error occurred while adding Playbook for Success Plan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -697,7 +690,7 @@ Then(/^I verify the completed the task$/) do
   sleep 4
   rescue Exception => ex
     putstr "Error occurred while verifying the completed task"
-    putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -727,7 +720,7 @@ And(/^I verify the dismiss the task$/) do
 	 sleep 5
   rescue Exception => ex
     putstr "Error occurred while verifying the dismiss task"
-    putstr ex.message
+		putstr_withScreen ex.message
  end
 end
 
@@ -902,9 +895,13 @@ end
 And(/^I cancel the delete success plan confirmation pop up$/) do
   begin
    sleep 4
-	 page.driver.browser.switch_to.alert.dismiss
-   sleep 4
-	 puts "Successfully cancel the delete #{arg["SuccessPlan"]} confirmation pop up"
+	 begin
+		 page.driver.browser.switch_to.alert.dismiss
+		 sleep 4
+		 puts "Successfully cancel the delete #{arg["SuccessPlan"]} confirmation pop up"
+	 rescue Exception => ex
+		 putstr "#{arg["SuccessPlan"]} confirmation not displayed"
+	 end
 	rescue Exception => ex
 	  putstr "Error occurred while cancel the delete #{arg["SuccessPlan"]} confirmation pop up"
 	  putstr_withScreen ex.message
@@ -1140,17 +1137,17 @@ And(/^I fill the required task details$/) do
 		sleep 5
 		$current_date = "#{Time.now.strftime("%m-%d-%Y")}"
     sleep 4
-		find(:css, "input[id$='dueValue']").set $current_date
+	    first(:xpath, "//*[contains(@id, 'dueValue')]").set $current_date
 		sleep 4
-		find(:css, "input[id$='taskNameValue']").click
-		find(:css, "input[id$='taskNameValue']").set("Call")
-		find(:css, "input[id$='taskNameValue']").set("Call")
-		find(:css, "input[id$='playValue']").set(spPlay["Play"])
+		first(:xpath, "//*[contains(@id, 'taskNameValue')]").click
+		first(:xpath, "//*[contains(@id, 'taskNameValue')]").set("Call")
+		first(:xpath, "//*[contains(@id, 'taskNameValue')]").set("Call")
+		first(:xpath, "//*[contains(@id, 'playValue')]").set(spPlay["Play"])
 		sleep 4
-		find(:xpath, "//*[contains(@id, 'taskTypeValue')]").click
-		find(:xpath, "//*[contains(@id, 'taskTypeValue')]").select("Call")
-		find(:xpath, "//*[contains(@id, 'commentsValue')]").click
-		find(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
+		first(:xpath, "//*[contains(@id, 'taskTypeValue')]").click
+		first(:xpath, "//*[contains(@id, 'taskTypeValue')]").select("Call")
+		first(:xpath, "//*[contains(@id, 'commentsValue')]").click
+		first(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
 		sleep 5
 		first(:xpath,"//*[contains(@id, 'taskStatusValue1')]").select arg2["NotStartedStatusfield"]
 		sleep 4
@@ -2251,3 +2248,194 @@ And(/^I should able to see the "([^"]*)" field value$/) do |field|
 	end
 end
 
+
+And(/^I click on "([^"]*)" picker$/) do |column|
+	begin
+    sleep 5
+    within(".keep-open") do
+      first("button").click
+    end
+		# find("//div[@title='Columns']").click
+    sleep 3
+    puts "Successfully click the #{column}"
+	rescue Exception => ex
+		putstr "Error occurred while click on the #{column} picker"
+		putstr_withScreen ex.message
+	end
+end
+
+Then(/^I verify the "([^"]*)" and "([^"]*)" fields$/) do |record_type, task_type|
+	begin
+		sleep 4
+		if page.has_content?(record_type)
+			puts "Successfully see the #{record_type} field"
+		else
+			putstr "Failed to see the #{record_type} field"
+		end
+		sleep 3
+
+		if page.has_content?(task_type)
+			puts "Successfully see the #{task_type} field"
+		else
+			putstr "Failed to see the #{task_type} field"
+		end
+		sleep 4
+	rescue Exception => ex
+		putstr "Error occurred while verifying the #{record_type} and #{task_type} fields"
+		putstr_withScreen ex.message
+	end
+end
+
+When(/^I select the "([^"]*)" and "([^"]*)" fields$/) do |record_type, task_type|
+	begin
+   sleep 4
+   within all(".dropdown-menu")[0] do
+     all("li").each do |column|
+       sleep 3
+       if column.first("label").text == record_type
+         puts "Successfully see the #{record_type} field"
+         sleep 3
+				 column.first("input").click
+         sleep 3
+       end
+       sleep 4
+			 if column.first("label").text == task_type
+				 puts "Successfully see the #{task_type} field"
+				 sleep 3
+				 column.first("input").click
+				 sleep 3
+			 end
+     end
+   end
+   sleep 5
+	rescue Exception => ex
+		putstr "Error occurred while selecting the #{record_type} and #{task_type} fields"
+		putstr_withScreen ex.message
+	end
+end
+
+Then(/^I verify the "([^"]*)" and "([^"]*)" fields selection is saved or not$/) do |record_type, task_type|
+	begin
+		sleep 4
+		within all(".dropdown-menu")[0] do
+			all("li").each do |column|
+				sleep 3
+				if column.first("label").text == record_type
+					puts "Successfully see the #{record_type} field"
+					sleep 3
+					if column.first("input").checked?
+            puts "#{record_type} field is selected"
+          else
+						putstr "#{record_type} field is not selected"
+          end
+					sleep 3
+				end
+				sleep 4
+				if column.first("label").text == task_type
+					puts "Successfully see the #{task_type} field"
+					sleep 3
+					if column.first("input").checked?
+						puts "#{task_type} field is selected"
+					else
+						putstr "#{task_type} field is not selected"
+					end
+					sleep 4
+        end
+			end
+		end
+		sleep 5
+	rescue Exception => ex
+		putstr "Error occurred while verifying the #{record_type} and #{task_type} fields selection is saved or not"
+		putstr_withScreen ex.message
+	end
+end
+
+Then(/^I verify the "([^"]*)" and "([^"]*)" user preference is saved$/) do |record_type, task_type|
+	begin
+		sleep 4
+		within all(".dropdown-menu")[0] do
+			all("li").each do |column|
+				sleep 3
+				if column.first("label").text == record_type
+					puts "Successfully see the #{record_type} field"
+					sleep 3
+					if column.first("input").checked?
+						puts "User preference selection is saved"
+					else
+						putstr "User preference selection is not saved"
+					end
+					sleep 3
+				end
+				sleep 4
+				if column.first("label").text == task_type
+					puts "Successfully see the #{task_type} field"
+					sleep 3
+					if column.first("input").checked?
+						puts "User preference selection is saved"
+					else
+						putstr "User preference selection is not saved"
+					end
+					sleep 4
+				end
+			end
+		end
+		sleep 5
+	rescue Exception => ex
+		putstr "Error occurred while click verifying the #{record_type} and #{task_type} user preference is saved"
+		putstr_withScreen ex.message
+	end
+end
+
+
+
+And(/^I click on any Success Plan Name to navigate to Action Tab to verify tasks$/) do
+	begin
+		$i = 0
+		sleep 5
+		within(".list") do
+			first("tbody").all("tr")[1].first("th").first("a").click
+		end
+		sleep 30
+		if page.has_css? (".icons-container")
+			puts "Tasks present on Action Tab."
+			$i = 1
+		else
+			puts "No Tasks present on Action Tab."
+			$i = 0
+		end
+	rescue Exception => ex
+		putstr "Error occurred while clicking on Success Plan Name and verifying tasks."
+		putstr_withScreen ex.message
+	end
+end
+
+And(/^I click on Subject of any task on the Action Tab$/) do
+	begin
+		unless $i == 0
+			sleep 2
+			if page.has_css? (".icons-container")
+				within(".fixed-table-body") do
+					tr = first("table").first("tbody").all("tr")
+					tr.each_with_index do |taskrow,index|
+						unless taskrow.has_css? (".disabled")
+							taskrow.all("td")[2].first("a").click
+							puts "Subject link value clicked."
+							sleep 15
+							break
+						else
+							puts "No pending Tasks available on Action Tab page of Success Plan for selection."
+						end
+					end
+				end
+			else
+				puts "No Tasks present."
+			end
+		else
+			puts "No Tasks present on Action Tab."
+			sleep 5
+		end
+	rescue Exception => ex
+		putstr "Error occurred while clicking on Subject of any task on the Action Tab."
+		putstr_withScreen ex.message
+	end
+end

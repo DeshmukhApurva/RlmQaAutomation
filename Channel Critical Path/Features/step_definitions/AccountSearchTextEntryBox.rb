@@ -10,8 +10,8 @@ Then(/^I verify Account search box$/) do
 		else
 			puts "Account Search box is not present"
 		end
-		
-		if find(:xpath, '//div[7]/div/div/span/span[1]').text == defaultSearchText
+		sleep 3
+		if find("div[placeholder='Search Accounts...']").text == defaultSearchText
 			puts "Default text entry #{defaultSearchText} is displayed in Account Search Text box"
 		else
 			puts "Default text entry #{defaultSearchText} is not displayed in Account Search Text box"
@@ -32,7 +32,7 @@ Then(/^I verify Account search box$/) do
 		click_on "Overview"
 		sleep 5
 		
-		if find(:xpath, '//div[7]/div/div/span/span[1]').text == defaultSearchText
+		if find("div[placeholder='Search Accounts...']").text == defaultSearchText
 			puts "Default text entry #{defaultSearchText} is displayed in Account Search Text box"
 		else
 			puts "Default text entry #{defaultSearchText} is not displayed in Account Search Text box"
@@ -58,9 +58,9 @@ When(/^I search an Account$/) do
 		find("input[placeholder='Search Accounts...']").send_keys AccountName
 		sleep 3
 		puts "Entered text #{AccountName} to search in Account search box"
-		
-		if find(".account-number").count > 0
-			accNum = find(".account-number").text
+
+
+			accNum = first(".account-number").text
 			if accNum != ""
 				if accNum == AccountNumber
 					puts "Successfully displayed Account number - #{accNum} in search results"
@@ -68,8 +68,10 @@ When(/^I search an Account$/) do
 			else
 				puts "Account number is not present for the account #{AccountName}"
 			end
-		end
-		
+
+    sleep 3
+		find("input[placeholder='Search Accounts...']").send_keys :arrow_down
+    sleep 3
 		find("input[placeholder='Search Accounts...']").send_keys :enter
 		sleep 3
 		

@@ -293,7 +293,7 @@ ProductFieldsCriteria:
 OppFields:
  DateField: "Resolution Date"
  PicklistField: "Stage"
- BooleanField: "Private"
+ BooleanField: "Incumbent"
  NumberField: "Quantity"
  CurrencyField: "Amount"
  TextField: "Name"
@@ -432,3 +432,8 @@ ManageRenewalsOpportunity:
   RenewalStatusOpen: "Open"
   RenewalStatusLost: "Lost"
   RenewalStatusWon: "Won"
+  CreateQuote: "New Quote"
+  StartSync: "Start Sync"
+  StopSync: "Stop Sync"
+  QuoteName: "OpportunityQuote"
+  SyncErrorMessage: "The current Opportunity has a Quote Synced to it. Please stop the Sync and retry this process."

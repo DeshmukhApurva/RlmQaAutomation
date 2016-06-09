@@ -26,6 +26,7 @@ end
 def putstr_withScreen(s)
    puts "<b><font color=red>#{s}</font></b>"
    screen_shot_and_save_page
+   raise s
 end
 
 def isAlertPresent
@@ -85,7 +86,7 @@ begin
 		return userName
 	end
 rescue Exception=>ex
-	putstr ex.message
+	putstr_withScreen ex.message
 end
 end
 

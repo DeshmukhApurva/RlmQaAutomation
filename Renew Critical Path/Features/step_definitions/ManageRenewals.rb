@@ -1239,3 +1239,211 @@ Then(/^I verify the invalid "([^"]*)" opportunity product$/) do |renewal_relatio
     putstr_withScreen  ex.message
   end
 end
+
+And(/^I sync the quotes to renewal opportunity$/) do
+  # begin
+    sleep 4
+    arg = getDetails "ManageRenewalsOpportunity"
+    sleep 3
+   isQuotePresent = 0
+   within all(".pbBody")[10] do
+     if page.has_css?(".noRowsHeader")
+       puts "No Quote Records found"
+       sleep 3
+       isQuotePresent = 1
+     else
+       puts "Successfully see the quote records"
+     end
+  end
+   sleep 3
+   if isQuotePresent > 0
+     sleep 4
+     within all(".listRelatedObject")[8] do
+       within(".pbButton") do
+       click_on arg["CreateQuote"]
+       end
+     end
+     sleep 4
+     within all(".pbSubsection")[0] do
+        first("#Name").send_keys arg["QuoteName"]
+     end
+      sleep 5
+      within("#bottomButtonRow") do
+        click_on 'Save'
+      end
+     sleep 5
+   else
+     sleep 4
+     within all(".pbBody")[10] do
+       within(".list") do
+         quote_name = first("tbody").all(".dataRow")[0].all("td")[1].first("a").text
+         puts quote_name
+         sleep 4
+         first("tbody").all(".dataRow")[0].all("td")[1].first("a").click
+         sleep 3
+       end
+     end
+   end
+   sleep 4
+   if page.has_css?("#topButtonRow")
+     within("#topButtonRow") do
+       puts "Successfully quote sync page"
+       sleep 3
+       if page.has_css?(".syncStart")
+         sleep 3
+         click_on arg["StartSync"]
+         sleep 4
+         puts "Successfully start the syncing quote"
+       else
+         click_on arg["StopSync"]
+         sleep 6
+         click_on arg["StartSync"]
+         sleep 4
+         puts "Successfully start the syncing quote"
+       end
+     end
+   else
+     puts "Faield to see the quote sync page"
+   end
+   sleep 4
+   if page.has_css?("#syncQuoteOverlay_buttons")
+      puts "Successfully see the sync quote overlay"
+      click_on 'Sync'
+   else
+     puts "Failed to see the sync quote overlay"
+   end
+   sleep 4
+   if page.has_css?("#syncQuoteOverlayContent")
+     puts "Sync completed"
+     sleep 3
+     click_on 'Done'
+   else
+    puts "Sync not completed"
+   end
+   sleep 3
+   if page.has_css?(".pageDescription")
+     within("#topButtonRow") do
+       puts "Successfully completed the quote syncing"
+     end
+   else
+     puts "Faield to complete the quote syncing"
+   end
+   sleep 4
+  # rescue Exception => ex
+  #   putstr "Error occurred while syncing the quote renewal opportunity"
+  #   putstr_withScreen  ex.message
+  # end
+end
+
+Then(/^I should able to see the sync error message$/) do
+  begin
+   sleep 3
+   arg = getDetails "ManageRenewalsOpportunity"
+   sleep 3
+   if page.has_content?(arg["SyncErrorMessage"])
+     puts "Successfully see the sync error message"
+   else
+     putstr "Failed to see the sync error message"
+   end
+  rescue Exception => ex
+     putstr "Error occurred while veriying the sync error message"
+     putstr_withScreen  ex.message
+  end
+end
+
+And(/^I stop the syncing the renewal opportunity$/) do
+  begin
+    sleep 4
+    arg = getDetails "ManageRenewalsOpportunity"
+    sleep 3
+    isQuotePresent = 0
+    within all(".pbBody")[10] do
+      if page.has_css?(".noRowsHeader")
+        puts "No Quote Records found"
+        sleep 3
+        isQuotePresent = 1
+      else
+        puts "Successfully see the quote records"
+      end
+    end
+    sleep 3
+    if isQuotePresent > 0
+      sleep 4
+      click_on arg["CreateQuote"]
+      sleep 4
+      fill_in "Quote Name", :with => arg["QuoteName"]
+      sleep 4
+      within("#bottomButtonRow") do
+        click_on 'Save'
+      end
+    else
+      sleep 4
+      within all(".pbBody")[10] do
+        within(".list") do
+          quote_name = first("tbody").all(".dataRow")[0].all("td")[1].first("a").text
+          puts quote_name
+          sleep 4
+          first("tbody").all(".dataRow")[0].all("td")[1].first("a").click
+          sleep 3
+        end
+      end
+    end
+    sleep 4
+    if page.has_css?("#topButtonRow")
+      within("#topButtonRow") do
+        puts "Successfully see the quote sync page"
+        sleep 3
+        if page.has_css?(".syncStop")
+          sleep 3
+          click_on arg["StopSync"]
+          puts "Successfully stop sync the quote renewal opportunity"
+          sleep 3
+        else
+          putstr "Failed to stop sync quote renewal opportunity"
+        end
+      end
+    else
+      puts "Faield to see the quote sync page"
+    end
+    sleep 3
+  rescue Exception => ex
+    putstr "Error occurred while sync stoping the quote renewal opportunity"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I add the product$/) do
+  begin
+    sleep 6
+    arg = getDetails "SplitOpportunity"
+    within("#undefined_grid") do
+      all('input[type=checkbox]').each_with_index do |checkbox , index|
+        if index.to_i == arg["SingleProductCheckboxIndex"].to_i
+          sleep 5
+          unless checkbox.checked?
+            checkbox.click
+            puts "Successfully enabled the the product"
+            break
+          else
+            puts "Product is already enabled"
+          end
+        else
+          # puts "#{index}"
+        end
+      end
+    end
+    sleep 4
+    click_on 'Select'
+    puts "Successfully select the product"
+    sleep 6
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[3]/input").set arg["ProductQuantity"]
+    sleep 5
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[6]/input").set arg["ProductSalesPrice"]
+    sleep 5
+    all(:xpath,'//td/input[@value=" Save "]')[0].click
+    sleep 6
+  rescue Exception => ex
+    putstr "Error occurred while adding the product to renewal opportunity"
+    putstr_withScreen  ex.message
+  end
+end

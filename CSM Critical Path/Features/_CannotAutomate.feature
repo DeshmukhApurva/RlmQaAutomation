@@ -145,3 +145,75 @@ Scenario: Overview Inactive Categories Show and Hide
 	And I Verify Inactive Categories 
 	And I Verify hamburger icon
     And I Verify Inactive Categories
+
+@CTaskDTask
+Scenario: Rally Test Case ID: TC5098,TC5099,TC5100,TC5101: Verify Complete Task with Status value, With Additional Fields,Verify Dismiss Task with Status value, With Additional Fields
+	When I click on "Overview" link
+	And I click on Complete Action
+	And I select Completed Status value
+	And I click on Save
+	And I click on "Overview" link
+	Then I verify Saved Task Completed
+	And I click on "Overview" link
+	And I click on Complete Action
+	And I select Completed Status value
+	And I provide additional details
+	And I click on Save
+	Then I verify Saved Task Completed with Additional Details
+	And I click on "Overview" link
+	And I click on Dismiss Action
+	And I select Dismissed Status value
+	And I click on Save
+	And I click on "Overview" link
+	Then I verify Saved Task Dismissed
+	And I click on "Overview" link
+	And I click on Dismiss Action
+	And I select Dismissed Status value
+	And I provide additional details
+	And I click on Save
+	And I click on "Overview" link
+	Then I verify Saved Task Dismissed with Additional Details
+
+@CSM_CTaskDTask
+Scenario: Rally Test Case ID: TC4785,TC4786,TC4787,TC4788: Verify Complete Task with Status value, With Additional Fields,Verify Dismiss Task with Status value, With Additional Fields
+	When I click on "Overview" link
+	And I click on Complete Action
+	And I select Completed Status value
+	And I click on Save
+	And I click on "Overview" link
+	Then I verify Saved Task Completed
+	And I click on "Overview" link
+	And I click on Complete Action
+	And I select Completed Status value
+	And I provide additional details
+	And I click on Save
+	Then I verify Saved Task Completed with Additional Details
+	And I click on "Overview" link
+	And I click on Dismiss Action
+	And I select Dismissed Status value
+	And I click on Save
+	And I click on "Overview" link
+	Then I verify Saved Task Dismissed
+	And I click on "Overview" link
+	And I click on Dismiss Action
+	And I select Dismissed Status value
+	And I provide additional details
+	And I click on Save
+	And I click on "Overview" link
+	Then I verify Saved Task Dismissed with Additional Details
+
+@CurrencyNumberFieldValues
+Scenario: Rally Test case ID: TC5092: Verify Currency field value as per locale
+	When I click on "Overview" link
+	And I select FC Group
+	And I click on FC Header link
+	And I verify FC view details
+	Then I verify currency field format
+
+@CSM_CurrencyNumberFieldValues
+Scenario: Rally Test case ID: TC4779: Verify Currency field value as per locale
+	When I click on "Overview" link
+	And I select FC Group
+	And I click on FC Header link
+	And I verify FC view details
+	Then I verify currency field format

@@ -51,7 +51,7 @@ And (/^the new Quantity Default Value should be displayed$/) do
 	end 
 end
 
-And (/^I Add Opportunity Product Line Fields$/) do
+	And (/^I Add Opportunity Product Line Fields$/) do
 	begin
 	  sleep 10
 		addDisabled = 1

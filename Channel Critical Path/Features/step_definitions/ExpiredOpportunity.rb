@@ -50,7 +50,7 @@ And(/^I verify the "(.*?)" display$/) do |arg|
 					puts "Expired Opportunities are segmented into the Stages : #{OppStage}"
 
         if OppStage.size > 1
-          if OppStage.to_s.include?(unAvailableStages).to_s
+          if OppStage.include?(unAvailableStages).to_s
             puts "Stages #{unAvailableStages} which are under Hidden from Pipeline & Not Available to Partners are visible"
           else
             puts "Stages #{unAvailableStages} which are under Hidden from Pipeline & Not Available to Partners are not visible"
@@ -137,6 +137,7 @@ And(/^I verify the "(.*?)" display$/) do |arg|
 	end
 end
 
+
 And(/^I validate the "(.*?)" section$/) do |arg|
 	begin
 		currentDate = Date.today.strftime("%m-%d-%Y")
@@ -148,6 +149,7 @@ And(/^I validate the "(.*?)" section$/) do |arg|
 		Stage = ""
 		isStageExists = 0
 		ExpirationDate = ""
+		StageArray = []
 		
 		within(".opp-stats-table") do 
 			if first("tbody").all("tr").count > 0
@@ -161,7 +163,6 @@ And(/^I validate the "(.*?)" section$/) do |arg|
 				
 				totalOppAmount = firstRow.all("td")[2].text.to_f
 				puts "Total amount of all the expired Opportunities: #{totalOppAmount}"
-
 
 
 				firstRow.first("td").first("a").click
@@ -182,7 +183,7 @@ And(/^I validate the "(.*?)" section$/) do |arg|
 					recordCount = all(:css, ".ui-grid-row.ng-scope").count
 					puts "No.of Opportunities on Opportunity grid: #{recordCount}"
 					
-					rows = all(:css, ".ui-grid-row.ng-scope")[0]
+					rows = all(:css, ".ui-grid-row.ng-scope")[1]
 					if rows.all(".ng-binding.ng-scope")[1].text != ""
 						Stage = rows.all(".ng-binding.ng-scope")[1].text
 						isStageExists = 1
@@ -195,14 +196,14 @@ And(/^I validate the "(.*?)" section$/) do |arg|
 						isExpDateExists = 1
 					else
 						isExpDateExists = 0
+          end
+
+          sleep 3
+					StageArray << all(".ng-binding.ng-scope")[1].text
+					if all(".ng-binding.ng-scope")[4].text != ""
+						ExpirationDate << all(".ng-binding.ng-scope")[4].text
+						isExpDateExists = 1
 					end
-					# rows.each_with_index do |row,index|
-						# StageArray << row.all(".ng-binding.ng-scope")[1].text
-						# if row.all(".ng-binding.ng-scope")[4].text != ""
-							# ExpirationDate << row.all(".ng-binding.ng-scope")[4].text
-							# isExpDateExists = 1
-						# end
-					# end
 				else
 					recordCount = 0
 					puts "No expired Opportunities found on Opportunity grid"

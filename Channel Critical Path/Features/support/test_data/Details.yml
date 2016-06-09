@@ -22,34 +22,31 @@ PredefinedFilters:
  filters: "My Open Requests,My Closed Requests,All Requests"
  defaultfilter: "My Open Requests"
  status: "Closed"
- 
+
 Action Tiles:
  tiles: "See New Opportunities,Update Opportunity Status,See Completed Requests,Start New Request"
 
 Expiration Quarter:
- filterIndex: 0 
-
-Expiration Year:
- filterIndex: 1
+ filterIndex: 0
 
 
 Country:
- filterIndex: 2 
+ filterIndex: 1
 
 
 Reseller Rep:
- filterIndex: 3
+ filterIndex: 2
 
 
 Distributor Rep:
- filterIndex: 4
- 
+ filterIndex: 3
+
 
 SalesStages:
  Unavailablestages: "Perception Analysis,Needs Analysis"
  CorrectText: "Opportunity Status Log data has been saved."
 
- 
+
 AddPartnerOpportunity:
  PartnerOpportunityName: "PES_Add_Partner"
  PartnerAccount1FieldName: "Partner Account 1"
@@ -220,11 +217,9 @@ NeedStatusUpdate:
  Status: "Set Sales Stage as Negotiation/Review"
 
 ExpirationQuarter:
- CurrentQuarter: "Q2"
- ChangedQuarter: "3"
- CurrentYear: "2016"
- ChangedYear: "2017"
- #AllQuarter: "All Quarters"
+ CurrentQuarter: "Q1 2016"
+ ChangedQuarter: "Q2 2016"
+ AllQuarter: "All Quarters"
 
 contactsSubtab:
  PartnerOpportunity: "Portal Agreement"
@@ -236,7 +231,7 @@ QuoteOpportunitySubTab:
  QuoteOpportunityField3: "Expiration Date"
  QuoteOpportunityField4: "Line Items"
  QuoteOpportunityField5: "Discount"
- QuoteOpportunityField6: "Subtotal" 
+ QuoteOpportunityField6: "Subtotal"
  QuoteOpportunityField7: "Total Price"
  QuoteOpportunityField8: "Primary Quote"
 
@@ -262,3 +257,49 @@ SplitOpportunity:
  SelectTargetOpportunity: "PES_TargetOpp"
  ProbabilityField: "Probability (%)"
  ProductValidationMessage: "Please select at least one Opportunity Line to proceed"
+
+
+
+NonIncumbentPartnerPricingDisplay:
+ AssetName: "My_PES_Asset"
+ PartnerAccountField1: "Partner Account 1"
+ PartnerAccountField2: "Partner Account 1 Type"
+ PartnerAccountField3: "Partner Account 1 Contact"
+ PartnerAccountField4: "Incumbent"
+ PartnerAccountField5: "Partner Account 2"
+ PartnerAccountField6: "Partner Account 2 Type"
+ PartnerAccountField7: "Partner Account 2 Contact"
+ NewQuoteName: "PES_Quote"
+ StartSync: "Start Sync"
+ StopSync: "Stop Sync"
+
+ReportsTab:
+ ExportDataFields1: "Export all data as csv"
+ ExportDataFields2: "Export visible data as csv"
+ ExportDataFields3: "Export all data as pdf"
+ ExportDataFields4: "Export visible data as pdf"
+
+
+GroupSharing:
+ PoratalGroupNewButton: "New"
+ PortalGroupNameField: "Portal Group Name"
+ RollUpHierarchyField: "Roll Up Hierarchy"
+ DescriptionField: "Description"
+ CreatePortalGroupSection: "Search And Add Group Members"
+ AccountsField: "Accounts"
+ PartnerUsersField: "Partner Users"
+ SearchTextField: "Search Text"
+ SearchButton: "Search"
+ AddToGroupButton: "Add To Group"
+ SaveButton: "Save"
+ CancelButton: "Cancel"
+ GroupNameMandatoryMessage: "Please enter Portal Group Name"
+ partnerAccountName: "PES Channel Account"
+ PartnerUserName: "p"
+ SearchErrorMessage: "Please enter search text"
+ ObjectErrorMessage: "Please select object"
+ PortalGroupName: "PES_Portal_Group"
+ PortalDescription: "test group"
+ SelectedGroupMembersSection: "Selected Group Members"
+ DuplicatePortalGroupErrorMessage: "Duplicate Group Name"
+

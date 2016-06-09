@@ -1,6 +1,6 @@
 @RenOpportunity
 @RenManageRenewalsFeature
-Feature: All features related to Opportunity Management - Manage Renewals
+Feature: All features related to Opportunity - Manage Renewals
 
   Background: Login to the Application
     Given that I navigate to the CRM application

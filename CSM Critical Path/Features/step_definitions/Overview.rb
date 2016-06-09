@@ -86,7 +86,7 @@ And /^verify data on donut chart$/ do
   end
 	rescue Exception => ex
 		putstr "Data Verification Error On Donut Chart : "
-		putstr ex.message
+		putstr_withScreen ex.message
 	end	
 end
 
@@ -500,7 +500,7 @@ begin
   end
 	rescue Exception => ex
 		putstr "Verifing the Tiles"
-    putstr ex.message
+    putstr_withScreen ex.message
 	end
 end
 
@@ -528,7 +528,7 @@ begin
 		sleep 5
 	end
 	rescue Exception => ex
-		putstr ex.message
+		putstr_withScreen ex.message
 	end	
 end
 
@@ -545,7 +545,7 @@ And(/^I hover on record count on FC cards$/) do
 	puts "Hovered over FC Cards Record Card"
 	rescue Exception => ex 
 		putstr "Not hovered" 
-		putstr ex.message 
+		putstr_withScreen ex.message 
 	end 
 end
 
@@ -563,7 +563,7 @@ And (/^I hover on FC cards$/) do
 		sleep 5
 	rescue Exception => ex
 		putstr "Not hovered"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -587,7 +587,7 @@ begin
 		
 	rescue Exception => ex
 		putstr "Failed to get values of Success plan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -619,7 +619,7 @@ Then(/^click on edit view to change the "([^"]*)"$/) do |v1|
 	sleep 10
 	rescue Exception => ex
 		putstr "Error  while changing the user"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -632,7 +632,7 @@ Then(/^select the focus category$/) do
 		sleep 10
 	rescue Exception =>ex
 		putstr "Unable to select focus category"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
  
@@ -648,7 +648,7 @@ Then (/^verify Health Donut Chart$/) do
 		end	
 	rescue Exception =>ex
 			putstr "Unable to select focus category"
-			putstr ex.message
+			putstr_withScreen ex.message
 	end
 end
 
@@ -678,7 +678,7 @@ Then(/^select any one account$/) do
 		sleep 5
 	rescue Exception =>ex
 		putstr "Error while selecting the account"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -694,7 +694,7 @@ And (/^I select Show Charts and Tiles$/) do
 
 	  rescue Exception => ex
 			putstr "Unable to select Show Charts and Tiles"
-			putstr ex.message
+			putstr_withScreen ex.message
 	  end
 end
 
@@ -731,7 +731,7 @@ Then(/^click on the edit view to change the different "([^"]*)"$/) do |val1|
 		sleep 10
 	rescue Exception =>ex
 		putstr "Error while selecting different user"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end		
 
@@ -790,7 +790,7 @@ Then(/^Verify the Account in Focus category$/) do
 		end
 	rescue Exception =>ex
 		putstr "Error  while verify the account"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end  
 
@@ -821,7 +821,7 @@ Then(/^count the number of tiles$/) do
 		sleep 5
 	rescue Exception => ex
 		putstr "Error while counting the Tiles"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -864,7 +864,7 @@ begin
 		sleep 5
 	rescue Exception => ex
 		putstr "Error while counting the Tiles"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -879,7 +879,7 @@ Then(/^Verify the Tile Records$/) do
 		end
 	rescue Exception => ex
 		putstr "Error while counting the Tiles"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -902,7 +902,7 @@ Then(/^click on edit view to show the tiles$/) do
 		end
 	rescue Exception => ex
 		putstr "Error  while Show Charts and Tiles"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 		sleep 5
 end
@@ -927,7 +927,7 @@ Then(/^click on edit view to Hide the tiles$/) do
 		end		
 	rescue Exception => ex
 		putstr "Error clicking on Hide Charts and Tiles"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 	sleep 2
 end
@@ -960,7 +960,7 @@ Then(/^change the filter attribute to Last Health Status for verify the Focus Ca
 		sleep 5
 	rescue Exception => ex
 		putstr "Last Health Status is not present in the Filter attribute"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1003,7 +1003,7 @@ Then(/^change the filter attribute to Last Health Status for verify the Tiles$/)
 		sleep 5
 	rescue Exception => ex
 		putstr "Last Health Status is not present in the Filter attribute"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1035,7 +1035,7 @@ Then(/^change the filter attribute to ARR for verify the Focus Category records$
 		sleep 5
 	rescue Exception => ex
 		putstr "ARR is not present in the Filter attribute"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1065,7 +1065,7 @@ Then(/^change the filter attribute to ARR for verify the Tiles$/) do
 		sleep 5
 	rescue Exception => ex
 		putstr "ARR is not present in the Filterattribute"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1086,7 +1086,7 @@ Then(/^change the object to Success plan in the edit view to verify the Tiles$/)
     sleep 5
 	rescue Exception => ex
 		putstr "Error while counting the tiles"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1115,7 +1115,7 @@ Then(/^change the object to Success plan in the edit view to verify the Focus Ca
 	end
 	rescue Exception => ex
 		putstr "Error while counting the FocusCategory"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1133,7 +1133,7 @@ Then(/^click on Show Inactive Categories view to see the Inactive Categories$/) 
 		end
 	rescue Exception=> ex
 		putstr "Error while Show Inactive Categories accounts"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1154,20 +1154,10 @@ begin
 			    end
 			end	
 			sleep 5
-			
-			# within(:id,'focusCategories') do
-				# if page.should have_css('.title-status-inactive',visible: false)
-					# @TotalFocuscategory1 = (page.all(".title-status-inactive" ,visible: false).count)
-					# puts "The number of Inactive Focus Category : #{@TotalFocuscategory1}"
-					
-				# else
-					# puts" Inactive Focus Category are not present"
-				# end
-			# end	
 		end
 	rescue Exception => ex
 		putstr "Error  while hiding the Inactive Categories"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 	sleep 5
 end
@@ -1203,7 +1193,7 @@ And /^I navigate to heatMapChart for details$/ do
 		end 
 	rescue Exception => ex
 		putstr "Not able to navigate to heatMapChart"+ex.message
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1216,7 +1206,7 @@ begin
 		puts"Focuscategory is edited"
 	rescue Exception => ex
 		putstr "User doesn't have sufficient privilleges"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end 
 
@@ -1229,7 +1219,7 @@ begin
 	end
 	rescue Exception => ex
 		putstr "User doesn't have sufficient privilleges"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end 
 
@@ -1265,7 +1255,7 @@ And (/^navigate to heatMapChart to verify records$/) do
 		end
 	rescue Exception => ex
 		putstr "HeapMapChart Verification Failed"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1279,13 +1269,14 @@ And(/^I click on Edit View link$/) do
     sleep 5
 	rescue Exception => ex
 		putstr "Error occurred while clicking Edit View link"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
 
 Then(/^I verify Account object as default selection$/) do
 	begin
+	find(:xpath, "//*[contains(@id, 'selectObjectType')]").select("Account")
     within(".detailList") do
 			if find("option[value='Account']")
 				puts "Account object is default selection."
@@ -1295,18 +1286,18 @@ Then(/^I verify Account object as default selection$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while verifying Account object as default"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
 And(/^I change the filter attribute to Account Owner$/) do
 	begin
-		find(:xpath, "//*[contains(@id, 'filterAttributeValue')]").select "Account Owner"
+		find(:xpath, "//*[contains(@id,'outerfilterAttributesSectionItem:filterAttributeValue')]").select "Account Owner"
     puts "Account Owner value slected from dropdown."
 		sleep 3
 	rescue Exception => ex
 		putstr "Error occurred while Changing filter attribute to Account Owner"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1328,7 +1319,7 @@ And(/^I select the Default checkbox and Save$/) do
     sleep 10
 	rescue Exception => ex
 		putstr "Error occurred while selecting Default Checkbox and Save"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1342,7 +1333,7 @@ Then(/^I Verify Heat map chart records$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while verifying Heat Map Chart records"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1355,7 +1346,7 @@ And(/^I click Clear button$/) do
     puts "Clicked clear button."
 	rescue Exception => ex
 		putstr "Error occurred while clicking Clear button"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1369,7 +1360,7 @@ Then(/^I Verify result displayed on "([^"]*)" page$/) do |arg|
     end
 	rescue Exception => ex
 		putstr "Error occurred while verifying the result"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1380,7 +1371,7 @@ And(/^I change value to "([^"]*)"$/) do |arg|
     sleep 3
 	rescue Exception => ex
 		putstr "Error occurred while changing value"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1394,7 +1385,7 @@ Then(/^I Verify filter result displayed on "([^"]*)" page$/) do |arg|
     end
 	rescue Exception => ex
 		putstr "Error occurred while verifying the filtered results"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1414,7 +1405,7 @@ And(/^I search for Lookup values$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while searching for Lookup values"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1427,7 +1418,7 @@ Then(/^I verify the lookup values$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while verifying the lookup values"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1442,7 +1433,7 @@ And(/^I change the object to Success Plan$/) do
 		sleep 10
 	rescue Exception => ex
 		putstr "Error occurred while changing the object to Success Plan"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1453,7 +1444,7 @@ And(/^I click on filter attribute$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while clicking on filter attribute."
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1469,7 +1460,7 @@ Then(/^I verify the values for Success Plan$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while verifying the values for Success Plan"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1484,7 +1475,7 @@ And(/^I Navigate to Health Donut chart$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while navigating to Health Donut Chart"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1493,20 +1484,16 @@ And(/^I click on Donut$/) do
     sleep 3
     if page.has_text? ("Account Health Status")
       puts "Health Donut on display."
-      sleep 3
-			within("#pieChartcontainer") do
-				within(".highcharts-series-group") do
-					first("path").click
-				end
-			end
-			sleep 5
+      sleep 5		
+	  find("#pieChartcontainer").first(".highcharts-0").first(".highcharts-series-group").first("path").click
+	  sleep 5
       puts "Health Donut clicked."
     else
       puts "Health Donut cannot be clicked."
     end
 	rescue Exception => ex
 		putstr "Error occurred while clicking the donut"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1515,7 +1502,7 @@ And(/^I verify user navigates to Account Health Status to click on Account Name$
     sleep 10
     if page.has_css? ("#healthStatus-toolbar")
       puts "Account Health Status page verified."
-      if page.has_text? ("No matching records found")
+      if page.has_text?("No matching records found")
 				puts "No matching records found"
         puts "Account name not present to be clicked."
       else
@@ -1530,7 +1517,7 @@ And(/^I verify user navigates to Account Health Status to click on Account Name$
     end
 	rescue Exception => ex
 		putstr "Error occurred while verifying the navigation to Account Health Status page and clicking Account Name"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1543,7 +1530,7 @@ Then(/^I Verify user navigates to Account Details page$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while verifying the navigation to Account Details page."
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1551,7 +1538,7 @@ And(/^I verify user navigates to Account Health Status to click on Success Plan$
 	begin
 		if page.has_css? ("#healthStatus-toolbar")
 			puts "Account Health Status page verified."
-			if page.has_text? ("No matching records found")
+			if page.has_content?("No matching records found")
         puts "No matching records found"
 				puts "Success Plan not present be clicked."
 			else
@@ -1564,7 +1551,7 @@ And(/^I verify user navigates to Account Health Status to click on Success Plan$
     end
 	rescue Exception => ex
 		putstr "Error occurred while verifying the navigation to Account Health Status page and clicking Success Plan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1577,7 +1564,7 @@ Then(/^I Verify user navigates to Success Plan page$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while verifying the navigation to Success Plan page"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1593,7 +1580,7 @@ Then(/^I Verify User Preferences$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while verifying the User Preferences"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1605,7 +1592,7 @@ And(/^I click on Success Plan tab link$/) do
     puts "Success Plans page."
 	rescue Exception => ex
 		putstr "Error occurred while clicking on Success Plan tab link"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
   sleep 10
 end
@@ -1620,7 +1607,7 @@ And(/^I click logout$/) do
     sleep 3
 	rescue Exception => ex
 		putstr "Error occurred while clicking logout"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1635,7 +1622,7 @@ Then(/^I verify User Preferences as per HeatMap$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while verifying User Prefernces as per HeatMap"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1652,7 +1639,7 @@ And(/^I navigate to Heat Map Chart$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while navigating to Heat Map Chart"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1670,7 +1657,7 @@ And(/^I click on a tile$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while clicking on a tile"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1723,7 +1710,7 @@ And(/^I click on tile to navigate to Account name link to click it$/) do
 		end
 	rescue Exception => ex
 		putstr "Error occurred while clicking on link to navigate to Account name link"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1737,7 +1724,7 @@ Then(/^I Verify user navigates to Account Name Details page$/) do
 		end
 	rescue Exception => ex
 		putstr "Error occurred while verifying the navigation to Account Name Details page."
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1745,27 +1732,28 @@ Then(/^I verify Active Tiles with No Records$/) do
   begin
 		if page.has_css?(".ROD-tiles")
 			within(".ROD-tiles") do
-				if page.should have_css('.inactive')
-          puts "Tile is grey."
-        else
-          puts "Tile is not grey."
-        end
+				if page.has_css?('.inactive')
+					  puts "Tile is grey."
+					else
+					  puts "Tile is not grey."
+					end
       end
     else
       puts "Page has no tiles."
     end
   rescue Exception => ex
 		putstr "Error occurred while verifying Active tiles with no records"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
 
 And(/^I click on tile to navigate to Account name link$/) do
 	begin
+	    @tileCount = 0
 		if page.has_css?(".ROD-tiles")
 			within(".ROD-tiles") do
-				if page.should have_css('.tile')
+				if  page.has_css?('.tile')
 					@tileCount = (page.all(".tile").count)
 					puts "The number of tiles : #{@tileCount}"
 
@@ -1773,7 +1761,7 @@ And(/^I click on tile to navigate to Account name link$/) do
 					page.all(".tile").each do |tile|
 						tileLabel = tile.first(".figureCaption").text
 						puts tileLabel
-
+                       
 						if tile.all("h3").count > 0
 							tileRecords = tile.first("h3").text.to_i
 							puts "Tile - #{tileLabel} has value "+ tile.first("h3").text
@@ -1783,16 +1771,18 @@ And(/^I click on tile to navigate to Account name link$/) do
 
 						end
 						@tileValues << tileRecords
+						 #tile.first(".figureCaption").click
 					end
 
 				end
 			end
-			0.upto(@tileCount - 2) do |x|
-				@tilerecordValue = @tileValues[x]
-				puts @tilerecordValue
-				all(".tile")[x].click
-				sleep 5
-      end
+			page.all(".tile").first.first(".figureCaption").click
+			# (@tileCount - 1).times do |x|
+				# @tilerecordValue = @tileValues[x]
+				# puts @tilerecordValue
+				# page.all(".tile")[x].click
+				# sleep 5
+			# end
 			if page.has_text? ("Account Name")
 				puts "Account Name page navigated."
 			else
@@ -1801,7 +1791,7 @@ And(/^I click on tile to navigate to Account name link$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while clicking on tile to navigate to Account name link"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1816,7 +1806,7 @@ When(/^I click on Edit link$/) do
     sleep 10
 	rescue Exception => ex
 		putstr "Error occurred while clicking Edit link"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1843,7 +1833,7 @@ Then(/^I verify FC page and click Save to save changes$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while erifying FC page and clicking save"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1907,7 +1897,7 @@ Then(/^I Verify Focus Category records$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while verifying Focus Category records"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1921,7 +1911,7 @@ Then(/^I verify User Preferences as per FC$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while verifying User preferences as per FC"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -1953,7 +1943,7 @@ And(/^I click on Subject link value of FC Task$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while clicking on Subject link of FC task"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -1963,6 +1953,7 @@ Then(/^I Verify Action link for the chosen FC Task$/) do
 		if page.has_css? (".acc")
       within(".list") do
         unless all("tr")[1].all("td")[0].first("span").first("a").has_css? (".ss-fill-disabled")
+					puts all("tr")[1].all("td")[0].first("span").first("a").text
           all("tr")[1].all("td")[0].first("span").first("a").click
           page.has_text? ("Complete Task Help")
           puts "Complete link is Active."
@@ -1976,14 +1967,14 @@ Then(/^I Verify Action link for the chosen FC Task$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while verifying Action link for chosen FC Task"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
 
 And(/^I click on FC Header$/) do
 	begin
-    within(".title-status") do
+    within all(".title-status").last do
 			$title = all("h3")[1].first("a").text
 			all("h3")[1].first("a").click
     end
@@ -1991,7 +1982,7 @@ And(/^I click on FC Header$/) do
     puts "FC Header link clicked."
 	rescue Exception => ex
 		putstr "Error occurred while clicking on FC Header"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -2009,7 +2000,7 @@ Then(/^I verify FC view details page$/) do
 		end
 	rescue Exception => ex
 		putstr "Error occurred while verifying FC view details page"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -2032,7 +2023,7 @@ And(/^I click Create New link$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while clicking Create New link"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -2050,7 +2041,7 @@ Then(/^I save the new FC$/) do
     sleep 5
 	rescue Exception => ex
 		putstr "Error occurred while saving the new FC"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -2065,7 +2056,7 @@ And(/^I click Edit link$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while clicking Edit link"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -2098,7 +2089,7 @@ Then(/^I Save the changes$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while Saving the changes"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -2112,7 +2103,7 @@ And(/^I click Record Name link$/) do
     sleep 5
 	rescue Exception => ex
 		putstr "Error occurred while clicking on Record Name link"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -2126,7 +2117,7 @@ Then(/^I verify Record Name details page$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while verifying Record Name details page"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -2154,7 +2145,7 @@ And(/^I click on Complete Action$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while clicking on Complete Actin link"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -2171,7 +2162,7 @@ And(/^I select Completed Status value$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while selecting Completed Status value"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -2208,7 +2199,7 @@ Then(/^I verify Saved Task Completed$/) do
       end
   rescue Exception => ex
 		putstr "Error occurred while verifying Saved Task Completed"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -2245,27 +2236,9 @@ Then(/^I verify Saved Task Completed with Additional Details$/) do
 				sleep 5
 			end
 		end
-    # if page.has_text? ("Task")
-			# puts "Navigated to task page."
-			# within all(".pbBody")[0] do
-			# 	within all(".detailList")[0] do
-			# 		#$status = first("tr").all("td")[3].first("div").text
-			# 		$count = all("tr")[6].all("td")[1].first("div").text
-			# 		#puts $status
-			# 		puts $count
-			# 		if $count.to_i == $x.to_i
-			# 			puts "Status is completed with additional details and Saved Task Verified."
-			# 		else
-			# 			puts "Status is not completed with additional details and Saved Task not Verified."
-			# 		end
-			# 	end
-			# end
-    # else
-			# puts "Not navigated to task page."
-    # end
 	rescue Exception => ex
 		putstr "Error occurred while verifying Saved Task Completed with Additional Details"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -2290,7 +2263,7 @@ And(/^I click on Dismiss Action$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while clicking on Dismiss Action"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -2310,7 +2283,7 @@ And(/^I select Dismissed Status value$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while selecting Dismissed Status value"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -2345,7 +2318,7 @@ Then(/^I verify Saved Task Dismissed$/) do
 		end
 	rescue Exception => ex
 		putstr "Error occurred while verifying Saved Task Dismissed"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -2384,7 +2357,7 @@ Then(/^I verify Saved Task Dismissed with Additional Details$/) do
 		end
 	rescue Exception => ex
 		putstr "Error occurred while verifying Dismissed Task Completed with Additional Details"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -2402,7 +2375,7 @@ And(/^I click on Save$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while clicking Save"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -2421,7 +2394,7 @@ And(/^I provide additional details$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while providing Additional Details"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -2437,7 +2410,7 @@ And(/^I select FC Group$/) do
       sleep 5
 	rescue Exception => ex
 		putstr "Error occurred while selecting FC Group"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -2453,9 +2426,10 @@ And(/^I click on FC Header link$/) do
 		puts "FC Header link clicked."
 	rescue Exception => ex
 		putstr "Error occurred while Clicking on FC Header link"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
+
 
 
 And(/^I verify FC view details$/) do
@@ -2472,7 +2446,7 @@ And(/^I verify FC view details$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while verifying FC view details"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -2493,7 +2467,7 @@ Then(/^I verify currency field format$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while verifying Currency Field Format"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -2509,7 +2483,7 @@ And(/^I select FCG$/) do
 		sleep 5
 	rescue Exception => ex
 		putstr "Error occurred while selecting FCG"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -2541,10 +2515,57 @@ Then(/^I verify Additional Fields Section$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while verifying Additional Fields Section"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
+
+
+
+And(/^I select Task object$/) do
+	begin
+		sleep 2
+		if page.has_text? ("Edit Filter")
+			sleep 3
+			find(:xpath, "//*[contains(@id, 'selectObjectType')]").select "Task"
+			sleep 5
+			puts "Task object selected."
+		else
+			puts "No Task object present to be selected."
+		end
+	rescue Exception => ex
+		putstr "Error occurred while selecting Task as object."
+		putstr_withScreen ex.message
+	end
+end
+
+
+And(/^I change the filter attribute for Task$/) do
+	begin
+		arg = getDetails "Overview"
+		find(:xpath, "//*[contains(@id, 'filterAttrViewList')]").select(arg["Filter_value1"])
+		puts "Filter Attribute selected."
+	rescue Exception => ex
+		putstr "Error occurred while changing the filter attribute."
+		putstr_withScreen ex.message
+	end
+end
+
+
+Then(/^I verify Task object present$/) do
+	begin
+		$objval =find(:xpath, "//*[contains(@id, 'selectObjectType')]").all('option').collect(&:text)
+		puts $objval
+		if page.has_text?("Task")
+			puts "Task as object verified."
+		else
+			puts "Task as object cannot be verified."
+		end
+	rescue Exception => ex
+		putstr "Error occurred while verifying Task as object."
+		putstr_withScreen ex.message
+	end
+end
 
 And(/^I provide Required additional details$/) do
 	begin
@@ -2557,7 +2578,7 @@ And(/^I provide Required additional details$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while providing Required Additional Details"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -2571,7 +2592,7 @@ And(/^I provide Non\-Required additional details$/) do
     end
 	rescue Exception => ex
 		putstr "Error occurred while providing Non-Required Additional Details"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -2611,7 +2632,7 @@ Then(/^I verify the required details of the task$/) do
     end
   rescue Exception => ex
 		putstr "Error occurred while verifying Required Details of Task"
-		putstr ex.message
+		putstr_withScreen ex.message
   end
 end
 
@@ -2651,7 +2672,7 @@ Then(/^I verify the non\-required details of the task$/) do
 		end
 	rescue Exception => ex
 		putstr "Error occurred while verifying Non-required Details of task"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -2667,45 +2688,197 @@ And(/^I click on Subject link for Active Action link$/) do
 					$valuerow = row.all("td")[2].first("a").text
 					row.all("td")[2].first("a").click
 					puts "Subject link value clicked."
-					sleep 15
+					break
 				else
-					puts "Not Navigated to task page."
+					puts "No Active Action links present."
 				end
-			end	
-            if page.has_text? ("Task")
-				within first(".pbBody") do
-					within first(".detailList") do
-                         $create = all("tr")[7].all("td")[1].first("div").first("a").text
-                    end
-                end
-              puts $create
-		      puts "Navigated to task page."
-              sleep 2
-            else
-		      puts "Record is Inactive."
-            end
-		    within("#tabBar") do
-		      all("li")[1].first("a").click
-		    end
-        end
-    rescue Exception => ex
+			end
+		end
+	rescue Exception => ex
 		putstr "Error occurred while clicking on Subject link."
-		putstr ex.message
-  end
+		putstr_withScreen ex.message
+	end
+end
+
+
+And(/^I verify Task page$/) do
+	begin
+		if page.has_css? (".multiUserViewIcon")
+			within first(".pbBody") do
+				within first(".pbSubsection") do
+					$create = first("table").first("tbody").all("tr")[6].all("td")[1].first("div").first("a").text
+					$sts = first("table").first("tbody").all("tr")[0].all("td")[3].first("div").text
+				end
+			end
+			puts $create, $sts
+			puts "Navigated to task page."
+			sleep 2
+		else
+			puts "Not Navigated to task page."
+		end
+	rescue Exception => ex
+		putstr "Error occurred while verifying Task page."
+		putstr_withScreen ex.message
+	end
 end
 
 Then(/^I verify the User Access$/) do
-  begin
-    within(:id, "phHeader") do
-      $user = first("tbody").first("tr").all("td")[2].first("div").first("div").first("div").first("div").first("div").first("span").text
-    end
-    if $user.to_s == $create.to_s
-      puts "Same User and Hence Action Link is Active."
-    else
-      puts "Different Users and Hence Action Link Inactive."
-    end
-  rescue Exception => ex
+	begin
+		sleep 2
+		$user = find("#userNavButton").first("span").text
+		puts $user
+		sleep 3
+		if $user.to_s == $create.to_s && $sts.to_s != "Completed"
+			puts "Same User and Hence Action Link is Active."
+		else
+			puts "Different Users and Hence Action Link Inactive."
+		end
+	rescue Exception => ex
 		putstr "Error occurred while verifying User Access."
-		putstr ex.message
-  end
+		putstr_withScreen ex.message
+	end
+end
+
+
+And(/^I select Task FCG$/) do
+	begin
+		unless page.has_css? (".ss-check")
+			within(".select2-container") do
+				first("a").first("span").click
+			end
+			within(".select2-drop") do
+				first("ul").all("li").each_with_index do |fc,index|
+					next if index == 0
+					#puts index
+					fc.click
+					sleep 10
+					if page.has_css? (".ss-check")
+						puts "Task FCG selected."
+					else
+						puts "Task FCG not present."
+						#puts index
+					end
+					break
+				end
+				sleep 10
+			end
+		else
+			puts "Page already has Task FCG selected."
+		end
+	rescue Exception => ex
+		putstr "Error occurred while verifying User Access."
+		putstr_withScreen ex.message
+	end
+end
+
+And(/^I click on Subject of any Task$/) do
+	begin
+		$i = 0
+		sleep 2
+		if page.has_css? (".ss-check")
+			within(".list") do
+				tr = first("tbody").all("tr")
+				tr.each_with_index do |row, index|
+					next if index == 0
+					unless row.has_css? (".ss-disabled")
+						#$valuerow = row.all("td")[2].first("a").text
+						row.all("td")[2].first("a").click
+						puts "Subject link value clicked."
+						sleep 15
+						$i = 1
+						break
+					else
+						puts "No pending Tasks available on Overview page for selection."
+					end
+				end
+			end
+		else
+			puts "No Subject present."
+		end
+		sleep 5
+	rescue Exception => ex
+		putstr "Error occurred while clicking Subject."
+		putstr_withScreen ex.message
+	end
+end
+
+
+And(/^I check Task detail page to edit status to Completed$/) do
+	begin
+		unless $i == 0
+			if page.has_text? ("Task")
+				puts "Navigated to task page."
+				sleep 20
+				find(:id, "topButtonRow").all("input")[0].click
+				puts "Edit button clicked."
+				sleep 10
+				find(:xpath, "//*[contains(@id, 'tsk12')]").select "Completed"
+				puts "Completed status is selected."
+				sleep 3
+				within all(".pbHeader")[0] do
+					within all(".pbButton")[0] do
+						click_on "Save"
+					end
+				end
+				sleep 20
+			else
+				puts "Not Navigated to task page."
+			end
+		else
+			puts "No pending Tasks available on for selection."
+		end
+	rescue Exception => ex
+		putstr "Error occurred while editing status to Completed."
+		putstr_withScreen ex.message
+	end
+end
+
+
+
+Then(/^I verify Task State$/) do
+	begin
+		unless $i == 0
+			sleep 3
+			if page.has_text? ("Task")
+				puts "Navigated to task page."
+				within all(".pbSubsection")[0] do
+					within all(".detailList")[0] do
+						$stas = all("tr")[0].all("td")[3].first("div").text
+					end
+				end
+				puts $stas
+				$taskstas = find(:id, '00N1a000006qMEQ_ileinner').text
+				puts $taskstas
+				if $taskstas == "Manual Completion" && $stas == "Completed"
+					puts "Task State Status verified as Manual Completion."
+				else
+					puts "Task State Status verified not as Manual Completion."
+				end
+			else
+				puts "Not Navigated to task page."
+			end
+		else
+			puts "No pending Tasks available on for selection."
+		end
+	rescue Exception => ex
+		putstr "Error occurred while verifying Task State status."
+		putstr_withScreen ex.message
+	end
+end
+
+
+Then(/^I Verify result for Task as object$/) do
+	begin
+		arg = getDetails "Overview"
+		$messagedisplay = find(:id, "filterSelectionCriteria").text
+		puts $messagedisplay
+		if $messagedisplay.to_s.include?(arg["Display_Msg1"]) || $messagedisplay.to_s.include?(arg["Display_Msg2"]) || $messagedisplay.to_s.include?(arg["Display_Msg3"])
+			puts "Verified result for Task as Object."
+		else
+			puts "Page does not get filtered as per Task Object."
+		end
+	rescue Exception => ex
+		putstr "Error occurred while verifying result for Task as Object."
+		putstr_withScreen ex.message
+	end
 end

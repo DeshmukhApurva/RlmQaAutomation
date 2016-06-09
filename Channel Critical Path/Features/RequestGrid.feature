@@ -29,8 +29,6 @@ Scenario: Rally Test Case ID: TC4342,TC4343,TC4344,TC4345,TC4346 : Request - Req
     When I click on "Opportunities" tab
     And I click on "Requests" tab
     Then I should able to see the "Request Grid" fields
-    When I click on the "Kebab Menu" menu button
-    And I click on the "Export all data as CSV" field
     And user sorts by "Subject" in "Ascending" order
     Then files should be sorted by "Subject" in "Ascending" order
     When I click on "Requests" tab

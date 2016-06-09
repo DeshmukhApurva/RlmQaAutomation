@@ -1,11 +1,15 @@
 #All Accounts - Account Details specific Step definitions
 #All Scenario mentioned in AccountDetails.feature
 
+
+
 Then(/^I should able to see the "([^"]*)" page columns$/) do |tab_name|
   begin
     sleep 5
     arg = getDetails "AccountDetailsPage"
-    sleep 5
+    sleep 3
+    if page.has_css?(".ui-grid-header-cell-row")
+    sleep 3
     if page.has_content?(arg["AssetTabField1"])
       puts "Successfully see the #{arg["AssetTabField1"]} #{tab_name} column"
     else
@@ -58,6 +62,9 @@ Then(/^I should able to see the "([^"]*)" page columns$/) do |tab_name|
     else
       putstr "Failed to see the #{arg["AssetTabField8"]} #{tab_name} column"
     end
+    else
+      putstr "#{tab_name} Grid Found"
+    end
     sleep 5
   rescue Exception => ex
     putstr "Error occurred while verifying the #{tab_name} columns"
@@ -65,12 +72,15 @@ Then(/^I should able to see the "([^"]*)" page columns$/) do |tab_name|
   end
 end
 
+
 Then(/^I should able to see the "([^"]*)" page fields$/) do |tab_name|
   begin
     sleep 5
     arg = getDetails "AccountDetailsPage"
     sleep 5
-    if page.has_content?(arg["ContractsTabField1"])
+    if page.has_css?(".ui-grid-header-cell-row")
+      sleep 3
+      if page.has_content?(arg["ContractsTabField1"])
       puts "Successfully see the #{arg["ContractsTabField1"]} #{tab_name} column"
     else
       putstr "Failed to see the #{arg["ContractsTabField1"]} #{tab_name} column"
@@ -127,6 +137,9 @@ Then(/^I should able to see the "([^"]*)" page fields$/) do |tab_name|
     else
       putstr "Failed to see the #{arg["ContractsTabField9"]} #{tab_name} column"
     end
+    else
+      putstr "#{tab_name} Grid Found"
+    end
     sleep 5
   rescue Exception => ex
     putstr "Error occurred while verifying the #{tab_name} columns"
@@ -138,7 +151,12 @@ Then(/^I verify the the grid scroll up and scroll down and pagination$/) do
   begin
     sleep 5
     arg = getDetails "OpportunityModule"
-    sleep 5
+    sleep 3
+    if page.has_css?(".ui-grid-header-cell-row")
+      sleep 3
+    rowcount = all(".ui-grid-row.ng-scope").count
+    if rowcount > 0
+      sleep 4
     default_pagination_count = find("button[type='button']").text
     if default_pagination_count.to_i == arg["DefaultPaginationValue"].to_i
       puts "Successfully see the default value: #{default_pagination_count}"
@@ -149,37 +167,22 @@ Then(/^I verify the the grid scroll up and scroll down and pagination$/) do
     rowcount = all(".ui-grid-row.ng-scope").count
     if rowcount >= 25
       sleep 5
-      all("button[type='button']")[1].send_keys :page_down
+      find("button[type='button']").send_keys :page_down
       sleep 5
-      all("button[type='button']")[1].send_keys :page_up
+      find("button[type='button']").send_keys :page_up
       sleep 5
     else
       puts "Scroll bar is disabled"
     end
+    else
+      puts "No Records Found"
+    end
+    else
+      putstr "Tab is not loading"
+    end
+    sleep 3
   rescue Exception => ex
     putstr "Error occurred while verifying the scroll up and scroll down the page and default pagination value"
-    putstr_withScreen  ex.message
-  end
-end
-
-And(/^I set Partner Account Type on Account ID "(.*?)" to "(.*?)" type$/) do |accountId, accountType|
-  begin
-    sleep 5
-    sufixUrl = "#{accountId}/e?retURL=#{accountId}"
-    url = page.current_url.to_s
-    url = url.sub('001/o', sufixUrl)
-    puts url
-    visit url
-    sleep 5
-    if page.has_content?("Partner Account Type")
-      option_xpath = "//*[@id='00N1a000008V0bK']/option[@value='#{accountType}']"
-      find(:xpath, option_xpath).click
-      sleep 2
-      all(:xpath, "//*/input[@name='save']")[0].click
-      sleep 5
-    end
-  rescue Exception => ex
-    putstr "Error occurred while changing account Type #{accountType} to for Account id: #{accountId}"
     putstr_withScreen  ex.message
   end
 end

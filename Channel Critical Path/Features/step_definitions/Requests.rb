@@ -400,12 +400,12 @@ When(/^I click on the "([^"]*)" menu button$/) do |menu|
   begin
    sleep 5
    if page.has_css?(".ui-grid-header-cell-row")
-      sleep 4
-      find(".ui-grid-icon-menu").click
-      sleep 5
-      puts "Successfully clicked the #{menu} button"
+     sleep 4
+     find(".ui-grid-icon-menu").click
+     sleep 5
+     puts "Successfully clicked the #{menu} button"
    else
-     puts "No #{menu} Records Found"
+     putstr "Tab is not loading"
    end
   rescue Exception => ex
     putstr "Error occurred while clicking the #{menu} button"
@@ -553,7 +553,15 @@ end
 
 Then(/^I should able to see the created "([^"]*)" request$/) do |request|
   begin
-  sleep 15
+  sleep 12
+  find("input[placeholder='Search Requests...']").send_keys [:control, 'a'], :backspace
+  sleep 3
+  find("input[placeholder='Search Requests...']").send_keys $create_request
+  sleep 3
+  find("input[placeholder='Search Requests...']").send_keys :enter
+  sleep 4
+  puts "Successfully search the #{$create_request} request"
+  sleep 6
   rowcount = all(".ui-grid-row.ng-scope").count
   if rowcount > 0
     sleep 5
@@ -581,9 +589,7 @@ When(/^user sorts by "([^"]*)" in "([^"]*)" order$/) do |sort_parameter, sort_or
     sleep 5
     if page.has_css?(".ui-grid-header-cell-row")
       sleep 4
-      within all(".ui-grid-header-cell-row")[1] do
-        all(".ui-grid-icon-angle-down")[8].click
-      end
+      all(".ui-grid-icon-angle-down")[8].click
       sleep 5
       all("button[ng-focus='focus=true']")[1].click
       sleep 4
@@ -606,9 +612,9 @@ Then(/^files should be sorted by "([^"]*)" in "([^"]*)" order$/) do |sort_parame
    sleep 5
    all_files = all(:xpath, '//div[2]/div/div[position() <= 6]/div/div[9]/div').collect(&:text)
    sleep 6
-   within all(".ui-grid-header-cell-row")[1] do
+   # within all(".ui-grid-header-cell-row")[1] do
      all(".ui-grid-icon-angle-down")[8].click
-   end
+   # end
    sleep 5
    ascending_order = find(".ui-grid-menu-item-active").text
    sleep 5
@@ -657,9 +663,9 @@ When(/^user sorts by "([^"]*)" in "([^"]*)" sort order$/) do |sort_parameter, so
     sleep 5
     if page.has_css?(".ui-grid-header-cell-row")
       sleep 4
-      within all(".ui-grid-header-cell-row")[1] do
+      #within all(".ui-grid-header-cell-row")[1] do
         all(".ui-grid-icon-angle-down")[8].click
-      end
+       #end
       sleep 5
       all("button[ng-focus='focus=true']")[2].click
       sleep 4
@@ -683,9 +689,9 @@ Then(/^files should be sorted by "([^"]*)" in "([^"]*)" sort order$/) do |sort_p
     sleep 5
     all_files = all(:xpath, '//div[2]/div/div[position() <= 6]/div/div[9]/div').collect(&:text)
     sleep 6
-    within all(".ui-grid-header-cell-row")[1] do
+    # within all(".ui-grid-header-cell-row")[1] do
       all(".ui-grid-icon-angle-down")[8].click
-    end
+    # end
     sleep 5
     descending_order = find(".ui-grid-menu-item-active").text
     sleep 5
@@ -829,11 +835,10 @@ Then(/^I verify the "([^"]*)" opportunity details$/) do |related_to|
 end
 
 
-
 And(/^I click on the "([^"]*)" link$/) do |request|
   begin
     sleep 5
-    rowcount = all(".ui-grid-selection-row-header-buttons").count
+    rowcount = all(".ui-grid-row.ng-scope").count
     if rowcount > 0
       sleep 3
       within all(".ui-grid-canvas")[1] do
@@ -1050,7 +1055,7 @@ end
 Then(/^I verify the "([^"]*)" links$/) do |request_number|
   begin
     sleep 5
-    rowcount = all(".ui-grid-selection-row-header-buttons").count
+    rowcount = all(".ui-grid-row.ng-scope").count
     if rowcount > 0
       sleep 3
       within all(".ui-grid-canvas")[1] do
@@ -1088,6 +1093,18 @@ And(/^I attach the "([^"]*)" file$/) do |url|
     sleep  15
   rescue Exception => ex
     putstr "Error occurred while attaching the file"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I filter the "([^"]*)" record$/) do |related_to|
+  begin
+   sleep 3
+   all(".ui-grid-header-cell-label")[9].click
+   sleep 4
+   puts "Successfully filter the #{related_to} record"
+  rescue Exception => ex
+    putstr "Error occurred while filtering the #{related_to} record"
     putstr_withScreen  ex.message
   end
 end

@@ -21,6 +21,13 @@ AddPartnerOpportunity:
  PartnerAccount1HierarchyName: "PartnerAccount1"
  PartnerAccount1HierarchyContact: "Con1PA1"
 
+
+NonIncumbentPartnerPricingDisplay:
+ AssetName: "My_PES_Asset"
+ ServiceContractName: "PES_Service_Contract"
+ PartnerOpportunityName: "Portal Agreement"
+ PartnerOpportunityName1: "Partner Agreement"
+
 SplitOpportunity:
  SplitOpportunityName: "PES_SplitOpp"
  TargetOpportunityOwnerID: "QA ChannelManager"

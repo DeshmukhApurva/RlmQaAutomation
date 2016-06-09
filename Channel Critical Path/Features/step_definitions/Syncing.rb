@@ -75,14 +75,23 @@ When (/^I select NewPartnerOpp Partner Opportunity$/) do
 	begin
 		sleep 5
 		arg1 = getReference "PartnerOpportunity"
+		sleep 3
+		if page.has_css?(".pShowMore")
+			first(".pShowMore").first("a").click
+		end
+		sleep 4
 		within all('.listRelatedObject')[0] do
 			tr = all(".dataRow")
 			tr.each do |row|
-				if row.all(".dataCell")[0].text == "#{arg1['NewPartnerOpp']}#{$Opp}"
-          row.first("input[type='checkbox']").click
-					puts "#{arg1['NewPartnerOpp']} partner opportunity is selected"
-          break
-				end
+        sleep 3
+				row.all(".dataCell").each do |sync|
+					if sync.text == "#{arg1['NewPartnerOpp']}#{$Opp}"
+             sleep 3
+             row.first("input[type='checkbox']").click
+					   puts "#{arg1['NewPartnerOpp']} partner opportunity is selected"
+             break
+          end
+        end
 			end
 		end
 	rescue Exception => ex
@@ -313,29 +322,17 @@ And (/^I verify the master opportunity after changing the sync options$/) do
 			click_on('Save')
 			puts "Saved changes made for the 'Master Opportunity' Partner Opportunity"
 		end
-		sleep 2
-		within all(".pbSubsection")[0] do
-			click_on('PES_CHL_Opp')
-		end
-		sleep 2
-		within all('.detailList')[0] do
-			$partnerOppStagevalue = page.find(:id,'opp11_ileinner').text
-		end
-      	if $partnerOppStagevalue == arg['SalesStage']
-          	puts "Sync is successful for the option 'To Master Opportunity'"
-        else
-          	putstr "Sync is unsuccessful for the option 'To Master Opportunity' and Stop sync is enabled"
-        end
-
-		rescue Exception=> ex
-      puts "Error in verifying the master opportunity after changing the sync options"
-			putstr_withScreen ex.message
-    end
+    sleep 3
+	rescue Exception=> ex
+		puts "Error in verifying the master opportunity after changing the sync options"
+		putstr_withScreen ex.message
+	end
 end
 
 
 Then (/^I stop the syncing$/) do
 	begin
+    sleep 3
 		main = page.driver.browser.window_handles.first
 		click_on("Syncing")
 		puts "Clicked on the button 'Syncing'"
@@ -355,8 +352,29 @@ Then (/^I stop the syncing$/) do
 		click_on('Save')
 		sleep 5
 		page.driver.browser.switch_to.window(main)
-
+    sleep 3
   rescue Exception=>ex
     puts "Error in stopping sync"
   end
+end
+
+Then(/^I verify the sync opportunity$/) do
+  begin
+  sleep 3
+	arg = getDetails "PartnerOpportunity"
+	  sleep 3
+		within all('.detailList')[0] do
+			$partnerOppStagevalue = page.find(:id,'opp11_ileinner').text
+    end
+    sleep 2
+		if $partnerOppStagevalue == arg['SalesStage']
+			puts "Sync is successful for the option 'To Master Opportunity'"
+		else
+			putstr "Sync is unsuccessful for the option 'To Master Opportunity' and Stop sync is enabled"
+		end
+  sleep 3
+	rescue Exception=> ex
+		puts "Error in verifying the master sync opportunity"
+		putstr_withScreen ex.message
+	end
 end

@@ -1,4 +1,3 @@
-@ServiceSourceSetUp
 @MappingsFeature
 Feature: All features related to Service Source setup - Mappings
 	
@@ -206,6 +205,7 @@ Scenario: Rally Test Case ID: TC3494 : Mappings - Service Contract -> Opportunit
 	And I Add an Opportunity Product Line field "Total Price" to "Total Price"
 	And I verify the validation message
 	And I save the Mapping
+
 
 @MappingsDelete
 Scenario: Delete all mappings that were created

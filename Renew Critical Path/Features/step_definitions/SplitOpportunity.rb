@@ -11,7 +11,7 @@ And(/^I select one or more product from the grid$/) do
             sleep 5
             unless checkbox.checked?
               checkbox.click
-              puts "Successfully enabled the the product"
+              puts "Successfully enabled the product"
               break
             else
               puts "Product is already enabled"
@@ -28,7 +28,7 @@ And(/^I select one or more product from the grid$/) do
           sleep 5
           unless checkbox.checked?
             checkbox.click
-            puts "Successfully enabled the the product"
+            puts "Successfully enabled the product"
             break
           else
             puts "Product is already enabled"
@@ -73,7 +73,7 @@ And(/^I select the products$/) do
           sleep 5
           unless checkbox.checked?
             checkbox.click
-            puts "Successfully enabled the the product"
+            puts "Successfully enabled the product"
           else
             puts "Product is already enabled"
           end
@@ -87,7 +87,7 @@ And(/^I select the products$/) do
           sleep 5
           unless checkbox.checked?
             checkbox.click
-            puts "Successfully enabled the the product"
+            puts "Successfully enabled the product"
           else
             puts "Product is already enabled"
           end

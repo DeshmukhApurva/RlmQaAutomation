@@ -339,9 +339,14 @@ When(/^I Navigate to (.*?) tab$/) do |arg1|
 end
 
 When(/^I click on "(.*?)" link$/) do |arg1|
-	first(:link, arg1).click
-	sleep 10
-	puts "Navigated to " + arg1 + " tab"
+	begin
+		first(:link, arg1).click
+		sleep 10
+		puts "Navigated to " + arg1 + " tab"
+	rescue Exception => ex
+		puts "Error while navigating to #{arg1}"
+		putstr_withScreen  ex.message
+	end
 end
 
 And (/^I switch to new tab$/) do
@@ -1167,11 +1172,11 @@ And(/^I click on "([^"]*)" button$/) do |button_text|
   end
 end
 
-Then(/^I clicked on "(.*?)" link$/) do |arg1|
-  first(:link, arg1).click
-  sleep 10
-  puts "Clicked on " + arg1 + " link" 
-end
+# Then(/^I clicked on "(.*?)" link$/) do |arg1|
+#   first(:link, arg1).click
+#   sleep 10
+#   puts "Clicked on " + arg1 + " link"
+# end
 
 And (/^I save the Mapping$/) do
 	begin

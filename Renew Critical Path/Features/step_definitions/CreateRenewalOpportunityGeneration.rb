@@ -953,29 +953,77 @@ Then (/^I generate new opportunity from the asset$/) do
 	select "Needs Analysis",:from=> "Stage"
 	sleep 3	
 	rows=all(".dataRow")
-	rows.each do |row|
-		row.all(".dataCell")[3].first("input").set(arg1["salesPrice1"])	
-		row.all(".dataCell")[5].first("input").set(arg1["lineDesc1"])
-	end
+	#rows.each do |row|
+		if rows.count > 0
+			$generate_opportunity_product = rows[0].all("td")[1].first("span").text
+			rows[0].all(".dataCell")[3].first("input").set(arg1["salesPrice1"])	
+			rows[0].all(".dataCell")[5].first("input").set(arg1["lineDesc1"])
+		else
+			puts "No Opportunity Products available"
+		end
+		#break
+	#end
   sleep 4
-  within all(".opportunityBlock")[1] do
-    within(".pbBody") do
-      if first("tbody").first(".dataRow").all("td").count > 0
-        $generate_opportunity_product = first("tbody").first(".dataRow").all("td")[1].first("span").text
-      else
-        puts "No Opportunity Products Available"
-      end
-    end
-  end
-  sleep 4
-	click_on "Save"
+  click_on "Save"
 	puts "New Opportunity is generated"
+  sleep 4
+  #within all(".opportunityBlock")[1] do
+    # within(".pbBody") do
+      # if first("tbody").first(".dataRow").all("td").count > 0
+        # $generate_opportunity_product = first("tbody").first(".dataRow").all("td")[1].first("span").text
+      # else
+        # puts "No Opportunity Products Available"
+      # end
+    # end
+  # end
   sleep 4
 	rescue Exception => ex	
 		putstr "Error in generating new opportunity from the asset"
 		putstr_withScreen  ex.message
 	end
 end
+
+# Then (/^I generate new opportunity from the asset$/) do
+	# begin
+	# ref = getReference "CreateAssetOpportunity"
+	# arg = getDetails "CreateAssetOpportunity"
+	# arg1 = getDetails "Asset"	
+	# pb = getReference "Pricebooks"
+	# arg.each do |key,val|
+		# fill_in key,:with => val		
+		# sleep 1
+	# end
+    # select pb["first"],:from=>  "Pricebook"
+
+	# fill_in "Owner ID",:with=>ref["Owner ID"]
+	# fill_in "Name",:with=>arg["Name"]+$Opp
+	# sleep 2
+	# select "Needs Analysis",:from=> "Stage"
+	# sleep 3	
+	# rows=all(".dataRow")
+#	rows.each do |row|
+		# row.all(".dataCell")[3].first("input").set(arg1["salesPrice1"])	
+		# row.all(".dataCell")[5].first("input").set(arg1["lineDesc1"])
+#	end
+  # sleep 4
+  # within all(".opportunityBlock")[1] do
+    # within(".pbBody") do
+      # if first("tbody").first(".dataRow").all("td").count > 0
+        # $generate_opportunity_product = first("tbody").first(".dataRow").all("td")[1].first("span").text
+      # else
+        # puts "No Opportunity Products Available"
+      # end
+    # end
+  # end
+  # sleep 4
+	# click_on "Save"
+	# puts "New Opportunity is generated"
+  # sleep 4
+	# rescue Exception => ex	
+		# putstr "Error in generating new opportunity from the asset"
+		# putstr_withScreen  ex.message
+	# end
+# end
 
 Then (/^I select the existing Service Contract$/) do
 	begin
@@ -1154,8 +1202,10 @@ Then (/^I check for the errors to be displayed while generating opportunity for 
 			#puts "Filled value for " + key + " column"
 			sleep 1
 		end
-		all(".dataRow")[0].all(".dataCell")[2].first("input").set(nil)
-		all(".dataRow")[0].all(".dataCell")[3].first("input").set(nil)
+		# all(".dataRow")[0].all(".dataCell")[2].first("input").set(nil)
+		# all(".dataRow")[0].all(".dataCell")[3].first("input").set(nil)
+		all(".dataRow")[0].all(".dataCell")[2].first("input").set('')
+		all(".dataRow")[0].all(".dataCell")[3].first("input").set('')
 		click_on "Save"
 		if find(".messageTable").has_content? "Errors"
 			puts "Validation Error Message is displayed : " + find(".messageTable").text
@@ -1279,6 +1329,21 @@ And (/^I delete the resolved Opportunity$/) do
 		sleep 3
 	rescue Exception => ex
 		puts "Error in deleting the resolved opportunity"
+		putstr_withScreen  ex.message
+	end
+end
+
+
+And(/^I click on "([^"]*)" button to Generate Opportunity$/) do |button_text|
+	begin
+		within(:id ,"bottomButtonRow") do
+			click_on button_text
+			puts "#{button_text} Clicked"
+		end
+		sleep 8
+		puts "Successfully click the #{button_text} button"
+	rescue Exception => ex
+		putstr "Error occurred while clicking on #{button_text} button"
 		putstr_withScreen  ex.message
 	end
 end

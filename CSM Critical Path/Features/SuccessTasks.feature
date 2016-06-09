@@ -45,22 +45,22 @@ Scenario: Rally Test Case ID: TC2933 : Dismiss Success task
 	And I dismiss Success task
 
 @EmailTask
-Scenario:Rally Test Case ID: TC2934 : Complete Success task 
+Scenario:Rally Test Case ID: TC2934 : Email from Success task 
 	When I Navigate to Success Tasks tab
 	And I email Success task
 
 @CancelCompleteBulkTask
-Scenario:Rally Test Case ID: TC2937, TC2801: Dismiss Success task 
+Scenario:Rally Test Case ID: TC2937, TC2801: Cancel Complete Bulk taskz 
 	When I Navigate to Success Tasks tab
 	And I cancel complete Success task in bulk
 	
 @CompleteBulkTask
-Scenario:Rally Test Case ID: TC2936 : Complete Success task 
+Scenario:Rally Test Case ID: TC2936 : Complete Success task in Bulk
 	When I Navigate to Success Tasks tab
 	And I complete Success task in bulk
 
 @DismissBulkTask
-Scenario:Rally Test Case ID: TC2938 : Dismiss Success task 
+Scenario:Rally Test Case ID: TC2938 : Dismiss Success task in Bulk
 	When I Navigate to Success Tasks tab
 	And I dismiss Success task in bulk
 
@@ -71,7 +71,7 @@ Scenario:Rally Test Case ID: TC2939 : Verify SP Details Widget on Success task
 	Then I verify SP Details Widget on Success task 
 
 @TaskOpenSP
-Scenario:Rally Test Case ID: TC2940 : Verify SP Details Widget on Success task 
+Scenario:Rally Test Case ID: TC2940 : Verify SP Open from Success task 
 	When I Navigate to Success Tasks tab
 	Then I open SP
 	
@@ -118,12 +118,7 @@ Scenario:Rally Test Case ID: TC5106,TC4988,TC4991,TC4992 - Success Task : Add ta
 	And I select the task from task list
 	And I click on "Create Task" button
 	And I fill the required task details
-	Then I verify the "Create Task" "Status" fields
-	When I "SAVE" the "Create Task"
-	When I click on "Success Tasks" tab
-	And I select the task from task list
-	Then I verify the complete icon state
-	And I verify the dismiss icons state
+	
 
 
 @verify_task_details_page
@@ -267,5 +262,61 @@ Scenario:Rally Test Case ID: TC5102,TC5103,TC5104 - Success Task - Save user pre
 	Then I verify that user preference is saved
 	When I select the task from task list
 	Then I verify that user preference is saved
+
+
+@verify_success_tasks_columns
+Scenario:Rally Test Case ID: TC5445,TC5446,TC5447 - Success Tasks: Availability of Task Record Type Column,Ability of the user to select Record Type and Task Type columns,Verify Record Type columns saved in User Preference
+	When I click on "Success Tasks" tab
+	And I select the task from task list
+	And I click on "Columns" picker
+	Then I verify the task "Record Type" field
+	When I select the task "Record Type" field
+	Then I verify the task "Record Type" field selection is saved or not
+	When I user logout from "CSM" application
+	And that I navigate to the CRM application
+	Then I should land on CRM home page
+	When I click on "Success Tasks" tab
+	And I select the task from task list
+	And I click on "Columns" picker
+	Then I verify the task "Record Type" user preference is saved
+	When I click on "Success Plans" tab
+	When I click on "Success Tasks" tab
+	And I select the task from task list
+	And I click on "Columns" picker
+	Then I verify the task "Record Type" user preference is saved
+
+
+@TaskStateSuccessTask
+Scenario: Rally Test Case ID: TC5196: Verifying Task State for Task from Success Tasks page
+  When I Navigate to Success Tasks tab
+  And I select Task based FC from dropdown
+  And I click on Subject of any Task displayed
+  And I check Task detail page to edit status to Completed
+  Then I verify Task State
+
+
+@SuccessTaskUserPreferences
+Scenario: Rally Test Case ID: TC5205, TC5206, TC5207, TC5208, TC5209 : Verify User Preference for Search text on grid, Verify when user changes FC view, Verify when user selects/deselects grid columns, Verify when user changes page size, verify when user gets from Overview page
+  When I Navigate to Success Tasks tab
+  And I select Task based FC from dropdown
+  And I record the default grid output
+  And Enter some text in Search field
+  Then Verify grid details as per search
+  And I click logout
+  Given that I navigate to the CRM application
+  Then I should land on CRM home page
+  And I Navigate to Success Tasks tab
+  Then I Verify the text present in the Search field
+  And I click on Success Plan tab link
+  And I Navigate to Success Tasks tab
+  Then I Verify the text present in the Search field
+  And I select any grid column
+  Then I Verify the text present in the Search field
+  And I deselect grid columns
+  Then I Verify the text present in the Search field
+  
+
+
+
 
 

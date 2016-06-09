@@ -23,7 +23,7 @@ Scenario: Rally Test Case ID: TC3543,TC3544,TC3546 - AddOn Opportunity - Same Cu
 	And I select one or more product from the grid
     And I select the "Destination Service Contract" field
     And I resolve the "opportunity"
-    Then I should be able to see the "Source Oppportunity" should get resolved
+    Then I should be able to see the "Source Opportunity" should get resolved
 
 @no_auto_renewal_opportunity_generated
 Scenario: Rally Test Case ID: TC3541,TC3542 - AddOn Opportunity - Resolution,No auto renewal opportunity generated if user resolves the add-on
@@ -33,3 +33,4 @@ Scenario: Rally Test Case ID: TC3541,TC3542 - AddOn Opportunity - Resolution,No 
 	And I associate opportunity to "Destination Renewal Opportunity"
 	And I add new line items to the "Source Opportunities" and resolve the source opportunity
 	Then I verify the associated "Destination Renewal Opportunity" and "Source Opportunities"
+

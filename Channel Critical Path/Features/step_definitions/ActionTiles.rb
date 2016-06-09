@@ -44,7 +44,8 @@ And(/^I click on the "([^"]*)" action tile$/) do |completed_action_tile|
       end
     end
     sleep 4
-    within all(".ui-select-match")[1] do
+    within(".view-content-section") do
+    within all(".ui-select-match").last do
       defaultFilter = first("span").first("span").text
       if defaultFilter.to_s == "My Closed Requests".to_s
         puts "The default filter value present on #{completed_action_tile} : My Closed Requests"
@@ -52,7 +53,9 @@ And(/^I click on the "([^"]*)" action tile$/) do |completed_action_tile|
         putstr "Failed to see My Closed Requests as default value on #{completed_action_tile}"
       end
     end
+   end
     sleep 3
+
     within all(".ui-grid-canvas")[1] do
       if all(:css, ".ui-grid-row.ng-scope").count > 0
         requestsCount = all(:css, ".ui-grid-row.ng-scope").count

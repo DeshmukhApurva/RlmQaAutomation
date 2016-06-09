@@ -1,23 +1,18 @@
 #All Opportunities - Opportunity Expiration Filter specific Step definitions
 #All Scenario mentioned in OpportunityExpirationFilter.feature
 
-Then (/^I check the current expiration quarter and expiration year results$/) do
+Then (/^I check the current expiration quarter results$/) do
 	begin
 	arg1 = getDetails "ExpirationQuarter"
 		within all(".ui-select-match")[1] do
 			if find(:css, ".ng-binding.ng-scope").text == arg1['CurrentQuarter']
 				puts "Expiration quarter is in current quarter '#{arg1['CurrentQuarter']}'."
 			end
-    end
-    within all(".ui-select-match")[2] do
-      if find(:css, ".ng-binding.ng-scope").text == arg1['CurrentYear']
-        puts "Expiration year is in current year '#{arg1['CurrentYear']}'."
-      end
-    end
+		end
 		within all(".ui-grid-canvas")[1] do
 			within all("div[role='gridcell']")[0] do
 				sleep 3
-				$currentQtrOpp = first("div").text
+				$currentQtrOpp = first("div").text				
 			end
 		end			
 		sleep 3
@@ -27,103 +22,66 @@ Then (/^I check the current expiration quarter and expiration year results$/) do
 	end
 end
 
-And (/^I verify after the expiration quarter and expiration year results$/) do
+And (/^I verify after the expiration quarter results$/) do
 	begin	
-    allExpQrtrArg = getReference "Expiration Quarter"
-    allExpQuarters = allExpQrtrArg["filterValues"].split(",")
-    arg1 = getDetails "ExpirationQuarter"
-    changedQuarter = arg1['ChangedQuarter']
-    changedYear = arg1['ChangedYear']
-    allYears = getExpirationYears(10)
-    # Change quarter - 
+	arg1 = getDetails "ExpirationQuarter"
 		within all(".ui-select-match")[1] do
-			find(:css, ".close.ui-select-match-close").click 			
+			find(:css, ".ng-binding.ng-scope").click 			
 		end
-		find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[1]/div/div/div/input").click
-		click_on(changedQuarter)
-		sleep 1
-		within all(".ui-select-match")[1] do
-      if find(:css, ".ng-binding.ng-scope").text == changedQuarter
-        puts "Expiration quarter is in changed quarter '#{changedQuarter}'."
-      end
-    end
-    sleep 1
-    # Change year - 
-    within all(".ui-select-match")[2] do
-      find(:css, ".close.ui-select-match-close").click      
-    end
-    sleep 1
-    find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[2]/div/div/div/input").click
-    sleep 1
-    click_on(changedYear)
-    sleep 1
-    within all(".ui-select-match")[2] do
-      if find(:css, ".ng-binding.ng-scope").text == changedYear
-        puts "Expiration year is in changed year '#{changedYear}'."
-      end
-    end
-    sleep 1
-    # Verify current quarter/year opportunity is present in changed quarter/year as well - 
-    found = 0
-    within all(".ui-grid-canvas")[1] do 
-      tr = all(".ui-grid-row")      
-      tr.each do |row|        
-        if row.all("div[role='gridcell']")[0].text == $currentQtrOpp
-          found = 1         
-        else
-          found = 0         
-        end
-      end
-      if found == 1
-        putstr "#{$currentQtrOpp} is present in the '#{changedQuarter}' and '#{changedYear}'"
-      else
-        puts "#{$currentQtrOpp} is not present in the '#{changedQuarter}' and '#{changedYear}'"
-      end
-    end 
-    sleep 3
-    # Set all available quarters in expiration quarter
-    within all(".ui-select-match")[1] do
-      find(:css, ".close.ui-select-match-close").click      
-    end
-    sleep 1
-		allExpQuarters.each do |value|
-      find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[1]/div/div/div/input").click
-      sleep 1
-      click_on(value)
-      sleep 1
-    end
-    puts "Selected all available expiration quarters"
-    # Set all available years in expiration year
-    within all(".ui-select-match")[2] do
-      find(:css, ".close.ui-select-match-close").click      
-    end
-    sleep 1
-    allYears.each do |value|
-      find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[2]/div/div/div/input").click
-      sleep 1
-      click_on(value)
-      sleep 1
-    end
-    puts "Selected all available expiration years"
 		sleep 3
-		# Verify current quarter/year opportunity is present in all available quarters/years
-		within all(".ui-grid-canvas")[1] do 
-      tr = all(".ui-grid-row")
-      tr.each do |row| 
-        opptyName = row.all("div[role='gridcell']")[0].text
-        if opptyName == $currentQtrOpp
-          found = 1  
-          break       
-        else
-          found = 0         
-        end
-      end
-      if found == 1
-        puts "#{$currentQtrOpp} is present in all available expiration quarters and expiration years"
-      else
-        putstr "#{$currentQtrOpp} is not present in all available expiration quarters and expiration years"
-      end
-    end 
+		find("input[placeholder='Select Quarter...']").send_keys arg1['ChangedQuarter']
+		sleep 3
+		puts "Successfully Set as '#{arg1['ChangedQuarter']}'"
+		find("input[placeholder='Select Quarter...']").send_keys :enter
+		sleep 3
+		within all(".ui-select-match")[1] do
+			if find(:css, ".ng-binding.ng-scope").text == arg1['ChangedQuarter']
+				puts "Expiration quarter is in '#{arg1['ChangedQuarter']}' quarter"
+			end
+		end	
+		sleep 3
+		found = 0
+		within all(".ui-grid-canvas")[1] do	
+			tr = all(".ui-grid-row")			
+			tr.each do |row|				
+				if row.all("div[role='gridcell']")[0].text == $currentQtrOpp
+					found = 1					
+				else
+					found = 0					
+				end
+			end
+			if found == 1
+				putstr "#{$currentQtrOpp} is present in the '#{arg1['ChangedQuarter']}'"
+			else
+				puts "#{$currentQtrOpp} is not present in the '#{arg1['ChangedQuarter']}'"
+			end
+		end	
+		sleep 3
+		within all(".ui-select-match")[1] do
+			find(:css, ".ng-binding.ng-scope").click 			
+		end
+		sleep 3
+		find("input[placeholder='Select Quarter...']").send_keys arg1['AllQuarter']
+		sleep 3
+		puts "Successfully Set as '#{arg1['AllQuarter']}'"
+		find("input[placeholder='Select Quarter...']").send_keys :enter
+		sleep 3
+		within all(".ui-grid-canvas")[1] do	
+			tr = all(".ui-grid-row")
+			#td = all("div[role='gridcell']")
+			tr.each do |row|				
+				if row.all("div[role='gridcell']")[0].text == $currentQtrOpp
+					found = 1					
+				else
+					found = 0					
+				end
+			end
+			if found == 1
+				puts "#{$currentQtrOpp} is present in the '#{arg1['ChangedQuarter']}'"
+			else
+				putstr "#{$currentQtrOpp} is not present in the '#{arg1['ChangedQuarter']}'"
+			end
+		end	
 	rescue Exception => ex
 		puts "Error in verifying after changing the expiration quarter results"
 		putstr_withScreen  ex.message

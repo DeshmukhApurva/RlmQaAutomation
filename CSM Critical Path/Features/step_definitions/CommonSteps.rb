@@ -36,7 +36,7 @@ Then(/^I should land on CRM home page$/) do
 		end				
 	rescue Exception => ex
 		putstr "Error  occurred while login"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -99,7 +99,7 @@ Then (/^I delete an Account$/) do
 		end
 	rescue Exception => ex
 		putstr "Error occurred while deleting a Account"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -478,7 +478,7 @@ Then (/^I add new Playbook for SP$/) do
 		sleep 10
 	rescue Exception =>ex
 		putstr "Error while adding Playbook for Success Plan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -522,7 +522,7 @@ Then (/^I verify Play task created for SP$/) do
      sleep 3
   rescue Exception =>ex
       putstr "Error while verifying that Play task is generated when PlayBook is added to SP"
-      putstr ex.message
+      putstr_withScreen ex.message
   end
 end
 
@@ -559,7 +559,7 @@ Then (/^I delete a Playbook for SP$/) do
 	end
 	rescue Exception =>ex
 		putstr "Error while deleting PlayBook for Success Plan"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 

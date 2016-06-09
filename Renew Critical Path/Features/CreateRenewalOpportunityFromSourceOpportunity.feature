@@ -12,7 +12,8 @@ Scenario: Rally-ID: TC3717,TC3718,TC3719: Manual renewal opportunity creation - 
 	Then I select the Source Opportunity for Opportunity Generation from Opportunity	
 	Then I generate Opportunity from Opportunity	
 	And I verify the generated opportunity for "SourceOppDetails"
-@T
+
+
 @NewOpp
 Scenario: Rally-ID: TC3720,TC3721,TC3722,TC3723: Verify renewal opp - Covered Asset and Covered Product from source opp,Create Renewal Opp page - Opp->Renew opp mapping values,Create Renewal Opp page - Edit the auto populated values, Create Renewal Opp page - Delete the opp. product line item
 	When I Navigate to "Opportunities" tab	
@@ -33,17 +34,9 @@ Scenario: Rally-ID: TC3720,TC3721,TC3722,TC3723: Verify renewal opp - Covered As
 	And I select the resolved Opportunity	
 	And I verify the resolved opportunity 
 	And I delete the product from the opportunity
-@T
+
 @Errormessage
 Scenario: Rally-ID: TC3724: Create Renewal Opp page - Check the message if mandatory fields are empty
 	When I Navigate to "Opportunities" tab
 	Then I select the Source Opportunity for Opportunity Generation from Opportunity		
 	Then I check for the errors to be displayed while generating opportunity for Opportunity
-
-
-	
-
-	
-
-	
-	

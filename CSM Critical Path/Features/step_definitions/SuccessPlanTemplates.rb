@@ -13,8 +13,10 @@ Then(/^I create a new Success Plan Template$/) do
 		puts "Creating a new SPT"
 		sleep 2
 		fill_in "Template Name",:with => arg["Template Name"]
-		sleep 1
-		first("a", :text => "Create").click
+		sleep 2
+		within(".pbBottomButtons") do
+		 click_on "Create"
+		end
 		puts "Successfully created SPT" 
 		sleep 10
 		if page.has_content?('Define Success Plan Phases')
@@ -34,7 +36,9 @@ Then(/^I create a new Success Plan Template$/) do
 		first(:xpath, "//*[contains(@id, 'csmName')]").set(arg["PhaseName"])
 		first(:xpath, "//*[contains(@id, 'csmLength')]").set(arg["Days"])
 		sleep 5
-		first(:link, "Save").click
+		within all(".pbButton")[0] do
+					click_on "Save"
+				end
 		puts "Saved Success Plan Template"
 		sleep 5
 		if page.has_content?('Template has been saved')
@@ -75,7 +79,9 @@ Then(/^I create a new Success Plan Template$/) do
 		end
 		puts "Added Playbook Sucessfully"
 		sleep 10
-		first(:link, "Save").click
+		within all(".pbButton")[0] do
+					click_on "Save"
+				end
 		puts "Saved Success Plan Template"
 
 		if page.has_content?('Template has been saved')
@@ -138,24 +144,26 @@ Then(/^I create a new Success Plan Template$/) do
 		# sleep 3
 		# page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
         # page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
-		first(:link, "Save").click
+		within all(".pbButton")[0] do
+					click_on "Save"
+				end
 		puts "Saved Success Plan Templates"
 		sleep 5
 		if page.has_content?('Template has been saved')
 				puts "Template has been saved message displayed after saving"
 				sleep 3
 		else
-			raise "Template has been saved message not displayed"
+			puts "Template has been saved message not displayed"
 		end
 		if page.has_content?('Success Plan Template Indicators have been saved')
 				puts "Success Plan Template Indicators have been saved message displayed after saving"
 				sleep 3
 		else
-			raise "Success Plan Template Indicators have been saved message not displayed"
+			puts "Success Plan Template Indicators have been saved message not displayed"
 		end
     rescue Exception => ex
 		putstr "Error occurred while creating SPT"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end 
 end
 
@@ -178,7 +186,7 @@ And(/^I edit Success Plan Templates$/) do
 		sleep 5
 	rescue Exception => ex
 		putstr "Error occurred while editing Success Plan Template"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -218,7 +226,7 @@ And(/^I Clone a Success Plan Template$/) do
 		end
 	rescue Exception => ex
 		putstr "Error occurred while Cloning Success Plan Template"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -246,7 +254,7 @@ And(/^I Delete a clone Success Plan Templates$/) do
 		puts "Clone of "+arg["Template Name"]+" deleted successfully."
 	rescue Exception => ex
 		putstr "Error occurred while deleting Success Plan Template"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -255,31 +263,33 @@ Then(/^I delete SuccessPlanIndicator$/) do
 		if page.has_content?('Define Success Plan Indicators')
 			puts "Define Success Plan Indicators section displayed"
 			sleep 3
-		else
-			raise "Define Success Plan Indicators section not displayed"
-		end
-        if all(".dataRow").count > 0
-			within all(".dataRow").last do
-			   if all(".dataCell").count > 0 
-				all(".dataCell")[0].first(:link,"Delete").click
-			   end
+			if all(".dataRow").count > 0
+				within all(".dataRow").last do
+				   if all(".dataCell").count > 0 
+					all(".dataCell")[0].first(:link,"Delete").click
+				   end
+				end
 			end
-			
-		end
-		driver.switch_to.alert.accept rescue Selenium::WebDriver::Error::NoAlertOpenError
-		sleep 10
-		if page.has_content?('Success Plan Template Indicator has been deleted')
-			puts "Success Plan Template Indicator has been deleted message displayed after deleting"
-			sleep 3
+			driver.switch_to.alert.accept rescue Selenium::WebDriver::Error::NoAlertOpenError
+			sleep 10
+			if page.has_content?('Success Plan Template Indicator has been deleted')
+				puts "Success Plan Template Indicator has been deleted message displayed after deleting"
+				sleep 3
+			else
+				puts "Success Plan Template Indicator has been deleted "
+			end
+			within all(".pbButton")[0] do
+					click_on "Save"
+				end
+			puts "Saved Success Plan Templates." 
+			sleep 5
 		else
-			puts "Success Plan Template Indicator has been deleted "
+			puts "No Success Plan Indicators to delete"
 		end
-		first(:link, "Save").click
-		puts "Saved Success Plan Templates." 
-		sleep 5
+        
 	rescue Exception => ex
 		putstr "Error occurred while deleting Indicator from Success Plan Template"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end 
 end
 
@@ -288,16 +298,18 @@ And(/^create a new Playbook from SPT$/) do
 		arg = getDetails "SPTPlayBook Details"
 		sleep 5
 		click_on "Create Playbook"
-		puts "Clicked Create Playbook successfully"
+		puts "Clicked Create New Playbook successfully"
 		sleep 10
 		arg.each do |key,val|
 			fill_in key,:with => val
 		end
-		all('.btn')[0].click
+		within all(".pbButton")[0] do
+					click_on "Create"
+				end
 		puts "Successfully created Playbook" 
     rescue Exception => ex
 		putstr "Error occurred while creating Playbook"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -327,7 +339,7 @@ Then(/^I should edit a Playbook$/) do
 		puts "Successfully updated Playbook"
     rescue Exception => ex
 		putstr "Error occurred while editing Playbook from Success Plan Template"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -374,7 +386,9 @@ Then(/^I should view the "(.*?)" Playbook$/) do |var1|
 				end
 				puts "Added Playbook Sucessfully"
 				sleep 5
-				first(:link, "Save").click
+				within all(".pbButton")[0] do
+					click_on "Save"
+				end
 				puts "Saved Success Plan Template"
 				sleep 5
 				if page.has_content?('Template has been saved')
@@ -387,7 +401,7 @@ Then(/^I should view the "(.*?)" Playbook$/) do |var1|
 		end
     rescue Exception => ex
 		putstr "Error occurred while verifying created/updated Playbook from Success Plan Template"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 

@@ -7,33 +7,36 @@ Then(/^create new Tasks$/) do
 		arg=getDetails "Taskdetails"	
 		spPlay = getReference "Reference"
 		sleep 2
-		find(:xpath, "//*[contains(@id, 'selTasks')]").select(spPlay["FCView"])
+		first(:xpath, "//*[contains(@id, 'selTasks')]").select(spPlay["FCView"])
 		sleep 8
 		puts "Selected First Task Category" 
 		click_on "Create Task"
 		sleep 8
 		within all('.pbSubsection').last do
-			sleep 5	
-			find(:css, "input[id$='dueValue']").set(arg["DueDate"])
-			sleep 5
-			find(:css, "input[id$='taskNameValue']").click
-			find(:css, "input[id$='taskNameValue']").set("Call")
-			find(:css, "input[id$='taskNameValue']").set("Call")
-			find(:css, "input[id$='successPlanValue']").click
-			find(:css, "input[id$='successPlanValue']").set(spPlay["SuccessPlan"])
-			find(:css, "input[id$='playValue']").set(spPlay["Play"])
-			find(:xpath, "//*[contains(@id, 'commentsValue')]").click
-			find(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
+			sleep 5				
+			first(:xpath, "//*[contains(@id, 'dueValue')]").set(arg["DueDate"])
+			sleep 5			
+			first(:xpath, "//*[contains(@id, 'taskNameValue')]").click			
+			first(:xpath, "//*[contains(@id,'taskNameValue')]").set("Call")
+			first(:xpath, "//*[contains(@id,'successPlanValue')]").click
+			first(:xpath, "//*[contains(@id,'successPlanValue')]").set(spPlay["SuccessPlan"])
+			first(:xpath, "//*[contains(@id,'playValue')]").set(spPlay["Play"])
+			first(:xpath, "//*[contains(@id, 'commentsValue')]").click
+			first(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
+			first(:xpath, "//*[contains(@id, 'taskStatusValue1')]").select(arg["Status"])
 		end
 		sleep 10
 		within(".pbButtonb") do
 			click_on "SAVE"
+		end
+		within(".pbButtonb") do
+			click_on "Save"
 			puts"Created task for the focus"
 		end
 		sleep 10
 	 rescue Exception =>ex
 		putstr "Error while creating the new task"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
@@ -59,7 +62,7 @@ end
 Then(/^click on Create new link$/) do
 begin
 	sleep 10
-	find("a",:text =>"Create New").click
+	first("a",:text =>"Create New").click
 	sleep 5
 	arg = getDetails "FC View"
 
@@ -92,7 +95,7 @@ end
 Then(/^click on Edit link$/) do
 begin
 	sleep 10
-	find("a",:text =>"Edit").click
+	first("a",:text =>"Edit").click
 	sleep 5
 	
 	 if page.should have_content('Focus Category View')
@@ -108,85 +111,6 @@ begin
 end
 
 
-# Then(/^create new task to dismiss$/) do
-	# begin
-		# find("a",:text => "Create Task").click
-		# sleep 5
-		# within all('.pbSubsection').last do
-			# table=all("table")[0]
-			# sleep 5
-			# arg=getTaskInfo("TaskdetailsToDismiss")
-			# puts arg
-			# sleep 2
-			# table.all("td")[0].find(:css, "input[id$='taskNameValue']").set(arg["TaskNameValue"])
-			# sleep 5
-			# page.driver.browser.window_handles.first
-			# find("img[alt='Success Plan Lookup (New Window)']").click
-			# sleep 5
-			# page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
-			# sleep 5
-			# #page.driver.browser.switch_to.frame("resultsFrame")
-			# within_frame("resultsFrame") do
-			# sleep 5
-			# all('a')[0].click
-			# #first('a').click
-			# sleep 5
-			# end
-			# page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
-			# sleep 10
-			
-			# #page.driver.browser.window_handles.first
-			# puts "play"
-			# find("img[alt='Play Lookup (New Window)']").click
-			# sleep 5
-			# page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
-			# sleep 5
-			# #page.driver.browser.switch_to.frame("resultsFrame")
-			# within_frame("resultsFrame") do
-			# sleep 5
-			# all('a')[0].click
-			# #first('a').click
-			# sleep 5
-			# end
-			# page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
-			# sleep 5
-			
-			# table.all("td")[5].find(:css, "input[id$='dueValue']").set(arg["DueDate"])
-			# sleep 2
-			# table.all("td")[0].find(".comboboxIcon").click
-			
-			# sleep 2
-			# find(:xpath, "//*[contains(@id, 'commentsValue')]").click
-			# find(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
-			# sleep 5
-		# end
-		# within all('.pbBottomButtons').last do
-			# click_on "ADD"
-			# puts"Created task for the focus"
-		# end
-		# sleep 20
-		 # within all(".detailList").first do	
-			 # find(:xpath, "//*[contains(@id, 'tsk12')]").select("Waiting on someone else")
-			 # puts "Set status as Waiting on "
-			 # sleep 5				
-		 # end
-		# sleep 5
-		# within(:id,"topButtonRow") do
-			# click_on "Save"
-			# raise "save"
-		# end	
-		
-		# if page.has_content?(:css,'.detailList')
-			# puts "created"
-		# else
-		 # raise " not saved"
-		# end
-	# rescue Exception =>ex
-		# puts "Error while creating the new task"+ex.message
-	# end
-	
-# end
-
 Then(/^dismiss the Task$/) do
 	begin 	
 		sleep 10
@@ -195,13 +119,13 @@ Then(/^dismiss the Task$/) do
 				table=all("table")[0]
 				table.all("td")[0].click
 				sleep 10
-				table.all("td")[1].find('.removeEnabled').click
+				table.all("td")[1].first('.removeEnabled').click
 				sleep 10
 				status=table.all("td")[6].text
 				subject =table.all("td")[3].text
 				
 		end
-		find(:xpath, "//*[contains(@id, 'riskReasonValue')]").select("D - Alternative Task Performed - ATP")		
+		first(:xpath, "//*[contains(@id, 'riskReasonValue')]").select("D - Alternative Task Performed - ATP")		
 		sleep 10
 		
 		within all('.pbBottomButtons').first do
@@ -210,7 +134,7 @@ Then(/^dismiss the Task$/) do
 		end
 		sleep 5
 		
-		find(".form-control").set(arg["DueDate"])
+		first(".form-control").set(arg["DueDate"])
 		sleep 5
 		within(".fixed-table-body") do
 			
@@ -232,15 +156,15 @@ Then(/^complete the Task in bulk$/) do
 		sleep 10
 		arg=getTaskdetailsTobulkcomplete
 		within(".fixed-table-body") do
-				#all('tbody')[0].all('tr')[0].all('td')[0].find('.btSelectItem').set(true)
+				#all('tbody')[0].all('tr')[0].all('td')[0].first('.btSelectItem').set(true)
 				all('tbody')[0].all('tr')[0].all('td')[0].click
 				sleep 2
 				all('tbody')[0].all('tr')[1].all('td')[0].click
 		end	
 		sleep 5
-		find("a",:text => "Complete").click
+		first("a",:text => "Complete").click
 		sleep 10                
-		find(:xpath, "//*[contains(@id, 'riskReasonValue')]").select("C - Adoption Issue - ADI")		
+		first(:xpath, "//*[contains(@id, 'riskReasonValue')]").select("C - Adoption Issue - ADI")		
 		sleep 5
 		
 		within all('.pbBottomButtons').first do
@@ -289,18 +213,18 @@ And /^click on first opportunity$/ do
 		if(ex.message == "undefined method `click' for nil:NilClass")
 			puts "Error : No Opportunity to select"
 		end
-		writeFailure "Delete Opportunity Error :"+ex.message
+		putstr_withScreen "Delete Opportunity Error :"+ex.message
 	end
 end
  
 And /^select one view$/ do
 	begin
-		first_option = find(:xpath, "//*[@id='pageTaskList:frmCustomerSuccessOverview:taskComp:cmpCSMTasks:pageBlockTaskList:selTasks']/option[2]").text 
+		first_option = first(:xpath, "//*[@id='pageTaskList:frmCustomerSuccessOverview:taskComp:cmpCSMTasks:pageBlockTaskList:selTasks']/option[2]").text 
 		puts first_option
 		select(first_option, :from => "pageTaskList:frmCustomerSuccessOverview:taskComp:cmpCSMTasks:pageBlockTaskList:selTasks")
 		sleep 5
 	rescue Exception => ex
-		writeFailure "Select View Error :"+ex.message
+		putstr_withScreen "Select View Error :"+ex.message
 	end
  end
  
@@ -309,7 +233,7 @@ And /^select one view$/ do
 	all('.bs')[0].all('tbody')[0].all('tr')[0].find('.detailEnabled').click
 	sleep 10
 	rescue Exception => ex
-		writeFailure "Selected first Success-Tasks Error :"+ex.message
+		putstr_withScreen "Selected first Success-Tasks Error :"+ex.message
 	end
  end	
 
@@ -322,7 +246,7 @@ And /^select one view$/ do
 		page.should have_content('Support Contact')
 		puts ("SP Details verified that it contains Information")
 	rescue Exception => ex
-		writeFailure "Success Plan Details Widget Verification Failed :"+ex.message
+		putstr_withScreen "Success Plan Details Widget Verification Failed :"+ex.message
 	end
  end
 
@@ -339,7 +263,7 @@ And /^I clicked success Plans on SP Details Widget$/ do
 			sleep 10
 		end
 	rescue Exception => ex
-		writeFailure "There is no Success Plan associate with this Task: "+ex.message
+		putstr_withScreen "There is no Success Plan associate with this Task: "+ex.message
 	end
 end
 
@@ -348,7 +272,7 @@ And (/^I switch to new tab$/) do
 		page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
 		sleep 10
 	rescue Exception => ex
-		writeFailure "Switching to new tab Error :"+ex.message
+		putstr_withScreen "Switching to new tab Error :"+ex.message
 	end	
 end
 
@@ -359,7 +283,7 @@ Then(/^I should be able to see Success Plan page$/) do
 		page.should have_content("Printable");
         puts "User taken to Success Plan page"
 	rescue Exception => ex
-		writeFailure "User unable to access Success Plan page"+ex.message
+		putstr_withScreen "User unable to access Success Plan page"+ex.message
 	end	
 end
 
@@ -368,7 +292,7 @@ And (/^I close the new tab$/)do
         page.driver.browser.close
 		puts "Closed New Tab"
 	rescue Exception => ex
-		writeFailure "Closed New Tab Error :"+ex.message
+		putstr_withScreen "Closed New Tab Error :"+ex.message
 	end
 end
 
@@ -378,7 +302,7 @@ And (/^I switch back to first tab$/) do
 		sleep 10
 		puts "Switched back to first tab"
 	rescue Exception => ex
-		writeFailure "Switched back to first tab Error :"+ex.message
+		putstr_withScreen "Switched back to first tab Error :"+ex.message
 	end	
 end
 
@@ -422,7 +346,7 @@ Then /^verify current phase$/ do
 			sleep 5
 		end	   
 	rescue Exception => ex
-		writeFailure "Current Phase Verification Failed: "+ex.message
+		puts "Current Phase Verification Failed: "+ex.message
 	end
  end
  
@@ -450,7 +374,7 @@ Then /^verify Contact widget$/ do
 			puts "Contact Widget Not Verified"
 		end
 	rescue Exception => ex
-		writeFailure "Contact Widget Verified : "+ex.message
+		putstr "Contact Widget Verified : "+ex.message
 	end
  end
 
@@ -470,7 +394,7 @@ Then /^click on Email Icon$/ do
 		 end
 		 
 	rescue Exception => ex
-		writeFailure "Email sent Error : "+ex.message
+		puts "Email sent Error : "+ex.message
 	end
 end
 
@@ -500,7 +424,7 @@ Then /^click on show more link$/ do
 			end
 		end
 	rescue Exception => ex
-		writeFailure "clicked On Show More Error : "+ex.message
+		puts "clicked On Show More Error : "+ex.message
 	end
 end
 
@@ -513,7 +437,7 @@ Then /^click on CSM Contact Icon$/ do
 			puts "clicked on contact Icon"
 		end
 	rescue Exception => ex
-		writeFailure "clicked on contact Icon : "+ex.message
+		puts "clicked on contact Icon : "+ex.message
 	end	
 end
 
@@ -533,7 +457,7 @@ Then /^click on first contact$/ do
 			puts "verified Contact"
 		end
 	rescue Exception => ex
-		writeFailure "verified Contact : "+ex.message
+		puts "verified Contact : "+ex.message
 	end
 end
 
@@ -548,7 +472,7 @@ Then /^verify play details widget$/ do
 			puts "Verified Play Details"
 		end
 	rescue Exception => ex
-		writeFailure "Verified Play Details Error : "+ex.message
+		puts "Verified Play Details Error : "+ex.message
 	end
 end 
 
@@ -581,7 +505,7 @@ end
 
 Then(/^select the TaskCategory$/) do
 begin
-	first_option = find(:xpath, "//*[contains(@id, 'selTasks')]/option[2]").text 
+	first_option = first(:xpath, "//*[contains(@id, 'selTasks')]/option[2]").text 
 	puts first_option
 	select(first_option, :from => "pageTaskList:frmCustomerSuccessOverview:taskComp:cmpCSMTasks:pageBlockTaskList:selTasks")
 	sleep 5
@@ -594,23 +518,23 @@ end
 Then(/^click on New Button to create New Task$/) do
 	begin
 		sleep 5
-		find("a",:text => "Create Task").click
+		first("a",:text => "Create Task").click
 		sleep 5
 		within all('.pbSubsection').last do
 			table=all("table")[0]
 			sleep 5	
 			arg=getTaskInfo ""
-			table.all("td")[5].find(:css, "input[id$='dueValue']").set(arg["DueDate"])
+			table.all("td")[5].first(:css, "input[id$='dueValue']").set(arg["DueDate"])
 			sleep 5
-			table.all("td")[0].find(".comboboxIcon").click
+			table.all("td")[0].first(".comboboxIcon").click
 			sleep 5	
-			table.all("td")[0].find(:css, "input[id$='taskNameValue']").set("Call")
+			table.all("td")[0].first(:css, "input[id$='taskNameValue']").set("Call")
 			sleep 5	
-			table.all("td")[1].find(:css, "input[id$='successPlanValue']").click
-			table.all("td")[1].find(:css, "input[id$='successPlanValue']").set(arg["SuccessPlan"])
-			table.all("td")[2].find(:css, "input[id$='playValue']").set(arg["Play"])
-			find(:xpath, "//*[contains(@id, 'commentsValue')]").click
-			find(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
+			table.all("td")[1].first(:css, "input[id$='successPlanValue']").click
+			table.all("td")[1].first(:css, "input[id$='successPlanValue']").set(arg["SuccessPlan"])
+			table.all("td")[2].first(:css, "input[id$='playValue']").set(arg["Play"])
+			first(:xpath, "//*[contains(@id, 'commentsValue')]").click
+			first(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
 			sleep 10
 		end
 		sleep 10
@@ -620,7 +544,7 @@ Then(/^click on New Button to create New Task$/) do
 		end
 		sleep 20
 		 within all(".detailList").first do	
-			 find(:xpath, "//*[contains(@id, 'tsk12')]").select("Waiting on someone else")
+			 first(:xpath, "//*[contains(@id, 'tsk12')]").select("Waiting on someone else")
 			 sleep 5		
 		 end
 		sleep 10
@@ -631,7 +555,7 @@ Then(/^click on New Button to create New Task$/) do
 			
 	rescue Exception =>ex
 		putstr "Error while creating the new task"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 	
 end
@@ -640,9 +564,9 @@ Then(/^edit FC View$/) do
 begin
 	sleep 5
 	arg = getDetails "FC View"
-	find(:xpath, "//*[contains(@id, 'selTasks')]").first(:option, arg["Display Name"]).select_option
+	first(:xpath, "//*[contains(@id, 'selTasks')]").first(:option, arg["Display Name"]).select_option
 	sleep 5
-	find("a",:text =>"Edit").click
+	first("a",:text =>"Edit").click
 	sleep 5
 	click_on "Save"
 		puts "Successfully Saved Focus Category" 
@@ -657,142 +581,137 @@ begin
 	sleep 5
    rescue Exception => ex
      putstr "Error Editing Focus Category View from Success Tasks"
-	 putstr ex.message
+	 putstr_withScreen ex.message
    end
 end
 
-And (/^I complete Success task$/) do
+And (/^I complete Success task in bulk$/) do
 	begin
 		sleep 5
 		arg = getReference "Reference"
-		find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
+		first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
+		sleep 5
+		searchStr = "In Progress"
+		within(".bootstrap-table") do
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
+		end
 		sleep 10
 		completedCount = 0
 		newcompletedCount = 0
-		within(:id,"taskGrid") do
-			all("tr").each do |row|
-			 if row.all("td").count > 0
-				if row.all("td")[6].text=="Completed"
-					completedCount += 1
-				end
-			 end
-			end
-		end
+		
 		sleep 5
 		found = 0
 		within(:id,"taskGrid") do
 			all("tr").each do |row|
 			    if row.all("td").count > 0
 					if row.all("td")[6].text!="Completed"
-						row.first(".checkEnabled").click
-						found = 1
-						break
+					    row.all("td")[0].click
+						found = found + 1
+							if found > 1 
+								break
+							end
+						
 					end
 				end
 			end
 		end
 		sleep 5
 		if found==1
-			find(:xpath, "//*[contains(@id, 'riskReasonValue')]").find(:xpath, 'option[2]').select_option
-      sleep 3
-      within("#grid-toolbar") do
-        unless page.has_css?(".disabled")
-           puts "Complete Button is enabled"
-           sleep 5
-           find("#completeTask").click
-           sleep 4
-        else
-          puts "Complete Button is disabled"
-        end
-      end
-
-			sleep 10
-			find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
-			sleep 10
-			within(:id,"taskGrid") do
-				all("tr").each do |row|
-					 if row.all("td").count > 0
-						if row.all("td")[6].text=="Completed"
-							newcompletedCount += 1
-						end
-					 end
+			#first(:xpath, "//*[contains(@id, 'riskReasonValue')]").first(:xpath, 'option[2]').select_option
+			  sleep 3
+			  within("#grid-toolbar") do
+				unless page.has_css?(".disabled")
+				   puts "Complete Button is enabled"
+				   sleep 5
+				   
+				   find("#completeTask").click
+				   sleep 5
+				   first(:xpath, "//*[contains(@id, 'riskReasonValue')]").first(:xpath, 'option[2]').select_option
+				   first(:xpath, "//*[contains(@id, 'taskStatusValue')]").first(:xpath, 'option[1]').select_option
+				   sleep 4
+				   within(".pbButtonb") do
+					click_on "SAVE"
 				end
-			end
+				   puts "Tasks completed in bulk"
+				   sleep 4
+				else
+				  puts "Complete Button is disabled"
+				end
+			  end
 		end
-		if newcompletedCount > completedCount
-			puts "Task completed successfully"
-		end
-		
+			sleep 10
+			
+		puts "Bulk Tasks completed successfully"
 	rescue Exception =>ex
 		putstr "Error while completing task"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
-And (/^I dismiss Success task$/) do
+
+And (/^I dismiss Success task in bulk$/) do
 	begin
 		sleep 5
 		arg = getReference "Reference"
-		find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
+		first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
+		sleep 5
+		searchStr = "In Progress"
+		within(".bootstrap-table") do
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
+		end
 		sleep 10
 		completedCount = 0
 		newcompletedCount = 0
-		within(:id,"taskGrid") do
-			all("tr").each do |row|
-			 if row.all("td").count > 0
-				if row.all("td")[6].text=="Completed"
-					completedCount += 1
-				end
-			 end
-			end
-		end
+		
 		sleep 5
 		found = 0
 		within(:id,"taskGrid") do
 			all("tr").each do |row|
 			    if row.all("td").count > 0
 					if row.all("td")[6].text!="Completed"
-						row.first(".removeEnabled").click
-						found = 1
-						break
+					    row.all("td")[0].click
+						found = found + 1
+							if found > 1 
+								break
+							end
+						
 					end
 				end
 			end
 		end
 		sleep 5
 		if found==1
-			find(:xpath, "//*[contains(@id, 'riskReasonValue')]").find(:xpath, 'option[2]').select_option
-      sleep 4
-      within("#grid-toolbar") do
-        unless page.has_css?(".disabled")
-          puts "Dismiss Button is enabled"
-          sleep 5
-          find("#dismissTask").click
-          sleep 4
-        else
-          puts "Dismiss Button is disabled"
-        end
-      end
-			sleep 10
-			find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
-			sleep 10
-			within(:id,"taskGrid") do
-				all("tr").each do |row|
-					 if row.all("td").count > 0
-						if row.all("td")[6].text=="Completed"
-							newcompletedCount += 1
-						end
-					 end
+				#first(:xpath, "//*[contains(@id, 'riskReasonValue')]").first(:xpath, 'option[2]').select_option
+		  sleep 3
+		  #within("#grid-toolbar") do
+			unless page.has_css?(".disabled")
+			   puts "Dismiss Button is enabled"
+			   sleep 5
+			   
+			   find("#dismissTask").click
+			   sleep 5
+			   first(:xpath, "//*[contains(@id, 'riskReasonValue')]").first(:xpath, 'option[2]').select_option
+			   first(:xpath, "//*[contains(@id, 'taskStatusValue')]").first(:xpath, 'option[1]').select_option
+			   sleep 5
+			   within(".pbButtonb") do
+				click_on "SAVE"
 				end
+			   sleep 4
+			else
+			  puts "Dismiss Button is disabled"
 			end
-		end
-		if newcompletedCount > completedCount
-			puts "Task dismissed successfully"
-		end
-		
+		  #end
+	    end
+			sleep 10
+			
+		puts "Bulk Tasks dismissed successfully"
 	rescue Exception =>ex
-		putstr "Error while dismissing task"
-		putstr ex.message
+		putstr "Error while completing task"
+		putstr_withScreen ex.message
 	end
 end
 
@@ -800,7 +719,7 @@ And (/^I email Success task$/) do
 	begin
 		sleep 5
 		arg = getReference "Reference"
-		find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
+		first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
 		sleep 10
 		within(:id,"taskGrid") do
 			first(".envEnabled").click
@@ -815,34 +734,34 @@ And (/^I email Success task$/) do
 		 end
 	rescue Exception =>ex
 		putstr "Error while sending task email"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
-And (/^I complete Success task in bulk$/) do
+And (/^I complete Success task$/) do
 	begin
 		sleep 5
 		arg = getReference "Reference"
-		find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
-		sleep 10
-		completedCount = 0
-		newcompletedCount = 0
-		within(:id,"taskGrid") do
-			all("tr").each do |row|
-			 if row.all("td").count > 0
-				if row.all("td")[6].text=="Completed"
-					completedCount += 1
-				end
-			 end
-			end
-		end
+		first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
 		sleep 5
+		searchStr = "In Progress"
+		within(".bootstrap-table") do
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
+		end
+		sleep 10
 		i=0
 		within(:id,"taskGrid") do
 			all("tr").each do |row|
 			    if row.all("td").count > 0
 					if row.all("td")[6].text!="Completed"
-						row.all("td")[0].click
+						if row.all(".checkEnabled").count > 0						
+							row.first(".checkEnabled").click
+							sleep 5
+							
+							break
+						end
 						i+=1
 						if i>1
 							break
@@ -851,69 +770,45 @@ And (/^I complete Success task in bulk$/) do
 				end
 			end
 		end
-		sleep 5
-		if i>0
-			first(:link,"Complete").click
-			sleep 2
-			find(:xpath, "//*[contains(@id, 'riskReasonValue')]").find(:xpath, 'option[2]').select_option
-			sleep 4
-      within("#grid-toolbar") do
-        unless page.has_css?(".disabled")
-          puts "Complete Button is enabled"
-          sleep 5
-          find("#completeTask").click
-          sleep 4
-        else
-          puts "Complete Button is disabled"
-        end
-      end
-			sleep 10
-			find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
-			sleep 10
-			within(:id,"taskGrid") do
-				all("tr").each do |row|
-					 if row.all("td").count > 0
-						if row.all("td")[6].text=="Completed"
-							newcompletedCount += 1
-						end
-					 end
-				end
+		if i>0 
+			first(:xpath, "//*[contains(@id, 'riskReasonValue')]").first(:xpath, 'option[2]').select_option
+			first(:xpath, "//*[contains(@id, 'taskStatusValue')]").first(:xpath, 'option[1]').select_option
+			sleep 5
+			within(".pbButtonb") do
+				click_on "SAVE"
 			end
 		end
-		if newcompletedCount > completedCount
-			puts "Bulk Task completed successfully"
-		end
+		sleep 5
+		puts "Task completed"
 		
 	rescue Exception =>ex
-		putstr "Error while bulk completing task"
-		putstr ex.message
+		putstr "Error while completing task"
+		putstr_withScreen ex.message
 	end
 end
 
-And (/^I dismiss Success task in bulk$/) do
-	begin
+And (/^I dismiss Success task$/) do
+begin
 		sleep 5
 		arg = getReference "Reference"
-		find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
-		sleep 10
-		completedCount = 0
-		newcompletedCount = 0
-		within(:id,"taskGrid") do
-			all("tr").each do |row|
-			 if row.all("td").count > 0
-				if row.all("td")[6].text=="Completed"
-					completedCount += 1
-				end
-			 end
-			end
-		end
+		first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
 		sleep 5
+		searchStr = "In Progress"
+		within(".bootstrap-table") do
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
+		end
+		sleep 10
 		i=0
 		within(:id,"taskGrid") do
 			all("tr").each do |row|
 			    if row.all("td").count > 0
 					if row.all("td")[6].text!="Completed"
-						row.all("td")[0].click
+						if all(".removeEnabled").count > 0						
+							row.first(".removeEnabled").click
+							
+						end
 						i+=1
 						if i>1
 							break
@@ -922,42 +817,20 @@ And (/^I dismiss Success task in bulk$/) do
 				end
 			end
 		end
-		sleep 5
-		if i>1
-			first(:link,"Dismiss").click
-			sleep 2
-			find(:xpath, "//*[contains(@id, 'riskReasonValue')]").find(:xpath, 'option[2]').select_option
-      sleep 4
-      within("#grid-toolbar") do
-        unless page.has_css?(".disabled")
-          puts "Dismiss Button is enabled"
-          sleep 5
-          find("#dismissTask").click
-          sleep 4
-        else
-          puts "Dismiss Button is disabled"
-        end
-      end
-			sleep 10
-			find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
-			sleep 10
-			within(:id,"taskGrid") do
-				all("tr").each do |row|
-					 if row.all("td").count > 0
-						if row.all("td")[6].text=="Completed"
-							newcompletedCount += 1
-						end
-					 end
-				end
+		if i>0 
+			first(:xpath, "//*[contains(@id, 'riskReasonValue')]").first(:xpath, 'option[2]').select_option
+			first(:xpath, "//*[contains(@id, 'taskStatusValue')]").first(:xpath, 'option[1]').select_option
+			sleep 5
+			within(".pbButtonb") do
+				click_on "SAVE"
 			end
 		end
-		if newcompletedCount > completedCount
-			puts "Bulk Task completed successfully"
-		end
+		sleep 5
+		puts "Task dismissed"
 		
 	rescue Exception =>ex
-		putstr "Error while bulk completing task"
-		putstr ex.message
+		putstr "Error while dismissing task"
+		putstr_withScreen ex.message
 	end
 end
 
@@ -965,7 +838,7 @@ And (/^I cancel complete Success task in bulk$/) do
 	begin
 		sleep 5
 		arg = getReference "Reference"
-		find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
+		first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
 		sleep 10
 		completedCount = 0
 		newcompletedCount = 0
@@ -997,12 +870,12 @@ And (/^I cancel complete Success task in bulk$/) do
 		if i>0
 			first(:link,"Complete").click
 			sleep 2
-			#find(:xpath, "//*[contains(@id, 'riskReasonValue')]").find(:xpath, 'option[2]').select_option
+			#first(:xpath, "//*[contains(@id, 'riskReasonValue')]").first(:xpath, 'option[2]').select_option
 			within(".pbBottomButtons") do
 				click_on("CANCEL")
 			end
 			sleep 10
-			find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
+			first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
 			sleep 10
 			within(:id,"taskGrid") do
 				all("tr").each do |row|
@@ -1020,17 +893,22 @@ And (/^I cancel complete Success task in bulk$/) do
 		
 	rescue Exception =>ex
 		putstr "Error while cancelling bulk completing task"
-		putstr ex.message
+		putstr_withScreen ex.message
 	end
 end
 
 Then (/^I verify SP Details Widget on Success task$/) do
 	begin
 		arg = getReference "Reference"
-		find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
+		first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
 		sleep 5
-		find(".form-control").set(arg["Account"])
-		sleep 5
+		searchStr = "In Progress"
+		within(".bootstrap-table") do
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
+		end
+		sleep 10
    unless page.has_css?(".no-records-found")
       sleep 4
       first(".detailEnabled").click
@@ -1048,17 +926,22 @@ Then (/^I verify SP Details Widget on Success task$/) do
    sleep 3
 	rescue Exception => ex
 		putstr "Success Plan Details Widget Verification Failed"
-    putstr ex.message
+    putstr_withScreen ex.message
 	end
  end
  
  Then (/^I open SP$/) do
 	begin
 		arg = getReference "Reference"
-		find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
+		first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
 		sleep 5
-		find(".form-control").set(arg["Account"])
-		sleep 5
+		searchStr = "In Progress"
+		within(".bootstrap-table") do
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
+		end
+		sleep 10
     unless page.has_css?(".no-records-found")
       sleep 3
       first(".detailEnabled").click
@@ -1072,7 +955,7 @@ Then (/^I verify SP Details Widget on Success task$/) do
     sleep 4
 	rescue Exception => ex
 		putstr "Error opening Success Plan"
-    putstr ex.message
+    putstr_withScreen ex.message
 	end
  end
  
@@ -1115,14 +998,14 @@ Then (/^I open Contact$/) do
     sleep 4
 	rescue Exception => ex
 		putstr "Error verifying Success Task Contact Widget"
-    putstr ex.message
+    putstr_withScreen ex.message
 	end
  end
 
  Then (/^I verify Play widget$/) do
 	begin
 		arg = getReference "Reference"
-		find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCWidgetView"])
+		first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCWidgetView"])
 		sleep 5
     unless page.has_css?(".no-records-found")
       sleep 3
@@ -1143,7 +1026,7 @@ Then (/^I open Contact$/) do
   sleep 4
 	rescue Exception => ex
 		putstr "Error verifying Success Task Play Widget"
-    putstr ex.message
+    putstr_withScreen ex.message
 	end
  end
 
@@ -1176,7 +1059,7 @@ And(/^I create a new "([^"]*)" success task$/) do |new_task|
     sleep 5
   rescue Exception => ex
     putstr "Error occurred while creating the success task"
-    putstr ex.message
+    putstr_withScreen ex.message
   end
 end
 
@@ -1226,29 +1109,29 @@ end
 And(/^I "([^"]*)" the create new task$/) do |button|
 	begin
 		sleep 3
-		arg = getDetails "Taskdetails"
-		arg2 = getReference "Reference"
-		sleep 4
-		find(:xpath, "//*[contains(@id, 'selTasks')]").select arg2["FCView"]
 		sleep 8
-		puts "Selected First Task Category"
+		arg=getDetails "Taskdetails"	
+		spPlay = getReference "Reference"
+		sleep 2
+		first(:xpath, "//*[contains(@id, 'selTasks')]").select(spPlay["FCView"])
+		sleep 8
+		puts "Selected First Task Category" 
 		click_on "Create Task"
 		sleep 8
 		within all('.pbSubsection').last do
-			sleep 5
-			find(:css, "input[id$='dueValue']").set arg["DueDate"]
-			sleep 5
-			find(:css, "input[id$='taskNameValue']").click
-			find(:css, "input[id$='taskNameValue']").set "Call"
-			find(:css, "input[id$='taskNameValue']").set "Call"
-			find(:css, "input[id$='successPlanValue']").click
-			find(:css, "input[id$='successPlanValue']").set arg2["SuccessPlan"]
-      sleep 3
-			find(:css, "input[id$='playValue']").set arg2["Play"]
-			find(:xpath, "//*[contains(@id, 'commentsValue')]").click
-			find(:xpath, "//*[contains(@id, 'commentsValue')]").set arg["CommentsValue"]
+			sleep 5				
+			first(:xpath, "//*[contains(@id, 'dueValue')]").set(arg["DueDate"])
+			sleep 5			
+			first(:xpath, "//*[contains(@id, 'taskNameValue')]").click			
+			first(:xpath, "//*[contains(@id,'taskNameValue')]").set("Call")
+			first(:xpath, "//*[contains(@id,'successPlanValue')]").click
+			first(:xpath, "//*[contains(@id,'successPlanValue')]").set(spPlay["SuccessPlan"])
+			first(:xpath, "//*[contains(@id,'playValue')]").set(spPlay["Play"])
+			first(:xpath, "//*[contains(@id, 'commentsValue')]").click
+			first(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
+			first(:xpath, "//*[contains(@id, 'taskStatusValue1')]").select(arg["Status"])
 		end
-		sleep 10
+			
 		within(".pbButtonb") do
 			if page.has_button?(button)
 				puts "Successfully see the #{button} button on create new task"
@@ -1288,6 +1171,7 @@ And(/^I select the task from task list$/) do
 		sleep 4
 		find(:xpath, "//*[contains(@id, 'selTasks')]").select arg["FCView"]
 		sleep 5
+		#find(".pull-right.search").first("input").set('')
 		puts "Successfully selected the filter"
 	rescue Exception => ex
 		putstr "Error occurred while selecting the task from task list"
@@ -2034,7 +1918,7 @@ end
 And(/^I select the pagination size$/) do
 	begin
    sleep 5
-   if page.has_css?(".pagination-detail")
+   if page.has_css?(".dropdown-toggle")
       puts "Successfully see the pagination"
       sleep 4
       within(".pagination-detail") do
@@ -2050,7 +1934,7 @@ And(/^I select the pagination size$/) do
       sleep 3
       puts "Successfully selected the pagination size: #{$page_size}"
    else
-		 putstr "Failed to see the pagination"
+		 puts "No pagination present"
    end
    sleep 3
 	rescue Exception => ex
@@ -2166,3 +2050,364 @@ And(/^I click on success task "([^"]*)" button$/) do |button|
 		putstr_withScreen  ex.message
 	end
 end
+
+Then(/^I verify the task "([^"]*)" field$/) do |record_type|
+	begin
+		sleep 4
+		if page.has_content?(record_type)
+			puts "Successfully see the #{record_type} field"
+		else
+			putstr "Failed to see the #{record_type} field"
+		end
+		sleep 4
+	rescue Exception => ex
+		putstr "Error occurred while verifying the #{record_type} field"
+		putstr_withScreen ex.message
+	end
+end
+
+When(/^I select the task "([^"]*)" field$/) do |record_type|
+	begin
+		sleep 4
+		within all(".dropdown-menu")[0] do
+			all("li").each do |column|
+				sleep 3
+				if column.first("label").text == record_type
+					puts "Successfully see the #{record_type} field"
+					sleep 3
+					column.first("input").click
+					sleep 4
+				end
+			end
+		end
+		sleep 5
+	rescue Exception => ex
+		putstr "Error occurred while selecting the #{record_type} field"
+		putstr_withScreen ex.message
+	end
+end
+
+Then(/^I verify the task "([^"]*)" field selection is saved or not$/) do |record_type|
+	begin
+		sleep 4
+		within all(".dropdown-menu")[0] do
+			all("li").each do |column|
+				sleep 3
+				if column.first("label").text == record_type
+					puts "Successfully see the #{record_type} field"
+					sleep 3
+					if column.first("input").checked?
+						puts "#{record_type} field is selected"
+					else
+						putstr "#{record_type} field is not selected"
+					end
+					sleep 3
+				end
+			end
+		end
+		sleep 5
+	rescue Exception => ex
+		putstr "Error occurred while verifying the #{record_type} field selection is saved or not"
+		putstr_withScreen ex.message
+	end
+end
+
+Then(/^I verify the task "([^"]*)" user preference is saved$/) do |record_type|
+	begin
+		sleep 4
+		within all(".dropdown-menu")[0] do
+			all("li").each do |column|
+				sleep 3
+				if column.first("label").text == record_type
+					puts "Successfully see the #{record_type} field"
+					sleep 3
+					if column.first("input").checked?
+						puts "User preference selection is saved"
+					else
+						putstr "User preference selection is not saved"
+					end
+					sleep 3
+				end
+				sleep 4
+			end
+		end
+		sleep 5
+	rescue Exception => ex
+		putstr "Error occurred while click verifying the #{record_type} user preference is saved"
+		putstr_withScreen ex.message
+	end
+end
+
+
+And(/^I select Task based FC from dropdown$/) do
+	begin
+		unless page.has_css? (".icons-container")
+			#find(:xpath, "//*[contains(@id, 'selTasks')]").click
+			find(:xpath, "//*[contains(@id, 'selTasks')]").all("option").each_with_index do |task, index|
+				next if index == 0
+				task.click
+				sleep 10
+				if page.has_css? (".icons-container")
+					puts "Task based FC selected."
+					break
+				else
+					puts "Task based FC selected but no records found."
+				end
+			end
+		else
+			puts "Page already has Task based FC selected."
+		end
+	rescue Exception => ex
+		putstr "Error occurred while selecting Task based FC from dropdown."
+		putstr_withScreen ex.message
+	end
+end
+
+And(/^I click on Subject of any Task displayed$/) do
+	begin
+		$i = 0
+		sleep 2
+		if page.has_css? (".icons-container")
+			within(".fixed-table-body") do
+				tr = first("table").first("tbody").all("tr")
+				tr.each_with_index do |taskrow,index|
+					unless taskrow.has_css? (".disabled")
+						taskrow.all("td")[3].first("a").click
+						puts "Subject link value clicked."
+						sleep 15
+						$i = 1
+						break
+					else
+						puts "No pending Tasks available on Success Tasks page for selection."
+					end
+				end
+			end
+		else
+			puts "No Tasks present for the choosen FC."
+		end
+		sleep 5
+	rescue Exception => ex
+		putstr "Error occurred while selecting Subject of any Task displayed."
+		putstr_withScreen ex.message
+	end
+end
+
+
+And(/^I record the default grid output$/) do
+	begin
+		$all_subject = []
+		unless page.has_content? ("No matching records found")
+			if page.has_css? (".icons-container")
+				within(".fixed-table-body") do
+					tr = first("table").first("tbody").all("tr")
+					tr.each_with_index do |taskrow,index|
+						$all_subject << taskrow.all("td")[3].first("a").text
+					end
+					puts $all_subject
+				end
+			else
+				puts "No Tasks present for the choosen FC."
+			end
+		else
+			puts "No matching records found."
+		end
+	rescue Exception => ex
+		putstr "Error occurred while recording the default grid output."
+		putstr_withScreen ex.message
+	end
+end
+
+
+And(/^Enter some text in Search field$/) do
+	begin
+		$search = "PES Play"
+		within(".bootstrap-table") do
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys $search
+		end
+		sleep 5
+		$srcresults = []
+		unless page.has_content? ("No matching records found")
+			if page.has_css? (".icons-container")
+				within(".fixed-table-body") do
+					tr = first("table").first("tbody").all("tr")
+					tr.each_with_index do |taskrow,index|
+						$srcresults << taskrow.all("td")[3].first("a").text
+					end
+					puts $srcresults
+				end
+			else
+				puts "No Tasks present for the choosen FC."
+			end
+		else
+			puts "No matching records found."
+		end
+	rescue Exception => ex
+		putstr "Error occurred while entering text in Search field."
+		putstr_withScreen ex.message
+	end
+end
+
+Then(/^Verify grid details as per search$/) do
+	begin
+		unless page.has_content? ("No matching records found")
+			$srcresults.each do |search_elements|
+				if search_elements.to_s.include?($search.to_s)
+					puts "Grid results verified as per search."
+				else
+					puts "Grid results do not match search."
+				end
+			end
+		else
+			puts "No matching records found."
+			puts "Grid results verified as per search."
+		end
+	rescue Exception => ex
+		putstr "Error occurred while verifying the grid details as per search."
+		putstr_withScreen ex.message
+	end
+end
+
+
+And(/^I change FC view$/) do
+	begin
+		$fctask = find(:xpath, "//*[contains(@id, 'selTasks')]").find("option[selected='selected']").text
+		if $fctask
+			find(:xpath, "//*[contains(@id, 'selTasks')]").select "FC for Widgets"
+			puts "New FC selected."
+		else
+			puts "Not able to select New FC."
+		end
+	rescue Exception => ex
+		putstr "Error occurred while changing the FC view."
+		putstr_withScreen ex.message
+	end
+end
+
+And(/^I change the Page Size$/) do
+	begin
+		unless page.has_content? ("No matching records found")
+			within(".page-list") do
+				first("span").first("button").click
+			end
+			sleep 1
+			within(".page-list") do
+				first("ul").first("li").first("a").click
+			end
+			sleep 2
+			puts "Page Size is changed."
+		else
+			puts "No matching records found."
+		end
+	rescue Exception => ex
+		putstr "Error occurred while changing the Page Size."
+		putstr_withScreen ex.message
+	end
+end
+
+And(/^I select any grid column$/) do
+	begin
+		sleep 5
+		unless page.has_content? ("No matching records found")
+			if page.has_css? (".icons-container")
+				within(".fixed-table-body") do
+					tr = first("table").first("tbody").all("tr")
+					sleep 3
+					tr.each_with_index do |taskrow,index|
+						unless taskrow.has_css? (".disabled")
+							if taskrow.first("td").checked?
+								sleep 3
+								puts "Checkbox already selected."
+							else
+								taskrow.all("td")[0].first("input").click
+								puts "Checkbox selected."
+								sleep 1
+								break
+							end
+						else
+							puts "No pending Tasks available on Success Tasks page for selection."
+						end
+					end
+				end
+			else
+				puts "No Tasks present for the choosen FC."
+			end
+		else
+			puts "No matching records found."
+		end
+	rescue Exception => ex
+		putstr "Error occurred while changing the Page Size."
+		putstr_withScreen ex.message
+	end
+end
+
+And(/^I deselect grid columns$/) do
+	begin
+		unless page.has_content? ("No matching records found")
+			if page.has_css? (".icons-container")
+				within(".fixed-table-body") do
+					tr = first("table").first("tbody").all("tr")
+					tr.each_with_index do |taskrow,index|
+						unless taskrow.has_css? (".disabled")
+							unless taskrow.first("td").checked?
+								sleep 3
+								puts "Checkbox already un-selected"
+							else
+								taskrow.all("td")[0].first("input").click
+								puts "Checkbox un-selected."
+								sleep 1
+								break
+							end
+						else
+							puts "No pending Tasks available on Success Tasks page for selection."
+						end
+					end
+				end
+			else
+				puts "No Tasks present for the choosen FC."
+			end
+		else
+			puts "No matching records found."
+		end
+	rescue Exception => ex
+		putstr "Error occurred while changing the Page Size."
+		putstr_withScreen ex.message
+	end
+end
+
+Then(/^I Verify the text present in the Search field$/) do
+	begin
+		$srcsresults = []
+		unless page.has_content? ("No matching records found")
+			if page.has_css? (".icons-container")
+				within(".fixed-table-body") do
+					tr = first("table").first("tbody").all("tr")
+					tr.each_with_index do |taskrow,index|
+						$srcsresults << taskrow.all("td")[3].first("a").text
+					end
+					puts $srcsresults
+				end
+			else
+				puts "No Tasks present for the choosen FC."
+			end
+			$srcsresults.each do |search_elements|
+				if search_elements.to_s.include?($search.to_s)
+					puts "Grid results verified as per search."
+					puts "Text present in Search field."
+				else
+					puts "Grid results do not match search."
+					puts "Text not present in Search field."
+				end
+			end
+		else
+			puts "No matching records found."
+			puts "Grid results verified as per search."
+			puts "Text present in Search field."
+		end
+	rescue Exception => ex
+		putstr "Error occurred while verifying the grid details as per search."
+		putstr_withScreen ex.message
+	end
+end
+

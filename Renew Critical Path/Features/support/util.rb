@@ -19,6 +19,7 @@ end
 def putstr_withScreen(s)
    puts "<b><font color=red>#{s}</font></b>"
    screen_shot_and_save_page
+   raise s
 end
 
 def isAlertPresent

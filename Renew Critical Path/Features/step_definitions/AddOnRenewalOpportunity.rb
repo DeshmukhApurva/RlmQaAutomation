@@ -105,9 +105,9 @@ And(/^I associate opportunity to "([^"]*)"$/) do |destination_renewal_opportunit
     within all(".pbSubsection")[2] do
       destination_renewal_opportunity_field = all("tr")[0].first("td").text
       unless destination_renewal_opportunity_field.to_s == arg["DestinationRenewalOpportunityField"].to_s
-        putstr "Failed to see the #{destination_renewal_opportunity_field} filed"
+        putstr "Failed to see the #{destination_renewal_opportunity_field} field"
       else
-        puts "Successfully see the #{destination_renewal_opportunity_field} filed"
+        puts "Successfully see the #{destination_renewal_opportunity_field} field"
       end
      end
     puts "Successfully see the #{destination_renewal_opportunity} field"

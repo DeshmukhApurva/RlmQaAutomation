@@ -3,12 +3,37 @@
 
 Then (/^I Select the Partner Opportunity with sync "(.*?)" and Update$/) do |argument1|
   begin
+  sleep 3
     arg1 = getReference argument1
     presentIndex = Array.new
+	sleep 3
+	if page.has_css?(".ui-select-match-close")
+		sleep 4
+		all(".ui-select-match-close").each do |filter|
+			filter.click
+		end
+		sleep 3
+	else
+		puts "Unable to see the filter values"
+    end
+    sleep 4
+	find("div[placeholder='Select Opportunity Type...']").click
+	sleep 5
+	find("input[placeholder='Select Opportunity Type...']").send_keys "New Last Week"
+	sleep 3
+	puts "Successfully see the New Last Week filter"
+	find("input[placeholder='Select Opportunity Type...']").send_keys :arrow_down
+	sleep 5
+	find("input[placeholder='Select Opportunity Type...']").send_keys :enter
+	sleep 5
     find("input[placeholder='Search Opportunities...']").send_keys arg1['Name']
     sleep 3
+	find("input[placeholder='Search Opportunities...']").send_keys :enter
+	sleep 3
     puts "Successfully see the Partner Agreement Opportunity"
     sleep 2
+  rowcount = all(".ui-grid-row.ng-scope").count
+  if rowcount > 0
     within all(".ui-grid-canvas")[1] do
       tr = all(".ui-grid-row")
       tr.each_with_index do |row, index|
@@ -68,8 +93,11 @@ Then (/^I Select the Partner Opportunity with sync "(.*?)" and Update$/) do |arg
             putstr "Test case failed"
           end
         end
-      end
-    end
+       end
+     end
+   else
+    puts "No Opportunities Records Found"
+   end
   rescue Exception=> ex
     puts "Error in Selecting the #{argument1} Partner Opportunity"
     putstr_withScreen  ex.message
@@ -80,15 +108,34 @@ Then (/^I Select the Partner Opportunity and bulkupdate with sync "(.*?)"$/) do 
   begin
     arg1 = getReference argument1
     presentIndex = Array.new
-    within all(".ui-select-match")[1] do
-      find(:css, ".ng-binding.ng-scope").click
-      sleep 3
-    end
     sleep 3
+	if page.has_css?(".ui-select-match-close")
+		sleep 4
+		all(".ui-select-match-close").each do |filter|
+			filter.click
+		end
+		sleep 3
+	else
+		puts "Unable to see the filter values"
+    end
+    sleep 4
+	find("div[placeholder='Select Opportunity Type...']").click
+	sleep 5
+	find("input[placeholder='Select Opportunity Type...']").send_keys "New Last Week"
+	sleep 3
+	puts "Successfully see the New Last Week filter"
+	find("input[placeholder='Select Opportunity Type...']").send_keys :arrow_down
+	sleep 5
+	find("input[placeholder='Select Opportunity Type...']").send_keys :enter
+	sleep 5
     find("input[placeholder='Search Opportunities...']").send_keys arg1['Name']
     sleep 3
+	find("input[placeholder='Search Opportunities...']").send_keys :enter
+	sleep 3
     puts "Successfully see the Partner Agreement Opportunity"
-    sleep 2
+    sleep 3
+    rowcount = all(".ui-grid-row.ng-scope").count
+    if rowcount > 0
     within all(".ui-grid-canvas")[1] do
       tr = all(".ui-grid-row")
       tr.each_with_index do |row, index|
@@ -150,6 +197,9 @@ Then (/^I Select the Partner Opportunity and bulkupdate with sync "(.*?)"$/) do 
         end
       end
     end
+  else
+    puts "No Opportunities Records Found"
+  end
   rescue Exception=> ex
     puts "Error in Selecting the #{argument1} Partner Opportunity"
     putstr_withScreen  ex.message
@@ -208,17 +258,44 @@ Then (/^I Select the Partner Opportunity to set primary$/) do
   begin
     arg1 = getReference "setPrimary"
     presentIndex = Array.new
+    sleep 3
+	if page.has_css?(".ui-select-match-close")
+		sleep 4
+		all(".ui-select-match-close").each do |filter|
+			filter.click
+		end
+		sleep 3
+	else
+		puts "Unable to see the filter values"
+    end
+    sleep 4
+	find("div[placeholder='Select Opportunity Type...']").click
+	sleep 5
+	find("input[placeholder='Select Opportunity Type...']").send_keys "New Last Week"
+	sleep 3
+	puts "Successfully see the New Last Week filter"
+	find("input[placeholder='Select Opportunity Type...']").send_keys :arrow_down
+	sleep 5
+	find("input[placeholder='Select Opportunity Type...']").send_keys :enter
+	sleep 5
     find("input[placeholder='Search Opportunities...']").send_keys arg1['Name']
+    sleep 3
+	find("input[placeholder='Search Opportunities...']").send_keys :enter
     sleep 3
     puts "Successfully see the Partner Agreement Opportunity"
     sleep 2
-    within all(".ui-grid-canvas")[1] do
+    rowcount = all(".ui-grid-row.ng-scope").count
+    if rowcount > 0
+     within all(".ui-grid-canvas")[1] do
       tr = all(".ui-grid-row")
       tr.each_with_index do |row, index|
         if row.all("div[role='gridcell']")[0].text == arg1['Name']
           row.all("div[role='gridcell']")[0].click
         end
+       end
       end
+    else
+      puts "No Opportunities Records Found"
     end
   rescue Exception=> ex
     puts "Error in selecting the Partner Opportunity to set primary"
@@ -226,25 +303,31 @@ Then (/^I Select the Partner Opportunity to set primary$/) do
   end
 end
 
-And (/^I verify the primary quote field$/) do
+
+And(/^I verify the opportunity "([^"]*)" field value$/) do |field_name|
   begin
-    sleep 4
-    if page.has_xpath?("//div[2]/div/div/div/div[8]/div/input")
-      puts "Pass"
-      else
-      puts "Failed"
+    sleep 3
+    rowcount = all(".ui-grid-row.ng-scope").count
+    if rowcount > 0
+    within(".data-table") do
+      $renewalFieldValue = all("tr")[4].all("td")[2].text
+      $amountFieldValue = all("tr")[5].all("td")[2].text
     end
-    # within all(".ui-grid-canvas")[1]do
-    #   tr = all(".ui-grid-row")
-    #   tr.each do|row|
-    #     if page.has_css?("ss-cb.ng-untouched.ng-valid.ng-dirty.ng-valid-parse")
-    #       puts "present"
-    #     end
-    #   end
-    # end
-      sleep 3
+    if $renewalFieldValue != "0.00"
+      puts "Incumbent is checked and #{field_name} field is not empty and has #{$renewalFieldValue}"
+    else
+      puts "Incumbent is not checked and #{field_name} field is not empty and has #{$renewalFieldValue}"
+    end
+    if $amountFieldValue != "0.00"
+      puts "Amount field is populated if the latest quote item is assigned"
+    else
+      puts "Amount field is populated if the latest quote item is not assigned"
+    end
+   else
+     puts "No Opportunities Records Found"
+   end
   rescue Exception=>ex
-    puts "Error in verifying the primary quote fields"
+    puts "Error in verifying #{field_name} field values."
     putstr_withScreen  ex.message
   end
 end

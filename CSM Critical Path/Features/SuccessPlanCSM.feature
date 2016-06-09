@@ -174,8 +174,7 @@ Scenario:Rally Test Case ID: TC4695,TC4696 : Cancel Success Plan Edit action,Can
 	And I click on "Go!" button from "Success Plans" page
 	And I edit the existing success plan
 	And I click on "Cancel" button from success plan creation
-	And I delete the existing success plan
-    And I cancel the delete success plan confirmation pop up
+	
 
 
 
@@ -370,7 +369,7 @@ Scenario:Rally Test Case ID: TC4825 - Opportunities Grid - Verify Currency field
 	Then I verify the opportunities grid details
 
 
-@cancel_complete_dismiss_task
+@CSM_cancel_complete_dismiss_task
 Scenario:Rally Test Case ID: TC4959,TC4960,TC5127 - Cancel Complete task action,Cancel dismiss task action,Verify that no actions (complete/dismiss) should get displayed for the tasks, for which user does not have access
 	When I click on "Success Plans" tab
 	And I click on "Go!" button from "Success Plans" page
@@ -379,3 +378,73 @@ Scenario:Rally Test Case ID: TC4959,TC4960,TC5127 - Cancel Complete task action,
 	And I cancel the complete task
 	And I cancel the dismiss task
 
+
+@CSM_verify_action_tab_columns
+Scenario:Rally Test Case ID: TC5448,TC5449,TC5450 - Success Plan - Actions Tab: Availability of Task Record Type Column,Ability of the user to select Record Type and Task Type columns,Verify Record Type and Task Type columns saved in User Preference
+	When I click on "Success Plans" tab
+	And I click on "Go!" button from "Success Plans" page
+	And I select the existing success plan
+	And I click on "Actions" tab
+	And I click on "Columns" picker
+	Then I verify the "Record Type" and "Task Type" fields
+	When I select the "Record Type" and "Task Type" fields
+	Then I verify the "Record Type" and "Task Type" fields selection is saved or not
+	And I click on "Activity Stream" tab
+	And I click on "Actions" tab
+	Then I verify the "Record Type" and "Task Type" fields
+	When I user logout from "CSM" application
+	And that I navigate to the CRM application
+	Then I should land on CRM home page
+	When I click on "Success Plans" tab
+	And I click on "Go!" button from "Success Plans" page
+	And I select the existing success plan
+	And I click on "Actions" tab
+	And I click on "Columns" picker
+	Then I verify the "Record Type" and "Task Type" user preference is saved
+	When I click on "Success Tasks" tab
+	When I click on "Success Plans" tab
+	And I click on "Go!" button from "Success Plans" page
+	And I select the existing success plan
+	And I click on "Actions" tab
+	And I click on "Columns" picker
+	Then I verify the "Record Type" and "Task Type" user preference is saved
+
+
+@CSM_verify_activity_stream_tab_columns
+Scenario:Rally Test Case ID: TC5451,TC5452,TC5453 - Success Plan - Activity Stream Tab: Availability of Task Record Type Column,Ability of the user to select Record Type and Task Type columns,Verify Record Type and Task Type columns saved in User Preference
+	When I click on "Success Plans" tab
+	And I click on "Go!" button from "Success Plans" page
+	And I select the existing success plan
+	And I click on "Activity Stream" tab
+	And I click on "Columns" picker
+	Then I verify the "Record Type" and "Task Type" fields
+	When I select the "Record Type" and "Task Type" fields
+	Then I verify the "Record Type" and "Task Type" fields selection is saved or not
+	And I click on "Actions" tab
+	And I click on "Activity Stream" tab
+	Then I verify the "Record Type" and "Task Type" fields
+	When I user logout from "CSM" application
+	And that I navigate to the CRM application
+	Then I should land on CRM home page
+	When I click on "Success Plans" tab
+	And I click on "Go!" button from "Success Plans" page
+	And I select the existing success plan
+	And I click on "Activity Stream" tab
+	And I click on "Columns" picker
+	Then I verify the "Record Type" and "Task Type" user preference is saved
+	When I click on "Success Tasks" tab
+	When I click on "Success Plans" tab
+	And I click on "Go!" button from "Success Plans" page
+	And I select the existing success plan
+	And I click on "Activity Stream" tab
+	And I click on "Columns" picker
+	Then I verify the "Record Type" and "Task Type" user preference is saved
+
+
+@CSM_TaskStateSuccessPlan
+Scenario: Rally Test Case ID: TC5214: Verifying Task State for Task from Success Plan page
+  When I click on "Success Plans" link
+  And I click on any Success Plan Name to navigate to Action Tab to verify tasks
+  And I click on Subject of any task on the Action Tab
+  And I check Task detail page to edit status to Completed
+  Then I verify Task State

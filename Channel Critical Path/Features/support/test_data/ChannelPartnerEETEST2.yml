@@ -4,11 +4,8 @@ DefaultAccounts:
  accountNumber: "QA-0001"
 
 Expiration Quarter:
- presentQuarter: "Q1"
- filterValues: "Q1,Q2,Q3,Q4"
-
-Expiration Year:
- filterValues: "2015,2016,2017,2018"
+ presentQuarter: "Q1 2016"
+ filterValues: "Q1 2016,Q2 2016,Q3 2016,Q4 2016"
 
 Country:
  filterValues: "USA"
@@ -20,8 +17,7 @@ Distributor Rep:
  filterValues: "PES Channel User"
 
 Opportunity Pipeline:
- Quarter: "Q1"
- Quarter Year: "2016"
+ Quarter: "Q1 2016"
  Country: "USA"
  Reseller Rep: "PES Channel User"
  Distributor Rep: "PES Channel User"
@@ -35,6 +31,7 @@ AddPartnerOpportunity:
  PartnerAccount2Contact: "PES Channel User"
  PartnerAccount1HierarchyName: "PartnerAccount1"
  PartnerAccount1HierarchyContact: "Con1PA1"
+ partnerQuoteOpportunity: "PES_Orange_Pipeline"
 
 RenewalOpportunity:
  Name: "PES_CHL_Opp"
@@ -44,7 +41,7 @@ PartnerOpportunity:
  Second: "Partner Agreement"
 
 Incumbent:
- Name: "PES_CHL_Opp_Incumbent" 
+ Name: "PES_CHL_Opp - Incumbent"
 
 NonIncumbent:
  Name: "PES_CHL_Opp - NonIncumbent"
@@ -64,13 +61,3 @@ NeedStatusUpdate:
  Name: "PES_Pipeline_Opportunity"
  PartnerOpp: "PES_NeedStatusUpdate"
 
-TwoTier:
-  ResellerAccount: "Automation Reseller"
-  DistributorAccount: "Automation Distributor"
-  Account: "TwoTierAutomation"
-  RenewalOpportunity: "TwoTierAutomationRO"
-  PartnerOpportunity: "TwoTierAutomationRO-TwoTierAutomation"
-  ResellerQuote: "TwoTierAutomationROR"
-  DistributorQuote: "TwoTierAutomationROD"
-  ResellerQuoteNumber: "  00000869"
-  DistributorQuoteNumber: "00000870"

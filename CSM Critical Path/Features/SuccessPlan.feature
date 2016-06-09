@@ -131,7 +131,7 @@ Scenario: Success Plan Deletion from Accounts
 	Then I delete an Account
 
 
-@complete_sp_task @sanity
+@complete_sp_task
 Scenario:Rally Test Case ID: TC2906,TC5128,TC5129,TC5132 : Complete task from Success Plan,Complete Task with Status value,Complete Task with Status value and additional Fields (required/non required),Verify the Task Status Value after completing the task
 	When I click on "Success Plans" tab
 	And I select the created SP
@@ -145,7 +145,7 @@ Scenario:Rally Test Case ID: TC2906,TC5128,TC5129,TC5132 : Complete task from Su
 	Then I verify the completed the task
 
 
-@dismiss_sp_task @sanity
+@dismiss_sp_task
 Scenario:Rally Test Case ID: TC2907,TC5130,TC5131 : Complete task from Success Plan,Dismiss Task with Status value,Dismiss Task with Status value and additional Fields (required/non required)
 	When I click on "Success Plans" tab
 	And I select the created SP
@@ -159,7 +159,7 @@ Scenario:Rally Test Case ID: TC2907,TC5130,TC5131 : Complete task from Success P
 	Then I verify the dismiss the task
 
 
-@cancel_success_plan_creation @sanity
+@cancel_success_plan_creation
 Scenario:Rally Test Case ID: TC4940 : Cancel Success plan creation
     When I click on "Success Plans" tab
     And I click on "New" button
@@ -169,17 +169,16 @@ Scenario:Rally Test Case ID: TC4940 : Cancel Success plan creation
 	Then I verify the success plan created or not
 
 
-@cancel_edit_delete_action @sanity ~@wip
+@cancel_edit_delete_action
 Scenario:Rally Test Case ID: TC4941,TC4942 : Cancel Success Plan Edit action,Cancel Success Plan delete action
 	When I click on "Success Plans" tab
 	And I click on "Go!" button from "Success Plans" page
     And I edit the existing success plan
 	And I click on "Cancel" button from success plan creation
-#	And I delete the existing success plan
-#    And I cancel the delete success plan confirmation pop up
 
 
-@verifying_task_time_line @sanity
+
+@verifying_task_time_line
 Scenario:Rally Test Case ID: TC4943,TC4944,TC4945,TC4946,TC4947,TC4948,TC4949,TC4950,TC4951 - Verify - task on time line,task icon and styling,task icon hover details,Verify that correct number of Phases will appear on the Timeline,Verify that due date is correct for tasks appeared on timeline,Task alignment based on Zoom Level,Availability of < and > button on timeline,Verify "Rolling Quarter" link range,Verify "This Quarter" link range,Verify "Rolling Half Year" link range
 	When I click on "Success Plans" tab
 	And I click on "Go!" button from "Success Plans" page
@@ -197,7 +196,7 @@ Scenario:Rally Test Case ID: TC4943,TC4944,TC4945,TC4946,TC4947,TC4948,TC4949,TC
 	And I verify "Rolling Half Year" link range
 
 
-@verify_tasks_get_created @sanity
+@verify_tasks_get_created
 Scenario:Rally Test Case ID: TC4952,TC4953 - Verify that tasks get created when play criteria matches,Cancel task creation
 	When I click on "Success Plans" tab
 	And I click on "Go!" button from "Success Plans" page
@@ -213,7 +212,7 @@ Scenario:Rally Test Case ID: TC4952,TC4953 - Verify that tasks get created when 
 	And I "CANCEL" the "Create Task"
 
 
-@verify_complete_reason_code @sanity
+@verify_complete_reason_code
 Scenario:Rally Test Case ID: TC4954 - View and Select value (value entered in Complete Reason Codes and/or Complete Reason Codes (Cont'd) field of CSM Admin custom) from Complete Reason Code drop down of Complete Tasks Popup of the Overview/Success Tasks/Success Plan page
 	When I click on "Success Plans" tab
 	And I click on "Go!" button from "Success Plans" page
@@ -232,7 +231,7 @@ Scenario:Rally Test Case ID: TC4954 - View and Select value (value entered in Co
 	And I verify the "Complete" task "Reason Code" field
 
 
-@verify_dismiss_reason_code @sanity
+@verify_dismiss_reason_code
 Scenario:Rally Test Case ID: TC4955 - View and Select value (value entered in Dismiss Reason Codes and/or Dismiss Reason Codes (Cont'd) field of CSM Admin custom) from Dismiss Reason Code drop down of Dismiss Tasks Popup of the Overview/Success Tasks/Success Plan page
 	When I click on "Success Plans" tab
 	And I click on "Go!" button from "Success Plans" page
@@ -251,7 +250,7 @@ Scenario:Rally Test Case ID: TC4955 - View and Select value (value entered in Di
 	And I verify the "Dismiss" task "Reason Code" field
 
 
-@sp_required_non_required_fields @sanity
+@sp_required_non_required_fields
 Scenario:Rally Test Case ID: TC4956,TC4957,TC4958 - Required/Non Required Fields on Complete/Dismiss Tasks popup window of Overview/Success Plan/Success Plan Page,Complete/Dismisse Tasks with value in Required Field on Complete/Dismiss Tasks popup window. Error messge if no value is entered,Complete/Dismisse Tasks with value in Non Required Field on Complete/Dismiss Tasks popup window. Error messge if no value is entered
 	When I click on "Success Plans" tab
 	And I click on "Go!" button from "Success Plans" page
@@ -269,7 +268,7 @@ Scenario:Rally Test Case ID: TC4956,TC4957,TC4958 - Required/Non Required Fields
 	And I verify the required fields
 
 
-@sp_save_user_preferences @sanity
+@sp_save_user_preferences
 Scenario:Rally Test Case ID: TC4995,TC4996 - Success Plan Actions Tab: Save user preferences for Filter Selection (login/logout/Navigate away from tab/subtab),Save user preferences for Task grid column selection (login/logout/Navigate away from tab/subtab)
 	When I click on "Success Plans" tab
 	And I click on "Go!" button from "Success Plans" page
@@ -288,7 +287,7 @@ Scenario:Rally Test Case ID: TC4995,TC4996 - Success Plan Actions Tab: Save user
 	When I select the default filter from "Actions" filter pick list
 
 
-@cancel_complete_dismiss_task @sanity
+@cancel_complete_dismiss_task
 Scenario:Rally Test Case ID: TC4959,TC4960,TC5127 - Cancel Complete task action,Cancel dismiss task action,Verify that no actions (complete/dismiss) should get displayed for the tasks, for which user does not have access
 	When I click on "Success Plans" tab
 	And I click on "Go!" button from "Success Plans" page
@@ -298,7 +297,7 @@ Scenario:Rally Test Case ID: TC4959,TC4960,TC5127 - Cancel Complete task action,
     And I cancel the dismiss task
 
 
-@verify_status_fields @sanity
+@verify_status_fields
 Scenario:Rally Test Case ID: TC5123,TC5124 - Create task with Status Field,Related Play value will get populated in Play field of New Task Page after selecting a Task with an existing play and clicking on Create Task
 	When I click on "Success Plans" tab
 	And I click on "Go!" button from "Success Plans" page
@@ -310,7 +309,7 @@ Scenario:Rally Test Case ID: TC5123,TC5124 - Create task with Status Field,Relat
 	And I "SAVE" the "Create Task"
 
 
-@verify_contact_widget_details @sanity
+@verify_contact_widget_details
 Scenario:Rally Test Case ID: TC4961,TC4962,TC4963,TC4964,TC4965 - Verify Contact Widget display contacts on navigating to Success Plan,Verify Contact Widget is static on Success Plan page,Verify CSM and Non- CSM contact icon,Verify contacts display order,Navigate to contact details through contact link
 	When I click on "Success Plans" tab
 	And I click on "Go!" button from "Success Plans" page
@@ -318,7 +317,7 @@ Scenario:Rally Test Case ID: TC4961,TC4962,TC4963,TC4964,TC4965 - Verify Contact
 	Then I verify the contact widget details
 
 
-@verify_opportunities_grid @sanity
+@verify_opportunities_grid
 Scenario:Rally Test Case ID: TC5138 - Opportunities Grid - Verify Currency field values display record currency with each opportunity
 	When I click on "Success Plans" tab
 	And I click on "Go!" button from "Success Plans" page
@@ -327,7 +326,7 @@ Scenario:Rally Test Case ID: TC5138 - Opportunities Grid - Verify Currency field
 	Then I verify the opportunities grid details
 
 
-@verify_custom_settings @sanity
+@verify_custom_settings
 Scenario:Rally Test Case ID: TC4966,TC4967 - Availability of "Use Revenue Link v2 Canvas App" field in Custom Setting,"Use Revenue Link v2 Canvas App" field is by default checked
 	When I click on "Setup" from "CSM" app
 	And I click on "Develop" tab
@@ -338,7 +337,7 @@ Scenario:Rally Test Case ID: TC4966,TC4967 - Availability of "Use Revenue Link v
     Then I should be able to see the "Default Value" is "Checked"
 
 
-@verify_the_usage_tab @sanity
+@verify_the_usage_tab
 Scenario:Rally Test Case ID: TC4968,TC4969,TC4970,TC4971,TC4972,TC4973,TC4974,TC4975,TC4976,TC4977 - Verify the Usage Tab when custom setting is checked, and neither RevLink v2 nor v1 installed in the org,Verify the Usage Tab when custom setting is unchecked, and neither RevLink v2 nor v1 installed in the org,Verify that Usage Tab display Scout Canvas App, when only Rev Link v2 installed and the custom setting is checked/TRUE,Verify that Usage Tab display error message,when only Rev Link v2 installed and the custom setting is unchecked/False,Verify that Usage Tab display error message when only Rev Link v2 installed and the custom setting is checked, but the parameters needed are empty,Verify that Usage Tab display error message when only Rev Link v2 installed and the custom setting is checked but needed parameters are not accessible
 	When I click on "Setup" from "CSM" app
 	And I click on "Develop" tab
@@ -355,7 +354,7 @@ Scenario:Rally Test Case ID: TC4968,TC4969,TC4970,TC4971,TC4972,TC4973,TC4974,TC
 	And I verify the "Scout Canvas"
 
 
-@verify_csm_admin_custom_fields @sanity
+@verify_csm_admin_custom_fields
 Scenario:Rally Test Case ID: TC5133,TC5134,TC5135,TC5136 - Availability of 8 Custom Fields CSM Admin Custom Setting to replace the Success Plan User Lookup's label, Verify the custom field's size to replace the Success Plan user lookup's label,Verify the Success Plan user lookup's label when no value provided in the custom fields, Verify the Success Plan user lookup's label replacement on Success Plan > Details Subtab
 	When I click on "Setup" from "CSM" app
 	And I click on "Develop" tab
@@ -369,7 +368,7 @@ Scenario:Rally Test Case ID: TC5133,TC5134,TC5135,TC5136 - Availability of 8 Cus
 	Then I verify "Details" tab default labels
 
 
-@verify_custom_layout @sanity
+@verify_custom_layout
 Scenario:Rally Test Case ID: TC5017,TC5018,TC5019,TC5023,TC5025 - CSMSuccessPlanDetails VF page component should get display as read only on Account record,CSMSuccessPlanDetails VF page component should display as blank if no Success Plan present for Account record,CSMSuccessPlanDetails VF page component should display values for Account record which has Success Plan present,CSMSuccessPlanDetails VF page component should display value of Success Plan which is added/created first for Account,"Has Success Plan" field should get unchecked if user deletes Success Plan created for the Account
 	When I click on "Accounts" tab
 	And I select the existing account
@@ -382,22 +381,76 @@ Scenario:Rally Test Case ID: TC5017,TC5018,TC5019,TC5023,TC5025 - CSMSuccessPlan
 	And I should able to see the "Has Success Plan" field value
 
 
-@verify_custom_field_under_sp_account @sanity
-Scenario:Rally Test Case ID: TC5020,TC5021,TC5022,TC5024 - Value in "CSMSuccessPlanDetails" VF page component should be same as displayed under Success Plan Details section of Details tab of Success Plan page,CSMSuccessPlanDetails VF page component should display as blank if user deletes Success Plan from Success Plan tab or Account record,CSMSuccessPlanDetails VF page component should display as blank for Account1 and values for Account2 if user updates Success Plan with value from Account1 to Account2,"Has Success Plan" field should display as unchecked if there is no Success Plan present for the Account
-	When I click on "Accounts" tab
-	And I click on "New" button
-	And I fill the account data
-	And I create the account
-	Then I verify the "CSMSuccessPlanDetails" vf page component
-	And I verify the "Has Success Plan" field
-	When I click on "New Success Plan" button
-	And I fill the required details
-	And I click on "Save" button from success plan creation
-	And I click on "Accounts" tab
-	And I open the created account
-	Then I verify the success plan details in "CSMSuccessPlanDetails" vf page
-	When I edit the success plan from account
-	And I click on "Accounts" tab
-	And I open the created account
-	Then I verify the success plan details in "CSMSuccessPlanDetails" vf page
-	When I delete the created account
+
+
+
+
+@verify_action_tab_columns
+Scenario:Rally Test Case ID: TC5439,TC5440,TC5441 - Success Plan - Actions Tab: Availability of Task Record Type Column,Ability of the user to select Record Type and Task Type columns,Verify Record Type and Task Type columns saved in User Preference
+	When I click on "Success Plans" tab
+	And I click on "Go!" button from "Success Plans" page
+	And I select the existing success plan
+	And I click on "Actions" tab
+    And I click on "Columns" picker
+	Then I verify the "Record Type" and "Task Type" fields
+	When I select the "Record Type" and "Task Type" fields
+	Then I verify the "Record Type" and "Task Type" fields selection is saved or not
+	And I click on "Activity Stream" tab
+	And I click on "Actions" tab
+	Then I verify the "Record Type" and "Task Type" fields
+	When I user logout from "CSM" application
+	And that I navigate to the CRM application
+	Then I should land on CRM home page
+	When I click on "Success Plans" tab
+	And I click on "Go!" button from "Success Plans" page
+	And I select the existing success plan
+	And I click on "Actions" tab
+	And I click on "Columns" picker
+	Then I verify the "Record Type" and "Task Type" user preference is saved
+	When I click on "Success Tasks" tab
+	When I click on "Success Plans" tab
+	And I click on "Go!" button from "Success Plans" page
+	And I select the existing success plan
+	And I click on "Actions" tab
+	And I click on "Columns" picker
+	Then I verify the "Record Type" and "Task Type" user preference is saved
+
+
+@verify_activity_stream_tab_columns
+Scenario:Rally Test Case ID: TC5442,TC5443,TC5444 - Success Plan - Activity Stream Tab: Availability of Task Record Type Column,Ability of the user to select Record Type and Task Type columns,Verify Record Type and Task Type columns saved in User Preference
+	When I click on "Success Plans" tab
+	And I click on "Go!" button from "Success Plans" page
+	And I select the existing success plan
+	And I click on "Activity Stream" tab
+	And I click on "Columns" picker
+	Then I verify the "Record Type" and "Task Type" fields
+	When I select the "Record Type" and "Task Type" fields
+	Then I verify the "Record Type" and "Task Type" fields selection is saved or not
+	And I click on "Actions" tab
+	And I click on "Activity Stream" tab
+	Then I verify the "Record Type" and "Task Type" fields
+	When I user logout from "CSM" application
+	And that I navigate to the CRM application
+	Then I should land on CRM home page
+	When I click on "Success Plans" tab
+	And I click on "Go!" button from "Success Plans" page
+	And I select the existing success plan
+	And I click on "Activity Stream" tab
+	And I click on "Columns" picker
+	Then I verify the "Record Type" and "Task Type" user preference is saved
+	When I click on "Success Tasks" tab
+	When I click on "Success Plans" tab
+	And I click on "Go!" button from "Success Plans" page
+	And I select the existing success plan
+	And I click on "Activity Stream" tab
+	And I click on "Columns" picker
+	Then I verify the "Record Type" and "Task Type" user preference is saved
+
+
+@TaskStateSuccessPlan
+Scenario: Rally Test Case ID: TC5197: Verifying Task State for Task from Success Plan page
+  When I click on "Success Plans" link
+  And I click on any Success Plan Name to navigate to Action Tab to verify tasks
+  And I click on Subject of any task on the Action Tab
+  And I check Task detail page to edit status to Completed
+  Then I verify Task State

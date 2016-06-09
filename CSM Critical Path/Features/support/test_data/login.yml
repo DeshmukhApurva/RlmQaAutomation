@@ -15,7 +15,23 @@ CSM_EETEST2:
  Server: "EEtest2"
  Instance: "CSM_EETEST2"
  Name: "QA CSM"
+
+CSMNetOps_DEV20:
+ userName: "pes-csmnetopsuser20@csm.com"
+ pwd: "pass@word1"
+ Role: "CSM NetOps"
+ Server: "EEtest4"
+ Instance: "CSMNetOps_EETEST4"
+ Name: "QA CSMNetOps"
  
+CSM_DEV20:
+ userName: "pes-csmuser20@csm.com"
+ pwd: "pass@word1"
+ Role: "CSM"
+ Server: "EEtest4"
+ Instance: "CSM_EETEST4"
+ Name: "QA CSMNetOps"
+  
 CSMNetOps_EETEST4:
  userName: "qa-csmnetops-eetest4@servicesource.com"
  pwd: "pass@word2"
@@ -30,4 +46,20 @@ CSM_EETEST4:
  Role: "CSM"
  Server: "EEtest4"
  Instance: "CSM_EETEST4"
+ Name: "QA CSM"
+ 
+CSMNetOps_DEV25:
+ userName: "pes-csmnetopsuser25@csm.com"
+ pwd: "pass@word1"
+ Role: "CSM NetOps"
+ Server: "Dev25"
+ Instance: "CSMNetOps_DEV25"
+ Name: "QA CSMNetOps"
+ 
+CSM_DEV25:
+ userName: "pes-csmuser25@csm.com"
+ pwd: "pass@word1"
+ Role: "CSM"
+ Server: "CSM_DEV25"
+ Instance: "CSM_DEV25"
  Name: "QA CSM"

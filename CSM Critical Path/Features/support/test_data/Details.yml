@@ -35,6 +35,8 @@ Play Details:
  Display Name: "Play for Account" 
  Short Description: "High Risk Description"
  Object: "Account"
+ userName: "qa-renewnetops-eetest4@servicesource.com"
+ pwd: "pass@word2"
 
 PlayforPB Details:
  Display Name: "Play1 for PlayBook" 
@@ -62,8 +64,12 @@ FocusCategoryDetails:
  FocusCategoryFieldValue: "Owner ID"
  FocusCategoryOperator: "="
  FocusCategoryValue: "User"
-
-
+ FocusCategoryFieldValue1: "Annual Revenue"
+ FocusCategoryOperator1: ">"
+ FocusCategoryValue1: "500000"
+ FilterLogicErrorMessage: "Some filter conditions are defined but not referenced in your filter logic."
+ FocusCategoryPaginationSize: "50"
+ FocusCategoryPaginationSize1: "100"
 
 FC View:
  Display Name: "PES New FC View" 
@@ -127,6 +133,7 @@ Taskdetails:
  Tasktype: "Call"
  DueDate: "12/11/2015"
  CommentsValue: "Success Task for call"
+ Status: "In Progress"
  
 PlayBookForSP:
  Display Name: "PlayBook for SP"
@@ -181,3 +188,33 @@ CreateTaskFields:
  SucessPlanRelatedToField: "Account"
  ActionDefaultFilterField: "Has Play"
  AccountName1: "TestAccount"
+ DefinePlayCriteriaSection: "Define Play Criteria"
+ DefinePlayTasksSection: "Define Play Tasks"
+ DefinePlayCriteriaFieldValue: "Annual Revenue"
+ DefinePlayCriteriaOperator: ">"
+ DefinePlayCriteriaValue: "500000"
+ RecordTypeValue: "Service_Source_Record"
+
+
+SuccessPlanTemplates:
+ AlertMessage: "You are attempting to delete a Success Plan Template that belongs to one or more Success Plans, summarized below. Please assign a new Success Plan Template to the Success Plan(s) or delete these Success Plan(s) before deleting this template."
+ SaveMessage1: "Template has been saved"
+ SaveMessage2: "Phase updates have been saved"
+ DeletePhaseMessage: "The Phase Onboarding has been deleted"
+ PhaseRecord: "No data available in table"
+ AlertMsage: "This playbook is already present on the Success Plan Template. Please choose another playbook to add."
+ SaveMessage3: "Success Plan Template Indicators have been saved"
+
+
+PlayRecordTask:
+ SaveMsg1: "Play Criteria have been saved"
+ SaveMsg2: "Play has been saved"
+ SaveMsg3: "Play Tasks have been saved"
+
+Overview:
+ Filter_value1: "Assigned To"
+ Filter_value2: "Created By"
+ Filter_value3: "Last Modified By"
+ Display_Msg1: "Displaying data for: Assigned To"
+ Display_Msg2: "Displaying data for: Created By"
+ Display_msg3: "Displaying data for: Last Modified By"

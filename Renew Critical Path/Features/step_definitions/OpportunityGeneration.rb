@@ -359,12 +359,12 @@ end
 
 Then (/^I Resolved the opportunity$/) do
 begin
-	within(:id ,"bottomButtonRow ") do
+	within(:id ,"bottomButtonRow") do
 		click_on "Edit"
 	end
 	sleep 5	
 	select "Closed Won" ,:from => "opp11"
-	within(:id ,"bottomButtonRow ") do	
+	within(:id ,"bottomButtonRow") do	
 		click_on "Save"
 	end
 	

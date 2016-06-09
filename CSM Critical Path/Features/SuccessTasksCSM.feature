@@ -118,10 +118,7 @@ Scenario:Rally Test Case ID: TC4793,TC4744,TC4747,TC4748 - Success Task : Add ta
 	And I select the task from task list
 	And I click on "Create Task" button
 	And I fill the required task details
-	Then I verify the "Create Task" "Status" fields
-	When I "SAVE" the "Create Task"
-	Then I verify the complete icon state
-	And I verify the dismiss icons state
+	
 
 
 @CSM_task_details_page
@@ -263,3 +260,57 @@ Scenario:Rally Test Case ID: TC4789,TC4790,TC4791 - Success Task - Save user pre
 	Then I verify that user preference is saved
 	When I select the task from task list
 	Then I verify that user preference is saved
+
+
+
+@CSM_verify_success_tasks_columns
+Scenario:Rally Test Case ID: TC5454,TC5455,TC5456 - Success Tasks: Availability of Task Record Type Column,Ability of the user to select Record Type and Task Type columns,Verify Record Type columns saved in User Preference
+	When I click on "Success Tasks" tab
+	And I select the task from task list
+	And I click on "Columns" picker
+	Then I verify the task "Record Type" field
+	When I select the task "Record Type" field
+	Then I verify the task "Record Type" field selection is saved or not
+	When I user logout from "CSM" application
+	And that I navigate to the CRM application
+	Then I should land on CRM home page
+	When I click on "Success Tasks" tab
+	And I select the task from task list
+	And I click on "Columns" picker
+	Then I verify the task "Record Type" user preference is saved
+	When I click on "Success Plans" tab
+	When I click on "Success Tasks" tab
+	And I select the task from task list
+	And I click on "Columns" picker
+	Then I verify the task "Record Type" user preference is saved
+
+
+@CSM_TaskStateSuccessTask
+Scenario: Rally Test Case ID: TC5213: Verifying Task State for Task from Success Tasks page
+  When I Navigate to Success Tasks tab
+  And I select Task based FC from dropdown
+  And I click on Subject of any Task displayed
+  And I check Task detail page to edit status to Completed
+  Then I verify Task State
+
+
+@CSM_SuccessTaskUserPreferences
+Scenario: Rally Test Case ID: TC5222, TC5223, TC5224, TC5225, TC5226 : Verify User Preference for Search text on grid, Verify when user changes FC view, Verify when user selects/deselects grid columns, Verify when user changes page size, verify when user gets from Overview page
+  When I Navigate to Success Tasks tab
+  And I select Task based FC from dropdown
+  And I record the default grid output
+  And Enter some text in Search field
+  Then Verify grid details as per search
+  And I click logout
+  Given that I navigate to the CRM application
+  Then I should land on CRM home page
+  And I Navigate to Success Tasks tab
+  Then I Verify the text present in the Search field
+  And I click on Success Plan tab link
+  And I Navigate to Success Tasks tab
+  Then I Verify the text present in the Search field
+  And I select any grid column
+  Then I Verify the text present in the Search field
+  And I deselect grid columns
+  Then I Verify the text present in the Search field
+  

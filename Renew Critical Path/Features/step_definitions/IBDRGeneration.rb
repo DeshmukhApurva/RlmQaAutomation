@@ -75,22 +75,36 @@ Then(/^I add update criteria for "(.*?)" without values$/) do |item|
 			sleep 10
 			all(".dataRow")[2].all(".dataCell")[4].first("input").set("")
 			sleep 5
-		end
+			
+			
+			within(:css ,".pbButton") do
+				click_on "Save"
+			end
+			if page.has_content?("Value must be populated for #{field}")
+				puts "Validation Error : Value must be populated for #{field} is displayed"
+			else
+				putstr "Validation Error : Value must be populated for #{field} is not displayed"
+			end
+		#end
 
-		if item == "ProductFields"
+		elsif item == "ProductFields"
 			arg = getDetails "ProductFields"
-			field = arg["Fieldvalue3"]
-			puts field
+			#field = arg["Fieldvalue3"]
+			field = "Product Family"
+			#puts field
+			
+			within(:css ,".pbButton") do
+				click_on "Save"
+			end
+			
+			if page.has_content?("Value must be populated for #{field}")
+				puts "Validation Error : Value must be populated for #{field} is displayed"
+			else
+				puts "Validation Error : Value must be populated for #{field} is not displayed"
+			end
 		end
 
-		within(:css ,".pbButton") do
-			click_on "Save"
-		end
-		if page.has_content?("Value must be populated for #{field}")
-			puts "Validation Error : Value must be populated for #{field} is displayed"
-		else
-			putstr "Validation Error : Value must be populated for #{field} is not displayed"
-		end
+		
 	rescue Exception => ex
 		puts "Error while verifying the Validation message"
 		putstr_withScreen  ex.message
@@ -233,9 +247,9 @@ And(/^I set the "([^"]*)" mapping$/) do |field_name|
 					fieldPresent = 1
 					puts "#{field_name} field found"
 					sleep 5
-					first(:xpath, ".//*[contains(@id, 'rOFDFields')]").find(:xpath, 'option[1]').select_option
+					row.first(:xpath, ".//*[contains(@id, 'rOFDFields')]").find(:xpath, 'option[1]').select_option
 					sleep 5
-					first(:xpath, ".//*[contains(@id, 'FM_DefaultTextField')]").set arg["IBDRMappingOpportunity"]
+					row.first(:xpath, ".//*[contains(@id, 'FM_DefaultTextField')]").set arg["IBDRMappingOpportunity"]
 					sleep 10
 					break
 				end
@@ -413,7 +427,6 @@ Then(/^I verify the created products$/) do
          puts "Successfully see the products"
          sleep 4
 				 $first_product_name = all(:xpath,"//table/tbody/tr/th/a")[0].text
-         puts $first_product_name
          sleep 4
 				 $second_product_name = all(:xpath,"//table/tbody/tr/th/a")[1].text
          puts $second_product_name
@@ -484,9 +497,9 @@ And(/^I set the "([^"]*)" mapping for Service Contracts$/) do |field_name|
 						fieldPresent = 1
 						puts "#{field_name} field found"
 						sleep 5
-						all(:xpath, ".//*[contains(@id, 'rOFDFields')]")[1].find(:xpath, 'option[1]').select_option
+						row.first(:xpath, ".//*[contains(@id, 'rOFDFields')]").find(:xpath, 'option[1]').select_option
 						sleep 5
-						all(:xpath, ".//*[contains(@id, 'FM_DefaultTextField')]")[1].set arg["IBDRServiceContractMapping"]
+						row.first(:xpath, ".//*[contains(@id, 'FM_DefaultTextField')]").set arg["IBDRServiceContractMapping"]
 						sleep 10
 						break
 					end
@@ -679,10 +692,13 @@ When(/^I delete the created opportunity$/) do
 		arg = getDetails "InstallBaseDataRules"
 		result = false
 		all(:xpath, '//div/table/tbody/tr/td[4]/div/a/span').each do |activity|
-			if activity.text == arg["NewIBDROpportunity"]
-				puts "Successfully see the #{arg["NewIBDROpportunity"]} Opportunity"
+			#if activity.text == arg["NewIBDROpportunity"]
+			if activity.text == arg["IBDRMappingOpportunity"]
+				#puts "Successfully see the #{arg["NewIBDROpportunity"]} Opportunity"
+				puts "Successfully see the #{arg["IBDRMappingOpportunity"]} Opportunity"
 				activity.click
-				puts "Successfully opened the #{arg["NewIBDROpportunity"]} Opportunity"
+				#puts "Successfully opened the #{arg["NewIBDROpportunity"]} Opportunity"
+				puts "Successfully opened the #{arg["IBDRMappingOpportunity"]} Opportunity"
 				sleep 5
 				within("#topButtonRow") do
 					click_on 'Delete'
@@ -690,15 +706,18 @@ When(/^I delete the created opportunity$/) do
 				sleep 6
 				page.driver.browser.switch_to.alert.accept
 				sleep 5
-				puts "Successfully deleted the #{arg["NewIBDROpportunity"]} Opportunity"
+				#puts "Successfully deleted the #{arg["NewIBDROpportunity"]} Opportunity"
+				puts "Successfully deleted the #{arg["IBDRMappingOpportunity"]} Opportunity"
 				result = true
 				break
 			end
 		end
-		putstr "Failed to see the #{arg["NewIBDROpportunity"]} Opportunity" unless result
+		#putstr "Failed to see the #{arg["NewIBDROpportunity"]} Opportunity" unless result
+		putstr "Failed to see the #{arg["IBDRMappingOpportunity"]} Opportunity" unless result
 		sleep 8
 	rescue Exception => ex
-		putstr "Error occurred while deleting the #{arg["NewIBDROpportunity"]} opportunity"
+		#putstr "Error occurred while deleting the #{arg["NewIBDROpportunity"]} opportunity"
+		putstr "Error occurred while deleting the #{arg["IBDRMappingOpportunity"]} opportunity"
 		putstr_withScreen  ex.message
 	end
 end
@@ -809,7 +828,8 @@ And(/^I clear the "([^"]*)" mapping for Service Contracts$/) do |field_name|
 						fieldPresent = 1
 						puts "#{field_name} field found"
 						sleep 5
-						all(:xpath, ".//*[contains(@id, 'rOFDFields')]")[1].select "Name"
+						#all(:xpath, ".//*[contains(@id, 'rOFDFields')]")[1].select "Name"
+						row.first(:xpath, ".//*[contains(@id, 'rOFDFields')]").select "Name"
 						sleep 10
 						break
 					end

@@ -10,5 +10,5 @@ Background: Login to the Application
 Scenario: Rally-ID : TC4519 : Opportunity Details and Renewal Tab: Value of Renewal Target field/Renewal Target column/Previous Price column when Incumbent flag is unchecked for PO
     When I click on "Opportunities" link
     Then I Select the "NonIncumbent" Partner Opportunity
-    When I Navigate to "Details" tab
+    When I navigate to "Details" tab
     And I verify the "Renewal Target" field value

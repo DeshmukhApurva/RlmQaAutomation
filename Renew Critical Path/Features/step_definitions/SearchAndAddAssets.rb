@@ -174,7 +174,7 @@ And(/^I select the applicable assets or contract line item$/) do
          puts "Specific asset checkbox is already selected"
        end
      else
-       # puts "#{index}"
+       #puts "#{index}"
      end
    end
    end
@@ -245,12 +245,12 @@ And(/^I select specific asset from search and asset page$/) do
        sleep 5
        unless checkbox.checked?
          checkbox.click
-         puts "Successfully selected the the asset"
+         puts "Successfully selected the asset"
        else
          puts "Asset is already selected"
        end
      else
-      # puts "#{index}"
+       #puts "#{index}"
      end
    end
    sleep 4
@@ -501,7 +501,7 @@ And(/^I select asset from search and asset page$/) do
         sleep 5
         unless checkbox.checked?
           checkbox.click
-          puts "Successfully selected the the asset"
+          puts "Successfully selected the asset"
         else
           puts "Asset is already selected"
         end

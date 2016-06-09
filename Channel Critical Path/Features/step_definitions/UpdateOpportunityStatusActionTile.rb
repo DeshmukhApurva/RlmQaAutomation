@@ -101,6 +101,8 @@ And(/^I click on "(.*?)" tile$/) do |arg|
 	begin
 		sleep 3
 		arg1 = getReference "NeedStatusUpdate"
+		arg = getDetails "OpportunityModule"
+		sleep 4
 		partnerOppName = arg1["PartnerOpp"]
 		
 		recordCount = 0
@@ -129,44 +131,80 @@ And(/^I click on "(.*?)" tile$/) do |arg|
 			end
 		end
 		sleep 4
-
-    within all(".ui-select-match")[2] do
+		within(".view-content-section") do
+    within all(".ui-select-match").last do
       defaultFilter = first("span").first("span").text
       if defaultFilter.to_s == "Need Status Updates".to_s
         puts "The default filter value present on #{arg} : Need Status Updates"
       else
         putstr "Failed to see Need Status Updates as default value on #{arg}"
       end
+     end
     end
-		
+
+		sleep 4
+		$sum = 0
+		begin
+			unless page.has_css?('div.next.disabled')
+				sleep 4
+				within all(".ui-grid-canvas")[1] do
+					if all(:css, ".ui-grid-row.ng-scope").count > 0
+						$sum = $sum + all(:css, ".ui-grid-row.ng-scope").count
+						puts "No.of Opportunities on Opportunity grid: #{$sum}"
+						sleep 3
+					end
+				end
+				sleep 5
+				find(".next").click
+				sleep 5
+			else
+				break
+			end
+			sleep 3
+		end until (page.has_css?('div.next.disabled'))
+
+		sleep 4
 		within all(".ui-grid-canvas")[1] do
 			if all(:css, ".ui-grid-row.ng-scope").count > 0
-				oppCount = all(:css, ".ui-grid-row.ng-scope").count
-				puts "No.of Opportunities on Opportunity grid: #{dataCount}"
-			else
-				oppCount = 0
+				$sum = $sum + all(:css, ".ui-grid-row.ng-scope").count
+				puts "No.of Opportunities on Opportunity grid: #{$sum}"
+				sleep 3
 			end
 		end
 		
-		if dataCount.to_i == oppCount.to_i
+		if dataCount.to_i == $sum.to_i
 			puts "The record count on Update Opportunity Status Action Tile and Opportunity grid is Same"
 		else
 			putstr "The record count on Update Opportunity Status Action Tile and Opportunity grid is not Same"
 		end
 		
-		if oppCount.to_i > 0
+		if $sum.to_i > 0
 			find("input[placeholder='Search Opportunities...']").send_keys [:control, 'a'], :backspace
 			sleep 3
 			find("input[placeholder='Search Opportunities...']").send_keys partnerOppName
 			sleep 3
 			find("input[placeholder='Search Opportunities...']").send_keys :enter
-			sleep 4
-			within all(".ui-grid-canvas")[1] do
-				within all("div[role='gridcell']")[12] do
-					sleep 3
-					first("div").first("div").click
-					puts "Successfully clicked the Needs Status Update button"
+			sleep 5
+			rowcount = all(".ui-grid-row.ng-scope").count
+			if rowcount > 0
+				sleep 3
+			if page.has_content?(arg["OpportunityModuleField10"])
+				within all(".ui-grid-canvas")[1] do
+					within all("div[role='gridcell']")[12] do
+						sleep 3
+						first("div").first("div").click
+						puts "Successfully clicked the Needs Status Update button"
+					end
 				end
+			else
+				within all(".ui-grid-canvas")[1] do
+					within all("div[role='gridcell']")[11] do
+						sleep 3
+						first("div").first("div").click
+						puts "Successfully clicked the Needs Status Update button"
+					end
+				end
+				sleep 3
 			end
 			
 			within(".btns-update-status") do
@@ -195,11 +233,15 @@ And(/^I click on "(.*?)" tile$/) do |arg|
 				puts "The record count on Update Opportunity Status Action Tile is changed from #{dataCount} to #{recordCount} after Opportunity is updated"
 			else
 				putstr "The record count on Update Opportunity Status Action Tile is not changed after Opportunity is updated"
-			end
+      end
+		else
+			puts "No Opportunities records found"
+    end
+    sleep 3
 		else
 			puts "No Opportunities for Status update"
 		end
-		
+
 	rescue Exception => ex
 		putstr "Error while verifying #{arg} on Overview Page"
 		putstr_withScreen  ex.message

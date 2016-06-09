@@ -6,82 +6,76 @@ Then(/^I should able to see the "([^"]*)" columns$/) do |grid|
     sleep 5
     arg = getDetails "OpportunityModule"
     sleep 5
-    if page.has_content?(arg["OpportunityGridField1"])
-      puts "Successfully see the #{arg["OpportunityGridField1"]} request grid name"
+    if page.has_content?(arg["OpportunityModuleField1"])
+      puts "Successfully see the #{arg["OpportunityModuleField1"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityGridField1"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityModuleField1"]} request grid name"
     end
     sleep 3
-    if page.has_content?(arg["OpportunityGridField2"])
-      puts "Successfully see the #{arg["OpportunityGridField2"]} request grid name"
+    if page.has_content?(arg["OpportunityModuleField2"])
+      puts "Successfully see the #{arg["OpportunityModuleField2"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityGridField2"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityModuleField2"]} request grid name"
     end
     sleep 3
 
     if page.has_content?(arg["OpportunityModuleField3"])
-      puts "Successfully see the #{arg["OpportunityGridField3"]} request grid name"
+      puts "Successfully see the #{arg["OpportunityModuleField3"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityGridField3"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityModuleField3"]} request grid name"
     end
     sleep 3
 
     if page.has_content?(arg["OpportunityModuleField4"])
-      puts "Successfully see the #{arg["OpportunityGridField4"]} request grid name"
+      puts "Successfully see the #{arg["OpportunityModuleField4"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityGridField4"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityModuleField4"]} request grid name"
     end
     sleep 3
 
-    if page.has_content?(arg["OpportunityModuleField5"])
-      puts "Successfully see the #{arg["OpportunityGridField5"]} request grid name"
+    if page.has_content?(arg["OpportunityModuleField5"]) || page.has_content?(arg["OpportunityGridField13"])
+      puts "Successfully see the #{arg["OpportunityModuleField5"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityMGridField5"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityModuleField5"]} request grid name"
     end
     sleep 3
 
     if page.has_content?(arg["OpportunityModuleField6"])
-      puts "Successfully see the #{arg["OpportunityGridField6"]} request grid name"
+      puts "Successfully see the #{arg["OpportunityModuleField6"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityGridField6"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityModuleField6"]} request grid name"
     end
     sleep 3
 
     if page.has_content?(arg["OpportunityModuleField7"])
-      puts "Successfully see the #{arg["OpportunityGridField7"]} request grid name"
+      puts "Successfully see the #{arg["OpportunityModuleField7"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityGridField7"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityModuleField7"]} request grid name"
     end
     sleep 3
 
     if page.has_content?(arg["OpportunityModuleField8"])
-      puts "Successfully see the #{arg["OpportunityGridField8"]} request grid name"
+      puts "Successfully see the #{arg["OpportunityModuleField8"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityGridField8"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityModuleField8"]} request grid name"
     end
     sleep 3
     if page.has_content?(arg["OpportunityModuleField9"])
-      puts "Successfully see the #{arg["OpportunityGridField9"]} request grid name"
+      puts "Successfully see the #{arg["OpportunityModuleField9"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityGridField9"]} request grid name"
-    end
-    sleep 3
-    if page.has_content?(arg["OpportunityModuleField10"])
-      puts "Successfully see the #{arg["OpportunityGridField10"]} request grid name"
-    else
-      putstr "Failed to see the #{arg["OpportunityGridField10"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityModuleField9"]} request grid name"
     end
     sleep 3
     if page.has_content?(arg["OpportunityModuleField11"])
-      puts "Successfully see the #{arg["OpportunityGridField11"]} request grid name"
+      puts "Successfully see the #{arg["OpportunityModuleField11"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityGridField11"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityModuleField11"]} request grid name"
     end
     sleep 3
     if page.has_content?(arg["OpportunityModuleField12"])
-      puts "Successfully see the #{arg["OpportunityGridField12"]} request grid name"
+      puts "Successfully see the #{arg["OpportunityModuleField12"]} request grid name"
     else
-      putstr "Failed to see the #{arg["OpportunityGridField12"]} request grid name"
+      putstr "Failed to see the #{arg["OpportunityModuleField12"]} request grid name"
     end
     sleep 5
   rescue Exception => ex
@@ -93,40 +87,38 @@ end
 
 And(/^user sorts by "([^"]*)" in "([^"]*)" order from "([^"]*)" page$/) do |sort_parameter, sort_order, opportunity|
   begin
-    sleep 5
-    if page.has_css?(".ui-grid-header-cell-row")
-      sleep 4
-      within all(".ui-grid-header-cell-row")[1] do
+    sleep 4
+      if page.has_css?(".ui-grid-header-cell-row")
+        sleep 4
         all(".ui-grid-icon-angle-down")[0].click
+        sleep 5
+        all("button[ng-focus='focus=true']")[1].click
+        sleep 4
+        puts "Changing order to: #{sort_order}"
+      else
+        putstr "#{opportunity} is not loading"
       end
-      sleep 5
-      all("button[ng-focus='focus=true']")[1].click
-      sleep 4
-      puts "Changing order to: #{sort_order}"
-    else
-      puts "No #{opportunity} Opportunity fields Found"
-    end
   rescue Exception => ex
     putstr "Error occurred while selecting the sorted by #{sort_parameter} in #{sort_order} order from #{opportunity} page"
     putstr_withScreen  ex.message
   end
 end
 
-Then(/^files should be sorted by "([^"]*)" in "([^"]*)" order from "([^"]*)" page$/) do |sort_parameter, sort_order, opportunity|
+Then(/^files should be sorted by "([^"]*)" in "([^"]*)" order from "([^"]*)" page$/) do |sort_parameter, sort_order, tab|
   begin
     sleep 3
     arg = getDetails "RequestGrid"
     sleep 5
+    if page.has_css?(".ui-grid-header-cell-row")
+    sleep 3
     rowcount = all(".ui-grid-row.ng-scope").count
     if rowcount > 0
       sleep 5
       all_files = all(:xpath, '//div[2]/div/div[position() <= 6]/div/div[1]/div/a').collect(&:text)
-    sleep 6
-    within all(".ui-grid-header-cell-row")[1] do
+      sleep 6
       all(".ui-grid-icon-angle-down")[0].click
-    end
-    sleep 5
-    ascending_order = find(".ui-grid-menu-item-active").text
+      sleep 5
+      ascending_order = find(".ui-grid-menu-item-active").text
     sleep 5
     if ascending_order == arg["SortAscendingOrder"]
 
@@ -157,10 +149,13 @@ Then(/^files should be sorted by "([^"]*)" in "([^"]*)" order from "([^"]*)" pag
       sleep 5
     end
     else
-      puts "No Opportunities Records Found"
-   end
+      puts "No #{tab} Records Found"
+    end
+    else
+      putstr "#{tab} is not loading"
+    end
   rescue Exception => ex
-    putstr "Error occurred while verifying the sorted by #{sort_parameter} in #{sort_order} order from #{opportunity} page"
+    putstr "Error occurred while verifying the sorted by #{sort_parameter} in #{sort_order} order from #{tab} page"
     putstr_withScreen  ex.message
   end
 end
@@ -168,38 +163,35 @@ end
 And(/^user sorts by "([^"]*)" in "([^"]*)" sort order from "([^"]*)" page$/) do |sort_parameter, sort_order, opportunity|
   begin
     sleep 5
-    if page.has_css?(".ui-grid-header-cell-row")
-      sleep 4
-      within all(".ui-grid-header-cell-row")[1] do
+      if page.has_css?(".ui-grid-header-cell-row")
+        sleep 4
         all(".ui-grid-icon-angle-down")[0].click
+        sleep 5
+        all("button[ng-focus='focus=true']")[2].click
+        sleep 4
+        puts "Changing order to: #{sort_order}"
+      else
+        putstr "#{opportunity} is not loading"
       end
-      sleep 5
-      all("button[ng-focus='focus=true']")[2].click
-      sleep 4
-      puts "Changing order to: #{sort_order}"
-    else
-      puts "No #{opportunity} Opportunity fields Found"
-    end
   rescue Exception => ex
     putstr "Error occurred while selecting the sorted by #{sort_parameter} in #{sort_order} order from #{opportunity} page"
     putstr_withScreen  ex.message
   end
 end
 
-Then(/^files should be sorted by "([^"]*)" in "([^"]*)" sort order from "([^"]*)" page$/) do |sort_parameter, sort_order, opportunity|
+Then(/^files should be sorted by "([^"]*)" in "([^"]*)" sort order from "([^"]*)" page$/) do |sort_parameter, sort_order, tab|
   begin
     sleep 3
     arg = getDetails "RequestGrid"
     sleep 5
-
+    if page.has_css?(".ui-grid-header-cell-row")
+      sleep 3
     rowcount = all(".ui-grid-row.ng-scope").count
    if rowcount > 0
     sleep 5
     all_files = all(:xpath, '//div[2]/div/div[position() <= 6]/div/div[1]/div/a').collect(&:text)
     sleep 6
-    within all(".ui-grid-header-cell-row")[1] do
-      all(".ui-grid-icon-angle-down")[0].click
-    end
+    all(".ui-grid-icon-angle-down")[0].click
     sleep 5
     descending_order = find(".ui-grid-menu-item-active").text
     sleep 5
@@ -232,10 +224,13 @@ Then(/^files should be sorted by "([^"]*)" in "([^"]*)" sort order from "([^"]*)
       sleep 5
     end
   else
-    puts "No Opportunities Records Found"
+    puts "No #{tab} Records Found"
+   end
+  else
+    putstr "#{tab} is not loading"
   end
   rescue Exception => ex
-    putstr "Error occurred while verifying the sorted by #{sort_parameter} in #{sort_order} order from #{opportunity} page"
+    putstr "Error occurred while verifying the sorted by #{sort_parameter} in #{sort_order} order from #{tab} page"
     putstr_withScreen  ex.message
   end
 end
@@ -354,7 +349,7 @@ Then(/^I should not able to see the "([^"]*)" fields from "([^"]*)" page$/) do |
       putstr "Able see the #{arg["OpportunityGridField4"]} request grid name"
     end
     sleep 3
-    unless page.has_content?(arg["OpportunityGridField5"])
+    unless page.has_content?(arg["OpportunityGridField5"]) || page.has_content?(arg["OpportunityGridField13"])
       puts "Unable to see the #{arg["OpportunityGridField5"]} request grid name"
     else
       putstr "Able see the #{arg["OpportunityGridField5"]} request grid name"
@@ -411,15 +406,26 @@ end
 When(/^I click on "([^"]*)" icon$/) do |icon|
   begin
    sleep 5
+   arg = getDetails "OpportunityModule"
+   sleep 4
    rowcount = all(".ui-grid-row.ng-scope").count
    if rowcount > 0
-     within all(".ui-grid-canvas")[1] do
-      within all("div[role='gridcell']")[12] do
-        sleep 5
-        first("div").click
-        sleep 2
-        first("div").click
-      end
+     sleep 3
+     if page.has_content?(arg["OpportunityModuleField10"])
+       within all(".ui-grid-canvas")[1] do
+         within all("div[role='gridcell']")[12] do
+           sleep 3
+           first("div").first("div").click
+         end
+       end
+     else
+       within all(".ui-grid-canvas")[1] do
+         within all("div[role='gridcell']")[11] do
+           sleep 3
+           first("div").first("div").click
+         end
+     end
+     sleep 3
     end
     sleep 5
    puts "Successfully click the #{icon} icon"
@@ -434,34 +440,30 @@ end
 
 Then(/^I should be able to see the "([^"]*)" and "([^"]*)" buttons$/) do |button_text1, button_text2|
   begin
-   sleep 5
-   rowcount = all(".ui-grid-row.ng-scope").count
+    sleep 5
+    rowcount = all(".ui-grid-row.ng-scope").count
     if rowcount > 0
-     sleep 5
-      within all(".ui-grid-canvas")[1] do
-        within all("div[role='gridcell']")[12] do
-          sleep 5
-          first("div").first("div").click
-          sleep 1
-          no_change = find(:xpath, "//div[2]/div/div/button[1]").text
-          update = find(:xpath, "//div[2]/div/div/button[2]").text
-          if no_change == button_text1
-            puts "Successfully see the #{button_text1} button"
-          else
-            putstr "Failed to see the #{button_text1} button"
-          end
-          sleep 5
-          if update == button_text2
-            puts "Successfully see the #{button_text2} button"
-          else
-            putstr "Failed to see the #{button_text2} button"
-          end
+      sleep 5
+      within(".btns-update-status") do
+      no_change = all("button")[0].text
+      update = all("button")[1].text
+      sleep 3
+      if no_change == button_text1
+        puts "Successfully see the #{button_text1} button"
+      else
+        putstr "Failed to see the #{button_text1} button"
+      end
+      sleep 5
+      if update == button_text2
+        puts "Successfully see the #{button_text2} button"
+      else
+        putstr "Failed to see the #{button_text2} button"
       end
     end
     sleep 5
     within all(".ui-grid-canvas")[1] do
       within all("div[role='gridcell']")[12] do
-        sleep 5
+        sleep 3
         first("div").first("div").click
       end
     end
@@ -635,36 +637,19 @@ Then(/^I should not able to see the "([^"]*)" dialogue box$/) do |status|
   end
 end
 
-And(/^I verify the current expiration quarter value in Expiration Quarter filter$/) do
-  begin
-    sleep 6
-    expirationQuarter = getDetails "ExpirationQuarter"
-    currentQuarter = expirationQuarter['CurrentQuarter']
-    sleep 1
-    within all(".ui-select-match")[1] do
-      if find(:css, ".ng-binding.ng-scope").text == currentQuarter
-        puts "Expiration quarter contains current quarter '#{currentQuarter}' by default."
-      end
-    end
-  rescue Exception => ex
-  putstr "Error occurred while verifying the '#{currentQuarter}'"
-    putstr_withScreen  ex.message
-  end
-end
 
-And(/^I verify the current expiration year value in Expiration Year filter$/) do
+And(/^I select the "([^"]*)" filter$/) do |filter|
   begin
     sleep 6
-    expirationQuarter = getDetails "ExpirationQuarter"
-    currentYear = expirationQuarter['CurrentYear']
-    sleep 1
-    within all(".ui-select-match")[2] do
-      if find(:css, ".ng-binding.ng-scope").text == currentYear
-        puts "Expiration year contains current year '#{currentYear}' by default."
-      end
-    end
+    find("div[placeholder='Select Quarter...']").click
+    sleep 5
+    find("input[placeholder='Select Quarter...']").send_keys filter
+    puts "Successfully see the #{filter} filter"
+    sleep 5
+    find("input[placeholder='Select Quarter...']").send_keys :enter
+    sleep 5
   rescue Exception => ex
-    putstr "Error occurred while verifying the '#{currentYear}'"
+    putstr "Error occurred while selecting the #{filter} filter"
     putstr_withScreen  ex.message
   end
 end
@@ -676,7 +661,7 @@ And(/^I select the "([^"]*)" filter value$/) do |filter|
     find("div[placeholder='Select Opportunity Type...']").click
     sleep 5
     find("input[placeholder='Select Opportunity Type...']").send_keys filter
-    sleep 10
+    sleep 3
     puts "Successfully see the #{filter} filter"
     find("input[placeholder='Select Opportunity Type...']").send_keys :arrow_down
     sleep 5
@@ -796,7 +781,7 @@ Then(/^I verify the "([^"]*)" and "([^"]*)" column where Rep is not yet selected
   begin
     sleep 5
     arg = getDetails "OpportunityModule"
-    sleep 5
+    sleep 3
     rowcount = all(".ui-grid-row.ng-scope").count
     if rowcount > 0
     reseller = all("div[role='gridcell']")[7].text
@@ -938,7 +923,9 @@ And(/^I update the "([^"]*)" sales field$/) do |title|
         sleep 3
         find("div[placeholder='Choose...']").click
         sleep 3
-        click_on(arg["NeedStatusUpdateOpportunitySalesStage"])
+        find("input[placeholder='Choose...']").send_keys arg["NeedStatusUpdateOpportunitySalesStage"]
+        sleep 3
+        find("input[placeholder='Choose...']").send_keys :enter
         sleep 5
         puts "Successfully updated the #{title} value"
         sleep 3
@@ -1161,6 +1148,7 @@ And(/^I navigate to the "([^"]*)" opportunity sub tab$/) do |name|
     sleep 5
     arg = getDetails "OpportunityModule"
     sleep 3
+    $isOpportunity = 0
     rowcount = all(".ui-grid-row.ng-scope").count
     if rowcount > 0
       sleep 4
@@ -1169,6 +1157,7 @@ And(/^I navigate to the "([^"]*)" opportunity sub tab$/) do |name|
           sleep 3
           first("div").click
           sleep 5
+          $isOpportunity = 1
           puts "Successfully opened the #{name} opportunity page"
         end
       end
@@ -1189,7 +1178,6 @@ Then(/^I should able to see the "([^"]*)" opportunity fields$/) do |name|
     arg = getDetails "RenewalOpportunitySubTab"
     sleep 5
     if page.has_css?(".ui-grid-header-cell-row")
-    within all(".ui-grid-header-cell-row")[1] do
       existing_end_date = all(".ui-grid-header-cell-label")[0].text
       if existing_end_date == arg["RenewalOpportunityField1"]
         puts "Successfully see the #{name} opportunity #{existing_end_date} field"
@@ -1245,7 +1233,6 @@ Then(/^I should able to see the "([^"]*)" opportunity fields$/) do |name|
       else
         putstr "Failed to see the #{name} opportunity #{renewal_status} field"
       end
-    end
     else
        puts "No #{name} Opportunity fields Found"
     end
@@ -1271,16 +1258,10 @@ Then(/^I verify the "([^"]*)" button/) do |menu|
       find(".ui-grid-icon-menu").click
       sleep 5
       puts "Successfully clicked the #{menu} button"
-      sleep 5
-      if page.has_css?(".ui-grid-icon-ok")
-        putstr "Able see the #{menu} button"
-      else
-        puts "Unable to see the #{menu} button"
-      end
-    sleep 4
-    else
-      puts "No #{menu} Records Found"
-    end
+      sleep 4
+  else
+    putstr "Tab is not loading"
+  end
     sleep 5
   rescue Exception => ex
     putstr "Error occurred while verifying the #{menu} button"
@@ -1401,12 +1382,13 @@ Then(/^I verify the notes gets updated in "([^"]*)" opportunity sub tab$/) do |n
     sleep 3
     arg = getDetails "OpportunityModule"
     sleep 4
+  if page.has_css?(".arrow-box-left")
     updated_note = first(".arrow-box-left").text
     sleep 3
     if updated_note.include?arg["UpdateOpportunityNewStatus"]
       puts "Successfully updated the #{note}: #{arg["UpdateOpportunityNewStatus"]}"
     else
-      puts "Failed to updated the #{note}: #{arg["UpdateOpportunityNewStatus"]}"
+      putstr "Failed to updated the #{note}: #{arg["UpdateOpportunityNewStatus"]}"
     end
     sleep 5
     created_by_date_text = first(".arrow-box-left").first("div").text
@@ -1419,9 +1401,12 @@ Then(/^I verify the notes gets updated in "([^"]*)" opportunity sub tab$/) do |n
     if date[1].to_s == current_date.to_s
       puts "Successfully updated the #{note} with Current Date: #{current_date}"
     else
-      puts "Failed to updated the #{note} with Current Date: #{date[1]}"
+      putstr "Failed to updated the #{note} with Current Date: #{date[1]}"
     end
-    sleep 5
+  else
+    putstr "Failed to see the notes"
+  end
+  sleep 5
   rescue Exception => ex
     putstr "Error occurred while verifying the updated #{note},created by and date"
     putstr_withScreen  ex.message
@@ -1433,6 +1418,8 @@ Then(/^I should able to see the "([^"]*)" field list$/) do |details|
     sleep 8
     arg = getDetails "DetailsOpportunitySubTab"
     sleep 4
+  if $isOpportunity > 0
+      sleep 3
     if page.has_content?(arg["DetailsOpportunityField1"])
       puts "Successfully see the #{arg["DetailsOpportunityField1"]} field"
     else
@@ -1534,7 +1521,10 @@ Then(/^I should able to see the "([^"]*)" field list$/) do |details|
     else
       putstr "Failed to see the see the #{arg["DetailsOpportunityField18"]} field"
     end
-    sleep 5
+  else
+    puts "No Opportunities Records Found"
+  end
+  sleep 5
   rescue Exception => ex
     putstr "Error occurred while verifying the opportunity #{details} fields"
     putstr_withScreen  ex.message
@@ -1546,6 +1536,8 @@ And(/^I verify the renewal target and amount currency type$/) do
    sleep 4
    arg = getDetails "DetailsOpportunitySubTab"
    sleep 4
+  if $isOpportunity > 0
+     sleep 3
    within(".data-table") do
      renewal_target = first("tbody").all("tr")[4].all("td")[1].text
      amount = first("tbody").all("tr")[5].all("td")[1].text
@@ -1569,6 +1561,9 @@ And(/^I verify the renewal target and amount currency type$/) do
    else
      puts "No amount price displayed"
    end
+   end
+  else
+    puts "No Opportunities Records Found"
   end
   sleep 5
   rescue Exception => ex
@@ -1671,11 +1666,16 @@ end
 And(/^user "([^"]*)" in "([^"]*)" sort order$/) do |sort_parameter, sort_order|
   begin
     sleep 5
-    all(".ui-grid-icon-angle-down")[0].click
-    sleep 5
-    all("button[ng-focus='focus=true']")[1].click
-    sleep 4
-    puts "Changing order to: #{sort_order}"
+    if page.has_css?(".ui-grid-header-cell-row")
+      sleep 3
+      all(".ui-grid-icon-angle-down")[0].click
+      sleep 5
+      all("button[ng-focus='focus=true']")[1].click
+      sleep 4
+      puts "Changing order to: #{sort_order}"
+    else
+      putstr "Contract tab is not loading"
+    end
   rescue Exception => ex
     putstr "Error occurred while selecting the sorted by #{sort_parameter} in #{sort_order} order"
     putstr_withScreen  ex.message
@@ -1685,11 +1685,16 @@ end
 And(/^user "([^"]*)" in "([^"]*)" order$/) do |sort_parameter, sort_order|
   begin
     sleep 5
-    all(".ui-grid-icon-angle-down")[0].click
-    sleep 5
-    all("button[ng-focus='focus=true']")[2].click
-    sleep 4
-    puts "Changing order to: #{sort_order}"
+    if page.has_css?(".ui-grid-header-cell-row")
+      sleep 3
+      all(".ui-grid-icon-angle-down")[0].click
+      sleep 5
+      all("button[ng-focus='focus=true']")[2].click
+      sleep 4
+      puts "Changing order to: #{sort_order}"
+    else
+      putstr "Contract tab is not loading"
+    end
   rescue Exception => ex
     putstr "Error occurred while selecting the sorted by #{sort_parameter} in #{sort_order} order"
     putstr_withScreen  ex.message
@@ -1755,6 +1760,8 @@ And(/^I verify the currency related fields$/) do
     rowcount = all(".ui-grid-row.ng-scope").count
     if rowcount > 0
       sleep 5
+     if page.has_content?(arg["CurrencyCode1"]) || page.has_content?(arg["CurrencyCode2"])
+      sleep 3
       within all(".ui-grid-canvas")[1] do
         within all("div[role='gridcell']")[3] do
           sleep 3
@@ -1767,6 +1774,9 @@ And(/^I verify the currency related fields$/) do
           sleep 5
         end
       end
+     else
+       putstr "Currency field not found"
+     end
     else
       puts "No Opportunities Records Found"
     end
@@ -1975,7 +1985,7 @@ And(/^I click "([^"]*)" drop down value$/) do |sales_stage|
     sleep 5
     arg = getDetails "OpportunityModule"
     sleep 6
-    rowcount = all(".ui-grid-selection-row-header-buttons").count
+    rowcount = all(".ui-grid-row.ng-scope").count
     if rowcount > 0
       sleep 3
       within all(".ui-grid-canvas")[1] do
@@ -2000,9 +2010,9 @@ Then(/^I should able to see the "([^"]*)" drop down values$/) do |sales_stage|
     sleep 5
     arg = getDetails "OpportunityModule"
     sleep 6
-    rowcount = all(".ui-grid-selection-row-header-buttons").count
+    rowcount = all(".ui-grid-row.ng-scope").count
     if rowcount > 0
-      sleep 5
+      sleep 3
       all("div[role='gridcell']")[2].double_click
       sleep 3
       find("div[placeholder='Choose...']").click
@@ -2030,8 +2040,9 @@ And(/^I select the multiple "([^"]*)" columns$/) do |opportunities|
     sleep 3
     arg = getDetails "OpportunityModule"
     sleep 6
-    rowcount = all(".ui-grid-selection-row-header-buttons").count
+    rowcount = all(".ui-grid-row.ng-scope").count
     if rowcount > 0
+      sleep 3
       puts "Successfully see the #{opportunities}"
       sleep 5
       if page.has_css?(".ui-grid-row-selected")
@@ -2060,11 +2071,12 @@ end
 
 And(/^I update the "([^"]*)" columns$/) do |opportunities|
   begin
-    sleep 3
+    sleep 5
     arg = getDetails "OpportunityModule"
     sleep 5
-    rowcount = all(".ui-grid-selection-row-header-buttons").count
+    rowcount = all(".ui-grid-row.ng-scope").count
     if rowcount > 0
+      sleep 3
       puts "Successfully see the #{opportunities}"
       sleep 5
       if page.has_content?("Update Opportunities")
@@ -2226,63 +2238,53 @@ Then(/^I should able to see the "([^"]*)" quote fields$/) do |name|
     arg = getDetails "QuoteOpportunitySubTab"
     sleep 5
     if page.has_css?(".ui-grid-header-cell-row")
-      within(".ui-grid-header-cell-row") do
-        quote_number = all(".ui-grid-header-cell-label")[0].text
-        if quote_number == arg["QuoteOpportunityField1"]
-          puts "Successfully see the #{name} opportunity #{quote_number} field"
+        if page.has_content?(arg["QuoteOpportunityField1"])
+          puts "Successfully see the #{arg["QuoteOpportunityField1"]} quote field"
         else
-          putstr "Failed to see the #{name} opportunity #{quote_number} field"
+          putstr "Failed to see the #{arg["QuoteOpportunityField1"]} quote field"
         end
         sleep 3
-        quote_name = all(".ui-grid-header-cell-label")[1].text
-        if quote_name == arg["QuoteOpportunityField2"]
-          puts "Successfully see the #{name} opportunity #{quote_name} field"
+        if page.has_content?(arg["QuoteOpportunityField2"])
+          puts "Successfully see the #{arg["QuoteOpportunityField2"]} quote field"
         else
-          putstr "Failed to see the #{name} opportunity #{quote_name} field"
+          putstr "Failed to see the #{arg["QuoteOpportunityField2"]} quote field"
         end
         sleep 3
-        expiration_date = all(".ui-grid-header-cell-label")[2].text
-        if expiration_date == arg["QuoteOpportunityField3"]
-          puts "Successfully see the #{name} opportunity #{expiration_date} field"
+        if page.has_content?(arg["QuoteOpportunityField3"])
+          puts "Successfully see the #{arg["QuoteOpportunityField3"]} quote field"
         else
-          putstr "Failed to see the #{name} opportunity #{expiration_date} field"
+          putstr "Failed to see the #{arg["QuoteOpportunityField3"]} quote field"
         end
         sleep 3
-        line_items = all(".ui-grid-header-cell-label")[3].text
-        if line_items == arg["QuoteOpportunityField4"]
-          puts "Successfully see the #{name} opportunity #{line_items} field"
+        if page.has_content?(arg["QuoteOpportunityField4"])
+          puts "Successfully see the #{arg["QuoteOpportunityField4"]} quote field"
         else
-          putstr "Failed to see the #{name} opportunity #{line_items} field"
+          putstr "Failed to see the #{arg["QuoteOpportunityField4"]} quote field"
         end
         sleep 3
-        discount = all(".ui-grid-header-cell-label")[4].text
-        if discount == arg["QuoteOpportunityField5"]
-          puts "Successfully see the #{name} opportunity #{discount} field"
+        if page.has_content?(arg["QuoteOpportunityField5"])
+          puts "Successfully see the #{arg["QuoteOpportunityField5"]} quote field"
         else
-          putstr "Failed to see the #{name} opportunity #{discount} field"
+          putstr "Failed to see the #{arg["QuoteOpportunityField4"]} quote field"
         end
         sleep 3
-        subtotal = all(".ui-grid-header-cell-label")[5].text
-        if subtotal == arg["QuoteOpportunityField6"]
-          puts "Successfully see the #{name} opportunity #{subtotal} field"
+        if page.has_content?(arg["QuoteOpportunityField6"])
+          puts "Successfully see the #{arg["QuoteOpportunityField6"]} quote field"
         else
-          putstr "Failed to see the #{name} opportunity #{subtotal} field"
+          putstr "Failed to see the #{arg["QuoteOpportunityField6"]} quote field"
         end
         sleep 3
-        total_price= all(".ui-grid-header-cell-label")[6].text
-        if total_price == arg["QuoteOpportunityField7"]
-          puts "Successfully see the #{name} opportunity #{total_price} field"
+        if page.has_content?(arg["QuoteOpportunityField7"])
+          puts "Successfully see the #{arg["QuoteOpportunityField7"]} quote field"
         else
-          putstr "Failed to see the #{name} opportunity #{total_price} field"
+          putstr "Failed to see the #{arg["QuoteOpportunityField7"]} quote field"
         end
         sleep 3
-        primary_quote = all(".ui-grid-header-cell-label")[7].text
-        if primary_quote == arg["QuoteOpportunityField8"]
-          puts "Successfully see the #{name} opportunity #{primary_quote} field"
+        if page.has_content?(arg["QuoteOpportunityField8"])
+          puts "Successfully see the #{arg["QuoteOpportunityField8"]} quote field"
         else
-          putstr "Failed to see the #{name} opportunity #{primary_quote} field"
+          putstr "Failed to see the #{arg["QuoteOpportunityField8"]} quote field"
         end
-      end
     else
       puts "No #{name} Opportunity fields Found"
     end
@@ -2319,9 +2321,7 @@ And(/^user "([^"]*)" in "([^"]*)" sort order from "([^"]*)" page$/) do |sort_par
     sleep 5
     if page.has_css?(".ui-grid-header-cell-row")
       sleep 4
-      within(".ui-grid-header-cell-row") do
-        all(".ui-grid-icon-angle-down")[0].click
-      end
+      all(".ui-grid-icon-angle-down")[0].click
       sleep 5
       all("button[ng-focus='focus=true']")[2].click
       sleep 4
@@ -2492,6 +2492,8 @@ And(/^I verify the currency fields$/) do
     rowcount = all(".ui-grid-row.ng-scope").count
     if rowcount > 0
       sleep 5
+     if page.has_content?(arg["CurrencyCode1"]) || page.has_content?(arg["CurrencyCode2"])
+      sleep 3
       within all("div[role='gridcell']")[6] do
         sleep 3
         currency_type = first("div").text
@@ -2502,6 +2504,9 @@ And(/^I verify the currency fields$/) do
         end
         sleep 5
       end
+     else
+       putstr "Currency field not found"
+     end
     else
       puts "No Quotes Records Found"
     end
@@ -2514,17 +2519,21 @@ end
 And(/^I sort "([^"]*)" in "([^"]*)" order$/) do |sort_parameter, sort_order|
   begin
     sleep 5
+    rowcount = all(".ui-grid-row.ng-scope").count
+    if rowcount > 0
+      sleep 4
     if page.has_css?(".ui-grid-header-cell-row")
       sleep 4
-      within all(".ui-grid-header-cell-row")[1] do
-        all(".ui-grid-icon-angle-down")[9].click
-      end
+      all(".ui-grid-icon-angle-down")[9].click
       sleep 5
       all("button[ng-focus='focus=true']")[1].click
       sleep 4
       puts "Changing order to: #{sort_order}"
     else
       puts "No Opportunity fields Found"
+    end
+    else
+      puts "No Records Found"
     end
     sleep 5
   rescue Exception => ex
@@ -2621,48 +2630,326 @@ Then(/^I should able to see the download "([^"]*)" attachment$/) do |quote|
   end
 end
 
-Then(/^I select all quarter values in Expiration Quarter filter$/) do 
+
+
+And(/^I clear the filters$/) do
   begin
-    allExpQrtrArg = getReference "Expiration Quarter"
-    allExpQuarters = allExpQrtrArg["filterValues"].split(",")
-    sleep 3
-    # Set all available quarters in expiration quarter
-    within all(".ui-select-match")[1] do
-      find(:css, ".close.ui-select-match-close").click      
+    sleep 4
+    if page.has_css?(".ui-select-match-close")
+      sleep 4
+      all(".ui-select-match-close").each do |filter|
+        filter.click
+      end
+      sleep 3
+    else
+      puts "Unable to see the filter values"
     end
-    sleep 1
-    allExpQuarters.each do |value|
-      find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[1]/div/div/div/input").click
-      sleep 1
-      click_on(value)
-      sleep 1
-    end
-    puts "Selected all available expiration quarters"
   rescue Exception => ex
-    putstr "Error occurred while verifying the download #{quote} attachment"
+    putstr "Error occurred while clear the filters"
     putstr_withScreen  ex.message
   end
 end
 
-Then(/^I select all expiration year value in Expiration Year filter$/) do 
+Then(/^I able to see the "([^"]*)" and "([^"]*)" quotes$/) do |reseller, distributor|
   begin
-    allYears = getExpirationYears(10)
     sleep 3
-    # Set all available years in expiration year
-    within all(".ui-select-match")[2] do
-      find(:css, ".close.ui-select-match-close").click      
+    arg = getDetails "OpportunityModule"
+    sleep 4
+    if all(".ui-grid-row.ng-scope").count > 0
+      sleep 4
+      if page.has_content?(arg["OpportunityGridField8"])
+        puts "Successfully see the #{arg["OpportunityGridField8"]} field"
+      else
+        putstr "Failed to see the #{arg["OpportunityGridField8"]} field"
+      end
+      sleep 3
+      if page.has_content?(arg["OpportunityGridField9"])
+        puts "Successfully see the #{arg["OpportunityGridField9"]} field"
+      else
+        putstr "Failed to see the #{arg["OpportunityGridField9"]} field"
+      end
+      sleep 3
+      within all(".ui-grid-canvas")[1] do
+        within all("div[role='gridcell']")[7] do
+          sleep 3
+          $reseller_rep = first("div").text
+        end
+      end
+      sleep 5
+      all("div[role='gridcell']")[8].double_click
+      sleep 3
+      find("div[placeholder='Choose...']").click
+      sleep 4
+      distribute_rep = []
+      all(".ui-select-choices-row-inner").each do |rep|
+        sleep 3
+        distribute_rep << rep.text
+        sleep 3
+      end
+      sleep 3
+      if distribute_rep.to_s.include?($reseller_rep.to_s)
+        puts "Successfully see the #{reseller} and #{distributor} quotes"
+      else
+        putstr "Failed to see the #{reseller} and #{distributor} quotes"
+      end
+      sleep 3
+    else
+      puts "No Opportunities Records Found"
     end
-    sleep 1
-    allYears.each do |value|
-      find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[2]/div/div/div/input").click
-      sleep 1
-      click_on(value)
-      sleep 1
+    sleep 5
+  rescue Exception => ex
+    putstr "Error occurred while verifying the #{reseller} and #{distributor} quotes"
+    putstr_withScreen  ex.message
+  end
+end
+
+Then(/^I verify the "([^"]*)" quotes$/) do |reseller|
+  begin
+    sleep 4
+    if all(".ui-grid-row.ng-scope").count > 0
+      sleep 3
+      if page.has_css?(".btn-orange")
+        sleep 3
+        within all(".ui-grid-canvas")[1] do
+          within all("div[role='gridcell']")[8] do
+            sleep 3
+            $distribute_rep = first("div").text
+          end
+        end
+        sleep 5
+        all("div[role='gridcell']")[7].double_click
+        sleep 3
+        find("div[placeholder='Choose...']").click
+        sleep 4
+        reseller_rep = []
+        all(".ui-select-choices-row-inner").each do |rep|
+          sleep 3
+          reseller_rep << rep.text
+          sleep 3
+        end
+        sleep 3
+        if reseller_rep.to_s.include?($distribute_rep.to_s)
+          puts "Successfully see the only #{reseller} values"
+        else
+          putstr "Failed to see the #{reseller} values"
+        end
+        sleep 3
+      else
+        puts "No updated records column"
+      end
+    else
+      puts "No Opportunities Records Found"
     end
-    puts "Selected all available expiration years"
+    sleep 5
+  rescue Exception => ex
+    putstr "Error occurred while verifying the #{reseller} quotes"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I verify the "([^"]*)" quote amount$/) do |reseller_rep|
+  begin
+    sleep 5
+    arg = getDetails "OpportunityModule"
+    sleep 3
+    if all(".ui-grid-row.ng-scope").count > 0
+      sleep 3
+      all("div[role='gridcell']")[7].double_click
+      sleep 5
+      find("input[placeholder='Choose...']").send_keys arg["OpportunityRipStatus"]
+      sleep 3
+      find("input[placeholder='Choose...']").send_keys :enter
+      sleep 4
+      within all(".ui-grid-canvas")[1] do
+        within all("div[role='gridcell']")[4] do
+          sleep 3
+          amount = first("div").text
+          puts amount
+          puts "Successfully updated the #{reseller_rep} amount"
+        end
+      end
+      sleep 3
+    else
+      puts "No Opportunities Records Found"
+    end
     sleep 3
   rescue Exception => ex
-    putstr "Error occurred while verifying the download #{quote} attachment"
+    putstr "Error occurred while verifying the #{reseller_rep} amount"
+    putstr_withScreen  ex.message
+  end
+end
+
+Then(/^I verify the "([^"]*)" and "([^"]*)" quotes$/) do |distributor, reseller|
+  begin
+    sleep 3
+    arg = getDetails "QuoteOpportunitySubTab"
+    sleep 4
+    rowcount = all(".ui-grid-row.ng-scope").count
+   if rowcount > 0
+     sleep 4
+     if page.has_content?(arg["QuoteOpportunityField1"])
+       puts "Successfully see the #{arg["QuoteOpportunityField1"]} field"
+     else
+       putstr "Failed to see the #{arg["QuoteOpportunityField1"]} field"
+     end
+     sleep 3
+     if page.has_content?(arg["QuoteOpportunityField2"])
+       puts "Successfully see the #{arg["QuoteOpportunityField2"]} field"
+     else
+       putstr "Failed to see the #{arg["QuoteOpportunityField2"]} field"
+     end
+     sleep 4
+     within all(".ui-grid-canvas")[1] do
+       within all("div[role='gridcell']")[1] do
+         sleep 3
+         $quote_name = first("div").text
+         puts $quote_name
+       end
+     end
+     sleep 4
+     if $distributor_reseller_Quote == $quote_name
+       puts "Successfully see the reseller and distributor quotes"
+     else
+       puts "Failed to see the reseller and distributor quotes"
+     end
+     sleep 3
+   else
+     puts "No Quote fields found"
+   end
+  rescue Exception => ex
+    putstr "Error occurred while verify the #{distributor} and #{reseller} quotes"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I search with opportunity$/) do
+  begin
+    sleep 3
+    arg = getReference "AddPartnerOpportunity"
+    sleep 4
+    find("input[placeholder='Search Opportunities...']").send_keys [:control, 'a'], :backspace
+    sleep 3
+    find("input[placeholder='Search Opportunities...']").send_keys arg["partnerQuoteOpportunity"]
+    sleep 3
+    find("input[placeholder='Search Opportunities...']").send_keys :enter
+    sleep 4
+    puts "Successfully enter the #{arg["partnerQuoteOpportunity"]} name"
+    sleep 5
+  rescue Exception => ex
+    putstr "Error occurred while searching and verifying the #{arg["partnerQuoteOpportunity"]} results"
+    putstr_withScreen  ex.message
+  end
+end
+
+Then(/^I see the reseller and distributor quotes$/) do
+  begin
+    sleep 3
+    arg = getDetails "OpportunityModule"
+    sleep 4
+    rowcount = all(".ui-grid-row.ng-scope").count
+    if rowcount > 0
+      sleep 4
+      if page.has_content?(arg["OpportunityGridField8"])
+        puts "Successfully see the #{arg["OpportunityGridField8"]} field"
+      else
+        putstr "Failed to see the #{arg["OpportunityGridField8"]} field"
+      end
+      sleep 3
+      if page.has_content?(arg["OpportunityGridField9"])
+        puts "Successfully see the #{arg["OpportunityGridField9"]} field"
+      else
+        putstr "Failed to see the #{arg["OpportunityGridField9"]} field"
+      end
+      sleep 3
+      within all(".ui-grid-canvas")[1] do
+        within all("div[role='gridcell']")[7] do
+          sleep 3
+          reseller_rep = first("div").text
+        end
+      end
+      sleep 5
+      within all(".ui-grid-canvas")[1] do
+        within all("div[role='gridcell']")[8] do
+          sleep 3
+          distributor_rep = first("div").text
+        end
+      end
+      sleep 5
+      within all(".ui-grid-canvas")[1] do
+        within all("div[role='gridcell']")[9] do
+          sleep 3
+          $distributor_reseller_Quote = first("div").text
+        end
+      end
+    else
+      puts "No Opportunities Records Found"
+    end
+    sleep 5
+  rescue Exception => ex
+    putstr "Error occurred while verifying the opportunity quotes"
+    putstr_withScreen  ex.message
+  end
+end
+
+
+And(/^I navigate to the "([^"]*)" page$/) do |quotes|
+  begin
+    sleep 6
+    rowcount = all(".ui-grid-row.ng-scope").count
+    if rowcount > 0
+      sleep 4
+      within all(".ui-grid-canvas")[1] do
+        within all("div[role='gridcell']")[0] do
+          sleep 3
+          first("div").click
+          sleep 5
+          puts "Successfully opened the #{quotes} page"
+        end
+      end
+      sleep 5
+      click_on quotes
+      sleep 3
+      puts "Successfully navigate to the #{quotes} page"
+    else
+      puts "No Opportunities Records Found"
+    end
+    sleep 5
+  rescue Exception => ex
+    putstr "Error occurred while navigate to #{quotes} page"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I click on "([^"]*)" tab from Opportunities$/) do |tab|
+  begin
+   sleep 4
+   if $isOpportunity > 0
+     sleep 3
+     click_on tab
+     sleep 5
+     puts "Successfully navigate to the #{tab} page"
+   else
+     puts "No Opportunities Records Found"
+   end
+  rescue Exception => ex
+    putstr "Error occurred while navigate to #{tab} page"
+    putstr_withScreen  ex.message
+  end
+end
+
+When(/^I open the "([^"]*)" tab$/) do |buuton|
+  begin
+    sleep 5
+    rowcount = all(".ui-grid-row.ng-scope").count
+    if rowcount > 0
+      first(:link, buuton).click
+      sleep 10
+      puts "Navigate to the #{buuton} tab"
+    else
+      puts "No Opportunities Records Found"
+    end
+  rescue Exception => ex
+    putstr "Error occurred while clicking the #{buuton} tab"
     putstr_withScreen  ex.message
   end
 end

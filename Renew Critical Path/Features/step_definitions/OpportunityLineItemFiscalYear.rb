@@ -80,7 +80,7 @@ And (/^I verify the quarter fields$/)do
         $expiration_Year = all("tbody")[0].all("tr")[5].all("td")[1].text
     end
     sleep 4
-    if ($expiration_Quarter=="" && $expiration_Year== "")
+    if ($expiration_Quarter == "" && $expiration_Year == "")
         putstr "Expiration Quarter:#{$expiration_Quarter} & ExpirationYear:#{$expiration_Year} is not populated"
     else
         puts "Expiration Quarter:#{$expiration_Quarter} & ExpirationYear:#{$expiration_Year} is populated"

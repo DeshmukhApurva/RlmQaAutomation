@@ -2,7 +2,7 @@
 Reference:
  SPTemplate: "APT-000000"
  # SuccessPlan: "SP-000017"
- SuccessPlan: "SP-000506"
+ SuccessPlan: "SP-000728"
  Play: "PN-0000000"
  Account: "Action Machinery Co"
  FCCategory: "PES FCG Overview"

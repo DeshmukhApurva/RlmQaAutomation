@@ -1,73 +1,31 @@
 #All Opportunities - Opportunity Split specific Step definitions
 #All Scenario mentioned in OpportunitySplit.feature
 
-# Then (/^I Choose the Pricebook for the product$/) do
-#   begin
-#     arg = getReference "Pricebooks"
-#     select arg["first"],:from=>"p1"
-#     click_on "Save"
-#   rescue Exception => ex
-#     putstr "Error in choosing the pricebook for the product "
-#     putstr_withScreen  ex.message
-#   end
-# end
-#
-# And(/^I select more than one product from the product grid$/) do
-#   begin
-#     sleep 6
-#     arg = getDetails "SplitOpportunity"
-#     arg1 = getReference "SplitOpportunity"
-#     within("#undefined_grid") do
-#       tr = all(".x-grid3-row")
-#       tr.each do |row|
-#         if row.all("td")[1].text==arg1["ProductA"]
-#           row.all('input[type=checkbox]').each do |checkbox |
-#             unless checkbox.checked?
-#               checkbox.click
-#               puts "#{arg1["ProductA"]} is selected"
-#               break
-#             else
-#               putstr "#{arg1["ProductA"]} is not selected"
-#             end
-#           end
-#           foundCount = "found"
-#           break
-#         end
-#       end
-#     end
-#     sleep 5
-#     click_on 'Select'
-#     puts "Successfully selected the product"
-#     sleep 6
-#     find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[3]/input").set arg["ProductQuantity"]
-#     sleep 5
-#     all(:xpath,'//td/input[@value=" Save "]')[0].click
-#     sleep 6
-#   rescue Exception => ex
-#     putstr "Error occurred while selecting more than one product from the product grid"
-#     putstr_withScreen  ex.message
-#   end
-# end
 
-#All Opportunity Management - Split Opportunity specific Step definitions
-#All Scenario mentioned in SplitOpportunity.feature
 And (/^I click on button "(.*?)"$/) do |data|
   begin
-      within(".opportunityLineItemBlock") do
-          click_on (data)
-      end
+    sleep 6
+    within(".opportunityLineItemBlock") do
+        click_on data
+    end
+    sleep 3
+    puts "Successfully click the #{data} button"
   rescue Exception=>ex
-      puts "Error on clicking #{data} button"
+    putstr "Error on clicking #{data} button"
       putstr_withScreen  ex.message
   end
 end
 
 And (/^I clicked button "(.*?)"$/) do|data|
-    begin
-        click_on data
-    rescue Exception=>ex
-      puts "Error in clicking the button #{data}"
-    end
+  sleep 5
+  begin
+    click_on data
+    sleep 3
+    puts "Successfully #{data} the existing split opportunity"
+  rescue Exception=>ex
+    putstr "Error in clicking the button #{data}"
+    putstr_withScreen  ex.message
+  end
 end
 
 And(/^I select one or more product from the grid$/) do
@@ -129,9 +87,12 @@ And(/^I select the products$/) do
     arg = getDetails "SplitOpportunity"
     sleep 5
     within(".opportunityLineItemBlock") do
-      sleep 5
-      $first_product_name = all(:xpath,"//table/tbody/tr/th/a")[0].text
-      $second_product_name = all(:xpath,"//table/tbody/tr/th/a")[1].text
+      within(".list") do
+      sleep 3
+      $first_product_name = all(".dataRow")[0].all("th")[0].first("a").text
+      $second_product_name = all(".dataRow")[1].all("th")[0].first("a").text
+      sleep 3
+    end
       sleep 5
       all('input[type=checkbox]').each_with_index do |checkbox , index|
         if index.to_i == arg["FirstProductCheckboxIndex"].to_i
@@ -209,18 +170,24 @@ Then(/^I verify the renewal relationship & Metrics fields values are recalculate
   begin
     sleep 6
     arg = getDetails "SplitOpportunity"
-    new_opportunity_name= find(".pageDescription").text
-    puts new_opportunity_name
-    if new_opportunity_name.strip.to_s == arg["TargetOpportunityName"]+$Opp
-      puts "Successfully created the #{new_opportunity_name} new target opportunity"
+    sleep 3
+    if page.has_css?(".pageDescription")
+      puts "Successfully created the new target opportunity"
     else
-      putstr "Failed to created the #{new_opportunity_name} new target opportunity"
+      putstr "Failed to created the new target opportunity"
     end
     sleep 5
-    if (all(:xpath,"//table/tbody/tr/th/a")[0].text.to_s == $first_product_name.to_s) || (all(:xpath,"//table/tbody/tr/th/a")[1].text.to_s == $second_product_name.to_s)
-      puts "Successfully see the selected #{$first_product_name} #{$second_product_name} products"
-    else
-      putstr "Failed to see the selected #{$first_product_name} #{$second_product_name} products"
+    within (".opportunityLineItemBlock")do
+      within(".list") do
+        tr = all(".dataRow")
+        tr.each do |row|
+          if ((row.all(".dataCell")[0].text == $first_product_name.to_s)||(row.all(".dataCell")[0].text == $second_product_name.to_s))
+            puts "Successfully see the selected #{$first_product_name} #{$second_product_name} products"
+          else
+            putstr "Failed to see the selected #{$first_product_name} #{$second_product_name} products"
+          end
+        end
+      end
     end
     sleep 5
     within all(".pbSubsection")[0] do
@@ -339,22 +306,23 @@ end
 Then(/^I should able to see the opportunity details$/) do
   begin
     found =0
-    sleep 6
+    sleep 4
     arg = getDetails "SplitOpportunity"
     sleep 5
     within (".opportunityLineItemBlock")do
+      within(".list") do
         tr = all(".dataRow")
         tr.each do |row|
             if ((row.all(".dataCell")[0].text == $first_product_name.to_s)||(row.all(".dataCell")[0].text == $second_product_name.to_s))
-                # puts "Successfully see the selected #{$first_product_name} #{$second_product_name} products"
                 found = 1
             else
-                # putstr "Failed to see the selected #{$first_product_name} #{$second_product_name} products"
                 found = 0
             end
         end
+      end
     end
-    if (found ==1)
+    sleep 3
+    if (found == 1)
       puts "Successfully see the selected #{$first_product_name} #{$second_product_name} products"
     else
       putstr "Failed to see the selected #{$first_product_name} #{$second_product_name} products"
@@ -370,17 +338,6 @@ Then(/^I should able to see the opportunity details$/) do
       end
     end
     sleep 3
-    within(:id,"topButtonRow")do
-        click_on "Edit"
-    end
-    sleep 2
-    within all(".pbSubsection")[0]do
-        fill_in "Opportunity Name",:with=> "PES_SplitOpp"+$Opp
-    end
-    sleep 2
-    within(:id,"topButtonRow")do
-      click_on "Save"
-    end
   rescue Exception => ex
     putstr "Error occurred while new target opportunity and product details verification"
     putstr_withScreen  ex.message
@@ -429,4 +386,20 @@ Then(/^I should able to see the "([^"]*)" alert message$/) do |alert_message|
     putstr "Error occurred while validating #{alert_message} alert message"
     putstr_withScreen  ex.message
   end
+end
+
+
+Then(/^I should able to cancel the split opportunity$/) do
+  begin
+   sleep 4
+   if page.has_css?(".pageDescription")
+     puts "Successfully cancel the existing split opportunity"
+   else
+     putstr "Failed to cancel the existing split opportunity"
+   end
+   sleep 3
+   rescue Exception => ex
+   putstr "Error occurred while cancel the existing split opportunity"
+   putstr_withScreen  ex.message
+ end
 end

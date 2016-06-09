@@ -1,4 +1,3 @@
-@Opportunities
 @BulkUpdateFeature
 Feature: All features related to Partner user - Opportunities - BulkUpdateFeature
 
@@ -9,13 +8,11 @@ Background: Login to the Application
 @BulkUpdate
 Scenario: Rally-ID: TC4386 :Opportunity Bulk Update Div
 	When I click on "Opportunities" link
-	And I verify the current expiration quarter value in Expiration Quarter filter
-   	And I verify the current expiration year value in Expiration Year filter
 	And I select the opportunity for field update for "BulkUpdate"
 	Then I verify the Bulk Update window
 
 @login
-Scenario: Rally-ID: Login as OEM user and set the NeedStatusUpdate button as true.
+Scenario: Rally-ID: Login as OEM user and set the NeedStatusUpdate button as true
     When user logs out from channel partner community
     And user login in to "OEM" application
     Then I should able to see the "OEM" home page
@@ -39,7 +36,7 @@ Scenario: Rally-ID: Login as OEM user and set the NeedStatusUpdate button as tru
 	And I set the Needs Status Update as true
 	
 @Update
-Scenario: Rally-ID: TC4392 : BulkUpdate-verify Update is working or not
+Scenario:Rally-ID: TC4392 : BulkUpdate-verify Update is working or not
 	When I click on "Opportunities" link
 	Then I select one or more the opportunity "Update" and verify opportunity for "BulkUpdate" when status is true	
 
@@ -53,8 +50,6 @@ Scenario: Rally-ID: TC4387,TC4388,TC4389,TC4390,TC4391 : Bulk Update - Field upd
 @BulkUpdateNotes
 Scenario: Rally-ID: TC4393,TC4394 : Bulk Update - Update with Notes,Do not select any opportunity record.
 	When I click on "Opportunities" link
-	And I verify the current expiration quarter value in Expiration Quarter filter
-   	And I verify the current expiration year value in Expiration Year filter
 	And I select the opportunity for field update for "NeedStatusUpdate"
 	When I click on the "Update" button
 	And I update the notes for particular Opportunity

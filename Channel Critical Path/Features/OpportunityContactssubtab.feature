@@ -11,6 +11,8 @@ Background: Login to the Application
 @contacts_opportunity_sub_tab
 Scenario: Rally Test Case ID: TC4406,TC4407,TC4408,TC4409 : Opportunity - Contact subtab,Contact subtab - grid sorting,Contact subtab - Export,Contacts subtab -Column Show/Hide
    When I click on "Opportunities" tab
+   And I clear the filters
+   And I select the "New Last Week" filter value
    And I navigate to the "Contacts" opportunity sub tab
    And I click on "Contacts" tab
    Then I should able to see the opportunity "Contacts" fields
