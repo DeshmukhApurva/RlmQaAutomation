@@ -6,18 +6,18 @@ Background: Login to the Application
     Given that I navigate to the CRM application
     Then I should land on CRM home page
 
-@verifyFilters	
-Scenario: Rally Test Case ID: TC4433,TC4434,TC4435,TC4436,TC4444,TC4445,TC4446,TC4447,TC4448,TC4449,TC4450,TC4452, TC5858, TC5859, TC5860, TC5861, TC5862, TC5863 : Opportunity Pipeline - Expiration Quarter, Opportunity Pipeline - Country, Opportunity Pipeline - Reseller Rep, Opportunity Pipeline - Distributor Rep, Opportunity Pipeline - Clear all the filters, Opportunity Pipeline - Expiration Quarter Filter,Opportunity Pipeline - Country Filter,Opportunity Pipeline - Reseller Rep Filter:Account OWD is Public,Opportunity Pipeline - Reseller Rep Filter:Account OWD is Private,Opportunity Pipeline - Distributor Rep Filter:Account OWD is Public,Opportunity Pipeline - Distributor Rep Filter:Account OWD is Private,Opportunity Pipeline - Try various filter combinations
-	When I Navigate to "Overview" tab
-	And I check the default filter for "Expiration Quarter"
-	And I verify "Expiration Quarter" filter on Opportunity Pipeline chart
-	And I verify "Expiration Year" filter on Opportunity Pipeline chart
-	And I verify "Country" filter on Opportunity Pipeline chart
-	And I verify "Reseller Rep" filter on Opportunity Pipeline chart
-	And I verify "Distributor Rep" filter on Opportunity Pipeline chart
-	When I Navigate to "Opportunity" tab
-	When I Navigate to "Overview" tab
-	Then I clear all the filters
+#@verifyFilters	
+#Scenario: Rally Test Case ID: TC4433,TC4434,TC4435,TC4436,TC4444,TC4445,TC4446,TC4447,TC4448,TC4449,TC4450,TC4452, TC5858, TC5859, TC5860, TC5861, TC5862, TC5863 : Opportunity Pipeline - Expiration Quarter, Opportunity Pipeline - Country, Opportunity Pipeline - Reseller Rep, Opportunity Pipeline - Distributor Rep, Opportunity Pipeline - Clear all the filters, Opportunity Pipeline - Expiration Quarter Filter,Opportunity Pipeline - Country Filter,Opportunity Pipeline - Reseller Rep Filter:Account OWD is Public,Opportunity Pipeline - Reseller Rep Filter:Account OWD is Private,Opportunity Pipeline - Distributor Rep Filter:Account OWD is Public,Opportunity Pipeline - Distributor Rep Filter:Account OWD is Private,Opportunity Pipeline - Try various filter combinations
+#	When I Navigate to "Overview" tab
+#	And I check the default filter for "Expiration Quarter"
+#	And I verify "Expiration Quarter" filter on Opportunity Pipeline chart
+#	And I verify "Expiration Year" filter on Opportunity Pipeline chart
+#	And I verify "Country" filter on Opportunity Pipeline chart
+#	And I verify "Reseller Rep" filter on Opportunity Pipeline chart
+#	And I verify "Distributor Rep" filter on Opportunity Pipeline chart
+#	When I Navigate to "Opportunity" tab
+#	When I Navigate to "Overview" tab
+#	Then I clear all the filters
 
 
 
@@ -74,10 +74,10 @@ Scenario: Rally Test Case ID: TC4437,TC4438,TC4439,TC4440,TC4441,TC4442,TC4443,T
 
 	
 	
-@filterPreservation
-Scenario: Rally Test Case ID: TC4451 : Opportunity Pipeline - Preserving Filters
-	When I Navigate to "Overview" tab
-	And I select all the filters
-	When I Navigate to "Opportunities" tab
-	When I Navigate to "Overview" tab
-	And I verify that filters Preserved or not
+#@filterPreservation
+#Scenario: Rally Test Case ID: TC4451 : Opportunity Pipeline - Preserving Filters
+#	When I Navigate to "Overview" tab
+#	And I select all the filters
+#	When I Navigate to "Opportunities" tab
+#	When I Navigate to "Overview" tab
+#	And I verify that filters Preserved or not
