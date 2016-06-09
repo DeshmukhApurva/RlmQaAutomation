@@ -7,14 +7,14 @@ Background: Login to the Application
 	Then I should land on CRM home page
 
 @verifySCCount
-Scenario:Rally Test Case ID: TC3577 : Success Plan - Service Contract Line Items
+Scenario: Rally Test Case ID: TC3577 : Success Plan - Service Contract Line Items
 	When I click on "Success Plans" link
 	Then I select the created SuccessPlan
 	Then I click on "Service Contracts" subtab
 	Then I verify the count for "Service Contracts"
 
 @verifySCGrid
-Scenario:Rally Test Case ID: TC3580,TC3581,TC3583 : Success Plan - Show/Hide Columns, Success Plan - View all Service Contract Line Item field columns, Success Plan - Service Contracts tab Verify Pagination
+Scenario: Rally Test Case ID: TC3580,TC3581,TC3583 : Success Plan - Show/Hide Columns, Success Plan - View all Service Contract Line Item field columns, Success Plan - Service Contracts tab Verify Pagination
 	When I click on "Success Plans" link
 	Then I select the created SuccessPlan
 	Then I click on "Service Contracts" subtab
@@ -23,7 +23,7 @@ Scenario:Rally Test Case ID: TC3580,TC3581,TC3583 : Success Plan - Show/Hide Col
 	Then I verify pagination
 	
 @verifySCGridFields
-Scenario:Rally Test Case ID: TC3578,TC3579,TC3582  : Success Plan - Renewal Opportunity Status,Success Plan - Close Date Verification, Success Plan - Renewal Opportunity Sales Stage
+Scenario: Rally Test Case ID: TC3578,TC3579,TC3582  : Success Plan - Renewal Opportunity Status,Success Plan - Close Date Verification, Success Plan - Renewal Opportunity Sales Stage
 	When I click on "Success Plans" link
 	Then I select the created SuccessPlan
 	Then I click on "Service Contracts" subtab

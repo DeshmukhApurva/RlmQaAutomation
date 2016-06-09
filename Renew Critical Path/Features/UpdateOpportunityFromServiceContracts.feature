@@ -58,7 +58,7 @@ Scenario: Rally Test Case ID: TC3418,TC3419 : Opportunity Updates - No Change to
 	Then I verify that renewal opportunity update accordingly
 
 @service_contracts_data_types
-Scenario:Rally Test Case ID: TC3420 : Opportunity Updates - Data Types
+Scenario: Rally Test Case ID: TC3420 : Opportunity Updates - Data Types
 	When I click on "ServiceSource Setup" link
 	And I click on "Opportunity Generation" link
 	And I select the "Enable Generation of Opportunities" checkbox on opp generation

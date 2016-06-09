@@ -1,7 +1,5 @@
 @RenOpportunityManagement
 @RenAddOnRenewalOpportunityFeature
-
-
 Feature: All features related to Renew User - Opportunity Management - Add on Renewal Opportunity
 
 Background: Login to the Application

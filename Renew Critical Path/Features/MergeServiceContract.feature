@@ -57,7 +57,7 @@ Scenario: Rally Test Case ID: TC3528,TC3529,TC3530,TC3531,TC3533,TC3534 : Merge 
 	Then I verify consolidated field is checked or not
 	
 @verifyConsolidatedSC
-Scenario:Rally Test Case ID: TC3532 : Merge Service Contracts - Validation Message
+Scenario: Rally Test Case ID: TC3532 : Merge Service Contracts - Validation Message
 	When I click on "Service Contracts" link
 	And I click on Go
 	And I select "first" Service Contract 

@@ -7,7 +7,7 @@ Background: Login to the Application
 	Then I should land on CRM home page
 
 @IBDRverify
-Scenario:Rally Test Case ID : TC3422,TC3423,TC3424,TC3425,TC3427,TC3428,TC3430,TC3433,TC3434,TC3440,TC3441,TC3443,TC3446,TC3447 : IBDR - Clear Filter Logic,IBDR - Data Types,IBDR - Default AND Behaviour,IBDR - Select Values,IBDR - Operators,IBDR - Row Limit,IBDR - Add Filter Logic,IBDR - Entitlement is on/off,IBDR - Remove Criteria
+Scenario: Rally Test Case ID : TC3422,TC3423,TC3424,TC3425,TC3427,TC3428,TC3430,TC3433,TC3434,TC3440,TC3441,TC3443,TC3446,TC3447 : IBDR - Clear Filter Logic,IBDR - Data Types,IBDR - Default AND Behaviour,IBDR - Select Values,IBDR - Operators,IBDR - Row Limit,IBDR - Add Filter Logic,IBDR - Entitlement is on/off,IBDR - Remove Criteria
 	When I Navigate to "ServiceSource Setup" tab
 	And I click on "Install Base Data Rules" link
 	And I enable "Enable Generation of Assets" checkbox
@@ -23,7 +23,7 @@ Scenario:Rally Test Case ID : TC3422,TC3423,TC3424,TC3425,TC3427,TC3428,TC3430,T
 
 
 @IBDRVerifyValidation
-Scenario:Rally Test Case ID: TC3448,TC3429 : IBDR - Validation Messages
+Scenario: Rally Test Case ID: TC3448,TC3429 : IBDR - Validation Messages
 	When I Navigate to "ServiceSource Setup" tab
 	And I click on "Install Base Data Rules" link
 	And I enable "Enable Generation of Assets" checkbox
@@ -37,7 +37,7 @@ Scenario:Rally Test Case ID: TC3448,TC3429 : IBDR - Validation Messages
 	
 	
 @auto_generation_verification
-Scenario:Rally Test Case ID: TC3421,TC3426,TC3432,TC3431,TC3435,TC3436,TC3437,TC3438,TC3439,TC3444,TC3445,TC3449 - Auto Generate Assets on Renewal,Asset present on source opportunity
+Scenario: Rally Test Case ID: TC3421,TC3426,TC3432,TC3431,TC3435,TC3436,TC3437,TC3438,TC3439,TC3444,TC3445,TC3449 - Auto Generate Assets on Renewal,Asset present on source opportunity
 	When I Navigate to "ServiceSource Setup" tab
 	And I click on "Mappings" link
     And I click on "Opportunity → Renewal Opportunity" link
