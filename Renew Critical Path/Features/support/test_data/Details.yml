@@ -252,6 +252,7 @@ AddOnRenewalOpportunity:
  SourceOpportunityStageValue: "Prospecting"
  SourceOpportunityStageValue1: "Closed Won"
  DestinationServiceContract: "Test_QA_SC"
+ Account Name: "QA Test"
 
 
 RenewalRelationship:

@@ -66,7 +66,9 @@ And(/^I enter mandatory details in "([^"]*)" opportunity page$/) do |new_opportu
     sleep 3
     within all(".pbSubsection")[0] do
       sleep 3
-      all("input[type='text']")[0].set $create_new_opportunity
+    all("input[type='text']")[0].set $create_new_opportunity
+    all("input[type='text']")[1].set arg["Account Name"]
+  
       sleep 4
       all("input[type='text']")[3].set arg["RenewalOpportunityCloseDate"]
       sleep 3
