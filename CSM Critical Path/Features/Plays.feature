@@ -55,7 +55,6 @@ Scenario:Rally Test Case ID : TC2836,TC2837,TC2838 : Create Indicator Group and 
 	Then I create a new Indicator Group
 	Then I add indicators
 
-
 @RecordTypePlays
 Scenario: Rally Test Case ID: TC5185, TC5186, TC5187 : Availability of Task Record Type on Create/Edit Play page, Availability when Task Record Types values exist in org, Create Play Tasks using Record types
 	When I goto Setup, customize, Activities, Task Record Types
@@ -121,22 +120,3 @@ Scenario: Rally Test Case ID: TC5188: Verify Accessability of Record Type field
   And Select Plays link
   And I click on edit link of a Play
   Then I verify that Record Type field is available
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
