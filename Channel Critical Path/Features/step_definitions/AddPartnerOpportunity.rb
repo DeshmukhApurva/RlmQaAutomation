@@ -13,7 +13,7 @@ Then(/^I verify the "([^"]*)" name and corresponding "([^"]*)" name$/) do |oppor
     account_name = find(:xpath, "//*/th[text()='Account Name']/following-sibling::td/span",  :match => :prefer_exact).text
     puts "Account Name: #{account_name}"
     sleep 3
-    if opportunity_name.include? opportunity
+    if opportunity_name.include? opportunity_name
       puts "Successfully see the #{opportunity_name} name"
     else
       putstr "Failed to see the #{opportunity_name} name"
