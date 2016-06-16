@@ -1,7 +1,8 @@
 ---
 Reference:
  SPTemplate: "APT-000000"
- SuccessPlan: "SP-000046"
+ SuccessPlan: "SP-001069"
+ SuccessPlanPlay: "SPPL-0000074"
  Play: "PN-0000000"
  Account: "University of Canada"
  FCView: "PES FC Task"
