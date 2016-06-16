@@ -60,15 +60,15 @@ Scenario: Rally Test Case ID: TS5468,TS5469 - Portal Groups: Verify "Selected Gr
     When I "Save" the portal group
 
 
-@verify_validation_message
+@verify_validation_message_PortalSearch
 Scenario: Rally Test Case ID: TS5470 - Portal Groups: Verify validation message when user clicks on Add to Group without selecting any account or partner user
     When I click on the "Portal Groups" grid tab
     And I click on the "New" button from "Portal Groups" page
     And I select the "Partner Users" radio button
-    And I enter the partner user name
+    #And I enter the partner user name
     And I click on partner "Search" button
-    And I save the partners to "Add To Group"
-    And I "Save" the portal group
+    #And I save the partners to "Add To Group"
+    #And I "Save" the portal group
     Then I should able to see the search error message
 
 
