@@ -5,14 +5,18 @@
 Then(/^I verify the "([^"]*)" name and corresponding "([^"]*)" name$/) do |opportunity , account|
   begin
     sleep 4
-    opportunity_name = find(:xpath, "//*[contains(@id, 'OppNameLable')]").text
+    #opportunity_name = find(:xpath, "//*[contains(@id, 'OppNameLable')]").text
+    opportunity_name = find(:xpath, "//*/th[text()='Opportunity Name']/following-sibling::td/span",:match => :prefer_exact ).text
+    puts "Opportunity Name: #{opportunity_name}"
     sleep 3
-    account_name = find(:xpath, "//*[contains(@id, 'AccountNameLable')]").text
+    #account_name = find(:xpath, "//*[contains(@id, 'AccountNameLable')] | //*/th[text()='Account Name']/following-sibling::td/span",exact: true).text
+    account_name = find(:xpath, "//*/th[text()='Account Name']/following-sibling::td/span",  :match => :prefer_exact).text
+    puts "Account Name: #{account_name}"
     sleep 3
-    if opportunity_name.include? opportunity
-      puts "Successfully see the #{opportunity} name"
+    if opportunity_name.include? opportunity_name
+      puts "Successfully see the #{opportunity_name} name"
     else
-      putstr "Failed to see the #{opportunity} name"
+      putstr "Failed to see the #{opportunity_name} name"
     end
     sleep 4
     if account_name.include? account
@@ -21,7 +25,7 @@ Then(/^I verify the "([^"]*)" name and corresponding "([^"]*)" name$/) do |oppor
       putstr "Failed to see the #{account} name"
     end
   rescue Exception => ex
-    putstr "Error occurred while verifying the #{opportunity} and #{account} names"
+    putstr "Error occurred while verifying the #{opportunity_name} and #{account} names"
     putstr_withScreen  ex.message
   end
 end
@@ -638,8 +642,12 @@ end
 And(/^I set the "([^"]*)" opportunity$/) do |primary_checkbox|
   begin
   sleep 5
+    tables_index,rows_index,columns_index = get_data_table_index('Primary')
+    puts tables_index,rows_index,columns_index
   if page.has_css?(".customnotabBlock")
     within all(".pbBody")[1] do
+      pos = all(:xpath, "//tr[1]/td[.='Primary']/position()").count
+      put pos
       if all("tr")[1].all("td")[5].first("img")[:title] == "Checked"
         puts "Partner Opportunity primary checkbox is checked"
         break

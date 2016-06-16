@@ -113,7 +113,7 @@ CHANNELPARTNER_DEV25:
 
 CHANNELNETOPS_EETEST2:
  userName: "qa-channelnetops-eetest2@servicesource.com"
- pwd: "pass@word1"
+ pwd: "passw0rd"
  Instance: "ChannelNetOpEETEST2"
  url: "https://login.salesforce.com/"
  admin_url: "https://login.salesforce.com"
@@ -150,7 +150,7 @@ CHANNELPARTNER_EETEST2:
 
 CHANNELNETOPS_EETEST4:
  userName: "qa-channelnetops-eetest4@servicesource.com"
- pwd: "pass@word1"
+ pwd: "passw0rd"
  Instance: "ChannelNetOpEETEST4"
  url: "https://login.salesforce.com/"
  admin_url: "https://login.salesforce.com"
@@ -159,7 +159,7 @@ CHANNELNETOPS_EETEST4:
 
 CHANNELMANAGER_EETEST4:
  userName: "qa-channelmanager-eetest4@servicesource.com"
- pwd: "pass@word1"
+ pwd: "passw0rd"
  Instance: "ChannelManagerEETEST4"
  url: "https://login.salesforce.com/"
  Name: "QA ChannelPartner"
