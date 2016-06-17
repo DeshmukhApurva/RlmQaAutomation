@@ -1485,7 +1485,9 @@ And(/^I click on Donut$/) do
     if page.has_text? ("Account Health Status")
       puts "Health Donut on display."
       sleep 5		
-	  find("#pieChartcontainer").first(".highcharts-0").first(".highcharts-series-group").first("path").click
+	  #find("#pieChartcontainer").first(".highcharts-0").first(".highcharts-series-group").first("path").click
+      find(:xpath, "//*[contains(@id, 'highcharts-0')]").click
+
 	  sleep 5
       puts "Health Donut clicked."
     else
@@ -1988,11 +1990,8 @@ end
 
 Then(/^I verify FC view details page$/) do
 	begin
-		within all(".pbBody")[1] do
-			$fctask = find(:xpath, "//*[contains(@id, 'selTasks')]").all("option").collect(&:text)
-			#$fctask =find(:xpath, "//*[contains(@id, 'filterAttributeValue')]").all('option').collect(&:text)
-    end
-    puts $fctask
+			$fctask = find(:xpath, "//*[contains(@id, 'selectfocusCategoryView')]").all("option").collect(&:text)
+			puts $fctask
 		if $title && $fctask == true
 			puts "FC Verified"
 		else
@@ -2144,7 +2143,7 @@ And(/^I click on Complete Action$/) do
        end
     end
 	rescue Exception => ex
-		putstr "Error occurred while clicking on Complete Actin link"
+		putstr "Error occurred while clicking on Complete Action link"
 		putstr_withScreen ex.message
   end
 end
@@ -2478,7 +2477,7 @@ And(/^I select FCG$/) do
 			first("a").first("span").click
 		end
 		within(".select2-drop") do
-			first("ul").all("li")[1].click
+			first("ul").all("li")[2].click
 		end
 		sleep 5
 	rescue Exception => ex
@@ -2493,9 +2492,10 @@ Then(/^I verify Additional Fields Section$/) do
     if page.has_text? ("COMPLETE TASK")
       puts "Pop-up Window opened"
       within all(".pbSubsection")[1] do
-			  within all(".detailList")[1] do
+			 # within all(".detailList")[1] do
 			    $adet = first("tbody").all("tr")[0].first("th").first("label").text
-				  $adt = first("tbody").all("tr")[1].first("th").first("label").text
+    
+    		  $adt = first("tbody").all("tr")[1].first("th").first("label").text
           sleep 2
 					if $adet == "Count"
 						puts "Additional field Count section verified"
@@ -2508,7 +2508,7 @@ Then(/^I verify Additional Fields Section$/) do
 					else
 						puts "Additional field Date section not verified"
 					end
-        end
+        #end
       end
     else
       puts "No Additional Fields present."
