@@ -136,7 +136,12 @@ end
 And(/^I click renewal opportunity having products$/) do
   begin
     sleep 5
-    within all(".pbBody")[5] do
+    arg = getReference "AddPartnerOpportunity"
+    
+    if page.has_content?(arg["PartnerOpportunityName"])
+      first(:link,arg["PartnerOpportunityName"]).click
+    else
+      within all(".pbBody")[5] do
       within(".list") do
         renewal_opportunity = first(".dataRow").first("th").first("a").text
         puts renewal_opportunity
@@ -145,6 +150,7 @@ And(/^I click renewal opportunity having products$/) do
         sleep 5
         puts "Successfully open the renewal opportunity"
       end
+    end
     end
     sleep 3
   rescue Exception => ex
@@ -414,7 +420,7 @@ When(/^I select the sync "([^"]*)" option$/) do |sync_value|
     find(:xpath, ".//*[contains(@id, 'panelOpts')]").select sync_value
     sleep 3
     click_on 'Save'
-    sleep 5
+    sleep 25
     page.driver.browser.switch_to.window(main)
   rescue Exception => ex
     putstr "Error occurred while select the syncing #{sync_value} option"
