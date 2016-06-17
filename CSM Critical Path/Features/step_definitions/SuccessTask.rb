@@ -952,6 +952,7 @@ Then (/^I verify SP Details Widget on Success task$/) do
     unless page.has_css?(".no-records-found")
       sleep 3
       first(".detailEnabled").click
+      puts "Detail clicked ..."
       sleep 3
       all('.pbSubsection')[0].first("a").click
       sleep 5
@@ -1131,9 +1132,9 @@ And(/^I "([^"]*)" the create new task$/) do |button|
 			sleep 5			
 			first(:xpath, "//*[contains(@id, 'taskNameValue')]").click			
 			first(:xpath, "//*[contains(@id,'taskNameValue')]").set("Call")
-			first(:xpath, "//*[contains(@id,'successPlanValue')]").click
-			first(:xpath, "//*[contains(@id,'successPlanValue')]").set(spPlay["SuccessPlan"])
-			first(:xpath, "//*[contains(@id,'playValue')]").set(spPlay["Play"])
+			first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").click
+			first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").set(spPlay["SuccessPlanPlay"])
+			#first(:xpath, "//*[contains(@id,'playValue')]").set(spPlay["Play"])
 			first(:xpath, "//*[contains(@id, 'commentsValue')]").click
 			first(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
 			first(:xpath, "//*[contains(@id, 'taskStatusValue1')]").select(arg["Status"])
