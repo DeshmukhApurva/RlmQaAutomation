@@ -78,21 +78,21 @@ And(/^I click on "(.*?)" action tile$/) do |arg|
 			putstr "The record count on #{arg} Action Tile and Opportunity grid is not Same"
 		end
 
-		if $sum.to_i > 0
-
-			click_on "Overview"
-			sleep 3
-			puts "Navigated to Overview page"
-
-			recordCount = all(".big-badge-container")[1].first("div")['data-number']
-			if recordCount == ""
-				puts "See New Opportunities count is disappeared"
-			else
-				putstr "See New Opportunities count is not disappeared"
-			end
-		else
-			puts "No new Opportunities to see"
-		end
+#		if $sum.to_i > 0
+#
+#			click_on "Overview"
+#			sleep 3
+#			puts "Navigated to Overview page"
+#
+#			recordCount = all(".big-badge-container")[1].first("div")['data-number']
+#			if recordCount == ""
+#				puts "See New Opportunities count is disappeared"
+#			else
+#				putstr "See New Opportunities count is not disappeared"
+#			end
+#		else
+#			puts "No new Opportunities to see"
+#		end
 		
 	rescue Exception => ex
 		putstr "Error while verifying #{arg} on Overview Page"
