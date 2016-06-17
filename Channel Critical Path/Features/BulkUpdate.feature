@@ -46,7 +46,11 @@ Scenario: Rally-ID: TC4392 : BulkUpdate-verify Update is working or not
 Scenario: Rally-ID: TC4387,TC4388,TC4389,TC4390,TC4391 : Bulk Update - Field update for opportunities based on needs update flag False,Update with no change for opportunities where needs update flag is false,Update fields/notes and update status from TRUE to FALSE,Update the fields those are not designated on "Need Status Update Config" page, Update the status with no change,Cancel
 	When I click on "Opportunities" link	
 	Then I select one or more the opportunity "Cancel" and verify opportunity for "BulkUpdate" when status is false
+	When I click on "Overview" link
+	When I click on "Opportunities" link	
 	Then I select one or more the opportunity "Update with no change" and verify opportunity for "BulkUpdate" when status is false
+	When I click on "Overview" link
+	When I click on "Opportunities" link	
 	Then I select one or more the opportunity "Update" and verify opportunity for "BulkUpdate" when status is false
 
 @BulkUpdateNotes
