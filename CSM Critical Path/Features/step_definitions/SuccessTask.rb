@@ -6,9 +6,15 @@ Then(/^create new Tasks$/) do
 		sleep 8
 		arg=getDetails "Taskdetails"	
 		spPlay = getReference "Reference"
+		spPlayValue = spPlay["SuccessPlanPlay"]
 		sleep 2
 		first(:xpath, "//*[contains(@id, 'selTasks')]").select(spPlay["FCView"])
 		sleep 8
+    within(".bootstrap-table") do
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys ''
+    end
 		puts "Selected First Task Category" 
 		click_on "Create Task"
 		sleep 8
@@ -18,9 +24,10 @@ Then(/^create new Tasks$/) do
 			sleep 5			
 			first(:xpath, "//*[contains(@id, 'taskNameValue')]").click			
 			first(:xpath, "//*[contains(@id,'taskNameValue')]").set("Call")
-			first(:xpath, "//*[contains(@id,'successPlanValue')]").click
-			first(:xpath, "//*[contains(@id,'successPlanValue')]").set(spPlay["SuccessPlan"])
-			first(:xpath, "//*[contains(@id,'playValue')]").set(spPlay["Play"])
+			#first(:xpath, "//*[contains(@id,'successPlanValue')]").click
+      first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").click
+			first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").set(spPlay["SuccessPlanPlay"])
+			#first(:xpath, "//*[contains(@id,'playValue')]").set(spPlay["Play"])
 			first(:xpath, "//*[contains(@id, 'commentsValue')]").click
 			first(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
 			first(:xpath, "//*[contains(@id, 'taskStatusValue1')]").select(arg["Status"])
@@ -819,7 +826,7 @@ begin
 		end
 		if i>0 
 			first(:xpath, "//*[contains(@id, 'riskReasonValue')]").first(:xpath, 'option[2]').select_option
-			first(:xpath, "//*[contains(@id, 'taskStatusValue')]").first(:xpath, 'option[1]').select_option
+			first(:xpath, "//*[contains(@id, 'taskStatusValue')]").first(:xpath, 'option[4]').select_option
 			sleep 5
 			within(".pbButtonb") do
 				click_on "SAVE"
