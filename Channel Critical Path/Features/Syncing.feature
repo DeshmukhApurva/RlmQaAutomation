@@ -45,10 +45,3 @@ Scenario: Rally-ID : TC4336,TC4341 : Opportunity Page- Stop syncing of Master Op
     When I click on the "Opportunities" grid tab
     Then I select the "RenewalOpportunity"
     Then I verify the sync opportunity
-
-
-
-
-
-
-
