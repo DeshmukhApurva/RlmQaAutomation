@@ -6,7 +6,6 @@ Then(/^create new Tasks$/) do
 		sleep 8
 		arg=getDetails "Taskdetails"	
 		spPlay = getReference "Reference"
-		spPlayValue = spPlay["SuccessPlanPlay"]
 		sleep 2
 		first(:xpath, "//*[contains(@id, 'selTasks')]").select(spPlay["FCView"])
 		sleep 8
@@ -24,10 +23,12 @@ Then(/^create new Tasks$/) do
 			sleep 5			
 			first(:xpath, "//*[contains(@id, 'taskNameValue')]").click			
 			first(:xpath, "//*[contains(@id,'taskNameValue')]").set("Call")
-			#first(:xpath, "//*[contains(@id,'successPlanValue')]").click
       first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").click
 			first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").set(spPlay["SuccessPlanPlay"])
-			#first(:xpath, "//*[contains(@id,'playValue')]").set(spPlay["Play"])
+      first(:xpath, "//*[contains(@id,'relatedToValue')]").click
+      puts "related to clicked.."
+      first(:xpath, "//*[contains(@id,'relatedToValue')]").set(spPlay["Account"])
+      puts "related to set.."
 			first(:xpath, "//*[contains(@id, 'commentsValue')]").click
 			first(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
 			first(:xpath, "//*[contains(@id, 'taskStatusValue1')]").select(arg["Status"])
@@ -814,7 +815,6 @@ begin
 					if row.all("td")[6].text!="Completed"
 						if all(".removeEnabled").count > 0						
 							row.first(".removeEnabled").click
-							
 						end
 						i+=1
 						if i>1
@@ -824,6 +824,7 @@ begin
 				end
 			end
 		end
+		sleep 10
 		if i>0 
 			first(:xpath, "//*[contains(@id, 'riskReasonValue')]").first(:xpath, 'option[2]').select_option
 			first(:xpath, "//*[contains(@id, 'taskStatusValue')]").first(:xpath, 'option[4]').select_option
@@ -952,7 +953,6 @@ Then (/^I verify SP Details Widget on Success task$/) do
     unless page.has_css?(".no-records-found")
       sleep 3
       first(".detailEnabled").click
-      puts "Detail clicked ..."
       sleep 3
       all('.pbSubsection')[0].first("a").click
       sleep 5
@@ -1134,7 +1134,8 @@ And(/^I "([^"]*)" the create new task$/) do |button|
 			first(:xpath, "//*[contains(@id,'taskNameValue')]").set("Call")
 			first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").click
 			first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").set(spPlay["SuccessPlanPlay"])
-			#first(:xpath, "//*[contains(@id,'playValue')]").set(spPlay["Play"])
+      first(:xpath, "//*[contains(@id,'relatedToValue')]").click
+			first(:xpath, "//*[contains(@id,'relatedToValue')]").set(spPlay["Account"])
 			first(:xpath, "//*[contains(@id, 'commentsValue')]").click
 			first(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
 			first(:xpath, "//*[contains(@id, 'taskStatusValue1')]").select(arg["Status"])
