@@ -7,7 +7,7 @@ Background: Login to the Application
 	Then I should land on CRM home page
 
 @RenWithinFiscalYear
-Scenario:Rally -ID: TC4635: Opportunity Line Item - End Date in fiscal year range
+Scenario: Rally -ID: TC4635: Opportunity Line Item - End Date in fiscal year range
   When I Navigate to "Opportunities" tab
   Then I select the opportunity to set the date
   Then I select a Opportunity Line Item with no date to set "WithinFiscalYear"
@@ -15,7 +15,7 @@ Scenario:Rally -ID: TC4635: Opportunity Line Item - End Date in fiscal year rang
   And I clear the date fields for FiscalOpp
 
 @RenBeyondFiscalYear
-Scenario:Rally -ID: TC4636,TC4637: Opportunity Line Item - End Date outside fiscal year range - Std Fiscal year set
+Scenario: Rally -ID: TC4636,TC4637: Opportunity Line Item - End Date outside fiscal year range - Std Fiscal year set
   When I Navigate to "Opportunities" tab
   Then I select the opportunity to set the date
   Then I select a Opportunity Line Item with no date to set "BeyondFiscalYear"

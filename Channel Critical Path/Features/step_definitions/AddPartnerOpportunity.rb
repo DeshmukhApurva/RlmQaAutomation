@@ -5,18 +5,14 @@
 Then(/^I verify the "([^"]*)" name and corresponding "([^"]*)" name$/) do |opportunity , account|
   begin
     sleep 4
-    #opportunity_name = find(:xpath, "//*[contains(@id, 'OppNameLable')]").text
-    opportunity_name = find(:xpath, "//*/th[text()='Opportunity Name']/following-sibling::td/span",:match => :prefer_exact ).text
-    puts "Opportunity Name: #{opportunity_name}"
+    opportunity_name = find(:xpath, "//*[contains(@id, 'OppNameLable')]").text
     sleep 3
-    #account_name = find(:xpath, "//*[contains(@id, 'AccountNameLable')] | //*/th[text()='Account Name']/following-sibling::td/span",exact: true).text
-    account_name = find(:xpath, "//*/th[text()='Account Name']/following-sibling::td/span",  :match => :prefer_exact).text
-    puts "Account Name: #{account_name}"
+    account_name = find(:xpath, "//*[contains(@id, 'AccountNameLable')]").text
     sleep 3
-    if opportunity_name.include? opportunity_name
-      puts "Successfully see the #{opportunity_name} name"
+    if opportunity_name.include? opportunity
+      puts "Successfully see the #{opportunity} name"
     else
-      putstr "Failed to see the #{opportunity_name} name"
+      putstr "Failed to see the #{opportunity} name"
     end
     sleep 4
     if account_name.include? account
@@ -25,7 +21,7 @@ Then(/^I verify the "([^"]*)" name and corresponding "([^"]*)" name$/) do |oppor
       putstr "Failed to see the #{account} name"
     end
   rescue Exception => ex
-    putstr "Error occurred while verifying the #{opportunity_name} and #{account} names"
+    putstr "Error occurred while verifying the #{opportunity} and #{account} names"
     putstr_withScreen  ex.message
   end
 end
@@ -642,12 +638,8 @@ end
 And(/^I set the "([^"]*)" opportunity$/) do |primary_checkbox|
   begin
   sleep 5
-    tables_index,rows_index,columns_index = get_data_table_index('Primary')
-    puts tables_index,rows_index,columns_index
   if page.has_css?(".customnotabBlock")
     within all(".pbBody")[1] do
-      pos = all(:xpath, "//tr[1]/td[.='Primary']/position()").count
-      put pos
       if all("tr")[1].all("td")[5].first("img")[:title] == "Checked"
         puts "Partner Opportunity primary checkbox is checked"
         break
@@ -745,6 +737,53 @@ Then(/^I should be able to see the partner account hierarchy details$/) do
     sleep 5
   rescue Exception => ex
     putstr "Error occurred while verifying the partner opportunity details page"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I "(.*?)" partner account 1_2 picklist on PO$/) do |arg1|
+  begin
+    sleep 5
+    arg = getReference "TwoTier"
+    sleep 2
+    select("My Accounts", :from => "fcf")
+    if page.has_selector?(:xpath, '//*[@id="filter_element"]/div/span/span[1]/input')
+      click_on('Go!')
+    end
+
+    sleep 2
+    ResellerAccount = arg["Account"]
+    puts ResellerAccount.chr
+    click_on(ResellerAccount.chr)
+    sleep 2
+    if page.has_content?(Account.chr)
+      puts "Successfully see the #{Account.chr} on Account Tab"
+    else
+      putstr "Failed to see the #{Account.chr} on Account Tab"
+    end
+
+    first(:link, arg["Account"]).click
+    sleep(3)
+
+    first(:link, arg["RenewalOpportunity"]).click
+    sleep(3)
+
+    click_on("New Partner Opportunity")
+    sleep(3)
+    
+    if arg1 == "Hide"
+      page.should_not have_css('option[value="Reseller"]')
+      if page.should_not have_css('option[value="Reseller"]')
+        puts "Successfully verified Partner Account 1 & 2 Type"      
+      end
+    else
+      page.should have_css('option[value="Reseller"]')
+      if page.should have_css('option[value="Reseller"]')
+        puts "Successfully verified Partner Account 1 & 2 Type"
+      end
+    end
+  rescue Exception => ex
+    putstr "Error occurred while selecting the products"
     putstr_withScreen  ex.message
   end
 end
