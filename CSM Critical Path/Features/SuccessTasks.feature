@@ -314,9 +314,3 @@ Scenario: Rally Test Case ID: TC5205, TC5206, TC5207, TC5208, TC5209 : Verify Us
   Then I Verify the text present in the Search field
   And I deselect grid columns
   Then I Verify the text present in the Search field
-  
-
-
-
-
-
