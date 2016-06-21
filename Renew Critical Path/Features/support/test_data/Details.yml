@@ -252,6 +252,7 @@ AddOnRenewalOpportunity:
  SourceOpportunityStageValue: "Prospecting"
  SourceOpportunityStageValue1: "Closed Won"
  DestinationServiceContract: "Test_QA_SC"
+ Account Name: "QA Test"
 
 
 RenewalRelationship:
@@ -392,6 +393,10 @@ InstallBaseDataRules:
  NewIBDROpportunity: "PES_IBDR_Opportunity"
  IBDROpportunityCloseDate: "4/15/2017"
  IBDROpportunityStageValue: "Prospecting"
+
+EmptyFiscalYear:
+ StartDate: ""
+ EndDate: ""
 
 WithinFiscalYear:
  StartDate: "6/4/2016"
