@@ -1486,7 +1486,7 @@ And(/^I click on Donut$/) do
       puts "Health Donut on display."
       sleep 5		
 	  #find("#pieChartcontainer").first(".highcharts-0").first(".highcharts-series-group").first("path").click
-      find(:xpath, "//*[contains(@id, 'highcharts-0')]").click
+      find(:xpath, "//*[contains(@id, 'highcharts-13')]").click
 
 	  sleep 5
       puts "Health Donut clicked."
@@ -2095,11 +2095,18 @@ end
 
 And(/^I click Record Name link$/) do
 	begin
-		within("#taskGrid") do
-			$val = first("tbody").first("tr").all("td")[4].first("a").text
-      first("tbody").first("tr").all("td")[4].first("a").click
+     within("#fcFullList") do
+
+      #within(".bootstrap-table") do
+      
+			$val = first("tbody").first("tr").all("td")[0].first("a").text
+			puts "#{$val}"
+      first("tbody").first("tr").all("td")[0].first("a").click
+	  sleep 5
+      #first("tbody").first("tr")[1].all("td")[1].first("a").click
+#find(:xpath, "//*[contains(@id, 'fcFullList')]").first("tbody").first("tr")[0].all("td")[0].first("a").click
+
     end
-    sleep 5
 	rescue Exception => ex
 		putstr "Error occurred while clicking on Record Name link"
 		putstr_withScreen ex.message
@@ -2706,7 +2713,10 @@ And(/^I verify Task page$/) do
 		if page.has_css? (".multiUserViewIcon")
 			within first(".pbBody") do
 				within first(".pbSubsection") do
-					$create = first("table").first("tbody").all("tr")[6].all("td")[1].first("div").first("a").text
+         # $create = first("table").first("tbody").all("tr")[6].all("td")[1].first("div").first("a").text
+
+          $create = find(:xpath, "//*[contains(@id, 'tsk5_ileinner')]").text
+        
 					$sts = first("table").first("tbody").all("tr")[0].all("td")[3].first("div").text
 				end
 			end
@@ -2870,6 +2880,7 @@ end
 Then(/^I Verify result for Task as object$/) do
 	begin
 		arg = getDetails "Overview"
+		sleep 5
 		$messagedisplay = find(:id, "filterSelectionCriteria").text
 		puts $messagedisplay
 		if $messagedisplay.to_s.include?(arg["Display_Msg1"]) || $messagedisplay.to_s.include?(arg["Display_Msg2"]) || $messagedisplay.to_s.include?(arg["Display_Msg3"])

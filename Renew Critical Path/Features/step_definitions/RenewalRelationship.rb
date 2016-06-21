@@ -1,6 +1,15 @@
 #All Opportunity Management - Renewal Relationship specific Step definitions
 #All Scenario mentioned in RenewalRelationship.feature
 
+And(/^I go to first row where column name is "([^"]*)"$/) do |columnName|
+  begin
+#    visit "https://na17.salesforce.com/006o000000L584v"
+    sleep 5
+    puts find(:xpath, "//th[text()='#{columnName}']").text
+    find(:xpath, "//th[text()='#{columnName}']").find(:xpath, '..').find(:xpath, "following-sibling::tr/td[2]/a").click
+    sleep 3
+  end
+end
 And(/^I resolve the "([^"]*)"$/) do |opportunity|
   begin
     sleep 5

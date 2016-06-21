@@ -36,16 +36,16 @@ RENEW_EETEST2:
 
 RENEWNETOPS_EETEST2:
  userName: "qa-renewnetops-eetest2@servicesource.com"
- pwd: "pass@word1"
+ pwd: "passw0rd"
  Instance: "RenewNetOpEEtest2"
 
 RENEW_EETEST4:
  userName: "qa-renew-eetest4@servicesource.com"
- pwd: "pass@word2"
+ pwd: "passw0rd1"
  Instance: "RenewEEtest4"
 
 RENEWNETOPS_EETEST4:
  userName: "qa-renewnetops-eetest4@servicesource.com"
- pwd: "pass@word2"
+ pwd: "passw0rd1"
  Instance: "RenewNetOpEEtest4"
 

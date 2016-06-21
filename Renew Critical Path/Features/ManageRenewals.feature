@@ -23,22 +23,24 @@ Scenario: Rally Test Case ID: TC4657,TC4645,TC5361,TC5362 - Rebuild Opportunity 
     And I select the "Renewal Relationship" product field
     And I click on renewal relationship "Rebuild Opportunity" button
     Then I verify the invalid "Renewal Relationship" opportunity product
-
+	And I delete the "Renewal Relationship" opportunity product
+    
 
 @valid_renewal_relationship
-Scenario: Rally Test Case ID: TC4646,TC4649 - Manage Renewals - Valid OPLID - Identify,Back button navigation
+Scenario: Rally Test Case ID: TC4646, TC4649 - Manage Renewals - Valid OPLID - Identify,Back button navigation
     When I click on "Opportunities" link
-    And I navigate to the "Renewal Relationship" opportunity
-    Then I should able to see the "Renewal Relationship" section
-    When I click on "Renewal Relationship" edit link
-    Then I should able to see the "Renewal Relationship" products
+    And I click on "New" button
+    And Create new Opportunity under an Account
+    And I click on "Choose Price Book" button
+    Then I Choose the Pricebook for the product
     And I click on "Add Product" button
     And I add the product
+    And I resolve the "Opportunity"
+    And I go to first row where column name is "Contributed To"
     When I click on "Manage Renewals" button
-    Then I verify the "Renewal Relationship" products
+    And I select the "Renewal Relationship" product field
+    And I click on renewal relationship "Rebuild Opportunity" button
     When I click on the "Back" button on "Renewal Relationship" page
-    Then I navigate to the renewal opportunity page
-
 
 @change_renewal_status
 Scenario: Rally Test Case ID: TC4647,TC4650 - Manage Renewals - Change Renewal Status,Disable Renewal Status pick list
