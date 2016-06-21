@@ -1252,6 +1252,7 @@ And(/^I "([^"]*)" the dismiss success task$/) do |button|
 		unless page.has_xpath?("//input[@disabled='disabled']")
     sleep 5
 			first(:xpath, "//*[contains(@id, 'riskReasonValue')]").find(:xpath, 'option[2]').select_option
+      first(:xpath, "//*[contains(@id, 'taskStatusValue')]").select('Completed')
 			sleep 5
 			within all(".pbBottomButtons")[0] do
 				if page.has_button?(button)
@@ -1903,7 +1904,7 @@ And(/^I select the "([^"]*)" value from dismiss task$/) do |field|
 	unless page.has_css?(".no-records-found")
 		if $ispopwindow > 0
 			sleep 5
-			$reason_code = "C - Support Issue - SPI"
+			$reason_code = "D - Already Completed - ACD"
 			$current_date = "#{Time.now.strftime("%m-%d-%Y")}"
 			sleep 4
 			find(:xpath, "//*[contains(@id, 'completedOnValue')]").set $current_date
@@ -2035,24 +2036,29 @@ end
 And(/^I click on success task "([^"]*)" button$/) do |button|
 	begin
 		sleep 3
+		recordsFound = false;
 		unless page.has_css?(".no-records-found")
 			within("#taskGrid") do
 				if first("tbody").all("tr").count > 0
 					unless page.has_xpath?("//input[@disabled='disabled']")
             sleep 4
-						click_on button
-						sleep 6
+  					recordsFound = true
 					else
 						puts "Tasks are disabled mode"
-					end
-				else
-					puts "No Task Records found"
-				end
-			end
+				  end
+			  else
+			    puts "No Task Records found"
+		    end
+		  end
 		else
 			puts "No matching records found"
 		end
-		sleep 10
+		if recordsFound
+		  within("#grid-toolbar") do
+		    click_on button
+		    sleep 2
+		  end
+		end
 		puts "Successfully to clicked the #{button} button"
 	rescue Exception => ex
 		putstr "Error occurred while clicking the #{button} button"
