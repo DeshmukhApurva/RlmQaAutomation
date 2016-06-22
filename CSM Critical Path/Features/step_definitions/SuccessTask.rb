@@ -1,6 +1,5 @@
 #All Success Tasks Specific Step Definitions
 #All Scenario mentioned in SuccessTasks.feature
-
 Then(/^create new Tasks$/) do
 	begin
 		sleep 8
@@ -17,18 +16,21 @@ Then(/^create new Tasks$/) do
 		puts "Selected First Task Category" 
 		click_on "Create Task"
 		sleep 8
+    currentDate = "#{Time.now.strftime("%m-%d-%Y")}"
 		within all('.pbSubsection').last do
 			sleep 5				
-			first(:xpath, "//*[contains(@id, 'dueValue')]").set(arg["DueDate"])
+			first(:xpath, "//*[contains(@id, 'dueValue')]").set(currentDate)
 			sleep 5			
 			first(:xpath, "//*[contains(@id, 'taskNameValue')]").click			
 			first(:xpath, "//*[contains(@id,'taskNameValue')]").set("Call")
       first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").click
 			first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").set(spPlay["SuccessPlanPlay"])
-      first(:xpath, "//*[contains(@id,'relatedToValue')]").click
-      puts "related to clicked.."
-      first(:xpath, "//*[contains(@id,'relatedToValue')]").set(spPlay["Account"])
-      puts "related to set.."
+			within(:xpath, "//*[contains(@id,'relatedToBlockPanel')]") do
+			  first(:css, "input[id$='relatedToValue']").click
+			  sleep 2
+        first(:css, "input[id$='relatedToValue']").set(spPlay["Account"])
+			  sleep 2
+			end
 			first(:xpath, "//*[contains(@id, 'commentsValue')]").click
 			first(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
 			first(:xpath, "//*[contains(@id, 'taskStatusValue1')]").select(arg["Status"])
@@ -528,11 +530,12 @@ Then(/^click on New Button to create New Task$/) do
 		sleep 5
 		first("a",:text => "Create Task").click
 		sleep 5
+    currentDate = "#{Time.now.strftime("%m-%d-%Y")}"
 		within all('.pbSubsection').last do
 			table=all("table")[0]
 			sleep 5	
 			arg=getTaskInfo ""
-			table.all("td")[5].first(:css, "input[id$='dueValue']").set(arg["DueDate"])
+			table.all("td")[5].first(:css, "input[id$='dueValue']").set(currentDate)
 			sleep 5
 			table.all("td")[0].first(".comboboxIcon").click
 			sleep 5	
@@ -1126,16 +1129,21 @@ And(/^I "([^"]*)" the create new task$/) do |button|
 		puts "Selected First Task Category" 
 		click_on "Create Task"
 		sleep 8
+    currentDate = "#{Time.now.strftime("%m-%d-%Y")}"
 		within all('.pbSubsection').last do
 			sleep 5				
-			first(:xpath, "//*[contains(@id, 'dueValue')]").set(arg["DueDate"])
+			first(:xpath, "//*[contains(@id, 'dueValue')]").set(currentDate)
 			sleep 5			
 			first(:xpath, "//*[contains(@id, 'taskNameValue')]").click			
 			first(:xpath, "//*[contains(@id,'taskNameValue')]").set("Call")
 			first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").click
 			first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").set(spPlay["SuccessPlanPlay"])
-      first(:xpath, "//*[contains(@id,'relatedToValue')]").click
-			first(:xpath, "//*[contains(@id,'relatedToValue')]").set(spPlay["Account"])
+      within(:xpath, "//*[contains(@id,'relatedToBlockPanel')]") do
+        first(:css, "input[id$='relatedToValue']").click
+        sleep 2
+        first(:css, "input[id$='relatedToValue']").set(spPlay["Account"])
+        sleep 2
+      end
 			first(:xpath, "//*[contains(@id, 'commentsValue')]").click
 			first(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
 			first(:xpath, "//*[contains(@id, 'taskStatusValue1')]").select(arg["Status"])
