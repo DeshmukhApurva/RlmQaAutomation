@@ -946,19 +946,19 @@ Then (/^I verify SP Details Widget on Success task$/) do
 		arg = getReference "Reference"
 		first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
 		sleep 5
-		searchStr = "In Progress"
+		searchStr = ""
 		within(".bootstrap-table") do
 			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
 			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
 			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
 		end
-		sleep 10
+		sleep 5
     unless page.has_css?(".no-records-found")
       sleep 3
       first(".detailEnabled").click
       sleep 3
       all('.pbSubsection')[0].first("a").click
-      sleep 5
+      sleep 10
       puts ("SP opened successfully")
     else
       puts "No matching records found"
@@ -1080,7 +1080,14 @@ And(/^I select the tasks$/) do
 		sleep 5
 		arg = getReference "Reference"
 		find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
-		sleep 10
+		sleep 5
+    searchStr = "In Progress"
+    within(".bootstrap-table") do
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
+    end
+    sleep 5
 	unless page.has_css?(".no-records-found")
     within("#taskGrid") do
      if first("tbody").all("tr").count > 0
@@ -1185,7 +1192,12 @@ And(/^I select the task from task list$/) do
 	begin
 		sleep 3
 		arg = getReference "Reference"
-		sleep 4
+    searchStr = ""
+    within(".bootstrap-table") do
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
+    end
 		find(:xpath, "//*[contains(@id, 'selTasks')]").select arg["FCView"]
 		sleep 5
 		#find(".pull-right.search").first("input").set('')
