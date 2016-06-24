@@ -425,17 +425,17 @@ Then(/^I verify the created products$/) do
 			sleep 5
       if page.has_xpath?('//table/tbody/tr/th/a')
          puts "Successfully see the products"
-         sleep 4
+         sleep 1
 				 $first_product_name = all(:xpath,"//table/tbody/tr/th/a")[0].text
-         sleep 4
-				 $second_product_name = all(:xpath,"//table/tbody/tr/th/a")[1].text
-         puts $second_product_name
-         sleep 5
+#         sleep 4
+				 #$second_product_name = all(:xpath,"//table/tbody/tr/th/a")[1].text
+         puts $first_product_name
+         sleep 1
       else
 				putstr "Failed to see the products"
       end
     end
-		sleep 5
+		sleep 1
 	rescue Exception => ex
 		putstr "Error occurred while verifying the created products"
 		putstr_withScreen  ex.message
