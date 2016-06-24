@@ -14,7 +14,8 @@ When(/^I search for the "(.*?)" opportunities$/) do |arg1|
     allYears = getExpirationYears(10)
 
     within all(".ui-select-match")[1] do
-      find(:css, ".close.ui-select-match-close").click
+      find(:css, ".close.ui-select-match-close")[0].click
+      sleep 1
     end
 
     allExpQuarters.each do |value|
@@ -24,7 +25,8 @@ When(/^I search for the "(.*?)" opportunities$/) do |arg1|
     end
 
     within all(".ui-select-match")[2] do
-      find(:css, ".close.ui-select-match-close").click
+      find(:css, ".close.ui-select-match-close")[0].click
+      sleep 1
     end
 
     allExpYears.each do |value|
