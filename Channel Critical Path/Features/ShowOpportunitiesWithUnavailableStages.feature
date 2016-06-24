@@ -9,13 +9,15 @@ Background: Login to the Application
 
 
 @update_sales_stage_opportunities
-Scenario: Rally Test Case ID: TC4534,TC4535,TC4536,TC4537,TC4539 : Opportunities Tab: "Show Opportunities with Unavailable Stages" checkbox is Checked, Error message when user inline edits the PO if "Show Opportunities with Unavailable Stages" checkbox is Checked
+Scenario: Rally Test Case ID: TC4534,TC4535,TC4536,TC4537,TC4539, TC5856 : Opportunities Tab: "Show Opportunities with Unavailable Stages" checkbox is Checked, Error message when user inline edits the PO if "Show Opportunities with Unavailable Stages" checkbox is Checked
      When I click on "Opportunities" tab
      Then I should able to see the "Opportunity Grid" columns
-     And I clear the filters
+   	 When I verify the current expiration quarter value in Expiration Quarter filter
+   	 When I verify the current expiration year value in Expiration Year filter
      And I select the "New Last Week" filter value
      And I update the "PES_Add_Partner" column values
-     And I clear the filters
+     When I verify the current expiration quarter value in Expiration Quarter filter
+   	 When I verify the current expiration year value in Expiration Year filter
      And I select the "New Last Week" filter value
      And I click on "Opportunities" tab
      And I select more than one "PES_Add_Partner" from the grid
@@ -30,7 +32,8 @@ Scenario: Rally Test Case ID: TC4534,TC4535,TC4536,TC4537,TC4539 : Opportunities
 Scenario: Rally Test Case ID: TC4538,TC4540,TC4542 : Opportunities Tab: Error message when user updates the status of the PO if "Show Opportunities with Unavailable Stages" checkbox is Checked,Opportunities Tab: Error message when user updates the status of the PO with No Change if "Show Opportunities with Unavailable Stages" checkbox is Checked
     When I click on "Opportunities" tab
     Then I should able to see the "Opportunity Grid" columns
-    And I clear the filters
+   	When I verify the current expiration quarter value in Expiration Quarter filter
+   	When I verify the current expiration year value in Expiration Year filter
     And I select the "New Last Week" filter value
     And I click on "Update" icon
     Then I should be able to see the "No Change" and "Update" buttons

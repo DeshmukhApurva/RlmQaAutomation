@@ -24,10 +24,9 @@ And(/^I click on existing opportunity$/) do
     putstr "Unable to find the renewal Opportunity" unless result
   rescue Exception => ex
     putstr "Error occurred while existing renewal opportunity page"
-   putstr_withScreen  ex.message
+    putstr_withScreen  ex.message
   end
 end
-
 
 Then(/^I verify that opportunity have lookup to opportunity and field "([^"]*)" and "([^"]*)"$/) do |renewal_opportunity, service_contract|
   begin
@@ -51,11 +50,35 @@ Then(/^I verify that opportunity have lookup to opportunity and field "([^"]*)" 
     sleep 3
   rescue Exception => ex
     putstr "Error occurred while verifying the #{service_contract} field"
-   putstr_withScreen  ex.message
+    putstr_withScreen  ex.message
   end
 end
 
-
+And(/^Create new Opportunity under an Account$/) do
+  begin
+    sleep 3
+    arg = getDetails "AddOnRenewalOpportunity"
+    sleep 1
+    $create_new_opportunity = "#{arg["NewOpportunityName"]} #{Time.now.strftime('%m%d_%H%M_%S')}"
+    sleep 1
+    fill_in "Opportunity Name",:with=>$create_new_opportunity
+    fill_in "Account Name",:with=>arg["Account Name"]
+#    fill_in "Stage",:with=>arg["OpportunityStageValue"]
+    fill_in "Close Date",:with=>arg["RenewalOpportunityCloseDate"]
+      
+#    find(:xpath, "//td/label[text()='Stage']").find(:xpath, '..').find(:xpath, "following-sibling::td").find(:xpath,"//select").select arg["OpportunityStageValue"]
+    find("#opp11").select arg["OpportunityStageValue"]
+    sleep 2
+    within("#bottomButtonRow") do
+      click_on 'Save'
+    end
+    sleep 3
+    puts "Successfully created the #{$create_new_opportunity} opportunity"
+  rescue Exception => ex
+    putstr "Error occurred while entering the mandatory details on opportunity page"
+    putstr_withScreen  ex.message
+  end
+end
 
 And(/^I enter mandatory details in "([^"]*)" opportunity page$/) do |new_opportunity|
   begin
@@ -80,27 +103,26 @@ And(/^I enter mandatory details in "([^"]*)" opportunity page$/) do |new_opportu
     puts "Successfully created the #{new_opportunity} opportunity"
   rescue Exception => ex
     putstr "Error occurred while entering the mandatory details in #{new_opportunity} opportunity page"
-   putstr_withScreen  ex.message
+    putstr_withScreen  ex.message
   end
 end
-
 
 And(/^I associate opportunity to "([^"]*)"$/) do |destination_renewal_opportunity|
   begin
     sleep 5
     arg = getDetails "RenewalOpportunityFields"
     within all(".pbSubsection")[0] do
-    if page.has_css?("#opp12_ilecell")
-       $before_updated_probability = first("#opp12_ilecell").text
-    else
-      putstr "Failed to see the probability value"
+      if page.has_css?("#opp12_ilecell")
+        $before_updated_probability = first("#opp12_ilecell").text
+      else
+        putstr "Failed to see the probability value"
+      end
+      if page.has_css?("#opp7_ilecell")
+        $before_updated_amount = first("#opp7_ileinner").text
+      else
+        putstr "Failed to see the amount value"
+      end
     end
-    if page.has_css?("#opp7_ilecell")
-       $before_updated_amount = first("#opp7_ileinner").text
-    else
-      putstr "Failed to see the amount value"
-    end
-  end
     sleep 5
     within all(".pbSubsection")[2] do
       destination_renewal_opportunity_field = all("tr")[0].first("td").text
@@ -109,11 +131,11 @@ And(/^I associate opportunity to "([^"]*)"$/) do |destination_renewal_opportunit
       else
         puts "Successfully see the #{destination_renewal_opportunity_field} field"
       end
-     end
+    end
     puts "Successfully see the #{destination_renewal_opportunity} field"
   rescue Exception => ex
     putstr "Error occurred while verifying the #{destination_renewal_opportunity} field and renewal relationship & Metrics fields values"
-   putstr_withScreen  ex.message
+    putstr_withScreen  ex.message
   end
 end
 
@@ -149,11 +171,11 @@ And(/^I add new line items to the "([^"]*)" and resolve the source opportunity$/
     within all(".pbSubsection")[0] do
       sleep 4
       if page.has_css?("#opp11")
-          find("#opp11").select arg["SourceOpportunityStageValue"]
-          sleep 3
-          puts "Successfully resolve the source opportunity"
+        find("#opp11").select arg["SourceOpportunityStageValue"]
+        sleep 3
+        puts "Successfully resolve the source opportunity"
       else
-         puts "Failed to see the Stage Value"
+        puts "Failed to see the Stage Value"
       end
     end
     within("#bottomButtonRow") do
@@ -163,10 +185,9 @@ And(/^I add new line items to the "([^"]*)" and resolve the source opportunity$/
     sleep 5
   rescue Exception => ex
     putstr "Error occurred while selecting the #{source_opportunity} opportunity"
-   putstr_withScreen  ex.message
+    putstr_withScreen  ex.message
   end
 end
-
 
 Then(/^I verify the associated "([^"]*)" and "([^"]*)"$/) do |destination, source|
   begin
@@ -174,30 +195,29 @@ Then(/^I verify the associated "([^"]*)" and "([^"]*)"$/) do |destination, sourc
     arg = getDetails "RenewalOpportunityFields"
     within all(".pbSubsection")[0] do
       if page.has_css?("#opp12_ilecell")
-         puts "Successfully see the probability"
+        puts "Successfully see the probability"
       else
-         putstr "Failed to see the probability"
+        putstr "Failed to see the probability"
       end
     end
     sleep 5
     within all(".pbSubsection")[2] do
-    if page.has_content?(arg["DestinationRenewalOpportunityField"])
-      if page.has_xpath?('//div[6]/table/tbody/tr[1]/td[2]/div/a')
-        puts "Successfully see the updated #{arg["DestinationRenewalOpportunityField"]}"
+      if page.has_content?(arg["DestinationRenewalOpportunityField"])
+        if page.has_xpath?('//div[6]/table/tbody/tr[1]/td[2]/div/a')
+          puts "Successfully see the updated #{arg["DestinationRenewalOpportunityField"]}"
+        else
+          putstr "Failed to see the updated #{arg["DestinationRenewalOpportunityField"]}"
+        end
       else
-        putstr "Failed to see the updated #{arg["DestinationRenewalOpportunityField"]}"
+        putstr "Failed to see the #{arg["DestinationRenewalOpportunityField"]} field"
       end
-    else
-      putstr "Failed to see the #{arg["DestinationRenewalOpportunityField"]} field"
     end
-   end
-   sleep 5
+    sleep 5
   rescue Exception => ex
     putstr "Error occurred while #{destination} and #{source} recalculated on the opportunity"
-   putstr_withScreen  ex.message
+    putstr_withScreen  ex.message
   end
 end
-
 
 And(/^I select the "([^"]*)" field$/) do |destination_service_contract|
   begin
@@ -219,13 +239,13 @@ And(/^I select the "([^"]*)" field$/) do |destination_service_contract|
     end
     sleep 8
     if page.has_content?(destination_service_contract)
-    within all(".pbSubsection")[1] do
-      sleep 5
-      all("input[type='text']")[1].send_keys [:control, 'a'], :backspace
-      sleep 4
-      all(".lookupIcon")[1].click
-      sleep 10
-    end
+      within all(".pbSubsection")[1] do
+        sleep 5
+        all("input[type='text']")[1].send_keys [:control, 'a'], :backspace
+        sleep 4
+        all(".lookupIcon")[1].click
+        sleep 10
+      end
       sleep 5
       main = page.driver.browser.window_handles.first
       sleep 5
@@ -250,7 +270,7 @@ And(/^I select the "([^"]*)" field$/) do |destination_service_contract|
     sleep 5
   rescue Exception => ex
     putstr "Error occurred while selecting the #{destination_service_contract} opportunity"
-   putstr_withScreen  ex.message
+    putstr_withScreen  ex.message
   end
 end
 
@@ -280,6 +300,6 @@ Then(/^I should be able to see the "([^"]*)" should get resolved$/) do |source|
     puts "Successfully deleted the #{arg["NewOpportunityName"]} Opportunity"
   rescue Exception => ex
     putstr "Error occurred while #{source} recalculated on the opportunity"
-   putstr_withScreen  ex.message
+    putstr_withScreen  ex.message
   end
 end

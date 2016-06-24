@@ -1,8 +1,6 @@
 #All Accounts - Account Details specific Step definitions
 #All Scenario mentioned in AccountDetails.feature
 
-
-
 Then(/^I should able to see the "([^"]*)" page columns$/) do |tab_name|
   begin
     sleep 5
@@ -167,9 +165,9 @@ Then(/^I verify the the grid scroll up and scroll down and pagination$/) do
     rowcount = all(".ui-grid-row.ng-scope").count
     if rowcount >= 25
       sleep 5
-      find("button[type='button']").send_keys :page_down
+      all("button[type='button']")[1].send_keys :page_down
       sleep 5
-      find("button[type='button']").send_keys :page_up
+      all("button[type='button']")[1].send_keys :page_up
       sleep 5
     else
       puts "Scroll bar is disabled"
@@ -183,6 +181,28 @@ Then(/^I verify the the grid scroll up and scroll down and pagination$/) do
     sleep 3
   rescue Exception => ex
     putstr "Error occurred while verifying the scroll up and scroll down the page and default pagination value"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I set Partner Account Type on Account ID "(.*?)" to "(.*?)" type$/) do |accountId, accountType|
+  begin
+    sleep 5
+    sufixUrl = "#{accountId}/e?retURL=#{accountId}"
+    url = page.current_url.to_s
+    url = url.sub('001/o', sufixUrl)
+    puts url
+    visit url
+    sleep 5
+    if page.has_content?("Partner Account Type")
+      option_xpath = "//*[@id='00N1a000008V0bK']/option[@value='#{accountType}']"
+      find(:xpath, option_xpath).click
+      sleep 2
+      all(:xpath, "//*/input[@name='save']")[0].click
+      sleep 5
+    end
+  rescue Exception => ex
+    putstr "Error occurred while changing account Type #{accountType} to for Account id: #{accountId}"
     putstr_withScreen  ex.message
   end
 end

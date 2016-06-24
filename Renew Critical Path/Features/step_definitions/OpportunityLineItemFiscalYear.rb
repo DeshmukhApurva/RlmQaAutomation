@@ -71,7 +71,28 @@ Then (/^I select a Opportunity Line Item with no date to set "(.*?)"$/)do|data|
     putstr_withScreen  ex.message
   end
 end
-
+Then (/^I select a RR on Opportunity to set Start and End Dates "(.*?)"$/)do|data|
+  begin
+#    visit "https://na17.salesforce.com/006o000000IRzRW"
+    arg1 = getDetails data
+    sleep 3
+    first(".customnotabBlock").first(:link,"Edit").click
+    
+    sleep 3
+         fill_in "Existing Start Date",:with=>arg1["StartDate"]
+        fill_in "Existing End Date",:with=>arg1["EndDate"]
+    sleep 1
+    within(:id,"topButtonRow")do
+        click_on "Save"
+        puts "Start Date and End Date has been set as #{arg1['StartDate']} and #{arg1['EndDate']}."
+    end
+  rescue Exception=>ex
+    puts "Error in selecting a line item with no date"
+    puts ex.backtrace
+        putstr_withScreen  ex.message
+    
+  end
+end
 And (/^I verify the quarter fields$/)do
   begin
     sleep 3

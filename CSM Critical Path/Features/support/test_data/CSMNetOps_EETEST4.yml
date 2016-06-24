@@ -1,8 +1,8 @@
 ---
 Reference:
  SPTemplate: "APT-000000"
- SuccessPlan: "SP-001085"
- SuccessPlanPlay: "SPPL-0000090"
+ SuccessPlan: "SP-001110"
+ SuccessPlanPlay: "SPPL-0000115"
  Play: "PN-0000000"
  Account: "Action Machinery Co"
  FCCategory: "PES FCG Overview"
@@ -15,4 +15,3 @@ Reference:
  AdditionalContactName: "Martin Liner"
  FCWidgetView: "PES FC for Widgets"
  FocusCategoryLookupValue: "CSM NetOps"
-

@@ -1,12 +1,10 @@
 #All Success Tasks Specific Step Definitions
 #All Scenario mentioned in SuccessTasks.feature
-
 Then(/^create new Tasks$/) do
 	begin
 		sleep 8
 		arg=getDetails "Taskdetails"	
 		spPlay = getReference "Reference"
-		spPlayValue = spPlay["SuccessPlanPlay"]
 		sleep 2
 		first(:xpath, "//*[contains(@id, 'selTasks')]").select(spPlay["FCView"])
 		sleep 8
@@ -18,16 +16,21 @@ Then(/^create new Tasks$/) do
 		puts "Selected First Task Category" 
 		click_on "Create Task"
 		sleep 8
+    currentDate = "#{Time.now.strftime("%m-%d-%Y")}"
 		within all('.pbSubsection').last do
 			sleep 5				
-			first(:xpath, "//*[contains(@id, 'dueValue')]").set(arg["DueDate"])
+			first(:xpath, "//*[contains(@id, 'dueValue')]").set(currentDate)
 			sleep 5			
 			first(:xpath, "//*[contains(@id, 'taskNameValue')]").click			
 			first(:xpath, "//*[contains(@id,'taskNameValue')]").set("Call")
-			#first(:xpath, "//*[contains(@id,'successPlanValue')]").click
       first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").click
 			first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").set(spPlay["SuccessPlanPlay"])
-			#first(:xpath, "//*[contains(@id,'playValue')]").set(spPlay["Play"])
+			within(:xpath, "//*[contains(@id,'relatedToBlockPanel')]") do
+			  first(:css, "input[id$='relatedToValue']").click
+			  sleep 2
+        first(:css, "input[id$='relatedToValue']").set(spPlay["Account"])
+			  sleep 2
+			end
 			first(:xpath, "//*[contains(@id, 'commentsValue')]").click
 			first(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
 			first(:xpath, "//*[contains(@id, 'taskStatusValue1')]").select(arg["Status"])
@@ -527,11 +530,12 @@ Then(/^click on New Button to create New Task$/) do
 		sleep 5
 		first("a",:text => "Create Task").click
 		sleep 5
+    currentDate = "#{Time.now.strftime("%m-%d-%Y")}"
 		within all('.pbSubsection').last do
 			table=all("table")[0]
 			sleep 5	
 			arg=getTaskInfo ""
-			table.all("td")[5].first(:css, "input[id$='dueValue']").set(arg["DueDate"])
+			table.all("td")[5].first(:css, "input[id$='dueValue']").set(currentDate)
 			sleep 5
 			table.all("td")[0].first(".comboboxIcon").click
 			sleep 5	
@@ -814,7 +818,6 @@ begin
 					if row.all("td")[6].text!="Completed"
 						if all(".removeEnabled").count > 0						
 							row.first(".removeEnabled").click
-							
 						end
 						i+=1
 						if i>1
@@ -824,6 +827,7 @@ begin
 				end
 			end
 		end
+		sleep 10
 		if i>0 
 			first(:xpath, "//*[contains(@id, 'riskReasonValue')]").first(:xpath, 'option[2]').select_option
 			first(:xpath, "//*[contains(@id, 'taskStatusValue')]").first(:xpath, 'option[4]').select_option
@@ -942,19 +946,19 @@ Then (/^I verify SP Details Widget on Success task$/) do
 		arg = getReference "Reference"
 		first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
 		sleep 5
-		searchStr = "In Progress"
+		searchStr = ""
 		within(".bootstrap-table") do
 			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
 			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
 			find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
 		end
-		sleep 10
+		sleep 5
     unless page.has_css?(".no-records-found")
       sleep 3
       first(".detailEnabled").click
       sleep 3
       all('.pbSubsection')[0].first("a").click
-      sleep 5
+      sleep 10
       puts ("SP opened successfully")
     else
       puts "No matching records found"
@@ -1076,7 +1080,14 @@ And(/^I select the tasks$/) do
 		sleep 5
 		arg = getReference "Reference"
 		find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
-		sleep 10
+		sleep 5
+    searchStr = "In Progress"
+    within(".bootstrap-table") do
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
+    end
+    sleep 5
 	unless page.has_css?(".no-records-found")
     within("#taskGrid") do
      if first("tbody").all("tr").count > 0
@@ -1125,15 +1136,21 @@ And(/^I "([^"]*)" the create new task$/) do |button|
 		puts "Selected First Task Category" 
 		click_on "Create Task"
 		sleep 8
+    currentDate = "#{Time.now.strftime("%m-%d-%Y")}"
 		within all('.pbSubsection').last do
 			sleep 5				
-			first(:xpath, "//*[contains(@id, 'dueValue')]").set(arg["DueDate"])
+			first(:xpath, "//*[contains(@id, 'dueValue')]").set(currentDate)
 			sleep 5			
 			first(:xpath, "//*[contains(@id, 'taskNameValue')]").click			
 			first(:xpath, "//*[contains(@id,'taskNameValue')]").set("Call")
-			first(:xpath, "//*[contains(@id,'successPlanValue')]").click
-			first(:xpath, "//*[contains(@id,'successPlanValue')]").set(spPlay["SuccessPlan"])
-			first(:xpath, "//*[contains(@id,'playValue')]").set(spPlay["Play"])
+			first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").click
+			first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").set(spPlay["SuccessPlanPlay"])
+      within(:xpath, "//*[contains(@id,'relatedToBlockPanel')]") do
+        first(:css, "input[id$='relatedToValue']").click
+        sleep 2
+        first(:css, "input[id$='relatedToValue']").set(spPlay["Account"])
+        sleep 2
+      end
 			first(:xpath, "//*[contains(@id, 'commentsValue')]").click
 			first(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
 			first(:xpath, "//*[contains(@id, 'taskStatusValue1')]").select(arg["Status"])
@@ -1175,7 +1192,12 @@ And(/^I select the task from task list$/) do
 	begin
 		sleep 3
 		arg = getReference "Reference"
-		sleep 4
+    searchStr = ""
+    within(".bootstrap-table") do
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
+    end
 		find(:xpath, "//*[contains(@id, 'selTasks')]").select arg["FCView"]
 		sleep 5
 		#find(".pull-right.search").first("input").set('')
@@ -1250,6 +1272,7 @@ And(/^I "([^"]*)" the dismiss success task$/) do |button|
 		unless page.has_xpath?("//input[@disabled='disabled']")
     sleep 5
 			first(:xpath, "//*[contains(@id, 'riskReasonValue')]").find(:xpath, 'option[2]').select_option
+      first(:xpath, "//*[contains(@id, 'taskStatusValue')]").select('Completed')
 			sleep 5
 			within all(".pbBottomButtons")[0] do
 				if page.has_button?(button)
@@ -1901,7 +1924,7 @@ And(/^I select the "([^"]*)" value from dismiss task$/) do |field|
 	unless page.has_css?(".no-records-found")
 		if $ispopwindow > 0
 			sleep 5
-			$reason_code = "C - Support Issue - SPI"
+			$reason_code = "D - Already Completed - ACD"
 			$current_date = "#{Time.now.strftime("%m-%d-%Y")}"
 			sleep 4
 			find(:xpath, "//*[contains(@id, 'completedOnValue')]").set $current_date
@@ -2033,24 +2056,29 @@ end
 And(/^I click on success task "([^"]*)" button$/) do |button|
 	begin
 		sleep 3
+		recordsFound = false;
 		unless page.has_css?(".no-records-found")
 			within("#taskGrid") do
 				if first("tbody").all("tr").count > 0
 					unless page.has_xpath?("//input[@disabled='disabled']")
             sleep 4
-						click_on button
-						sleep 6
+  					recordsFound = true
 					else
 						puts "Tasks are disabled mode"
-					end
-				else
-					puts "No Task Records found"
-				end
-			end
+				  end
+			  else
+			    puts "No Task Records found"
+		    end
+		  end
 		else
 			puts "No matching records found"
 		end
-		sleep 10
+		if recordsFound
+		  within("#grid-toolbar") do
+		    click_on button
+		    sleep 2
+		  end
+		end
 		puts "Successfully to clicked the #{button} button"
 	rescue Exception => ex
 		putstr "Error occurred while clicking the #{button} button"

@@ -1141,8 +1141,9 @@ And(/^I fill the required task details$/) do
 		sleep 4
 		first(:xpath, "//*[contains(@id, 'taskNameValue')]").click
 		first(:xpath, "//*[contains(@id, 'taskNameValue')]").set("Call")
-		first(:xpath, "//*[contains(@id, 'taskNameValue')]").set("Call")
-		first(:xpath, "//*[contains(@id, 'playValue')]").set(spPlay["Play"])
+		#first(:xpath, "//*[contains(@id, 'taskNameValue')]").set("Call")
+    first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").click
+    first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").set(spPlay["SuccessPlanPlay"])
 		sleep 4
 		first(:xpath, "//*[contains(@id, 'taskTypeValue')]").click
 		first(:xpath, "//*[contains(@id, 'taskTypeValue')]").select("Call")

@@ -7,11 +7,12 @@ Background: Login to the Application
     Then I should land on CRM home page
 
 
+
 @quote_opportunity_sub_tab
 Scenario: Rally Test Case ID: TC4418,TC4419,TC4420,TC4421,TC4422,TC4423,TC4424: Opportunity - Quotes subtab,Quotes subtab - Sorting,Quotes subtab - Export,Quotes subtab - Currency related fields,Quotes subtab -column Show/Hide
     When I click on "Opportunities" tab
-    And I clear the filters
-    And I select the "New Last Week" filter value
+   	And I verify the current expiration quarter value in Expiration Quarter filter
+   	And I verify the current expiration year value in Expiration Year filter
     And I sort "Latest Quote" in "Ascending" order
     And I navigate to the "Quotes" opportunity sub tab
     And I click on "Quotes" tab
