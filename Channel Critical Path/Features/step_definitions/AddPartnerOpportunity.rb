@@ -6,10 +6,12 @@ Then(/^I verify the "([^"]*)" name and corresponding "([^"]*)" name$/) do |oppor
   begin
     sleep 4
     #opportunity_name = find(:xpath, "//*[contains(@id, 'OppNameLable')]").text
+        #account_name = find(:xpath, "//*[contains(@id, 'AccountNameLable')] | //*/th[text()='Account Name']/following-sibling::td/span",exact: true).text
+    
     opportunity_name = find(:xpath, "//*/th[text()='Opportunity Name']/following-sibling::td/span",:match => :prefer_exact ).text
     puts "Opportunity Name: #{opportunity_name}"
     sleep 3
-    #account_name = find(:xpath, "//*[contains(@id, 'AccountNameLable')] | //*/th[text()='Account Name']/following-sibling::td/span",exact: true).text
+    
     account_name = find(:xpath, "//*/th[text()='Account Name']/following-sibling::td/span",  :match => :prefer_exact).text
     puts "Account Name: #{account_name}"
     sleep 3
