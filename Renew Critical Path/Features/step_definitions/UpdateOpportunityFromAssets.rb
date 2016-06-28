@@ -96,7 +96,7 @@ end
 And(/^I add asset criteria and multiple filter logic "([^"]*)" and "([^"]*)"$/) do |asset_filter1, asset_filter2|
   begin
     sleep 8
-	  arg = getDetails "AssetDetails"
+    arg = getDetails "AssetDetails"
     arg2 = getReference "AssetDetails"
     within all(".pbBody")[1] do
       within(".list") do
@@ -308,13 +308,13 @@ Then(/^I should see the renewal relationship & Metrics fields values are recalcu
     unless $before_updated_renewal_target == after_updated_renewal_target
       puts "Successfully updated the Renewal Opportunity renewal target"
     else
-      putstr "Failed to updated the Renewal Opportunity renewal target"
+      putstr "Failed to updated the Renewal Opportunity renewal target. Expected: #{$before_updated_renewal_target}, Actual: #{after_updated_renewal_target}"
     end
     sleep 5
     unless $before_updated_probability == after_updated_probability
       puts "Successfully updated the Renewal Opportunity probability"
     else
-      putstr "Failed to updated the Renewal Opportunity probability"
+      putstr "Failed to updated the Renewal Opportunity probability. Expected: #{$before_updated_probability}, Actual: #{after_updated_probability}"
     end
    end
    rescue Exception => ex
@@ -374,7 +374,7 @@ Then(/^I should not able to see the updated renewal opportunity$/) do
       if $before_updated_amount.to_i == after_updated_amount.to_i
         puts "Not updated the renewal opportunity amount"
       else
-        putstr "Updated the renewal opportunity amount"
+        puts "Updated the renewal opportunity amount"
       end
     end
 
@@ -383,4 +383,3 @@ Then(/^I should not able to see the updated renewal opportunity$/) do
     putstr_withScreen  ex.message
   end
 end
-

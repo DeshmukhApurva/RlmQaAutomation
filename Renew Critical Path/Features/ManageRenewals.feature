@@ -15,15 +15,31 @@ Scenario: Rally Test Case ID: TC4657,TC4645,TC5361,TC5362 - Rebuild Opportunity 
     And I Add Opportunity Product Line fields "Total Price" to "Total Price"
     And I save the Mapping
     When I click on "Opportunities" link
-    And I navigate to the "Renewal Relationship" opportunity
+    And I click on "New" button
+    And Create new Opportunity under an Account
+    And I click on "Choose Price Book" button
+    Then I Choose the Pricebook for the product
     And I click on "Add Product" button
     And I add the product
-    And I delete the "Renewal Relationship" opportunity product
+    And I resolve the "Opportunity"
+    And I go to first row where column name is "Contributed To"
+    And I delete the opportunity product
     When I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
-    And I click on renewal relationship "Rebuild Opportunity" button
     Then I verify the invalid "Renewal Relationship" opportunity product
-	And I delete the "Renewal Relationship" opportunity product
+    And I click on renewal relationship "Rebuild Opportunity" button
+
+
+#    When I click on "Opportunities" link
+#    And I navigate to the "Renewal Relationship" opportunity
+#    And I click on "Add Product" button
+#    And I add the product
+#    And I delete the "Renewal Relationship" opportunity product
+#    When I click on "Manage Renewals" button
+#    And I select the "Renewal Relationship" product field
+#    And I click on renewal relationship "Rebuild Opportunity" button
+#    Then I verify the invalid "Renewal Relationship" opportunity product
+#	And I delete the "Renewal Relationship" opportunity product
     
 
 @valid_renewal_relationship
@@ -207,36 +223,34 @@ Scenario: Rally Test Case ID: TC5361 - Manage Renewals - Disable Rebuild for Syn
 @sync_split_renewal_opportunity
 Scenario: Rally Test Case ID: TC5363,TC5365 - Manage Renewals - Disable RR Split for Synced Quote,Disable RR Split for Synced Quote on Target Opportunity
     When I click on "Opportunities" link
-    And I open the renewal relationship opportunity
-    Then I should able to see the "Renewal Relationship" section
-    And I sync the quotes to renewal opportunity
-    When I click on "Opportunities" link
-    And I open the renewal relationship opportunity
+    And I click on "New" button
+    And Create new Opportunity under an Account
+    And I click on "Choose Price Book" button
+    Then I Choose the Pricebook for the product
     And I click on "Add Product" button
     And I add the product
+    And I resolve the "Opportunity"
+    And I go to first row where column name is "Contributed To"
+    And I sync the quotes to renewal opportunity
     When I click on "Manage Renewals" button
-    And I select the multiple "Renewal Relationship" product fields
+    And I select the "Renewal Relationship" product field
     And I click on "Split Opportunity" button from renewal relationship page
     Then I should able to see the sync error message
-    When I click on "Opportunities" link
-    And I open the renewal relationship opportunity
-    And I stop the syncing the renewal opportunity
 
 
 @sync_consolidate_opportunity
 Scenario: Rally Test Case ID: TC5367,TC5369 - Manage Renewals - Disable RR Consolidation for Synced Quote,Disable RR Consolidation for Synced Quote on Target Opportunity
     When I click on "Opportunities" link
-    And I open the renewal relationship opportunity
-    Then I should able to see the "Renewal Relationship" section
-    And I sync the quotes to renewal opportunity
-    When I click on "Opportunities" link
-    And I open the renewal relationship opportunity
+    And I click on "New" button
+    And Create new Opportunity under an Account
+    And I click on "Choose Price Book" button
+    Then I Choose the Pricebook for the product
     And I click on "Add Product" button
     And I add the product
+    And I resolve the "Opportunity"
+    And I go to first row where column name is "Contributed To"
+    And I sync the quotes to renewal opportunity
     When I click on "Manage Renewals" button
-    Then I verify the "Consolidate Opportunity" button
-    When I click on "Consolidate Opportunity" button
+    And I select the "Renewal Relationship" product field
+    And I click on "Consolidate Opportunity" button from renewal relationship page
     Then I should able to see the sync error message
-    When I click on "Opportunities" link
-    And I open the renewal relationship opportunity
-    And I stop the syncing the renewal opportunity
