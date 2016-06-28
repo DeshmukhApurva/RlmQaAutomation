@@ -8,14 +8,13 @@ Background: Login to the Application
 
 @service_contracts_line_item
 Scenario: Rally Test Case ID: TC3414,TC3415,TC3416,TC3417: Opportunity Updates - Service Contract Line Item Change on Add/Edit
-	When I click on "ServiceSource Setup" link
-	And I click on "Opportunity Generation" link
-	And I select the "Enable Generation of Opportunities" checkbox on opp generation
-	When I click on "ServiceSource Setup" link
-	And I click on "Mappings" link
-	And I click on "Opportunity → Renewal Opportunity" link
-	And I Add Opportunity Fields "Account ID" and "Save"
-	And I save the Mapping
+#	When I click on "ServiceSource Setup" link
+#	And I click on "Opportunity Generation" link
+#	And I select the "Enable Generation of Opportunities" checkbox on opp generation
+#	When I click on "ServiceSource Setup" link
+#	And I click on "Mappings" link
+#	And I click on "Opportunity → Renewal Opportunity" link
+#	And I save the Mapping
 	When I click on "ServiceSource Setup" link
 	And I click on "Opportunity Updates" link
 	And I select the "Update opportunities when the following service contract line item fields change" checkbox
@@ -33,20 +32,19 @@ Scenario: Rally Test Case ID: TC3414,TC3415,TC3416,TC3417: Opportunity Updates -
 
 @service_contracts_checkbox
 Scenario: Rally Test Case ID: TC3418,TC3419 : Opportunity Updates - No Change to Renewal Opportunity,Update Opportunity checkbox (New Service Contract) line item
-	When I click on "ServiceSource Setup" link
-	And I click on "Opportunity Generation" link
-	And I unselect the "Enable Generation of Opportunities" checkbox on opp generation
-	When I click on "ServiceSource Setup" link
-	And I click on "Mappings" link
-	And I click on "Opportunity → Renewal Opportunity" link
-	And I Add Opportunity Fields "Account ID" and "Save"
-	And I save the Mapping
-	When I click on "ServiceSource Setup" link
-	And I click on "Mappings" link
-	And I click on "Asset → Opportunity" link
-	Then all required fields should be displayed in Grey
-	And I should be able to edit Opportunity Product Line field Quantity
-	And I save the Mapping
+#	When I click on "ServiceSource Setup" link
+#	And I click on "Opportunity Generation" link
+#	And I unselect the "Enable Generation of Opportunities" checkbox on opp generation
+#	When I click on "ServiceSource Setup" link
+#	And I click on "Mappings" link
+#	And I click on "Opportunity → Renewal Opportunity" link
+#	And I save the Mapping
+#	When I click on "ServiceSource Setup" link
+#	And I click on "Mappings" link
+#	And I click on "Asset → Opportunity" link
+#	Then all required fields should be displayed in Grey
+#	And I should be able to edit Opportunity Product Line field Quantity
+#	And I save the Mapping
 	When I click on "ServiceSource Setup" link
 	And I click on "Opportunity Updates" link
 	And I unselect the "Update opportunities when the following service contract line item fields change" checkbox
@@ -58,12 +56,9 @@ Scenario: Rally Test Case ID: TC3418,TC3419 : Opportunity Updates - No Change to
 	Then I verify that renewal opportunity update accordingly
 
 @service_contracts_data_types
-Scenario:Rally Test Case ID: TC3420 : Opportunity Updates - Data Types
+Scenario: Rally Test Case ID: TC3420 : Opportunity Updates - Data Types
 	When I click on "ServiceSource Setup" link
 	And I click on "Opportunity Generation" link
 	And I select the "Enable Generation of Opportunities" checkbox on opp generation
 	And I verify the Data Types of "OppFields"
 	And I verify the list of Operators for "OppFields"
-
-
-

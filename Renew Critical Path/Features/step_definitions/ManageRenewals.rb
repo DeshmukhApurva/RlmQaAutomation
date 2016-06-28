@@ -1170,6 +1170,17 @@ And(/^I navigate to the "([^"]*)" opportunity$/) do |arg|
   end
 end
 
+
+
+And(/^I delete the opportunity product$/) do
+  $rebuild_product_name = first(".opportunityLineItemBlock").first("tbody").first(".dataRow").first("th").first("a").text
+  first(".opportunityLineItemBlock").first(:link,"Del").click
+  sleep 3
+  page.driver.browser.switch_to.alert.accept
+  puts "Deleted product #{$rebuild_product_name}"
+  sleep 5
+end
+
 And(/^I delete the "([^"]*)" opportunity product$/) do |renewal_relationship|
   begin
     sleep 8
@@ -1330,6 +1341,8 @@ And(/^I sync the quotes to renewal opportunity$/) do
   #   putstr "Error occurred while syncing the quote renewal opportunity"
   #   putstr_withScreen  ex.message
   # end
+  find(:xpath, "//td[text()='Opportunity Name']").find(:xpath, "following-sibling::td/div/a").click
+  sleep 5
 end
 
 Then(/^I should able to see the sync error message$/) do
