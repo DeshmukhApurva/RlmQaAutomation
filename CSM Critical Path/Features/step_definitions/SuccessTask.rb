@@ -993,6 +993,7 @@ Then (/^I open Contact$/) do
           end
         end
       end
+      sleep 5
       if found > 0
         fill_in 'Subject', :with => 'Send Email'
         sleep 5
@@ -1193,12 +1194,12 @@ And(/^I select the task from task list$/) do
 		sleep 3
 		arg = getReference "Reference"
     searchStr = ""
+    find(:xpath, "//*[contains(@id, 'selTasks')]").select arg["FCView"]
     within(".bootstrap-table") do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
     end
-		find(:xpath, "//*[contains(@id, 'selTasks')]").select arg["FCView"]
 		sleep 5
 		#find(".pull-right.search").first("input").set('')
 		puts "Successfully selected the filter"
@@ -1979,11 +1980,15 @@ Then(/^I verify that user preference is saved$/) do
 		if page.has_css?(".pagination-detail")
 			puts "Successfully see the pagination"
 			sleep 4
-      if find(".page-size").text == $page_size
-				puts "User preference is saved as per last selection"
-      else
-				putstr "User preference is not saved as per last selection"
-      end
+			if page.has_css?(".page-size")
+        if find(".page-size").text == $page_size
+          puts "User preference is saved as per last selection"
+        else
+          putstr "User preference is not saved as per last selection"
+        end
+			else
+			  puts "FC does not have enough record to display page size list drop down"
+			end
 		else
 			putstr "Failed to see the pagination"
 		end
