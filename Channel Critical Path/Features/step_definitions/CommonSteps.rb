@@ -431,3 +431,38 @@ When(/^I click on the "(.*?)" grid tab$/) do |tab|
 		putstr_withScreen  ex.message
 	end
 end
+
+When(/^I log into "(.*?)" details$/) do |arg1|
+  begin
+    sleep 5
+    ENV['UserRole'] = arg1
+    arg = getCredentialInfo
+    visit arg["url"]
+    sleep 4
+    #puts "Login as " + ENV['UserRole']
+    if arg["url"] == "https://login.salesforce.com/"
+      sleep 4
+      fill_in "username",:with => arg["userName"]
+      sleep 4
+      fill_in "Password",:with => arg["pwd"]
+      puts "Entered Credentials"
+      find(:id,"Login").click
+      page.driver.browser.manage.window.maximize
+      sleep 10
+    else
+      sleep 4
+      fill_in "username",:with => arg["userName"]
+      sleep 4
+      find("input[name='password']").send_keys arg["pwd"]
+      puts "Entered Credentials"
+      sleep 4
+      click_on 'Sign In'
+      sleep 5
+      page.driver.browser.manage.window.maximize
+      sleep 6
+    end
+  rescue Exception => ex
+    puts "Error while entering credentials"
+    puts ex.message
+  end
+end
