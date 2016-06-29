@@ -642,7 +642,7 @@ end
 
 And(/^I click on "([^"]*)" button$/) do |button|
   begin
-    sleep 3
+    sleep 5
     click_on button
     sleep 10
     puts "Successfully to clicked the #{button} button"
