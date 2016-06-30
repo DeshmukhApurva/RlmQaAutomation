@@ -49,10 +49,10 @@ SalesStages:
 
 AddPartnerOpportunity:
  PartnerOpportunityName: "PES_Add_Partner"
- PartnerAccount1FieldName: "Partner Account 1"
- PartnerAccount2FieldName: "Partner Account 1"
- PartnerAccount1ContactFieldName: "Con1PA1"
- PartnerAccount2ContactFieldName: "Con1PA1"
+ PartnerAccount1FieldName: "PES Channel Account"
+ PartnerAccount2FieldName: "PES Channel Account"
+ PartnerAccount1ContactFieldName: "PES Channel User"
+ PartnerAccount2ContactFieldName: "PES Channel User"
 
 NewSalesRequest:
  NewRequestField1: "Subject"
