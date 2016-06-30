@@ -24,22 +24,22 @@ Feature: All features related to ServiceSource Setup - Channel Portal Configurat
     Then I add or remove Sales stages again from "Display in Pipeline" to "Hidden from Pipeline"
     And I verify "Show Opportunities for Unavailable Stage" checkbox
 
-  @verify2TierPricing
-  Scenario: Rally Test Case ID: TS5457,TS5458 : Channel Portal Config - Check the "Enable 2 Tier Pricing" checkbox.
-    When I Navigate to "ServiceSource Setup" tab
-    And I click on "Channel Portal Configuration" link
-    And I verify "Enable 2 Tier Pricing" checkbox
+  #@verify2TierPricing
+  #Scenario: Rally Test Case ID: TS5457,TS5458 : Channel Portal Config - Check the "Enable 2 Tier Pricing" checkbox.
+  #  When I Navigate to "ServiceSource Setup" tab
+  #  And I click on "Channel Portal Configuration" link
+  #  And I verify "Enable 2 Tier Pricing" checkbox
 
-  @check_the_enable_2_tier_pricing_checkbox
-  Scenario: Rally Test Case ID: TS5457,TS5481,TS5482 - Channel Portal Config - Check the "Enable 2 Tier Pricing" checkbox,Group Sharing : Verify that portal group members get instant access to Master opportunity,Verify additional members should also get access to Partner Opportunity when added to Portal Groups
-    When I Navigate to "ServiceSource Setup" tab
-    And I click on "Channel Portal Configuration" link
-    And I check the "Enable 2 Tier Pricing" checkbox
-    And I click on "Save" button from "Channel Portal Configuration" page
+  #@check_the_enable_2_tier_pricing_checkbox
+  #Scenario: Rally Test Case ID: TS5457,TS5481,TS5482 - Channel Portal Config - Check the "Enable 2 Tier Pricing" checkbox,Group Sharing : Verify that portal group members get instant access to Master opportunity,Verify additional members should also get access to Partner Opportunity when added to Portal Groups
+  #  When I Navigate to "ServiceSource Setup" tab
+  #  And I click on "Channel Portal Configuration" link
+  #  And I check the "Enable 2 Tier Pricing" checkbox
+  #  And I click on "Save" button from "Channel Portal Configuration" page
 
-  @uncheck_the_enable_2_tier_pricing_checkbox
-  Scenario: Rally Test Case ID: TS5458,TS5483 - Channel Portal Config -Uncheck the "Enable 2 Tier Pricing" checkbox,Group Sharing : Verify Partner Opportunity on Portal after granting access
-    When I Navigate to "ServiceSource Setup" tab
-    And I click on "Channel Portal Configuration" link
-    And I uncheck the "Enable 2 Tier Pricing" checkbox
-    And I click on "Save" button from "Channel Portal Configuration" page
+  #@uncheck_the_enable_2_tier_pricing_checkbox
+  #Scenario: Rally Test Case ID: TS5458,TS5483 - Channel Portal Config -Uncheck the "Enable 2 Tier Pricing" checkbox,Group Sharing : Verify Partner Opportunity on Portal after granting access
+  #  When I Navigate to "ServiceSource Setup" tab
+  #  And I click on "Channel Portal Configuration" link
+  #  And I uncheck the "Enable 2 Tier Pricing" checkbox
+  #  And I click on "Save" button from "Channel Portal Configuration" page
