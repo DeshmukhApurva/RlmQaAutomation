@@ -987,13 +987,14 @@ Then (/^I open Contact$/) do
           puts "Contact phone number:"+all(".iconContact-phone")[0].text
           puts "Contact Name:"+first(".ss_contact_name").text
           if all(".iconBasic-mail").count > 0
-               found = 1
+             found = 1
+             sleep 1
              all(".iconBasic-mail")[0].click
              puts "Email verified"
           end
         end
       end
-      sleep 5
+      sleep 2
       if found > 0
         fill_in 'Subject', :with => 'Send Email'
         sleep 5
@@ -1831,6 +1832,7 @@ end
 And(/^I verify the "([^"]*)" task reason code$/) do |status|
 	begin
 	sleep 4
+	puts "current_date - #{$current_date}"
 	unless page.has_css?(".no-records-found")
 	 if $ispopwindow > 0
 		if page.has_css?("#taskGrid")
