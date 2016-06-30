@@ -25,6 +25,7 @@ Scenario: Rally Test Case ID: TC3294,TC3295,TC3298,TC3299,TC3308,TC3310,TC3311 :
 @ren_renewal_tracking_fields
 Scenario: Rally Test Case ID: TC3296,TC3297,TC3300,TC3301,TC3302,TC3303,TC3306,TC3309,TC3316,TC3318,TC3319,TC3320,TC3321 : Renewal Opportunity Specific fields - First Contact Date,Renewal Opportunity Specific fields - First Quote Date,Renewal Opportunity Specific fields - Adds Amount,Renewal Opportunity Specific fields - Renewal Target - Resolved,Renewal Opportunity Specific fields - Renewal Target - Lost,Renewal Opportunity Specific fields - Renewal Target - Won, Renewal Opportunity Specific fields - Resolution Date, Renewal Opportunity Specific fields - Conversion Rate, Renewal Opportunity Specific fields - Assets and Service Contract Line Items: Renewal Target, Renewal Opportunity Specific fields - Verify the Renewal Target - Resolved field, Renewal Opportunity Specific fields - Verify the Renewal Target - Lost field, Renewal Opportunity Specific fields - Verify the Renewal Target - Won field, Renewal Opportunity Specific fields - Verify the Renewal Target field
 	When I click on "Opportunities" link
+	#And I click on RenewTesting link
 	And I go to existing renewal opportunities
 	And I click on "Add Product" button
 	And I select one or more product from the grid

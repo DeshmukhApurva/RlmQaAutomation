@@ -13,5 +13,5 @@ Scenario: Rally Test Case ID: TC3386: Opportunity Updates - Asset Field Change
 	And I click on asset link
 	And I update the asset as per criteria set for asset field on opportunity generation
 	When I click on "Opportunities" link
-	And I go to existing renewal opportunities
+	And I go to the existing renewal opportunities
 	Then I should see the renewal relationship & Metrics fields values are recalculated on the opportunity

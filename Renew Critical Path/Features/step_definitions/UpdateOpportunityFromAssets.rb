@@ -190,6 +190,42 @@ And(/^I add asset criteria and multiple filter logic "([^"]*)" and "([^"]*)"$/) 
   end
 end
 
+And(/^I go to existing opportunities$/) do
+  begin
+    
+    sleep 6
+       arg = getReference "AssetDetails"
+       find('#fcf').select "My Opportunities"
+       sleep 5
+       within (".fBody") do
+        click_button 'Go!'
+       end
+       sleep 10
+       if page.has_css?(".listItemPad")
+         sleep 4
+         puts "Successfully see the Alphabetic Pagination"
+         all(".listItemPad")[13].click
+         sleep 8
+         all(".selectArrow")[0].click
+         sleep 8
+         within(".bottomNav") do
+           first("table").all("tr")[4].click
+         end
+       else
+         putstr "Failed to see the Alphabetic Pagination"
+       end
+    
+        find(:xpath, "(//input[@type='checkbox'])[2]").set(true)
+        puts "Successfully selected the Standard Pricebook Opportunity"
+        find(:xpath, "(//input[@type='checkbox'])[3]").set(true)
+        puts "Successfully selected the Test Pricebook Opportunity"
+       
+       click_on "Merge"
+       puts "Clicked on Merge Button"
+       sleep 10
+       
+  end
+end
 
 And(/^I go to existing renewal opportunities$/) do
   begin
@@ -226,11 +262,60 @@ And(/^I go to existing renewal opportunities$/) do
      end
    end
    putstr "Unable to find the #{arg["OpportunityName"]} Renewal Opportunity" unless result
+   $before_total_amount = find(:id,"opp7_ileinner").text
+   puts "$before_total_amount = " 
+   puts $before_total_amount
   rescue Exception => ex
     putstr "Error occurred while clicking on existing #{arg["OpportunityName"]} Renewal Opportunity page"
     putstr_withScreen  ex.message
  end
 end
+
+And(/^I go to the existing renewal opportunities$/) do
+  begin
+   sleep 6
+   arg = getReference "AssetDetails"
+   find('#fcf').select "My Opportunities"
+   sleep 5
+   within (".fBody") do
+    click_button 'Go!'
+   end
+   sleep 10
+   if page.has_css?(".listItemPad")
+     sleep 4
+     puts "Successfully see the Alphabetic Pagination"
+     all(".listItemPad")[17].click
+     sleep 8
+     all(".selectArrow")[0].click
+     sleep 8
+     within(".bottomNav") do
+       first("table").all("tr")[4].click
+     end
+   else
+     putstr "Failed to see the Alphabetic Pagination"
+   end
+   sleep 10
+   result = false
+   all(:xpath, '//div/table/tbody/tr/td[4]/div/a/span').each do |activity|
+     if activity.text.include? arg["OpportunityName"]
+       puts "Successfully match the Renewal Opportunity name"
+       activity.click
+       puts "Successfully opened the #{arg["OpportunityName"]} Renewal Opportunity"
+       result = true
+       break
+     end
+   end
+   putstr "Unable to find the #{arg["OpportunityName"]} Renewal Opportunity" unless result
+   $after_total_amount = find(:id,"opp7_ileinner").text
+     puts "$after_total_amount = " 
+     puts $after_total_amount
+
+  rescue Exception => ex
+    putstr "Error occurred while clicking on existing #{arg["OpportunityName"]} Renewal Opportunity page"
+    putstr_withScreen  ex.message
+ end
+end
+
 
 And(/^I click on asset link$/) do
   begin
@@ -273,8 +358,24 @@ And(/^I update the asset as per criteria set for asset field on opportunity gene
     click_on ' Edit '
     sleep 5
   end
-  fill_in "Price",:with => arg["AssetPrice"]
-  sleep 5
+  $priceofasset = find(:id, "Price").value.delete(',').to_i
+#  puts find(:id, "Price").value
+#  
+#    puts $priceofasset
+#    puts arg["AssetPrice"]
+#    puts $priceofasset == arg["AssetPrice"]
+#    puts arg["AssetNewPrice"]
+#    puts $priceofasset == arg["AssetNewPrice"]
+  
+    if $priceofasset == arg["AssetPrice"]
+    
+  fill_in "Price",:with => arg["AssetNewPrice"]
+  elsif $priceofasset == arg["AssetNewPrice"]
+    
+    fill_in "Price",:with => arg["AssetPrice"]
+  end
+  sleep 1
+  
   first("#bottomButtonRow").click_on ' Save '
   sleep 5
   puts "Successfully updated the Asset criteria"

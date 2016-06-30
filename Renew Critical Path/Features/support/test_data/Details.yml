@@ -130,6 +130,7 @@ AssetDetails:
  SearchAndAddAssetVisibleText: "AND"
  AssetContractCheckboxIndex: 0
  AssetPrice: 1500
+ AssetNewPrice: 2500
  AssetSearchCriteria: "Assets"
 
 

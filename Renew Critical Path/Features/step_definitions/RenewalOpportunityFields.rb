@@ -13,7 +13,6 @@ Then(/^I should able to see the opportunity detail fields$/) do
       expiration_quarter_field = all("tr")[4].first("td").text
       expiration_year_fields = all("tr")[5].first("td").text
 
-
       if all("tr")[1].all("td")[3].first("img")[:title] == "Checked"
         puts "Opportunity Renewal checkbox is checked"
       else
@@ -68,7 +67,6 @@ Then(/^I should able to see the opportunity detail fields$/) do
       close_date_field = all("tr")[3].all("td")[2].text
       renewal_target_field = all("tr")[4].all("td")[2].text
       probability_field = all("tr")[5].all("td")[2].text
-
 
       unless opportunity_owner_field.to_s == arg["OpportunityOwnerField"].to_s
         putstr "Failed to see the #{opportunity_owner_field} field"
@@ -125,8 +123,6 @@ Then(/^I should able to see the opportunity detail fields$/) do
   end
 end
 
-
-
 And(/^I change the earliest expiration date value and set the new date range$/) do
   begin
     sleep 5
@@ -152,7 +148,6 @@ And(/^I change the earliest expiration date value and set the new date range$/) 
     putstr_withScreen  ex.message
   end
 end
-
 
 Then(/^I should able to see the renewals indicators fields$/) do
   begin
@@ -222,7 +217,6 @@ Then(/^I should able to see the renewal tracking fields$/) do
       conversion_delta_field = all("tr")[6].first("td").text
       created_by_field = all("tr")[7].first("td").text
 
-
       unless destination_renewal_opportunity_field.to_s == arg["DestinationRenewalOpportunityField"].to_s
         putstr "Failed to see the #{destination_renewal_opportunity_field} field"
       else
@@ -235,50 +229,57 @@ Then(/^I should able to see the renewal tracking fields$/) do
       else
         puts "Successfully see the #{first_contact_date_field} field"
       end
-      sleep 5
+      sleep 2
 
       unless first_quote_date_field.to_s == arg["FirstQuoteDateField"].to_s
         putstr "Failed to see the #{first_quote_date_field} field"
       else
         puts "Successfully see the #{first_quote_date_field} field"
       end
-      sleep 5
+      sleep 2
 
       unless resolution_date_field.to_s == arg["ResolutionDateField"].to_s
         putstr "Failed to see the #{resolution_date_field} field"
       else
         puts "Successfully see the #{resolution_date_field} field"
       end
-      sleep 5
+      sleep 2
 
       unless adds_amount_field.to_s == arg["AddsAmountField"].to_s
         putstr "Failed to see the #{adds_amount_field} field"
       else
         puts "Successfully see the #{adds_amount_field} field"
       end
-      sleep 5
+      sleep 2
 
       unless adds_ratio_field.to_s == arg["AddsRatioField"].to_s
         putstr "Failed to see the #{adds_ratio_field} field"
       else
         puts "Successfully see the #{adds_ratio_field} field"
       end
-      sleep 5
+      sleep 2
 
       unless conversion_delta_field.to_s == arg["ConversionDeltaField"].to_s
         putstr "Failed to see the #{conversion_delta_field} field"
       else
         puts "Successfully see the #{conversion_delta_field} field"
       end
-      sleep 5
+      sleep 2
 
       unless created_by_field.to_s == arg["CreatedByField"].to_s
         putstr "Failed to see the #{created_by_field} field"
       else
         puts "Successfully see the #{created_by_field} field"
       end
-      sleep 5
-
+      sleep 2
+           
+#      $after_update_renewal_target = find(:xpath, "//td[text()='Renewal Target - Resolved']/following-sibling::td/div").text
+#
+#      if $before_update_renewal_target != $after_update_renewal_target
+#        putstr "Successfully updated Renewal Target - Resolved field"
+#      else
+#        putstr "Failed to update Renewal Target - Resolved field"
+#      end
 
       if page.has_content?(arg["DestinationServiceContractField"])
         puts "Successfully see the #{arg["DestinationServiceContractField"]} field"
@@ -316,6 +317,65 @@ Then(/^I should able to see the renewal tracking fields$/) do
         putstr "Failed to see the #{arg["LastModifiedByField"]} field"
       end
     end
+
+    #$before_update_renewal_target = find(:xpath, "//td[text()='Renewal Target - Resolved']/following-sibling::td/div").text
+    #puts $before_update_renewal_target
+
+    sleep 5
+    before_rt_won = find(:xpath, "//div[6]/table/tbody/tr[3]/td[4]/div[1]").text
+    puts "before_rt_won = "
+    puts find(:xpath, "//div[6]/table/tbody/tr[3]/td[4]/div[1]").text
+
+    before_rt_lost = find(:xpath, "//div[6]/table/tbody/tr[5]/td[4]/div[1]").text
+    puts "before_rt_lost = "
+    puts find(:xpath, "//div[6]/table/tbody/tr[5]/td[4]/div[1]").text
+
+    #find(:xpath,"(//a[contains(text(),'Edit')])[6]").click
+    
+    within all(".customnotabBlock")[0]do
+        first(:link,"Edit").click
+      end
+    sleep 10
+    visit(current_path)
+    puts find(:xpath, "//div[@id='ep']/div[2]/div[2]/table/tbody/tr[4]/td[4]/span/select").value
+    puts "--"
+    RenStatus = find(:xpath, "//div[@id='ep']/div[2]/div[2]/table/tbody/tr[4]/td[4]/span/select").value
+    if RenStatus == "Open"
+      first(:option, 'Won').select_option
+    elsif RenStatus == "Won"
+      first(:option, 'Lost').select_option
+    elsif RenStatus == "Lost"
+      first(:option, 'Won').select_option
+    end
+
+    sleep 5
+    puts find(:xpath, "//div[@id='ep']/div[2]/div[2]/table/tbody/tr[4]/td[4]/span/select").value
+    first(:button, 'Save').click
+    sleep 10
+    first(:link, 'RenewTesting').click
+    sleep 5
+
+    after_rt_won = find(:xpath, "//div[6]/table/tbody/tr[3]/td[4]/div[1]").text
+    after_rt_lost = find(:xpath, "//div[6]/table/tbody/tr[5]/td[4]/div[1]").text
+
+    #after_rt_won = find(:xpath, "//div[6]/table/tbody/tr[3]/td[4]/div[1]").text
+    puts "after_rt_won = "
+    puts find(:xpath, "//div[6]/table/tbody/tr[3]/td[4]/div[1]").text
+
+    #after_rt_lost = find(:xpath, "//div[6]/table/tbody/tr[5]/td[4]/div[1]").text
+    puts "after_rt_lost = "
+    puts find(:xpath, "//div[6]/table/tbody/tr[5]/td[4]/div[1]").text
+
+    if before_rt_won != after_rt_won
+      puts "Renewal Target - Won updated/changed Successfully"
+    end
+    if before_rt_lost != after_rt_lost
+      puts "Renewal Target - Lost updated/changed Successfully"
+    end
+
+    puts "Successfully updated Renewal Target - Won/Lost"
+    sleep 5
+
     sleep 5
   rescue Exception => ex
     putstr "Error occurred while verifying the renewal tracking fields"
@@ -323,12 +383,72 @@ Then(/^I should able to see the renewal tracking fields$/) do
   end
 end
 
+And(/^I click on RenewTesting link$/) do
+  begin
+
+    first(:link, 'RenewTesting').click
+    #click_on 'RenewTesting'
+    sleep 5
+
+    before_rt_won = find(:xpath, "//div[6]/table/tbody/tr[3]/td[4]/div[1]").text
+    puts "before_rt_won = "
+    puts find(:xpath, "//div[6]/table/tbody/tr[3]/td[4]/div[1]").text
+
+    before_rt_lost = find(:xpath, "//div[6]/table/tbody/tr[5]/td[4]/div[1]").text
+    puts "before_rt_lost = "
+    puts find(:xpath, "//div[6]/table/tbody/tr[5]/td[4]/div[1]").text
+
+    find(:xpath,"(//a[contains(text(),'Edit')])[6]").click
+    sleep 10
+    visit(current_path)
+    puts find(:xpath, "//div[@id='ep']/div[2]/div[2]/table/tbody/tr[4]/td[4]/span/select").value
+    puts "--"
+    RenStatus = find(:xpath, "//div[@id='ep']/div[2]/div[2]/table/tbody/tr[4]/td[4]/span/select").value
+    if RenStatus == "Open"
+      first(:option, 'Won').select_option
+    elsif RenStatus == "Won"
+      first(:option, 'Lost').select_option
+    elsif RenStatus == "Lost"
+      first(:option, 'Won').select_option
+    end
+
+    sleep 5
+    puts find(:xpath, "//div[@id='ep']/div[2]/div[2]/table/tbody/tr[4]/td[4]/span/select").value
+    first(:button, 'Save').click
+    sleep 10
+    first(:link, 'RenewTesting').click
+    sleep 5
+
+    after_rt_won = find(:xpath, "//div[6]/table/tbody/tr[3]/td[4]/div[1]").text
+    after_rt_lost = find(:xpath, "//div[6]/table/tbody/tr[5]/td[4]/div[1]").text
+
+    #after_rt_won = find(:xpath, "//div[6]/table/tbody/tr[3]/td[4]/div[1]").text
+    puts "after_rt_won = "
+    puts find(:xpath, "//div[6]/table/tbody/tr[3]/td[4]/div[1]").text
+
+    #after_rt_lost = find(:xpath, "//div[6]/table/tbody/tr[5]/td[4]/div[1]").text
+    puts "after_rt_lost = "
+    puts find(:xpath, "//div[6]/table/tbody/tr[5]/td[4]/div[1]").text
+
+    if before_rt_won != after_rt_won
+      puts "Renewal Target - Won updated/changed Successfully"
+    end
+    if before_rt_lost != after_rt_lost
+      puts "Renewal Target - Lost updated/changed Successfully"
+    end
+
+    puts "Successfully updated Renewal Target - Won/Lost"
+    sleep 5
+
+  end
+
+end
 
 And(/^I change renewal status of one of the line items to "([^"]*)"$/) do |stage|
   begin
     sleep 5
     within("#bottomButtonRow") do
-    click_on 'Edit'
+      click_on 'Edit'
     end
     sleep 5
     within all(".pbSubsection")[0] do
@@ -362,19 +482,19 @@ end
 
 Then(/^I should able to see the "([^"]*)" section$/) do |title|
   begin
-   sleep 5
-  within all(".customnotabBlock")[0] do
-   renewal_relationship_title = first(".pbTitle").text
-   sleep 4
-    unless renewal_relationship_title.to_s == title.to_s
-      putstr "Failed to see the #{renewal_relationship_title} section"
-    else
-      puts "Successfully see the #{renewal_relationship_title} section"
+    sleep 5
+    within all(".customnotabBlock")[0] do
+      renewal_relationship_title = first(".pbTitle").text
+      sleep 4
+      unless renewal_relationship_title.to_s == title.to_s
+        putstr "Failed to see the #{renewal_relationship_title} section"
+      else
+        puts "Successfully see the #{renewal_relationship_title} section"
+      end
     end
-  end
   rescue Exception => ex
-  putstr "Error occurred while verifying the renewal relationship section"
-  putstr_withScreen  ex.message
- end
+    putstr "Error occurred while verifying the renewal relationship section"
+    putstr_withScreen  ex.message
+  end
 end
 
