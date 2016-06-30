@@ -274,6 +274,7 @@ When(/^I select the Priority "([^"]*)" from drop down$/) do |priority|
     puts "Successfully selected the #{arg["SelectPriorityField1"]} field value"
 
     # Select Priority "Low"...
+    sleep 5
     find("div[placeholder='Select Priority...']").click
     sleep 5
     find("input[placeholder='Select Priority...']").send_keys arg["SelectPriorityField2"]
