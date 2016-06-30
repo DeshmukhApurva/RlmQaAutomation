@@ -20,7 +20,7 @@ Distributor Rep:
  filterValues: "PES Channel User"
 
 Opportunity Pipeline:
- Quarter: "Q1 2016"
+ Quarter: "Q1"
  Country: "USA"
  Reseller Rep: "PES Channel User"
  Distributor Rep: "PES Channel User"

@@ -217,8 +217,8 @@ NeedStatusUpdate:
  Status: "Set Sales Stage as Negotiation/Review"
 
 ExpirationQuarter:
- CurrentQuarter: "Q1 2016"
- ChangedQuarter: "Q2 2016"
+ CurrentQuarter: "Q1"
+ ChangedQuarter: "Q2"
  AllQuarter: "All Quarters"
 
 contactsSubtab:
@@ -302,4 +302,3 @@ GroupSharing:
  PortalDescription: "test group"
  SelectedGroupMembersSection: "Selected Group Members"
  DuplicatePortalGroupErrorMessage: "Duplicate Group Name"
-
