@@ -2851,7 +2851,7 @@ Then(/^I verify Task State$/) do
           end
         end
         puts $stas
-        $taskstas = find(:id, '00N1a000006qMEQ_ileinner').text
+        $taskstas = find(:xpath, '//*/td[text()="Task State"]/following-sibling::td/div').text
         puts $taskstas
         if $taskstas == "Manual Completion" && $stas == "Completed"
           puts "Task State Status verified as Manual Completion."

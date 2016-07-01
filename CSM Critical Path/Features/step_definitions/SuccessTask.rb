@@ -988,7 +988,7 @@ Then (/^I open Contact$/) do
           puts "Contact Name:"+first(".ss_contact_name").text
           if all(".iconBasic-mail").count > 0
              found = 1
-             sleep 1
+             sleep 5
              all(".iconBasic-mail")[0].click
              puts "Email verified"
           end
