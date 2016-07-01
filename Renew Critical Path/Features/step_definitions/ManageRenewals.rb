@@ -3,7 +3,7 @@
 
 When(/^I click on "([^"]*)" edit link$/) do |renewal_relationship|
   begin
-    
+
     sleep 5
     within all(".pbBody")[2] do
       within(".list") do
@@ -1170,15 +1170,19 @@ And(/^I navigate to the "([^"]*)" opportunity$/) do |arg|
   end
 end
 
-
-
 And(/^I delete the opportunity product$/) do
-  $rebuild_product_name = first(".opportunityLineItemBlock").first("tbody").first(".dataRow").first("th").first("a").text
-  first(".opportunityLineItemBlock").first(:link,"Del").click
-  sleep 3
-  page.driver.browser.switch_to.alert.accept
-  puts "Deleted product #{$rebuild_product_name}"
-  sleep 5
+  begin
+    $rebuild_product_name = first(".opportunityLineItemBlock").first("tbody").first(".dataRow").first("th").first("a").text
+    first(".opportunityLineItemBlock").first(:link,"Del").click
+    sleep 3
+    page.driver.browser.switch_to.alert.accept
+    puts "Deleted product #{$rebuild_product_name}"
+    sleep 5
+  rescue Exception => ex
+    putstr "Error occurred while deleting the Opportunity product"
+    putstr_withScreen  ex.message
+  end
+
 end
 
 And(/^I delete the "([^"]*)" opportunity product$/) do |renewal_relationship|
@@ -1266,11 +1270,11 @@ And(/^I sync the quotes to renewal opportunity$/) do
   sleep 3
   if isQuotePresent > 0
     sleep 4
-#    within all(".listRelatedObject")[8] do
-#      within(".pbButton") do
-        click_on arg["CreateQuote"]
-#      end
-#    end
+    #    within all(".listRelatedObject")[8] do
+    #      within(".pbButton") do
+    click_on arg["CreateQuote"]
+    #      end
+    #    end
     sleep 4
     within all(".pbSubsection")[0] do
       first("#Name").send_keys arg["QuoteName"]
@@ -1316,7 +1320,9 @@ And(/^I sync the quotes to renewal opportunity$/) do
   sleep 4
   if page.has_css?("#syncQuoteOverlay_buttons")
     puts "Successfully see the sync quote overlay"
-    click_on 'Sync'
+    within("#bottomButtonRow") do
+      click_on 'Sync'
+    end
   else
     puts "Failed to see the sync quote overlay"
   end

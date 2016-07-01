@@ -386,7 +386,7 @@ Then (/^I click on BatchLink and verify the "(.*?)" batch generation$/) do |data
 					sleep 3
 					within(".bPageTitle") do
 						opportunity_name = first(".pageDescription").text
-						if opportunity_name == @@opportunity_name
+						if opportunity_name == @opportunity_name
 							puts "Successfully see the #{opportunity_name} page"
 						else
 							puts "Failed to see the #{opportunity_name} page"
