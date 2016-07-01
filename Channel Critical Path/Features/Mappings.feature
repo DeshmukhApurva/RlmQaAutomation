@@ -1,4 +1,4 @@
-@ServiceSourceSetUp
+#ServiceSourceSetUp
 @MappingsFeature
 Feature: All features related to Service Source setup - Mappings
 
