@@ -126,3 +126,10 @@ Scenario: Rally Test Case ID: TC3226 - Merge Opportunities - Validation Message 
 	And I select the opportunities
 	#When I delete the created different price book opportunity
 	When I delete opportunity with "TestPB"
+	
+	@different_price_bookss
+Scenario: Test Merge Oppotunity Diff PB
+	When I click on "Opportunities" link
+	#And I click on RenewTesting link
+	And I go to existing opportunities
+	Then I should able to see the different price book "The Selected Opportunities must have matching Pricebooks." alert message
