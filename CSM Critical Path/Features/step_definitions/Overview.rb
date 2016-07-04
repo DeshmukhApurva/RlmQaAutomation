@@ -2573,7 +2573,6 @@ And(/^I change the filter attribute for Task$/) do
     find(:xpath, "//*[contains(@id, 'filterAttrViewList')]").select(arg["Filter_value1"])
     puts "Filter Attribute selected."
     sleep 5
-    first(:xpath, "//*[contains(@title, 'Object Field Filter User Lookup (New Window)')]").click
      rescue Exception => ex
     putstr "Error occurred while changing the filter attribute."
     putstr_withScreen ex.message
