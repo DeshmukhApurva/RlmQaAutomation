@@ -125,7 +125,7 @@ Scenario: Rally Test Case ID: TC3512,TC3513,TC3519,TC3520,TC3521 - Merge Opportu
 #	And I select the opportunities
 #	#When I delete the created different price book opportunity
 #	When I delete opportunity with "TestPB"
-
+# test
 @different_price_bookss
 Scenario: Test Merge Oppotunity Diff PB
 	When I click on "Opportunities" link
