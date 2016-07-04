@@ -38,7 +38,7 @@ Scenario: Rally Test Case ID : TC2866, TC2890, TC5094 : Overview Inactive Catego
 
 	
 @FHDCBO
-Scenario:Rally Test Case ID : TC2871 : Filter Health Donut Chart by owner,Filter Health Donut Chart by Account Owner/Created By ID/Last Modified By ID
+Scenario: Rally Test Case ID : TC2871 : Filter Health Donut Chart by owner,Filter Health Donut Chart by Account Owner/Created By ID/Last Modified By ID
 	When I click on "Overview" link
 	And I Verify hamburger icon
 	And I select Show Charts and Tiles
@@ -55,7 +55,7 @@ Scenario:Rally Test Case ID : TC2871 : Filter Health Donut Chart by owner,Filter
 
 
 @SuccessplanTiles
-Scenario:Rally Test Case ID: TC287 : Verify the Tiles for Success plan object,Tiles - SP object filter
+Scenario: Rally Test Case ID: TC287 : Verify the Tiles for Success plan object,Tiles - SP object filter
 	When I click on "Overview" link
 	And I Verify hamburger icon
 	And I select Show Charts and Tiles
@@ -63,7 +63,7 @@ Scenario:Rally Test Case ID: TC287 : Verify the Tiles for Success plan object,Ti
 	Then change the object to Success plan in the edit view to verify the Tiles
 	
 @SuccessplanFCR
-Scenario:Rally Test Case ID: TC2878 : Verify the FocusCategory for Success plan object,Focus Categories - SP object filter
+Scenario: Rally Test Case ID: TC2878 : Verify the FocusCategory for Success plan object,Focus Categories - SP object filter
 	When I click on "Overview" link
 	And I Verify hamburger icon
 	And I select Show Charts and Tiles
@@ -87,21 +87,21 @@ Scenario: Rally Test Case ID: TC2881 : Heat Map Chart Verification
 	And I navigate to heatMapChart		
 	
 @HMC-Tile 
-Scenario:Rally Test Case ID: TC2882 : HeatMapChart Tile clicking
+Scenario: Rally Test Case ID: TC2882 : HeatMapChart Tile clicking
 	When I click on "Overview" link	
 	And I Verify hamburger icon
 	And I select Show Charts and Tiles
 	And I click on first tile
 	
 @verify-tiles
-Scenario:Rally Test Case ID: TC2883 : Tiles Verification On Overview Tab
+Scenario: Rally Test Case ID: TC2883 : Tiles Verification On Overview Tab
 	When I click on "Overview" link
 	And I Verify hamburger icon
 	And I select Show Charts and Tiles
 	Then Verify tiles	
 
 @verify-tile-content
-Scenario:Rally Test Case ID: TC2884, TC2885  :Tile Content Verification On Overview tab
+Scenario: Rally Test Case ID: TC2884, TC2885  :Tile Content Verification On Overview tab
 	When I click on "Overview" link
 	And I Verify hamburger icon
 	And I select Show Charts and Tiles
@@ -109,7 +109,7 @@ Scenario:Rally Test Case ID: TC2884, TC2885  :Tile Content Verification On Overv
 	Then click on tile	
 	
 @SPhide
-Scenario:Rally Test Case ID: TC2886, TC5039 : Overview Tiles Hide and Show
+Scenario: Rally Test Case ID: TC2886, TC5039 : Overview Tiles Hide and Show
 	When I click on "Overview" link
 	And I select Show_Hide Charts and Tiles
 	And I Verify Chart and Tiles Visibility
@@ -118,14 +118,14 @@ Scenario:Rally Test Case ID: TC2886, TC5039 : Overview Tiles Hide and Show
 	And I Verify Chart and Tiles Visibility	
  
 @SFC
-Scenario:Rally Test Case ID: TC2887: Select focus category
+Scenario: Rally Test Case ID: TC2887: Select focus category
 	When I click on "Overview" link
 	And I Verify hamburger icon
 	And I select Show Charts and Tiles
 	Then select the focus category
 	
 @EditFocuscategory
- Scenario:Rally Test Case ID: TC2888  : Verify the edit of FocusCategory
+ Scenario: Rally Test Case ID: TC2888  : Verify the edit of FocusCategory
   When I click on "Overview" link
   And I Verify hamburger icon
   And I select Show Charts and Tiles
@@ -134,14 +134,14 @@ Scenario:Rally Test Case ID: TC2887: Select focus category
 	
    
 @HoverFCCard
-Scenario:Rally Test Case ID: TC2891 : Verify hover behaviour on FC mains cards - FC title
+Scenario: Rally Test Case ID: TC2891 : Verify hover behaviour on FC mains cards - FC title
 	When I click on "Overview" link
 	And I Verify hamburger icon
 	And I select Show Charts and Tiles
 	And I hover on FC cards   
 	
 @HoverRecordCount
-Scenario:Rally Test Case ID: TC2892 : Verify hover behaviour on Record Count - FC title
+Scenario: Rally Test Case ID: TC2892 : Verify hover behaviour on Record Count - FC title
 	When I click on "Overview" link
 	And I Verify hamburger icon
 	And I select Show Charts and Tiles
@@ -149,7 +149,7 @@ Scenario:Rally Test Case ID: TC2892 : Verify hover behaviour on Record Count - F
 	And I hover on record count on FC cards	
 	
 @CreateNewGroup
-Scenario:Rally Test Case ID :TC2889 : Verifying the creation of new FocusCategory Group
+Scenario: Rally Test Case ID :TC2889 : Verifying the creation of new FocusCategory Group
    When I click on "Overview" link
    And I Verify hamburger icon
    And I select Show Charts and Tiles
@@ -342,14 +342,11 @@ Scenario: Rally Test Case ID: TC5046,TC5047,TC5048,TC5049: Navigate to Focus Cat
 	Then I verify Record Name details page
 
 
-
-
-
-
-
-
 @VerifyCDpopupAddDetails
 Scenario: Rally Test Case ID: TC5041,TC5042,TC5043: Verify Required/Non-Required Fields on Complete/Dismiss Task's popup window, Verify task complete/dismiss with Required fields input, Verify task complete/dismiss with Non-Required fields input, Error Messages
+	And I click on "Overview" link
+	And I select FCG
+	And I mark the task as Not Started
 	And I click on "Overview" link
 	And I select FCG
 	And I click on Complete Action
@@ -415,3 +412,4 @@ Scenario: Rally Test Case ID: TC5195: Verifying Task State for Task from Overvie
   And I click on Subject of any Task
   And I check Task detail page to edit status to Completed
   Then I verify Task State
+	
