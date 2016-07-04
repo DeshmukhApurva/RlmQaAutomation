@@ -1367,7 +1367,7 @@ end
 And(/^I change value to "([^"]*)"$/) do |arg|
   begin
     find(:xpath, "//*[contains(@id, 'csmFilterUsrLookup_mlktp')]").select "Customer Portal User"
-    puts "Customer Portal User value slected from dropdown."
+    puts "Customer Portal User value selected from dropdown."
     sleep 3
   rescue Exception => ex
     putstr "Error occurred while changing value"
@@ -2136,10 +2136,11 @@ And(/^I click on Complete Action$/) do
            if page.has_css? ("#fcDialogTask")
              puts "Complete Action link Active: #{index} #{$valuerow} #{$valuerow1}"
              $popwin = 1
+             
            end
            break
          else
-           puts "No Complete Action link's Active: #{index}"
+          puts "No Complete Action link's Active: #{index}"
          end
        end
     end
@@ -2148,6 +2149,31 @@ And(/^I click on Complete Action$/) do
     putstr_withScreen ex.message
   end
 end
+And(/^I mark the task as Not Started$/) do
+  begin
+    within(".list") do
+           tr = first("tbody").all("tr")
+           all("td")[2].first("a").click
+           puts "Navigated to Task page"
+                   sleep 5
+             first(:xpath, "//*[contains(@name, 'edit')]").click
+             sleep 5
+             puts "clicked to edit"
+             find(:xpath, "//*[contains(@id, 'tsk12')]").select "Not Started"
+             find(:xpath, "//*[contains(@id, '00No000000DVO0g')]").send_keys "100"
+             first(:xpath, "//*[contains(@name, 'save')]").click
+             sleep 2
+             puts "Task status changed from Completed to Not started"
+             sleep 2
+             end          
+               
+             
+   rescue Exception => ex
+     putstr "Error occurred while changing the status from Completed to Not started"
+     putstr_withScreen ex.message
+   end
+ end
+
 
 And(/^I select Completed Status value$/) do
   begin
@@ -2546,7 +2572,9 @@ And(/^I change the filter attribute for Task$/) do
     arg = getDetails "Overview"
     find(:xpath, "//*[contains(@id, 'filterAttrViewList')]").select(arg["Filter_value1"])
     puts "Filter Attribute selected."
-  rescue Exception => ex
+    sleep 5
+    first(:xpath, "//*[contains(@title, 'Object Field Filter User Lookup (New Window)')]").click
+     rescue Exception => ex
     putstr "Error occurred while changing the filter attribute."
     putstr_withScreen ex.message
   end
