@@ -153,7 +153,7 @@ Then(/^I should able to see the renewals indicators fields$/) do
   begin
     sleep 6
     arg = getDetails "RenewalOpportunityFields"
-    within all(".pbSubsection")[1] do
+    #within all(".pbSubsection") do
 
       unless page.has_content?(arg["DaysUntilExpirationField"])
         putstr "Failed to see the #{arg["DaysUntilExpirationField"]} field"
@@ -195,7 +195,7 @@ Then(/^I should able to see the renewals indicators fields$/) do
       else
         puts "Successfully see the #{arg["LossRateField"]} field"
       end
-    end
+    #end
     sleep 5
   rescue Exception => ex
     putstr "Error occurred while verifying the renewals indicators fields"
