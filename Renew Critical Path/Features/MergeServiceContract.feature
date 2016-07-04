@@ -66,15 +66,3 @@ Scenario: Rally Test Case ID: TC3528,TC3529,TC3530,TC3531,TC3533,TC3534,TC3532 :
 	Then I verify the consolidated SC validation message
 	Then I delete the "first" Service Contract
 	Then I delete the "third" Service Contract
-	
-	
-#@verifyConsolidatedSC
-#Scenario: Rally Test Case ID: TC3532 : Merge Service Contracts - Validation Message
-#	When I click on "Service Contracts" link
-#	And I click on Go
-#	And I select "first" Service Contract 
-#	And I select "third" Service Contract
-#	And I click on "Merge" button
-#	Then I verify the consolidated SC validation message
-#	Then I delete the "first" Service Contract
-#	Then I delete the "third" Service Contract
