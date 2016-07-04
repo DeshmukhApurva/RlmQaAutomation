@@ -38,7 +38,7 @@ Scenario: Rally Test Case ID : TC2730, TC2754, TC4781 : Overview Inactive Catego
 
 	
 @CSM_FHDCBO
-Scenario:Rally Test Case ID : TC2735 : Filter Health Donut Chart by owner,Filter Health Donut Chart by Account Owner/Created By ID/Last Modified By ID
+Scenario: Rally Test Case ID : TC2735 : Filter Health Donut Chart by owner,Filter Health Donut Chart by Account Owner/Created By ID/Last Modified By ID
 	When I click on "Overview" link
 	And I Verify hamburger icon
 	And I select Show Charts and Tiles
@@ -55,7 +55,7 @@ Scenario: Rally Test Case ID: TC2740 : Filter Health Donut Chart by Success Plan
 
 
 @CSM_SuccessplanTiles
-Scenario:Rally Test Case ID: TC2741 : Verify the Tiles for Success plan object,Tiles - SP object filter
+Scenario: Rally Test Case ID: TC2741 : Verify the Tiles for Success plan object,Tiles - SP object filter
 	When I click on "Overview" link
 	And I Verify hamburger icon
 	And I select Show Charts and Tiles
@@ -63,7 +63,7 @@ Scenario:Rally Test Case ID: TC2741 : Verify the Tiles for Success plan object,T
 	Then change the object to Success plan in the edit view to verify the Tiles
 	
 @CSM_SuccessplanFCR
-Scenario:Rally Test Case ID: TC2742 : Verify the FocusCategory for Success plan object,Focus Categories - SP object filter
+Scenario: Rally Test Case ID: TC2742 : Verify the FocusCategory for Success plan object,Focus Categories - SP object filter
 	When I click on "Overview" link
 	And I Verify hamburger icon
 	And I select Show Charts and Tiles
@@ -87,21 +87,21 @@ Scenario: Rally Test Case ID: TC2745 : Heat Map Chart Verification
 	And I navigate to heatMapChart		
 	
 @CSM_HMC-Tile
-Scenario:Rally Test Case ID: TC2746 : HeatMapChart Tile clicking
+Scenario: Rally Test Case ID: TC2746 : HeatMapChart Tile clicking
 	When I click on "Overview" link	
 	And I Verify hamburger icon
 	And I select Show Charts and Tiles
 	And I click on first tile
 	
 @CSM_verify-tiles
-Scenario:Rally Test Case ID: TC2747 : Tiles Verification On Overview Tab
+Scenario: Rally Test Case ID: TC2747 : Tiles Verification On Overview Tab
 	When I click on "Overview" link
 	And I Verify hamburger icon
 	And I select Show Charts and Tiles
 	Then Verify tiles	
 
 @CSM_verify-tile-content
-Scenario:Rally Test Case ID: TC2748, TC2749 :Tile Content Verification On Overview tab
+Scenario: Rally Test Case ID: TC2748, TC2749 :Tile Content Verification On Overview tab
 	When I click on "Overview" link
 	And I Verify hamburger icon
 	And I select Show Charts and Tiles
@@ -109,7 +109,7 @@ Scenario:Rally Test Case ID: TC2748, TC2749 :Tile Content Verification On Overvi
 	Then click on tile	
 	
 @CSM_SPhide
-Scenario:Rally Test Case ID: TC2750, TC4762 : Overview Tiles Hide and Show
+Scenario: Rally Test Case ID: TC2750, TC4762 : Overview Tiles Hide and Show
 	When I click on "Overview" link
 	And I select Show_Hide Charts and Tiles
 	And I Verify Chart and Tiles Visibility
@@ -118,14 +118,14 @@ Scenario:Rally Test Case ID: TC2750, TC4762 : Overview Tiles Hide and Show
 	And I Verify Chart and Tiles Visibility	
  
 @CSM_SFC
-Scenario:Rally Test Case ID: TC2751  : Select focus category
+Scenario: Rally Test Case ID: TC2751  : Select focus category
 	When I click on "Overview" link
 	And I Verify hamburger icon
 	And I select Show Charts and Tiles
 	Then select the focus category
 	
 @CSM_EditFocuscategory
- Scenario:Rally Test Case ID: TC2752  : Verify the edit of FocusCategory
+ Scenario: Rally Test Case ID: TC2752  : Verify the edit of FocusCategory
   When I click on "Overview" link
   And I Verify hamburger icon
   And I select Show Charts and Tiles
@@ -134,14 +134,14 @@ Scenario:Rally Test Case ID: TC2751  : Select focus category
 	
    
 @CSM_HoverFCCard
-Scenario:Rally Test Case ID: TC2755 : Verify hover behaviour on FC mains cards - FC title
+Scenario: Rally Test Case ID: TC2755 : Verify hover behaviour on FC mains cards - FC title
 	When I click on "Overview" link
 	And I Verify hamburger icon
 	And I select Show Charts and Tiles
 	And I hover on FC cards   
 	
 @CSM_HoverRecordCount
-Scenario:Rally Test Case ID: TC2756 : Verify hover behaviour on Record Count - FC title
+Scenario: Rally Test Case ID: TC2756 : Verify hover behaviour on Record Count - FC title
 	When I click on "Overview" link
 	And I Verify hamburger icon
 	And I select Show Charts and Tiles
@@ -149,7 +149,7 @@ Scenario:Rally Test Case ID: TC2756 : Verify hover behaviour on Record Count - F
 	And I hover on record count on FC cards	
 	
 @CSM_CreateNewGroup
-Scenario:Rally Test Case ID : TC2753 : Verifying the creation of new FocusCategory Group
+Scenario: Rally Test Case ID : TC2753 : Verifying the creation of new FocusCategory Group
    When I click on "Overview" link
    And I Verify hamburger icon
    And I select Show Charts and Tiles
@@ -292,6 +292,9 @@ Scenario: Rally Test Case ID: TC4763: Edit Focus Category on Tile Portfolio Summ
 
 @CSM_VerifyCDpopupAddDetails
 Scenario: Rally Test Case ID: TC4764,TC4765,TC4766: Verify Required/Non-Required Fields on Complete/Dismiss Task's popup window, Verify task complete/dismiss with Required fields input, Verify task complete/dismiss with Non-Required fields input, Error Messages
+	And I click on "Overview" link
+	And I select FCG
+	And I mark the task as Not Started
 	And I click on "Overview" link
 	And I select FCG
 	And I click on Complete Action
