@@ -60,7 +60,7 @@ Scenario: Rally Test Case ID: TC3465,TC3466,TC3467,TC3468,TC3469,TC3470,TC3471,T
 	And I click on "Mappings" link
 	And I click on "Opportunity → Renewal Opportunity" link
 	Then Opportunity Field "Account ID" should not be present
-	And I Add all Opportunity Fields
+#	And I Add all Opportunity Fields
 
 	When I click on "ServiceSource Setup" link
 	And I click on "Mappings" link

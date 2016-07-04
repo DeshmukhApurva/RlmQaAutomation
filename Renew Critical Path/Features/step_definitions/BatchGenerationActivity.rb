@@ -368,13 +368,13 @@ Then (/^I click on BatchLink and verify the "(.*?)" batch generation$/) do |data
 					within("#batchJobSummary") do
 					unless page.has_content?("No matching records found")
 						opportunity_count = first("tbody").all("tr").count
-						if opportunity_count.to_i == @@generated_count.to_i
+						if opportunity_count.to_i == @generated_count.to_i
 							puts "Successfully see the #{opportunity_count} count"
 						else
 							puts "Failed to see the #{opportunity_count} count"
 						end
 						sleep 5
-						@@opportunity_name = first("tbody").all("tr")[0].all("td")[1].first("a").text
+						@opportunity_name = first("tbody").all("tr")[0].all("td")[1].first("a").text
 						first("tbody").all("tr")[0].all("td")[1].first("a").click
 						sleep 5
 						puts "Successfully opened the opportunity"
@@ -386,7 +386,7 @@ Then (/^I click on BatchLink and verify the "(.*?)" batch generation$/) do |data
 					sleep 3
 					within(".bPageTitle") do
 						opportunity_name = first(".pageDescription").text
-						if opportunity_name == @@opportunity_name
+						if opportunity_name == @opportunity_name
 							puts "Successfully see the #{opportunity_name} page"
 						else
 							puts "Failed to see the #{opportunity_name} page"

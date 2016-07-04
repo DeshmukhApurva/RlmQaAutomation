@@ -71,7 +71,9 @@ Scenario: Rally Test Case ID: TC3688,TC3714,TC3715 - Batch Generation Activity -
 	And I "Run" the batch file
 	When I click on "ServiceSource Setup" link
 	And I click on "Batch Generation Activity" link
-	Then I should able to see the "Failed" batch generation
+	And Wait for "300" seconds
+	And I click on "Batch Generation Activity" link
+#	Then I should able to see the "Failed" batch generation
 
 
 @scheduleJob

@@ -1091,15 +1091,10 @@ end
 
 And(/^I provide details and click Save$/) do
 	begin
-		if page.has_content? ("New Account")
+		if page.has_content?("New Account")
 			puts "Page redirected to New Account Creation page."
 			sleep 1
-			within all(".detailList")[0] do
-				first("tbody").all("tr")[1].all("td")[1].first("div").first("input").send_keys "AccountPlayTask"
-				# within all(".requiredInput")[0] do
-				#   first("input").send_keys "AccountPlayOne"
-				# end
-			end
+			  fill_in "Account Name",:with=> "AccountPlayTask"
 			sleep 1
 			within all(".pbButton")[0] do
 				click_on "Save"
@@ -1118,7 +1113,7 @@ end
 And(/^I create New Task in Account$/) do
 	begin
 		sleep 5
-		if page.has_content? ("Account")
+		if page.has_content?("Account")
 			puts "Page redirected to the new Account page."
 			sleep 2
 			within all(".pbHeader")[5] do
