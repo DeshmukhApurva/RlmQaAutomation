@@ -22,11 +22,12 @@ Scenario: Rally Test Case ID: TC3407,TC3408,TC3409,TC3410,TC3411,TC3413: Opportu
 #	Then all required fields should be displayed in Grey
 #	And I should be able to edit Opportunity Product Line field Quantity
 #	And I save the Mapping
-	When I click on "ServiceSource Setup" link
-	And I click on "Opportunity Updates" link
-	And I select the "Update opportunities when the following assets fields change"
-	And I add multiple criteria for asset fields and clear filter logic
-	And I add asset criteria and multiple filter logic "1 AND 2 OR 3" and "1 OR 2 OR 3"
+	
+	#When I click on "ServiceSource Setup" link
+	#And I click on "Opportunity Updates" link
+	#And I select the "Update opportunities when the following assets fields change"
+	#And I add multiple criteria for asset fields and clear filter logic
+	#And I add asset criteria and multiple filter logic "1 AND 2 OR 3" and "1 OR 2 OR 3"
 	
 	When I click on "Opportunities" link
 	And I go to existing renewal opportunities
