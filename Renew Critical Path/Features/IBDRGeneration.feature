@@ -66,11 +66,8 @@ Scenario:Rally Test Case ID: TC3421,TC3426,TC3432,TC3431,TC3435,TC3436,TC3437,TC
 	And I click on "Add Product" button
 	And I select the products and covered assets
 	Then I verify the created products
-	And I resolve the "Opportunity"
-	When I click on "Opportunities" link
-	And I click on "Go!" button from opportunity page
-	And I select the opportunities
-	And I open the resolved opportunity
+    And I resolve the "Opportunity"
+    And I go to first row where column name is "Contributed To"
 	Then I verify that opportunity products get generated
 	And I verify the service contract get generated
 	And I verify the covered asset and covered product
