@@ -394,11 +394,11 @@ Then (/^I should see the hamburger icon$/) do
     page.driver.browser.manage.window.maximize
     sleep 4
     page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
-    sleep 4
+    sleep 7
     page.driver.browser.switch_to.frame("searchFrame")
-    sleep 5
+    sleep 7
     fill_in "lksrch",:with => arg1["Search_value"]
-    sleep 5
+    sleep 7
     click_on 'Go!'
     sleep 3
     page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
@@ -407,6 +407,7 @@ Then (/^I should see the hamburger icon$/) do
     sleep 3
     within('.list') do
     click_link arg1["Search_value"]
+    sleep 5
     end
     sleep 3
     page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)

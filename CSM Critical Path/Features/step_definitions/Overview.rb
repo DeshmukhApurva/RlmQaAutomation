@@ -120,11 +120,11 @@ And (/^I navigate to heatMapChart$/) do
         puts "low: #{@low}"
       puts "Pending: #{@Pending}"
       puts "Undetermined: #{@Undetermined}"
-      
+      sleep 7
     find(:id, 'rightarrow').click
     sleep 5
     puts "Clicked on rightarrow for heatMapChart"
-    sleep 5
+    sleep 7
     within(:id,'heatMapDivId') do
       highchart = all('.highcharts-tracker')
       @str = highchart[1].text
@@ -2757,13 +2757,17 @@ end
 And(/^I verify Task page$/) do
   begin
     if page.has_css? (".multiUserViewIcon")
+      sleep 3
       within first(".pbBody") do
-        within first(".pbSubsection") do
+      within first(".pbSubsection") do
+        sleep 3
          # $create = first("table").first("tbody").all("tr")[6].all("td")[1].first("div").first("a").text
 
           $create = find(:xpath, "//*[contains(@id, 'tsk5_ileinner')]").text
+          sleep 3
         
           $sts = first("table").first("tbody").all("tr")[0].all("td")[3].first("div").text
+          sleep 3
         end
       end
       puts $create, $sts
