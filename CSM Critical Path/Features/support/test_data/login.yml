@@ -2,7 +2,7 @@
  
 CSMNetOps_EETEST2:
  userName: "qa-csmnetops-eetest2@servicesource.com"
- pwd: "pass@word1"
+ pwd: "passw0rd"
  Role: "CSM NetOps" 
  Server: "EEtest2"
  Instance: "CSMNetOps_EETEST2"
@@ -10,7 +10,7 @@ CSMNetOps_EETEST2:
  
 CSM_EETEST2:
  userName: "qa-csm-eetest2@servicesource.com"
- pwd: "pass@word1"
+ pwd: "passw0rd"
  Role: "CSM"
  Server: "EEtest2"
  Instance: "CSM_EETEST2"
