@@ -34,7 +34,7 @@ CSM_DEV20:
   
 CSMNetOps_EETEST4:
  userName: "qa-csmnetops-eetest4@servicesource.com"
- pwd: "passw7rd"
+ pwd: "p@ssw0rd"
  Role: "CSM NetOps"
  Server: "EEtest4"
  Instance: "CSMNetOps_EETEST4"
