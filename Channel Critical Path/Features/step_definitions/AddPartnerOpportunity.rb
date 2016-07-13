@@ -189,14 +189,16 @@ And(/^I select the account as "([^"]*)" or "([^"]*)"$/) do |account1, account2|
   within all(".pbSubsection")[1] do
       sleep 4
       result = false
-      # account_list = first("tbody").first("tr").all("td")[1].first("select").all('option').collect(&:text)
-      # puts account_list
-      first("tbody").first("tr").all("td")[1].first("select").all('option').each do |accounts|
+      
+      #first("tbody").first("tr")[1].all("td")[2].first("select").all('option').each do |accounts|
+      #//label[contains(text(),'Incumbent')]/ancestor::th//preceding-sibling::td/select
+      find(:xpath, "//tbody/tr[1]/td[2]/select").all('option').each do |accounts|
       if accounts.text.to_s.include?account1.to_s
         sleep 5
         puts "Successfully see the #{account1} field value"
         sleep 4
-        first("tbody").first("tr").all("td")[1].first("select").select account1
+        #first("tbody").first("tr")[1].all("td")[2].first("select").select account1
+        find(:xpath, "//tbody/tr[1]/td[2]/select").select account1
         result = true
         break
       end
@@ -204,12 +206,16 @@ And(/^I select the account as "([^"]*)" or "([^"]*)"$/) do |account1, account2|
     putstr "Failed to see the #{account1} field value" unless result
     sleep 8
     result = false
-    first("tbody").all("tr")[1].all("td")[1].first("select").all('option').each do |accounts|
+    #first("tbody").all("tr")[2].all("td")[2].first("select").all('option').each do |accounts|
+    #first("tbody").all("tr")[2].all("td")[2].first("select").select account2
+    #//label[contains(text(),'Syncing')]/ancestor::th/preceding-sibling::td/select
+    find(:xpath, "//tbody/tr[2]/td[2]/select").all('option').each do |accounts|
       if accounts.text.to_s.include?account2.to_s
         sleep 5
         puts "Successfully see the #{account2} field values"
         sleep 4
-        first("tbody").all("tr")[1].all("td")[1].first("select").select account2
+        
+        find(:xpath, "//tbody/tr[2]/td[2]/select").select account2
         result = true
         break
       end
@@ -222,24 +228,26 @@ And(/^I select the account as "([^"]*)" or "([^"]*)"$/) do |account1, account2|
   end
 end
 
+
 And(/^I select the "([^"]*)" checkbox$/) do |incumbent_checkbox|
   begin
     sleep 5
-    within all(".pbSubsection")[1] do
-      within('.detailList') do
-        if find('input[type=checkbox]').checked?
-          sleep 3
-          puts "#{incumbent_checkbox} is already enabled"
-        else
-          sleep 4
-          find('input[type=checkbox]').click
-          sleep 3
-          puts "Enabled the #{incumbent_checkbox}"
-          break
-        end
-      end
-    end
-    sleep 10
+     #within all(".pbSubsection")[1] do
+     # within('.detailList') do
+     #   if find('input[type=checkbox]').checked?
+     #     sleep 3
+     #     puts "#{incumbent_checkbox} is already enabled"
+     #   else
+     #     sleep 4
+     #     find('input[type=checkbox]').click
+     #     sleep 3
+     #     puts "Enabled the #{incumbent_checkbox}"
+     #   break
+     #   end
+     # end
+    
+    find(:xpath, '//label[contains(text(),"Incumbent")]/ancestor::th/following-sibling::td/input').click
+    sleep 3
   rescue Exception => ex
     putstr "Error occurred while selecting #{incumbent_checkbox} checkbox"
     putstr_withScreen  ex.message

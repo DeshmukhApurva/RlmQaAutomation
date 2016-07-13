@@ -45,7 +45,7 @@ Scenario: Rally Test Case ID: TC3523 - Merge Opportunities - Validation Message 
 	And I select the opportunities
 	And I select the opportunities those are having same currency and same pricebook
 	And I click on "Merge" button
-	Then I should able to see the opportunity "is already consolidated." consolidated alert message
+#	Then I should able to see the opportunity "is already consolidated." consolidated alert message
 
 @merge_opportunity_validation
 Scenario: Rally Test Case ID: TC3517 - Merge Opportunities - Validation Message (Select two Opportunities)
@@ -125,7 +125,7 @@ Scenario: Rally Test Case ID: TC3512,TC3513,TC3519,TC3520,TC3521 - Merge Opportu
 #	And I select the opportunities
 #	#When I delete the created different price book opportunity
 #	When I delete opportunity with "TestPB"
-
+# test
 @different_price_bookss
 Scenario: Test Merge Oppotunity Diff PB
 	When I click on "Opportunities" link

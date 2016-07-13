@@ -383,25 +383,57 @@ Then (/^I should see the hamburger icon$/) do
 	i=i+1
    end
    puts "Hamburger icon displayed"
+   arg1 = getDetails "Overview"
    liText[0].click
-   find(:xpath, "//*[contains(@id, 'selectObjectType')]").select("Account")
-   find(:xpath, "//*[contains(@id, 'filterAttributeValue')]").select("Account Owner")  
-   find(:xpath, "//*[contains(@id, 'chboxSaveAsDefaultValue')]").click
-   find(".lookupIcon").click
-	sleep 10
-	within_window(page.driver.browser.window_handles.last) do
-	   within_frame "resultsFrame" do
-		first(:link,"PES CSM User").click
-	   end
-	end
-   sleep 15
-   puts page.body
-  # first(:link,"CSM Automation").click
-   sleep 5
-   within_window(page.driver.browser.window_handles.last) do
-     puts page.body
-    click_on "Save"
-   end
+    find(:xpath, "//*[contains(@id, 'selectObjectType')]").select("Account")
+
+    find(:xpath, "//*[contains(@id, 'filterAttrViewList')]").select(arg1["Filter_value1"])
+    sleep 5
+    first(:xpath, "//*[contains(@title, 'Object Field Filter User Lookup (New Window)')]").click
+    sleep 5
+    page.driver.browser.manage.window.maximize
+    sleep 4
+    page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+    sleep 7
+    page.driver.browser.switch_to.frame("searchFrame")
+    sleep 7
+    fill_in "lksrch",:with => arg1["Search_value"]
+    sleep 7
+    click_on 'Go!'
+    sleep 3
+    page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+    sleep 3
+    page.driver.browser.switch_to.frame("resultsFrame")
+    sleep 3
+    within('.list') do
+    click_link arg1["Search_value"]
+    sleep 5
+    end
+    sleep 3
+    page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+    sleep 3
+    find(:xpath, "//input[@value='Save']").click
+    sleep 5
+    puts "Filter Attribute selected."
+#   find(:xpath, "//*[contains(@id, 'selectObjectType')]").select("Account")
+#   find(:xpath, "//*[contains(@id, 'filterAttributeValue')]").select("Account Owner")  
+#   find(:xpath, "//*[contains(@id, 'chboxSaveAsDefaultValue')]").click
+#   find(".lookupIcon").click
+#	sleep 10
+##	within_window(page.driver.browser.window_handles.last) do
+##	   within_frame "resultsFrame" do
+##		first(:link,"PES CSM User").click
+##	   end
+##	end
+#	
+#   sleep 15
+#   puts page.body
+#  # first(:link,"CSM Automation").click
+#   sleep 5
+#   within_window(page.driver.browser.window_handles.last) do
+#     puts page.body
+#    click_on "Save"
+#   end
    sleep 15
 end
 

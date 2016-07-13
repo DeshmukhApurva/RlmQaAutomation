@@ -356,8 +356,8 @@ Then (/^I click on BatchLink and verify the "(.*?)" batch generation$/) do |data
 				end
 				puts "Batch Ganeration process is completed"
 				sleep 4
-					@@generated_count = first("tbody").all("tr")[0].all("td")[8].text
-					unless @@generated_count.to_i == arg["BatchGenerationGeneratedCount"]
+					@generated_count = first("tbody").all("tr")[0].all("td")[8].text
+					unless @generated_count.to_i == arg["BatchGenerationGeneratedCount"]
 						first("tbody").all("tr")[0].all("td")[1].first("a").click
 					else
 						putstr "No Batch Generation activity log link"
