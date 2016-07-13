@@ -120,11 +120,11 @@ And (/^I navigate to heatMapChart$/) do
         puts "low: #{@low}"
       puts "Pending: #{@Pending}"
       puts "Undetermined: #{@Undetermined}"
-      
+      sleep 7
     find(:id, 'rightarrow').click
     sleep 5
     puts "Clicked on rightarrow for heatMapChart"
-    
+    sleep 7
     within(:id,'heatMapDivId') do
       highchart = all('.highcharts-tracker')
       @str = highchart[1].text
@@ -2571,9 +2571,34 @@ And(/^I change the filter attribute for Task$/) do
   begin
     arg = getDetails "Overview"
     find(:xpath, "//*[contains(@id, 'filterAttrViewList')]").select(arg["Filter_value1"])
-    puts "Filter Attribute selected."
     sleep 5
-     rescue Exception => ex
+    first(:xpath, "//*[contains(@title, 'Object Field Filter User Lookup (New Window)')]").click
+    sleep 5
+    page.driver.browser.manage.window.maximize
+    sleep 4
+    page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+    sleep 4
+    page.driver.browser.switch_to.frame("searchFrame")
+    sleep 5
+    fill_in "lksrch",:with => arg["Search_value"]
+    sleep 5
+    click_on 'Go!'
+    sleep 3
+    page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+    sleep 3
+    page.driver.browser.switch_to.frame("resultsFrame")
+    sleep 3
+    within('.list') do
+    click_link arg["Search_value"]
+    end
+    sleep 3
+    page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+    sleep 3
+    #find(:xpath, "//input[@value='Save']").click
+    sleep 5
+    puts "Filter Attribute selected."
+
+    rescue Exception => ex
     putstr "Error occurred while changing the filter attribute."
     putstr_withScreen ex.message
   end
@@ -2732,13 +2757,17 @@ end
 And(/^I verify Task page$/) do
   begin
     if page.has_css? (".multiUserViewIcon")
+      sleep 3
       within first(".pbBody") do
-        within first(".pbSubsection") do
+      within first(".pbSubsection") do
+        sleep 3
          # $create = first("table").first("tbody").all("tr")[6].all("td")[1].first("div").first("a").text
 
           $create = find(:xpath, "//*[contains(@id, 'tsk5_ileinner')]").text
+          sleep 3
         
           $sts = first("table").first("tbody").all("tr")[0].all("td")[3].first("div").text
+          sleep 3
         end
       end
       puts $create, $sts
