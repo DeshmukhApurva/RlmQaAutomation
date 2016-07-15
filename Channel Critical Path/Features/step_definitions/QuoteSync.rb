@@ -264,6 +264,8 @@ And(/^I verify the quote is synced and update the custom fields on quote$/) do
       sleep 3
       fill_in "Automation_Cust_DateTime",:with => arg["Automation_Cust_DateTime"]
       sleep 3
+      select(arg["Automation_Cust_Picklist"], :from => 'Automation_Cust_Picklist')
+      sleep 3
 
       first(:xpath, "//*[contains(@name, 'save')]").click
       puts "Quote Custom field data saved "
@@ -292,6 +294,10 @@ And(/^I verify the quote is synced and update the custom fields on quote$/) do
       $quote_1_auto_Custom_DateTime = find(:xpath, '//td[text()="Automation_Cust_DateTime"]/following-sibling::td/div', :match => :prefer_exact).text
       sleep 3
       puts "#{$quote_1_auto_Custom_DateTime}"
+
+      $quote_1_auto_Custom_Picklist = find(:xpath, '//td[text()="Automation_Cust_Picklist"]/following-sibling::td/div', :match => :prefer_exact).text
+      sleep 3
+      puts "#{$quote_1_auto_Custom_Picklist}"
 
     end
   rescue Exception => ex
@@ -401,6 +407,17 @@ Then(/^I verify the Opportunity fields on opportunity page$/) do
       puts "#{$quote_1_auto_Custom_DateTime} field NOT copied from quote to opportunity"
     end
 
+    $opp_1_auto_Custom_Picklist = find(:xpath, '//td[text()="Automation_Cust_Picklist"]/following-sibling::td/div', :match => :prefer_exact).text
+    sleep 5
+    puts "#{$opp_1_auto_Custom_Picklist}"
+
+    if $opp_1_auto_Custom_Picklist == $quote_1_auto_Custom_Picklist
+      sleep 5
+      puts "#{$quote_1_auto_Custom_Picklist} field copied from quote to opportunity"
+    else
+      puts "#{$quote_1_auto_Custom_Picklist} field NOT copied from quote to opportunity"
+    end
+
     $opp_1_auto_Description = find(:xpath, '//td[text()="Description"]/following-sibling::td/div', :match => :prefer_exact).text
     sleep 5
 
@@ -507,6 +524,10 @@ And(/^I verify the quote is synced and update the custom fields on opportunity l
     sleep 3
     puts "#{$oppli_auto_Custom_DateTime}"
 
+    $oppli_auto_Custom_Picklist = find(:xpath, '//td[text()="Automation_Cust_Picklist"]/following-sibling::td/div', :match => :prefer_exact).text
+    sleep 3
+    puts "#{$oppli_auto_Custom_Picklist}"
+
     $oppli_auto_Description = find(:xpath, '//td[text()="Line Description"]/following-sibling::td/div', :match => :prefer_exact).text
     puts "#{$oppli_auto_Description} standard field saved"
 
@@ -601,6 +622,17 @@ Then(/^I verify the Quote line item fields on quote page$/) do
       puts "#{$oppli_auto_Custom_DateTime} field NOT copied from opportunity line item  to quote line item"
     end
 
+    $quoteli_auto_Custom_Picklist = find(:xpath, '//td[text()="Automation_Cust_Picklist"]/following-sibling::td/div', :match => :prefer_exact).text
+    sleep 5
+    puts "#{$quoteli_auto_Custom_Picklist}"
+
+    if $oppli_auto_Custom_Picklist == $quoteli_auto_Custom_Picklist
+      sleep 5
+      puts "#{$oppli_auto_Custom_Picklist} field copied from opportunity line item  to quote line item"
+    else
+      puts "#{$oppli_auto_Custom_Picklist} field NOT copied from opportunity line item  to quote line item"
+    end
+
     $quoteli_auto_Description = find(:xpath, '//td[text()="Line Item Description"]/following-sibling::td/div', :match => :prefer_exact).text
     sleep 5
     puts "#{$quoteli_auto_Description}"
@@ -658,6 +690,8 @@ And(/^I verify the quote is synced and update the custom fields on quote line it
       sleep 3
       fill_in "Automation_Cust_DateTime",:with => arg["Automation_Cust_DateTime"]
       sleep 3
+      select(arg["Automation_Cust_Picklist"], :from => 'Automation_Cust_Picklist')
+      sleep 3
       fill_in "Line Item Description",:with => arg["Automation_Description"]
       sleep 3
       fill_in "Discount",:with => arg["Automation_Discount"]
@@ -699,6 +733,10 @@ And(/^I verify the quote is synced and update the custom fields on quote line it
     $quoteli_1_auto_Custom_DateTime = find(:xpath, '//td[text()="Automation_Cust_DateTime"]/following-sibling::td/div', :match => :prefer_exact).text
     sleep 3
     puts "#{$quoteli_1_auto_Custom_DateTime}"
+
+    $quoteli_1_auto_Custom_Picklist = find(:xpath, '//td[text()="Automation_Cust_Picklist"]/following-sibling::td/div', :match => :prefer_exact).text
+    sleep 3
+    puts "#{$quoteli_1_auto_Custom_Picklist}"
 
     $quoteli_1_auto_Description = find(:xpath, '//td[text()="Line Item Description"]/following-sibling::td/div', :match => :prefer_exact).text
     sleep 3
@@ -791,6 +829,17 @@ Then(/^I verify the Opportunity line item fields on opportunity page$/) do
     puts "#{$quoteli_1_auto_Custom_DateTime} field copied from quote line item  to opportunity line item"
   else
     puts "#{$quoteli_1_auto_Custom_DateTime} field NOT copied from quote line item  to opportunity line item"
+  end
+
+  $oppli_1_auto_Custom_Picklist = find(:xpath, '//td[text()="Automation_Cust_Picklist"]/following-sibling::td/div', :match => :prefer_exact).text
+  sleep 5
+  puts "#{$oppli_1_auto_Custom_Picklist}"
+
+  if $oppli_1_auto_Custom_Picklist == $quoteli_1_auto_Custom_Picklist
+    sleep 5
+    puts "#{$quoteli_1_auto_Custom_Picklist} field copied from quote line item  to opportunity line item"
+  else
+    puts "#{$quoteli_1_auto_Custom_Picklist} field NOT copied from quote line item  to opportunity line item"
   end
 
   $oppli_1_auto_Description = find(:xpath, '//td[text()="Line Description"]/following-sibling::td/div', :match => :prefer_exact).text
