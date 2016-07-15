@@ -1,5 +1,7 @@
 #All Success Tasks Specific Step Definitions
 #All Scenario mentioned in SuccessTasks.feature
+
+####apurva
 Then(/^create new Tasks$/) do
 	begin
 		sleep 8
@@ -40,7 +42,7 @@ Then(/^create new Tasks$/) do
 			click_on "SAVE"
 		end
 		within(".pbButtonb") do
-			click_on "Save"
+			click_on "SAVE"
 			puts"Created task for the focus"
 		end
 		sleep 10
@@ -725,15 +727,15 @@ And (/^I dismiss Success task in bulk$/) do
 		putstr_withScreen ex.message
 	end
 end
-
 And (/^I email Success task$/) do
 	begin
 		sleep 5
 		arg = getReference "Reference"
-		first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
+		first(:xpath,"//*[contains(@id,'selTasks')]").select(arg["FCView"])
 		sleep 10
 		within(:id,"taskGrid") do
-			first(".envEnabled").click
+			
+		  first(".envEnabled").click
 		end
 		sleep 5
 		fill_in 'Subject', :with => 'Send Email'
@@ -748,6 +750,7 @@ And (/^I email Success task$/) do
 		putstr_withScreen ex.message
 	end
 end
+
 
 And (/^I complete Success task$/) do
 	begin
@@ -844,6 +847,8 @@ begin
 		putstr_withScreen ex.message
 	end
 end
+
+###apurva
 
 And (/^I cancel complete Success task in bulk$/) do
 	begin
@@ -1194,7 +1199,7 @@ And(/^I select the task from task list$/) do
 	begin
 		sleep 3
 		arg = getReference "Reference"
-    searchStr = ""
+    searchStr = "In Progress"
     find(:xpath, "//*[contains(@id, 'selTasks')]").select arg["FCView"]
     within(".bootstrap-table") do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
@@ -1232,6 +1237,7 @@ Then(/^I verify the "([^"]*)" and "([^"]*)" buttons$/) do |complete, dismiss|
 		putstr_withScreen ex.message
 	end
 end
+
 
 And(/^I "([^"]*)" the complete success task$/) do |button|
 	begin
@@ -1829,12 +1835,18 @@ And(/^I verify the email icon state$/) do
 end
 
 
+
+
+
+
+
 And(/^I verify the "([^"]*)" task reason code$/) do |status|
 	begin
 	sleep 4
 	puts "current_date - #{$current_date}"
 	unless page.has_css?(".no-records-found")
 	 if $ispopwindow > 0
+	   puts "ispopwindow= ${ispopwindow}"
 		if page.has_css?("#taskGrid")
 			within("#taskGrid") do
 				sleep 3
@@ -1844,6 +1856,7 @@ And(/^I verify the "([^"]*)" task reason code$/) do |status|
 					count = 0
 					tr = first("tbody").all("tr")
 					tr.each do |row|
+            puts "Name=#{tr}"
 						if row.all("td")[2].all('span')[0].text == $current_date
 							sleep 3
 							$success_task = row.all("td")[3].all('a')[0].text
@@ -1872,8 +1885,12 @@ And(/^I verify the "([^"]*)" task reason code$/) do |status|
 		end
 		sleep 4
 		within all(".pbSubsection") do
-			reason_code = first("tbody").all("tr")[5].all("td")[1].text
-			if reason_code == $reason_code
+		  puts "In the reason code loop"
+     # :xpath, '//td[text()="Synced Quote"]/following-sibling::td/div/a',
+			#reason_code = first("tbody").all("tr")[5].all("td")[1].text
+      reason_code = find(:xpath,'//td[@id="ep" and @class="last labelCo" and contains(text(),"Reason Code")]/following-sibling::td/div').text
+			puts "reason_code=#{reason_code}"
+      if reason_code == $reason_code
 				puts "Successfully see the #{status} task reason code"
 			else
 				putstr "Failed to see the #{status} task reason code"
@@ -1900,14 +1917,17 @@ And(/^I select the "([^"]*)" value from complete task$/) do |field|
 	unless page.has_css?(".no-records-found")
 		if $ispopwindow > 0
 			$reason_code = "C - Support Issue - SPI"
-			$current_date = "#{Time.now.strftime("%m-%d-%Y")}"
+			$current_date = "7/15/2016"
+			
 			sleep 4
 			find(:xpath, "//*[contains(@id, 'completedOnValue')]").set $current_date
 			sleep 4
 			find(:xpath, "//*[contains(@id, 'riskReasonValue')]").select $reason_code
 			sleep 4
 			first(:xpath, "//*[contains(@id, 'taskStatusValue')]").select arg["CompletedStatusfield"]
-			sleep 5
+			sleep 4
+			page.find(:xpath,"//*[@id='pageTaskList:frmCustomerSuccessOverview:taskComp:cmpCSMTasks:taskCompleteTaskPageBlock:j_id303:bottom:Complete']").click
+			puts "Save all data"
 		else
 			puts "Complete Task pop up is not displayed"
     end
