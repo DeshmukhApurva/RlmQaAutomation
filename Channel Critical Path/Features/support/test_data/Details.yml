@@ -302,3 +302,42 @@ GroupSharing:
  PortalDescription: "test group"
  SelectedGroupMembersSection: "Selected Group Members"
  DuplicatePortalGroupErrorMessage: "Duplicate Group Name"
+ 
+QuoteSyncMappings:
+ FieldName1: "Automation_Cust_Currency"
+ FieldName2: "Automation_Cust_Date"
+ FieldName3: "Automation_Cust_DateTime"
+ FieldName4: "Automation_Cust_Email"
+ FieldName5: "Automation_Cust_Phone"
+ FieldName6: "Automation_Cust_Picklist"
+ FieldName7: "Automation_Cust_Text"
+
+QuoteSyncCreateNewQuote:
+ QuoteName: "Automation Standard Quote"
+ PartnerOpportunity: "Partner Agreement"
+ 
+QuoteSyncOppFields:
+ Automation_Cust_Text: "Automation Opp Custom Field text"
+ Automation_Cust_Picklist: "1"
+ Automation_Cust_Date: "1/1/2017"
+ Automation_Cust_DateTime: "7/14/2016 1:56 AM"
+ Automation_Cust_Email: "automationoppemail@comitydesigns.com"
+ Automation_Cust_Phone: "9800000000"
+ Automation_Cust_Currency: "80000"
+ Automation_Expiration_Date: "1/1/2018"
+ Automation_Description: "Automation Opportunity Description..."
+ Automation_Discount: "20"
+ 
+QuoteSyncQuoteFields:
+ Automation_Cust_Text: "Automation quote Custom Field text"
+ Automation_Cust_Picklist: "4"
+ Automation_Cust_Date: "1/1/2020"
+ Automation_Cust_DateTime: "7/14/2018 5:56 AM"
+ Automation_Cust_Email: "automationquoteemail@comitydesigns.com"
+ Automation_Cust_Phone: "8800000000"
+ Automation_Cust_Currency: "50000"
+ Automation_Expiration_Date: "1/1/2019"
+ Automation_Description: "Automation Quote Description..."
+ Automation_Discount: "40"
+ 
+
