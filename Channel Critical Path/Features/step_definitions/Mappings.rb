@@ -1,8 +1,6 @@
 #All Service Source Setup - Mappings specific Step definitions
 #All Scenario mentioned in Mappings.feature
 
-
-
 When(/^I delete "([^"]*)" fields "([^"]*)"$/) do |mapping, action|
   begin
     sleep 2
@@ -36,9 +34,8 @@ When(/^I delete "([^"]*)" fields "([^"]*)"$/) do |mapping, action|
   rescue Exception => ex
     putstr "Error occurred while verifying #{mapping} Fields"
     putstr_withScreen  ex.message
- end
+  end
 end
-
 
 And(/^I Add "([^"]*)" fields "([^"]*)" and "([^"]*)"$/) do |mapping, mapping_field, save|
   begin
@@ -84,7 +81,6 @@ And(/^I Add "([^"]*)" fields "([^"]*)" and "([^"]*)"$/) do |mapping, mapping_fie
   end
 end
 
-
 And(/^I save the Mapping$/) do
   begin
     sleep 5
@@ -96,7 +92,6 @@ And(/^I save the Mapping$/) do
     putstr_withScreen  ex.message
   end
 end
-
 
 Then(/^all required fields should be displayed in Grey$/) do
   begin
@@ -115,7 +110,6 @@ Then(/^all required fields should be displayed in Grey$/) do
   end
 end
 
-
 And(/^I should be able to set required field value for description as "(.*?)"$/) do |arg|
   begin
     within all(".pbSubsection")[1].first(".detailList").first(".list") do
@@ -130,7 +124,6 @@ And(/^I should be able to set required field value for description as "(.*?)"$/)
     putstr_withScreen  ex.message
   end
 end
-
 
 And(/^I Add "([^"]*)" fields "([^"]*)" to "([^"]*)"$/) do |mapping, field1, field2|
   begin
@@ -208,8 +201,6 @@ And(/^I verify the default value field is disabled for "([^"]*)"$/) do |mapping_
   end
 end
 
-
-
 Then(/^"([^"]*)" Field "([^"]*)" should be present$/) do |mapping, field|
   begin
     within all(".pbSubsection")[1] do
@@ -233,7 +224,6 @@ Then(/^"([^"]*)" Field "([^"]*)" should be present$/) do |mapping, field|
     putstr_withScreen  ex.message
   end
 end
-
 
 And(/^I add multiple "([^"]*)" Fields$/) do |mapping|
   begin
@@ -287,6 +277,80 @@ And(/^I add multiple "([^"]*)" Fields$/) do |mapping|
   end
 end
 
+And(/^I add quote sync "([^"]*)" in opportunity to quote mapping$/) do |mapping|
+  begin
+    arg = getDetails "QuoteSyncMappings"
+    sleep 5
+    addDisabled = 1
+    
+        for i in 1..7
+      within all(".pbSubsection")[1] do
+        if page.has_css?(".btnDisabled")
+          addDisabled = 0
+        end
+      end
+        
+      if addDisabled != 0
+        within all(".pbSubsection")[1] do
+          click_on "Add"
+          sleep 10
+        end
+      
+        find(:xpath, "//*[contains(@id, 'fieldsName')]").select(arg["FieldName#{i}"])
+        sleep 10
+        first(:xpath, ".//*[contains(@id, 'FM_sourceFieldId')]").select(arg["FieldName#{i}"])
+        sleep 10
+
+        within all(".pbButton")[1] do
+          click_on "Save"
+          sleep 10
+        end
+      end
+    end 
+    
+  rescue Exception => ex
+    putstr "Error occurred while adding #{mapping} Fields"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I add quote sync "([^"]*)" in quote to opportunity mapping$/) do |mapping|
+begin
+    arg = getDetails "QuoteSyncMappings"
+    sleep 5
+    addDisabled = 1
+    
+      for i in 1..7
+      within all(".pbSubsection")[1] do
+        if page.has_css?(".btnDisabled")
+          addDisabled = 0
+      end
+      end
+        
+      if addDisabled != 0
+        within all(".pbSubsection")[1] do
+          click_on "Add"
+          sleep 10
+       end
+        find(:xpath, "//*[contains(@id, 'fieldsName')]").select(arg["FieldName#{i}"])
+        sleep 10
+        first(:xpath, "//*[contains(@id, 'FM_sourceFieldId')]").select(arg["FieldName#{i}"])
+        sleep 10
+
+        within all(".pbButton")[1] do
+          click_on "Save"
+          sleep 10
+        end
+      end
+    end 
+    
+  rescue Exception => ex
+    putstr "Error occurred while adding #{mapping} Fields"
+    putstr_withScreen  ex.message
+  end
+end
+
+  
 
 And(/^I delete Quote Product Line field "([^"]*)"$/) do |action|
   begin
@@ -322,7 +386,6 @@ And(/^I delete Quote Product Line field "([^"]*)"$/) do |action|
     putstr_withScreen  ex.message
   end
 end
-
 
 And(/^I verify the validation message$/) do
   begin
@@ -537,7 +600,6 @@ And(/^I verify the default value field is enabled for "([^"]*)"$/) do |field|
   end
 end
 
-
 And(/^I verify the default field is disabled for "([^"]*)"$/) do |arg|
   begin
     within all(".pbSubsection")[2] do
@@ -562,7 +624,6 @@ And(/^I verify the default field is disabled for "([^"]*)"$/) do |arg|
   end
 end
 
-
 Then(/^"([^"]*)" all required fields should be displayed in grey$/) do |mapping|
   begin
     within all(".pbSubsection")[2].first(".detailList").first(".list") do
@@ -579,7 +640,6 @@ Then(/^"([^"]*)" all required fields should be displayed in grey$/) do |mapping|
     putstr_withScreen  ex.message
   end
 end
-
 
 And(/^I verify the default field is enabled for "([^"]*)"$/) do |field|
   begin
@@ -604,7 +664,6 @@ And(/^I verify the default field is enabled for "([^"]*)"$/) do |field|
     putstr_withScreen  ex.message
   end
 end
-
 
 And(/^I add multiple fields to "([^"]*)"$/) do |mapping|
   begin
@@ -658,6 +717,44 @@ And(/^I add multiple fields to "([^"]*)"$/) do |mapping|
   end
 end
 
+And(/^I add quote sync custom fields to "([^"]*)"$/) do |mapping|
+  begin
+    arg = getDetails "QuoteSyncMappings"
+    sleep 5
+    addDisabled = 1
+    
+    for i in 1..7
+      within all(".pbSubsection")[2] do
+        if page.has_css?(".btnDisabled")
+          addDisabled = 0
+        end
+      end
+        
+      if addDisabled != 0
+        within all(".pbSubsection")[2] do
+          click_on "Add"
+          sleep 10
+        end
+      
+        find(:xpath, "//*[contains(@id, 'fieldsName')]").select(arg["FieldName#{i}"])
+        sleep 10
+        first(:xpath, ".//*[contains(@id, 'FM_sourceFieldId')]").select(arg["FieldName#{i}"])
+        sleep 10
+
+        within all(".pbButton")[1] do
+          click_on "Save"
+          sleep 10
+        end
+      end
+    end 
+           
+  rescue Exception => ex
+    putstr "Error occurred while adding #{mapping} Fields"
+    putstr_withScreen  ex.message
+  end
+end
+
+
 And(/^I delete all mapping fields$/) do
   begin
     sleep 5
@@ -684,16 +781,15 @@ And(/^I delete all mapping fields$/) do
   end
 end
 
-
 Then(/^I should not able to see the "([^"]*)" mapping$/) do |mapping|
   begin
-   sleep 4
-   if page.has_content?(mapping)
-     puts "Unable to see the #{mapping} mapping"
-   else
-     putstr "Able to see the #{mapping} mapping"
-   end
-   sleep 3
+    sleep 4
+    if page.has_content?(mapping)
+      puts "Unable to see the #{mapping} mapping"
+    else
+      putstr "Able to see the #{mapping} mapping"
+    end
+    sleep 3
   rescue Exception => ex
     putstr "Error occurred while verifying the #{mapping} mappings"
     putstr_withScreen  ex.message
@@ -720,7 +816,6 @@ When(/^I click on "([^"]*)" from "([^"]*)" app$/) do |link, app|
   end
 end
 
-
 And(/^I check the "([^"]*)" settings$/) do |quote|
   begin
     sleep 4
@@ -733,7 +828,7 @@ And(/^I check the "([^"]*)" settings$/) do |quote|
             sleep 3
             puts "#{quote} checkbox is enabled mode"
             if first("input").checked?
-               puts "#{quote} checkbox is already selected"
+              puts "#{quote} checkbox is already selected"
             else
               sleep 3
               first("input").click
@@ -741,22 +836,21 @@ And(/^I check the "([^"]*)" settings$/) do |quote|
             end
           else
             putstr "#{quote} checkbox is disabled mode"
-         end
+          end
         else
           putstr "Failed to see the #{quote} field"
         end
       end
+      sleep 3
+    else
+      puts "#{quote} is not found"
+    end
     sleep 3
-  else
-    puts "#{quote} is not found"
-  end
-  sleep 3
   rescue Exception => ex
     putstr "Error occurred while checking #{quote} checkbox"
     putstr_withScreen ex.message
   end
 end
-
 
 Then(/^I should able to see the "([^"]*)" mapping$/) do |mapping|
   begin
@@ -772,7 +866,6 @@ Then(/^I should able to see the "([^"]*)" mapping$/) do |mapping|
     putstr_withScreen  ex.message
   end
 end
-
 
 And(/^I uncheck the "([^"]*)" settings$/) do |quote|
   begin

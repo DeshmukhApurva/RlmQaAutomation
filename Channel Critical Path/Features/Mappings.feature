@@ -17,50 +17,50 @@ Scenario: Rally Test Case ID: TC5260 : Quote - Opportunity Mappings: Add and Sav
     And I save the Mapping
 
 
-@check_disable_quotes_checkbox
-Scenario:Rally Test Case ID: TC5298,TC5306 - Mappings - Display of "Opportunity → Quote" mapping when Quote is disabled for org,Display of "Quote → Opportunity" mapping when Quote is disabled for org
-    And user logout from "Channel Netops" application
-    And I user login as a "Admin" user
-    Then I should able to see the "Admin" page
-    When I click on "Setup" from "Admin" app
-    And I click on "Customize" tab
-    And I click on "Quotes" tab
-    And I click on "Quotes" tab
-    And I click on "Quotes Settings" link
-    And I check the "Disable Quotes" settings
-    And user logout from "Admin" application
-    Given that I navigate to the CRM application
-    Then I should land on CRM home page
-    When I click on "ServiceSource Setup" link
-    And I click on "Mappings" link
-    And I click on "Quote → Opportunity" link
-    Then I should not able to see the "Quote → Opportunity" mapping
-    When I click on "ServiceSource Setup" link
-    And I click on "Mappings" link
-    Then I should not able to see the "Opportunity → Quote" mapping
+#@check_disable_quotes_checkbox
+#Scenario: Rally Test Case ID: TC5298,TC5306 - Mappings - Display of "Opportunity → Quote" mapping when Quote is disabled for org,Display of "Quote → Opportunity" mapping when Quote is disabled for org
+#    And user logout from "Channel Netops" application
+#    And I user login as a "Admin" user
+#    Then I should able to see the "Admin" page
+#    When I click on "Setup" from "Admin" app
+#    And I click on "Customize" tab
+#    And I click on "Quotes" tab
+#    And I click on "Quotes" tab
+#    And I click on "Quotes Settings" link
+#    And I check the "Disable Quotes" settings
+#    And user logout from "Admin" application
+#    Given that I navigate to the CRM application
+#    Then I should land on CRM home page
+#    When I click on "ServiceSource Setup" link
+#    And I click on "Mappings" link
+#    And I click on "Quote → Opportunity" link
+#    Then I should not able to see the "Quote → Opportunity" mapping
+#    When I click on "ServiceSource Setup" link
+#    And I click on "Mappings" link
+#    Then I should not able to see the "Opportunity → Quote" mapping
 
 
-@uncheck_disable_quotes_checkbox
-Scenario:Rally Test Case ID: TC5297,TC5305 - Mappings - Display of "Opportunity → Quote" mapping when Quote is enabled for org,Display of "Quote → Opportunity" mapping when Quote is enabled for org
-    And user logout from "Channel Netops" application
-    And I user login as a "Admin" user
-    Then I should able to see the "Admin" page
-    When I click on "Setup" from "Admin" app
-    And I click on "Customize" tab
-    And I click on "Quotes" tab
-    And I click on "Quotes" tab
-    And I click on "Quotes Settings" link
-    And I uncheck the "Disable Quotes" settings
-    And user logout from "Admin" application
-    Given that I navigate to the CRM application
-    Then I should land on CRM home page
-    When I click on "ServiceSource Setup" link
-    And I click on "Mappings" link
-    Then I should able to see the "Quote → Opportunity" mapping
-    When I click on "ServiceSource Setup" link
-    And I click on "Mappings" link
-    And I click on "Opportunity → Quote" link
-    Then I should able to see the "Opportunity → Quote" mapping
+#@uncheck_disable_quotes_checkbox
+#Scenario: Rally Test Case ID: TC5297,TC5305 - Mappings - Display of "Opportunity → Quote" mapping when Quote is enabled for org,Display of "Quote → Opportunity" mapping when Quote is enabled for org
+#    And user logout from "Channel Netops" application
+#    And I user login as a "Admin" user
+#    Then I should able to see the "Admin" page
+#    When I click on "Setup" from "Admin" app
+#    And I click on "Customize" tab
+#    And I click on "Quotes" tab
+#    And I click on "Quotes" tab
+#    And I click on "Quotes Settings" link
+#    And I uncheck the "Disable Quotes" settings
+#    And user logout from "Admin" application
+#    Given that I navigate to the CRM application
+#    Then I should land on CRM home page
+#    When I click on "ServiceSource Setup" link
+#    And I click on "Mappings" link
+#    Then I should able to see the "Quote → Opportunity" mapping
+#    When I click on "ServiceSource Setup" link
+#    And I click on "Mappings" link
+#    And I click on "Opportunity → Quote" link
+#    Then I should able to see the "Opportunity → Quote" mapping
 
 
 @opportunity_quote_mappings
@@ -236,3 +236,5 @@ Scenario: Rally Test Case ID: TC5319,TC5320,TC5321,TC5322,TC5323,TC5324 : "Quote
     And I click on "Mappings" link
     And I click on "Quote → Opportunity" link
     And I delete all mapping fields
+    
+    
