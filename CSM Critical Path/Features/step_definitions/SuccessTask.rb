@@ -1917,7 +1917,9 @@ And(/^I select the "([^"]*)" value from complete task$/) do |field|
 	unless page.has_css?(".no-records-found")
 		if $ispopwindow > 0
 			$reason_code = "C - Support Issue - SPI"
-			$current_date = "7/15/2016"
+			
+			time = Time.new
+            $current_date = time.day.to_s + "/" + time.month.to_s + "/" + time.year.to_s
 			
 			sleep 4
 			find(:xpath, "//*[contains(@id, 'completedOnValue')]").set $current_date
@@ -1948,7 +1950,8 @@ And(/^I select the "([^"]*)" value from dismiss task$/) do |field|
 		if $ispopwindow > 0
 			sleep 5
 			$reason_code = "D - Already Completed - ACD"
-			$current_date = "#{Time.now.strftime("%m-%d-%Y")}"
+			time = Time.new
+            $current_date = time.day.to_s + "/" + time.month.to_s + "/" + time.year.to_s
 			sleep 4
 			find(:xpath, "//*[contains(@id, 'completedOnValue')]").set $current_date
 			sleep 4
