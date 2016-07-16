@@ -112,7 +112,7 @@ Scenario: Rally Test Case ID:  - Quote Sync - Copy Opportunity line item fields 
 	And I update the fields on opportunity line item
 	Then I navigate to opportunity from product detail page
 	And I navigate to synced quote details page from opportunity
-	Then I verify opportunity fields copied to quote fields on quote page
+	Then I verify OLI fields copied to QLI
 	
 @quotesync_Copy_QLItoOLI
 Scenario: Rally Test Case ID:  - Quote Sync - Copy Quote line item fields to Opp line item fields.
@@ -124,7 +124,7 @@ Scenario: Rally Test Case ID:  - Quote Sync - Copy Quote line item fields to Opp
 	And I navigate to synced quote details page from opportunity
 	And I update the fields on quote line item
 	And I navigate to opportunity from quote page
-	Then I verify quote fields copied to opportunity fields on opportunity page
+	Then I verify QLI fields copied to OLI
 	
 	
 	
