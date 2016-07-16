@@ -466,3 +466,113 @@ When(/^I log into "(.*?)" details$/) do |arg1|
     puts ex.message
   end
 end
+
+When(/^I create Source Opportunity with Line Items and resolve it$/) do
+  begin
+    # Components of a Time
+    #    puts "Current Time : " + time.inspect
+    #    puts time.year    # => Year of the date
+    #    puts time.month   # => Month of the date (1 to 12)
+    #    puts time.day     # => Day of the date (1 to 31 )
+    #    puts time.wday    # => 0: Day of week: 0 is Sunday
+    #    puts time.yday    # => 365: Day of year
+    #    puts time.hour    # => 23: 24-hour clock
+    #    puts time.min     # => 59
+    #    puts time.sec     # => 59
+    #    puts time.usec    # => 999999: microseconds
+    #    puts time.zone    # => "UTC": timezone name
+    time = Time.new
+    oppDateTime = time.day.to_s + time.month.to_s + time.year.to_s
+    arg = getDetails "QuoteSync"
+    time = Time.new
+    oppDateTime = time.hour.to_s + time.min.to_s + time.sec.to_s
+    year = time.year.to_i + 2
+    click_link('Opportunities')
+    sleep 5
+    click_on "New"
+    sleep 5
+    puts "Creating a new opportunity"
+    $automationOppName = "Automation Opp" + oppDateTime
+ 
+    fill_in "Opportunity Name",:with=>$automationOppName
+    fill_in "Close Date",:with=>"1/26/" + year.to_s
+    select arg["SourceOppStage"], :from => "Stage"
+    fill_in "Account Name",:with=>arg["Account"]
+ 
+    sleep 1
+    within(:id,"topButtonRow") do
+      click_on "Save"
+    end
+ 
+    puts "Successfully created Opportunity"
+ 
+    sleep 5
+    click_on "Choose Price Book"
+    sleep 3
+    first(:option,'Standard Price Book').select_option
+    sleep 4
+    click_on "Save"
+    sleep 5
+    click_on "Add Product"
+    find(:xpath, "(//input[@type='checkbox'])[2]").set(true)
+    find(:xpath, "(//input[@type='checkbox'])[3]").set(true)
+    find(:xpath, "(//input[@type='checkbox'])[4]").set(true)
+    find(:xpath, "(//input[@type='checkbox'])[5]").set(true)
+    find(:xpath, "(//input[@type='checkbox'])[6]").set(true)
+    find(:xpath, "(//input[@type='checkbox'])[7]").set(true)
+    find(:xpath, "(//input[@type='checkbox'])[8]").set(true)
+    find(:xpath, "(//input[@type='checkbox'])[9]").set(true)
+    click_on 'Select'
+    puts "Successfully select the product"
+    sleep 6
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[3]/input").set arg["ProductQuantity"]
+    sleep 2
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[3]/input").set arg["ProductQuantity"]
+    sleep 2
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[13]/td[3]/input").set arg["ProductQuantity"]
+    sleep 2
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[17]/td[3]/input").set arg["ProductQuantity"]
+    sleep 2
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[21]/td[3]/input").set arg["ProductQuantity"]
+    sleep 2
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[25]/td[3]/input").set arg["ProductQuantity"]
+    sleep 2
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[29]/td[3]/input").set arg["ProductQuantity"]
+    sleep 2
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[33]/td[3]/input").set arg["ProductQuantity"]
+    sleep 2
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[6]/input").set arg["ProductSalesPrice"]
+    sleep 2
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[6]/input").set arg["ProductSalesPrice"]
+    sleep 2
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[13]/td[6]/input").set arg["ProductSalesPrice"]
+    sleep 2
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[17]/td[6]/input").set arg["ProductSalesPrice"]
+    sleep 2
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[21]/td[6]/input").set arg["ProductSalesPrice"]
+    sleep 2
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[25]/td[6]/input").set arg["ProductSalesPrice"]
+    sleep 2
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[29]/td[6]/input").set arg["ProductSalesPrice"]
+    sleep 2
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[33]/td[6]/input").set arg["ProductSalesPrice"]
+    sleep 2
+    all(:xpath,'//td/input[@value=" Save "]')[0].click
+    sleep 6
+   
+    #Resolve Opportunity
+    first(:button,'Edit').click
+    sleep 5
+    first(:option,'Closed Won').select_option
+    sleep 2
+    first(:button,'Save').click
+    sleep 10
+   
+    find(:xpath, "//th[text()='Contributed To']").find(:xpath, '..').find(:xpath, "following-sibling::tr/td[2]/a").click
+    sleep 10
+   
+  rescue Exception => ex
+    puts "Error occurred while creating Opportunities"
+    puts ex.message
+  end
+end
