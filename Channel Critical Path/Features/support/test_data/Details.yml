@@ -312,6 +312,26 @@ QuoteSyncMappings:
  FieldName6: "Automation_Cust_Picklist"
  FieldName7: "Automation_Cust_Text"
 
+
+QuoteSync:
+ SourceOppName:
+ SourceOppStage: "Qualification"   
+ Account: "SSAutomationQuoteSyncAccount"
+ FirstProductCheckboxIndex: 1
+ SecondProductCheckboxIndex: 2
+ RenewalStatusOpen: "Open"
+ RenewalStatusLost: "Lost"
+ RenewalStatusWon: "Won"
+ CreateQuote: "New Quote"
+ StartSync: "Start Sync"
+ StopSync: "Stop Sync"
+ QuoteName: "OpportunityQuote"
+ SyncErrorMessage: "The current Opportunity has a Quote Synced to it. Please stop the Sync and retry this process."  
+ SingleProductCheckboxIndex: 1
+ MultipleProductCheckboxIndex: 2
+ ProductQuantity: 1
+ ProductSalesPrice: 5000
+
 QuoteSyncCreateNewQuote:
  QuoteName: "Automation Standard Quote"
  PartnerOpportunity: "Partner Agreement"
@@ -339,5 +359,3 @@ QuoteSyncQuoteFields:
  Automation_Expiration_Date: "1/1/2019"
  Automation_Description: "Automation Quote Description..."
  Automation_Discount: "40"
- 
-
