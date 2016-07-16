@@ -1960,26 +1960,32 @@ end
 
 And(/^I select the pagination size$/) do
   begin
-    sleep 5
-    if page.has_css?(".dropdown-toggle")
+   sleep 5
+   if page.has_css?(".dropdown-toggle")
       puts "Successfully see the pagination"
       sleep 4
       within(".pagination-detail") do
         sleep 4
+       
+          puts "Successfully see the pagination button"
+           #find(".btn btn-default  dropdown-toggle").click
+          
         find(".dropdown-toggle").click
+        puts "I clicked on button"
         sleep 3
         within(".dropdown-menu") do
           all("li")[2].first("a").click
-        end
+        
       end
+    end
       sleep 3
       $page_size = find(".page-size").text
       sleep 3
       puts "Successfully selected the pagination size: #{$page_size}"
-    else
-      puts "No pagination present"
-    end
-    sleep 3
+   else
+     puts "No pagination present"
+   end
+   sleep 3
   rescue Exception => ex
     putstr "Error occurred while selecting the pagination size"
     putstr_withScreen ex.message
