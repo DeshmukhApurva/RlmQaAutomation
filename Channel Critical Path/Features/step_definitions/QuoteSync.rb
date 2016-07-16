@@ -900,8 +900,8 @@ And(/^I sync the quotes from Quote$/) do
       if page.has_css?(".noRowsHeader")
         puts "No Quote Records found"
         sleep 3
-        isQuotePresent = 1
       else
+        isQuotePresent = 1
         puts "Successfully see the quote records"
       end
     end
@@ -942,9 +942,9 @@ And(/^I sync the quotes from Quote$/) do
     sleep 4
     if page.has_css?("#syncQuoteOverlay_buttons")
       puts "Successfully see the sync quote overlay"
-      within("#bottomButtonRow") do
+      #within("#bottomButtonRow") do
         click_on 'Sync'
-      end
+      #end
     else
       puts "Failed to see the sync quote overlay"
     end
@@ -1032,7 +1032,7 @@ And(/^I stop the syncing of the quote$/) do
         end
       end
     else
-      puts "Faield to see the quote sync page"
+      puts "Failed to see the quote sync page"
     end
     sleep 3
   rescue Exception => ex
