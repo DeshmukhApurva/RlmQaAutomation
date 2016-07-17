@@ -31,9 +31,9 @@ Scenario: Rally-ID : TC4333,TC4334,TC4335 : Opportunity Page- Auto update of Mas
 	When I select NewPartnerOpp Partner Opportunity
 	Then I choose the sync options
 	And I verify the master opportunity after changing the sync options
-    When I click on the "Opportunities" grid tab
-    Then I select the "RenewalOpportunity"
-    Then I verify the sync opportunity
+  When I click on the "Opportunities" grid tab
+  Then I select the "RenewalOpportunity"
+  Then I verify the sync opportunity
 
 @StopSync_opp
 Scenario: Rally-ID : TC4336,TC4341 : Opportunity Page- Stop syncing of Master Opportunity and partner opportunity
@@ -42,6 +42,6 @@ Scenario: Rally-ID : TC4336,TC4341 : Opportunity Page- Stop syncing of Master Op
 	When I select NewPartnerOpp Partner Opportunity
 	Then I stop the syncing
 	And I verify the master opportunity after changing the sync options
-    When I click on the "Opportunities" grid tab
-    Then I select the "RenewalOpportunity"
-    Then I verify the sync opportunity
+  When I click on the "Opportunities" grid tab
+  Then I select the "RenewalOpportunity"
+  Then I verify the sync opportunity
