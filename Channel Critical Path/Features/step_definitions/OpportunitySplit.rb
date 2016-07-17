@@ -189,13 +189,13 @@ Then(/^I verify the renewal relationship & Metrics fields values are recalculate
     end
     sleep 5
     # within all(".pbSubsection")[0] do
-      # sleep 4
-      # probability_field = all("tr")[6].all("td")[2].text
-      # unless probability_field.to_s == arg["ProbabilityField"].to_s
-        # puts "Failed to see the #{probability_field} filed"
-      # else
-        # puts "Successfully see the #{probability_field} filed"
-      # end
+    # sleep 4
+    # probability_field = all("tr")[6].all("td")[2].text
+    # unless probability_field.to_s == arg["ProbabilityField"].to_s
+    # puts "Failed to see the #{probability_field} filed"
+    # else
+    # puts "Successfully see the #{probability_field} filed"
+    # end
     # end
     if page.has_content?(arg["ProbabilityField"])
       puts "Successfully see the #{arg["ProbabilityField"]} filed"
@@ -328,15 +328,21 @@ Then(/^I should able to see the opportunity details$/) do
       putstr "Failed to see the selected #{$first_product_name} #{$second_product_name} products"
     end
     sleep 5
-    within all(".pbSubsection")[0] do
-      sleep 6
-      probability_field = all("tr")[5].all("td")[2].text
-      unless probability_field.to_s == arg["ProbabilityField"].to_s
-        putstr "Failed to see the #{probability_field} filed"
-      else
-        puts "Successfully see the #{probability_field} filed"
-      end
+    # within all(".pbSubsection")[0] do
+    # sleep 6
+    # probability_field = all("tr")[5].all("td")[2].text
+    # unless probability_field.to_s == arg["ProbabilityField"].to_s
+    # putstr "Failed to see the #{probability_field} filed"
+    # else
+    # puts "Successfully see the #{probability_field} filed"
+    # end
+    # end
+    if page.has_content?(arg["ProbabilityField"])
+      puts "Successfully see the #{arg["ProbabilityField"]} filed"
+    else
+      putstr "Failed to see the #{arg["ProbabilityField"]} filed"
     end
+
     sleep 3
   rescue Exception => ex
     putstr "Error occurred while new target opportunity and product details verification"
