@@ -170,11 +170,11 @@ end
 And(/^I click on "(.*?)" button$/) do |button_text|
   begin
     sleep 3
-    within all(".pbButton ")[1] do
+    #within all(".pbButton ")[1] do
       click_on button_text
       puts "Successfully clicked #{button_text}"
       sleep 5
-    end
+    #end
   rescue Exception => ex
     putstr "Error occurred while clicking on #{button_text}"
     putstr_withScreen  ex.message
