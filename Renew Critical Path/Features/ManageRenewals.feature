@@ -9,11 +9,11 @@ Feature: All features related to Opportunity Management - Manage Renewals
 
 @invalid_rebuild_renewal_opportunity
 Scenario: Rally Test Case ID: TC4657,TC4645,TC5361,TC5362 - Rebuild Opportunity Product Line - Invalid Renewal Relationship,Manage Renewals - Invalid OPLID - Identify,Manage Renewals - Enable Rebuild for UnSynced Quote
-    When I click on "ServiceSource Setup" link
-    And I click on "Mappings" link
-    And I click on "Renewal Relationship → Opportunity Line Item" link
-    And I Add Opportunity Product Line fields "Total Price" to "Total Price"
-    And I save the Mapping
+    #When I click on "ServiceSource Setup" link
+    #And I click on "Mappings" link
+    #And I click on "Renewal Relationship → Opportunity Line Item" link
+    #And I Add Opportunity Product Line fields "Total Price" to "Total Price"
+    #And I save the Mapping
     When I click on "Opportunities" link
     And I click on "New" button
     And Create new Opportunity under an Account
@@ -26,7 +26,7 @@ Scenario: Rally Test Case ID: TC4657,TC4645,TC5361,TC5362 - Rebuild Opportunity 
     And I delete the opportunity product
     When I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
-    Then I verify the invalid "Renewal Relationship" opportunity product
+    #Then I verify the invalid "Renewal Relationship" opportunity product
     And I click on renewal relationship "Rebuild Opportunity" button
 
 

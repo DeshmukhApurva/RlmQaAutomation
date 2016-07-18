@@ -250,7 +250,7 @@ end
 And(/^I open the asset$/) do
   begin
     sleep 5
-    within all(".pbBody")[2] do
+    within all(".pbBody")[3] do
       within(".list") do
         sleep 3
         first(".dataRow").first("th").first("a").click
@@ -268,7 +268,8 @@ end
 And(/^I open the service contract$/) do
   begin
     sleep 5
-    within all(".pbBody")[5] do
+    #within all(".pbBody")[5] do
+    within all("listRelatedObject assetBlock") do
       within(".list") do
         service_contract = first(".dataRow").first("th").first("a").text
         puts service_contract
@@ -300,8 +301,7 @@ And(/^I navigate to "([^"]*)" folder$/) do |folder_name|
     sleep 4
     end
     edit_name = all(".x-menu-item")[1].text
-    sleep 3
-    edit_name = all(".x-menu-item")[1].click
+    puts edit_name
     sleep 4
     if page.has_content?("Portal Reports (Managed)")
       puts "Successfully see the #{folder_name} edit page"

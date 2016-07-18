@@ -81,33 +81,51 @@ Scenario: Rally-ID:  : Quote Sync - Create quote from standard salesforce
    
 @quotesync_Copy_OppFieldstoQuoteFields
 Scenario: Rally Test Case ID:  - Quote Sync - Copy Opportunity fields to quote fields.
-    When I click on the "Opportunities" grid tab	
-	Then I select the "RenewalOpportunity" 
-	And I verify the quote is synced and update the custom fields on opportunity
-    And I update the standard fields on opportunity
-	Then I verify the quote fields on quote
+    When I click on the "Opportunities" grid tab
+    Then I create Source Opportunity with Line Items and resolve it	
+    And I create new quote by OOB
+	And I navigate to opportunity from quote page
+	And I sync the quotes from Quote
+	And I update the fields on opportunity
+	And I navigate to synced quote details page from opportunity
+	Then I verify opportunity fields copied to quote fields on quote page
 	
 @quotesync_Copy_QuoteFieldstoOppFields
 Scenario: Rally Test Case ID:  - Quote Sync - Copy Quote fields to Opp fields.
     When I click on the "Opportunities" grid tab	
-	Then I select the "RenewalOpportunity" 
-	And I verify the quote is synced and update the custom fields on quote
-    And I update the standard fields on quote
-	Then I verify the Opportunity fields on opportunity page
+	Then I create Source Opportunity with Line Items and resolve it
+	And I create new quote by OOB
+	And I navigate to opportunity from quote page
+	And I sync the quotes from Quote
+	And I navigate to synced quote details page from opportunity 
+	And I update the fields on quote page
+	And I navigate to opportunity from quote page
+	Then I verify quote fields copied to opportunity fields on opportunity page
 	
 @quotesync_Copy_OLItoQLI
 Scenario: Rally Test Case ID:  - Quote Sync - Copy Opportunity line item fields to quote line item fields.
     When I click on the "Opportunities" grid tab	
-	Then I select the "RenewalOpportunity" 
-	And I verify the quote is synced and update the custom fields on opportunity line item
-    Then I verify the Quote line item fields on quote page
+	Then I create Source Opportunity with Line Items and resolve it
+	And I create new quote by OOB
+	And I navigate to opportunity from quote page
+	And I sync the quotes from Quote
+	And I update the fields on opportunity line item
+	Then I navigate to opportunity from product detail page
+	And I navigate to synced quote details page from opportunity
+	Then I verify opportunity fields copied to quote fields on quote page
 	
 @quotesync_Copy_QLItoOLI
 Scenario: Rally Test Case ID:  - Quote Sync - Copy Quote line item fields to Opp line item fields.
     When I click on the "Opportunities" grid tab	
-	Then I select the "RenewalOpportunity" 
-	And I verify the quote is synced and update the custom fields on quote line item
-	Then I verify the Opportunity line item fields on opportunity page
+	Then I create Source Opportunity with Line Items and resolve it
+	And I create new quote by OOB
+	And I navigate to opportunity from quote page
+	And I sync the quotes from Quote
+	And I navigate to synced quote details page from opportunity
+	And I update the fields on quote line item
+	And I navigate to opportunity from quote page
+	Then I verify quote fields copied to opportunity fields on opportunity page
+	
 	
 	
 

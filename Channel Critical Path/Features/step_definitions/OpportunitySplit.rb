@@ -1,18 +1,17 @@
 #All Opportunities - Opportunity Split specific Step definitions
 #All Scenario mentioned in OpportunitySplit.feature
 
-
 And (/^I click on button "(.*?)"$/) do |data|
   begin
     sleep 6
     within(".opportunityLineItemBlock") do
-        click_on data
+      click_on data
     end
     sleep 3
     puts "Successfully click the #{data} button"
   rescue Exception=>ex
     putstr "Error on clicking #{data} button"
-      putstr_withScreen  ex.message
+    putstr_withScreen  ex.message
   end
 end
 
@@ -39,12 +38,12 @@ And(/^I select one or more product from the grid$/) do
           unless checkbox.checked?
             checkbox.click
             puts "Successfully enabled the the product"
-            break
+          break
           else
             puts "Product is already enabled"
           end
         else
-          # puts "#{index}"
+        # puts "#{index}"
         end
       end
     end
@@ -56,12 +55,12 @@ And(/^I select one or more product from the grid$/) do
           unless checkbox.checked?
             checkbox.click
             puts "Successfully enabled the the product"
-            break
+          break
           else
             puts "Product is already enabled"
           end
         else
-          # puts "#{index}"
+        # puts "#{index}"
         end
       end
     end
@@ -88,11 +87,11 @@ And(/^I select the products$/) do
     sleep 5
     within(".opportunityLineItemBlock") do
       within(".list") do
-      sleep 3
-      $first_product_name = all(".dataRow")[0].all("th")[0].first("a").text
-      $second_product_name = all(".dataRow")[1].all("th")[0].first("a").text
-      sleep 3
-    end
+        sleep 3
+        $first_product_name = all(".dataRow")[0].all("th")[0].first("a").text
+        $second_product_name = all(".dataRow")[1].all("th")[0].first("a").text
+        sleep 3
+      end
       sleep 5
       all('input[type=checkbox]').each_with_index do |checkbox , index|
         if index.to_i == arg["FirstProductCheckboxIndex"].to_i
@@ -104,7 +103,7 @@ And(/^I select the products$/) do
             puts "Product is already enabled"
           end
         else
-          # puts "#{index}"
+        # puts "#{index}"
         end
       end
       sleep 5
@@ -118,7 +117,7 @@ And(/^I select the products$/) do
             puts "Product is already enabled"
           end
         else
-          # puts "#{index}"
+        # puts "#{index}"
         end
       end
     end
@@ -127,7 +126,6 @@ And(/^I select the products$/) do
     putstr_withScreen  ex.message
   end
 end
-
 
 And(/^I select the "([^"]*)" option from the "([^"]*)" list$/) do |drop_down_value, label|
   begin
@@ -190,15 +188,21 @@ Then(/^I verify the renewal relationship & Metrics fields values are recalculate
       end
     end
     sleep 5
-    within all(".pbSubsection")[0] do
-      sleep 4
-      probability_field = all("tr")[5].all("td")[2].text
-      unless probability_field.to_s == arg["ProbabilityField"].to_s
-        putstr "Failed to see the #{probability_field} filed"
-      else
-        puts "Successfully see the #{probability_field} filed"
-      end
+    # within all(".pbSubsection")[0] do
+    # sleep 4
+    # probability_field = all("tr")[6].all("td")[2].text
+    # unless probability_field.to_s == arg["ProbabilityField"].to_s
+    # puts "Failed to see the #{probability_field} filed"
+    # else
+    # puts "Successfully see the #{probability_field} filed"
+    # end
+    # end
+    if page.has_content?(arg["ProbabilityField"])
+      puts "Successfully see the #{arg["ProbabilityField"]} filed"
+    else
+      putstr "Failed to see the #{arg["ProbabilityField"]} filed"
     end
+
   rescue Exception => ex
     putstr "Error occurred while new target opportunity and product details verification"
     putstr_withScreen  ex.message
@@ -237,8 +241,6 @@ Then(/^I should able to see the validation error messages$/) do
   end
 end
 
-
-
 Then(/^I should able to see the "([^"]*)" and "([^"]*)" section$/) do |target_opportunity_section, opportunity_products_section|
   begin
     sleep 6
@@ -272,7 +274,6 @@ Then(/^I should able to see the "([^"]*)" and "([^"]*)" section$/) do |target_op
   end
 end
 
-
 And(/^I fill the required fields from "([^"]*)" page$/) do |page_file|
   begin
     sleep 5
@@ -288,7 +289,7 @@ And(/^I fill the required fields from "([^"]*)" page$/) do |page_file|
     sleep 10
     page.driver.browser.switch_to.frame("resultsFrame")
     within('.list') do
-      # first("tbody").all("tr")[1].first("th").first("a").click
+    # first("tbody").all("tr")[1].first("th").first("a").click
       click_on arg["SelectTargetOpportunity"]
     end
     sleep 5
@@ -302,7 +303,6 @@ And(/^I fill the required fields from "([^"]*)" page$/) do |page_file|
   end
 end
 
-
 Then(/^I should able to see the opportunity details$/) do
   begin
     found =0
@@ -313,11 +313,11 @@ Then(/^I should able to see the opportunity details$/) do
       within(".list") do
         tr = all(".dataRow")
         tr.each do |row|
-            if ((row.all(".dataCell")[0].text == $first_product_name.to_s)||(row.all(".dataCell")[0].text == $second_product_name.to_s))
-                found = 1
-            else
-                found = 0
-            end
+          if ((row.all(".dataCell")[0].text == $first_product_name.to_s)||(row.all(".dataCell")[0].text == $second_product_name.to_s))
+          found = 1
+          else
+          found = 0
+          end
         end
       end
     end
@@ -328,22 +328,27 @@ Then(/^I should able to see the opportunity details$/) do
       putstr "Failed to see the selected #{$first_product_name} #{$second_product_name} products"
     end
     sleep 5
-    within all(".pbSubsection")[0] do
-      sleep 6
-      probability_field = all("tr")[5].all("td")[2].text
-      unless probability_field.to_s == arg["ProbabilityField"].to_s
-        putstr "Failed to see the #{probability_field} filed"
-      else
-        puts "Successfully see the #{probability_field} filed"
-      end
+    # within all(".pbSubsection")[0] do
+    # sleep 6
+    # probability_field = all("tr")[5].all("td")[2].text
+    # unless probability_field.to_s == arg["ProbabilityField"].to_s
+    # putstr "Failed to see the #{probability_field} filed"
+    # else
+    # puts "Successfully see the #{probability_field} filed"
+    # end
+    # end
+    if page.has_content?(arg["ProbabilityField"])
+      puts "Successfully see the #{arg["ProbabilityField"]} filed"
+    else
+      putstr "Failed to see the #{arg["ProbabilityField"]} filed"
     end
+
     sleep 3
   rescue Exception => ex
     putstr "Error occurred while new target opportunity and product details verification"
     putstr_withScreen  ex.message
   end
 end
-
 
 And(/^I open existing opportunity$/) do
   begin
@@ -356,13 +361,18 @@ And(/^I open existing opportunity$/) do
     end
     sleep 6
     result = false
+    oppName = arg["SplitOpportunityName"].to_s
+    oppInitial = oppName[0]
+    click_on oppInitial
+    #find(:xpath, '//a/span[text()="#{oppInitial}"]').click
+    sleep 5
     all(:xpath, '//div/table/tbody/tr/td[4]/div/a/span').each do |activity|
       if activity.text.include? arg["SplitOpportunityName"]
         puts "Successfully match the #{arg["SplitOpportunityName"]} Opportunity name"
         activity.click
         puts "Successfully opened the #{arg["SplitOpportunityName"]} Opportunity"
-        result = true
-        break
+      result = true
+      break
       end
     end
     putstr "Unable to find the #{arg["SplitOpportunityName"]} Opportunity" unless result
@@ -388,18 +398,17 @@ Then(/^I should able to see the "([^"]*)" alert message$/) do |alert_message|
   end
 end
 
-
 Then(/^I should able to cancel the split opportunity$/) do
   begin
-   sleep 4
-   if page.has_css?(".pageDescription")
-     puts "Successfully cancel the existing split opportunity"
-   else
-     putstr "Failed to cancel the existing split opportunity"
-   end
-   sleep 3
-   rescue Exception => ex
-   putstr "Error occurred while cancel the existing split opportunity"
-   putstr_withScreen  ex.message
- end
+    sleep 4
+    if page.has_css?(".pageDescription")
+      puts "Successfully cancel the existing split opportunity"
+    else
+      putstr "Failed to cancel the existing split opportunity"
+    end
+    sleep 3
+  rescue Exception => ex
+    putstr "Error occurred while cancel the existing split opportunity"
+    putstr_withScreen  ex.message
+  end
 end

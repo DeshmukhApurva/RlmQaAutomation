@@ -252,7 +252,7 @@ Scenario: Rally Test Case ID: TC4993,TC4994 - Success Task - Save user preferenc
 @save_the_page_size_user_preferences
 Scenario: Rally Test Case ID: TC5102,TC5103,TC5104 - Success Task - Save user preferences for Page Size Selection (login/logout/Navigate away),Verify that User Prefernece for FC View , grid Columns should remain saved if user changes the Page Size,Verify that user prefernece for Page Size should remain saved if user changes the FC View and grid columns
     When I click on "Success Tasks" tab
-   # And I select the task from task list
+    #And I select the task from task list
     And I select the pagination size
     And I user logout from "CSM" application
     And that I navigate to the CRM application
