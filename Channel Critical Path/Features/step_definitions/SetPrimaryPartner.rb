@@ -12,6 +12,9 @@ Then (/^I select the "(.*?)"$/) do |data|
 		end
 		sleep 5
 		foundCount = 0
+		oppName = arg["Name"].to_s
+    oppInitial = oppName[0]
+    click_on oppInitial
 		begin  
 			within(".x-grid3-body") do
 				tr = all(".x-grid3-row")				
