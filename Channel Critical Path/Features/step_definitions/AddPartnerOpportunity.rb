@@ -727,3 +727,16 @@ Then(/^I should be able to see the partner account hierarchy details$/) do
     putstr_withScreen  ex.message
   end
 end
+
+# And(/^I select the "([^"]*)" option from syncing dropdown$/) do |syncing_option|
+  # begin
+    # sleep 2
+    # first(:option, syncing_option).select_option
+    # #find(:xpath, '//label[@text='Syncing']/following-sibling::')
+    # sleep 2
+  # rescue Exception => ex
+    # putstr "Error occurred while verifying the partner opportunity details page"
+    # putstr_withScreen  ex.message
+  # end
+# end
+# 

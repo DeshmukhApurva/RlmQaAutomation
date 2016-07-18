@@ -85,7 +85,8 @@ When (/^I select NewPartnerOpp Partner Opportunity$/) do
 			tr.each do |row|
         sleep 3
 				row.all(".dataCell").each do |sync|
-					if sync.text == "#{arg1['NewPartnerOpp']}#{$Opp}"
+					#if sync.text == "#{arg1['NewPartnerOpp']}#{$Opp}"
+          if sync.text == "#{arg1['First']}"
              sleep 3
              row.first("input[type='checkbox']").click
 					   puts "#{arg1['NewPartnerOpp']} partner opportunity is selected"
@@ -132,12 +133,12 @@ Then (/^I choose the sync options$/) do
 				main = page.driver.browser.window_handles.first
 				click_on("Syncing")
 				puts "Clicked on the button 'Syncing'"
-				sleep 5
+				sleep 10
 				popup = page.driver.browser.window_handles.last
 				page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
-				sleep 10
-				page.driver.browser.switch_to.window(popup)
 				sleep 5
+				#page.driver.browser.switch_to.window(popup)
+				#sleep 5
 				if page.has_content? "Please select one option for Syncing"
 					puts "Navigated to the pop up window."
 				else
