@@ -814,6 +814,66 @@ Then(/^I verify QLI fields copied to OLI$/) do
     end
   end
 end
+
+And(/^I navigate to Quote detail page from QLI details page$/) do
+  begin
+    find(:xpath, '//td[text()="Quote Name"]/following-sibling::td/div/a', :match => :prefer_exact).click
+    puts "Navigated to quote details page"
+    sleep 5
+
+  rescue Exception => ex
+    putstr "Error occurred while navigating quote page from QLI details page"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I navigate to available quote$/) do
+  begin
+
+    sleep 3
+    isQuotePresent = 0
+    #within all(".listRelatedObject.quoteBlock") do
+    within all(".pbBody")[10] do
+
+      if page.has_css?(".noRowsHeader")
+        puts "No Quote Records found"
+        sleep 3
+      else
+        isQuotePresent = 1
+        puts "Successfully see the quote records"
+      end
+    end
+    sleep 3
+    if isQuotePresent == 1
+      sleep 4
+      within all(".pbBody")[10] do
+        within(".list") do
+          quote_name = first("tbody").all(".dataRow")[0].all("td")[1].first("a").text
+          puts quote_name
+          sleep 4
+          first("tbody").all(".dataRow")[0].all("td")[1].first("a").click
+
+          puts "Navigated to available quote page - #{quote_name} "
+          sleep 3
+        end
+      end
+    end
+  rescue Exception => ex
+    putstr "Error occurred while navigating to available quote"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I navigate to Opportunity from partner Opportunity page$/) do
+  begin
+    find(:xpath, '//td[text()="Opportunity Name"]/following-sibling::td/div/a', :match => :prefer_exact).click
+    sleep 5
+    puts "Navigated Opportunity page"
+  rescue Exception => ex
+    putstr "Error occurred while navigating to opportunity page from partner opportunity page"
+    putstr_withScreen  ex.message
+  end
+end
 And(/^I delete the product from Quote_Opportunity$/) do
   begin
     sleep 5
@@ -894,9 +954,8 @@ And(/^I sync the quotes from Quote$/) do
     sleep 3
     isQuotePresent = 0
     #within all(".listRelatedObject.quoteBlock") do
-    puts "m in.."
     within all(".pbBody")[10] do
-      
+
       if page.has_css?(".noRowsHeader")
         puts "No Quote Records found"
         sleep 3
@@ -943,7 +1002,7 @@ And(/^I sync the quotes from Quote$/) do
     if page.has_css?("#syncQuoteOverlay_buttons")
       puts "Successfully see the sync quote overlay"
       #within("#bottomButtonRow") do
-        click_on 'Sync'
+      click_on 'Sync'
       #end
     else
       puts "Failed to see the sync quote overlay"
@@ -999,8 +1058,9 @@ And(/^I stop the syncing of the quote$/) do
       if page.has_css?(".noRowsHeader")
         puts "No Quote Records found"
         sleep 3
-        isQuotePresent = 1
       else
+        isQuotePresent = 1
+
         puts "Successfully see the quote records"
       end
     end
@@ -1023,8 +1083,12 @@ And(/^I stop the syncing of the quote$/) do
         puts "Successfully see the quote sync page"
         sleep 3
         if page.has_css?(".syncStop")
+          puts "syncstop button is available"
           sleep 3
-          click_on arg["StopSync"]
+          #click_on arg["StopSync"]
+          click_on "Stop Sync"
+          sleep 5
+
           puts "Successfully stop sync the quote renewal opportunity"
           sleep 3
         else
