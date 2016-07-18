@@ -155,46 +155,46 @@ Then(/^I should able to see the renewals indicators fields$/) do
     arg = getDetails "RenewalOpportunityFields"
     #within all(".pbSubsection") do
 
-      unless page.has_content?(arg["DaysUntilExpirationField"])
-        putstr "Failed to see the #{arg["DaysUntilExpirationField"]} field"
-      else
-        puts "Successfully see the #{arg["DaysUntilExpirationField"]} field"
-      end
-      sleep 5
+    unless page.has_content?(arg["DaysUntilExpirationField"])
+      putstr "Failed to see the #{arg["DaysUntilExpirationField"]} field"
+    else
+      puts "Successfully see the #{arg["DaysUntilExpirationField"]} field"
+    end
+    sleep 5
 
-      unless page.has_content?(arg["DIAContactedField"])
-        putstr "Failed to see the #{arg["DIAContactedField"]} field"
-      else
-        puts "Successfully see the #{arg["DIAContactedField"]} field"
-      end
-      sleep 5
+    unless page.has_content?(arg["DIAContactedField"])
+      putstr "Failed to see the #{arg["DIAContactedField"]} field"
+    else
+      puts "Successfully see the #{arg["DIAContactedField"]} field"
+    end
+    sleep 5
 
-      unless page.has_content?(arg["DIAQuotedField"])
-        putstr "Failed to see the #{arg["DIAQuotedField"]} field"
-      else
-        puts "Successfully see the #{arg["DIAQuotedField"]} field"
-      end
-      sleep 5
+    unless page.has_content?(arg["DIAQuotedField"])
+      putstr "Failed to see the #{arg["DIAQuotedField"]} field"
+    else
+      puts "Successfully see the #{arg["DIAQuotedField"]} field"
+    end
+    sleep 5
 
-      unless page.has_content?(arg["DIAClosedField"])
-        putstr "Failed to see the #{arg["DIAClosedField"]} field"
-      else
-        puts "Successfully see the #{arg["DIAClosedField"]} field"
-      end
-      sleep 5
+    unless page.has_content?(arg["DIAClosedField"])
+      putstr "Failed to see the #{arg["DIAClosedField"]} field"
+    else
+      puts "Successfully see the #{arg["DIAClosedField"]} field"
+    end
+    sleep 5
 
-      unless page.has_content?(arg["ConversionRateField"])
-        putstr "Failed to see the #{arg["ConversionRateField"]} field"
-      else
-        puts "Successfully see the #{arg["ConversionRateField"]} field"
-      end
-      sleep 5
+    unless page.has_content?(arg["ConversionRateField"])
+      putstr "Failed to see the #{arg["ConversionRateField"]} field"
+    else
+      puts "Successfully see the #{arg["ConversionRateField"]} field"
+    end
+    sleep 5
 
-      unless page.has_content?(arg["LossRateField"])
-        putstr "Failed to see the #{arg["LossRateField"]} field"
-      else
-        puts "Successfully see the #{arg["LossRateField"]} field"
-      end
+    unless page.has_content?(arg["LossRateField"])
+      putstr "Failed to see the #{arg["LossRateField"]} field"
+    else
+      puts "Successfully see the #{arg["LossRateField"]} field"
+    end
     #end
     sleep 5
   rescue Exception => ex
@@ -272,14 +272,14 @@ Then(/^I should able to see the renewal tracking fields$/) do
         puts "Successfully see the #{created_by_field} field"
       end
       sleep 2
-           
-#      $after_update_renewal_target = find(:xpath, "//td[text()='Renewal Target - Resolved']/following-sibling::td/div").text
-#
-#      if $before_update_renewal_target != $after_update_renewal_target
-#        putstr "Successfully updated Renewal Target - Resolved field"
-#      else
-#        putstr "Failed to update Renewal Target - Resolved field"
-#      end
+
+      #      $after_update_renewal_target = find(:xpath, "//td[text()='Renewal Target - Resolved']/following-sibling::td/div").text
+      #
+      #      if $before_update_renewal_target != $after_update_renewal_target
+      #        putstr "Successfully updated Renewal Target - Resolved field"
+      #      else
+      #        putstr "Failed to update Renewal Target - Resolved field"
+      #      end
 
       if page.has_content?(arg["DestinationServiceContractField"])
         puts "Successfully see the #{arg["DestinationServiceContractField"]} field"
@@ -331,10 +331,10 @@ Then(/^I should able to see the renewal tracking fields$/) do
     puts find(:xpath, "//div[6]/table/tbody/tr[5]/td[4]/div[1]").text
 
     #find(:xpath,"(//a[contains(text(),'Edit')])[6]").click
-    
+
     within all(".customnotabBlock")[0]do
-        first(:link,"Edit").click
-      end
+      first(:link,"Edit").click
+    end
     sleep 10
     visit(current_path)
     puts find(:xpath, "//div[@id='ep']/div[2]/div[2]/table/tbody/tr[4]/td[4]/span/select").value
@@ -352,7 +352,11 @@ Then(/^I should able to see the renewal tracking fields$/) do
     puts find(:xpath, "//div[@id='ep']/div[2]/div[2]/table/tbody/tr[4]/td[4]/span/select").value
     first(:button, 'Save').click
     sleep 10
-    first(:link, 'RenewTesting').click
+    if page.has_xpath?('//a[@title="ServiceSource Setup Tab"]')
+      first(:link, 'RenewNetOpsTesting').click
+    else
+      first(:link, 'RenewTesting').click
+    end
     sleep 5
 
     after_rt_won = find(:xpath, "//div[6]/table/tbody/tr[3]/td[4]/div[1]").text
@@ -497,4 +501,3 @@ Then(/^I should able to see the "([^"]*)" section$/) do |title|
     putstr_withScreen  ex.message
   end
 end
-

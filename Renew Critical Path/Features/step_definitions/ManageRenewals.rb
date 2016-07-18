@@ -1172,8 +1172,9 @@ end
 
 And(/^I delete the opportunity product$/) do
   begin
-    $rebuild_product_name = first(".opportunityLineItemBlock").first("tbody").first(".dataRow").first("th").first("a").text
-    first(".opportunityLineItemBlock").first(:link,"Del").click
+    #$rebuild_product_name = first(".opportunityLineItemBlock").first("tbody").first(".dataRow").first("th").first("a").text
+    #first(".opportunityLineItemBlock").first(:link,"Del").click
+    first(:link,'Del').click
     sleep 3
     page.driver.browser.switch_to.alert.accept
     puts "Deleted product #{$rebuild_product_name}"

@@ -5,8 +5,8 @@ CHANNELNETOPS_DEV19:
  Instance: "ChannelNetOpDEV19"
  url: "https://login.salesforce.com/"
  admin_url: "https://login.salesforce.com"
- admin_userName: "senthilj-eetest4@servicesource.com"
- admin_pwd: "pass@word1"
+ admin_userName: "devuser-ee4@comitydesigns.com"
+ admin_pwd: "passw0rd"
 
 CHANNELMANAGER_DEV19:
  userName: "qa-channelmanager-csmdev19@servicesource.com"
@@ -17,8 +17,8 @@ CHANNELMANAGER_DEV19:
  partner_userName: "qa-channelpartner-csmdev19@servicesource.com"
  partner_pwd: "pass@word1"
  admin_url: "https://login.salesforce.com"
- admin_userName: "senthilj-csmdev19@servicesource.com"
- admin_pwd: "pass@word1"
+ admin_userName: "devuser-ee4@comitydesigns.com"
+ admin_pwd: "passw0rd"
 
 CHANNELPARTNER_DEV19:
  userName: "qa-channelpartner-csmdev19@servicesource.com"
@@ -36,8 +36,8 @@ CHANNELPARTNER_DEV19:
 
 ADMIN_DEV19:
  url: "https://login.salesforce.com/"
- userName: "senthilj-csmdev19@servicesource.com"
- pwd: "pass@word1"
+ userName: "devuser-ee4@comitydesigns.com"
+ pwd: "passw0rd"
  Instance: "ChannelManagerDEV19"
 
 CHANNELNETOPS_DEV20:
@@ -46,8 +46,8 @@ CHANNELNETOPS_DEV20:
  Instance: "ChannelNetOpDEV20"
  url: "https://login.salesforce.com/"
  admin_url: "https://login.salesforce.com"
- admin_userName: "senthilj-eetest4@servicesource.com"
- admin_pwd: "pass@word1"
+ admin_userName: "devuser-ee4@comitydesigns.com"
+ admin_pwd: "passw0rd"
 
 CHANNELMANAGER_DEV20:
  userName: "qa-channelmanager-csmdev20@servicesource.com"
@@ -58,8 +58,8 @@ CHANNELMANAGER_DEV20:
  partner_userName: "qa-channelpartner-csmdev20@servicesource.com"
  partner_pwd: "pass@word1"
  admin_url: "https://login.salesforce.com"
- admin_userName: "senthilj-csmdev20@servicesource.com"
- admin_pwd: "pass@word1"
+ admin_userName: "devuser-ee4@comitydesigns.com"
+ admin_pwd: "passw0rd"
 
 CHANNELPARTNER_DEV20:
  userName: "qa-channelpartner-csmdev20@servicesource.com"
@@ -81,8 +81,8 @@ CHANNELNETOPS_DEV25:
  Instance: "ChannelNetOpDEV25"
  url: "https://login.salesforce.com/"
  admin_url: "https://login.salesforce.com"
- admin_userName: "senthilj-eetest4@servicesource.com"
- admin_pwd: "pass@word1"
+ admin_userName: "devuser-ee4@comitydesigns.com"
+ admin_pwd: "passw0rd"
 
 
 CHANNELMANAGER_DEV25:
@@ -94,8 +94,8 @@ CHANNELMANAGER_DEV25:
  partner_userName: "qa-channelpartner-csmdev25@servicesource.com"
  partner_pwd: "pass@word1"
  admin_url: "https://login.salesforce.com"
- admin_userName: "senthilj-csmdev25@servicesource.com"
- admin_pwd: "pass@word1"
+ admin_userName: "devuser-ee4@comitydesigns.com"
+ admin_pwd: "passw0rd"
 
 CHANNELPARTNER_DEV25:
  userName: "qa-channelpartner-csmdev25@servicesource.com"
@@ -117,8 +117,8 @@ CHANNELNETOPS_EETEST2:
  Instance: "ChannelNetOpEETEST2"
  url: "https://login.salesforce.com/"
  admin_url: "https://login.salesforce.com"
- admin_userName: "senthilj-eetest4@servicesource.com"
- admin_pwd: "pass@word1"
+ admin_userName: "devuser-ee4@comitydesigns.com"
+ admin_pwd: "passw0rd"
 
 
 CHANNELMANAGER_EETEST2:
@@ -130,8 +130,8 @@ CHANNELMANAGER_EETEST2:
  partner_userName: "qa-channelpartner-eetest2@servicesource.com"
  partner_pwd: "pass@word1"
  admin_url: "https://login.salesforce.com"
- admin_userName: "senthilj-eetest2@servicesource.com"
- admin_pwd: "pass@word1"
+ admin_userName: "devuser-ee4@comitydesigns.com"
+ admin_pwd: "passw0rd"
 
 
 CHANNELPARTNER_EETEST2:
@@ -154,8 +154,8 @@ CHANNELNETOPS_EETEST4:
  Instance: "ChannelNetOpEETEST4"
  url: "https://login.salesforce.com/"
  admin_url: "https://login.salesforce.com"
- admin_userName: "senthilj-eetest4@servicesource.com"
- admin_pwd: "pass@word1"
+ admin_userName: "devuser-ee4@comitydesigns.com"
+ admin_pwd: "passw0rd"
 
 CHANNELMANAGER_EETEST4:
  userName: "qa-channelmanager-eetest4@servicesource.com"
@@ -167,8 +167,8 @@ CHANNELMANAGER_EETEST4:
  partner_userName: "qa-channelpartner-eetest4@servicesource.com"
  partner_pwd: "pass@word1"
  admin_url: "https://login.salesforce.com"
- admin_userName: "senthilj-eetest4@servicesource.com"
- admin_pwd: "pass@word1"
+ admin_userName: "devuser-ee4@comitydesigns.com"
+ admin_pwd: "passw0rd"
 
 CHANNELPARTNER_EETEST4:
  userName: "qa-channelpartner-eetest4@servicesource.com"
