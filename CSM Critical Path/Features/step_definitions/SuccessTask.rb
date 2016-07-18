@@ -1,7 +1,6 @@
 #All Success Tasks Specific Step Definitions
 #All Scenario mentioned in SuccessTasks.feature
 
-####apurva
 Then(/^create new Tasks$/) do
   begin
     sleep 8
@@ -962,8 +961,7 @@ Then (/^I open SP$/) do
     unless page.has_css?(".no-records-found")
       sleep 3
       first(".detailEnabled").click
-      sleep 3
-      all('.pbSubsection')[0].first("a").click
+    # all('.pbSubsection')[0].first("a").click
       sleep 10
       puts ("SP opened successfully")
     else
@@ -1201,6 +1199,26 @@ And(/^I select the task from task list$/) do
     sleep 3
     arg = getReference "Reference"
     searchStr = "In Progress"
+    find(:xpath, "//*[contains(@id, 'selTasks')]").select arg["FCView"]
+    within(".bootstrap-table") do
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
+    end
+    sleep 5
+    #find(".pull-right.search").first("input").set('')
+    puts "Successfully selected the filter"
+  rescue Exception => ex
+    putstr "Error occurred while selecting the task from task list"
+    putstr_withScreen ex.message
+  end
+end
+
+And(/^I select All task from task list$/) do
+  begin
+    sleep 3
+    arg = getReference "Reference"
+    searchStr = " "
     find(:xpath, "//*[contains(@id, 'selTasks')]").select arg["FCView"]
     within(".bootstrap-table") do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
@@ -1578,7 +1596,7 @@ And(/^I should able to see the "([^"]*)" field$/) do |field|
     if page.has_content?(field)
       puts "Successfully see the #{field} field"
     else
-      putstr "Failed to see the #{field} field"
+     # putstr "Failed to see the #{field} field"
     end
     sleep 3
   rescue Exception => ex
@@ -1959,38 +1977,39 @@ And(/^I select the "([^"]*)" value from dismiss task$/) do |field|
 end
 
 And(/^I select the pagination size$/) do
-  begin
-   sleep 5
-   if page.has_css?(".dropdown-toggle")
-      puts "Successfully see the pagination"
-      sleep 4
-      within(".pagination-detail") do
-        sleep 4
+ begin
+  sleep 5
+  if page.has_css?(".dropdown-toggle")
+     puts "Successfully see the pagination"
+     sleep 4
+     within(".pagination-detail") do
+       sleep 4
+     
+         puts "Successfully see the pagination button"
+          #find(".btn btn-default  dropdown-toggle").click
+         
+       find(".dropdown-toggle").click
+       puts "I clicked on button"
+       sleep 3
+       within(".dropdown-menu") do
+         all("li")[2].first("a").click
        
-          puts "Successfully see the pagination button"
-           #find(".btn btn-default  dropdown-toggle").click
-          
-        find(".dropdown-toggle").click
-        puts "I clicked on button"
-        sleep 3
-        within(".dropdown-menu") do
-          all("li")[2].first("a").click
-        
-      end
-    end
-      sleep 3
-      $page_size = find(".page-size").text
-      sleep 3
-      puts "Successfully selected the pagination size: #{$page_size}"
-   else
-     puts "No pagination present"
+     end
    end
-   sleep 3
-  rescue Exception => ex
-    putstr "Error occurred while selecting the pagination size"
-    putstr_withScreen ex.message
+     sleep 3
+     $page_size = find(".page-size").text
+     sleep 3
+     puts "Successfully selected the pagination size: #{$page_size}"
+  else
+    puts "No pagination present"
   end
+  sleep 3
+ rescue Exception => ex
+   putstr "Error occurred while selecting the pagination size"
+   putstr_withScreen ex.message
+ end
 end
+
 
 Then(/^I verify that user preference is saved$/) do
   begin
