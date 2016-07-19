@@ -131,9 +131,9 @@ Then(/^I verify opportunity fields copied to quote fields on quote page$/) do
 
     if $opp_auto_Custom_Text == $quote_auto_Custom_Text
       sleep 5
-      puts "#{$opp_auto_Custom_Text} field copied from opportunity to quote"
+      puts "#{$opp_auto_Custom_Text} - text type custom field copied from opportunity to quote"
     else
-      puts "#{$opp_auto_Custom_Text} field NOT copied from opportunity to quote"
+      puts "#{$opp_auto_Custom_Text} - text type custom field NOT copied from opportunity to quote"
     end
 
     $quote_auto_Custom_Email = find(:xpath, '//td[text()="Automation_Cust_Email"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -142,9 +142,9 @@ Then(/^I verify opportunity fields copied to quote fields on quote page$/) do
 
     if $opp_auto_Custom_Email == $quote_auto_Custom_Email
       sleep 5
-      puts "#{$opp_auto_Custom_Email} field copied from opportunity to quote"
+      puts "#{$opp_auto_Custom_Email} - email type custom field copied from opportunity to quote"
     else
-      puts "#{$opp_auto_Custom_Email} field NOT copied from opportunity to quote"
+      puts "#{$opp_auto_Custom_Email} - email type custom field  NOT copied from opportunity to quote"
     end
 
     $quote_auto_Custom_Currency = find(:xpath, '//td[text()="Automation_Cust_Currency"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -153,9 +153,9 @@ Then(/^I verify opportunity fields copied to quote fields on quote page$/) do
 
     if $opp_auto_Custom_Currency == $quote_auto_Custom_Currency
       sleep 5
-      puts "#{$opp_auto_Custom_Currency} field copied from opportunity to quote"
+      puts "#{$opp_auto_Custom_Currency} - currency type custom field copied from opportunity to quote"
     else
-      puts "#{$opp_auto_Custom_Currency} field NOT copied from opportunity to quote"
+      puts "#{$opp_auto_Custom_Currency} - currency type custom field NOT copied from opportunity to quote"
     end
 
     $quote_auto_Custom_Phone = find(:xpath, '//td[text()="Automation_Cust_Phone"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -164,9 +164,9 @@ Then(/^I verify opportunity fields copied to quote fields on quote page$/) do
 
     if $opp_auto_Custom_Phone == $quote_auto_Custom_Phone
       sleep 5
-      puts "#{$opp_auto_Custom_Phone} field copied from opportunity to quote"
+      puts "#{$opp_auto_Custom_Phone} - phone type custom field copied from opportunity to quote"
     else
-      puts "#{$opp_auto_Custom_Phone} field NOT copied from opportunity to quote"
+      puts "#{$opp_auto_Custom_Phone} - phone type custom field NOT copied from opportunity to quote"
     end
 
     $quote_auto_Custom_Date = find(:xpath, '//td[text()="Automation_Cust_Date"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -175,9 +175,9 @@ Then(/^I verify opportunity fields copied to quote fields on quote page$/) do
 
     if $opp_auto_Custom_Date == $quote_auto_Custom_Date
       sleep 5
-      puts "#{$opp_auto_Custom_Date} field copied from opportunity to quote"
+      puts "#{$opp_auto_Custom_Date} - date type custom field copied from opportunity to quote"
     else
-      puts "#{$opp_auto_Custom_Date} field NOT copied from opportunity to quote"
+      puts "#{$opp_auto_Custom_Date} - date type custom field NOT copied from opportunity to quote"
     end
 
     $quote_auto_Custom_DateTime = find(:xpath, '//td[text()="Automation_Cust_DateTime"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -186,9 +186,9 @@ Then(/^I verify opportunity fields copied to quote fields on quote page$/) do
 
     if $opp_auto_Custom_DateTime == $quote_auto_Custom_DateTime
       sleep 5
-      puts "#{$opp_auto_Custom_DateTime} field copied from opportunity to quote"
+      puts "#{$opp_auto_Custom_DateTime} - DateTime type custom field copied from opportunity to quote"
     else
-      puts "#{$opp_auto_Custom_DateTime} field NOT copied from opportunity to quote"
+      puts "#{$opp_auto_Custom_DateTime} - DateTime type custom field NOT copied from opportunity to quote"
     end
 
     $quote_auto_Custom_Picklist = find(:xpath, '//td[text()="Automation_Cust_Picklist"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -197,9 +197,9 @@ Then(/^I verify opportunity fields copied to quote fields on quote page$/) do
 
     if $opp_auto_Custom_Picklist == $quote_auto_Custom_Picklist
       sleep 5
-      puts "#{$opp_auto_Custom_Picklist} field copied from opportunity to quote"
+      puts "#{$opp_auto_Custom_Picklist} - picklist type custom field copied from opportunity to quote"
     else
-      puts "#{$opp_auto_Custom_Picklist} field NOT copied from opportunity to quote"
+      puts "#{$opp_auto_Custom_Picklist} - picklist type custom field NOT copied from opportunity to quote"
     end
 
     $quote_auto_Description = find(:xpath, '//td[text()="Description"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -207,9 +207,9 @@ Then(/^I verify opportunity fields copied to quote fields on quote page$/) do
 
     if $opp_auto_Description == $quote_auto_Description
       sleep 5
-      puts "#{$opp_auto_Description} field copied from opportunity to quote"
+      puts "#{$opp_auto_Description} - Description - standard field copied from opportunity to quote"
     else
-      puts "#{$opp_auto_Description} field NOT copied from opportunity to quote"
+      puts "#{$opp_auto_Description}  - Description - standard field NOT copied from opportunity to quote"
     end
 
     $quote_auto_ExpirationDate = find(:xpath, '//td[text()="Expiration Date"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -218,9 +218,9 @@ Then(/^I verify opportunity fields copied to quote fields on quote page$/) do
 
     if $opp_auto_ExpirationDate == $quote_auto_ExpirationDate
       sleep 5
-      puts "#{$opp_auto_Custom_DateTime} field copied from opportunity to quote"
+      puts "#{$opp_auto_Custom_DateTime} Exp Date - standard field copied from opportunity to quote"
     else
-      puts "#{$opp_auto_Custom_DateTime} field NOT copied from opportunity to quote"
+      puts "#{$opp_auto_Custom_DateTime} Exp Date- standard field NOT copied from opportunity to quote"
     end
 
   rescue Exception => ex
@@ -304,9 +304,9 @@ Then(/^I verify quote fields copied to opportunity fields on opportunity page$/)
 
     if $opp_auto_Custom_Text == $quote_1_auto_Custom_Text
       sleep 5
-      puts "#{$quote_1_auto_Custom_Text} field copied from quote to opportunity"
+      puts "#{$quote_1_auto_Custom_Text} - text type custom field copied from quote to opportunity"
     else
-      puts "#{$quote_1_auto_Custom_Text} field NOT copied from quote to opportunity"
+      puts "#{$quote_1_auto_Custom_Text} - text type custom field  NOT copied from quote to opportunity"
     end
 
     $opp_auto_Custom_Email = find(:xpath, '//td[text()="Automation_Cust_Email"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -315,9 +315,9 @@ Then(/^I verify quote fields copied to opportunity fields on opportunity page$/)
 
     if $opp_auto_Custom_Email == $quote_1_auto_Custom_Email
       sleep 5
-      puts "#{$quote_1_auto_Custom_Email} field copied from quote to opportunity"
+      puts "#{$quote_1_auto_Custom_Email} - email type custom field  copied from quote to opportunity"
     else
-      puts "#{$quote_1_auto_Custom_Email} field NOT copied from quote to opportunity"
+      puts "#{$quote_1_auto_Custom_Email} - email type custom field  NOT copied from quote to opportunity"
     end
 
     $opp_auto_Custom_Currency = find(:xpath, '//td[text()="Automation_Cust_Currency"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -326,9 +326,9 @@ Then(/^I verify quote fields copied to opportunity fields on opportunity page$/)
 
     if $opp_auto_Custom_Currency == $quote_1_auto_Custom_Currency
       sleep 5
-      puts "#{$quote_1_auto_Custom_Currency} field copied from quote to opportunity"
+      puts "#{$quote_1_auto_Custom_Currency} - currency type custom field  copied from quote to opportunity"
     else
-      puts "#{$quote_1_auto_Custom_Currency} field NOT copied from quote to opportunity"
+      puts "#{$quote_1_auto_Custom_Currency} - currency type custom field  NOT copied from quote to opportunity"
     end
 
     $opp_auto_Custom_Phone = find(:xpath, '//td[text()="Automation_Cust_Phone"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -337,9 +337,9 @@ Then(/^I verify quote fields copied to opportunity fields on opportunity page$/)
 
     if $opp_auto_Custom_Phone == $quote_1_auto_Custom_Phone
       sleep 5
-      puts "#{$quote_1_auto_Custom_Phone} field copied from quote to opportunity"
+      puts "#{$quote_1_auto_Custom_Phone} - phone type custom field  copied from quote to opportunity"
     else
-      puts "#{$quote_1_auto_Custom_Phone} field NOT copied from quote to opportunity"
+      puts "#{$quote_1_auto_Custom_Phone} - phone type custom field NOT copied from quote to opportunity"
     end
 
     $opp_auto_Custom_Date = find(:xpath, '//td[text()="Automation_Cust_Date"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -348,9 +348,9 @@ Then(/^I verify quote fields copied to opportunity fields on opportunity page$/)
 
     if $opp_auto_Custom_Date == $quote_1_auto_Custom_Date
       sleep 5
-      puts "#{$quote_1_auto_Custom_Date} field copied from quote to opportunity"
+      puts "#{$quote_1_auto_Custom_Date} - Date type custom field copied from quote to opportunity"
     else
-      puts "#{$quote_1_auto_Custom_Date} field NOT copied from quote to opportunity"
+      puts "#{$quote_1_auto_Custom_Date} - Date type custom field NOT copied from quote to opportunity"
     end
 
     $opp_auto_Custom_DateTime = find(:xpath, '//td[text()="Automation_Cust_DateTime"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -359,9 +359,9 @@ Then(/^I verify quote fields copied to opportunity fields on opportunity page$/)
 
     if $opp_auto_Custom_DateTime == $quote_1_auto_Custom_DateTime
       sleep 5
-      puts "#{$quote_1_auto_Custom_DateTime} field copied from quote to opportunity"
+      puts "#{$quote_1_auto_Custom_DateTime} - DateTime type custom field copied from quote to opportunity"
     else
-      puts "#{$quote_1_auto_Custom_DateTime} field NOT copied from quote to opportunity"
+      puts "#{$quote_1_auto_Custom_DateTime}  - DateTime type custom field NOT copied from quote to opportunity"
     end
 
     $opp_auto_Custom_Picklist = find(:xpath, '//td[text()="Automation_Cust_Picklist"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -370,9 +370,9 @@ Then(/^I verify quote fields copied to opportunity fields on opportunity page$/)
 
     if $opp_auto_Custom_Picklist == $quote_1_auto_Custom_Picklist
       sleep 5
-      puts "#{$quote_1_auto_Custom_Picklist} field copied from quote to opportunity"
+      puts "#{$quote_1_auto_Custom_Picklist}  - picklist type custom field copied from quote to opportunity"
     else
-      puts "#{$quote_1_auto_Custom_Picklist} field NOT copied from quote to opportunity"
+      puts "#{$quote_1_auto_Custom_Picklist}- picklist type custom field  NOT copied from quote to opportunity"
     end
 
     $opp_auto_Description = find(:xpath, '//td[text()="Description"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -380,21 +380,21 @@ Then(/^I verify quote fields copied to opportunity fields on opportunity page$/)
 
     if $opp_auto_Description == $quote_1_auto_Description
       sleep 5
-      puts "#{$quote_1_auto_Description} field copied from quote to opportunity"
+      puts "#{$quote_1_auto_Description} - Standard field - Description -  copied from quote to opportunity"
     else
-      puts "#{$quote_1_auto_Description} field NOT copied from quote to opportunity"
+      puts "#{$quote_1_auto_Description} - Standard field - Description -  NOT copied from quote to opportunity"
     end
 
-    $opp_auto_ExpirationDate = find(:xpath, '//td[text()="Earliest Expiration Date"]/following-sibling::td/div', :match => :prefer_exact).text
-    sleep 5
-    puts "#{$opp_auto_ExpirationDate}"
-
-    if $opp_auto_ExpirationDate == $quote_1_auto_ExpirationDate
-      sleep 5
-      puts "#{$quote_1_auto_ExpirationDate} field copied from quote to opportunity"
-    else
-      puts "#{$quote_1_auto_ExpirationDate} field NOT copied from quote to opportunity"
-    end
+    #    $opp_auto_ExpirationDate = find(:xpath, '//td[text()="Earliest Expiration Date"]/following-sibling::td/div', :match => :prefer_exact).text
+    #    sleep 5
+    #    puts "#{$opp_auto_ExpirationDate}"
+    #
+    #    if $opp_auto_ExpirationDate == $quote_1_auto_ExpirationDate
+    #      sleep 5
+    #      puts "#{$quote_1_auto_ExpirationDate} field copied from quote to opportunity"
+    #    else
+    #      puts "#{$quote_1_auto_ExpirationDate} field NOT copied from quote to opportunity"
+    #    end
 
   rescue Exception => ex
     putstr "Error occurred while copying quote fields to opportunity fields"
@@ -477,12 +477,12 @@ And(/^I update the fields on opportunity line item$/) do
     puts "#{$oppli_auto_Custom_Picklist}"
 
     $oppli_auto_Description = find(:xpath, '//td[text()="Line Description"]/following-sibling::td/div', :match => :prefer_exact).text
-    puts "#{$oppli_auto_Description} standard field saved"
+    puts "#{$oppli_auto_Description}"
 
     sleep 3
 
     $oppli_auto_Discount = find(:xpath, '//td[text()="Discount"]/following-sibling::td/div', :match => :prefer_exact).text
-    puts "#{$oppli_auto_Discount} standard field saved"
+    puts "#{$oppli_auto_Discount}"
 
   rescue Exception => ex
     putstr "Error occurred while updating fields on opportunity line item"
@@ -516,9 +516,9 @@ Then(/^I verify OLI fields copied to QLI$/) do
 
     if $oppli_auto_Custom_Text == $quoteli_auto_Custom_Text
       sleep 5
-      puts "#{$oppli_auto_Custom_Text} field copied from opportunity line item  to quote line item"
+      puts "#{$oppli_auto_Custom_Text} - text type custom field copied from opportunity line item  to quote line item"
     else
-      puts "#{$oppli_auto_Custom_Text} field NOT copied from opportunity line item  to quote line item"
+      puts "#{$oppli_auto_Custom_Text} - text type custom field NOT copied from opportunity line item  to quote line item"
     end
 
     $quoteli_auto_Custom_Email = find(:xpath, '//td[text()="Automation_Cust_Email"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -527,9 +527,9 @@ Then(/^I verify OLI fields copied to QLI$/) do
 
     if $oppli_auto_Custom_Email == $quoteli_auto_Custom_Email
       sleep 5
-      puts "#{$oppli_auto_Custom_Email} field copied from opportunity line item  to quote line item"
+      puts "#{$oppli_auto_Custom_Email} - email type custom field copied from opportunity line item  to quote line item"
     else
-      puts "#{$oppli_auto_Custom_Email} field NOT copied from opportunity line item  to quote line item"
+      puts "#{$oppli_auto_Custom_Email} - email type custom field NOT copied from opportunity line item  to quote line item"
     end
 
     $quoteli_auto_Custom_Currency = find(:xpath, '//td[text()="Automation_Cust_Currency"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -538,9 +538,9 @@ Then(/^I verify OLI fields copied to QLI$/) do
 
     if $oppli_auto_Custom_Currency == $quoteli_auto_Custom_Currency
       sleep 5
-      puts "#{$oppli_auto_Custom_Currency} field copied from opportunity line item  to quote line item"
+      puts "#{$oppli_auto_Custom_Currency} - currency type custom field copied from opportunity line item  to quote line item"
     else
-      puts "#{$oppli_auto_Custom_Currency} field NOT copied from opportunity line item  to quote line item"
+      puts "#{$oppli_auto_Custom_Currency} - currency type custom field NOT copied from opportunity line item  to quote line item"
     end
 
     $quoteli_auto_Custom_Phone = find(:xpath, '//td[text()="Automation_Cust_Phone"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -549,9 +549,9 @@ Then(/^I verify OLI fields copied to QLI$/) do
 
     if $oppli_auto_Custom_Phone == $quoteli_auto_Custom_Phone
       sleep 5
-      puts "#{$oppli_auto_Custom_Phone} field copied from opportunity line item  to quote line item"
+      puts "#{$oppli_auto_Custom_Phone} - phone type custom field copied from opportunity line item  to quote line item"
     else
-      puts "#{$oppli_auto_Custom_Phone} field NOT copied from opportunity line item  to quote line item"
+      puts "#{$oppli_auto_Custom_Phone} - phone type custom field  NOT copied from opportunity line item  to quote line item"
     end
 
     $quoteli_auto_Custom_Date = find(:xpath, '//td[text()="Automation_Cust_Date"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -560,9 +560,9 @@ Then(/^I verify OLI fields copied to QLI$/) do
 
     if $oppli_auto_Custom_Date == $quoteli_auto_Custom_Date
       sleep 5
-      puts "#{$oppli_auto_Custom_Date} field copied from opportunity line item  to quote line item"
+      puts "#{$oppli_auto_Custom_Date} - date type custom field  copied from opportunity line item  to quote line item"
     else
-      puts "#{$oppli_auto_Custom_Date} field NOT copied from opportunity line item  to quote line item"
+      puts "#{$oppli_auto_Custom_Date} - date type custom field  NOT copied from opportunity line item  to quote line item"
     end
 
     $quoteli_auto_Custom_DateTime = find(:xpath, '//td[text()="Automation_Cust_DateTime"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -571,9 +571,9 @@ Then(/^I verify OLI fields copied to QLI$/) do
 
     if $oppli_auto_Custom_DateTime == $quoteli_auto_Custom_DateTime
       sleep 5
-      puts "#{$oppli_auto_Custom_DateTime} field copied from opportunity line item  to quote line item"
+      puts "#{$oppli_auto_Custom_DateTime} - datetime type custom field  copied from opportunity line item  to quote line item"
     else
-      puts "#{$oppli_auto_Custom_DateTime} field NOT copied from opportunity line item  to quote line item"
+      puts "#{$oppli_auto_Custom_DateTime} - datetime type custom field  NOT copied from opportunity line item  to quote line item"
     end
 
     $quoteli_auto_Custom_Picklist = find(:xpath, '//td[text()="Automation_Cust_Picklist"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -582,9 +582,9 @@ Then(/^I verify OLI fields copied to QLI$/) do
 
     if $oppli_auto_Custom_Picklist == $quoteli_auto_Custom_Picklist
       sleep 5
-      puts "#{$oppli_auto_Custom_Picklist} field copied from opportunity line item  to quote line item"
+      puts "#{$oppli_auto_Custom_Picklist} - picklist type custom field  copied from opportunity line item  to quote line item"
     else
-      puts "#{$oppli_auto_Custom_Picklist} field NOT copied from opportunity line item  to quote line item"
+      puts "#{$oppli_auto_Custom_Picklist} - picklist type custom field NOT copied from opportunity line item  to quote line item"
     end
 
     $quoteli_auto_Description = find(:xpath, '//td[text()="Line Item Description"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -592,9 +592,9 @@ Then(/^I verify OLI fields copied to QLI$/) do
     puts "#{$quoteli_auto_Description}"
     if $oppli_auto_Description == $quoteli_auto_Description
       sleep 5
-      puts "#{$oppli_auto_Description} field copied from opportunity line item  to quote line item"
+      puts "#{$oppli_auto_Description} - standard field - Description - copied from opportunity line item  to quote line item"
     else
-      puts "#{$oppli_auto_Description} field NOTcopied from opportunity line item  to quote line item"
+      puts "#{$oppli_auto_Description} standard field - Description - NOT from opportunity line item  to quote line item"
     end
 
     $quoteli_auto_Discount = find(:xpath, '//td[text()="Discount"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -602,9 +602,9 @@ Then(/^I verify OLI fields copied to QLI$/) do
     puts "#{$quoteli_auto_Discount}"
     if $oppli_auto_Discount == $quoteli_auto_Discount
       sleep 5
-      puts "#{$oppli_auto_Discount} field copied from opportunity line item  to quote line item"
+      puts "#{$oppli_auto_Discount} - standard field - Discount - copied from opportunity line item  to quote line item"
     else
-      puts "#{$oppli_auto_Discount} field NOT copied from opportunity line item  to quote line item"
+      puts "#{$oppli_auto_Discount} - standard field - Discount - NOT copied from opportunity line item  to quote line item"
     end
   rescue Exception => ex
     putstr "Error occurred while copying OLI field to QLI field"
@@ -685,11 +685,11 @@ And(/^I update the fields on quote line item$/) do
 
     $quoteli_auto_Description = find(:xpath, '//td[text()="Line Item Description"]/following-sibling::td/div', :match => :prefer_exact).text
     sleep 3
-    puts "#{$quoteli_auto_Description} standard field saved"
+    puts "#{$quoteli_auto_Description}"
 
     $quoteli_auto_Discount = find(:xpath, '//td[text()="Discount"]/following-sibling::td/div', :match => :prefer_exact).text
     sleep 3
-    puts "#{ $quoteli_auto_Discount} standard field saved"
+    puts "#{ $quoteli_auto_Discount}"
 
   rescue Exception => ex
     putstr "Error occurred while updating QLI fields"
@@ -722,9 +722,9 @@ Then(/^I verify QLI fields copied to OLI$/) do
 
     if $oppli_auto_Custom_Text == $quoteli_auto_Custom_Text
       sleep 5
-      puts "#{$quoteli_auto_Custom_Text} field copied from quote line item  to opportunity line item"
+      puts "#{$quoteli_auto_Custom_Text} - text type custom field copied from quote line item  to opportunity line item"
     else
-      puts "#{$quoteli_auto_Custom_Text} field NOT copied from quote line item  to opportunity line item"
+      puts "#{$quoteli_auto_Custom_Text} - text type custom field NOT copied from quote line item  to opportunity line item"
     end
 
     $oppli_auto_Custom_Email = find(:xpath, '//td[text()="Automation_Cust_Email"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -733,9 +733,9 @@ Then(/^I verify QLI fields copied to OLI$/) do
 
     if $oppli_auto_Custom_Email == $quoteli_auto_Custom_Email
       sleep 5
-      puts "#{$quoteli_auto_Custom_Email} field copied from quote line item  to opportunity line item"
+      puts "#{$quoteli_auto_Custom_Email} - email type custom field copied from quote line item  to opportunity line item"
     else
-      puts "#{$quoteli_auto_Custom_Email} field NOT copied from quote line item  to opportunity line item"
+      puts "#{$quoteli_auto_Custom_Email} - email type custom field NOT copied from quote line item  to opportunity line item"
     end
 
     $oppli_auto_Custom_Currency = find(:xpath, '//td[text()="Automation_Cust_Currency"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -744,9 +744,9 @@ Then(/^I verify QLI fields copied to OLI$/) do
 
     if $oppli_auto_Custom_Currency == $quoteli_auto_Custom_Currency
       sleep 5
-      puts "#{$quoteli_auto_Custom_Currency} field copied from quote line item  to opportunity line item"
+      puts "#{$quoteli_auto_Custom_Currency} - currency type custom field copied from quote line item  to opportunity line item"
     else
-      puts "#{$quoteli_auto_Custom_Currency} field NOT copied from quote line item  to opportunity line item"
+      puts "#{$quoteli_auto_Custom_Currency} - currency type custom field NOT copied from quote line item  to opportunity line item"
     end
 
     $oppli_auto_Custom_Phone = find(:xpath, '//td[text()="Automation_Cust_Phone"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -755,9 +755,9 @@ Then(/^I verify QLI fields copied to OLI$/) do
 
     if $oppli_auto_Custom_Phone == $quoteli_auto_Custom_Phone
       sleep 5
-      puts "#{$quoteli_auto_Custom_Phone} field copied from quote line item  to opportunity line item"
+      puts "#{$quoteli_auto_Custom_Phone} - phone type custom field copied from quote line item  to opportunity line item"
     else
-      puts "#{$quoteli_auto_Custom_Phone} field NOT copied from quote line item  to opportunity line item"
+      puts "#{$quoteli_auto_Custom_Phone} - phone type custom field NOT copied from quote line item  to opportunity line item"
     end
 
     $oppli_auto_Custom_Date = find(:xpath, '//td[text()="Automation_Cust_Date"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -766,9 +766,9 @@ Then(/^I verify QLI fields copied to OLI$/) do
 
     if $oppli_auto_Custom_Date == $quoteli_auto_Custom_Date
       sleep 5
-      puts "#{$quoteli_auto_Custom_Date} field copied from quote line item  to opportunity line item"
+      puts "#{$quoteli_auto_Custom_Date} - date type custom field copied from quote line item  to opportunity line item"
     else
-      puts "#{$quoteli_auto_Custom_Date} field NOT copied from quote line item  to opportunity line item"
+      puts "#{$quoteli_auto_Custom_Date} - date type custom field NOT copied from quote line item  to opportunity line item"
     end
 
     $oppli_auto_Custom_DateTime = find(:xpath, '//td[text()="Automation_Cust_DateTime"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -777,9 +777,9 @@ Then(/^I verify QLI fields copied to OLI$/) do
 
     if $oppli_auto_Custom_DateTime == $quoteli_auto_Custom_DateTime
       sleep 5
-      puts "#{$quoteli_auto_Custom_DateTime} field copied from quote line item  to opportunity line item"
+      puts "#{$quoteli_auto_Custom_DateTime} - datetime type custom field copied from quote line item  to opportunity line item"
     else
-      puts "#{$quoteli_auto_Custom_DateTime} field NOT copied from quote line item  to opportunity line item"
+      puts "#{$quoteli_auto_Custom_DateTime} - datetime type custom field NOT copied from quote line item  to opportunity line item"
     end
 
     $oppli_auto_Custom_Picklist = find(:xpath, '//td[text()="Automation_Cust_Picklist"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -788,9 +788,9 @@ Then(/^I verify QLI fields copied to OLI$/) do
 
     if $oppli_auto_Custom_Picklist == $quoteli_auto_Custom_Picklist
       sleep 5
-      puts "#{$quoteli_auto_Custom_Picklist} field copied from quote line item  to opportunity line item"
+      puts "#{$quoteli_auto_Custom_Picklist} - picklist type custom field copied from quote line item  to opportunity line item"
     else
-      puts "#{$quoteli_auto_Custom_Picklist} field NOT copied from quote line item  to opportunity line item"
+      puts "#{$quoteli_auto_Custom_Picklist} - picklist type custom field NOT copied from quote line item  to opportunity line item"
     end
 
     $oppli_auto_Description = find(:xpath, '//td[text()="Line Description"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -798,9 +798,9 @@ Then(/^I verify QLI fields copied to OLI$/) do
     puts "#{$oppli_auto_Description}"
     if $oppli_auto_Description == $quoteli_auto_Description
       sleep 5
-      puts "#{$quoteli_auto_Description} field copied from quote line item  to opportunity line item"
+      puts "#{$quoteli_auto_Description} - standard field - Description - copied from quote line item  to opportunity line item"
     else
-      puts "#{$quoteli_auto_Description} field NOT copied from quote line item  to opportunity line item"
+      puts "#{$quoteli_auto_Description} - standard field - Description -  NOT copied from quote line item  to opportunity line item"
     end
 
     $oppli_auto_Discount = find(:xpath, '//td[text()="Discount"]/following-sibling::td/div', :match => :prefer_exact).text
@@ -808,9 +808,9 @@ Then(/^I verify QLI fields copied to OLI$/) do
     puts "#{$oppli_auto_Discount}"
     if $oppli_auto_Discount == $quoteli_auto_Discount
       sleep 5
-      puts "#{$quoteli_auto_Discount} field copied from quote line item  to opportunity line item"
+      puts "#{$quoteli_auto_Discount} - standard field - Discount - copied from quote line item  to opportunity line item"
     else
-      puts "#{$quoteli_auto_Discount} field NOT copied from quote line item  to opportunity line item"
+      puts "#{$quoteli_auto_Discount} - standard field - Discount - NOT copied from quote line item  to opportunity line item"
     end
   end
 end
@@ -866,8 +866,9 @@ end
 
 And(/^I navigate to Opportunity from partner Opportunity page$/) do
   begin
+    sleep 15
     find(:xpath, '//td[text()="Opportunity Name"]/following-sibling::td/div/a', :match => :prefer_exact).click
-    sleep 5
+    sleep 10
     puts "Navigated Opportunity page"
   rescue Exception => ex
     putstr "Error occurred while navigating to opportunity page from partner opportunity page"
@@ -880,7 +881,9 @@ And(/^I delete the product from Quote_Opportunity$/) do
     arg = getDetails "QuoteSync"
     sleep 5
 
-    within(".opportunityLineItemBlock.quoteLineItemBlock") do
+    #within(".opportunityLineItemBlock.quoteLineItemBlock") do
+     within(".quoteLineItemBlock") do
+       first(:link, "Del").click
 
       within(".list") do
         sleep 3
@@ -895,6 +898,7 @@ And(/^I delete the product from Quote_Opportunity$/) do
         if index.to_i == arg["FirstProductCheckboxIndex"].to_i
           sleep 5
           delLink.click
+          page.driver.browser.switch_to.alert.accept
         else
           # puts "#{index}"
         end
@@ -903,7 +907,7 @@ And(/^I delete the product from Quote_Opportunity$/) do
     end
 
   rescue Exception => ex
-    putstr "Error occurred while selecting the products"
+    putstr "Error occurred while deleting the QLI"
     putstr_withScreen  ex.message
   end
 end
@@ -1104,4 +1108,233 @@ And(/^I stop the syncing of the quote$/) do
     putstr_withScreen  ex.message
   end
 end
+
+And(/^I select the "([^"]*)" product field$/) do |renewal_relationship|
+  begin
+    sleep 6
+    if find(".pageDescription").text == renewal_relationship
+      puts "Successfully see the #{renewal_relationship} page"
+      sleep 5
+      unless page.has_css?(".no-records-found")
+        sleep 4
+        if page.has_css?("#renewalRelationshipGrid")
+          sleep 4
+          if first("input[name='btSelectItem']").checked?
+            puts "#{renewal_relationship} product field is already checked"
+          else
+            first("input[name='btSelectItem']").click
+            sleep 4
+          end
+        else
+          puts "No to renewal relationship grid"
+        end
+      else
+        puts "No matching records found"
+      end
+    else
+      putstr "Failed to see the #{renewal_relationship} page"
+    end
+    sleep 5
+  rescue Exception => ex
+    putstr "Error occurred while selecting the #{renewal_relationship} product"
+    putstr_withScreen  ex.message
+  end
+end
+
+#And(/^I click on "([^"]*)" button from renewal relationship page$/) do |consolidate|
+#  begin
+#    sleep 5
+#    unless page.has_css?(".no-records-found")
+#      sleep 4
+#      click_on consolidate
+#      sleep 8
+#      puts "Successfully click the #{consolidate} button"
+#    else
+#      puts "No matching records found"
+#    end
+#  rescue Exception => ex
+#    putstr "Error occurred while clicking the #{consolidate} button"
+#    putstr_withScreen  ex.message
+#  end
+#end
+
+And(/^I delete the opportunity product$/) do
+  begin
+    #$rebuild_product_name = first(".opportunityLineItemBlock").first("tbody").first(".dataRow").first("th").first("a").text
+    #first(".opportunityLineItemBlock").first(:link,"Del").click
+    #    sleep 5
+    #    find(:link,'Del').click
+    #    puts "tested.."
+    #    sleep 5
+    #    page.driver.browser.switch_to.alert.accept
+    #    puts "Deleted product #{$rebuild_product_name}"
+    #    sleep 5
+
+    within(".opportunityLineItemBlock")do
+      first(:link, "Del").click
+      sleep 5
+      puts "Deleted the product."
+      page.driver.browser.switch_to.alert.accept
+
+    end
+  rescue Exception => ex
+    putstr "Error occurred while deleting the Opportunity product"
+    putstr_withScreen  ex.message
+  end
+end
+
+Then(/^I should click on back to navigate to opportunity from manage renewals page$/) do
+  begin
+    sleep 3
+    click_on "Back"
+    sleep 3
+  end
+end
+
+And(/^I select the "([^"]*)" opportunity option and fill the required fields$/) do |drop_down_value|
+  begin
+    sleep 3
+    arg = getDetails "SplitOpportunity"
+    arg2 = getReference "SplitOpportunity"
+    sleep 5
+    unless page.has_css?(".no-records-found")
+      sleep 4
+      find(:xpath,"//div/table/tbody/tr[1]/td/select").select drop_down_value
+      sleep 6
+      puts "Successfully selected the #{drop_down_value}"
+      sleep 5
+      within all(".pbSubsection")[1] do
+        sleep 5
+        all('input[type=text]')[0].set arg["TargetOpportunityName"]
+        sleep 5
+        all('input[type=text]')[2].set arg["TargetOpportunityCloseDate"]
+        sleep 5
+        find(".class_StageName").select arg["TargetOpportunityStage"]
+        sleep 5
+        all('input[type=text]')[3].set arg2["TargetOpportunityOwnerID"]
+        sleep 5
+        all('input[type=text]')[4].set arg["TargetOpportunityProbability"]
+        sleep 5
+      end
+    else
+      puts "No matching records found"
+    end
+  rescue Exception => ex
+    putstr "Error occurred while selecting the #{drop_down_value}"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I click on "([^"]*)" button from renewal relationship page$/) do |consolidate|
+  begin
+    sleep 5
+    unless page.has_css?(".no-records-found")
+      sleep 4
+      click_on consolidate
+      sleep 8
+      puts "Successfully click the #{consolidate} button"
+    else
+      puts "No matching records found"
+    end
+  rescue Exception => ex
+    putstr "Error occurred while clicking the #{consolidate} button"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I select the multiple "([^"]*)" product fields$/) do |renewal_relationship|
+  begin
+    sleep 4
+    arg = getDetails "ManageRenewalsOpportunity"
+    sleep 6
+    if find(".pageDescription").text == renewal_relationship
+      puts "Successfully see the #{renewal_relationship} page"
+      sleep 5
+      unless page.has_css?(".no-records-found")
+        sleep 4
+        if page.has_css?("#renewalRelationshipGrid")
+          sleep 6
+          if all("input[name='btSelectItem']").count > 3
+            all("input[name='btSelectItem']").each_with_index do |checkbox , index|
+              if index.to_i == arg["ManageRenewalProductFirstIndex"].to_i
+                sleep 5
+                unless checkbox.checked?
+                  sleep 3
+                  checkbox.click
+                  puts "Successfully enabled the the product"
+                  break
+                else
+                  puts "#{renewal_relationship} product field is already checked"
+                end
+              else
+                # puts "#{index}"
+              end
+            end
+            sleep 4
+            all("input[name='btSelectItem']").each_with_index do |checkbox , index|
+              if index.to_i == arg["ManageRenewalProductSecondIndex"].to_i
+                sleep 5
+                unless checkbox.checked?
+                  sleep 3
+                  checkbox.click
+                  puts "Successfully enabled the the product"
+                  break
+                else
+                  puts "#{renewal_relationship} product field is already checked"
+                end
+              else
+                # puts "#{index}"
+              end
+            end
+          else
+            puts "No matching records found"
+          end
+        else
+          puts "No to renewal relationship grid"
+        end
+      else
+        puts "No matching records found"
+      end
+    else
+      putstr "Failed to see the #{renewal_relationship} page"
+    end
+    sleep 5
+  rescue Exception => ex
+    putstr "Error occurred while selecting the multiple #{renewal_relationship} products"
+    putstr_withScreen  ex.message
+  end
+end
+
+Then(/^I verify the renewal relationship & Metrics fields values$/) do
+  begin
+    sleep 6
+    arg = getDetails "SplitOpportunity"
+    sleep 5
+    unless page.has_css?(".no-records-found")
+      sleep 4
+      unless (all(:xpath,"//table/tbody/tr/th/a")[0].text.to_s == $first_product_name.to_s) || (all(:xpath,"//table/tbody/tr/th/a")[1].text.to_s == $second_product_name.to_s)
+        puts "Successfully see the selected #{$first_product_name} #{$second_product_name} products"
+      else
+        putstr "Failed to see the selected #{$first_product_name} #{$second_product_name} products"
+      end
+      sleep 5
+      within all(".pbSubsection")[0] do
+        sleep 4
+        probability_field = all("tr")[5].all("td")[2].text
+        unless probability_field.to_s == arg["ProbabilityField"].to_s
+          putstr "Failed to see the #{probability_field} field"
+        else
+          puts "Successfully see the #{probability_field} field"
+        end
+      end
+    else
+      puts "No matching records found"
+    end
+  rescue Exception => ex
+    putstr "Error occurred while new target opportunity and product details verification"
+    putstr_withScreen  ex.message
+  end
+end
+
+
 
