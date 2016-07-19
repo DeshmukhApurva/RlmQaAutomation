@@ -546,11 +546,13 @@ Then(/^I should be able to see the partner opportunity account details$/) do
     sleep 2
     if page.has_css?(".pageDescription")
       page_title = find(".pageDescription").text
+      $PO_name = page_title
       sleep 2
       puts "Successfully see the partner opportunity #{page_title} details page"
       sleep 2
       within all(".pbSubsection")[0] do
         opportunity_name = first("tbody").all("tr")[1].all("td")[1].text
+        $opportunity_name = first("tbody").all("tr")[1].all("td")[1].text
         if opportunity_name.to_s == arg["PartnerOpportunityName"].to_s
           puts "Successfully see the partner opportunity #{opportunity_name} name"
         else
@@ -728,29 +730,14 @@ Then(/^I should be able to see the partner account hierarchy details$/) do
   end
 end
 
-<<<<<<< HEAD
-# And(/^I select the "([^"]*)" option from syncing dropdown$/) do |syncing_option|
-  # begin
-    # sleep 2
-    # first(:option, syncing_option).select_option
-    # #find(:xpath, '//label[@text='Syncing']/following-sibling::')
-    # sleep 2
-  # rescue Exception => ex
-    # putstr "Error occurred while verifying the partner opportunity details page"
-    # putstr_withScreen  ex.message
-  # end
-# end
-# 
-=======
 And(/^I select the "([^"]*)" option from syncing dropdown$/) do |syncing_option|
   begin
     sleep 2
     first(:option, syncing_option).select_option
-    #find(:xpath, '//label[@text='Syncing']/following-sibling::')
+    puts "Successfully selected #{syncing_option} from syncing drop down"
     sleep 2
   rescue Exception => ex
-    putstr "Error occurred while verifying the partner opportunity details page"
+    putstr "Error occurred while selecting Syncing option"
     putstr_withScreen  ex.message
   end
 end
->>>>>>> refs/remotes/origin/612_v1.36.8
