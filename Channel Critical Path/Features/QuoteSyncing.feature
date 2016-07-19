@@ -365,7 +365,6 @@ Scenario: Rally Test Case ID:TC5359 part I - Original line item check on OLI and
   When I click on "Consolidate Opportunity" button
   And I select the "New Opportunity" opportunity option and fill the required fields
   And I click on "Consolidate" button from renewal relationship page
-  #Then I verify the renewal relationship lines should be moved to the target opportunity
 	
 @quotesync_TC5359_rsplit
 Scenario: Rally Test Case ID:TC5359 part II - Original line item check on OLI and RR after adding new quote from standard sales force UI
@@ -378,8 +377,8 @@ Scenario: Rally Test Case ID:TC5359 part II - Original line item check on OLI an
   And I click on "Split Opportunity" button from renewal relationship page
   And I select the "New Opportunity" opportunity option and fill the required fields
   And I click on "Split Selected" button from renewal relationship page
-  Then I verify the renewal relationship & Metrics fields values
   
+
 
  
 	
