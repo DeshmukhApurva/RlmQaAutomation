@@ -113,6 +113,7 @@ end
 
 And(/^I navigate to synced quote details page from opportunity$/) do
   begin
+    sleep 5
     find(:xpath, '//td[text()="Synced Quote"]/following-sibling::td/div/a', :match => :prefer_exact).click
     puts "Navigated to quote details page"
     sleep 5
@@ -621,6 +622,7 @@ And(/^I update the fields on quote line item$/) do
       sleep 5
     end
     puts "Clicked on edit to update quote line item fields."
+    sleep 5
 
     within(".pbSubsection")do
       fill_in "Automation_Cust_Text",:with => arg["Automation_Cust_Text"]
@@ -700,7 +702,7 @@ end
 And(/^I navigate to opportunity from quote page$/) do
   begin
     find(:xpath, '//td[text()="Opportunity Name"]/following-sibling::td/div/a', :match => :prefer_exact).click
-    sleep 5
+    sleep 7
     puts "Navigated Opportunity page"
   rescue Exception => ex
     putstr "Error occurred while navigating to opportunity page from quote page"
@@ -875,36 +877,51 @@ And(/^I navigate to Opportunity from partner Opportunity page$/) do
     putstr_withScreen  ex.message
   end
 end
-And(/^I delete the product from Quote_Opportunity$/) do
+#And(/^I delete the product from Quote_Opportunity$/) do
+And(/^I delete the product from "([^"]*)" LineItem$/) do |lineItem|
   begin
     sleep 5
-    arg = getDetails "QuoteSync"
-    sleep 5
 
-    #within(".opportunityLineItemBlock.quoteLineItemBlock") do
-    within(".quoteLineItemBlock") do
-      first(:link, "Del").click
-
-      within(".list") do
-        sleep 3
+    if lineItem == "Quote"
+      #within(".opportunityLineItemBlock",".quoteLineItemBlock") do
+      within(".quoteLineItemBlock") do
         $first_product_name = all(".dataRow")[0].all("th")[0].first("a").text
-        #$second_product_name = all(".dataRow")[1].all("th")[0].first("a").text
-        sleep 3
+        puts $first_product_name
+        first(:link, "Del").click
+        sleep 5
       end
-
-      sleep 5
-
-      all('a[contains(@title,"Delete")]').each_with_index do |delLink , index|
-        if index.to_i == arg["FirstProductCheckboxIndex"].to_i
-          sleep 5
-          delLink.click
-          page.driver.browser.switch_to.alert.accept
-        else
-          # puts "#{index}"
-        end
+      page.driver.browser.switch_to.alert.accept
+      puts "QLI deleted successfully"
+    else
+      within(".opportunityLineItemBlock") do
+        $first_product_name = all(".dataRow")[0].all("th")[0].first("a").text
+        puts $first_product_name
+        first(:link, "Del").click
+        sleep 5
       end
-
+      page.driver.browser.switch_to.alert.accept
+      puts "OLI deleted successfully"
     end
+    #      within(".list") do
+    #        first(:link, "Del").click
+    #        page.driver.browser.switch_to.alert.accept
+    #        sleep 3
+    #        $first_product_name = all(".dataRow")[0].all("th")[0].first("a").text
+    #        #$second_product_name = all(".dataRow")[1].all("th")[0].first("a").text
+    #        sleep 3
+    #      end
+
+    #      all('a[contains(@title,"Delete")]').each_with_index do |delLink , index|
+    #        if index.to_i == arg["FirstProductCheckboxIndex"].to_i
+    #          sleep 5
+    #          delLink.click
+    #          page.driver.browser.switch_to.alert.accept
+    #        else
+    #          # puts "#{index}"
+    #        end
+    #      end
+    #
+    #    end
 
   rescue Exception => ex
     putstr "Error occurred while deleting the QLI"
@@ -912,11 +929,16 @@ And(/^I delete the product from Quote_Opportunity$/) do
   end
 end
 
-And(/^I add the product to Quote_Opportunity$/) do
+And(/^I add the product to "([^"]*)" object$/) do |object|
   begin
+    if object == "Quote"
+      click_on "Add Line Item"
+    else
+      click_on "Add Product"
+    end
     sleep 6
     arg = getDetails "QuoteSync"
-
+    #$first_product_name
     within("#undefined_grid") do
       all('input[type=checkbox]').each_with_index do |checkbox , index|
         if index.to_i == arg["SingleProductCheckboxIndex"].to_i
@@ -929,18 +951,23 @@ And(/^I add the product to Quote_Opportunity$/) do
             puts "Product is already enabled"
           end
         else
-          # puts "#{index}"
+          #puts "#{index}"
         end
       end
     end
+    $add_first_product_name = first(:xpath, '//tr/td[4]/div/a/span').text
+    puts $add_first_product_name
+    if $first_product_name == $add_first_product_name
+      click_on 'Select'
+    end
 
     sleep 4
-    click_on 'Select'
+    #click_on 'Select'
     puts "Successfully select the product"
     sleep 6
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[3]/input").set arg["ProductQuantity"]
     sleep 5
-    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[6]/input").set arg["ProductSalesPrice"]
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[2]/input").set arg["ProductSalesPrice"]
     sleep 5
     all(:xpath,'//td/input[@value=" Save "]')[0].click
     sleep 6
@@ -1336,115 +1363,3 @@ Then(/^I verify the renewal relationship & Metrics fields values$/) do
   end
 end
 
-
-And(/^I create new quote for newly created PO$/) do
-  begin
-    time = Time.new
-    quoteDateTime = time.hour.to_s + time.min.to_s + time.sec.to_s
-    sleep 4
-    arg = getDetails "QuoteSyncCreateNewQuote"
-    sleep 7
-    click_on "New Quote"
-    sleep 5
-    within all(".pbSubsection")[0] do
-      first(:xpath, "//*[contains(@name, 'Name')]").send_keys arg["QuoteForPO"] + "_" + quoteDateTime
-      $newPOQuote = arg["QuoteForPO"] + "_" + quoteDateTime
-      sleep 5
-      fill_in "Partner Opportunity",:with => $PO_name #$PO_name came from AddPartnerOpportunity
-      sleep 3
-      first(:xpath, "//*[contains(@name, 'save')]").click
-      puts "New Quote created"
-      sleep 5
-    end
-    $newPOQuoteNumber = find(:xpath, '//td[text()="Quote Number"][1]/following-sibling::td/div').text
-    puts $newPOQuoteNumber
-    sleep 1
-  rescue Exception => ex
-    putstr "Error occurred while sync stoping the quote renewal opportunity"
-    putstr_withScreen  ex.message
-  end
-end
-
-When(/^I update the earliest expiration date$/) do |tab|
-  begin
-    sleep 2
-    first(:button,'Edit').click
-    sleep 5
-    fill_in "Earliest Expiration Date",:with=> $earliestExpirationDate
-    sleep 1
-    within(:id,"topButtonRow") do
-      click_on "Save"
-    end
-  rescue Exception => ex
-    raise "Error occurred while clicking the #{tab} tab"
-    putstr_withScreen  ex.message
-  end
-end
-
-And(/^I search for the partner opportunity on Community$/) do |arg1|
-  begin
-    sleep 3
-
-    allExpQrtrArg = getReference "Expiration Quarter"
-    allExpQuarters = allExpQrtrArg["filterValues"].split(",")
-    puts allExpQuarters
-
-    allExpYearsArg = getReference "Expiration Year"
-    allExpYears = allExpYearsArg["filterValues"].split(",")
-    puts allExpYears
-
-    allYears = getExpirationYears(10)
-
-    within all(".ui-select-match")[1] do
-      find(:css, ".close.ui-select-match-close")[0].click
-      sleep 1
-    end
-
-    allExpQuarters.each do |value|
-      find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[1]/div/div/div/input").click
-      click_on(value)
-      sleep 1
-    end
-
-    within all(".ui-select-match")[2] do
-      find(:css, ".close.ui-select-match-close")[0].click
-      sleep 1
-    end
-
-    allExpYears.each do |value|
-      find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[2]/div/div/div/input").click
-      click_on(value)
-      sleep 1
-    end
-    sleep 5
-
-    find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").send_keys [:control, 'a'], :space
-    sleep 1
-    find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").send_keys $PO_name
-    sleep 1
-
-    click_on $PO_name
-
-    sleep 3
-
-  rescue Exception => ex
-    puts "Error while entering credentials"
-    puts ex.message
-  end
-end
-
-And(/^I Set new Quote as primary$/) do |quoteType|
-  begin
-
-    Capybara.ignore_hidden_elements = true
-
-    if page.should have_content($newPOQuoteNumber)
-      puts "Quote #{$newPOQuoteNumber} has been verified successfully."
-      find(:xpath, "//a[text()=#{$newPOQuoteNumber}]/parent::div/parent::div/following-sibling::div/div/label").click
-      sleep 5
-    end
-  rescue Exception => ex
-    puts "Error occured whilte verifying quotes"
-    puts ex.message
-  end
-end
