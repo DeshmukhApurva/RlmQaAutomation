@@ -83,7 +83,7 @@ Scenario: Rally-ID:  : Quote Sync - Create quote from standard salesforce
 	
 @quotesync_TC5332_Copy_OppFieldstoQuoteFields 
 Scenario:
-Rally Test Case ID: TC5332, TC5358 - Quote Sync - Copy Opportunity fields to quote fields. 
+Rally Test Case ID: TC5332 - Quote Sync - Copy Opportunity fields to quote fields. 
 	When I click on the "Opportunities" grid tab 
 	Then I create Source Opportunity with Line Items and resolve it 
 	And I create new quote by OOB 
@@ -94,7 +94,7 @@ Rally Test Case ID: TC5332, TC5358 - Quote Sync - Copy Opportunity fields to quo
 	Then I verify opportunity fields copied to quote fields on quote page 
 	
 @quotesync_TC5331_Copy_QuoteFieldstoOppFields 
-Scenario: Rally Test Case ID:  - Quote Sync - Copy Quote fields to Opp fields. 
+Scenario: Rally Test Case ID:TC5331  - Quote Sync - Copy Quote fields to Opp fields. 
 	When I click on the "Opportunities" grid tab 
 	Then I create Source Opportunity with Line Items and resolve it 
 	And I create new quote by OOB 
@@ -107,7 +107,7 @@ Scenario: Rally Test Case ID:  - Quote Sync - Copy Quote fields to Opp fields.
 	
 @quotesync_TC5332_Copy_OLItoQLI 
 Scenario:
-Rally Test Case ID:  - Quote Sync - Copy Opportunity line item fields to quote line item fields. 
+Rally Test Case ID: TC5332 - Quote Sync - Copy Opportunity line item fields to quote line item fields. 
 	When I click on the "Opportunities" grid tab 
 	Then I create Source Opportunity with Line Items and resolve it 
 	And I create new quote by OOB 
@@ -229,12 +229,158 @@ Rally Test Case ID:TC5329 - 	Opportunity : Sync a Quote from sales force standar
 	And I select the "Renewal Relationship" product field 
 	And I click on "Consolidate Opportunity" button from renewal relationship page 
 	Then I should able to see the sync error message 
+	Then I should click on back to navigate to opportunity from manage renewals page
 	When I click on "Manage Renewals" button 
 	And I select the "Renewal Relationship" product field 
 	And I click on "Split Opportunity" button from renewal relationship page 
 	Then I should able to see the sync error message 
+	Then I should click on back to navigate to opportunity from manage renewals page
+	And I delete the opportunity product
 	When I click on "Manage Renewals" button 
 	And I select the "Renewal Relationship" product field 
 	And I click on "Rebuild Opportunity" button from renewal relationship page 
-	Then I should able to see the sync error message 
+	Then I should able to see the sync error message
+    
+@quotesync_TC5338
+Scenario: Rally Test Case ID:TC5338 - Create new quote from Add Partner Renewals page (Not yet synced), Now change the Quote and QLI fields those are mentioned on the quote to Opportunity and QLI to OLI mapping page and sync it by sales force standard UI.
+  When I click on the "Opportunities" grid tab	
+  Then I create Source Opportunity with Line Items and resolve it
+  And I click on "Add New Partner Opportunity" button
+  And I select the partner account
+  And I click on the "Grant Access"
+  And I navigate to Opportunity from partner Opportunity page
+  And I navigate to available quote
+  And I update the fields on quote page
+  And I update the fields on quote line item
+  And I navigate to Quote detail page from QLI details page
+  And I navigate to opportunity from quote page
+  And I sync the quotes from Quote
+  Then I verify quote fields copied to opportunity fields on opportunity page
+  Then I verify QLI fields copied to OLI
+  Then I navigate to opportunity from product detail page
+  When I click on "Manage Renewals" button 
+  And I select the "Renewal Relationship" product field 
+  And I click on "Consolidate Opportunity" button from renewal relationship page 
+  Then I should able to see the sync error message 
+  Then I should click on back to navigate to opportunity from manage renewals page
+  When I click on "Manage Renewals" button 
+  And I select the "Renewal Relationship" product field 
+  And I click on "Split Opportunity" button from renewal relationship page 
+  Then I should able to see the sync error message 
+  Then I should click on back to navigate to opportunity from manage renewals page
+  And I delete the opportunity product
+  When I click on "Manage Renewals" button 
+  And I select the "Renewal Relationship" product field 
+  And I click on "Rebuild Opportunity" button from renewal relationship page 
+  Then I should able to see the sync error message
 	
+	  
+@quotesync_TC5356
+Scenario: Rally Test Case ID:TC5356 - Stop the quote syncing which was created by add partner page and update the quote and quote line fields and sync the quote again.
+  When I click on the "Opportunities" grid tab	
+  Then I create Source Opportunity with Line Items and resolve it
+  And I click on "Add New Partner Opportunity" button
+  And I select the "To Master Opportunity" option from syncing dropdown
+  And I select the partner account
+  And I click on the "Grant Access"
+  And I navigate to Opportunity from partner Opportunity page
+  And I stop the syncing of the quote
+  And I update the fields on quote page
+  And I update the fields on quote line item
+  And I navigate to Quote detail page from QLI details page
+  And I navigate to opportunity from quote page
+  Then I verify quote fields copied to opportunity fields on opportunity page
+  Then I verify QLI fields copied to OLI
+  Then I navigate to opportunity from product detail page
+  And I sync the quotes from Quote
+  And I update the fields on opportunity
+  And I update the fields on opportunity line item
+  Then I navigate to opportunity from product detail page
+  And I navigate to synced quote details page from opportunity
+  Then I verify opportunity fields copied to quote fields on quote page
+  Then I verify OLI fields copied to QLI
+  And I navigate to Quote detail page from QLI details page
+  And I navigate to opportunity from quote page
+  When I click on "Manage Renewals" button 
+  And I select the "Renewal Relationship" product field 
+  And I click on "Consolidate Opportunity" button from renewal relationship page 
+  Then I should able to see the sync error message 
+  Then I should click on back to navigate to opportunity from manage renewals page
+  When I click on "Manage Renewals" button 
+  And I select the "Renewal Relationship" product field 
+  And I click on "Split Opportunity" button from renewal relationship page 
+  Then I should able to see the sync error message 
+  Then I should click on back to navigate to opportunity from manage renewals page
+  And I delete the opportunity product
+  When I click on "Manage Renewals" button 
+  And I select the "Renewal Relationship" product field 
+  And I click on "Rebuild Opportunity" button from renewal relationship page 
+  Then I should able to see the sync error message
+  
+  
+@quotesync_TC5342
+Scenario: Rally Test Case ID:TC5342 - Opportunity : Copy of Quote and Quote line item fields to Opportunity and Opportunity line item fields respectively if quote is created and synced from add renewals partner page.
+  When I click on the "Opportunities" grid tab	
+  Then I create Source Opportunity with Line Items and resolve it
+  And I click on "Add New Partner Opportunity" button
+  And I select the "To Master Opportunity" option from syncing dropdown
+  And I select the partner account
+  And I click on the "Grant Access"
+  And I navigate to Opportunity from partner Opportunity page
+  And I navigate to synced quote details page from opportunity
+  And I update the fields on quote page
+  And I update the fields on quote line item
+  And I navigate to Quote detail page from QLI details page
+  And I navigate to opportunity from quote page
+  Then I verify quote fields copied to opportunity fields on opportunity page
+  Then I verify QLI fields copied to OLI
+
+@quotesync_TC5343
+Scenario: Rally Test Case ID:TC5343 - Quote : Copy of Opportunity and Opportunity line items fields to Quote and Quote line items respectively if quote is created and synced from Add Renewals Partner screen.
+    When I click on the "Opportunities" grid tab	
+	Then I select the "RenewalOpportunity"
+	And I click on "Add New Partner Opportunity" button
+    And I select the "To Master Opportunity" option from syncing dropdown
+    And I select the partner account
+    And I click on the "Grant Access"
+    And I navigate to Opportunity from partner Opportunity page
+    And I update the fields on opportunity
+    And I update the fields on opportunity line item
+	Then I navigate to opportunity from product detail page
+	And I navigate to synced quote details page from opportunity
+	Then I verify opportunity fields copied to quote fields on quote page
+	Then I verify OLI fields copied to QLI
+	
+@quotesync_TC5359_rebuildandconsolidate
+Scenario: Rally Test Case ID:TC5359 part I - Original line item check on OLI and RR after adding new quote from standard sales force UI
+  When I click on the "Opportunities" grid tab	
+  Then I create Source Opportunity with Line Items and resolve it
+  And I create new quote by OOB
+  And I navigate to opportunity from quote page
+  And I delete the opportunity product
+  When I click on "Manage Renewals" button
+  And I select the "Renewal Relationship" product field
+  And I click on "Rebuild Opportunity" button from renewal relationship page
+  When I click on "Manage Renewals" button
+  When I click on "Consolidate Opportunity" button
+  And I select the "New Opportunity" opportunity option and fill the required fields
+  And I click on "Consolidate" button from renewal relationship page
+  #Then I verify the renewal relationship lines should be moved to the target opportunity
+	
+@quotesync_TC5359_rsplit
+Scenario: Rally Test Case ID:TC5359 part II - Original line item check on OLI and RR after adding new quote from standard sales force UI
+  When I click on the "Opportunities" grid tab	
+  Then I create Source Opportunity with Line Items and resolve it
+  And I create new quote by OOB
+  And I navigate to opportunity from quote page
+  When I click on "Manage Renewals" button
+  And I select the multiple "Renewal Relationship" product fields
+  And I click on "Split Opportunity" button from renewal relationship page
+  And I select the "New Opportunity" opportunity option and fill the required fields
+  And I click on "Split Selected" button from renewal relationship page
+  Then I verify the renewal relationship & Metrics fields values
+  
+
+ 
+	
+  
