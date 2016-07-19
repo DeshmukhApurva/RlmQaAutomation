@@ -359,3 +359,7 @@ QuoteSyncQuoteFields:
  Automation_Expiration_Date: "1/1/2019"
  Automation_Description: "Automation Quote Description..."
  Automation_Discount: "40"
+ 
+QuoteSync_ManageRenewalsOpportunity:
+  ManageRenewalProductFirstIndex: "0"
+  ManageRenewalProductSecondIndex: "1"
