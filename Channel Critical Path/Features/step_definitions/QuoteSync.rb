@@ -882,8 +882,8 @@ And(/^I delete the product from Quote_Opportunity$/) do
     sleep 5
 
     #within(".opportunityLineItemBlock.quoteLineItemBlock") do
-     within(".quoteLineItemBlock") do
-       first(:link, "Del").click
+    within(".quoteLineItemBlock") do
+      first(:link, "Del").click
 
       within(".list") do
         sleep 3
@@ -1245,7 +1245,7 @@ end
 And(/^I select the multiple "([^"]*)" product fields$/) do |renewal_relationship|
   begin
     sleep 4
-    arg = getDetails "ManageRenewalsOpportunity"
+    arg = getDetails "QuoteSync_ManageRenewalsOpportunity"
     sleep 6
     if find(".pageDescription").text == renewal_relationship
       puts "Successfully see the #{renewal_relationship} page"
@@ -1335,6 +1335,4 @@ Then(/^I verify the renewal relationship & Metrics fields values$/) do
     putstr_withScreen  ex.message
   end
 end
-
-
 
