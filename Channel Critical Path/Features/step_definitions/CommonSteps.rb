@@ -498,14 +498,27 @@ When(/^I create Source Opportunity with Line Items and resolve it$/) do
     click_on "New"
     sleep 5
     puts "Creating a new opportunity"
+    
     $automationOppName = "Automation Opp" + oppDateTime
- 
+    
+    $earliestExpirationDate = "12/30/" + year.to_s
+    $oPPCloseDate = "12/31/" + year.to_s
+    
+    $startDateOLI = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s
+    $endDateOLI = time.month.to_s + "/" + time.day.to_s + "/" + (time.year.to_i + 1).to_s
+      
     fill_in "Opportunity Name",:with=>$automationOppName
-    fill_in "Close Date",:with=>"1/26/" + year.to_s
-    select arg["SourceOppStage"], :from => "Stage"
-    fill_in "Account Name",:with=>arg["Account"]
- 
     sleep 1
+    fill_in "Close Date",:with=> $oPPCloseDate
+    sleep 1
+    fill_in "Earliest Expiration Date",:with=> $earliestExpirationDate
+    sleep 1
+    select arg["SourceOppStage"], :from => "Stage"
+    sleep 1
+    fill_in "Account Name",:with=>arg["Account"]
+    sleep 1
+    
+    
     within(:id,"topButtonRow") do
       click_on "Save"
     end
@@ -524,13 +537,15 @@ When(/^I create Source Opportunity with Line Items and resolve it$/) do
     find(:xpath, "(//input[@type='checkbox'])[3]").set(true)
     find(:xpath, "(//input[@type='checkbox'])[4]").set(true)
     find(:xpath, "(//input[@type='checkbox'])[5]").set(true)
-    find(:xpath, "(//input[@type='checkbox'])[6]").set(true)
-    find(:xpath, "(//input[@type='checkbox'])[7]").set(true)
-    find(:xpath, "(//input[@type='checkbox'])[8]").set(true)
-    find(:xpath, "(//input[@type='checkbox'])[9]").set(true)
+    # find(:xpath, "(//input[@type='checkbox'])[6]").set(true)
+    # find(:xpath, "(//input[@type='checkbox'])[7]").set(true)
+    # find(:xpath, "(//input[@type='checkbox'])[8]").set(true)
+    # find(:xpath, "(//input[@type='checkbox'])[9]").set(true)
     click_on 'Select'
     puts "Successfully select the product"
     sleep 6
+    
+    #Enter product Quantity
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[3]/input").set arg["ProductQuantity"]
     sleep 2
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[3]/input").set arg["ProductQuantity"]
@@ -539,14 +554,29 @@ When(/^I create Source Opportunity with Line Items and resolve it$/) do
     sleep 2
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[17]/td[3]/input").set arg["ProductQuantity"]
     sleep 2
-    find(:xpath,"//*[@id='editPage']/table/tbody/tr[21]/td[3]/input").set arg["ProductQuantity"]
+
+
+    #Enter Start Date of Product
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[17]/td[4]/span/input").set $startDateOLI
     sleep 2
-    find(:xpath,"//*[@id='editPage']/table/tbody/tr[25]/td[3]/input").set arg["ProductQuantity"]
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[4]/span/input").set $startDateOLI
     sleep 2
-    find(:xpath,"//*[@id='editPage']/table/tbody/tr[29]/td[3]/input").set arg["ProductQuantity"]
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[4]/span/input").set $startDateOLI
     sleep 2
-    find(:xpath,"//*[@id='editPage']/table/tbody/tr[33]/td[3]/input").set arg["ProductQuantity"]
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[13]/td[4]/span/input").set $startDateOLI
     sleep 2
+    
+    #Enter End Date of Product    
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[17]/td[5]/span/input").set $endDateOLI
+    sleep 2
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[5]/span/input").set $endDateOLI
+    sleep 2
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[5]/span/input").set $endDateOLI
+    sleep 2
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[13]/td[5]/span/input").set $endDateOLI
+    sleep 2
+    
+    #Enter product sales price
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[6]/input").set arg["ProductSalesPrice"]
     sleep 2
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[6]/input").set arg["ProductSalesPrice"]
@@ -555,14 +585,14 @@ When(/^I create Source Opportunity with Line Items and resolve it$/) do
     sleep 2
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[17]/td[6]/input").set arg["ProductSalesPrice"]
     sleep 2
-    find(:xpath,"//*[@id='editPage']/table/tbody/tr[21]/td[6]/input").set arg["ProductSalesPrice"]
-    sleep 2
-    find(:xpath,"//*[@id='editPage']/table/tbody/tr[25]/td[6]/input").set arg["ProductSalesPrice"]
-    sleep 2
-    find(:xpath,"//*[@id='editPage']/table/tbody/tr[29]/td[6]/input").set arg["ProductSalesPrice"]
-    sleep 2
-    find(:xpath,"//*[@id='editPage']/table/tbody/tr[33]/td[6]/input").set arg["ProductSalesPrice"]
-    sleep 2
+    # find(:xpath,"//*[@id='editPage']/table/tbody/tr[21]/td[6]/input").set arg["ProductSalesPrice"]
+    # sleep 2
+    # find(:xpath,"//*[@id='editPage']/table/tbody/tr[25]/td[6]/input").set arg["ProductSalesPrice"]
+    # sleep 2
+    # find(:xpath,"//*[@id='editPage']/table/tbody/tr[29]/td[6]/input").set arg["ProductSalesPrice"]
+    # sleep 2
+    # find(:xpath,"//*[@id='editPage']/table/tbody/tr[33]/td[6]/input").set arg["ProductSalesPrice"]
+    # sleep 2
     all(:xpath,'//td/input[@value=" Save "]')[0].click
     sleep 6
    

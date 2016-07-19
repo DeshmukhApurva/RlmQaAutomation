@@ -1336,3 +1336,115 @@ Then(/^I verify the renewal relationship & Metrics fields values$/) do
   end
 end
 
+
+And(/^I create new quote for newly created PO$/) do
+  begin
+    time = Time.new
+    quoteDateTime = time.hour.to_s + time.min.to_s + time.sec.to_s
+    sleep 4
+    arg = getDetails "QuoteSyncCreateNewQuote"
+    sleep 7
+    click_on "New Quote"
+    sleep 5
+    within all(".pbSubsection")[0] do
+      first(:xpath, "//*[contains(@name, 'Name')]").send_keys arg["QuoteForPO"] + "_" + quoteDateTime
+      $newPOQuote = arg["QuoteForPO"] + "_" + quoteDateTime
+      sleep 5
+      fill_in "Partner Opportunity",:with => $PO_name #$PO_name came from AddPartnerOpportunity
+      sleep 3
+      first(:xpath, "//*[contains(@name, 'save')]").click
+      puts "New Quote created"
+      sleep 5
+    end
+    $newPOQuoteNumber = find(:xpath, '//td[text()="Quote Number"][1]/following-sibling::td/div').text
+    puts $newPOQuoteNumber
+    sleep 1
+  rescue Exception => ex
+    putstr "Error occurred while sync stoping the quote renewal opportunity"
+    putstr_withScreen  ex.message
+  end
+end
+
+When(/^I update the earliest expiration date$/) do |tab|
+  begin
+    sleep 2
+    first(:button,'Edit').click
+    sleep 5
+    fill_in "Earliest Expiration Date",:with=> $earliestExpirationDate
+    sleep 1
+    within(:id,"topButtonRow") do
+      click_on "Save"
+    end
+  rescue Exception => ex
+    raise "Error occurred while clicking the #{tab} tab"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I search for the partner opportunity on Community$/) do |arg1|
+  begin
+    sleep 3
+
+    allExpQrtrArg = getReference "Expiration Quarter"
+    allExpQuarters = allExpQrtrArg["filterValues"].split(",")
+    puts allExpQuarters
+
+    allExpYearsArg = getReference "Expiration Year"
+    allExpYears = allExpYearsArg["filterValues"].split(",")
+    puts allExpYears
+
+    allYears = getExpirationYears(10)
+
+    within all(".ui-select-match")[1] do
+      find(:css, ".close.ui-select-match-close")[0].click
+      sleep 1
+    end
+
+    allExpQuarters.each do |value|
+      find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[1]/div/div/div/input").click
+      click_on(value)
+      sleep 1
+    end
+
+    within all(".ui-select-match")[2] do
+      find(:css, ".close.ui-select-match-close")[0].click
+      sleep 1
+    end
+
+    allExpYears.each do |value|
+      find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[2]/div/div/div/input").click
+      click_on(value)
+      sleep 1
+    end
+    sleep 5
+
+    find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").send_keys [:control, 'a'], :space
+    sleep 1
+    find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").send_keys $PO_name
+    sleep 1
+
+    click_on $PO_name
+
+    sleep 3
+
+  rescue Exception => ex
+    puts "Error while entering credentials"
+    puts ex.message
+  end
+end
+
+And(/^I Set new Quote as primary$/) do |quoteType|
+  begin
+
+    Capybara.ignore_hidden_elements = true
+
+    if page.should have_content($newPOQuoteNumber)
+      puts "Quote #{$newPOQuoteNumber} has been verified successfully."
+      find(:xpath, "//a[text()=#{$newPOQuoteNumber}]/parent::div/parent::div/following-sibling::div/div/label").click
+      sleep 5
+    end
+  rescue Exception => ex
+    puts "Error occured whilte verifying quotes"
+    puts ex.message
+  end
+end

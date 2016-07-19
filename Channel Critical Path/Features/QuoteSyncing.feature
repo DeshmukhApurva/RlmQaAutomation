@@ -378,7 +378,31 @@ Scenario: Rally Test Case ID:TC5359 part II - Original line item check on OLI an
   And I select the "New Opportunity" opportunity option and fill the required fields
   And I click on "Split Selected" button from renewal relationship page
   
-
+@quotesync_TC5349
+  Scenario: Rally Test Case ID:TC5349 -	Quotes Tab: When PO Syncing is as "To Master Opportunity", Select primary Quote checkbox for Quote
+    Tags:
+    When I click on the "Opportunities" grid tab
+    Then I create Source Opportunity with Line Items and resolve it
+    #Then I update the earliest expiration date
+    And I click on "Add New Partner Opportunity" button
+    Then I verify the "Opportunity" name and corresponding "Account" name
+    And I select the "Partner Accounts" from the accounts lookup list
+    #And I navigate to "Partner Contact(s)" section
+    #And I select the "Partner Account Contacts" from the contacts lookup list
+    And I select the account as "Reseller" or "Distributor"
+    And I select the "Incumbent" checkbox
+    And I select the "To Master Opportunity" option from syncing dropdown
+    And I click on the "Grant Access"
+    Then I should be able to see the partner opportunity account details
+    And I navigate to Opportunity from partner Opportunity page
+    And I create new quote for newly created PO
+    When user logout from "OEM" application
+    When I log into "CHANNELPARTNER_EETEST4" details
+    When I click on "Opportunities" tab
+    When I click on "Opportunities" tab
+    And I search for the partner opportunity on Community
+    And I click on "Quotes" tab
+    And I Set new Quote as primary
 
  
 	
