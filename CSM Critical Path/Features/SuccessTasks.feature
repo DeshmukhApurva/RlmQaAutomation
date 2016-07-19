@@ -217,21 +217,30 @@ Scenario: Rally Test Case ID: TC5108,TC5109 - NewTaskPopup Field Set : Add all f
 @verify_sk_complete_reason_code
 Scenario: Rally Test Case ID: TC4989,TC5116 - View and Select value (value entered in Complete Reason Codes and/or Complete Reason Codes (Cont'd) field of CSM Admin custom) from Complete Reason Code drop down of Complete Tasks Popup of the Success Tasks page,Verify the Reason Code field value for Completed/Dismissed tasks with Reason Codes
     When I click on "Success Tasks" tab
+    Then create new Tasks
+    And I click on "Success Tasks" tab
     And I select the task from task list
     And I open the "Complete Task" pop up window
     And I select the "Reason Code" value from complete task
-    #And I "Complete" the task
+    And I click on "Success Tasks" tab
+    And I select the task from task list
     Then I verify the "Complete" task reason code
-
+  
+  
+  
 
 @verify_sk_dismiss_reason_code
 Scenario: Rally Test Case ID: TC4990,TC5116 - View and Select value (value entered in Dismiss Reason Codes and/or Dismiss Reason Codes (Cont'd) field of CSM Admin custom) from Dismiss Reason Code drop down of Dismiss Tasks Popup of the Success Tasks page,Verify the Reason Code field value for Completed/Dismissed tasks with Reason Codes
     When I click on "Success Tasks" tab
+    Then create new Tasks
+    And I click on "Success Tasks" tab  
     And I select the task from task list
     And I open the "Dismiss" task pop up window
     And I select the "Reason Code" value from dismiss task
-    #And I "Dismiss" the task
+    And I click on "Success Tasks" tab
+    And I select the task from task list
     Then I verify the "Dismiss" task reason code
+	
 
 
 @st_save_user_preferences

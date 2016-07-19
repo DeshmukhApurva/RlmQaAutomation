@@ -1,14 +1,67 @@
 #All Success Tasks Specific Step Definitions
 #All Scenario mentioned in SuccessTasks.feature
 
+# Then(/^create new Tasks$/) do
+  # begin
+    # sleep 8
+    # arg=getDetails "Taskdetails"
+    # spPlay = getReference "Reference"
+    # sleep 2
+    # first(:xpath, "//*[contains(@id, 'selTasks')]").select(spPlay["FCView"])
+    # sleep 8
+    # within(".bootstrap-table") do
+      # find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+      # find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+      # find(:xpath, "//*[contains(@class, 'form-control')]").send_keys ''
+    # end
+    # puts "Selected First Task Category"
+    # click_on "Create Task"
+    # sleep 8
+    # time = Time.new
+    # currentDate = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s
+    # #currentDate = "#{Time.now.strftime("%m-%d-%Y")}"
+    # within all('.pbSubsection').last do
+      # sleep 5
+      # first(:xpath, "//*[contains(@id, 'dueValue')]").set(currentDate)
+      # sleep 5
+      # first(:xpath, "//*[contains(@id, 'taskNameValue')]").click
+      # first(:xpath, "//*[contains(@id,'taskNameValue')]").set("Call")
+      # first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").click
+      # first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").set(spPlay["SuccessPlanPlay"])
+      # within(:xpath, "//*[contains(@id,'relatedToBlockPanel')]") do
+        # first(:css, "input[id$='relatedToValue']").click
+        # sleep 2
+        # first(:css, "input[id$='relatedToValue']").set(spPlay["Account"])
+        # sleep 2
+      # end
+      # first(:xpath, "//*[contains(@id, 'commentsValue')]").click
+      # first(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
+      # first(:xpath, "//*[contains(@id, 'taskStatusValue1')]").select(arg["Status"])
+    # end
+    # sleep 10
+    # within(".pbButtonb") do
+      # click_on "SAVE"
+    # end
+    # within(".pbButtonb") do
+      # click_on "SAVE"
+      # puts"Created task for the focus"
+    # end
+    # sleep 10
+  # rescue Exception =>ex
+    # putstr "Error while creating the new task"
+    # putstr_withScreen ex.message
+  # end
+# end
+
+
 Then(/^create new Tasks$/) do
   begin
-    sleep 8
+    sleep 6
     arg=getDetails "Taskdetails"
     spPlay = getReference "Reference"
     sleep 2
     first(:xpath, "//*[contains(@id, 'selTasks')]").select(spPlay["FCView"])
-    sleep 8
+    sleep 6
     within(".bootstrap-table") do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
@@ -18,14 +71,18 @@ Then(/^create new Tasks$/) do
     click_on "Create Task"
     sleep 8
     time = Time.new
-    currentDate = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s
-    #currentDate = "#{Time.now.strftime("%m-%d-%Y")}"
+    currentDate = "#{Time.now.strftime("%m-%d-%Y")}"
+    time = Time.new
+    taskCreationTime = time.hour.to_s + time.min.to_s + time.sec.to_s
+    $taskName = "Automation" + taskCreationTime
+
     within all('.pbSubsection').last do
       sleep 5
       first(:xpath, "//*[contains(@id, 'dueValue')]").set(currentDate)
       sleep 5
       first(:xpath, "//*[contains(@id, 'taskNameValue')]").click
-      first(:xpath, "//*[contains(@id,'taskNameValue')]").set("Call")
+      #first(:xpath, "//*[contains(@id,'taskNameValue')]").set("Call")
+      first(:xpath, "//*[contains(@id,'taskNameValue')]").set($taskName)
       first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").click
       first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").set(spPlay["SuccessPlanPlay"])
       within(:xpath, "//*[contains(@id,'relatedToBlockPanel')]") do
@@ -38,7 +95,7 @@ Then(/^create new Tasks$/) do
       first(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
       first(:xpath, "//*[contains(@id, 'taskStatusValue1')]").select(arg["Status"])
     end
-    sleep 10
+    sleep 8
     within(".pbButtonb") do
       click_on "SAVE"
     end
@@ -165,7 +222,7 @@ end
 
 Then(/^complete the Task in bulk$/) do
   begin
-    sleep 10
+    sleep 10  
     arg=getTaskdetailsTobulkcomplete
     within(".fixed-table-body") do
       #all('tbody')[0].all('tr')[0].all('td')[0].first('.btSelectItem').set(true)
@@ -919,6 +976,7 @@ Then (/^I verify SP Details Widget on Success task$/) do
     first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
     sleep 5
     searchStr = "In Progress"
+    sleep 5
     within(".bootstrap-table") do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
@@ -928,7 +986,7 @@ Then (/^I verify SP Details Widget on Success task$/) do
     unless page.has_css?(".no-records-found")
       sleep 4
       first(".detailEnabled").click
-      sleep 3
+      sleep 6
       page.should have_content('Current Phase')
       page.should have_content('Success Plan')
       page.should have_content('Renewal Date')
@@ -952,6 +1010,7 @@ Then (/^I open SP$/) do
     first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
     sleep 5
     searchStr = ""
+    sleep 5
     within(".bootstrap-table") do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
@@ -982,15 +1041,20 @@ Then (/^I open Contact$/) do
     unless page.has_css?(".no-records-found")
       sleep 3
       first(".detailEnabled").click
-      sleep 3
+      sleep 5
       found = 0
       within all(".ss_box")[1] do
         if all(".iconContact-phone").count > 0
           puts find(:id,"th2").text
+          puts "mouse over task"
           all(".iconContact-phone")[0].hover
+          
           puts "Contact phone number:"+all(".iconContact-phone")[0].text
+          
           puts "Contact Name:"+first(".ss_contact_name").text
-          if all(".iconBasic-mail").count > 0
+          
+          sleep 5   
+         if all(".iconBasic-mail").count > 0
             found = 1
             sleep 5
             all(".iconBasic-mail")[0].click
@@ -1193,6 +1257,26 @@ Then(/^I should able to see the "([^"]*)" page$/) do |success_tasks|
     putstr_withScreen ex.message
   end
 end
+# 
+# And(/^I select the task from task list$/) do
+  # begin
+    # sleep 3
+    # arg = getReference "Reference"
+    # searchStr = "In Progress"
+    # find(:xpath, "//*[contains(@id, 'selTasks')]").select arg["FCView"]
+    # within(".bootstrap-table") do
+      # find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+      # find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+      # find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
+    # end
+    # sleep 5
+    # #find(".pull-right.search").first("input").set('')
+    # puts "Successfully selected the filter"
+  # rescue Exception => ex
+    # putstr "Error occurred while selecting the task from task list"
+    # putstr_withScreen ex.message
+  # end
+# end
 
 And(/^I select the task from task list$/) do
   begin
@@ -1203,7 +1287,8 @@ And(/^I select the task from task list$/) do
     within(".bootstrap-table") do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
-      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys $taskName
+      #find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
     end
     sleep 5
     #find(".pull-right.search").first("input").set('')
@@ -1213,6 +1298,7 @@ And(/^I select the task from task list$/) do
     putstr_withScreen ex.message
   end
 end
+
 
 And(/^I select All task from task list$/) do
   begin
@@ -1862,7 +1948,7 @@ And(/^I verify the "([^"]*)" task reason code$/) do |status|
               tr = first("tbody").all("tr")
               tr.each do |row|
                 puts "Name=#{tr}"
-                if row.all("td")[2].all('span')[0].text == $current_date
+                if row.all("td")[3].all('a')[0].text == $taskName
                   sleep 3
                   $success_task = row.all("td")[3].all('a')[0].text
                   row.all("td")[3].all('a')[0].click
@@ -1889,18 +1975,16 @@ And(/^I verify the "([^"]*)" task reason code$/) do |status|
           putstr "Failed to see the success task #{$success_task} details page"
         end
         sleep 4
-        within all(".pbSubsection") do
-          puts "In the reason code loop"
-          # :xpath, '//td[text()="Synced Quote"]/following-sibling::td/div/a',
-          #reason_code = first("tbody").all("tr")[5].all("td")[1].text
-          reason_code = find(:xpath,'//td[@id="ep" and @class="last labelCo" and contains(text(),"Reason Code")]/following-sibling::td/div').text
-          puts "reason_code=#{reason_code}"
-          if reason_code == $reason_code
-            puts "Successfully see the #{status} task reason code"
-          else
-            putstr "Failed to see the #{status} task reason code"
-          end
+        #within all(".pbSubsection") do
+        puts "In the reason code loop"
+        reason_code = first(:xpath,'//td[contains(text(),"Reason Code")]/following-sibling::td/div').text
+        puts "reason_code=#{reason_code}"
+        if reason_code.to_s == $reason_code.to_s
+          puts "Successfully see the #{status} task reason code"
+        else
+          putstr "Failed to see the #{status} task reason code"
         end
+        #end
       else
         puts "#{status} Task pop up is not displayed"
       end
@@ -1984,10 +2068,8 @@ And(/^I select the pagination size$/) do
      sleep 4
      within(".pagination-detail") do
        sleep 4
-     
-         puts "Successfully see the pagination button"
-          #find(".btn btn-default  dropdown-toggle").click
-         
+       puts "Successfully see the pagination button"
+      #find(".btn btn-default  dropdown-toggle").click
        find(".dropdown-toggle").click
        puts "I clicked on button"
        sleep 3
