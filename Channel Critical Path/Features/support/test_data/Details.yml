@@ -314,7 +314,7 @@ QuoteSyncMappings:
 
 
 QuoteSync:
- SourceOppName:
+ SourceOppName: "AO"
  SourceOppStage: "Qualification"   
  Account: "SSAutomationQuoteSyncAccount"
  FirstProductCheckboxIndex: 1
@@ -325,12 +325,13 @@ QuoteSync:
  CreateQuote: "New Quote"
  StartSync: "Start Sync"
  StopSync: "Stop Sync"
- QuoteName: "OpportunityQuote"
+ AQName: "AQ"
  SyncErrorMessage: "The current Opportunity has a Quote Synced to it. Please stop the Sync and retry this process."  
  SingleProductCheckboxIndex: 1
  MultipleProductCheckboxIndex: 2
  ProductQuantity: 1
  ProductSalesPrice: 5000
+ 
 
 QuoteSyncCreateNewQuote:
  QuoteName: "Automation Standard Quote"
