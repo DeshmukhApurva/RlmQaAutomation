@@ -51,26 +51,26 @@ And(/^I select the "([^"]*)" from the accounts lookup list$/) do |partner_accoun
   begin
     arg = getDetails "AddPartnerOpportunity"
     arg2 = getReference "AddPartnerOpportunity"
-    sleep 4
+    sleep 2
     #    within all(".pbSubsection")[1] do
     if page.has_content?(arg["PartnerAccount1FieldName"])
       puts "Successfully see the #{arg["PartnerAccount1FieldName"]} field"
     else
       putstr "Failed to see the #{arg["PartnerAccount1FieldName"]} field"
     end
-    sleep 4
+    sleep 2
     if page.has_content?(arg["PartnerAccount2FieldName"])
       puts "Successfully see the #{arg["PartnerAccount2FieldName"]} field"
     else
       putstr "Failed to see the #{arg["PartnerAccount2FieldName"]} field"
     end
     #  end
-    sleep 4
+    sleep 2
     if page.has_css?(".lookupIcon")
       puts "Successfully see the #{arg["PartnerAccount1FieldName"]} and #{arg["PartnerAccount2FieldName"]} lookup Icons"
-      sleep 3
+      sleep 1
       main = page.driver.browser.window_handles.first
-      sleep 5
+      sleep 2
       find("img[alt='Partner Account 1 Lookup (New Window)']").click
       sleep 8
       page.driver.browser.manage.window.maximize
@@ -82,11 +82,11 @@ And(/^I select the "([^"]*)" from the accounts lookup list$/) do |partner_accoun
       within('.list') do
         click_link arg2["PartnerAccount1Name"]
       end
-      sleep 5
+      sleep 2
       page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
-      sleep 3
+      sleep 1
       puts "Successfully Selected the #{arg["PartnerAccount1FieldName"]} from #{arg["PartnerOpportunityName"]} page"
-      sleep 8
+      sleep 1
       main = page.driver.browser.window_handles.first
       sleep 3
       find("img[alt='Partner Account 2 Lookup (New Window)']").click
