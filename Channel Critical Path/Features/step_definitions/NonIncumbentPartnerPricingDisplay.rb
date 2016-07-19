@@ -1,7 +1,6 @@
 #All Opportunities - NonIncumbentPartnerPricingDisplay specific Step definitions
 #All Scenario mentioned in NonIncumbentPartnerPricingDisplay.feature
 
-
 Then(/^I verify the "([^"]*)" field$/) do |prevent_portal_download|
   begin
     sleep 5
@@ -16,7 +15,6 @@ Then(/^I verify the "([^"]*)" field$/) do |prevent_portal_download|
     putstr_withScreen  ex.message
   end
 end
-
 
 And(/^I open the existing asset$/) do
   begin
@@ -47,8 +45,8 @@ And(/^I open the existing asset$/) do
         puts "Successfully match the asset name"
         activity.click
         puts "Successfully opened the #{arg["AssetName"]} asset"
-        result = true
-        break
+      result = true
+      break
       end
     end
     putstr "Unable to find the #{arg["AssetName"]} asset" unless result
@@ -57,8 +55,6 @@ And(/^I open the existing asset$/) do
     putstr_withScreen  ex.message
   end
 end
-
-
 
 Then(/^I verify the partner account fields$/) do
   begin
@@ -118,7 +114,6 @@ Then(/^I verify the partner account fields$/) do
   end
 end
 
-
 And(/^I edit the existing "([^"]*)"$/) do |name|
   begin
     sleep 5
@@ -137,20 +132,21 @@ And(/^I click renewal opportunity having products$/) do
   begin
     sleep 5
     arg = getReference "AddPartnerOpportunity"
-    
+
     if page.has_content?(arg["PartnerOpportunityName"])
+      puts "#{arg["PartnerOpportunityName"]} seen on page successfully"
       first(:link,arg["PartnerOpportunityName"]).click
     else
       within all(".pbBody")[5] do
-      within(".list") do
-        renewal_opportunity = first(".dataRow").first("th").first("a").text
-        puts renewal_opportunity
-        sleep 3
-        first(".dataRow").first("th").first("a").click
-        sleep 5
-        puts "Successfully open the renewal opportunity"
+        within(".list") do
+          renewal_opportunity = first(".dataRow").first("th").first("a").text
+          puts renewal_opportunity
+          sleep 3
+          first(".dataRow").first("th").first("a").click
+          sleep 5
+          puts "Successfully open the renewal opportunity"
+        end
       end
-    end
     end
     sleep 3
   rescue Exception => ex
@@ -208,8 +204,8 @@ And(/^I open the existing service contract$/) do
         puts "Successfully match the service Contract name"
         activity.click
         puts "Successfully opened the #{arg["ServiceContractName"]} service Contract"
-        result = true
-        break
+      result = true
+      break
       end
     end
     putstr "Unable to find the #{arg["ServiceContractName"]} service Contract" unless result
@@ -275,31 +271,31 @@ end
 
 And(/^I "([^"]*)" the quote page$/) do |button|
   begin
-   sleep 4
-   arg = getDetails "NonIncumbentPartnerPricingDisplay"
-   isSyncing = 0
-   sleep 3
-   if page.has_css?("#topButtonRow")
-     within("#topButtonRow") do
-       puts "Successfully quote sync page"
-       sleep 3
-       if page.has_css?(".syncStart")
-         sleep 3
-         click_on arg["StartSync"]
-         sleep 4
-         isSyncing = 1
-         puts "Successfully start the syncing quote"
-       else
-         click_on arg["StopSync"]
-         sleep 6
-         click_on arg["StartSync"]
-         sleep 4
-         puts "Successfully start the syncing quote"
-       end
-     end
-   else
-     puts "Faield to see the quote sync page"
-   end
+    sleep 4
+    arg = getDetails "NonIncumbentPartnerPricingDisplay"
+    isSyncing = 0
+    sleep 3
+    if page.has_css?("#topButtonRow")
+      within("#topButtonRow") do
+        puts "Successfully quote sync page"
+        sleep 3
+        if page.has_css?(".syncStart")
+          sleep 3
+          click_on arg["StartSync"]
+          sleep 4
+          isSyncing = 1
+          puts "Successfully start the syncing quote"
+        else
+          click_on arg["StopSync"]
+          sleep 6
+          click_on arg["StartSync"]
+          sleep 4
+          puts "Successfully start the syncing quote"
+        end
+      end
+    else
+      puts "Faield to see the quote sync page"
+    end
   rescue Exception => ex
     putstr "Error occurred while #{button} the quote page"
     putstr_withScreen  ex.message
@@ -372,7 +368,7 @@ And(/^I select the partner opportunity$/) do
           all('input[type=checkbox]')[1].click
           sleep 3
           puts "Enabled the partner opportunity"
-          break
+        break
         end
       end
     end
@@ -385,17 +381,17 @@ end
 
 And(/^I click on "([^"]*)" partner opportunity$/) do |button|
   begin
-   sleep 4
-   if page.has_button?(button)
-     puts "Successfully see the #{button} button"
-     sleep 3
-     click_on button
-     sleep 3
-     puts "Successfully #{button} the partner opportunity"
-   else
-     puts "Failed to see the #{button} button"
-   end
-   sleep 4
+    sleep 4
+    if page.has_button?(button)
+      puts "Successfully see the #{button} button"
+      sleep 3
+      click_on button
+      sleep 3
+      puts "Successfully #{button} the partner opportunity"
+    else
+      puts "Failed to see the #{button} button"
+    end
+    sleep 4
   rescue Exception => ex
     putstr "Error occurred while clicking the #{button} partner opportunity"
     putstr_withScreen  ex.message
@@ -427,5 +423,4 @@ When(/^I select the sync "([^"]*)" option$/) do |sync_value|
     putstr_withScreen  ex.message
   end
 end
-
 
