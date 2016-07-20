@@ -1,3 +1,4 @@
+require 'Win32API'
 #All Common Step Definitions which are common across modules
 #All scenarios mentioned in all features
 
@@ -27,6 +28,8 @@
 Given(/^that I navigate to the CRM application$/) do
   begin
     sleep 5
+    setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
+    setCursorPos.Call(500,10)
     arg = getCredentialInfo
     visit arg["url"]
     sleep 4
