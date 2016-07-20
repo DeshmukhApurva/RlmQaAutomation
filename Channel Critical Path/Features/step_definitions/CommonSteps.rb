@@ -581,18 +581,25 @@ When(/^I create Source Opportunity with Line Items and resolve it$/) do
     # sleep 2
     all(:xpath,'//td/input[@value=" Save "]')[0].click
     sleep 6
-
+    
     #Resolve Opportunity
     first(:button,'Edit').click
     sleep 5
     first(:option,'Closed Won').select_option
     sleep 2
     first(:button,'Save').click
-    sleep 10
-
+    sleep 8
+    
     find(:xpath, "//th[text()='Contributed To']").find(:xpath, '..').find(:xpath, "following-sibling::tr/td[2]/a").click
-    sleep 10
+    sleep 8
 
+
+    first(:button,'Edit').click
+    sleep 5
+    fill_in "Opportunity Name",:with=>$automationOppName
+    sleep 1
+    first(:button,'Save').click
+    sleep 8
   rescue Exception => ex
     puts "Error occurred while creating Opportunities"
     puts ex.message

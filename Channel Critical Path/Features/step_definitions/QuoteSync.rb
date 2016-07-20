@@ -1430,7 +1430,8 @@ And(/^I search for the partner opportunity on Community$/) do
     end
 
     allExpQuarters.each do |value|
-      find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[1]/div/div/div/input").click
+      #find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[1]/div/div/div/input").click
+      find(:xpath, "//div[1]/div/div/div/input").click
       click_on(value)
       sleep 1
     end
@@ -1441,7 +1442,7 @@ And(/^I search for the partner opportunity on Community$/) do
     end
 
     allExpYears.each do |value|
-      find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[2]/div/div/div/input").click
+      find(:xpath, "//div[2]/div/div/div/input").click
       click_on(value)
       sleep 1
     end

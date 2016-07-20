@@ -474,7 +474,6 @@ Scenario: Rally Test Case ID:TC5355 -Delete the opportunity line items and sync 
     When user logout from "OEM" application
     When I log into "CHANNELPARTNER_EETEST4" details
     When I click on "Opportunities" tab
-    When I click on "Opportunities" tab
     And I search for the partner opportunity on Community
     And I click on "Quotes" tab
     And I Set new Quote as primary  
