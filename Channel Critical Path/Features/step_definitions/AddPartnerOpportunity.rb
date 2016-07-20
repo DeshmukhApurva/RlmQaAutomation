@@ -52,20 +52,7 @@ And(/^I select the "([^"]*)" from the accounts lookup list$/) do |partner_accoun
     arg = getDetails "AddPartnerOpportunity"
     arg2 = getReference "AddPartnerOpportunity"
     sleep 2
-    #    within all(".pbSubsection")[1] do
-    if page.has_content?(arg["PartnerAccount1FieldName"])
-      puts "Successfully see the #{arg["PartnerAccount1FieldName"]} field"
-    else
-      putstr "Failed to see the #{arg["PartnerAccount1FieldName"]} field"
-    end
-    sleep 2
-    if page.has_content?(arg["PartnerAccount2FieldName"])
-      puts "Successfully see the #{arg["PartnerAccount2FieldName"]} field"
-    else
-      putstr "Failed to see the #{arg["PartnerAccount2FieldName"]} field"
-    end
-    #  end
-    sleep 2
+
     if page.has_css?(".lookupIcon")
       puts "Successfully see the #{arg["PartnerAccount1FieldName"]} and #{arg["PartnerAccount2FieldName"]} lookup Icons"
       sleep 1
@@ -181,8 +168,8 @@ And(/^I select the account as "([^"]*)" or "([^"]*)"$/) do |account1, account2|
           sleep 4
           #first("tbody").first("tr")[1].all("td")[2].first("select").select account1
           find(:xpath, "//tbody/tr[1]/td[2]/select").select account1
-          result = true
-          break
+        result = true
+        break
         end
       end
       putstr "Failed to see the #{account1} field value" unless result
@@ -198,8 +185,8 @@ And(/^I select the account as "([^"]*)" or "([^"]*)"$/) do |account1, account2|
           sleep 4
 
           find(:xpath, "//tbody/tr[2]/td[2]/select").select account2
-          result = true
-          break
+        result = true
+        break
         end
       end
       putstr "Failed to see the #{account2} field value" unless result
@@ -240,16 +227,16 @@ And(/^I select the partner account$/) do
     arg = getDetails "AddPartnerOpportunity"
     arg2 = getReference "AddPartnerOpportunity"
     sleep 4
-    within all(".pbSubsection")[1] do
-      if page.has_content?(arg["PartnerAccount1FieldName"])
-        puts "Successfully see the #{arg["PartnerAccount1FieldName"]} field"
-      else
-        putstr "Failed to see the #{arg["PartnerAccount1FieldName"]} field"
-      end
-      sleep 4
-      puts "Successfully see the #{arg["PartnerAccount1FieldName"]} lookup Icon"
-      sleep 4
+    #within all(".pbSubsection")[1] do
+    if page.has_content?(arg["PartnerAccount1FieldName"])
+      puts "Successfully see the #{arg["PartnerAccount1FieldName"]} field"
+    else
+      putstr "Failed to see the #{arg["PartnerAccount1FieldName"]} field"
     end
+    sleep 4
+    puts "Successfully see the #{arg["PartnerAccount1FieldName"]} lookup Icon"
+    sleep 4
+    #end
     if page.has_css?(".lookupIcon")
       puts "Successfully see the #{arg["PartnerAccount1FieldName"]} and #{arg["PartnerAccount2FieldName"]} lookup Icons"
       sleep 8
@@ -632,7 +619,7 @@ And(/^I set the "([^"]*)" opportunity$/) do |primary_checkbox|
       within all(".pbBody")[1] do
         if all("tr")[1].all("td")[5].first("img")[:title] == "Checked"
           puts "Partner Opportunity primary checkbox is checked"
-          break
+        break
         else
           sleep 4
           if all("input[type=checkbox]")[1].checked?

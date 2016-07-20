@@ -4,11 +4,13 @@ Feature: All features related to Quote Syncing
 Background: Login to the Application 
 	Given that I navigate to the CRM application 
 	Then I should land on CRM home page 
-	#---------------------------------------------------------------	
-	# QuoteSync_Mappings
-	#---------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------
+#                                                 QuoteSync_Mappings
+#-----------------------------------------------------------------------------------------------------------------------
 @quotesync_Delete_opportunity_to_quote_mappings 
-Scenario: Rally Test Case ID:  : Channel - Delete opportunity to quote mapping 
+Scenario: Rally Test Case ID:  : Channel - Delete opportunity to quote mapping
+  When user logout from "OEM" application
+  When I log into "CHANNELNETOPS_EETEST4" details
 	When I click on "ServiceSource Setup" link 
 	And I click on "Mappings" link 
 	And I click on "Opportunity → Quote" link 
@@ -16,12 +18,56 @@ Scenario: Rally Test Case ID:  : Channel - Delete opportunity to quote mapping
 	
 @quotesync_Delete__quote_to_opportunity_mappings 
 Scenario: Rally Test Case ID:  : Channel - Delete quote to opportunity mapping 
+	When user logout from "OEM" application
+  When I log into "CHANNELNETOPS_EETEST4" details
 	When I click on "ServiceSource Setup" link 
 	And I click on "Mappings" link 
 	And I click on "Quote → Opportunity" link 
 	And I delete all mapping fields
+		
+@quotesync_opportunity_to_quote_mappings 
+Scenario: Rally Test Case ID:  : Channel - Save opportunity to quote mapping 
+	When user logout from "OEM" application
+  When I log into "CHANNELNETOPS_EETEST4" details
+	When I click on "ServiceSource Setup" link 
+	And I click on "Mappings" link 
+	And I click on "Opportunity → Quote" link 
+	And I add quote sync "Quote Fields" in opportunity to quote mapping 
+	And I save the Mapping 
+		
+@quotesync_quote_to_opportunity_mappings 
+Scenario: Rally Test Case ID:  : Channel - Save quote to opportunity mapping 
+	When user logout from "OEM" application
+  When I log into "CHANNELNETOPS_EETEST4" details
+	When I click on "ServiceSource Setup" link 
+	And I click on "Mappings" link 
+	And I click on "Quote → Opportunity" link 
+	And I add quote sync "Quote Fields" in quote to opportunity mapping 
+	And I save the Mapping 
+
 	
-#@quotesync_QtoO_Delete_opportunity_line_item_fields 
+@quotesync_QtoO_opportunity_line_item_fields 
+Scenario:
+Rally Test Case ID:  : Channel - Save QtoO_opportunity_line_item_fields 
+	When user logout from "OEM" application
+  When I log into "CHANNELNETOPS_EETEST4" details
+	When I click on "ServiceSource Setup" link 
+	And I click on "Mappings" link 
+	And I click on "Quote → Opportunity" link 
+	And I add quote sync custom fields to "Opportunity Line Item Fields" 
+	And I save the Mapping 
+	
+@quotesync_OtoQ_quote_product_line_fields 
+Scenario: Rally Test Case ID:  : Channel - Save OtoQ_quote_product_line_fields 
+	When user logout from "OEM" application
+  When I log into "CHANNELNETOPS_EETEST4" details
+	When I click on "ServiceSource Setup" link 
+	And I click on "Mappings" link 
+	And I click on "Opportunity → Quote" link 
+	And I add quote sync custom fields to "Quote Product Line Item Fields" 
+	And I save the Mapping 
+	
+	#@quotesync_QtoO_Delete_opportunity_line_item_fields 
 #Scenario:
 #Rally Test Case ID:  : Channel - Delete QtoO_opportunity_line_item_fields 
 #	When I click on "ServiceSource Setup" link 
@@ -36,50 +82,17 @@ Scenario: Rally Test Case ID:  : Channel - Delete quote to opportunity mapping
 #	And I click on "Opportunity → Quote" link 
 #	And I delete all mapping fields
 	
-@quotesync_opportunity_to_quote_mappings 
-Scenario: Rally Test Case ID:  : Channel - Save opportunity to quote mapping 
-	When I click on "ServiceSource Setup" link 
-	And I click on "Mappings" link 
-	And I click on "Opportunity → Quote" link 
-	And I add quote sync "Quote Fields" in opportunity to quote mapping 
-	And I save the Mapping 
-		
-@quotesync_quote_to_opportunity_mappings 
-Scenario: Rally Test Case ID:  : Channel - Save quote to opportunity mapping 
-	When I click on "ServiceSource Setup" link 
-	And I click on "Mappings" link 
-	And I click on "Quote → Opportunity" link 
-	And I add quote sync "Quote Fields" in quote to opportunity mapping 
-	And I save the Mapping 
-
-	
-@quotesync_QtoO_opportunity_line_item_fields 
-Scenario:
-Rally Test Case ID:  : Channel - Save QtoO_opportunity_line_item_fields 
-	When I click on "ServiceSource Setup" link 
-	And I click on "Mappings" link 
-	And I click on "Quote → Opportunity" link 
-	And I add quote sync custom fields to "Opportunity Line Item Fields" 
-	And I save the Mapping 
-	
-@quotesync_OtoQ_quote_product_line_fields 
-Scenario: Rally Test Case ID:  : Channel - Save OtoQ_quote_product_line_fields 
-	When I click on "ServiceSource Setup" link 
-	And I click on "Mappings" link 
-	And I click on "Opportunity → Quote" link 
-	And I add quote sync custom fields to "Quote Product Line Item Fields" 
-	And I save the Mapping 
-	
-	#---------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------
 	
 @QuoteSyncing_CreateStandardQuote 
 Scenario: Rally-ID:  : Quote Sync - Create quote from standard salesforce 
 	When I click on the "Opportunities" grid tab 
 	Then I select the "RenewalOpportunity" 
 	And I create new quote by OOB 
-	#---------------------------------------------------------------
-	# Quote Sync Field update and verification
-	#---------------------------------------------------------------
+
+#-----------------------------------------------------------------------------------------------------------------------
+#                                          Quote Sync Field update and verification
+#-----------------------------------------------------------------------------------------------------------------------
 	
 	
 @quotesync_TC5332_Copy_OppFieldstoQuoteFields 
