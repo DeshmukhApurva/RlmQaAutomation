@@ -183,6 +183,8 @@ Scenario: Rally Test Case ID: TC5107 - Availability of New Task Popup Field Set
 @st_required_non_required_fields
 Scenario: Rally Test Case ID: TC4982,TC4983,TC4984 - Required/Non Required Fields on Complete/Dismiss Tasks popup window of Success Tasks Page,Complete/Dismiss Tasks with value in Required Field on Complete/Dismiss Tasks popup window. Error message if no value is entered,Complete/Dismiss Tasks with value in Non Required Field on Complete/Dismiss Tasks popup window. Error message if no value is entered
     When I click on "Success Tasks" tab
+    Then create new Tasks
+	  When I click on "Success Tasks" tab
     And I select the task from task list
     And I open the "Complete Task" pop up window
     Then I verify the additional fields
