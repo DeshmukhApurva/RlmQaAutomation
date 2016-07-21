@@ -87,7 +87,7 @@ Scenario: Rally Test Case ID:  : Channel - Save OtoQ_quote_product_line_fields
 	
 @QuoteSyncing_CreateStandardQuote 
 Scenario: Rally-ID:  : Quote Sync - Create quote from standard salesforce 
-  When I log into "CHANNELNETOPS_EETEST4" details
+  #When I log into "CHANNELNETOPS_EETEST4" details
 	When I click on the "Opportunities" grid tab 
 	Then I select the "RenewalOpportunity" 
 	And I create new quote by OOB 
@@ -265,6 +265,18 @@ Rally Test Case ID:TC5329 - 	Opportunity : Sync a Quote from sales force standar
 	And I select the "Renewal Relationship" product field 
 	And I click on "Rebuild Opportunity" button from renewal relationship page 
 	Then I should able to see the sync error message
+	Then I should click on back to navigate to opportunity from manage renewals page
+    And I stop the syncing of the quote
+    And I navigate to opportunity from quote page
+    And I delete the opportunity product
+    When I click on "Manage Renewals" button
+    And I select the "Renewal Relationship" product field
+    And I click on "Rebuild Opportunity" button from renewal relationship page
+    When I click on "Manage Renewals" button
+    When I click on "Consolidate Opportunity" button
+    And I select the "New Opportunity" opportunity option and fill the required fields
+    And I click on "Consolidate" button from renewal relationship page
+	
     
 @quotesync_TC5338
 Scenario: Rally Test Case ID:TC5338 - Create new quote from Add Partner Renewals page (Not yet synced), Now change the Quote and QLI fields those are mentioned on the quote to Opportunity and QLI to OLI mapping page and sync it by sales force standard UI.
@@ -298,6 +310,18 @@ Scenario: Rally Test Case ID:TC5338 - Create new quote from Add Partner Renewals
   And I select the "Renewal Relationship" product field 
   And I click on "Rebuild Opportunity" button from renewal relationship page 
   Then I should able to see the sync error message
+  Then I should click on back to navigate to opportunity from manage renewals page
+  And I stop the syncing of the quote
+  And I navigate to opportunity from quote page
+  And I delete the opportunity product
+  When I click on "Manage Renewals" button
+  And I select the "Renewal Relationship" product field
+  And I click on "Rebuild Opportunity" button from renewal relationship page
+  When I click on "Manage Renewals" button
+  When I click on "Consolidate Opportunity" button
+  And I select the "New Opportunity" opportunity option and fill the required fields
+  And I click on "Consolidate" button from renewal relationship page
+  
 	
 	  
 @quotesync_TC5356
@@ -341,6 +365,17 @@ Scenario: Rally Test Case ID:TC5356 - Stop the quote syncing which was created b
   And I select the "Renewal Relationship" product field 
   And I click on "Rebuild Opportunity" button from renewal relationship page 
   Then I should able to see the sync error message
+  Then I should click on back to navigate to opportunity from manage renewals page
+  And I stop the syncing of the quote
+  And I navigate to opportunity from quote page
+  And I delete the opportunity product
+  When I click on "Manage Renewals" button
+  And I select the "Renewal Relationship" product field
+  And I click on "Rebuild Opportunity" button from renewal relationship page
+  When I click on "Manage Renewals" button
+  When I click on "Consolidate Opportunity" button
+  And I select the "New Opportunity" opportunity option and fill the required fields
+  And I click on "Consolidate" button from renewal relationship page
   
   
 @quotesync_TC5342
@@ -430,6 +465,16 @@ Scenario: Rally Test Case ID:TC5354 - Delete the existing quote line items of th
   And I click on "Rebuild Opportunity" button from renewal relationship page
   Then I should able to see the sync error message 
   Then I should click on back to navigate to opportunity from manage renewals page
+  And I stop the syncing of the quote
+  And I navigate to opportunity from quote page
+  And I delete the opportunity product
+  When I click on "Manage Renewals" button
+  And I select the "Renewal Relationship" product field
+  And I click on "Rebuild Opportunity" button from renewal relationship page
+  When I click on "Manage Renewals" button
+  When I click on "Consolidate Opportunity" button
+  And I select the "New Opportunity" opportunity option and fill the required fields
+  And I click on "Consolidate" button from renewal relationship page
   
 @quotesync_TC5355
 Scenario: Rally Test Case ID:TC5355 -Delete the opportunity line items and sync the quote which is having same product line items as deleted from opportunity.
@@ -463,6 +508,17 @@ Scenario: Rally Test Case ID:TC5355 -Delete the opportunity line items and sync 
   And I select the "Renewal Relationship" product field
   And I click on "Rebuild Opportunity" button from renewal relationship page
   Then I should able to see the sync error message
+  Then I should click on back to navigate to opportunity from manage renewals page
+  And I stop the syncing of the quote
+  And I navigate to opportunity from quote page
+  And I delete the opportunity product
+  When I click on "Manage Renewals" button
+  And I select the "Renewal Relationship" product field
+  And I click on "Rebuild Opportunity" button from renewal relationship page
+  When I click on "Manage Renewals" button
+  When I click on "Consolidate Opportunity" button
+  And I select the "New Opportunity" opportunity option and fill the required fields
+  And I click on "Consolidate" button from renewal relationship page
   
 @quotesync_TC5349
   Scenario: Rally Test Case ID:TC5349 -	Quotes Tab: When PO Syncing is as "To Master Opportunity", Select primary Quote checkbox for Quote
