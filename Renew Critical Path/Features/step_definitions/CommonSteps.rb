@@ -1,9 +1,11 @@
 #All Common Step Definitions which are common across modules
 #All scenarios mentioned in all features
-
+require 'Win32API'
 
 Given(/^that I navigate to the CRM application$/) do
   begin
+    setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
+    setCursorPos.Call(500,10)
     visit env
     puts "Login as " + ENV['UserRole']
     arg = getCredentialInfo

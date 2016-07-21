@@ -1,59 +1,6 @@
 #All Success Tasks Specific Step Definitions
 #All Scenario mentioned in SuccessTasks.feature
 
-# Then(/^create new Tasks$/) do
-  # begin
-    # sleep 8
-    # arg=getDetails "Taskdetails"
-    # spPlay = getReference "Reference"
-    # sleep 2
-    # first(:xpath, "//*[contains(@id, 'selTasks')]").select(spPlay["FCView"])
-    # sleep 8
-    # within(".bootstrap-table") do
-      # find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
-      # find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
-      # find(:xpath, "//*[contains(@class, 'form-control')]").send_keys ''
-    # end
-    # puts "Selected First Task Category"
-    # click_on "Create Task"
-    # sleep 8
-    # time = Time.new
-    # currentDate = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s
-    # #currentDate = "#{Time.now.strftime("%m-%d-%Y")}"
-    # within all('.pbSubsection').last do
-      # sleep 5
-      # first(:xpath, "//*[contains(@id, 'dueValue')]").set(currentDate)
-      # sleep 5
-      # first(:xpath, "//*[contains(@id, 'taskNameValue')]").click
-      # first(:xpath, "//*[contains(@id,'taskNameValue')]").set("Call")
-      # first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").click
-      # first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").set(spPlay["SuccessPlanPlay"])
-      # within(:xpath, "//*[contains(@id,'relatedToBlockPanel')]") do
-        # first(:css, "input[id$='relatedToValue']").click
-        # sleep 2
-        # first(:css, "input[id$='relatedToValue']").set(spPlay["Account"])
-        # sleep 2
-      # end
-      # first(:xpath, "//*[contains(@id, 'commentsValue')]").click
-      # first(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
-      # first(:xpath, "//*[contains(@id, 'taskStatusValue1')]").select(arg["Status"])
-    # end
-    # sleep 10
-    # within(".pbButtonb") do
-      # click_on "SAVE"
-    # end
-    # within(".pbButtonb") do
-      # click_on "SAVE"
-      # puts"Created task for the focus"
-    # end
-    # sleep 10
-  # rescue Exception =>ex
-    # putstr "Error while creating the new task"
-    # putstr_withScreen ex.message
-  # end
-# end
-
-
 Then(/^create new Tasks$/) do
   begin
     sleep 6
@@ -1280,7 +1227,7 @@ end
 
 And(/^I select the task from task list$/) do
   begin
-    sleep 3
+    sleep 5
     arg = getReference "Reference"
     searchStr = "In Progress"
     find(:xpath, "//*[contains(@id, 'selTasks')]").select arg["FCView"]
@@ -1289,6 +1236,7 @@ And(/^I select the task from task list$/) do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys $taskName
       #find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
+    sleep 5
     end
     sleep 5
     #find(".pull-right.search").first("input").set('')
@@ -1737,6 +1685,7 @@ And(/^I open the "([^"]*)" task pop up window$/) do |task|
   begin
     sleep 4
     $ispopwindow = 0
+    sleep 5
     unless page.has_css?(".no-records-found")
       within("#taskGrid") do
         sleep 3
