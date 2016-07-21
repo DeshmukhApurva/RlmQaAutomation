@@ -1,6 +1,6 @@
 #All Common Step Definitions which are common across modules
 #All scenarios mentioned in all features
-
+require 'Win32API'
 
 Given(/^that I navigate to the CRM application$/) do
   begin
