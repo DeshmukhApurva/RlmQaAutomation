@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'rspec/expectations'
 require 'Capybara'
-require 'Restforce'
+#require 'Restforce'
 require 'openssl'
 
 #OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
