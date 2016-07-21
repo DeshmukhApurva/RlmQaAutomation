@@ -204,19 +204,34 @@ Scenario: Rally Test Case ID: TC5370 - Manage Renewals - Enable RR Consolidation
 @sync_invalid_rebuild_renewal_opportunity
 Scenario: Rally Test Case ID: TC5361 - Manage Renewals - Disable Rebuild for Synced Quote
     When I click on "Opportunities" link
-    And I navigate to the "Renewal Relationship" opportunity
-    And I sync the quotes to renewal opportunity
-    When I click on "Opportunities" link
-    And I navigate to the "Renewal Relationship" opportunity
+    #And I navigate to the "Renewal Relationship" opportunity
+    And I click on "New" button
+    And Create new Opportunity under an Account
+    And I click on "Choose Price Book" button
+    Then I Choose the Pricebook for the product
     And I click on "Add Product" button
     And I add the product
+    And I resolve the "Opportunity"
+    And I go to first row where column name is "Contributed To"
+    And I sync the quotes to renewal opportunity
+    #When I click on "Opportunities" link
+    #And I navigate to the "Renewal Relationship" opportunity
+#    And I select Sync
+#	And I click on the Go button if present
+#	And I click on "PES_Invalid_RR" link
+#    And I click on "Add Product" button
+#    And I add the product
     And I delete the "Renewal Relationship" opportunity product
     When I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on renewal relationship "Rebuild Opportunity" button
     Then I should able to see the sync error message
-    When I click on "Opportunities" link
-    And I navigate to the "Renewal Relationship" opportunity
+#    When I click on "Opportunities" link
+#    #And I navigate to the "Renewal Relationship" opportunity
+#    And I select Sync
+#	And I click on the Go button if present
+#	And I click on "PES_Invalid_RR" link
+	And I click on "Back" button
     And I stop the syncing the renewal opportunity
 
 

@@ -29,14 +29,26 @@ Scenario: Rally Test Case ID: TC3407,TC3408,TC3409,TC3410,TC3411,TC3413: Opportu
 	#And I add multiple criteria for asset fields and clear filter logic
 	#And I add asset criteria and multiple filter logic "1 AND 2 OR 3" and "1 OR 2 OR 3"
 	
+#	When I click on "Opportunities" link
+#	And I go to existing renewal opportunities
+#	And I click on asset link
+#	And I update the asset as per criteria set for asset field on opportunity generation
+#	When I click on "Opportunities" link
+#	And I go to existing renewal opportunities
+#	Then I should see the renewal relationship & Metrics fields values are recalculated on the opportunity
 	When I click on "Opportunities" link
-	And I go to existing renewal opportunities
-	And I click on asset link
+	And I select Renew View
+	And I click on the Go button if present
+	And I click on "RenewOpsTesting" link
+	#And I go to existing renewal opportunities
+	And I open the asset
 	And I update the asset as per criteria set for asset field on opportunity generation
 	When I click on "Opportunities" link
-	And I go to existing renewal opportunities
-	Then I should see the renewal relationship & Metrics fields values are recalculated on the opportunity
-
+	#And I go to the existing renewal opportunities
+	And I select Renew View
+	And I click on the Go button if present
+	And I click on "RenewOpsTesting" link
+	Then I should see the Metrics fields values are recalculated on the opportunity
 @update_opportunity_checkbox
 Scenario: Rally Test Case ID: TC3412 : Opportunity Updates - Update opportunity checkbox
 #	When I click on "ServiceSource Setup" link
@@ -56,12 +68,21 @@ Scenario: Rally Test Case ID: TC3412 : Opportunity Updates - Update opportunity 
 	When I click on "ServiceSource Setup" link
 	And I click on "Opportunity Updates" link
 	And I unselect the "Update opportunities when the following assets fields change"
-	And I add asset criteria and multiple filter logic "1 AND 2 OR 3" and "1 OR 2 OR 3"
+	#And I add asset criteria and multiple filter logic "1 AND 2 OR 3" and "1 OR 2 OR 3"
 	When I click on "Opportunities" link
-	And I go to existing renewal opportunities
-	And I click on asset link
+	And I select Renew View
+	And I click on the Go button if present
+	And I click on "RenewOpsTesting" link
+	#And I go to existing renewal opportunities
+	And I open the asset
+	#And I go to existing renewal opportunities
+	#And I click on asset link
 	And I update the asset as per criteria set for asset field on opportunity generation
 	When I click on "Opportunities" link
-	And I go to existing renewal opportunities
+	#And I go to existing renewal opportunities
+	And I select Renew View
+	And I click on the Go button if present
+	And I click on "RenewOpsTesting" link
+	#And I go to existing renewal opportunities
 	Then I should not able to see the updated renewal opportunity
 

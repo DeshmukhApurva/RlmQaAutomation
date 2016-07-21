@@ -1259,7 +1259,7 @@ And(/^I sync the quotes to renewal opportunity$/) do
   arg = getDetails "ManageRenewalsOpportunity"
   sleep 3
   isQuotePresent = 0
-  within all(".pbBody")[10] do
+  within all(".pbBody")[11] do
     if page.has_css?(".noRowsHeader")
       puts "No Quote Records found"
       sleep 3
@@ -1287,7 +1287,7 @@ And(/^I sync the quotes to renewal opportunity$/) do
     sleep 5
   else
     sleep 4
-    within all(".pbBody")[10] do
+    within all(".pbBody")[11] do
       within(".list") do
         quote_name = first("tbody").all(".dataRow")[0].all("td")[1].first("a").text
         puts quote_name
@@ -1321,9 +1321,9 @@ And(/^I sync the quotes to renewal opportunity$/) do
   sleep 4
   if page.has_css?("#syncQuoteOverlay_buttons")
     puts "Successfully see the sync quote overlay"
-    within("#bottomButtonRow") do
+    #within("#bottomButtonRow") do
       click_on 'Sync'
-    end
+    #end
   else
     puts "Failed to see the sync quote overlay"
   end
@@ -1374,7 +1374,7 @@ And(/^I stop the syncing the renewal opportunity$/) do
     arg = getDetails "ManageRenewalsOpportunity"
     sleep 3
     isQuotePresent = 0
-    within all(".pbBody")[10] do
+    within all(".pbBody")[11] do
       if page.has_css?(".noRowsHeader")
         puts "No Quote Records found"
         sleep 3
@@ -1395,7 +1395,7 @@ And(/^I stop the syncing the renewal opportunity$/) do
       end
     else
       sleep 4
-      within all(".pbBody")[10] do
+      within all(".pbBody")[11] do
         within(".list") do
           quote_name = first("tbody").all(".dataRow")[0].all("td")[1].first("a").text
           puts quote_name
@@ -1463,4 +1463,10 @@ And(/^I add the product$/) do
     putstr "Error occurred while adding the product to renewal opportunity"
     putstr_withScreen  ex.message
   end
+end
+And(/^I select Sync$/) do
+  begin
+    select "Sync", :from => "fcf"
+    sleep 3
+    end
 end
