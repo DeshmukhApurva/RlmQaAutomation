@@ -34,7 +34,7 @@ And(/^I verify synced quote name$/) do
       synced_quote_name = find(:xpath, '//td[text()="Synced Quote"]/following-sibling::td/div/a', :match => :prefer_exact).text
       sleep 5
       puts " #{synced_quote_name} Quote is already synced with opportunity"
-      isQuoteSynced = 1
+    isQuoteSynced = 1
     end
   rescue Exception => ex
     putstr "Error occurred while checking teh synced quote name"
@@ -946,12 +946,12 @@ And(/^I add the product to "([^"]*)" object$/) do |object|
           unless checkbox.checked?
             checkbox.click
             puts "Successfully enabled the the product"
-            break
+          break
           else
             puts "Product is already enabled"
           end
         else
-          #puts "#{index}"
+        #puts "#{index}"
         end
       end
     end
@@ -1034,7 +1034,7 @@ And(/^I sync the quotes from Quote$/) do
       puts "Successfully see the sync quote overlay"
       #within("#bottomButtonRow") do
       click_on 'Sync'
-      #end
+    #end
     else
       puts "Failed to see the sync quote overlay"
     end
@@ -1187,15 +1187,15 @@ end
 
 And(/^I delete the opportunity product$/) do
   begin
-    #$rebuild_product_name = first(".opportunityLineItemBlock").first("tbody").first(".dataRow").first("th").first("a").text
-    #first(".opportunityLineItemBlock").first(:link,"Del").click
-    #    sleep 5
-    #    find(:link,'Del').click
-    #    puts "tested.."
-    #    sleep 5
-    #    page.driver.browser.switch_to.alert.accept
-    #    puts "Deleted product #{$rebuild_product_name}"
-    #    sleep 5
+  #$rebuild_product_name = first(".opportunityLineItemBlock").first("tbody").first(".dataRow").first("th").first("a").text
+  #first(".opportunityLineItemBlock").first(:link,"Del").click
+  #    sleep 5
+  #    find(:link,'Del').click
+  #    puts "tested.."
+  #    sleep 5
+  #    page.driver.browser.switch_to.alert.accept
+  #    puts "Deleted product #{$rebuild_product_name}"
+  #    sleep 5
 
     within(".opportunityLineItemBlock")do
       first(:link, "Del").click
@@ -1289,12 +1289,12 @@ And(/^I select the multiple "([^"]*)" product fields$/) do |renewal_relationship
                   sleep 3
                   checkbox.click
                   puts "Successfully enabled the the product"
-                  break
+                break
                 else
                   puts "#{renewal_relationship} product field is already checked"
                 end
               else
-                # puts "#{index}"
+              # puts "#{index}"
               end
             end
             sleep 4
@@ -1305,12 +1305,12 @@ And(/^I select the multiple "([^"]*)" product fields$/) do |renewal_relationship
                   sleep 3
                   checkbox.click
                   puts "Successfully enabled the the product"
-                  break
+                break
                 else
                   puts "#{renewal_relationship} product field is already checked"
                 end
               else
-                # puts "#{index}"
+              # puts "#{index}"
               end
             end
           else
@@ -1369,7 +1369,7 @@ And(/^I create new quote for newly created PO$/) do
     time = Time.new
     quoteDateTime = time.hour.to_s + time.min.to_s + time.sec.to_s
     sleep 1
-    
+
     $newPOQuote = arg["AQName"] + quoteDateTime.to_s
     puts $newPOQuote
     click_on "New Quote"
@@ -1383,11 +1383,11 @@ And(/^I create new quote for newly created PO$/) do
       puts "New Quote created"
       sleep 5
     end
-    
+
     $newPOQuoteNumber = find(:xpath, '//td[text()="Quote Number"]/following-sibling::td/div', :match => :prefer_exact).text
     puts $newPOQuoteNumber
     sleep 1
-    
+
   rescue Exception => ex
     putstr "Error occurred while adding new Quote"
     putstr_withScreen  ex.message
@@ -1412,7 +1412,7 @@ end
 
 And(/^I search for the partner opportunity on Community$/) do
   begin
-    sleep 3
+    sleep 5
 
     allExpQrtrArg = getReference "Expiration Quarter"
     allExpQuarters = allExpQrtrArg["filterValues"].split(",")
@@ -1422,27 +1422,22 @@ And(/^I search for the partner opportunity on Community$/) do
     allExpYears = allExpYearsArg["filterValues"].split(",")
     puts allExpYears
 
-    allYears = getExpirationYears(10)
-
     within all(".ui-select-match")[1] do
-      find(:css, ".close.ui-select-match-close")[0].click
-      sleep 1
+      find(:css, ".close.ui-select-match-close").click
     end
 
     allExpQuarters.each do |value|
-      #find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[1]/div/div/div/input").click
-      find(:xpath, "//div[1]/div/div/div/input").click
+      find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[1]/div/div/div/input").click
       click_on(value)
       sleep 1
     end
 
     within all(".ui-select-match")[2] do
-      find(:css, ".close.ui-select-match-close")[0].click
-      sleep 1
+      find(:css, ".close.ui-select-match-close").click
     end
 
     allExpYears.each do |value|
-      find(:xpath, "//div[2]/div/div/div/input").click
+      find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[2]/div/div/div/input").click
       click_on(value)
       sleep 1
     end
@@ -1458,7 +1453,7 @@ And(/^I search for the partner opportunity on Community$/) do
     sleep 3
 
   rescue Exception => ex
-    puts "Error while entering credentials"
+    puts "Error while searching opportunity on Opporunities Tab"
     puts ex.message
   end
 end
