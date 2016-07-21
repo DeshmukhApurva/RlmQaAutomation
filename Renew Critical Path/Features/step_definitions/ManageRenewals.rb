@@ -274,6 +274,15 @@ Then(/^user able to see the updated "([^"]*)" pick list "([^"]*)" value$/) do |r
   end
 end
 
+And(/^I select multiple renewable line items$/) do
+  begin
+      find(:xpath, "(//input[@name='btSelectItem'])[1]").set(true)
+      sleep 2
+      find(:xpath, "(//input[@name='btSelectItem'])[2]").set(true)
+      sleep 2
+  end
+end
+
 And(/^I select the multiple "([^"]*)" product fields$/) do |renewal_relationship|
   begin
     sleep 4
@@ -997,6 +1006,13 @@ Then(/^I verify the renewal relationship & Metrics fields values$/) do
   rescue Exception => ex
     putstr "Error occurred while new target opportunity and product details verification"
     putstr_withScreen  ex.message
+  end
+end
+
+And (/^I select Existing opportunity and set value$/) do
+  begin
+    first(:option,'Existing Opportunity').select_option
+    find(:xpath,'//span/input').set "SourceOpportunity09"
   end
 end
 

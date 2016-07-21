@@ -106,11 +106,20 @@ Scenario: Rally Test Case ID: TC4652 - Manage Renewals - Metric Fields recalcula
 @consolidate_opportunity
 Scenario: Rally Test Case ID: TC4667,TC4668,TC4669,TC4670,TC5368- New Button - Consolidate Opportunity,move all renewal relationship lines selected, Action performed,Manage Renewals - Enable RR Consolidation for UnSynced Quote
     When I click on "Opportunities" link
-    And I open the renewal relationship opportunity
-    Then I should able to see the "Renewal Relationship" section
-    Then I verify the "Renewal Relationship" line items
+#    And I open the renewal relationship opportunity
+#    Then I should able to see the "Renewal Relationship" section
+#    Then I verify the "Renewal Relationship" line items
+#    And I click on "Add Product" button
+#    And I add the product
+	And I click on "New" button
+    And Create new Opportunity under an Account
+    And I click on "Choose Price Book" button
+    Then I Choose the Pricebook for the product
     And I click on "Add Product" button
     And I add the product
+    And I resolve the "Opportunity"
+    And I go to first row where column name is "Contributed To"
+    Then I verify the "Renewal Relationship" line items
     When I click on "Manage Renewals" button
     Then I verify the "Consolidate Opportunity" button
     When I click on "Consolidate Opportunity" button
@@ -140,12 +149,21 @@ Scenario: Rally Test Case ID: TC4658 - Manage Renewals - Tracking of "Original O
 @split_new_renewal_opportunity
 Scenario: Rally Test Case ID: TC4659,TC4661,TC4663,TC5364 - Manage Renewals - Tracking of "Original Opportunity" and "Previous Opportunity" - In New opp after Split,Tracking of "Original Opportunity"and "Previous Opportunity "- In New opportunity after Second Split,Tracking of "Original Opportunity"and "Previous Opportunity " -In New opportunity after Third Split,Enable RR Split for UnSynced Quote
     When I click on "Opportunities" link
-    And I open the renewal relationship opportunity
-    Then I should able to see the "Renewal Relationship" section
+#    And I open the renewal relationship opportunity
+#    Then I should able to see the "Renewal Relationship" section
+#    And I click on "Add Product" button
+#    And I add the product
+	And I click on "New" button
+    And Create new Opportunity under an Account
+    And I click on "Choose Price Book" button
+    Then I Choose the Pricebook for the product
     And I click on "Add Product" button
     And I add the product
+    And I resolve the "Opportunity"
+    And I go to first row where column name is "Contributed To"
     When I click on "Manage Renewals" button
-    And I select the multiple "Renewal Relationship" product fields
+    #And I select the multiple "Renewal Relationship" product fields
+    And I select multiple renewable line items
     And I click on "Split Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Split Selected" button from renewal relationship page
@@ -155,12 +173,21 @@ Scenario: Rally Test Case ID: TC4659,TC4661,TC4663,TC5364 - Manage Renewals - Tr
 @split_existing_renewal_opportunity
 Scenario: Rally Test Case ID: TC4660,TC4662,TC4664,TC5366 - Manage Renewals - Tracking of "Original Opportunity" and "Previous Opportunity" -In Existing opportunity after Split,Tracking of "Original Opportunity"and "Previous Opportunity " -In Existing opportunity after Second Split,Tracking of "Original Opportunity"and "Previous Opportunity "-In Existing opportunity after Third Split,Enable RR Split for UnSynced Quote on Target Opportunity
     When I click on "Opportunities" link
-    And I open the renewal relationship opportunity
-    Then I should able to see the "Renewal Relationship" section
+#    And I open the renewal relationship opportunity
+#    Then I should able to see the "Renewal Relationship" section
+#    And I click on "Add Product" button
+#    And I add the product
+	And I click on "New" button
+    And Create new Opportunity under an Account
+    And I click on "Choose Price Book" button
+    Then I Choose the Pricebook for the product
     And I click on "Add Product" button
     And I add the product
+    And I resolve the "Opportunity"
+    And I go to first row where column name is "Contributed To"
     When I click on "Manage Renewals" button
-    And I select the multiple "Renewal Relationship" product fields
+    #And I select the multiple "Renewal Relationship" product fields
+    And I select multiple renewable line items
     And I click on "Split Opportunity" button from renewal relationship page
     And I select the "Existing Opportunity" opportunity and fill the required fields
     Then I verify the "Target Opportunity" and "Opportunity Product(s)" section
@@ -171,10 +198,18 @@ Scenario: Rally Test Case ID: TC4660,TC4662,TC4664,TC5366 - Manage Renewals - Tr
 @add_and_remove_column_fields
 Scenario: Rally Test Case ID: TC4665,TC4666,TC4677,TC4678,TC4679,TC4680 - Manage Renewals - Select fields for display,Retain selected fields,Field set display fields,Add Fields on Fieldset to display (RR object + Cross object {Asset/Contract Line Item}),Add Custom Field on Fieldset to display,Remove Fields on Fieldset to display
     When I click on "Opportunities" link
-    And I open the renewal relationship opportunity
-    Then I should able to see the "Renewal Relationship" section
+#    And I open the renewal relationship opportunity
+#    Then I should able to see the "Renewal Relationship" section
+#    And I click on "Add Product" button
+#    And I add the product	
+	And I click on "New" button
+    And Create new Opportunity under an Account
+    And I click on "Choose Price Book" button
+    Then I Choose the Pricebook for the product
     And I click on "Add Product" button
     And I add the product
+    And I resolve the "Opportunity"
+    And I go to first row where column name is "Contributed To"
     When I click on "Manage Renewals" button
     Then I verify the "Renewal Relationship" column fields
     And I should able to see the column fields
@@ -187,11 +222,20 @@ Scenario: Rally Test Case ID: TC4665,TC4666,TC4677,TC4678,TC4679,TC4680 - Manage
 @consolidate_existing_opportunity
 Scenario: Rally Test Case ID: TC5370 - Manage Renewals - Enable RR Consolidation for UnSynced Quote on Target Opportunity
     When I click on "Opportunities" link
-    And I open the renewal relationship opportunity
-    Then I should able to see the "Renewal Relationship" section
-    Then I verify the "Renewal Relationship" line items
+#    And I open the renewal relationship opportunity
+#    Then I should able to see the "Renewal Relationship" section
+#    Then I verify the "Renewal Relationship" line items
+#    And I click on "Add Product" button
+#    And I add the product
+	And I click on "New" button
+    And Create new Opportunity under an Account
+    And I click on "Choose Price Book" button
+    Then I Choose the Pricebook for the product
     And I click on "Add Product" button
     And I add the product
+    And I resolve the "Opportunity"
+    And I go to first row where column name is "Contributed To"
+    Then I verify the "Renewal Relationship" line items
     When I click on "Manage Renewals" button
     Then I verify the "Consolidate Opportunity" button
     When I click on "Consolidate Opportunity" button
