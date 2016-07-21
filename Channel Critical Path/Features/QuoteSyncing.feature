@@ -14,7 +14,7 @@ Scenario: Rally Test Case ID:  : Channel - Delete opportunity to quote mapping
 	When I click on "ServiceSource Setup" link 
 	And I click on "Mappings" link 
 	And I click on "Opportunity → Quote" link 
-	And I delete all mapping fields 
+	And I delete all mapping fields
 	
 @quotesync_Delete__quote_to_opportunity_mappings 
 Scenario: Rally Test Case ID:  : Channel - Delete quote to opportunity mapping 
@@ -33,7 +33,7 @@ Scenario: Rally Test Case ID:  : Channel - Save opportunity to quote mapping
 	And I click on "Mappings" link 
 	And I click on "Opportunity → Quote" link 
 	And I add quote sync "Quote Fields" in opportunity to quote mapping 
-	And I save the Mapping 
+	And I save the Mapping
 		
 @quotesync_quote_to_opportunity_mappings 
 Scenario: Rally Test Case ID:  : Channel - Save quote to opportunity mapping 
@@ -43,7 +43,7 @@ Scenario: Rally Test Case ID:  : Channel - Save quote to opportunity mapping
 	And I click on "Mappings" link 
 	And I click on "Quote → Opportunity" link 
 	And I add quote sync "Quote Fields" in quote to opportunity mapping 
-	And I save the Mapping 
+	And I save the Mapping
 
 	
 @quotesync_QtoO_opportunity_line_item_fields 
@@ -55,7 +55,7 @@ Rally Test Case ID:  : Channel - Save QtoO_opportunity_line_item_fields
 	And I click on "Mappings" link 
 	And I click on "Quote → Opportunity" link 
 	And I add quote sync custom fields to "Opportunity Line Item Fields" 
-	And I save the Mapping 
+	And I save the Mapping
 	
 @quotesync_OtoQ_quote_product_line_fields 
 Scenario: Rally Test Case ID:  : Channel - Save OtoQ_quote_product_line_fields 
@@ -66,8 +66,9 @@ Scenario: Rally Test Case ID:  : Channel - Save OtoQ_quote_product_line_fields
 	And I click on "Opportunity → Quote" link 
 	And I add quote sync custom fields to "Quote Product Line Item Fields" 
 	And I save the Mapping 
-	
-	#@quotesync_QtoO_Delete_opportunity_line_item_fields 
+
+
+#@quotesync_QtoO_Delete_opportunity_line_item_fields 
 #Scenario:
 #Rally Test Case ID:  : Channel - Delete QtoO_opportunity_line_item_fields 
 #	When I click on "ServiceSource Setup" link 
@@ -86,9 +87,11 @@ Scenario: Rally Test Case ID:  : Channel - Save OtoQ_quote_product_line_fields
 	
 @QuoteSyncing_CreateStandardQuote 
 Scenario: Rally-ID:  : Quote Sync - Create quote from standard salesforce 
+  When I log into "CHANNELNETOPS_EETEST4" details
 	When I click on the "Opportunities" grid tab 
 	Then I select the "RenewalOpportunity" 
 	And I create new quote by OOB 
+
 
 #-----------------------------------------------------------------------------------------------------------------------
 #                                          Quote Sync Field update and verification
@@ -97,7 +100,8 @@ Scenario: Rally-ID:  : Quote Sync - Create quote from standard salesforce
 	
 @quotesync_TC5332_Copy_OppFieldstoQuoteFields 
 Scenario:
-Rally Test Case ID: TC5332 - Quote Sync - Copy Opportunity fields to quote fields. 
+Rally Test Case ID: TC5332 - Quote Sync - Copy Opportunity fields to quote fields.
+ 
 	When I click on the "Opportunities" grid tab 
 	Then I create Source Opportunity with Line Items and resolve it 
 	And I create new quote by OOB 
@@ -109,6 +113,7 @@ Rally Test Case ID: TC5332 - Quote Sync - Copy Opportunity fields to quote field
 	
 @quotesync_TC5331_Copy_QuoteFieldstoOppFields 
 Scenario: Rally Test Case ID:TC5331  - Quote Sync - Copy Quote fields to Opp fields. 
+
 	When I click on the "Opportunities" grid tab 
 	Then I create Source Opportunity with Line Items and resolve it 
 	And I create new quote by OOB 
@@ -122,6 +127,7 @@ Scenario: Rally Test Case ID:TC5331  - Quote Sync - Copy Quote fields to Opp fie
 @quotesync_TC5332_Copy_OLItoQLI 
 Scenario:
 Rally Test Case ID: TC5332 - Quote Sync - Copy Opportunity line item fields to quote line item fields. 
+
 	When I click on the "Opportunities" grid tab 
 	Then I create Source Opportunity with Line Items and resolve it 
 	And I create new quote by OOB 
@@ -135,6 +141,7 @@ Rally Test Case ID: TC5332 - Quote Sync - Copy Opportunity line item fields to q
 @quotesyncTC5331_Copy_QLItoOLI 
 Scenario:
 Rally Test Case ID:  - Quote Sync - Copy Quote line item fields to Opp line item fields. 
+
 	When I click on the "Opportunities" grid tab 
 	Then I create Source Opportunity with Line Items and resolve it 
 	And I create new quote by OOB 
@@ -149,6 +156,7 @@ Rally Test Case ID:  - Quote Sync - Copy Quote line item fields to Opp line item
 @quotesync_TC5330 
 Scenario:
 Rally Test Case ID:TC5330  - Quote: Create new quote from sales force standard UI, change the Quote and QLI fields those are mentioned on the Quote to Opportunity and QLI to OLI mapping page and sync it. 
+
 	When I click on the "Opportunities" grid tab 
 	Then I create Source Opportunity with Line Items and resolve it 
 	And I create new quote by OOB 
@@ -164,6 +172,7 @@ Rally Test Case ID:TC5330  - Quote: Create new quote from sales force standard U
 @quotesync_TC5331 
 Scenario:
 Rally Test Case ID:TC5331  - Opportunity: Copy of Quote and Quote line item fields to Opportunity and Opportunity line item fields respectively if quote is created and synced from sales force standard UI. 
+
 	When I click on the "Opportunities" grid tab 
 	Then I create Source Opportunity with Line Items and resolve it 
 	And I verify the quote is synced and update the custom fields on quote 
@@ -175,6 +184,7 @@ Rally Test Case ID:TC5331  - Opportunity: Copy of Quote and Quote line item fiel
 @quotesync_TC5335 
 Scenario:
 Rally Test Case ID:TC5335 - Quote : Opportunity: Stop syncing of the quote from standard UI and update the Opportunity and opportunity line item. 
+
 	When I click on the "Opportunities" grid tab 
 	Then I create Source Opportunity with Line Items and resolve it 
 	And I create new quote by OOB 
@@ -192,6 +202,7 @@ Rally Test Case ID:TC5335 - Quote : Opportunity: Stop syncing of the quote from 
 @quotesync_TC5336 
 Scenario:
 Rally Test Case ID:TC5336 - Opportunity: syncing of the quote from standard UI and update the Quote and Quote line item. 
+
 	When I click on the "Opportunities" grid tab 
 	Then I create Source Opportunity with Line Items and resolve it 
 	And I create new quote by OOB 
@@ -476,4 +487,13 @@ Scenario: Rally Test Case ID:TC5355 -Delete the opportunity line items and sync 
     When I click on "Opportunities" tab
     And I search for the partner opportunity on Community
     And I click on "Quotes" tab
-    And I Set new Quote as primary  
+    And I Set new Quote as primary 
+    
+@quotesync_Test
+  Scenario: Rally Te
+    When user logout from "OEM" application
+    When I log into "CHANNELPARTNER_EETEST4" details
+    When I click on "Opportunities" tab
+    And I search for the partner opportunity on Community
+    And I click on "Quotes" tab
+    And I Set new Quote as primary      
