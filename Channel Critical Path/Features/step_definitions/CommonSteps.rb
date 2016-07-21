@@ -27,6 +27,7 @@ require 'Win32API'
 
 Given(/^that I navigate to the CRM application$/) do
   begin
+    $userRole = ENV['UserRole']
     sleep 5
     setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
     setCursorPos.Call(500,10)
@@ -458,6 +459,7 @@ When(/^I log into "(.*?)" details$/) do |arg1|
       page.driver.browser.manage.window.maximize
       sleep 6
     end
+    ENV['UserRole'] = $userRole
   rescue Exception => ex
     puts "Error while entering credentials"
     puts ex.message
