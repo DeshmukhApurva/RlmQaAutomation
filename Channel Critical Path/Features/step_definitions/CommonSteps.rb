@@ -57,6 +57,7 @@ Given(/^that I navigate to the CRM application$/) do
       page.driver.browser.manage.window.maximize
       sleep 6
     end
+    
   rescue Exception => ex
     puts "Error while entering credentials"
     puts ex.message

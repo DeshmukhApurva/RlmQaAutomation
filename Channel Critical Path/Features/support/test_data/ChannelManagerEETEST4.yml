@@ -2,6 +2,13 @@
 RenewalOpportunity:
  Name: "PES_CHL_Opp"
 
+Expiration Quarter:
+ presentQuarter: "Q1"
+ filterValues: "Q1,Q2,Q3,Q4"
+
+Expiration Year:
+ filterValues: "2016,2017,2018,2019"
+
 PartnerOpportunity:
  First: "Portal Agreement"
  Second: "Partner Agreement"
