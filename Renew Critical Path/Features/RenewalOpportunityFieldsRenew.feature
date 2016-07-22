@@ -17,9 +17,9 @@ Scenario: Rally Test Case ID: TC3293,TC3304,TC3305,TC3307,TC3312,TC3313,TC3317,T
 Scenario: Rally Test Case ID: TC3294,TC3295,TC3298,TC3299,TC3308,TC3310,TC3311 : Renewal Opportunity Specific fields - Loss Rate,Renewal Opportunity Specific fields - DIA Contacted,Renewal Opportunity Specific fields - DIA Quoted,Renewal Opportunity Specific fields - DIA Closed,Renewal Opportunity Specific fields - Adds Ratio,Renewal Opportunity Specific fields - Days Until Expiration,Renewal Opportunity Specific fields - Status
 	When I click on "Opportunities" link
 	And I go to existing renewal opportunities
-	And I click on "Add Product" button
-	And I select one or more product from the grid
-	And I change renewal status of one of the line items to "Closed Won"
+	#And I click on "Add Product" button
+	#And I select one or more product from the grid
+	#And I change renewal status of one of the line items to "Closed Won"
 	Then I should able to see the renewals indicators fields
 
 @ren_renewal_tracking_fields

@@ -14,6 +14,13 @@ And(/^I click on Go$/) do
   end
 end
 
+And(/^I select All Service Contracts$/) do
+  begin
+    select "All Service Contracts", :from => "fcf"
+    sleep 3
+    end
+end
+
 Then(/^I verify the validation message "(.*?)"$/) do |alert_message|
   begin
     sleep 5

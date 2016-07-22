@@ -1,6 +1,33 @@
 #All Opportunity Generation - Create Renewal Opportunity From Assets,Create Renewal Opportunity From Source Opportunity specific Step definitions
 #All Scenario mentioned in CreateRenewalOpportunityGenerationFromAssets.feature,CreateRenewalOpportunityFromSourceOpportunity.feature
 
+And(/^I manually delete the opportunity$/) do
+  begin
+    within(:xpath,'//div[1]/div[2]/table/tbody/tr/td[2]/div[7]/div[1]') do
+    #within all('.customnotabBlock')[1] do
+      #within('.customnotabBlock')[1] do
+      delCount = all(:link,'Del').count
+      puts "delCount = "
+      puts delCount
+      unless delCount == 0
+        first(:link,'Del').click
+        sleep 5
+        page.driver.browser.switch_to.alert.accept
+        sleep 5
+        #find(:xpath, "//th[text()='Asset']").find(:xpath, '..').all(:xpath, "following-sibling::tr/td[3]/a")[1].click  # Asset link click
+        #find(:xpath, "//th[text()='Service Contract']").find(:xpath, '..').all(:xpath, "following-sibling::tr/td[9]/a")[1].click  # Service Contract link click
+      end
+    end
+
+    first(:button,'Delete').click
+    sleep 4
+    page.driver.browser.switch_to.alert.accept
+    sleep 5
+    puts "Deleted the Opportunity Successfully"
+
+  end
+end
+
 Then (/^I select the Source Opportunity for Opportunity Generation from Opportunity$/) do
 	begin
 	sleep 5
@@ -196,13 +223,17 @@ begin
 			putstr "Renewal field is not checked"
     end
     sleep 3
+    $generate_opportunity_prod = find(:xpath,'//th[contains(text(),"Existing Product")]/parent::tr/following-sibling::tr/td[2]/a').text
+    puts "$generate_opportunity_prod = "
+    puts $generate_opportunity_prod
 		within all('.list')[0] do 
 			tr = all(".dataRow")
 			tr.each do |row|
-				if (row.all(".dataCell")[0].text.include? $generate_opportunity_product)
-					puts "#{$generate_opportunity_product} is same in source Opportunity"
+				#if (row.all(".dataCell")[0].text.include? $generate_opportunity_product)
+			  if $generate_opportunity_prod == $product_name
+					puts "#{$generate_opportunity_prod} is same in source Opportunity"
 				else
-					putstr "#{$generate_opportunity_product} is not same in source Opportunity"
+					putstr "#{$generate_opportunity_prod} is not same in source Opportunity"
 				end        
 				break
 			end
@@ -215,6 +246,18 @@ begin
 		puts "Error in verifying the opportunity"
 		putstr_withScreen  ex.message
 	end
+end
+
+And(/^I select RenewNetOpsSCTest view$/) do
+  begin
+    select "RenewNetOpsSCTest", :from => "fcf"       
+  end
+end
+
+And(/^I select Test SC view$/) do
+  begin
+    select "Test SC", :from => "fcf"       
+  end
 end
 
 And (/^I delete the opportunity for "(.*?)"$/) do|data|
@@ -1220,6 +1263,9 @@ end
 
 Then (/^I generate Opportunity from Service Contract$/) do
 	begin
+	  $product_name = find(:xpath,'//th[contains(text(),"Product Name")]/parent::tr/following-sibling::tr/td[2]/a').text
+	  puts "$product_name = "
+    puts $product_name
 		arg = getDetails 'SCOppGenerationDetails'
 		within(:id,'bottomButtonRow') do
 			click_on "Generate Opportunity"
@@ -1231,11 +1277,36 @@ Then (/^I generate Opportunity from Service Contract$/) do
 			sleep 1
 		end
 		fill_in "Name",:with=>arg["Name"]+$Opp
-		click_on "Save"
+    click_on "Save"
 	rescue Exception => ex
 		puts "Error in generating Opportunity from Service Contract"
 		putstr_withScreen  ex.message
 	end
+end
+
+Then (/^I generate Opportunity from the Service Contract$/) do
+  begin
+    $product_name = find(:xpath,'//th[contains(text(),"Product Name")]/parent::tr/following-sibling::tr/td[2]/a').text
+    #$product_name  = find(:xpath, "//th[text()='Product Name']")..find(:xpath, '..').all(:xpath, "following-sibling::tr/td[2]/a")[1].text
+    puts "$product_name = "
+    puts $product_name
+    arg = getDetails 'SCOppGenerationDetails'
+    within(:id,'bottomButtonRow') do
+      click_on "Generate Opportunity"
+    end
+
+    arg.each do |key,val|
+      fill_in key,:with => val
+      puts "Filled value for " + key + " column"
+      sleep 1
+    end
+    #fill_in "Name",:with=>arg["Name"]+$Opp
+    fill_in "Name",:with=> "RenewNetOpsSCOpp"
+    click_on "Save"
+  rescue Exception => ex
+    puts "Error in generating Opportunity from Service Contract"
+    putstr_withScreen  ex.message
+  end
 end
 
 And (/^I click on generate Opportunity button$/) do

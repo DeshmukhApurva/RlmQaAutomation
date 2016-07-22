@@ -1476,3 +1476,11 @@ And(/^I Set new Quote as primary$/) do
     puts ex.message
   end
 end
+
+And(/^I navigate to contributor opportunity$/) do 
+  begin
+    sleep 5
+    find(:xpath, "//th[text()='Contributor']").find(:xpath, '..').find(:xpath, "following-sibling::tr/td[2]/a").click
+    sleep 5
+end
+end

@@ -39,8 +39,9 @@ Scenario: Rally Test Case ID: TC3660,TC3666,TC3668: Generate the batch activity 
 	And I click on "Batch Generation Activity" link
 	And I click on "Create New" button
 	Then I select the Asset filter and Grouping Filter logic
+    And I maximize the page
     And I set the schedule date
-	And I "Schedule" the batch file
+    And I "Schedule" the batch file
 	When I click on "ServiceSource Setup" link
 	And I click on "Batch Generation Activity" link
 	And I click on "Create New" button
@@ -82,6 +83,7 @@ Scenario: Rally Test Case ID: TC3684,TC3685,TC3690,TC3691,TC3692,TC3698,TC3699 -
 	And I click on "Batch Generation Activity" link
 	And I click on "Create New" button
 	And I select the Asset filter and Grouping Filter logic
+    And I maximize the page
     And I set the schedule date
 	And I "Schedule" the batch file
     When I click on "ServiceSource Setup" link

@@ -54,6 +54,15 @@ Then(/^I logout$/) do
   end
 end
 
+And(/^I maximize the page$/) do
+  begin
+    page.driver.browser.manage.window.maximize
+    sleep 5
+    page.driver.browser.manage.window.maximize
+    sleep 5       
+  end
+end
+
 Then(/^I create new Account$/) do
   begin
     arg=getDetails "Account"
