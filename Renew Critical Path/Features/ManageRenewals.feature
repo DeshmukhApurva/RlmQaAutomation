@@ -218,7 +218,6 @@ Scenario: Rally Test Case ID: TC4665,TC4666,TC4677,TC4678,TC4679,TC4680 - Manage
     Then I verify the adding and removing column fields
     When I select the all "Renewal Relationship" column fields
     Then I verify the "Renewal Relationship" column fields 
-    a
 
 
 @consolidate_existing_opportunity

@@ -239,6 +239,9 @@ And(/^I set the schedule date$/) do
 	sleep 3
 	all("input[type='text']")[3].set((Time.now+2).strftime('%m/%d/%Y').to_s + " 11:00 AM")
 	sleep 3
+  find("option[value='ServiceSource1__REN_Start_Date__c']").click
+  sleep 4
+  find("option[value='ServiceSource1__REN_End_Date__c']").click
 	rescue Exception => ex
 		putstr "Error in selecting the schedule date"
 		putstr_withScreen  ex.message
