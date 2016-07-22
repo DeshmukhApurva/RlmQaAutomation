@@ -189,7 +189,8 @@ Scenario: Rally Test Case ID: TC4660,TC4662,TC4664,TC5366 - Manage Renewals - Tr
     #And I select the multiple "Renewal Relationship" product fields
     And I select multiple renewable line items
     And I click on "Split Opportunity" button from renewal relationship page
-    And I select the "Existing Opportunity" opportunity and fill the required fields
+    #And I select the "Existing Opportunity" opportunity and fill the required fields
+    And I select Existing opportunity and set value
     Then I verify the "Target Opportunity" and "Opportunity Product(s)" section
     And I click on "Split Selected" button from renewal relationship page
     Then I verify the renewal relationship & Metrics fields values
@@ -216,7 +217,8 @@ Scenario: Rally Test Case ID: TC4665,TC4666,TC4677,TC4678,TC4679,TC4680 - Manage
     When I select and deselect the column fields
     Then I verify the adding and removing column fields
     When I select the all "Renewal Relationship" column fields
-    Then I verify the "Renewal Relationship" column fields
+    Then I verify the "Renewal Relationship" column fields 
+    a
 
 
 @consolidate_existing_opportunity
@@ -239,9 +241,10 @@ Scenario: Rally Test Case ID: TC5370 - Manage Renewals - Enable RR Consolidation
     When I click on "Manage Renewals" button
     Then I verify the "Consolidate Opportunity" button
     When I click on "Consolidate Opportunity" button
-    And I select the "Existing Opportunity" opportunity and fill the required fields
+    #And I select the "Existing Opportunity" opportunity and fill the required fields
+    And I select Existing opportunity and set value
     Then I verify the "Target Opportunity" and "Opportunity Product(s)" section
-    And I click on "Consolidate" button from renewal relationship page
+    And I click on "Consolidate" button #from renewal relationship page
     Then I verify the renewal relationship lines should be moved to the target opportunity
 
 
@@ -313,3 +316,16 @@ Scenario: Rally Test Case ID: TC5367,TC5369 - Manage Renewals - Disable RR Conso
     And I select the "Renewal Relationship" product field
     And I click on "Consolidate Opportunity" button from renewal relationship page
     Then I should able to see the sync error message
+@BDR
+Scenario: BDR
+	When I click on "Opportunities" link
+	And I click on "BDR" link
+	When I click on "Manage Renewals" button
+    #And I select the multiple "Renewal Relationship" product fields
+    And I select multiple renewable line items
+    And I click on "Split Opportunity" button
+    #And I select the "Existing Opportunity" opportunity and fill the required fields
+    And I select Existing opportunity and set value
+    Then I verify the "Target Opportunity" and "Opportunity Product(s)" section
+    And I click on "Split Selected" button from renewal relationship page
+    Then I verify the renewal relationship & Metrics fields values

@@ -1012,7 +1012,17 @@ end
 And (/^I select Existing opportunity and set value$/) do
   begin
     first(:option,'Existing Opportunity').select_option
-    find(:xpath,'//span/input').set "SourceOpportunity09"
+    if page.has_xpath?('//a[@title="ServiceSource Setup Tab"]')
+      find(:xpath,'//span/input').set "SourceOpportunity09"
+    else
+      find(:xpath,'//span/input').set "SourceOpportunity9"
+    end
+    sleep 5
+    first(:option,'Existing Opportunity').select_option
+    sleep 5
+    find(:xpath,'//span/input').send_keys :tab
+    sleep 4
+
   end
 end
 
