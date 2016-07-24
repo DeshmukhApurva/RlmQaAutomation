@@ -1412,7 +1412,7 @@ end
 
 And(/^I search for the partner opportunity on Community$/) do
   begin
-    sleep 5
+    sleep 10
 
     allExpQrtrArg = getReference "Expiration Quarter"
     allExpQuarters = allExpQrtrArg["filterValues"].split(",")
@@ -1421,28 +1421,31 @@ And(/^I search for the partner opportunity on Community$/) do
     allExpYearsArg = getReference "Expiration Year"
     allExpYears = allExpYearsArg["filterValues"].split(",")
     puts allExpYears
-
-    within all(".ui-select-match")[1] do
+    
+    within all("span.ui-select-match")[0] do
       find(:css, ".close.ui-select-match-close").click
+      sleep 2
     end
 
     allExpQuarters.each do |value|
       find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[1]/div/div/div/input").click
       click_on(value)
-      sleep 1
+      sleep 2
     end
 
-    within all(".ui-select-match")[2] do
+    within all("span.ui-select-match")[1] do
       find(:css, ".close.ui-select-match-close").click
+      sleep 2
     end
 
     allExpYears.each do |value|
       find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[2]/div/div/div/input").click
       click_on(value)
-      sleep 1
+      sleep 2
     end
     sleep 5
-
+    Puts $PO_name
+    find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").click 
     find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").send_keys [:control, 'a'], :space
     sleep 1
     find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").send_keys $PO_name
