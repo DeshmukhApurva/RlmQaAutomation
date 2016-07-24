@@ -337,3 +337,42 @@ And(/^I open existing opportunity$/) do
     putstr_withScreen  ex.message
   end
 end
+
+And (/^I select Existing split target opportunity and set value$/) do
+  begin
+    first(:option,'Existing Opportunity').select_option
+    if page.has_xpath?('//a[@title="ServiceSource Setup Tab"]')
+      find(:xpath,'//span/input').set "Split_Target_Opportunity_RN"
+    else
+      find(:xpath,'//span/input').set "Split_Target_Opportunity_RU"
+    end
+    sleep 5
+    first(:option,'Existing Opportunity').select_option
+    sleep 5
+    find(:xpath,'//span/input').send_keys :tab
+    sleep 4
+
+  end
+end
+
+And (/^I delete existing line items$/) do
+  begin
+    #within(:xpath,'//div[1]/div[2]/table/tbody/tr/td[2]/div[7]/div[1]') do
+    within('.opportunityLineItemBlock') do
+      delCount = all(:link,'Del').count
+      puts "delCountOpportunity = "
+      puts delCount
+
+      first(:link,'Del').click
+      sleep 5
+      page.driver.browser.switch_to.alert.accept
+      sleep 5
+      first(:link,'Del').click
+      sleep 5
+      page.driver.browser.switch_to.alert.accept
+      sleep 5
+      puts "Successfully deleted the opportunity line items"
+    end
+  end
+end
+
