@@ -179,6 +179,12 @@ And(/^I select Created Today view$/) do
   end
 end
 
+And(/^I select OppToOpp view$/) do
+  begin
+    select "OppToOpp", :from => "fcf"       
+  end
+end
+
 Then(/^I view Opportunities$/) do
   begin
     arg=getOpportunityInfo

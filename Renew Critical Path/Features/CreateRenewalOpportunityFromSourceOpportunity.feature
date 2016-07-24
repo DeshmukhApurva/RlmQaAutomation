@@ -9,9 +9,13 @@ Background: Login to the Application
 @GenerateOpp
 Scenario: Rally-ID: TC3717,TC3718,TC3719: Manual renewal opportunity creation - From opportunity, Verify renewal opp - "Renewal" flag to be checked, Verify renewal opp - Fields
 	When I Navigate to "Opportunities" tab
-	Then I select the Source Opportunity for Opportunity Generation from Opportunity	
+	#Then I select the Source Opportunity for Opportunity Generation from Opportunity	
+	Then I select OppToOpp view
+	And I click on the Go button if present
+	And I click on "CreateOppfromOpp" link
 	Then I generate Opportunity from Opportunity	
-	And I verify the generated opportunity for "SourceOppDetails"
+	#And I verify the generated opportunity for "SourceOppDetails"
+	And I verify the generated opportunity for Source Opportunity
 
 
 @NewOpp

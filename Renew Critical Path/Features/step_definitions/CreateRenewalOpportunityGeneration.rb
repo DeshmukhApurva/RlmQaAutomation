@@ -135,6 +135,9 @@ end
 
 Then (/^I generate Opportunity from Opportunity$/) do
 begin
+      $product_name = find(:xpath,'//th[contains(text(),"Product")]/parent::tr/following-sibling::tr/th/a').text
+      puts "$product_name = "
+      puts $product_name 
 	arg = getDetails 'OppGenerationDetails'	
 	within(:id,'bottomButtonRow') do
 		click_on "Generate Opportunity"
@@ -1417,4 +1420,41 @@ And(/^I click on "([^"]*)" button to Generate Opportunity$/) do |button_text|
 		putstr "Error occurred while clicking on #{button_text} button"
 		putstr_withScreen  ex.message
 	end
+end
+
+And (/^I verify the generated opportunity for Source Opportunity/) do 
+begin
+  sleep 4
+  #arg = getDetails data
+  #arg1 = getReference "ServiceContracts"
+  if page.has_content? "Opportunity Detail"
+    if all(:xpath,"//img[contains(@src, 'checkbox_checked.gif')]").count > 0
+      puts "Renewal field is checked"
+    else
+      putstr "Renewal field is not checked"
+    end
+    sleep 3
+    $generate_opportunity_prod = find(:xpath,'//th[contains(text(),"Product")]/parent::tr/following-sibling::tr/th/a').text
+    puts "$generate_opportunity_prod = "
+    puts $generate_opportunity_prod
+    within all('.list')[0] do 
+      tr = all(".dataRow")
+      tr.each do |row|
+        #if (row.all(".dataCell")[0].text.include? $generate_opportunity_product)
+        if $generate_opportunity_prod == $product_name
+          puts "#{$generate_opportunity_prod} is same in source Opportunity"
+        else
+          putstr "#{$generate_opportunity_prod} is not same in source Opportunity"
+        end        
+        break
+      end
+    end
+    puts "Generated Opportunity verified."
+  else
+    raise "Opportunity Detail page not present."
+  end
+  rescue Exception => ex
+    puts "Error in verifying the opportunity"
+    putstr_withScreen  ex.message
+  end
 end
