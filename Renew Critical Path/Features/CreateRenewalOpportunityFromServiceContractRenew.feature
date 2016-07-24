@@ -25,6 +25,9 @@ Scenario: Rally Test Case-ID:TC3376,TC3377,TC3378,TC3379,TC3380: Verify renewal 
 @renErrorMsgForServiceContract
 Scenario: Rally Test Case-ID: TC3381: Create Renewal Opp page - Mandatory Messsages
 	When I Navigate to "Service Contracts" tab	
-	Then I select the Source Service Contract for Opportunity Generation from ServiceContract
+	#Then I select the Source Service Contract for Opportunity Generation from ServiceContract
+	Then I select Test SC view
+	And I click on the Go button if present
+	And I click on "RenewNetOpsSCTest" link
 	And I click on "Generate Opportunity" button to Generate Opportunity
 	Then I check for the errors to be displayed while generating opportunity for serviceContract
