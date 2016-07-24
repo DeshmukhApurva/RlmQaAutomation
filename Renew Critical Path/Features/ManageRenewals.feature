@@ -243,7 +243,7 @@ Scenario: Rally Test Case ID: TC5370 - Manage Renewals - Enable RR Consolidation
     #And I select the "Existing Opportunity" opportunity and fill the required fields
     And I select Existing opportunity and set value
     Then I verify the "Target Opportunity" and "Opportunity Product(s)" section
-    And I click on "Consolidate" button #from renewal relationship page
+    And I click on "Consolidate" button
     Then I verify the renewal relationship lines should be moved to the target opportunity
 
 

@@ -21,7 +21,10 @@ Scenario: Rally Test Case ID: TC3414,TC3415,TC3416,TC3417: Opportunity Updates -
 	And I add multiple criteria for service contract line item fields and clear filter logic
 	And I add asset criteria and multiple filters logic "1 AND 2 OR 3" and "1 OR 2 OR 3"
 	When I click on "Opportunities" link
-	And I go to existing renewal opportunities
+	#And I go to existing renewal opportunities
+	Then I select SCOpp view
+	And I click on the Go button if present
+	And I click on "Service_Contract_Opp" link
 	And I click on service contract link
 	And I update the service contract line item fields
 	Then I verify that renewal opportunity update accordingly

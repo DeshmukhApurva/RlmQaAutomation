@@ -185,6 +185,12 @@ And(/^I select OppToOpp view$/) do
   end
 end
 
+And(/^I select SCOpp view$/) do
+  begin
+    select "SCOpp", :from => "fcf"       
+  end
+end
+
 Then(/^I view Opportunities$/) do
   begin
     arg=getOpportunityInfo
