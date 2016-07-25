@@ -529,24 +529,6 @@ When(/^I create Source Opportunity with Line Items and resolve it$/) do
     click_on "Add Product"
     sleep 5
 
-    within(".opportunityLineItemBlock") do
-      within(".list") do
-        sleep 3
-        $first_product = all(".dataRow")[0].all("th")[0].first("a").text
-        puts $first_product
-
-        $second_product = all(".dataRow")[1].all("th")[0].first("a").text
-        puts $second_product
-
-        $third_product = all(".dataRow")[2].all("th")[0].first("a").text
-        puts $third_product
-
-        $fourth_product = all(".dataRow")[3].all("th")[0].first("a").text
-        puts $fourth_product
-        sleep 3
-      end
-    end
-
     find(:xpath, "(//input[@type='checkbox'])[2]").set(true)
     find(:xpath, "(//input[@type='checkbox'])[3]").set(true)
     find(:xpath, "(//input[@type='checkbox'])[4]").set(true)
@@ -608,6 +590,24 @@ When(/^I create Source Opportunity with Line Items and resolve it$/) do
     # sleep 2
     all(:xpath,'//td/input[@value=" Save "]')[0].click
     sleep 6
+
+    within(".opportunityLineItemBlock") do
+      within(".list") do
+        sleep 3
+        $first_product = all(".dataRow")[0].all("th")[0].first("a").text
+        puts $first_product
+
+        $second_product = all(".dataRow")[1].all("th")[0].first("a").text
+        puts $second_product
+
+        $third_product = all(".dataRow")[2].all("th")[0].first("a").text
+        puts $third_product
+
+        $fourth_product = all(".dataRow")[3].all("th")[0].first("a").text
+        puts $fourth_product
+        sleep 3
+      end
+    end
 
     #Resolve Opportunity
     first(:button,'Edit').click
