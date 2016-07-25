@@ -123,6 +123,7 @@ And(/^I navigate to synced quote details page from opportunity$/) do
     putstr_withScreen  ex.message
   end
 end
+
 Then(/^I verify opportunity fields copied to quote fields on quote page$/) do
   begin
 
@@ -877,6 +878,7 @@ And(/^I navigate to Opportunity from partner Opportunity page$/) do
     putstr_withScreen  ex.message
   end
 end
+
 #And(/^I delete the product from Quote_Opportunity$/) do
 And(/^I delete the product from "([^"]*)" LineItem$/) do |lineItem|
   begin
@@ -885,8 +887,8 @@ And(/^I delete the product from "([^"]*)" LineItem$/) do |lineItem|
     if lineItem == "Quote"
       #within(".opportunityLineItemBlock",".quoteLineItemBlock") do
       within(".quoteLineItemBlock") do
-        $first_product_name = all(".dataRow")[0].all("th")[0].first("a").text
-        puts $first_product_name
+        $first_product = all(".dataRow")[0].all("th")[0].first("a").text
+        puts $first_product
         first(:link, "Del").click
         sleep 5
       end
@@ -894,8 +896,8 @@ And(/^I delete the product from "([^"]*)" LineItem$/) do |lineItem|
       puts "QLI deleted successfully"
     else
       within(".opportunityLineItemBlock") do
-        $first_product_name = all(".dataRow")[0].all("th")[0].first("a").text
-        puts $first_product_name
+        $first_product = all(".dataRow")[0].all("th")[0].first("a").text
+        puts $first_product
         first(:link, "Del").click
         sleep 5
       end
@@ -956,8 +958,9 @@ And(/^I add the product to "([^"]*)" object$/) do |object|
       end
     end
     $add_first_product_name = first(:xpath, '//tr/td[4]/div/a/span').text
-    puts $add_first_product_name
-    if $first_product_name == $add_first_product_name
+    puts "First Product selected from the Product List is: #{$add_first_product_name}"
+
+    if $first_product == $add_first_product_name
       click_on 'Select'
     end
 
@@ -1063,6 +1066,131 @@ And(/^I sync the quotes from Quote$/) do
   end
 end
 
+And(/^I select and sync the quote which is not syncing from Opp$/) do
+  begin
+    sleep 4
+    arg = getDetails "QuoteSync"
+    sleep 3
+    isQuotePresent = 0
+    #within all(".listRelatedObject.quoteBlock") do
+    within all(".pbBody")[10] do
+
+      if page.has_css?(".noRowsHeader")
+        puts "No Quote Records found"
+        sleep 3
+      else
+        isQuotePresent = 1
+        puts "Successfully see the quote records"
+      end
+    end
+    sleep 3
+    if isQuotePresent == 1
+      sleep 4
+      within all(".pbBody")[10] do
+        within(".list") do
+          puts first("tbody").all(".dataRow")[0].all("td")[1].first("a").text
+          puts first("tbody").all(".dataRow")[1].all("td")[1].first("a").text
+
+          sleep 3
+
+          if first("tbody").all(".dataRow")[0].all("td")[1].first("a").text != $newPOQuote
+            first("tbody").all(".dataRow")[0].all("td")[1].first("a").click
+            sleep 4
+          elsif first("tbody").all(".dataRow")[1].all("td")[1].first("a").text != $newPOQuote
+            first("tbody").all(".dataRow")[1].all("td")[1].first("a").click
+            sleep 4
+          end
+
+        end
+      end
+    end
+    sleep 4
+    if page.has_css?("#topButtonRow")
+      within("#topButtonRow") do
+        puts "Successfully see quote sync page"
+        sleep 3
+        if page.has_css?(".syncStart")
+          sleep 3
+          click_on arg["StartSync"]
+          sleep 6
+          puts "Successfully start the syncing quote"
+        else
+          click_on arg["StopSync"]
+          sleep 6
+          click_on arg["StartSync"]
+          sleep 4
+          puts "Successfully start the syncing quote"
+        end
+      end
+    else
+      puts "Faield to see the quote sync page"
+    end
+    sleep 4
+    if page.has_css?("#syncQuoteOverlay_buttons")
+      puts "Successfully see the sync quote overlay"
+      #within("#bottomButtonRow") do
+      click_on 'Sync'
+    #end
+    else
+      puts "Failed to see the sync quote overlay"
+    end
+    sleep 4
+    if page.has_css?("#syncQuoteOverlayContent")
+      puts "Sync completed"
+      sleep 3
+      click_on 'Done'
+    else
+      puts "Sync not completed"
+    end
+    sleep 3
+    if page.has_css?(".pageDescription")
+      within("#topButtonRow") do
+        puts "Successfully completed the quote syncing"
+      end
+    else
+      puts "Faield to complete the quote syncing"
+    end
+    sleep 4
+    find(:xpath, "//td[text()='Opportunity Name']").find(:xpath, "following-sibling::td/div/a").click
+    sleep 5
+  rescue Exception => ex
+    putstr "Error occurred while syncing the quote renewal opportunity"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I navigate to Quote page from Opportunity page$/) do
+  begin
+    sleep 4
+    arg = getDetails "QuoteSync"
+    sleep 3
+    isQuotePresent = 0
+    #within all(".listRelatedObject.quoteBlock") do
+    within all(".pbBody")[10] do
+      if page.has_css?(".noRowsHeader")
+        puts "No Quote Records found"
+        sleep 3
+      else
+        isQuotePresent = 1
+        puts "Successfully see the quote records"
+      end
+    end
+    sleep 3
+    if isQuotePresent == 1
+      sleep 4
+      within all(".pbBody")[10] do
+        within(".list") do
+          first("tbody").all(".dataRow")[0].all("td")[1].first("a").click
+          sleep 4
+        end
+      end
+    end
+  rescue Exception => ex
+    putstr "Error occurred while syncing the quote renewal opportunity"
+    putstr_withScreen  ex.message
+  end
+end
+
 Then(/^I should able to see the sync error message$/) do
   begin
     sleep 3
@@ -1101,6 +1229,7 @@ And(/^I stop the syncing of the quote$/) do
       within all(".pbBody")[10] do
         within(".list") do
           quote_name = first("tbody").all(".dataRow")[0].all("td")[1].first("a").text
+          $quote_name = first("tbody").all(".dataRow")[0].all("td")[1].first("a").text
           puts quote_name
           sleep 4
           first("tbody").all(".dataRow")[0].all("td")[1].first("a").click
@@ -1412,7 +1541,7 @@ end
 
 And(/^I search for the partner opportunity on Community$/) do
   begin
-    sleep 10
+    sleep 5
 
     allExpQrtrArg = getReference "Expiration Quarter"
     allExpQuarters = allExpQrtrArg["filterValues"].split(",")
@@ -1421,7 +1550,7 @@ And(/^I search for the partner opportunity on Community$/) do
     allExpYearsArg = getReference "Expiration Year"
     allExpYears = allExpYearsArg["filterValues"].split(",")
     puts allExpYears
-    
+
     within all("span.ui-select-match")[0] do
       find(:css, ".close.ui-select-match-close").click
       sleep 2
@@ -1444,14 +1573,24 @@ And(/^I search for the partner opportunity on Community$/) do
       sleep 2
     end
     sleep 5
-    Puts $PO_name
-    find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").click 
-    find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").send_keys [:control, 'a'], :space
-    sleep 1
-    find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").send_keys $PO_name
-    sleep 1
+    #Puts $PO_name
 
-    click_on $PO_name
+    find(:xpath, "//input[@placeholder='Search Opportunities...']").click
+    sleep 2
+    find(:xpath, "//input[@placeholder='Search Opportunities...']").send_keys [:control, 'a'], :backspace
+    sleep 2
+    find(:xpath, "//input[@placeholder='Search Opportunities...']").send_keys 'AO1972016174845-SSAutomationQuoteSyncAccount'
+    sleep 5
+
+    #find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").click
+    #find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").send_keys [:control, 'a'], :space
+    #sleep 1
+    #find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").send_keys $PO_name
+    #find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").send_keys 'AO1972016174845-SSAutomationQuoteSyncAccount'
+    #sleep 1
+
+    #click_on $PO_name
+    click_on  'AO1972016174845-SSAutomationQuoteSyncAccount'
 
     sleep 3
 
@@ -1466,21 +1605,127 @@ And(/^I Set new Quote as primary$/) do
 
     Capybara.ignore_hidden_elements = true
 
+    puts $newPOQuoteNumber
+
     if page.should have_content($newPOQuoteNumber)
+      #if page.should have_content("00001750")
       puts "Quote #{$newPOQuoteNumber} has been verified successfully."
-      find(:xpath, "//a[text()=#{$newPOQuoteNumber}]/parent::div/parent::div/following-sibling::div/div/label").click
+      #puts "Quote 00001750 has been verified successfully."
+
+      #find(:xpath, '//a[contains(text(),"00001750")]/parent::div/parent::div/following-sibling::div/div/label').click
+      find(:xpath, '//a[contains(text(),"#{$newPOQuoteNumber}")]/parent::div/parent::div/following-sibling::div/div/label').click
+
       sleep 5
     end
   rescue Exception => ex
-    puts "Error occured whilte verifying quotes"
+    puts "Error occured while setting new Quote as primary"
     puts ex.message
   end
 end
 
-And(/^I navigate to contributor opportunity$/) do 
+And(/^I navigate to contributor opportunity$/) do
   begin
     sleep 5
     find(:xpath, "//th[text()='Contributor']").find(:xpath, '..').find(:xpath, "following-sibling::tr/td[2]/a").click
     sleep 5
+  end
 end
+
+And(/^I open the Quote Sync Renewal Opportunity$/) do
+  begin
+    sleep 6
+    arg = getReference "AddPartnerOpportunity"
+    sleep 3
+    find('#fcf').select "My Opportunities"
+    sleep 5
+    #within (".fBody") do
+    click_button 'Go!'
+    #end
+    sleep 8
+    if page.has_css?(".listItemPad")
+      sleep 4
+      puts "Successfully see the Alphabetic Pagination"
+      all(".listItemPad")[15].click
+      sleep 8
+      all(".selectArrow")[0].click
+      sleep 8
+      within(".bottomNav") do
+        first("table").all("tr")[4].click
+      end
+    else
+      putstr "Failed to see the Alphabetic Pagination"
+    end
+    sleep 5
+    result = false
+    oppName = $automationRO.to_s
+    oppInitial = oppName[0]
+    click_on oppInitial
+    #find(:xpath, '//a/span[text()="#{oppInitial}"]').click
+    sleep 5
+    all(:xpath, '//div/table/tbody/tr/td[4]/div/a/span').each do |activity|
+
+      if activity.text.to_s == $automationRO.to_s
+        puts "Successfully match the Opportunity name"
+        activity.click
+        puts "Successfully opened the #{$automationRO} Opportunity"
+      result = true
+      break
+      end
+    end
+    putstr "Unable to find the #{$automationRO} Opportunity" unless result
+    sleep 5
+  rescue Exception => ex
+    putstr "Error occurred while clicking on existing #{$automationRO} Opportunity page"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I verify the primary and syncing Quote on Opp$/) do
+  begin
+    sleep 4
+    isQuotePresent = 0
+    #within all(".listRelatedObject.quoteBlock") do
+    within all(".pbBody")[10] do
+
+      if page.has_css?(".noRowsHeader")
+        puts "No Quote Records found"
+        sleep 3
+      else
+        isQuotePresent = 1
+        puts "Successfully see the quote records"
+      end
+    end
+    sleep 3
+    if isQuotePresent == 1
+      sleep 4
+      within all(".pbBody")[10] do
+        within(".list") do
+
+          puts first("tbody").all(".dataRow")[0].all("td")[1].first("a").text
+          puts first("tbody").all(".dataRow")[1].all("td")[1].first("a").text
+
+          sleep 3
+
+          if first("tbody").all(".dataRow")[0].all("th")[0].first("a").text == $newPOQuoteNumber
+            if first("tbody").all(".dataRow")[0].all("td")[2].find("img")['title'] == 'Checked'
+              puts "Quote #{$newPOQuoteNumber} has been selected as Primary Quote successfully"
+            else
+              puts "Quote #{$newPOQuoteNumber} has not been selected as Primary Quote successfully"
+            end
+            sleep 4
+          elsif first("tbody").all(".dataRow")[1].all("th")[0].first("a").text == $newPOQuoteNumber
+            if first("tbody").all(".dataRow")[1].all("td")[2].find("img")['title'] == 'Checked'
+              puts "Quote #{$newPOQuoteNumber} has been selected as Primary Quote successfully"
+            else
+              puts "Quote #{$newPOQuoteNumber} has not been selected as Primary Quote successfully"
+            end
+            sleep 4
+          end
+        end
+      end
+    end
+  rescue Exception => ex
+    putstr "Error occurred while syncing the quote renewal opportunity"
+    putstr_withScreen  ex.message
+  end
 end

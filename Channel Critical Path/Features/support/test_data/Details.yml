@@ -316,7 +316,7 @@ QuoteSyncMappings:
 QuoteSync:
  SourceOppName: "AO"
  SourceOppStage: "Qualification"   
- Account: "SSAutomationQuoteSyncAccount"
+ Account: "AA4QS"
  FirstProductCheckboxIndex: 1
  SecondProductCheckboxIndex: 2
  RenewalStatusOpen: "Open"

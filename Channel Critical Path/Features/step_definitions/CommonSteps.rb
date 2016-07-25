@@ -1,4 +1,5 @@
 require 'Win32API'
+
 #All Common Step Definitions which are common across modules
 #All scenarios mentioned in all features
 
@@ -57,7 +58,7 @@ Given(/^that I navigate to the CRM application$/) do
       page.driver.browser.manage.window.maximize
       sleep 6
     end
-    
+
   rescue Exception => ex
     puts "Error while entering credentials"
     puts ex.message
@@ -482,7 +483,7 @@ When(/^I create Source Opportunity with Line Items and resolve it$/) do
   #    puts time.usec    # => 999999: microseconds
   #    puts time.zone    # => "UTC": timezone name
     time = Time.new
-    #oppDateTime =  + 
+    #oppDateTime =  +
     arg = getDetails "QuoteSync"
     time = Time.new
     oppDateTime = time.day.to_s + time.month.to_s + time.year.to_s + time.hour.to_s + time.min.to_s + time.sec.to_s
@@ -526,6 +527,26 @@ When(/^I create Source Opportunity with Line Items and resolve it$/) do
     click_on "Save"
     sleep 5
     click_on "Add Product"
+    sleep 5
+
+    within(".opportunityLineItemBlock") do
+      within(".list") do
+        sleep 3
+        $first_product = all(".dataRow")[0].all("th")[0].first("a").text
+        puts $first_product
+
+        $second_product = all(".dataRow")[1].all("th")[0].first("a").text
+        puts $second_product
+
+        $third_product = all(".dataRow")[2].all("th")[0].first("a").text
+        puts $third_product
+
+        $fourth_product = all(".dataRow")[3].all("th")[0].first("a").text
+        puts $fourth_product
+        sleep 3
+      end
+    end
+
     find(:xpath, "(//input[@type='checkbox'])[2]").set(true)
     find(:xpath, "(//input[@type='checkbox'])[3]").set(true)
     find(:xpath, "(//input[@type='checkbox'])[4]").set(true)
@@ -533,11 +554,11 @@ When(/^I create Source Opportunity with Line Items and resolve it$/) do
     # find(:xpath, "(//input[@type='checkbox'])[6]").set(true)
     # find(:xpath, "(//input[@type='checkbox'])[7]").set(true)
     # find(:xpath, "(//input[@type='checkbox'])[8]").set(true)
-    # find(:xpath, "(//input[@type='checkbox'])[9]").set(true)
+    # find(:xpath, "(//input[@type='checkbox'])[9]").set(true)'
+
     click_on 'Select'
     puts "Successfully select the product"
     sleep 6
-
     #Enter product Quantity
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[3]/input").set arg["ProductQuantity"]
     sleep 2
@@ -587,7 +608,7 @@ When(/^I create Source Opportunity with Line Items and resolve it$/) do
     # sleep 2
     all(:xpath,'//td/input[@value=" Save "]')[0].click
     sleep 6
-    
+
     #Resolve Opportunity
     first(:button,'Edit').click
     sleep 5
@@ -595,14 +616,14 @@ When(/^I create Source Opportunity with Line Items and resolve it$/) do
     sleep 2
     first(:button,'Save').click
     sleep 8
-    
+
     find(:xpath, "//th[text()='Contributed To']").find(:xpath, '..').find(:xpath, "following-sibling::tr/td[2]/a").click
     sleep 8
 
-
     first(:button,'Edit').click
     sleep 5
-    fill_in "Opportunity Name",:with=>$automationOppName
+    $automationRO = $automationOppName + "RO"
+    fill_in "Opportunity Name",:with=>$automationRO
     sleep 1
     first(:button,'Save').click
     sleep 8
