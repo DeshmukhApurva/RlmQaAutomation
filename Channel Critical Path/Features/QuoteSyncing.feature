@@ -615,6 +615,38 @@ Feature: All features related to Quote Syncing
     And I navigate to Quote page from Opportunity page
     Then I verify opportunity fields copied to quote fields on quote page
 
+  @quotesync_TC5339
+  Scenario: Rally Test Case ID: TC5339 -
+    When I click on the "Opportunities" grid tab
+    Then I create Source Opportunity with Line Items and resolve it
+    And I click on "Add New Partner Opportunity" button
+    And I select the "Partner Accounts" from the accounts lookup list
+    And I select the account as "Reseller" or "Distributor"
+    And I select the "Incumbent" checkbox
+    #And I select the "To Master Opportunity" option from syncing dropdown
+    And I click on the "Grant Access"
+    Then I should be able to see the partner opportunity account details
+    And I navigate to Opportunity from partner Opportunity page
+    And I click on "Add New Partner Opportunity" button
+    And I select the "Partner Accounts" from the accounts lookup list
+    And I select the account as "Reseller" or "Distributor"
+    And I select the "Incumbent" checkbox
+    And I select the "To Master Opportunity" option from syncing dropdown
+    And I click on the "Grant Access"
+    Then I should be able to see the partner opportunity account details
+    And I navigate to Opportunity from partner Opportunity page
+    And I open the "Syncing" Quote from Opp
+    And I update the fields on quote line item
+    And I navigate to Quote detail page from QLI details page
+    And I navigate to opportunity from quote page
+    And I select Partner Opportunity for Syncing
+    Then I choose the sync options
+    And I open the "Syncing" Quote from Opp
+    And I update the fields on quote line item
+    And I navigate to Quote detail page from QLI details page
+    And I navigate to opportunity from quote page
+    Then I verify QLI fields copied to OLI
+
   @quotesync_Test
   Scenario: Rally Te
     #When user logout from "OEM" application
