@@ -152,15 +152,7 @@ Feature: All features related to Quote Syncing
     Then I verify quote fields copied to opportunity fields on opportunity page
     Then I verify QLI fields copied to OLI
 
-  @quotesync_TC5331
-  Scenario: Rally Test Case ID:TC5331  - Opportunity: Copy of Quote and Quote line item fields to Opportunity and Opportunity line item fields respectively if quote is created and synced from sales force standard UI.
-    When I click on the "Opportunities" grid tab
-    Then I create Source Opportunity with Line Items and resolve it
-    And I verify the quote is synced and update the custom fields on quote
-    Then I verify the Opportunity fields on opportunity page
-    And I verify the quote is synced and update the custom fields on quote line item
-    Then I verify the Opportunity line item fields on opportunity page
-
+ 
   @quotesync_TC5335
   Scenario: Rally Test Case ID:TC5335 - Quote : Opportunity: Stop syncing of the quote from standard UI and update the Opportunity and opportunity line item.
     When I click on the "Opportunities" grid tab
