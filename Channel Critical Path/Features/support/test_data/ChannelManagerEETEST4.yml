@@ -36,7 +36,7 @@ NonIncumbentPartnerPricingDisplay:
  PartnerOpportunityName1: "Partner Agreement"
 
 
-SplitOpportunity:
+ SplitOpportunity:
  SplitOpportunityName: "PES_SplitOpp"
  TargetOpportunityOwnerID: "QA ChannelManager"
  SelectTargetOpportunity: "PES_Split_Target_Opp"

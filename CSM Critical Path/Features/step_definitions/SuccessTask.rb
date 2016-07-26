@@ -985,6 +985,12 @@ Then (/^I open Contact$/) do
     arg = getReference "Reference"
     find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCWidgetView"])
     sleep 5
+    within(".bootstrap-table") do
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys ''
+    end
+    sleep 5
     unless page.has_css?(".no-records-found")
       sleep 3
       first(".detailEnabled").click
@@ -2012,6 +2018,13 @@ end
 And(/^I select the pagination size$/) do
  begin
   sleep 5
+  
+   within(".bootstrap-table") do
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys ''
+    end
+  sleep 3
   if page.has_css?(".dropdown-toggle")
      puts "Successfully see the pagination"
      sleep 4
@@ -2024,7 +2037,6 @@ And(/^I select the pagination size$/) do
        sleep 3
        within(".dropdown-menu") do
          all("li")[2].first("a").click
-       
      end
    end
      sleep 3
@@ -2072,6 +2084,11 @@ And(/^I change the "([^"]*)" filter$/) do |success_task|
     sleep 5
     find(:xpath, "//*[contains(@id, 'selTasks')]").find(:xpath, 'option[3]').select_option
     sleep 5
+    within(".bootstrap-table") do
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys ''
+    end
     puts "Successfully change the #{success_task} filter"
   rescue Exception => ex
     putstr "Error occurred while selecting the #{success_task} filter"
@@ -2223,6 +2240,12 @@ end
 Then(/^I verify the task "([^"]*)" user preference is saved$/) do |record_type|
   begin
     sleep 4
+    within(".bootstrap-table") do
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys ''
+    end
+    sleep   
     within all(".dropdown-menu")[0] do
       all("li").each do |column|
         sleep 3

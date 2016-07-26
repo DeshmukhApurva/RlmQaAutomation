@@ -13,5 +13,5 @@ Reference:
  TaskType: "Call"
  AdditionalAccount: "FURNITURE INC"
  AdditionalContactName: "Steve Gilbert"
- FCWidgetView: "FC for Widgets"
+ FCWidgetView: "PES FC for Widgets"
  FocusCategoryLookupValue: "QA CSM"
