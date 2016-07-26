@@ -158,7 +158,7 @@ end
 And(/^I open the quote$/) do
   begin
     sleep 5
-    within all(".pbBody")[8] do
+    within all(".pbBody")[10] do
       within(".list") do
         quote_name = first(".dataRow").all("td")[1].first("a").text
         puts quote_name

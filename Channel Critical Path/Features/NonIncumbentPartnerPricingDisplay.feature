@@ -57,7 +57,8 @@ Scenario:
 	And I select the "Partner Account" account 
 	And I navigate to "Partner Contact(s)" section 
 	And I select the "Partner Account Contact" contact 
-	And I select the "To Master Opportunity" syncing 
+	#And I select the "To Master Opportunity" syncing
+	And I select the "To Master Opportunity" option from syncing dropdown 
 	And I click on the "Grant Access" 
 	When I click on the "Assets" grid tab 
 	And I open the existing asset 
