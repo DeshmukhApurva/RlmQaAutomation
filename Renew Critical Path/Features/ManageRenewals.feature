@@ -124,7 +124,7 @@ Scenario: Rally Test Case ID: TC4667,TC4668,TC4669,TC4670,TC5368- New Button - C
     Then I verify the "Consolidate Opportunity" button
     When I click on "Consolidate Opportunity" button
     And I select the "New Opportunity" opportunity option and fill the required fields
-    And I click on "Consolidate" button from renewal relationship page
+    And I click on "Consolidate" button 
     Then I verify the renewal relationship lines should be moved to the target opportunity
 
 
@@ -164,9 +164,9 @@ Scenario: Rally Test Case ID: TC4659,TC4661,TC4663,TC5364 - Manage Renewals - Tr
     When I click on "Manage Renewals" button
     #And I select the multiple "Renewal Relationship" product fields
     And I select multiple renewable line items
-    And I click on "Split Opportunity" button from renewal relationship page
+    And I click on "Split Opportunity" button
     And I select the "New Opportunity" opportunity option and fill the required fields
-    And I click on "Split Selected" button from renewal relationship page
+    And I click on "Split Selected" button 
     Then I verify the renewal relationship & Metrics fields values
 
 
@@ -313,5 +313,5 @@ Scenario: Rally Test Case ID: TC5367,TC5369 - Manage Renewals - Disable RR Conso
     And I sync the quotes to renewal opportunity
     When I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
-    And I click on "Consolidate Opportunity" button from renewal relationship page
+    And I click on "Consolidate Opportunity" button
     Then I should able to see the sync error message
