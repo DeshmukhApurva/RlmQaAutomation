@@ -244,8 +244,8 @@ And(/^I open the existing opportunity$/) do
         puts "Successfully match the Opportunity name"
         activity.click
         puts "Successfully opened the #{arg["PartnerOpportunityName"]} Opportunity"
-      result = true
-      break
+        result = true
+        break
       end
     end
     putstr "Unable to find the #{arg["PartnerOpportunityName"]} Opportunity" unless result
@@ -470,18 +470,18 @@ end
 
 When(/^I create Source Opportunity with Line Items and resolve it$/) do
   begin
-  # Components of a Time
-  #    puts "Current Time : " + time.inspect
-  #    puts time.year    # => Year of the date
-  #    puts time.month   # => Month of the date (1 to 12)
-  #    puts time.day     # => Day of the date (1 to 31 )
-  #    puts time.wday    # => 0: Day of week: 0 is Sunday
-  #    puts time.yday    # => 365: Day of year
-  #    puts time.hour    # => 23: 24-hour clock
-  #    puts time.min     # => 59
-  #    puts time.sec     # => 59
-  #    puts time.usec    # => 999999: microseconds
-  #    puts time.zone    # => "UTC": timezone name
+    # Components of a Time
+    #    puts "Current Time : " + time.inspect
+    #    puts time.year    # => Year of the date
+    #    puts time.month   # => Month of the date (1 to 12)
+    #    puts time.day     # => Day of the date (1 to 31 )
+    #    puts time.wday    # => 0: Day of week: 0 is Sunday
+    #    puts time.yday    # => 365: Day of year
+    #    puts time.hour    # => 23: 24-hour clock
+    #    puts time.min     # => 59
+    #    puts time.sec     # => 59
+    #    puts time.usec    # => 999999: microseconds
+    #    puts time.zone    # => "UTC": timezone name
     time = Time.new
     #oppDateTime =  +
     arg = getDetails "QuoteSync"
@@ -610,7 +610,10 @@ When(/^I create Source Opportunity with Line Items and resolve it$/) do
     end
 
     #Resolve Opportunity
-    first(:button,'Edit').click
+    within("#bottomButtonRow") do
+      click_on 'Edit'
+    end
+    #first(:button,'Edit').click
     sleep 5
     first(:option,'Closed Won').select_option
     sleep 2
@@ -620,7 +623,10 @@ When(/^I create Source Opportunity with Line Items and resolve it$/) do
     find(:xpath, "//th[text()='Contributed To']").find(:xpath, '..').find(:xpath, "following-sibling::tr/td[2]/a").click
     sleep 8
 
-    first(:button,'Edit').click
+    # first(:button,'Edit').click
+    within("#bottomButtonRow") do
+      click_on 'Edit'
+    end
     sleep 5
     $automationRO = $automationOppName + "RO"
     fill_in "Opportunity Name",:with=>$automationRO
