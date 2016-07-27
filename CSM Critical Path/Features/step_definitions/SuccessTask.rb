@@ -908,7 +908,6 @@ And (/^I dismiss Success task$/) do
   end
 end
 
-###apurva
 
 And (/^I cancel complete Success task in bulk$/) do
   begin
@@ -916,6 +915,7 @@ And (/^I cancel complete Success task in bulk$/) do
     arg = getReference "Reference"
     first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
     sleep 4
+    #Added piece of code,it will be remove further(SearchBox)
     within(".bootstrap-table") do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
@@ -1020,6 +1020,7 @@ Then (/^I open SP$/) do
     sleep 5
     searchStr = ""
     sleep 5
+    #Added piece of code,it will be remove further(SearchBox)
     within(".bootstrap-table") do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
@@ -1047,6 +1048,7 @@ Then (/^I open Contact$/) do
     arg = getReference "Reference"
     find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCWidgetView"])
     sleep 5
+    #Added piece of code,it will be remove further(SearchBox)
     within(".bootstrap-table") do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
@@ -1103,6 +1105,12 @@ Then (/^I verify Play widget$/) do
     arg = getReference "Reference"
     first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCWidgetView"])
     sleep 5
+    #Added piece of code,it will be remove further(SearchBox)
+    within(".bootstrap-table") do
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys ''
+    end
     unless page.has_css?(".no-records-found")
       sleep 3
       first(".detailEnabled").click
@@ -1272,26 +1280,6 @@ Then(/^I should able to see the "([^"]*)" page$/) do |success_tasks|
     putstr_withScreen ex.message
   end
 end
-# 
-# And(/^I select the task from task list$/) do
-  # begin
-    # sleep 3
-    # arg = getReference "Reference"
-    # searchStr = "In Progress"
-    # find(:xpath, "//*[contains(@id, 'selTasks')]").select arg["FCView"]
-    # within(".bootstrap-table") do
-      # find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
-      # find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
-      # find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
-    # end
-    # sleep 5
-    # #find(".pull-right.search").first("input").set('')
-    # puts "Successfully selected the filter"
-  # rescue Exception => ex
-    # putstr "Error occurred while selecting the task from task list"
-    # putstr_withScreen ex.message
-  # end
-# end
 
 And(/^I select the task from task list$/) do
   begin
