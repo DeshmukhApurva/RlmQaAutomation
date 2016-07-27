@@ -859,6 +859,12 @@ And (/^I cancel complete Success task in bulk$/) do
     sleep 5
     arg = getReference "Reference"
     first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
+    sleep 4
+    within(".bootstrap-table") do
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys ''
+    end
     sleep 10
     completedCount = 0
     newcompletedCount = 0
