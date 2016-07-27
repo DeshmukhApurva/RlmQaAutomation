@@ -1776,30 +1776,27 @@ And(/^I open the "([^"]*)" Quote from Opp$/) do |isSyncing|
       sleep 4
       within all(".pbBody")[10] do
         within(".list") do
+          
           if first("tbody").all(".dataRow")[0].all("td")[1].first("a").text != ''
             puts first("tbody").all(".dataRow")[0].all("td")[1].first("a").text
-            first("tbody").all(".dataRow")[0].all("td")[1].first("a").click
-          end
-
-          if first("tbody").all(".dataRow")[1].all("td")[1].first("a").text != ''
+          elsif first("tbody").all(".dataRow")[1].all("td")[1].first("a").text != ''
             puts first("tbody").all(".dataRow")[1].all("td")[1].first("a").text
-            first("tbody").all(".dataRow")[1].all("td")[1].first("a").click
           end
 
           sleep 3
           if isSyncing == "Syncing"
-            if first("tbody").all(".dataRow")[0].all("td")[2].find("img")['title'] == 'Checked'
+            if first("tbody").all(".dataRow")[0].all("td")[3].find("img")['title'] == 'Checked'
               first("tbody").all(".dataRow")[0].all("td")[1].first("a").click
               sleep 4
-            elsif first("tbody").all(".dataRow")[1].all("td")[2].find("img")['title'] == 'Checked'
+            elsif first("tbody").all(".dataRow")[1].all("td")[3].find("img")['title'] == 'Checked'
               first("tbody").all(".dataRow")[1].all("td")[1].first("a").click
               sleep 4
             end
           else
-            if first("tbody").all(".dataRow")[0].all("td")[2].find("img")['title'] == 'Not Checked'
+            if first("tbody").all(".dataRow")[0].all("td")[3].find("img")['title'] == 'Not Checked'
               first("tbody").all(".dataRow")[0].all("td")[1].first("a").click
               sleep 4
-            elsif first("tbody").all(".dataRow")[1].all("td")[2].find("img")['title'] == 'Not Checked'
+            elsif first("tbody").all(".dataRow")[1].all("td")[3].find("img")['title'] == 'Not Checked'
               first("tbody").all(".dataRow")[1].all("td")[1].first("a").click
               sleep 4
             end
