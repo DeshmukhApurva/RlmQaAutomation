@@ -1377,7 +1377,7 @@ And(/^I select the "([^"]*)" opportunity option and fill the required fields$/) 
   begin
     sleep 3
     arg = getDetails "SplitOpportunity"
-    arg2 = getReference "SplitOpportunity"
+    #arg2 = getReference "SplitOpportunity"
     sleep 5
     unless page.has_css?(".no-records-found")
       sleep 4
@@ -1393,7 +1393,7 @@ And(/^I select the "([^"]*)" opportunity option and fill the required fields$/) 
         sleep 5
         find(".class_StageName").select arg["TargetOpportunityStage"]
         sleep 7
-        all('input[type=text]')[3].set arg2["TargetOpportunityOwnerID"]
+        all('input[type=text]')[3].set arg["TargetOpportunityOwnerID"]
         sleep 7
         all('input[type=text]')[4].set arg["TargetOpportunityProbability"]
         sleep 5
