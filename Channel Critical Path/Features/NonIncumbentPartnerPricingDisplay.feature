@@ -143,9 +143,11 @@ Scenario:
 @syncing_to_master_opportunity 
 Scenario: 
 	Rally Test Case ID: TC5271 - Opportunity and Quote Page: Populating value in Partner Account 1/2 related fields when user syncs the PO as "To Master Opportunity" which is not yet synced 
-	When I click on the "Accounts" grid tab 
-	And I open the existing account 
-	And I click renewal opportunity having products 
+	#When I click on the "Accounts" grid tab 
+	#And I open the existing account 
+	#And I click renewal opportunity having products 
+	When I click on the "Opportunities" grid tab 
+	And I open the existing opportunity
 	And I select the partner opportunity 
 	And I click on "Syncing" partner opportunity 
 	And I select the sync "To Master Opportunity" option 
@@ -155,9 +157,11 @@ Scenario:
 @syncing_from_master_opportunity 
 Scenario: 
 	Rally Test Case ID: TC5278 - Opportunity Page: Populating  value in Partner Account 1/2 related fields when user syncs the PO (which was not syncing) with "To Master Opportunity" syncing option 
-	When I click on the "Accounts" grid tab 
-	And I open the existing account 
-	And I click renewal opportunity having products 
+	#When I click on the "Accounts" grid tab 
+	#And I open the existing account 
+	#And I click renewal opportunity having products
+	When I click on the "Opportunities" grid tab 
+	And I open the existing opportunity	 
 	And I select the partner opportunity 
 	And I click on "Syncing" partner opportunity 
 	And I select the sync "From Master Opportunity" option 

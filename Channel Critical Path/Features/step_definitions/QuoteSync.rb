@@ -1750,9 +1750,15 @@ And(/^I open the "([^"]*)" Quote from Opp$/) do |isSyncing|
       sleep 4
       within all(".pbBody")[10] do
         within(".list") do
+          if first("tbody").all(".dataRow")[0].all("td")[1].first("a").text != ''
+            puts first("tbody").all(".dataRow")[0].all("td")[1].first("a").text
+            first("tbody").all(".dataRow")[0].all("td")[1].first("a").click
+          end
 
-          puts first("tbody").all(".dataRow")[0].all("td")[1].first("a").text
-          puts first("tbody").all(".dataRow")[1].all("td")[1].first("a").text
+          if first("tbody").all(".dataRow")[1].all("td")[1].first("a").text != ''
+            puts first("tbody").all(".dataRow")[1].all("td")[1].first("a").text
+            first("tbody").all(".dataRow")[1].all("td")[1].first("a").click
+          end
 
           sleep 3
           if isSyncing == "Syncing"
@@ -1781,10 +1787,47 @@ And(/^I open the "([^"]*)" Quote from Opp$/) do |isSyncing|
   end
 end
 
+And(/^I verify the newly created quote is primary and syncing$/) do
+  begin
+    sleep 4
+    isQuotePresent = 0
+    #within all(".listRelatedObject.quoteBlock") do
+    within all(".pbBody")[10] do
+      if page.has_css?(".noRowsHeader")
+        puts "No Quote Records found"
+        sleep 3
+      else
+        isQuotePresent = 1
+        puts "Successfully see the quote records"
+      end
+    end
+    sleep 3
+    if isQuotePresent == 1
+      sleep 4
+      within all(".pbBody")[10] do
+        within(".list") do
+          puts first("tbody").all(".dataRow")[0].all("td")[1].first("a").text
+          #puts first("tbody").all(".dataRow")[0].all("td")[2].find("img")['title']
+          #puts first("tbody").all(".dataRow")[0].all("td")[3].find("img")['title']
+          sleep 3
+          if first("tbody").all(".dataRow")[0].all("td")[3].find("img")['title'] == 'Checked'
+            puts "Quote is syncing"
+          else
+            puts "Quote is not syncing"
+          end
+        end
+      end
+    end
+  rescue Exception => ex
+    putstr "Error occurred while syncing the quote renewal opportunity"
+    putstr_withScreen  ex.message
+  end
+end
+
 And(/^I select Partner Opportunity for Syncing$/) do
   begin
     sleep 5
-    
+
     sleep 3
     if page.has_css?(".pShowMore")
       first(".pShowMore").first("a").click
@@ -1795,12 +1838,12 @@ And(/^I select Partner Opportunity for Syncing$/) do
       tr.each do |row|
         sleep 3
         row.all(".dataCell").each do |sync|
-          #if sync.text == "#{arg1['NewPartnerOpp']}#{$Opp}"
+        #if sync.text == "#{arg1['NewPartnerOpp']}#{$Opp}"
           if sync.text == "#{$PO_name}"
-             sleep 3
-             row.first("input[type='checkbox']").click
-             puts "#{$PO_name} partner opportunity is selected"
-             break
+            sleep 3
+            row.first("input[type='checkbox']").click
+            puts "#{$PO_name} partner opportunity is selected"
+          break
           end
         end
       end

@@ -258,7 +258,7 @@ end
 And(/^I "([^"]*)" the quote$/) do |button|
   begin
     sleep 5
-    within("#topButtonRow") do
+    within("#bottomButtonRow") do
       click_on button
     end
     sleep 3
@@ -275,7 +275,7 @@ And(/^I "([^"]*)" the quote page$/) do |button|
     arg = getDetails "NonIncumbentPartnerPricingDisplay"
     isSyncing = 0
     sleep 3
-    if page.has_css?("#topButtonRow")
+    if page.has_css?("#bottomButtonRow")
       within("#topButtonRow") do
         puts "Successfully quote sync page"
         sleep 3
