@@ -6,7 +6,6 @@ Background: Login to the Application
      Given that I navigate to the CRM application
     Then I should land on CRM home page
 
-
 @CreateNewview
 Scenario: Rally Test Case ID: TC2930 : Verify to creation of New FocusCategory,Create new view and select that view. Verify message when selected view does not have any task
    When I click on "Success Tasks" link
@@ -325,3 +324,10 @@ Scenario: Rally Test Case ID: TC5205, TC5206, TC5207, TC5208, TC5209 : Verify Us
   Then I Verify the text present in the Search field
   And I deselect grid columns
   Then I Verify the text present in the Search field
+  
+  
+@Completed_Status_Verify
+Scenario: Rally Test Case ID: TC2930 : Verify to creation of New FocusCategory,Create new view and select that view. Verify message when selected view does not have any task
+   When I click on "Success Tasks" link
+   And I select All task from task list with Selected Task
+  

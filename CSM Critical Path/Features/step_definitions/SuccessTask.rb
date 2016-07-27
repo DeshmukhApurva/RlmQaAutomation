@@ -2543,3 +2543,59 @@ Then(/^I Verify the text present in the Search field$/) do
     putstr_withScreen ex.message
   end
 end
+
+And(/^I select All task from task list with Selected Task$/) do
+ 
+ begin
+    sleep 3
+    arg = getReference "Reference"
+    searchStr = "In Progress"
+    find(:xpath, "//*[contains(@id, 'selTasks')]").select arg["FCView"]
+    within(".bootstrap-table") do
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
+    end
+    sleep 5
+    #find(".pull-right.search").first("input").set('')
+    puts "Successfully selected the filter"
+    
+    within("#taskGrid") do
+    if first("tbody").all("tr").count > 0
+       first("tbody").first("tr").all("td")[3].first("a").click
+       sleep 2
+       puts " click on subject text"
+       end
+       end
+     within(:id, 'topButtonRow') do
+     click_button('Edit')
+     puts "Clicked on edit"
+     sleep 5
+        end
+     if find(:xpath, "//*[contains(@id,'tsk12')]").find(:xpath, 'option[3]').select_option
+       puts "Status Changed to Complete"
+      else
+       puts "Status Not Changed"
+      end
+     sleep 4   
+    within(:id, 'topButtonRow') do
+    click_button('Save')
+    puts "Clicked on Save"
+    sleep 5
+    end
+  status="Completed" 
+  status= first(:xpath,'//td[contains(text(),"Status")]/following-sibling::td/div').text
+      
+       if status.to_s == status.to_s
+         puts "Successfully see the #{status} task Completed Code"
+       else
+         putstr "Failed to see the #{status} task Completed Code"
+       end
+    rescue Exception => ex
+    putstr "Error occurred while selecting the task from task list"
+    putstr_withScreen ex.message
+  end
+ 
+end
+
+
