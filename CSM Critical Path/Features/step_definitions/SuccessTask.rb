@@ -1,6 +1,62 @@
 #All Success Tasks Specific Step Definitions
 #All Scenario mentioned in SuccessTasks.feature
 
+Then(/^I select the SP$/) do
+begin
+   sleep 5
+  within('.list') do
+    first(:link).click
+  end
+  sleep 10
+  rescue Exception => ex
+    putstr "Error occurred while opening a SuccessPlan"
+    putstr_withScreen ex.message
+  end
+end
+
+And(/^I select task$/) do
+  begin
+    sleep 5
+    puts "1"
+    within("#actionSpGrid") do
+   puts "2"
+    if first("tbody").all("tr").count > 0
+       first("tbody").first("tr").all("td")[2].first("a").click
+     puts "3"
+       sleep 2
+       puts " click on subject text"
+       end
+       end
+     within(:id, 'topButtonRow') do
+     click_button('Edit')
+     puts "Clicked on edit"
+     sleep 5
+        end
+     if find(:xpath, "//*[contains(@id,'tsk12')]").find(:xpath, 'option[3]').select_option
+       puts "Status Changed to Complete"
+      else
+       puts "Status Not Changed"
+      end
+     sleep 4   
+    within(:id, 'topButtonRow') do
+    click_button('Save')
+    puts "Clicked on Save"
+    sleep 5
+    end
+  status="Completed" 
+  status= first(:xpath,'//td[contains(text(),"Status")]/following-sibling::td/div').text
+      
+       if status.to_s == status.to_s
+         puts "Successfully see the #{status} task Completed Code"
+       else
+         putstr "Failed to see the #{status} task Completed Code"
+       end
+    rescue Exception => ex
+    putstr "Error occurred while selecting the task from task list"
+    putstr_withScreen ex.message
+   end
+ end   
+
 Then(/^create new Tasks$/) do
   begin
     sleep 6
