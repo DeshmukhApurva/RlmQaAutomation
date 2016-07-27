@@ -1,5 +1,6 @@
 #All Quote Sync - Step definitions
 #All Scenario mentioned in QuoteSyncing.feature
+require 'Win32API'
 
 And(/^I create new quote by OOB$/) do
   begin
@@ -44,6 +45,10 @@ end
 
 And(/^I update the fields on opportunity$/) do
   begin
+    sleep 5
+    setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
+    setCursorPos.Call(500,10)
+    sleep 5
     arg = getDetails "QuoteSyncOppFields"
 
     first(:xpath, "//*[contains(@name, 'edit')]").click
@@ -113,6 +118,8 @@ end
 
 And(/^I navigate to synced quote details page from opportunity$/) do
   begin
+    setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
+    setCursorPos.Call(500,10)
     sleep 5
     find(:xpath, '//td[text()="Synced Quote"]/following-sibling::td/div/a', :match => :prefer_exact).click
     puts "Navigated to quote details page"
@@ -233,6 +240,9 @@ end
 
 And(/^I update the fields on quote page$/) do
   begin
+
+    setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
+    setCursorPos.Call(500,10)
     arg = getDetails "QuoteSyncQuoteFields"
 
     first(:xpath, "//*[contains(@name, 'edit')]").click
@@ -406,6 +416,8 @@ end
 
 And(/^I update the fields on opportunity line item$/) do
   begin
+    setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
+    setCursorPos.Call(500,10)
     arg = getDetails "QuoteSyncOppFields"
 
     within(".opportunityLineItemBlock")do
@@ -494,6 +506,8 @@ end
 
 Then(/^I navigate to opportunity from product detail page$/) do
   begin
+    setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
+    setCursorPos.Call(500,10)
     find(:xpath, '//td[text()="Opportunity"]/following-sibling::td/div/a', :match => :prefer_exact).click
     sleep 5
     puts "Navigated opportunity page"
@@ -616,6 +630,8 @@ end
 
 And(/^I update the fields on quote line item$/) do
   begin
+    setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
+    setCursorPos.Call(500,10)
     arg = getDetails "QuoteSyncQuoteFields"
 
     within(".quoteLineItemBlock")do
@@ -702,6 +718,10 @@ end
 
 And(/^I navigate to opportunity from quote page$/) do
   begin
+    sleep 5
+    setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
+    setCursorPos.Call(500,10)
+    sleep 5
     find(:xpath, '//td[text()="Opportunity Name"]/following-sibling::td/div/a', :match => :prefer_exact).click
     sleep 7
     puts "Navigated Opportunity page"
@@ -820,6 +840,8 @@ end
 
 And(/^I navigate to Quote detail page from QLI details page$/) do
   begin
+    setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
+    setCursorPos.Call(500,10)
     find(:xpath, '//td[text()="Quote Name"]/following-sibling::td/div/a', :match => :prefer_exact).click
     puts "Navigated to quote details page"
     sleep 5
@@ -869,6 +891,8 @@ end
 
 And(/^I navigate to Opportunity from partner Opportunity page$/) do
   begin
+    setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
+    setCursorPos.Call(500,10)
     sleep 15
     find(:xpath, '//td[text()="Opportunity Name"]/following-sibling::td/div/a', :match => :prefer_exact).click
     sleep 10
@@ -1161,6 +1185,8 @@ end
 
 And(/^I navigate to Quote page from Opportunity page$/) do
   begin
+    setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
+    setCursorPos.Call(500,10)
     sleep 4
     arg = getDetails "QuoteSync"
     sleep 3
@@ -1366,9 +1392,9 @@ And(/^I select the "([^"]*)" opportunity option and fill the required fields$/) 
         all('input[type=text]')[2].set arg["TargetOpportunityCloseDate"]
         sleep 5
         find(".class_StageName").select arg["TargetOpportunityStage"]
-        sleep 5
+        sleep 7
         all('input[type=text]')[3].set arg2["TargetOpportunityOwnerID"]
-        sleep 5
+        sleep 7
         all('input[type=text]')[4].set arg["TargetOpportunityProbability"]
         sleep 5
       end
@@ -1843,7 +1869,9 @@ And(/^I select Partner Opportunity for Syncing$/) do
             sleep 3
             row.first("input[type='checkbox']").click
             puts "#{$PO_name} partner opportunity is selected"
+
           break
+
           end
         end
       end
