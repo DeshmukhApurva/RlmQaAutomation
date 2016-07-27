@@ -9,7 +9,8 @@ Background: Login to the Application
 @renValidateSCselection
 Scenario: Rally Test Case ID: TC3230,TC3231 : Merge Service Contracts - Validation Message (Select two Service Contracts),Merge Service Contracts - Validation Message (More than two Service Contracts)
 	When I click on "Service Contracts" link
-	And I click on Go
+	And I select All Service Contracts
+	And I click on the Go button if present
 	And I click on "Merge" button
 	Then I verify the validation message "Select two Service Contracts to merge."
 	And I select more than two Service Contract
