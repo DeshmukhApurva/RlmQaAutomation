@@ -167,8 +167,9 @@ Then(/^I verify the the grid scroll up and scroll down and pagination$/) do
     if rowcount >= 25
       sleep 5
       all("button[type='button']")[1].send_keys :page_down
+      
       sleep 5
-      all("button[type='button']")[1].send_keys :page_up
+      #all("button[type='button']")[1].send_keys :page_up
       sleep 5
     else
       puts "Scroll bar is disabled"

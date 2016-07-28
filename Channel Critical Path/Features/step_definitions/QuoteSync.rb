@@ -313,7 +313,7 @@ end
 
 Then(/^I verify quote fields copied to opportunity fields on opportunity page$/) do
   begin
-    XDo::Mouse.click(10, 10)
+    
     setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
     setCursorPos.Call(500,10)
 
