@@ -313,7 +313,7 @@ end
 
 Then(/^I verify quote fields copied to opportunity fields on opportunity page$/) do
   begin
-    
+
     setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
     setCursorPos.Call(500,10)
 
@@ -1862,7 +1862,6 @@ And(/^I select Partner Opportunity for Syncing$/) do
   begin
     sleep 5
 
-    sleep 3
     if page.has_css?(".pShowMore")
       first(".pShowMore").first("a").click
     end
@@ -1877,15 +1876,33 @@ And(/^I select Partner Opportunity for Syncing$/) do
             sleep 3
             row.first("input[type='checkbox']").click
             puts "#{$PO_name} partner opportunity is selected"
-
           break
-
           end
         end
       end
     end
   rescue Exception => ex
     puts "Error in selecting the #{$PO_name} Partner Opportunity"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I edit the PO name$/) do
+  begin
+    time = Time.new
+    POName = find(:xpath,'//label[contains(@for,"addRenewalPartnerForm")]/parent::th/following-sibling::td/div/input')[:value]
+    
+    POName = POName + time.min.to_s 
+    sleep 2
+    find(:xpath,'//label[contains(@for,"addRenewalPartnerForm")]/parent::th/following-sibling::td/div/input').click
+    sleep 2
+    find(:xpath,'//label[contains(@for,"addRenewalPartnerForm")]/parent::th/following-sibling::td/div/input').send_keys [:control, 'a'], :backspace
+    sleep 2    
+    find(:xpath,'//label[contains(@for,"addRenewalPartnerForm")]/parent::th/following-sibling::td/div/input').set POName  
+    puts "Successfully selected #{POName} from syncing drop down"
+    sleep 2
+  rescue Exception => ex
+    putstr "Error occurred while selecting Syncing option"
     putstr_withScreen  ex.message
   end
 end

@@ -627,6 +627,7 @@ Feature: All features related to Quote Syncing
     Then I should be able to see the partner opportunity account details
     And I navigate to Opportunity from partner Opportunity page
     And I click on "Add New Partner Opportunity" button
+    And I edit the PO name
     And I select the "Partner Accounts" from the accounts lookup list
     And I select the account as "Reseller" or "Distributor"
     And I select the "Incumbent" checkbox
