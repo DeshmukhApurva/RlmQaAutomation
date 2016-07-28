@@ -1,6 +1,32 @@
 #All MasterDetailCreation Specific Step Definitions
 #All Scenario mentioned in MasterDetailCreation.feature
 
+Then(/^create new contact with FirstName "(.*?)" and LastName "(.*?)" and email "(.*?)"$/) do |arg1,arg2,arg3|
+  begin
+    click_on "New"
+    sleep 2
+    puts "Creating a new Account"
+    sleep 4
+    fill_in "name_firstcon2",:with => arg1
+    puts "Filled value for First name"
+    sleep 4
+    fill_in "name_lastcon2",:with => arg2
+    puts "Filled value for Last name"
+    sleep 4
+    fill_in "con15",:with => arg3
+    puts "Filled value for Email" 
+   within(:id,"topButtonRow") do
+      click_on "Save"
+    end
+
+    puts "Account  successfully created For"+arg
+  rescue Exception => ex
+    puts "Error occurred while creating Account"
+    puts ex.message
+  end
+end
+
+
 Then(/^I create new Account with value "(.*?)"$/) do |arg|
   begin
 
@@ -384,106 +410,8 @@ Then(/^create new Tasks with Type "(.*?)" and its FCView "(.*?)" with SPPL "(.*?
   end
 end
 
-And(/^ I send email for SP Task to "(.*?)"$/) do |arg|
-  begin
-    sleep 5
-    first(".envEnabled").click
-    sleep 5
-    fill_in 'Subject', :with => 'Send Email'
-    arg = getReference "Reference"
-    fill_in 'To', :with => arg
-    within(:id, 'topButtonRow') do
-      click_button('Send')
-      puts "Email sent"
-      sleep 5
-    end
-    sleep 10
-    if all(".envEnabled").count > 0
-      puts "Email sent successfully"
-    else
-      puts "Email could not be sent"
-    end
-  rescue Exception =>ex
-    putstr "Error while sending task email from Success Plan"
-    putstr_withScreen ex.message
-  end
-end
 
-And(/^I send email for SP Task to "(.*?)"$/) do |arg|
-  begin
-    sleep 5
-    first(".envEnabled").click
-    sleep 5
-    fill_in 'Subject', :with => 'Send Email'
 
-    fill_in 'To', :with => arg
-    within(:id, 'topButtonRow') do
-      click_button('Send')
-      puts "Email sent"
-      sleep 5
-    end
-    sleep 10
-    if all(".envEnabled").count > 0
-      puts "Email sent successfully"
-    else
-      puts "Email could not be sent"
-    end
-  rescue Exception =>ex
-    putstr "Error while sending task email from Success Plan"
-    putstr_withScreen ex.message
-  end
-end
-And(/^I add the account details with value "(.*?)" for SP with "(.*?)"$/) do |arg,arg1|
-  begin
-   sleep 5
-   first(:xpath,"//span[text()='Edit']").click
-          puts "I click Edit"
-   
-    sleep 4
-    fill_in "Account",:with => arg
-    sleep 3
-    within("#topButtonRow") do
-      click_on "Save"
-    end
 
-  rescue Exception => ex
-    putstr "Error occurred while adding the account details"
-    putstr_withScreen ex.message
-  end
-end
 
-And (/^I verify widgets for SP Task with value "(.*?)"$/) do |arg|
-  begin
-    sleep 5
-    first(".detailEnabled").click
-    sleep 5
-
-    contactMatch = 0
-
-    begin
-      within(:id,'tbodyA') do
-        rows = all("tr")
-        rows.each do |row|
-          if row.text == arg
-          contactMatch = 1
-          break
-          end
-        end
-
-        sleep 5
-      end
-    rescue Exception =>ex1
-      puts "Verification issue"
-    end
-
-    if contactMatch > 0
-      puts "Contact Widget Verified"
-    else
-      puts "Contact Widget verification completed"
-    end
-  rescue Exception =>ex
-    putstr "Error while verifying Contact Widget from Success Plan"
-    putstr_withScreen ex.message
-  end
-end
 
