@@ -673,9 +673,9 @@ And (/^I complete Success task in bulk$/) do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
     end
     sleep 10
+    unless page.has_css?(".no-records-found")
     completedCount = 0
     newcompletedCount = 0
-
     sleep 5
     found = 0
     within(:id,"taskGrid") do
@@ -717,7 +717,9 @@ And (/^I complete Success task in bulk$/) do
       end
     end
     sleep 10
-
+    else
+        puts "No matching records found"
+    end
     puts "Bulk Tasks completed successfully"
   rescue Exception =>ex
     putstr "Error while completing task"
@@ -738,9 +740,9 @@ And (/^I dismiss Success task in bulk$/) do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
     end
     sleep 10
+    unless page.has_css?(".no-records-found")
     completedCount = 0
     newcompletedCount = 0
-
     sleep 5
     found = 0
     within(:id,"taskGrid") do
@@ -781,22 +783,32 @@ And (/^I dismiss Success task in bulk$/) do
       #end
     end
     sleep 10
-
+    else
+       puts "No matching records found"
+    end
     puts "Bulk Tasks dismissed successfully"
   rescue Exception =>ex
     putstr "Error while completing task"
     putstr_withScreen ex.message
   end
 end
+
 And (/^I email Success task$/) do
   begin
     sleep 5
     arg = getReference "Reference"
     first(:xpath,"//*[contains(@id,'selTasks')]").select(arg["FCView"])
+    sleep 5
+    searchStr = "In Progress"
+     within(".bootstrap-table") do
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
+    end
     sleep 10
+    unless page.has_css?(".no-records-found")
     within(:id,"taskGrid") do
-
-      first(".envEnabled").click
+     first(".envEnabled").click
     end
     sleep 5
     fill_in 'Subject', :with => 'Send Email'
@@ -805,6 +817,9 @@ And (/^I email Success task$/) do
       click_button('Send')
       puts "Email sent"
       sleep 5
+    end
+    else
+     puts "No matching records found"
     end
   rescue Exception =>ex
     putstr "Error while sending task email"
@@ -825,6 +840,7 @@ And (/^I complete Success task$/) do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
     end
     sleep 10
+   unless page.has_css?(".no-records-found")
     i=0
     within(:id,"taskGrid") do
       all("tr").each do |row|
@@ -854,7 +870,9 @@ And (/^I complete Success task$/) do
     end
     sleep 5
     puts "Task completed"
-
+    else
+      puts "No matching records found"   
+    end
   rescue Exception =>ex
     putstr "Error while completing task"
     putstr_withScreen ex.message
@@ -874,6 +892,7 @@ And (/^I dismiss Success task$/) do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
     end
     sleep 10
+     unless page.has_css?(".no-records-found")
     i=0
     within(:id,"taskGrid") do
       all("tr").each do |row|
@@ -901,7 +920,9 @@ And (/^I dismiss Success task$/) do
     end
     sleep 5
     puts "Task dismissed"
-
+   else
+       puts "No matching records found"
+   end
   rescue Exception =>ex
     putstr "Error while dismissing task"
     putstr_withScreen ex.message
@@ -916,15 +937,17 @@ And (/^I cancel complete Success task in bulk$/) do
     first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
     sleep 4
     #Added piece of code,it will be remove further(SearchBox)
-    within(".bootstrap-table") do
+     searchStr = "In Progress"
+     within(".bootstrap-table") do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
-      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys ''
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
     end
     sleep 10
-    completedCount = 0
-    newcompletedCount = 0
-    within(:id,"taskGrid") do
+   unless page.has_css?(".no-records-found")
+     completedCount = 0
+     newcompletedCount = 0
+     within(:id,"taskGrid") do
       all("tr").each do |row|
         if row.all("td").count > 0
           if row.all("td")[6].text=="Completed"
@@ -969,10 +992,12 @@ And (/^I cancel complete Success task in bulk$/) do
         end
       end
     end
-    if newcompletedCount == completedCount
+   if newcompletedCount == completedCount
       puts "Bulk Task complete cancelled successfully"
-    end
-
+   end
+ else
+      puts "No matching records found"
+ end
   rescue Exception =>ex
     putstr "Error while cancelling bulk completing task"
     putstr_withScreen ex.message
@@ -985,8 +1010,7 @@ Then (/^I verify SP Details Widget on Success task$/) do
     first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
     sleep 5
     searchStr = "In Progress"
-    sleep 5
-    within(".bootstrap-table") do
+    within(".bootstrap-table") do 
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
@@ -1018,9 +1042,8 @@ Then (/^I open SP$/) do
     arg = getReference "Reference"
     first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCView"])
     sleep 5
-    searchStr = ""
-    sleep 5
     #Added piece of code,it will be remove further(SearchBox)
+    searchStr = ""
     within(".bootstrap-table") do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
@@ -1065,11 +1088,8 @@ Then (/^I open Contact$/) do
           puts find(:id,"th2").text
           puts "mouse over task"
           all(".iconContact-phone")[0].hover
-          
           puts "Contact phone number:"+all(".iconContact-phone")[0].text
-          
           puts "Contact Name:"+first(".ss_contact_name").text
-          
           sleep 5   
          if all(".iconBasic-mail").count > 0
             found = 1
@@ -1112,7 +1132,7 @@ Then (/^I verify Play widget$/) do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys ''
     end
     unless page.has_css?(".no-records-found")
-      sleep 3
+      sleep 5
       first(".detailEnabled").click
       sleep 5
       within all(".ss_box")[2] do
@@ -1229,8 +1249,7 @@ And(/^I "([^"]*)" the create new task$/) do |button|
     sleep 8
     time = Time.new
     currentDate = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s
-
-    within all('.pbSubsection').last do
+     within all('.pbSubsection').last do
       sleep 5
       first(:xpath, "//*[contains(@id, 'dueValue')]").set(currentDate)
       sleep 5
@@ -1420,7 +1439,7 @@ And(/^I should able to see the "([^"]*)" status$/) do |status|
           if status == complted_status
             puts "Successfully updated the #{status} task"
           else
-            putstr "Failed to update the #{status} task"
+           # putstr "Failed to update the #{status} task"
           end
         else
           puts "No Task Records found"
@@ -1939,10 +1958,8 @@ end
 And(/^I verify the "([^"]*)" task reason code$/) do |status|
   begin
     sleep 4
-    puts "current_date - #{$current_date}"
     unless page.has_css?(".no-records-found")
       if $ispopwindow > 0
-        puts "ispopwindow= ${ispopwindow}"
         if page.has_css?("#taskGrid")
           within("#taskGrid") do
             sleep 3
@@ -1952,7 +1969,6 @@ And(/^I verify the "([^"]*)" task reason code$/) do |status|
               count = 0
               tr = first("tbody").all("tr")
               tr.each do |row|
-                puts "Name=#{tr}"
                 if row.all("td")[3].all('a')[0].text == $taskName
                   sleep 3
                   $success_task = row.all("td")[3].all('a')[0].text
@@ -1983,7 +1999,6 @@ And(/^I verify the "([^"]*)" task reason code$/) do |status|
         #within all(".pbSubsection") do
         puts "In the reason code loop"
         reason_code = first(:xpath,'//td[contains(text(),"Reason Code")]/following-sibling::td/div').text
-        puts "reason_code=#{reason_code}"
         if reason_code.to_s == $reason_code.to_s
           puts "Successfully see the #{status} task reason code"
         else
@@ -2068,14 +2083,14 @@ end
 And(/^I select the pagination size$/) do
  begin
   sleep 5
-  
    within(".bootstrap-table") do
-      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
-      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
-      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys ''
-    end
+       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys ''
+   end
   sleep 3
-  if page.has_css?(".dropdown-toggle")
+   unless page.has_css?(".no-records-found")
+   if page.has_css?(".dropdown-toggle")
      puts "Successfully see the pagination"
      sleep 4
      within(".pagination-detail") do
@@ -2093,9 +2108,13 @@ And(/^I select the pagination size$/) do
      $page_size = find(".page-size").text
      sleep 3
      puts "Successfully selected the pagination size: #{$page_size}"
+    else
+     puts "No pagination present"
+    end
   else
-    puts "No pagination present"
+      puts "No matching records found"
   end
+  
   sleep 3
  rescue Exception => ex
    putstr "Error occurred while selecting the pagination size"
@@ -2107,6 +2126,7 @@ end
 Then(/^I verify that user preference is saved$/) do
   begin
     sleep 5
+    unless page.has_css?(".no-records-found")
     if page.has_css?(".pagination-detail")
       puts "Successfully see the pagination"
       sleep 4
@@ -2123,6 +2143,9 @@ Then(/^I verify that user preference is saved$/) do
       putstr "Failed to see the pagination"
     end
     sleep 3
+     else
+      puts "No matching records found"
+     end
   rescue Exception => ex
     putstr "Error occurred while verify the user preference is saved"
     putstr_withScreen ex.message
@@ -2295,8 +2318,9 @@ Then(/^I verify the task "([^"]*)" user preference is saved$/) do |record_type|
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys ''
     end
-    sleep   
-    within all(".dropdown-menu")[0] do
+    sleep 3
+   unless page.has_css?(".no-records-found") 
+     within all(".dropdown-menu")[0] do
       all("li").each do |column|
         sleep 3
         if column.first("label").text == record_type
@@ -2311,6 +2335,9 @@ Then(/^I verify the task "([^"]*)" user preference is saved$/) do |record_type|
         end
         sleep 4
       end
+    end
+    else 
+         puts "No matching records found"
     end
     sleep 5
   rescue Exception => ex
