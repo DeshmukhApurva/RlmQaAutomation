@@ -1070,7 +1070,7 @@ Then (/^I open Contact$/) do
   begin
     arg = getReference "Reference"
     find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCWidgetView"])
-    sleep 5
+    sleep 100
     #Added piece of code,it will be remove further(SearchBox)
     within(".bootstrap-table") do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
