@@ -7,22 +7,22 @@ Background: Login to the Application
 
 @Createnewaccount
 Scenario: Rally Test Case ID:  : Renew: New account creation
-	When I click on the Renew "Account" grid tab
-	Then I create new Renew Account
+	When I click on the "Account" grid tab
+	Then I create new Account with value "QA Test" 
 	
 @CreateSuccessPlan
 Scenario: Rally Test Case ID:  : Renew: New Success Plan creation
-  When I click on the Renew "Success Plans" grid tab
+  When I click on the "Success Plans" grid tab
   Then I create new Success Plan 
   
 @CreateAsset
 Scenario: Rally Test Case ID:  : Renew: Asset creation
-  When I click on the Renew "Asset" grid tab
-  Then I create new Asset
+  When I click on the "Asset" grid tab
+  #Then I create new Asset
   
 @CreateServiceContracts
 Scenario: Rally Test Case ID:  : Renew: Asset creation
-  When I click on the Renew "Service Contracts" grid tab
+  When I click on the "Service Contracts" grid tab
   Then I create new Service Contracts
   
 # needs to add exact steps to create pricebook  
