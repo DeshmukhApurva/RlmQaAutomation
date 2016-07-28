@@ -1,6 +1,6 @@
 @CSMMasterDetailForUser 
 @CSMMasterDetailFeaturForUser 
-Feature: All features related to MasterDetail Creation for User  
+Feature: All features related to MasterDetail Creation for User 
 
 Background: Login to the Application 
 	Given that I navigate to the CRM application 
@@ -11,64 +11,29 @@ Scenario: Rally Test Case ID :TC2898 :  Creation Of Account
 	When I click on "Accounts" tab 
 	Then I create new Account with value "University of Canada" 
 	
-@CSM_FCCreation 
-Scenario: Rally Test Case ID : TC2814,TC2818,TC2822 : Creation of Focus Category 
-	When I click on "ServiceSource Setup" link 
-	And create a new FC with value "PES FC Task" 
-	
 @CSM_TaskTypeCreation 
 Scenario: Rally Test Case ID: TC2935 : Create Task 
 	When I click on "Success Tasks" link 
 	Then create new Tasks with Type "Call" and its FCView "PES FC Task" with SPPL "SPPL-0000005"  with Account "University of Canada" with status "In Progress"
 	
-	
-@CSM_PlayCreation 
-Scenario: Rally Test Case ID : TC2839,TC2840,TC2841 : Creation of Play 
-	When I click on "ServiceSource Setup" link 
-	And create a new Play with value "Play for Account" and "Account" and "High Risk Description" and its TaskName "PES Play Task" and its task type "Call" and AssignTo "CSM Manager" and Description "Enquiry of Play" and days "10" 
-	
-@CSM_PlaybookCreation 
-Scenario: Rally Test Case ID : TC2847,TC2848 : Creation of Playbook 
-	When I click on "ServiceSource Setup" link 
-	And create a new Playbook with value "PES PlayBook" with play "Play for Account" and its Short Description "High Risk Description" and Object "Account" and its TaskName "PES Play Task" and its task type "Call" and AssignTo "CSM Manager" and Description "Enquiry of Play" and days "10" 
-	
 @CSM_SuccessPlanCreation 
 Scenario: Rally Test Case ID: TC2895 : Create Success plan 
 	When I click on "Success Plans" tab 
-	Then I create a SuccessPlan with template "APT-000003" with Account "Action Machinery Co"
-	
-@CSM_FCWidgetViewCreation 
-Scenario:
-Rally Test Case ID : TC2814,TC2818,TC2822 : Creation of Focus Category for Widget 
-	When I click on "ServiceSource Setup" link 
-	And create a new FC with value "FC for Widgets" 
-	
-@CSM_FCGroupCreation 
-Scenario: Rally Test Case ID: TC2827 : Creation of Focus Category Group 
-	When I click on "ServiceSource Setup" link 
-	And create a new FC group with value "PES Indicator Group" 
-	
-@CSM_FCCategoryCreation 
-Scenario: Rally Test Case ID: TC2827 : Creation of Focus Category Group 
-	When I click on "ServiceSource Setup" link 
-	And create a new FC group with value "PES FCG Overview" 
+	Then I create a SuccessPlan with template "APT-000003" with Account "Action Machinery Co" 
 	
 @CSM_EmailSPTaskCreation 
 Scenario: Rally Test Case ID: TC2908 : Complete task from Success Plan 
-	When I click on "Success Plans" tab 
-	Then I select Success Plan
-	And I send email for SP Task to "Sydney Sheldon" 
+	When I click on "Contact" tab 
+	Then create new contact with FirstName "Sydney" and LastName "Sheldon" and email "xyz@comitydesigns.com"
+	 	
+@CSM_AdditionalAccountCreation 
+Scenario: Add one Account To Existing Account 
+	When I click on "Accounts" tab 
+	Then I create new Account with value "FURNITURE INC" 
 	
-@CSM_AdditionalAccountCreation
-Scenario: Add one Account To Existing Account
-    When I click on "Success Plans" tab
-	And I click on "Go!" button from "Success Plans" page
-    And I add the account details with value "FURNITURE INC" for SP with "University of Canada"
-    
-@CSM_AdditionalContactNameCreation
-Scenario: Add one Account To Existing Account
-    When I click on "Success Plans" tab
-	Then I select Success Plan
-	And I verify widgets for SP Task with value "Steve Gilbert"  
-    
+@CSM_AdditionalContactNameCreation 
+Scenario: Add one Account To Existing Account 
+	When I click on "Contact" tab 
+	Then create new contact with FirstName "Steve" and LastName "Gilbert" and email "xyz@comitydesigns.com"
+	
  	    
