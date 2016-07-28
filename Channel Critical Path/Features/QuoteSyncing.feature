@@ -81,6 +81,7 @@ Feature: All features related to Quote Syncing
   #	And I click on "Opportunity → Quote" link
   #	And I delete all mapping fields
   #-----------------------------------------------------------------------------------------------------------------------
+  
   @QuoteSyncing_CreateStandardQuote
   Scenario: Rally-ID:  : Quote Sync - Create quote from standard salesforce
     #When I log into "CHANNELNETOPS_EETEST4" details
@@ -245,7 +246,8 @@ Feature: All features related to Quote Syncing
     And I click on "Split Selected" button from renewal relationship page
     And I navigate to contributor opportunity
     When I click on "Manage Renewals" button
-    When I click on "Consolidate Opportunity" button
+    
+    And I click on "Consolidate Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Consolidate" button from renewal relationship page
 
@@ -295,7 +297,8 @@ Feature: All features related to Quote Syncing
     And I click on "Split Selected" button from renewal relationship page
     And I navigate to contributor opportunity
     When I click on "Manage Renewals" button
-    When I click on "Consolidate Opportunity" button
+    
+    And I click on "Consolidate Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Consolidate" button from renewal relationship page
 
@@ -354,7 +357,8 @@ Feature: All features related to Quote Syncing
     And I click on "Split Selected" button from renewal relationship page
     And I navigate to contributor opportunity
     When I click on "Manage Renewals" button
-    When I click on "Consolidate Opportunity" button
+    
+    And I click on "Consolidate Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Consolidate" button from renewal relationship page
 
@@ -408,7 +412,8 @@ Feature: All features related to Quote Syncing
     And I click on "Split Selected" button from renewal relationship page
     And I navigate to contributor opportunity
     When I click on "Manage Renewals" button
-    When I click on "Consolidate Opportunity" button
+    
+    And I click on "Consolidate Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Consolidate" button from renewal relationship page
 
@@ -463,7 +468,8 @@ Feature: All features related to Quote Syncing
     And I click on "Split Selected" button from renewal relationship page
     And I navigate to contributor opportunity
     When I click on "Manage Renewals" button
-    When I click on "Consolidate Opportunity" button
+    
+    And I click on "Consolidate Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Consolidate" button from renewal relationship page
 
@@ -513,7 +519,8 @@ Feature: All features related to Quote Syncing
     And I click on "Split Selected" button from renewal relationship page
     And I navigate to contributor opportunity
     When I click on "Manage Renewals" button
-    When I click on "Consolidate Opportunity" button
+    
+    And I click on "Consolidate Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Consolidate" button from renewal relationship page
 

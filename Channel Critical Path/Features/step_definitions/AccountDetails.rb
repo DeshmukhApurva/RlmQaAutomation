@@ -163,6 +163,7 @@ Then(/^I verify the the grid scroll up and scroll down and pagination$/) do
     end
     sleep 5
     rowcount = all(".ui-grid-row.ng-scope").count
+    puts "Total number of Rows #{rowcount}"
     if rowcount >= 25
       sleep 5
       all("button[type='button']")[1].send_keys :page_down

@@ -303,12 +303,14 @@ And(/^I navigate to "([^"]*)" folder$/) do |folder_name|
     edit_name = all(".x-menu-item")[1].text
     puts edit_name
     sleep 4
-    if page.has_content?("Portal Reports (Managed)")
+    if page.has_content?(folder_name)
       puts "Successfully see the #{folder_name} edit page"
     else
       putstr "Failed to see the #{folder_name} edit page"
     end
     sleep 4
+    all(".x-menu-item")[1].click
+    sleep 5
     choose "This folder is accessible only by the following users:"
     sleep 4
     within("#duel_sharedto") do

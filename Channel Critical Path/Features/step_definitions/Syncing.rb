@@ -147,7 +147,7 @@ Then (/^I choose the sync options$/) do
 				find(:xpath, ".//*[contains(@id, 'panelOpts')]").select("To Master Opportunity")
 				sleep 1
 				click_on('Save')
-				sleep 5
+				sleep 15
 				page.driver.browser.switch_to.window(main)
     rescue Exception=> ex
       	puts "Error in choosing the sync options"

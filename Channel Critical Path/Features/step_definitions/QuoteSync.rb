@@ -6,20 +6,23 @@ And(/^I create new quote by OOB$/) do
   begin
     time = Time.new
     quoteDateTime = time.hour.to_s + time.min.to_s + time.sec.to_s
-    sleep 4
+    sleep 2
     arg = getDetails "QuoteSyncCreateNewQuote"
-    sleep 7
+    sleep 2
     click_on "New Quote"
     sleep 5
     within all(".pbSubsection")[0] do
       first(:xpath, "//*[contains(@name, 'Name')]").send_keys arg["QuoteName"] + "_" + quoteDateTime
-      sleep 5
+      sleep 2
       fill_in "Partner Opportunity",:with => arg["PartnerOpportunity"]
-
+      sleep 2
+    end
+    within(".pbBottomButtons") do
       first(:xpath, "//*[contains(@name, 'save')]").click
       puts "New Quote created"
       sleep 5
     end
+
   rescue Exception => ex
     putstr "Error occurred while creating new quote"
     putstr_withScreen  ex.message
@@ -310,6 +313,10 @@ end
 
 Then(/^I verify quote fields copied to opportunity fields on opportunity page$/) do
   begin
+    XDo::Mouse.click(10, 10)
+    setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
+    setCursorPos.Call(500,10)
+
     $opp_auto_Custom_Text = find(:xpath, '//td[text()="Automation_Cust_Text"]/following-sibling::td/div', :match => :prefer_exact).text
     sleep 5
     puts "#{$opp_auto_Custom_Text}"
@@ -854,7 +861,8 @@ end
 
 And(/^I navigate to available quote$/) do
   begin
-
+    setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
+    setCursorPos.Call(500,10)
     sleep 3
     isQuotePresent = 0
     #within all(".listRelatedObject.quoteBlock") do
@@ -1534,6 +1542,9 @@ And(/^I create new quote for newly created PO$/) do
       sleep 1
       fill_in "Partner Opportunity",:with => $PO_name
       sleep 1
+    end
+
+    within(".pbBottomButtons") do
       first(:xpath, "//*[contains(@name, 'save')]").click
       puts "New Quote created"
       sleep 5
@@ -1776,7 +1787,7 @@ And(/^I open the "([^"]*)" Quote from Opp$/) do |isSyncing|
       sleep 4
       within all(".pbBody")[10] do
         within(".list") do
-          
+
           if first("tbody").all(".dataRow")[0].all("td")[1].first("a").text != ''
             puts first("tbody").all(".dataRow")[0].all("td")[1].first("a").text
           elsif first("tbody").all(".dataRow")[1].all("td")[1].first("a").text != ''

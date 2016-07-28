@@ -29,6 +29,7 @@ require 'Win32API'
 Given(/^that I navigate to the CRM application$/) do
   begin
     $userRole = ENV['UserRole']
+    puts "#{$userRole} is logged in"
     sleep 5
     setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
     setCursorPos.Call(500,10)
@@ -171,11 +172,11 @@ end
 And(/^I click on "(.*?)" button$/) do |button_text|
   begin
     sleep 3
-    within all(".pbButton ")[1] do
-      first(:button, button_text).click
-      sleep 5
-      puts "Successfully clicked #{button_text}"
-    end
+    #within all(".pbButton")[1] do
+    first(:button, button_text).click
+    sleep 5
+    puts "Successfully clicked #{button_text}"
+    #end
   rescue Exception => ex
     putstr "Error occurred while clicking on #{button_text}"
     putstr_withScreen  ex.message
@@ -436,7 +437,13 @@ When(/^I log into "(.*?)" details$/) do |arg1|
   begin
     sleep 5
     ENV['UserRole'] = arg1
+    puts ENV['UserRole']
+
     arg = getCredentialInfo
+
+    ENV['UserRole'] = $userRole
+    puts ENV['UserRole']
+
     visit arg["url"]
     sleep 4
     #puts "Login as " + ENV['UserRole']
@@ -461,7 +468,7 @@ When(/^I log into "(.*?)" details$/) do |arg1|
       page.driver.browser.manage.window.maximize
       sleep 6
     end
-    ENV['UserRole'] = $userRole
+
   rescue Exception => ex
     puts "Error while entering credentials"
     puts ex.message

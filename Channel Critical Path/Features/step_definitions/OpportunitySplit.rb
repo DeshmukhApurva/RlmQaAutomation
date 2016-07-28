@@ -363,6 +363,7 @@ And(/^I open existing opportunity$/) do
     result = false
     oppName = arg["SplitOpportunityName"].to_s
     oppInitial = oppName[0]
+    puts oppInitial
     click_on oppInitial
     #find(:xpath, '//a/span[text()="#{oppInitial}"]').click
     sleep 5

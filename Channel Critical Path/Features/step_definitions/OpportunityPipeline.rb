@@ -45,7 +45,6 @@ end
 And(/^I verify "(.*?)" filter on Opportunity Pipeline chart$/) do |arg|
   begin
     sleep 2
-
     arg1 = getReference arg
     arg2 = getDetails arg
     index = arg2["filterIndex"]
