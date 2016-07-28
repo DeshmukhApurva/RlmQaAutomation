@@ -330,7 +330,7 @@ Scenario: Rally Test Case ID: TC2930 : Verify to creation of New FocusCategory,C
    When I click on "Success Tasks" link
    And I select All task from task list with Selected Task
    
-@Verify_Complete_Dissmiss_Status 
+#@Verify_Complete_Dissmiss_Status 
 Scenario: Rally Test Case ID: TC5197: Complete Status Manually 
 	When I click on "Success Plans" tab 
 	Then I select the SP 
