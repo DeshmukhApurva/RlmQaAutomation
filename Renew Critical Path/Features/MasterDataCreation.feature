@@ -7,34 +7,44 @@ Background: Login to the Application
 
 @Createnewaccount
 Scenario: Rally Test Case ID:  : Renew: New account creation
-	When I click on the "Account" grid tab
-	Then I create new Account with value "QA Test" 
-	
-@CreateSuccessPlan
-Scenario: Rally Test Case ID:  : Renew: New Success Plan creation
-  When I click on the "Success Plans" grid tab
-  Then I create new Success Plan 
+   	When I click on "Account" tab
+	Then I create new Renew Account with value "PE Wealth"
+
+#@SuccessPlanCreation 
+#Scenario: Rally Test Case ID: TC2895 : Create Success plan 
+#	When I click on "Success Plans" tab 
+#	Then I create a SuccessPlan with template "APT-000019" with Account "PE Wealth"
+
+@CreateAssetsRef
+Scenario: Rally Test Case ID:  : Renew: Asset creation
+  When I click on "Asset" tab
+  Then I create new Asset with Name "PEW Asset" and its Status "Installed" 
   
 @CreateAsset
 Scenario: Rally Test Case ID:  : Renew: Asset creation
-  When I click on the "Asset" grid tab
-  #Then I create new Asset
+  When I click on "Asset" tab
+  Then I create new Asset with Name "CA_CP_Asset" and its Product "Product A" 
+  When I click on "Asset" tab 
+  Then I create new Asset with Name "PESAsset" and its Product "Product A"
   
 @CreateServiceContracts
 Scenario: Rally Test Case ID:  : Renew: Asset creation
-  When I click on the "Service Contracts" grid tab
-  Then I create new Service Contracts
-  
-# needs to add exact steps to create pricebook  
+  When I click on "Service Contracts" tab
+  Then I create new Service Contracts with Name "PEW SC" with Account "PE Wealth" 
+		
+@CreateSC
+Scenario: Rally Test Case ID:  : Renew: Service Contract creation
+  When I click on "Service Contracts" tab
+  Then I create new Service Contracts with Name "RenewNetOpsSCTest" with Account "QA Test" 
+
+@ServiceContractsCreation
+ Scenario: Rally Test Case ID:  : Renew: Service Contract creation
+  When I click on "Service Contracts" tab
+  Then I create new Service Contracts with Name "PEW SC" with Account "QA Test" with Product "Product B" with ContractName "SourceServiceContract" 
+ 
 @CreateCustomPriceBook
-Scenario: Rally Test Case ID:  : Renew: Asset creation
+Scenario: Rally Test Case ID:  : Renew: CustomPriceBook creation
   Then I create new custom pricebook
-  
-  
 
+ 
   
-  
-
-	
-	
-
