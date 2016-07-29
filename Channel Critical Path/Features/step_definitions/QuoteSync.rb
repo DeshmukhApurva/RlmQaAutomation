@@ -1253,7 +1253,6 @@ And(/^I stop the syncing of the quote$/) do
         sleep 3
       else
         isQuotePresent = 1
-
         puts "Successfully see the quote records"
       end
     end
@@ -1891,18 +1890,82 @@ And(/^I edit the PO name$/) do
   begin
     time = Time.new
     POName = find(:xpath,'//label[contains(@for,"addRenewalPartnerForm")]/parent::th/following-sibling::td/div/input')[:value]
-    
-    POName = POName + time.min.to_s 
+
+    POName = POName + time.min.to_s
     sleep 2
     find(:xpath,'//label[contains(@for,"addRenewalPartnerForm")]/parent::th/following-sibling::td/div/input').click
     sleep 2
     find(:xpath,'//label[contains(@for,"addRenewalPartnerForm")]/parent::th/following-sibling::td/div/input').send_keys [:control, 'a'], :backspace
-    sleep 2    
-    find(:xpath,'//label[contains(@for,"addRenewalPartnerForm")]/parent::th/following-sibling::td/div/input').set POName  
+    sleep 2
+    find(:xpath,'//label[contains(@for,"addRenewalPartnerForm")]/parent::th/following-sibling::td/div/input').set POName
     puts "Successfully selected #{POName} from syncing drop down"
     sleep 2
   rescue Exception => ex
     putstr "Error occurred while selecting Syncing option"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I sync the quotes from Quote Page$/) do
+  begin
+    sleep 4
+    if page.has_css?("#topButtonRow")
+      within("#topButtonRow") do
+        puts "Successfully see quote sync page"
+        sleep 3
+        if page.has_css?(".syncStart")
+          sleep 3
+          click_on "Start Sync"
+          sleep 6
+          puts "Successfully start the syncing quote"
+        else
+          click_on "Stop Sync"
+          sleep 6
+          click_on "Start Sync"
+          sleep 4
+          puts "Successfully start the syncing quote"
+        end
+      end
+    else
+      puts "Faield to see the quote sync page"
+    end
+
+    sleep 3
+    if page.has_xpath?('//input[contains(@title,"Continue")]')
+      click_on 'Continue'
+    else
+      puts "Failed to see the Continue button"
+    end
+
+    sleep 4
+    if page.has_css?("#syncQuoteOverlay_buttons")
+      puts "Successfully see the sync quote overlay"
+      click_on 'Sync'
+    #end
+    else
+      puts "Failed to see the sync quote overlay"
+    end
+
+    sleep 4
+    if page.has_css?("#syncQuoteOverlayContent")
+      puts "Sync completed"
+      sleep 3
+      click_on 'Done'
+    else
+      puts "Sync not completed"
+    end
+
+    sleep 3
+    if page.has_css?(".pageDescription")
+      within("#topButtonRow") do
+        puts "Successfully completed the quote syncing"
+      end
+    else
+      puts "Faield to complete the quote syncing"
+    end
+    sleep 5
+  rescue Exception => ex
+    putstr "Error occurred while syncing the quote renewal opportunity"
     putstr_withScreen  ex.message
   end
 end

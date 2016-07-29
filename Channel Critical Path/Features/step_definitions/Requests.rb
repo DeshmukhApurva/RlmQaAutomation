@@ -64,7 +64,7 @@ And(/^I add the "([^"]*)" attachment file$/) do |url|
   begin
     sleep 4
     file_path = "#{Dir.pwd}/#{url}"
-    sleep 10
+    sleep 2
     page.attach_file("btn-file-upload", file_path)
     sleep 10
     puts "Successfully attached the file"
@@ -823,9 +823,10 @@ And(/^I click on the "([^"]*)" link$/) do |request|
       sleep 3
       within all(".ui-grid-canvas")[1] do
         within all("div[role='gridcell']")[1] do
-          sleep 3
+          sleep 5
           request_number = first("div").first("a").text
-          sleep 3
+          puts request_number
+          sleep 10
           first("div").first("a").click
         end
       end
