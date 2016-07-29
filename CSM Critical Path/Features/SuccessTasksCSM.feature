@@ -317,3 +317,14 @@ Scenario: Rally Test Case ID: TC5222, TC5223, TC5224, TC5225, TC5226 : Verify Us
   And I deselect grid columns
   Then I Verify the text present in the Search field
   
+@CSM_Completed_Status_Verify
+Scenario: Rally Test Case ID: TC5597 : Verify to creation of New FocusCategory,Create new view and select that view. Verify message when selected view does not have any task
+   When I click on "Success Tasks" link
+   And I select All task from task list with Selected Task
+   
+@CSM_Verify_Complete_Dismiss_Status 
+Scenario: Rally Test Case ID: TC5598: Complete Status Manually 
+	When I click on "Success Plans" tab 
+	Then I select the SP 
+	And I select task  
+  
