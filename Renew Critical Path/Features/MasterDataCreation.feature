@@ -124,6 +124,7 @@ Scenario: Renew: add products
 Scenario: Renew: assign pricebook to products
  When I click on "Price Books" tab
  Then I click on  pricebook "Test PriceBook" 
+ Then testing 
  Then I add "Product A", "Product B", "Product c", "Product D" , "Installation: Industrial - High" and "GenWatt Diesel 10kW"
  
 
