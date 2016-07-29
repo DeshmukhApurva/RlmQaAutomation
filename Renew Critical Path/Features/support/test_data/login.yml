@@ -49,3 +49,7 @@ RENEWNETOPS_EETEST4:
  pwd: "passw0rd1"
  Instance: "RenewNetOpEEtest4"
 
+SYSTEMADMIN_EETEST4:
+  userName: "devuser-ee4@comitydesigns.com"
+  pwd: "passw0rd"
+  Instance: "RenewNetOpEEtest4"
