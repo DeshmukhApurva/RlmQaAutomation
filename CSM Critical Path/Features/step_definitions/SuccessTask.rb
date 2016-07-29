@@ -6,6 +6,7 @@ begin
    sleep 5
   within('.list') do
     first(:link).click
+    puts "I Click on the Success Plan "
   end
   sleep 10
   rescue Exception => ex
@@ -17,19 +18,16 @@ end
 And(/^I select task$/) do
   begin
     sleep 5
-    puts "1"
+  unless page.has_css?(".no-records-found")
     within("#actionSpGrid") do
-   puts "2"
     if first("tbody").all("tr").count > 0
        first("tbody").first("tr").all("td")[2].first("a").click
-     puts "3"
-       sleep 2
-       puts " click on subject text"
-       end
-       end
+       sleep 5
+     Puts "Clicked on the Subject"
+     end
+     end
      within(:id, 'topButtonRow') do
      click_button('Edit')
-     puts "Clicked on edit"
      sleep 5
         end
      if find(:xpath, "//*[contains(@id,'tsk12')]").find(:xpath, 'option[3]').select_option
@@ -43,14 +41,17 @@ And(/^I select task$/) do
     puts "Clicked on Save"
     sleep 5
     end
-  status="Completed" 
-  status= first(:xpath,'//td[contains(text(),"Status")]/following-sibling::td/div').text
-      
+      status="Completed" 
+      status= first(:xpath,'//td[contains(text(),"Status")]/following-sibling::td/div').text
        if status.to_s == status.to_s
          puts "Successfully see the #{status} task Completed Code"
        else
          putstr "Failed to see the #{status} task Completed Code"
        end
+     else
+       puts "no-records-found"
+       end  
+       
     rescue Exception => ex
     putstr "Error occurred while selecting the task from task list"
     putstr_withScreen ex.message
@@ -380,8 +381,7 @@ end
 
 Then /^verify current phase$/ do
   begin
-
-    within all('.pbSubsection')[0] do
+   within all('.pbSubsection')[0] do
       rows = all("tr")
       SP1 = rows[2].text
       puts SP1
@@ -1049,7 +1049,7 @@ Then (/^I open SP$/) do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
     end
-    sleep 5
+    sleep 10
     unless page.has_css?(".no-records-found")
       sleep 3
       first(".detailEnabled").click
@@ -1070,14 +1070,15 @@ Then (/^I open Contact$/) do
   begin
     arg = getReference "Reference"
     find(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCWidgetView"])
-    sleep 100
+    sleep 5
     #Added piece of code,it will be remove further(SearchBox)
+    searchStr = "Completed"
     within(".bootstrap-table") do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
-      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys ''
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
     end
-    sleep 5
+    sleep 10
     unless page.has_css?(".no-records-found")
       sleep 3
       first(".detailEnabled").click
@@ -1090,7 +1091,7 @@ Then (/^I open Contact$/) do
           all(".iconContact-phone")[0].hover
           puts "Contact phone number:"+all(".iconContact-phone")[0].text
           puts "Contact Name:"+first(".ss_contact_name").text
-          sleep 5   
+          sleep 10   
          if all(".iconBasic-mail").count > 0
             found = 1
             sleep 5
@@ -1099,7 +1100,7 @@ Then (/^I open Contact$/) do
           end
         end
       end
-      sleep 2
+      sleep 5
       if found > 0
         fill_in 'Subject', :with => 'Send Email'
         sleep 5
@@ -1131,8 +1132,8 @@ Then (/^I verify Play widget$/) do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys ''
     end
+    sleep 10
     unless page.has_css?(".no-records-found")
-      sleep 5
       first(".detailEnabled").click
       sleep 5
       within all(".ss_box")[2] do
@@ -1199,7 +1200,7 @@ And(/^I select the tasks$/) do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
     end
-    sleep 5
+    sleep 10
     unless page.has_css?(".no-records-found")
       within("#taskGrid") do
         if first("tbody").all("tr").count > 0
@@ -1760,7 +1761,7 @@ And(/^I open the "([^"]*)" task pop up window$/) do |task|
   begin
     sleep 4
     $ispopwindow = 0
-    sleep 5
+    sleep 10
     unless page.has_css?(".no-records-found")
       within("#taskGrid") do
         sleep 3
@@ -1801,7 +1802,7 @@ end
 
 And(/^I verify the "([^"]*)" checkbox state$/) do |status|
   begin
-    sleep 4
+    sleep 7
     unless page.has_css?(".no-records-found")
       within("#taskGrid") do
         sleep 3
@@ -2022,7 +2023,7 @@ And(/^I select the "([^"]*)" value from complete task$/) do |field|
   begin
     sleep 3
     arg = getDetails "CreateTaskFields"
-    sleep 4
+    sleep 6
     unless page.has_css?(".no-records-found")
       if $ispopwindow > 0
         $reason_code = "C - Support Issue - SPI"
@@ -2088,7 +2089,7 @@ And(/^I select the pagination size$/) do
        find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
        find(:xpath, "//*[contains(@class, 'form-control')]").send_keys ''
    end
-  sleep 3
+  sleep 6
    unless page.has_css?(".no-records-found")
    if page.has_css?(".dropdown-toggle")
      puts "Successfully see the pagination"
@@ -2616,7 +2617,6 @@ Then(/^I Verify the text present in the Search field$/) do
 end
 
 And(/^I select All task from task list with Selected Task$/) do
- 
  begin
     sleep 3
     arg = getReference "Reference"
@@ -2628,45 +2628,42 @@ And(/^I select All task from task list with Selected Task$/) do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
     end
     sleep 5
-    #find(".pull-right.search").first("input").set('')
-    puts "Successfully selected the filter"
-    
+    unless page.has_css?(".no-records-found")
     within("#taskGrid") do
     if first("tbody").all("tr").count > 0
        first("tbody").first("tr").all("td")[3].first("a").click
-       sleep 2
-       puts " click on subject text"
-       end
-       end
+        sleep 2
+        puts " click on subject text"
+     end
+     end
      within(:id, 'topButtonRow') do
      click_button('Edit')
      puts "Clicked on edit"
-     sleep 5
-        end
+       sleep 5
+       end
      if find(:xpath, "//*[contains(@id,'tsk12')]").find(:xpath, 'option[3]').select_option
        puts "Status Changed to Complete"
-      else
+     else
        puts "Status Not Changed"
-      end
-     sleep 4   
+     end
+       sleep 4   
     within(:id, 'topButtonRow') do
     click_button('Save')
     puts "Clicked on Save"
     sleep 5
     end
-  status="Completed" 
-  status= first(:xpath,'//td[contains(text(),"Status")]/following-sibling::td/div').text
-      
-       if status.to_s == status.to_s
+    status="Completed" 
+    status= first(:xpath,'//td[contains(text(),"Status")]/following-sibling::td/div').text
+    if status.to_s == status.to_s
          puts "Successfully see the #{status} task Completed Code"
-       else
+      else
          putstr "Failed to see the #{status} task Completed Code"
-       end
+      end
+    else
+         puts "Records not Found"
+    end   
     rescue Exception => ex
     putstr "Error occurred while selecting the task from task list"
     putstr_withScreen ex.message
   end
- 
 end
-
-
