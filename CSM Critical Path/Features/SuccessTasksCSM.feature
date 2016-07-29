@@ -326,5 +326,5 @@ Scenario: Rally Test Case ID: TC5597 : Verify to creation of New FocusCategory,C
 Scenario: Rally Test Case ID: TC5598: Complete Status Manually 
 	When I click on "Success Plans" tab 
 	Then I select the SP 
-	And I select task  
+	#And I select task  
   

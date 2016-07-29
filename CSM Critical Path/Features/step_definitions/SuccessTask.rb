@@ -15,6 +15,7 @@ begin
   end
 end
 
+
 And(/^I select task$/) do
   begin
     sleep 5
@@ -36,10 +37,10 @@ And(/^I select task$/) do
        puts "Status Not Changed"
       end
      sleep 4   
-    within(:id, 'topButtonRow') do
-    click_button('Save')
-    puts "Clicked on Save"
-    sleep 5
+     within(:id, 'topButtonRow') do
+     click_button('Save')
+     puts "Clicked on Save"
+     sleep 5
     end
       status="Completed" 
       status= first(:xpath,'//td[contains(text(),"Status")]/following-sibling::td/div').text
@@ -48,9 +49,9 @@ And(/^I select task$/) do
        else
          putstr "Failed to see the #{status} task Completed Code"
        end
-     else
-       puts "no-records-found"
-       end  
+    else
+       puts " no records found "
+    end  
        
     rescue Exception => ex
     putstr "Error occurred while selecting the task from task list"
@@ -1373,6 +1374,8 @@ And(/^I "([^"]*)" the complete success task$/) do |button|
     arg = getDetails "Taskdetails"
     arg2 = getDetails "CreateTaskFields"
     sleep 4
+   unless page.has_css?(".no-records-found")
+     sleep 2
     unless page.has_xpath?("//input[@disabled='disabled']")
       sleep 5
       find(:xpath, "//*[contains(@id, 'riskReasonValue')]").find(:xpath, 'option[2]').select_option
@@ -1396,6 +1399,10 @@ And(/^I "([^"]*)" the complete success task$/) do |button|
       puts "Tasks are disabled mode"
     end
     sleep 5
+    else
+        puts"Records not found"
+    end
+    
   rescue Exception => ex
     putstr "Error occurred while #{button} the complete task"
     putstr_withScreen ex.message
@@ -1405,6 +1412,8 @@ end
 And(/^I "([^"]*)" the dismiss success task$/) do |button|
   begin
     sleep 5
+    unless page.has_css?(".no-records-found")
+    sleep 2
     unless page.has_xpath?("//input[@disabled='disabled']")
       sleep 5
       first(:xpath, "//*[contains(@id, 'riskReasonValue')]").find(:xpath, 'option[2]').select_option
@@ -1424,6 +1433,10 @@ And(/^I "([^"]*)" the dismiss success task$/) do |button|
     else
       puts "Tasks are disabled mode"
     end
+    else
+      puts"Records not found"
+    end  
+    
   rescue Exception => ex
     putstr "Error occurred while #{button} the dismiss task"
     putstr_withScreen ex.message
@@ -1459,6 +1472,8 @@ end
 And(/^I click on "([^"]*)" task button$/) do |button|
   begin
     sleep 4
+     unless page.has_css?(".no-records-found")
+       
     unless page.has_xpath?("//input[@disabled='disabled']")
       sleep 3
       click_on button
@@ -1467,6 +1482,9 @@ And(/^I click on "([^"]*)" task button$/) do |button|
     else
       puts "Tasks are disabled mode"
     end
+    else
+       puts "Records not found"
+    end 
   rescue Exception => ex
     putstr "Error occurred while clicking the #{button} button"
     putstr_withScreen  ex.message
