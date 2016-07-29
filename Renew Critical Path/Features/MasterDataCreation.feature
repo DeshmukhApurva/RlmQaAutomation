@@ -9,7 +9,9 @@ Background: Login to the Application
 Scenario: Rally Test Case ID:  : Renew: New account creation
    	When I click on "Account" tab
 	Then I create new Renew Account with value "PE Wealth"
-
+	When I click on "Account" tab
+	Then I create new Renew Account with value "QA Test"
+	
 #@SuccessPlanCreation 
 #Scenario: Rally Test Case ID: : Create Success plan 
 #	When I click on "Success Plans" tab 
