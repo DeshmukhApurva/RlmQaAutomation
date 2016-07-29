@@ -89,6 +89,43 @@ Scenario: Renew: Generate Opp
  When I click on "Opportunities" tab
  Then I select opportunity with its Product "Product B"
  
+ @Pricebooks
+Scenario: Renew: new pricebook
+ When I click on "Price Books" tab
+ # select standard pricebook checkbox
+ Then I add new pricebook with the name "Standard Price Book" 
+ When I click on "Price Books" tab
+ Then I add new pricebook with the name "Test PriceBook"
+ 
+@addProducts
+Scenario: Renew: add products
+ When I click on "Products" tab
+ Then click on products views
+ And click on "Add"
+ Then add the product "Product A"
+ When I click on "Products" tab
+ Then click on products views
+ And click on "Add"
+ Then add the product "Product B"
+ Then click on products views
+ And click on "Add"
+ Then add the product "Product C"
+ Then click on products views
+ And click on "Add"
+ Then add the product "Product D"
+ Then click on products views
+ And click on "Add"
+ Then add the product "GenWatt Diesel 10kW"
+ Then click on products views
+ And click on "Add"
+ Then add the product "Installation: Industrial - High"
+ 
+@assignPricebooktoProduct
+Scenario: Renew: assign pricebook to products
+ When I click on "Price Books" tab
+ Then I click on  pricebook "Test PriceBook" 
+ Then I add "Product A", "Product B", "Product c", "Product D" , "Installation: Industrial - High" and "GenWatt Diesel 10kW"
+ 
 
  
   
