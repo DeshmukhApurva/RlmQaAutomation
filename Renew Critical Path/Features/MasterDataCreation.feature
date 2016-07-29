@@ -9,6 +9,11 @@ Background: Login to the Application
 Scenario: Rally Test Case ID:  : Renew: New account creation
    	When I click on "Account" tab
 	Then I create new Renew Account with value "PE Wealth"
+
+@Createnewaccount
+Scenario: Rally Test Case ID:  : Renew: New account creation
+   	When I click on "Account" tab
+	Then I create new Renew Account with value "PE Wealth"
 	When I click on "Account" tab
 	Then I create new Renew Account with value "QA Test"
 	
@@ -57,7 +62,7 @@ Scenario: Renew: Add on Renewals creation
   When I click on "Opportunities" tab
   Then I create new opportunity with Name "SourceOpportunity" with Account "QA Test"
   When I click on "Opportunities" tab
-  Then I select with its Product "Product B"
+  Then I select opportunity with its Product "Product B"
   When I click on "Service Contracts" tab
   Then I create new Service Contracts with Name "RenewNetOpsService" with Account "QA Test"
   When I click on "Service Contracts" tab
@@ -67,11 +72,22 @@ Scenario: Renew: Add on Renewals creation
 #  Then I create new opportunity with Name "RenewNetOpsService" with Account "QA Test"
 #  Then I add opportunity product "Product C"
 
-@GenerateOpp
+@GenerateOppCreation
 Scenario: Renew: Generate Opp
  When I click on "Opportunities" tab
  Then I create new opportunity with Name "PesSrcOpp" with Account "QA Test"
- Then I add opportunity products
+ When I click on "Opportunities" tab
+ Then I select opportunity with its Product "Product B"
+ When I click on "Service Contracts" tab
+ Then I create new Service Contracts with Name "SourceServiceContract" with Account "QA Test"
+ When I click on "Service Contracts" tab
+ And I select contract and generate Opportunity with Name "PesSrcOpp" with Account "QA Test"
+ When I click on "Opportunities" tab
+ Then I create new opportunity with Name "CreateOppfromOpp" with Account "QA Test"
+ When I click on "Opportunities" tab
+ Then I create new opportunity with Name "Split_Target_Opportunity_RN" with Account "QA Test"
+ When I click on "Opportunities" tab
+ Then I select opportunity with its Product "Product B"
  
 
  
