@@ -1098,7 +1098,7 @@ And(/^I sync the quotes from Quote$/) do
   end
 end
 
-And(/^I select and sync the quote which is not syncing from Opp$/) do
+And(/^I open quote which is not syncing from Opp$/) do
   begin
     sleep 4
     arg = getDetails "QuoteSync"
@@ -1136,54 +1136,6 @@ And(/^I select and sync the quote which is not syncing from Opp$/) do
         end
       end
     end
-    sleep 4
-    if page.has_css?("#topButtonRow")
-      within("#topButtonRow") do
-        puts "Successfully see quote sync page"
-        sleep 3
-        if page.has_css?(".syncStart")
-          sleep 3
-          click_on arg["StartSync"]
-          sleep 6
-          puts "Successfully start the syncing quote"
-        else
-          click_on arg["StopSync"]
-          sleep 6
-          click_on arg["StartSync"]
-          sleep 4
-          puts "Successfully start the syncing quote"
-        end
-      end
-    else
-      puts "Faield to see the quote sync page"
-    end
-    sleep 4
-    if page.has_css?("#syncQuoteOverlay_buttons")
-      puts "Successfully see the sync quote overlay"
-      #within("#bottomButtonRow") do
-      click_on 'Sync'
-    #end
-    else
-      puts "Failed to see the sync quote overlay"
-    end
-    sleep 4
-    if page.has_css?("#syncQuoteOverlayContent")
-      puts "Sync completed"
-      sleep 3
-      click_on 'Done'
-    else
-      puts "Sync not completed"
-    end
-    sleep 3
-    if page.has_css?(".pageDescription")
-      within("#topButtonRow") do
-        puts "Successfully completed the quote syncing"
-      end
-    else
-      puts "Faield to complete the quote syncing"
-    end
-    sleep 4
-    find(:xpath, "//td[text()='Opportunity Name']").find(:xpath, "following-sibling::td/div/a").click
     sleep 5
   rescue Exception => ex
     putstr "Error occurred while syncing the quote renewal opportunity"

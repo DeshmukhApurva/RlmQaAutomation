@@ -591,7 +591,8 @@ Feature: All features related to Quote Syncing
     And I delete the product from "Quote" LineItem
     And I sync the quotes from Quote Page
     And I navigate to opportunity from quote page
-    And I select and sync the quote which is not syncing from Opp
+    And I open the "Not Syncing" Quote from Opp
+    And I sync the quotes from Quote Page
     And I update the fields on quote line item
     And I navigate to Quote detail page from QLI details page
     And I navigate to opportunity from quote page
