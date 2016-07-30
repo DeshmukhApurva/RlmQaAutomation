@@ -100,15 +100,15 @@ Scenario: Renew: Generate Opp
 	When I click on "Opportunities" tab 
 	Then I select opportunity with its Product "Product B" 
 	
-@StandardPricebooks 
-Scenario: Renew: new pricebook 
-	When I click on "All Tabs" tab 
-	Then I click on Price Books with the name "Standard Price Book" 
+#@StandardPricebooks 
+#Scenario: Renew: new pricebook 
+#	When I click on "All Tabs" tab 
+#	Then I click on Price Books with the name "Temp Standard Price Book" 
 		
 @CustomPricebooks
 Scenario: Renew: new pricebook 
-    When I click on the "All Tabs" grid tab 
-	Then I click on Price Books with the name "Test PriceBook" 
+    When I click on "All Tabs" tab  
+	Then I click on Price Books and create pricebook with the name "Test PriceBook" 
 	
 	
 @addProducts 

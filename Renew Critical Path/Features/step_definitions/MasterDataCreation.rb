@@ -26,7 +26,7 @@ When(/^I click on the "(.*?)" grid tab$/) do |tab|
   end
 end
 
- Then(/^I click on Price Books with the name "(.*?)"$/) do |arg|
+ Then(/^I click on Price Books and create pricebook with the name "(.*?)"$/) do |arg1|
    begin
      sleep 8
      click_on "Price Books"
@@ -36,12 +36,19 @@ end
      click_on "New"
      puts "Creating Standard Price Book"
      sleep 5
-     fill_in "Price Book Name",:with=>arg
+     fill_in "Price Book Name",:with=>arg1
       sleep 5
       
         find('input[type=checkbox]').click
+     #topButtonRow
+     within(".pbBottomButtons") do
+           first(:xpath, "//*[contains(@name, 'save')]").click
+           sleep 5
+         end
+         
+     puts "Pricebook created"
+
      
-      puts "Created PriceBook"
     rescue Exception => ex
     raise "Error occurred while creating Price book"
     putstr_withScreen  ex.message
