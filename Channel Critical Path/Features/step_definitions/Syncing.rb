@@ -149,6 +149,7 @@ Then (/^I choose the sync options$/) do
 				click_on('Save')
 				sleep 15
 				page.driver.browser.switch_to.window(main)
+				sleep 5
     rescue Exception=> ex
       	puts "Error in choosing the sync options"
 				putstr_withScreen ex.message

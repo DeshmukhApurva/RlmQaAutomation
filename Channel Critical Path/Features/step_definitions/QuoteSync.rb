@@ -1632,6 +1632,9 @@ And(/^I open the Quote Sync Renewal Opportunity$/) do
       within(".list") do
         if first("tbody").all(".dataRow")[0].all("th")[0].first("a").text == $automationRO
           first("tbody").all(".dataRow")[0].all("th")[0].first("a").click
+          puts "Opportunity #{$automationRO} Found..."
+        else
+          puts "Opportunity #{$automationRO} Not Found..."  
         end
       end
     end

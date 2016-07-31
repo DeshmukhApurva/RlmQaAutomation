@@ -213,46 +213,63 @@ And(/^I open the existing opportunity$/) do
     sleep 6
     arg = getReference "AddPartnerOpportunity"
     sleep 3
-    find('#fcf').select "My Opportunities"
-    sleep 5
-    #within (".fBody") do
-    click_button 'Go!'
-    #end
+    find(:xpath, '//input[contains(@placeholder,"Search...")]').click
+    sleep 2
+    find(:xpath, '//input[contains(@placeholder,"Search...")]').set arg["PartnerOpportunityName"]
+    sleep 2
+    find(:xpath, '//input[contains(@id,"phSearchButton")]').click
     sleep 8
-    if page.has_css?(".listItemPad")
-      sleep 4
-      puts "Successfully see the Alphabetic Pagination"
-      all(".listItemPad")[15].click
-      sleep 8
-      all(".selectArrow")[0].click
-      sleep 8
-      within(".bottomNav") do
-        first("table").all("tr")[4].click
-      end
-    else
-      putstr "Failed to see the Alphabetic Pagination"
-    end
-    sleep 5
-    result = false
-    oppName = arg["PartnerOpportunityName"].to_s
-    oppInitial = oppName[0]
-    click_on oppInitial
-    #find(:xpath, '//a/span[text()="#{oppInitial}"]').click
-    sleep 5
-    all(:xpath, '//div/table/tbody/tr/td[4]/div/a/span').each do |activity|
-
-      if activity.text.to_s == arg["PartnerOpportunityName"].to_s
-        puts "Successfully match the Opportunity name"
-        activity.click
-        puts "Successfully opened the #{arg["PartnerOpportunityName"]} Opportunity"
-      result = true
-      break
+    within(".opportunityBlock") do
+      within(".list") do
+        if first("tbody").all(".dataRow")[0].all("th")[0].first("a").text == arg["PartnerOpportunityName"]
+          first("tbody").all(".dataRow")[0].all("th")[0].first("a").click
+          puts "Opportunity #{arg["PartnerOpportunityName"]} Found..."
+        else
+          puts "Opportunity #{arg["PartnerOpportunityName"] } Not Found..."
+        end
       end
     end
-    putstr "Unable to find the #{arg["PartnerOpportunityName"]} Opportunity" unless result
-    sleep 5
+    sleep 10
+    # find('#fcf').select "My Opportunities"
+    # sleep 5
+    # #within (".fBody") do
+    # click_button 'Go!'
+    # #end
+    # sleep 8
+    # if page.has_css?(".listItemPad")
+      # sleep 4
+      # puts "Successfully see the Alphabetic Pagination"
+      # all(".listItemPad")[15].click
+      # sleep 8
+      # all(".selectArrow")[0].click
+      # sleep 8
+      # within(".bottomNav") do
+        # first("table").all("tr")[4].click
+      # end
+    # else
+      # putstr "Failed to see the Alphabetic Pagination"
+    # end
+    # sleep 5
+    # result = false
+    # oppName = arg["PartnerOpportunityName"].to_s
+    # oppInitial = oppName[0]
+    # click_on oppInitial
+    # #find(:xpath, '//a/span[text()="#{oppInitial}"]').click
+    # sleep 5
+    # all(:xpath, '//div/table/tbody/tr/td[4]/div/a/span').each do |activity|
+# 
+      # if activity.text.to_s == arg["PartnerOpportunityName"].to_s
+        # puts "Successfully match the Opportunity name"
+        # activity.click
+        # puts "Successfully opened the #{arg["PartnerOpportunityName"]} Opportunity"
+      # result = true
+      # break
+      # end
+    # end
+    # putstr "Unable to find the #{arg["PartnerOpportunityName"]} Opportunity" unless result
+    # sleep 5
   rescue Exception => ex
-    putstr "Error occurred while clicking on existing #{arg["PartnerOpportunityName"]} Opportunity page"
+    putstr "Error occurred while selecting Opportunity: #{arg["PartnerOpportunityName"]}"
     putstr_withScreen  ex.message
   end
 end
