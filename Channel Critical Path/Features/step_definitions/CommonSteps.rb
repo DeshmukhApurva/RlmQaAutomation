@@ -645,3 +645,49 @@ When(/^I create Source Opportunity with Line Items and resolve it$/) do
     puts ex.message
   end
 end
+
+And(/^I verify the current expiration quarter value in Expiration Quarter filter$/) do
+  begin
+    allExpQrtrArg = getReference "Expiration Quarter"
+    allExpQuarters = allExpQrtrArg["filterValues"].split(",")
+    puts allExpQuarters
+
+    within all("span.ui-select-match")[0] do
+      find(:css, ".close.ui-select-match-close").click
+      sleep 2
+    end
+
+    allExpQuarters.each do |value|
+      find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[1]/div/div/div/input").click
+      click_on(value)
+      sleep 2
+    end
+    sleep 5
+  rescue Exception => ex
+    puts "Error occurred while creating Opportunities"
+    puts ex.message
+  end
+end
+
+And(/^I verify the current expiration year value in Expiration Year filter$/) do
+  begin
+    allExpYearsArg = getReference "Expiration Year"
+    allExpYears = allExpYearsArg["filterValues"].split(",")
+    puts allExpYears
+
+    within all("span.ui-select-match")[1] do
+      find(:css, ".close.ui-select-match-close").click
+      sleep 2
+    end
+
+    allExpYears.each do |value|
+      find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[2]/div/div/div/input").click
+      click_on(value)
+      sleep 2
+    end
+    sleep 5
+  rescue Exception => ex
+    puts "Error occurred while creating Opportunities"
+    puts ex.message
+  end
+end

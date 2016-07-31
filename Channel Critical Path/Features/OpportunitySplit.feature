@@ -67,7 +67,7 @@ Scenario: Rally Test Case ID: TC4340 : Split Opportunity Page: Clicking on Cance
 
 @existing_opportunity
 Scenario: Rally Test Case ID: TC4339 : Split Opportunity Page: Split Opportunity with "Existing Opportunity" option
-  When I click on the "Opportunities" grid tab
+  
   And I open existing opportunity
   And I click on button "Add Product"
   And I select one or more product from the grid

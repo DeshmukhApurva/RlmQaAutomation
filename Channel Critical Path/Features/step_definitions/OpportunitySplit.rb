@@ -285,18 +285,39 @@ And(/^I fill the required fields from "([^"]*)" page$/) do |page_file|
     end
     main = page.driver.browser.window_handles.first
     sleep 5
+    # page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+    # sleep 10
+    # page.driver.browser.switch_to.frame("resultsFrame")
+    # within('.list') do
+    # # first("tbody").all("tr")[1].first("th").first("a").click
+    # click_on arg["SelectTargetOpportunity"]
+    # end
+    # sleep 5
+    # page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+    # sleep 5
+
+    page.driver.browser.manage.window.maximize
+    sleep 4
     page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
-    sleep 10
+    sleep 7
+    page.driver.browser.switch_to.frame("searchFrame")
+    sleep 7
+    fill_in "lksrch",:with => arg["SelectTargetOpportunity"]
+    sleep 7
+    click_on 'Go!'
+    sleep 3
+    page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+    sleep 3
     page.driver.browser.switch_to.frame("resultsFrame")
+    sleep 3
     within('.list') do
-    # first("tbody").all("tr")[1].first("th").first("a").click
-      click_on arg["SelectTargetOpportunity"]
+      click_link arg["SelectTargetOpportunity"]
     end
     sleep 5
     page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
     sleep 5
     puts "Successfully Select Target opportunity field from #{page_file} page"
-    sleep 6
+    sleep 15
   rescue Exception => ex
     putstr "Error occurred while Select Target Opportunity field from #{page_file} page"
     putstr_withScreen  ex.message
@@ -352,31 +373,47 @@ end
 
 And(/^I open existing opportunity$/) do
   begin
+  # sleep 6
+  # arg = getReference "SplitOpportunity"
+  # find('#fcf').select "My Opportunities"
+  # sleep 5
+  # within (".fBody") do
+  # click_button 'Go!'
+  # end
+  # sleep 6
+  # result = false
+  # oppName = arg["SplitOpportunityName"].to_s
+  # oppInitial = oppName[0]
+  # puts oppInitial
+  # click_on oppInitial
+  # #find(:xpath, '//a/span[text()="#{oppInitial}"]').click
+  # sleep 5
+  # all(:xpath, '//div/table/tbody/tr/td[4]/div/a/span').each do |activity|
+  # if activity.text.include? arg["SplitOpportunityName"]
+  # puts "Successfully match the #{arg["SplitOpportunityName"]} Opportunity name"
+  # activity.click
+  # puts "Successfully opened the #{arg["SplitOpportunityName"]} Opportunity"
+  # result = true
+  # break
+  # end
+  # end
     sleep 6
     arg = getReference "SplitOpportunity"
-    find('#fcf').select "My Opportunities"
-    sleep 5
-    within (".fBody") do
-      click_button 'Go!'
-    end
-    sleep 6
-    result = false
-    oppName = arg["SplitOpportunityName"].to_s
-    oppInitial = oppName[0]
-    puts oppInitial
-    click_on oppInitial
-    #find(:xpath, '//a/span[text()="#{oppInitial}"]').click
-    sleep 5
-    all(:xpath, '//div/table/tbody/tr/td[4]/div/a/span').each do |activity|
-      if activity.text.include? arg["SplitOpportunityName"]
-        puts "Successfully match the #{arg["SplitOpportunityName"]} Opportunity name"
-        activity.click
-        puts "Successfully opened the #{arg["SplitOpportunityName"]} Opportunity"
-      result = true
-      break
+    find(:xpath, '//input[contains(@placeholder,"Search...")]').click
+    sleep 2
+    find(:xpath, '//input[contains(@placeholder,"Search...")]').set arg["SplitOpportunityName"]
+    sleep 2
+    find(:xpath, '//input[contains(@id,"phSearchButton")]').click
+    sleep 8
+    within(".opportunityBlock") do
+      within(".list") do
+        if first("tbody").all(".dataRow")[0].all("th")[0].first("a").text == arg["SplitOpportunityName"]
+          first("tbody").all(".dataRow")[0].all("th")[0].first("a").click
+        end
       end
     end
-    putstr "Unable to find the #{arg["SplitOpportunityName"]} Opportunity" unless result
+    sleep 10
+    puts "Successfully opened the #{arg["SplitOpportunityName"]} Opportunity"
   rescue Exception => ex
     putstr "Error occurred while clicking on existing #{arg["SplitOpportunityName"]} Opportunity page"
     putstr_withScreen  ex.message

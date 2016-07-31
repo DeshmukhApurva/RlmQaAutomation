@@ -27,7 +27,7 @@ Scenario:
 	Rally Test Case ID: TC5264 - Assets and Service Contracts Page - Value in Partner Account 1/2 related fields when first time Renewal Opportunity gets created and user adds PO to that RO 
 	When I click on "Opportunities" tab 
 	And I open the existing opportunity 
-	And I click renewal opportunity having products 
+	 
 	When I click on "Add New Partner Opportunity" button 
 	Then I verify the "Opportunity" name and corresponding "Account" name 
 	When I navigate to "Partner Organization(s)" section 

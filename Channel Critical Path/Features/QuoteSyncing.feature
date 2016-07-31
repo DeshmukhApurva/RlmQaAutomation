@@ -81,7 +81,6 @@ Feature: All features related to Quote Syncing
   #	And I click on "Opportunity → Quote" link
   #	And I delete all mapping fields
   #-----------------------------------------------------------------------------------------------------------------------
-  
   @QuoteSyncing_CreateStandardQuote
   Scenario: Rally-ID:  : Quote Sync - Create quote from standard salesforce
     #When I log into "CHANNELNETOPS_EETEST4" details
@@ -153,7 +152,6 @@ Feature: All features related to Quote Syncing
     Then I verify quote fields copied to opportunity fields on opportunity page
     Then I verify QLI fields copied to OLI
 
- 
   @quotesync_TC5335
   Scenario: Rally Test Case ID:TC5335 - Quote : Opportunity: Stop syncing of the quote from standard UI and update the Opportunity and opportunity line item.
     When I click on the "Opportunities" grid tab
@@ -246,7 +244,6 @@ Feature: All features related to Quote Syncing
     And I click on "Split Selected" button from renewal relationship page
     And I navigate to contributor opportunity
     When I click on "Manage Renewals" button
-    
     And I click on "Consolidate Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Consolidate" button from renewal relationship page
@@ -297,7 +294,6 @@ Feature: All features related to Quote Syncing
     And I click on "Split Selected" button from renewal relationship page
     And I navigate to contributor opportunity
     When I click on "Manage Renewals" button
-    
     And I click on "Consolidate Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Consolidate" button from renewal relationship page
@@ -357,7 +353,6 @@ Feature: All features related to Quote Syncing
     And I click on "Split Selected" button from renewal relationship page
     And I navigate to contributor opportunity
     When I click on "Manage Renewals" button
-    
     And I click on "Consolidate Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Consolidate" button from renewal relationship page
@@ -412,7 +407,6 @@ Feature: All features related to Quote Syncing
     And I click on "Split Selected" button from renewal relationship page
     And I navigate to contributor opportunity
     When I click on "Manage Renewals" button
-    
     And I click on "Consolidate Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Consolidate" button from renewal relationship page
@@ -468,7 +462,6 @@ Feature: All features related to Quote Syncing
     And I click on "Split Selected" button from renewal relationship page
     And I navigate to contributor opportunity
     When I click on "Manage Renewals" button
-    
     And I click on "Consolidate Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Consolidate" button from renewal relationship page
@@ -519,7 +512,6 @@ Feature: All features related to Quote Syncing
     And I click on "Split Selected" button from renewal relationship page
     And I navigate to contributor opportunity
     When I click on "Manage Renewals" button
-    
     And I click on "Consolidate Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Consolidate" button from renewal relationship page
@@ -662,15 +654,10 @@ Feature: All features related to Quote Syncing
     And I navigate to Opportunity from partner Opportunity page
     And I verify the newly created quote is primary and syncing
     And I open the "Syncing" Quote from Opp
-		And I update the fields on quote page
+    And I update the fields on quote page
     And I navigate to opportunity from quote page
     Then I verify quote fields copied to opportunity fields on opportunity page
 
   @quotesync_Test
   Scenario: Rally Te
-    #When user logout from "OEM" application
-    #When I log into "CHANNELPARTNER_EETEST4" details
-    When I click on "Opportunities" tab
-    And I search for the partner opportunity on Community
-    And I click on "Quotes" tab
-    And I Set new Quote as primary
+    And I open the Quote Sync Renewal Opportunity

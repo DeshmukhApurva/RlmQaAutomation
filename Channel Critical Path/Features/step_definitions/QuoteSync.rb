@@ -1622,46 +1622,20 @@ end
 And(/^I open the Quote Sync Renewal Opportunity$/) do
   begin
     sleep 6
-    arg = getReference "AddPartnerOpportunity"
-    sleep 3
-    find('#fcf').select "My Opportunities"
-    sleep 5
-    #within (".fBody") do
-    click_button 'Go!'
-    #end
+    find(:xpath, '//input[contains(@placeholder,"Search...")]').click
+    sleep 2
+    find(:xpath, '//input[contains(@placeholder,"Search...")]').set $automationRO
+    sleep 2
+    find(:xpath, '//input[contains(@id,"phSearchButton")]').click
     sleep 8
-    if page.has_css?(".listItemPad")
-      sleep 4
-      puts "Successfully see the Alphabetic Pagination"
-      all(".listItemPad")[15].click
-      sleep 8
-      all(".selectArrow")[0].click
-      sleep 8
-      within(".bottomNav") do
-        first("table").all("tr")[4].click
-      end
-    else
-      putstr "Failed to see the Alphabetic Pagination"
-    end
-    sleep 5
-    result = false
-    oppName = $automationRO.to_s
-    oppInitial = oppName[0]
-    click_on oppInitial
-    #find(:xpath, '//a/span[text()="#{oppInitial}"]').click
-    sleep 5
-    all(:xpath, '//div/table/tbody/tr/td[4]/div/a/span').each do |activity|
-
-      if activity.text.to_s == $automationRO.to_s
-        puts "Successfully match the Opportunity name"
-        activity.click
-        puts "Successfully opened the #{$automationRO} Opportunity"
-      result = true
-      break
+    within(".opportunityBlock") do
+      within(".list") do
+        if first("tbody").all(".dataRow")[0].all("th")[0].first("a").text == $automationRO
+          first("tbody").all(".dataRow")[0].all("th")[0].first("a").click
+        end
       end
     end
-    putstr "Unable to find the #{$automationRO} Opportunity" unless result
-    sleep 5
+    sleep 10
   rescue Exception => ex
     putstr "Error occurred while clicking on existing #{$automationRO} Opportunity page"
     putstr_withScreen  ex.message
