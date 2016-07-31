@@ -9,7 +9,7 @@ Background: Login to the Application
 
 @new_target_opportunity
 Scenario: Rally Test Case ID: TC4337 : Split Opportunity Page: Split Opportunity with "New Opportunity" option
-  When I click on the "Opportunities" grid tab
+  #When I click on the "Opportunities" grid tab
   And I open existing opportunity
   And I click on button "Add Product"
   And I select one or more product from the grid
@@ -22,7 +22,7 @@ Scenario: Rally Test Case ID: TC4337 : Split Opportunity Page: Split Opportunity
 
 @verify_validation_message
 Scenario: Rally Test Case ID: TC4337 :Split Opportunity Page: Split Opportunity with "New Opportunity" option,Validation Message
-  When I click on the "Opportunities" grid tab
+  #When I click on the "Opportunities" grid tab
   And I open existing opportunity
   And I click on button "Add Product"
   And I select one or more product from the grid
@@ -34,7 +34,7 @@ Scenario: Rally Test Case ID: TC4337 :Split Opportunity Page: Split Opportunity 
 
 @new_cloned_target_opportunity
 Scenario: Rally Test Case ID: TC4338 : Split Opportunity Page: Split Opportunity with "New Cloned Opportunity" option
-  When I click on the "Opportunities" grid tab
+  #When I click on the "Opportunities" grid tab
   And I open existing opportunity
   And I click on button "Add Product"
   And I select one or more product from the grid
@@ -47,14 +47,14 @@ Scenario: Rally Test Case ID: TC4338 : Split Opportunity Page: Split Opportunity
 
 @product_validation_opp
 Scenario: Rally Test Case ID: TC4340 : Split Opportunity - Product Validation Message
-  When I click on the "Opportunities" grid tab
+  #When I click on the "Opportunities" grid tab
   And I open existing opportunity
   And I click on button "Split Opportunity"
   Then I should able to see the "Please select at least one Opportunity Line to proceed." alert message
 
 @cancel_existing_opportunity
 Scenario: Rally Test Case ID: TC4340 : Split Opportunity Page: Clicking on Cancel button
-  When I click on the "Opportunities" grid tab
+  #When I click on the "Opportunities" grid tab
   And I open existing opportunity
   And I click on button "Add Product"
   And I select one or more product from the grid
@@ -66,8 +66,8 @@ Scenario: Rally Test Case ID: TC4340 : Split Opportunity Page: Clicking on Cance
 
 
 @existing_opportunity
-Scenario: Rally Test Case ID: TC4339 : Split Opportunity Page: Split Opportunity with "Existing Opportunity" option
-  
+Scenario: Rally Test Case ID: TC4339 : Split Opportunity Page: Split Opportunity with "Existing Opportunity" option 
+  #When I click on the "Opportunities" grid tab
   And I open existing opportunity
   And I click on button "Add Product"
   And I select one or more product from the grid
