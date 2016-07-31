@@ -64,11 +64,11 @@ Then (/^I click on Products and create product with the name "(.*?)"$/) do |arg|
     sleep 5
     puts "I click on Products"
     sleep 6
-    
-#    within all(".bSubBlock brandSecondaryBrd secondaryPalette") do
-#      puts "m in"
-#      first(:xpath, "//*[contains(@name, 'go')]").click
-#    end 
+
+    #    within all(".bSubBlock brandSecondaryBrd secondaryPalette") do
+    #      puts "m in"
+    #      first(:xpath, "//*[contains(@name, 'go')]").click
+    #    end
     click_on "New"
     puts "Adding products"
     sleep 5
@@ -84,9 +84,9 @@ Then (/^I click on Products and create product with the name "(.*?)"$/) do |arg|
 
     puts "Product added successfully"
     sleep 5
-    click_on "Add" 
+    click_on "Add"
     sleep 5
-    find(:xpath, "//*[contains(@title, 'Unit Price')]").send_keys "5000"
+    find(:xpath, "//*[contains(@title, 'Unit Price')]").send_keys "3000"
     sleep 5
     click_on "Save"
     sleep 5
@@ -102,10 +102,8 @@ Then (/^I click on Products and create product with the name "(.*?)"$/) do |arg|
     #first(:xpath, "//*[contains(@name, 'edit')]").click
     click_on "Select"
 
-
     select 3
 
- 
   rescue Exception => ex
     raise "Error occurred while adding product"
     putstr_withScreen  ex.message
@@ -124,7 +122,7 @@ When(/^I click on "([^"]*)" tab$/) do |tab|
   end
 end
 
-Then(/^I create new Asset with Name "(.*?)" and its Product "(.*?)" and its Status "(.*?)" and account "(.*?)"$/) do |arg1,arg2,arg3,arg4|
+Then(/^I create new Asset with Name "(.*?)" and its Product "(.*?)" and its Status "(.*?)" and price "(.*?)" and account "(.*?)"$/) do |arg1,arg2,arg3,arg4,arg5|
   begin
     sleep 10
     click_on "New"
@@ -132,29 +130,36 @@ Then(/^I create new Asset with Name "(.*?)" and its Product "(.*?)" and its Stat
     puts "Creating a new Asset"
     sleep 5
     fill_in "Name",:with => arg1
-    puts "Filled value for Assest name"
+    puts "Filled value for Asset name"
     sleep 5
-    fill_in "Account",:with => arg4
-    puts "Filled value for Assest Account"
+    fill_in "Account",:with => arg5
+    puts "Filled value for Asset Account"
     sleep 5
     first(:xpath, "//*[contains(@id, 'Status')]").select(arg3)
     sleep 5
     fill_in "Product2",:with =>arg2
-    puts "Filled value for Assest Product"
+    puts "Filled value for Asset Product"
     sleep 8
+    fill_in "Price",:with =>arg4
+    fill_in "Quantity",:with => "1"
+    sleep 5
+
     within(:id,"topButtonRow") do
       click_on "Save"
     end
     sleep 8
-    puts "Assest  successfully created"
+    puts "Asset  successfully created"
   rescue Exception => ex
-    puts "Error occurred while creating Assest"
+    puts "Error occurred while creating Asset"
     puts ex.message
   end
 end
 
-Then(/^I create new Service Contracts with Name "(.*?)" with Account "(.*?)"$/) do |arg1,arg2|
+Then(/^I create new Service Contracts with Name "(.*?)" with Account "(.*?)" and Product "(.*?)"$/) do |arg1,arg2,arg|
   begin
+    
+    ProductName=arg
+
     click_on "New"
     sleep 2
     puts "Creating a new Service Contract"
@@ -170,6 +175,29 @@ Then(/^I create new Service Contracts with Name "(.*?)" with Account "(.*?)"$/) 
     end
     sleep 10
     puts "Service Contract  successfully created"
+    sleep 5
+    click_on "Add Line Item"
+    sleep 5
+    click_on "Save"
+    within (".x-grid3-body") do
+      tr=all(".x-grid3-row")
+      tr.each do |row|
+        puts row
+        puts row.all("td")[1].text
+        if row.all("td")[1].text == ProductName
+          row.all("td")[0].first("div").first("input").click
+        end
+      end
+    end
+    click_on 'Select'
+    puts "Successfully select the service contract line item"
+
+    #find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[3]/input").send_keys "1"
+    find(:xpath, "//*[contains(@name, 'Quantity')]").send_keys "1"
+    sleep 3
+    all(:xpath,'//td/input[@value=" Save "]')[0].click
+    puts "Successfully added product to service contract"
+
   rescue Exception => ex
     puts "Error occurred while creating Service Contract"
     puts ex.message
@@ -208,6 +236,10 @@ Then (/^I select with its Product "(.*?)"$/) do |arg|
     click_on "Select"
     puts "Successfully select the product"
     sleep 8
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[3]/input").set arg["ProductQuantity"]
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[17]/td[4]/span/input").set $startDateOLI
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[17]/td[5]/span/input").set $endDateOLI
+    all(:xpath,'//td/input[@value=" Save "]')[0].click
 
   rescue Exception => ex
     putstr "Error occurred while opening a Product"
@@ -215,8 +247,10 @@ Then (/^I select with its Product "(.*?)"$/) do |arg|
   end
 end
 
-Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)"$/) do |arg1,arg2|
+Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Product "(.*?)"$/) do |arg1,arg2,arg|
   begin
+    ProductName=arg
+
     sleep 8
     within (".pbHeader") do
       click_on "New"
@@ -235,7 +269,29 @@ Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)"$/) do |ar
       click_on 'Save'
     end
 
-    sleep 8
+    click_on "Add Product"
+    sleep 5
+    click_on "Save"
+    # find(:xpath, "(//input[@type='checkbox'])[2]").set(true)
+    within (".x-grid3-body") do
+      tr=all(".x-grid3-row")
+      tr.each do |row|
+        puts row
+        puts row.all("td")[1].text
+        if row.all("td")[1].text == ProductName
+          row.all("td")[0].first("div").first("input").click
+        end
+      end
+    end
+    click_on 'Select'
+    puts "Successfully select the product"
+
+    #find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[3]/input").send_keys "1"
+    find(:xpath, "//*[contains(@name, 'Quantity')]").send_keys "1"
+    sleep 3
+    all(:xpath,'//td/input[@value=" Save "]')[0].click
+    puts "Successfully added product to opportunity"
+
   rescue Exception => ex
     putstr "Error occurred while creating opportunity"
     putstr_withScreen ex.message
@@ -270,7 +326,6 @@ Then(/^I select opportunity with its Product "(.*?)"$/) do |arg|
         end
       end
     end
-    click_on 'Select'
     puts "Successfully select the product"
     sleep 8
 
