@@ -113,27 +113,20 @@ Scenario: Renew: new pricebook
 	
 @addProducts 
 Scenario: Renew: add products 
-	When I click on "Products" tab 
-	Then click on products views 
-	And click on "Add" 
-	Then add the product "Product A" 
-	When I click on "Products" tab 
-	Then click on products views 
-	And click on "Add" 
-	Then add the product "Product B" 
-	Then click on products views 
-	And click on "Add" 
-	Then add the product "Product C" 
-	Then click on products views 
-	And click on "Add" 
-	Then add the product "Product D" 
-	Then click on products views 
-	And click on "Add" 
-	Then add the product "GenWatt Diesel 10kW" 
-	Then click on products views 
-	And click on "Add" 
-	Then add the product "Installation: Industrial - High" 
+    When I click on "All Tabs" tab
+	Then I click on Products and create product with the name "Auto Product Purpleberry"
+#	When I click on "All Tabs" tab
+#	Then I click on Products and create product with the name "Product B"
+#	When I click on "All Tabs" tab
+#	Then I click on Products and create product with the name "Product C"
+#	When I click on "All Tabs" tab
+#	Then I click on Products and create product with the name "Product D"
+#	When I click on "All Tabs" tab
+#	Then I click on Products and create product with the name "GenWatt Diesel 10kW"
+#	When I click on "All Tabs" tab
+#	Then I click on Products and create product with the name "Installation: Industrial - High"
 	
+
 @assignPricebooktoProduct 
 Scenario: Renew: assign pricebook to products 
 	When I click on the "All Tabs" grid tab 

@@ -26,34 +26,91 @@ When(/^I click on the "(.*?)" grid tab$/) do |tab|
   end
 end
 
- Then(/^I click on Price Books and create pricebook with the name "(.*?)"$/) do |arg1|
-   begin
-     sleep 8
-     click_on "Price Books"
-     sleep 5
-     puts "I click on Price Book"
-     sleep 6
-     click_on "New"
-     puts "Creating Standard Price Book"
-     sleep 5
-     fill_in "Price Book Name",:with=>arg1
-      sleep 5
-      
-        find('input[type=checkbox]').click
-     #topButtonRow
-     within(".pbBottomButtons") do
-           first(:xpath, "//*[contains(@name, 'save')]").click
-           sleep 5
-         end
-         
-     puts "Pricebook created"
+Then(/^I click on Price Books and create pricebook with the name "(.*?)"$/) do |arg1|
+  begin
+    sleep 8
+    click_on "Price Books"
+    sleep 5
+    puts "I click on Price Book"
+    sleep 6
+    click_on "New"
+    puts "Creating Standard Price Book"
+    sleep 5
+    fill_in "Price Book Name",:with=>arg1
+    sleep 5
 
-     
-    rescue Exception => ex
+    find('input[type=checkbox]').click
+    #topButtonRow
+    within(".pbBottomButtons") do
+      first(:xpath, "//*[contains(@name, 'save')]").click
+      sleep 5
+    end
+
+    puts "Pricebook created"
+
+  rescue Exception => ex
     raise "Error occurred while creating Price book"
     putstr_withScreen  ex.message
-   end
- end
+  end
+end
+
+#Then(/^I click on Products and create product with the name "(.*?)" and product code "(.*?)" $/) do |arg1,arg2|
+#Then(/^I click on Products and create product with the name "(.*?)" and product code "(.*?)"$/) do |arg1,arg2|
+Then (/^I click on Products and create product with the name "(.*?)"$/) do |arg|
+
+  begin
+    sleep 5
+    click_on "Products"
+    sleep 5
+    puts "I click on Products"
+    sleep 6
+    
+#    within all(".bSubBlock brandSecondaryBrd secondaryPalette") do
+#      puts "m in"
+#      first(:xpath, "//*[contains(@name, 'go')]").click
+#    end 
+    click_on "New"
+    puts "Adding products"
+    sleep 5
+    fill_in "Product Name",:with=>arg
+    fill_in "Product Code",:with=> "Pro1234"
+    sleep 5
+    find('input[type=checkbox]').click
+    #topButtonRow
+    within(".pbBottomButtons") do
+      first(:xpath, "//*[contains(@name, 'save')]").click
+      sleep 5
+    end
+
+    puts "Product added successfully"
+    sleep 5
+    click_on "Add" 
+    sleep 5
+    find(:xpath, "//*[contains(@title, 'Unit Price')]").send_keys "5000"
+    sleep 5
+    click_on "Save"
+    sleep 5
+    puts "product price added successfully"
+    sleep 5
+    click_on "Add to Price Book"
+    sleep 5
+    find(:xpath, "//*[contains(@title, 'Select Test_PriceBook')]").click
+    select 3
+    #find(:xpath, "//*[contains(@value, 'Select')]").click
+    #find(:xpath, "//input[@value='Select']").click
+    #first(:xpath, "//*[contains(@title, 'Select')]").click
+    #first(:xpath, "//*[contains(@name, 'edit')]").click
+    click_on "Select"
+
+
+    select 3
+
+ 
+  rescue Exception => ex
+    raise "Error occurred while adding product"
+    putstr_withScreen  ex.message
+  end
+end
 
 When(/^I click on "([^"]*)" tab$/) do |tab|
   begin
@@ -67,7 +124,7 @@ When(/^I click on "([^"]*)" tab$/) do |tab|
   end
 end
 
-Then(/^I create new Asset with Name "(.*?)" and its Product "(.*?)" and its Status "(.*?)" and account "(.*?)"$/) do |arg1,arg2,arg3,arg4|   
+Then(/^I create new Asset with Name "(.*?)" and its Product "(.*?)" and its Status "(.*?)" and account "(.*?)"$/) do |arg1,arg2,arg3,arg4|
   begin
     sleep 10
     click_on "New"
@@ -167,11 +224,11 @@ Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)"$/) do |ar
     puts "New Opportunity button clicked."
     fill_in "Opportunity Name",:with=>arg1
     fill_in "Account Name",:with=>arg2
-#    fill_in "Stage",:with=>arg["OpportunityStageValue"]
+    #    fill_in "Stage",:with=>arg["OpportunityStageValue"]
     time = Time.new
     fill_in "Close Date",:with=>time.month.to_s + "/" + time.day.to_s + "/" +time.year.to_s
-      
-#    find(:xpath, "//td/label[text()='Stage']").find(:xpath, '..').find(:xpath, "following-sibling::td").find(:xpath,"//select").select arg["OpportunityStageValue"]
+
+    #    find(:xpath, "//td/label[text()='Stage']").find(:xpath, '..').find(:xpath, "following-sibling::td").find(:xpath,"//select").select arg["OpportunityStageValue"]
     find("#opp11").select "Qualification"
     sleep 2
     within("#bottomButtonRow") do
@@ -179,13 +236,13 @@ Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)"$/) do |ar
     end
 
     sleep 8
-    rescue Exception => ex
+  rescue Exception => ex
     putstr "Error occurred while creating opportunity"
     putstr_withScreen ex.message
   end
-end  
+end
 
-Then(/^I select opportunity with its Product "(.*?)"$/) do |arg|    
+Then(/^I select opportunity with its Product "(.*?)"$/) do |arg|
   begin
     ProductName=arg
     puts "ProductName"+ProductName
@@ -231,8 +288,8 @@ And(/^I select contract and generate Opportunity with Name "(.*?)" with Account 
     end
     sleep 8
     within('#topButtonRow') do
-    click_on "Generate Opportunity"
-    puts "Click on Generate Opportunity"
+      click_on "Generate Opportunity"
+      puts "Click on Generate Opportunity"
     end
     fill_in "Name",:with=>arg1
     time = Time.new
