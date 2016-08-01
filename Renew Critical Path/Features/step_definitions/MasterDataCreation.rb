@@ -77,13 +77,12 @@ end
 #Then(/^I click on Products and create product with the name "(.*?)" and product code "(.*?)" $/) do |arg1,arg2|
 #Then(/^I click on Products and create product with the name "(.*?)" and product code "(.*?)"$/) do |arg1,arg2|
 Then (/^I click on Products and create product with the name "(.*?)"$/) do |arg|
-
-  begin
-    sleep 5
+begin
+    sleep 8
     click_on "Products"
-    sleep 5
+    sleep 8
     puts "I click on Products"
-    sleep 6
+    sleep 10
 
     #    within all(".bSubBlock brandSecondaryBrd secondaryPalette") do
     #      puts "m in"
@@ -116,13 +115,18 @@ Then (/^I click on Products and create product with the name "(.*?)"$/) do |arg|
     sleep 5
     click_on "Add to Price Book"
     sleep 5
-    find(:xpath, "//*[contains(@title, 'Select Test_PriceBook')]").click
+    find(:xpath, "//*[contains(@name, 'allBox')]").click
     select 3
     #find(:xpath, "//*[contains(@value, 'Select')]").click
     #find(:xpath, "//input[@value='Select']").click
     #first(:xpath, "//*[contains(@title, 'Select')]").click
     #first(:xpath, "//*[contains(@name, 'edit')]").click
-    first(:button, 'Select').click
+    within('.selectButton') do
+      puts "Inside loop"
+      binding.pry
+    first(:button).click
+    puts "I click Select"
+    end
     sleep 5
     find(:xpath, "//*[contains(@title, 'List Price 1')]").send_keys "3500"
     sleep 5
@@ -327,7 +331,7 @@ Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Produ
   end
 end
 
-And(/^I select contract and generate Opportunity with Name "(.*?)" with Account "(.*?)"$/) do |arg1,arg2|
+And(/^I select SC and generate Opportunity with Name "(.*?)" with Account "(.*?)"$/) do |arg1,arg2|
   begin
     sleep 5
     within('.list') do
@@ -456,7 +460,7 @@ Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and price
   end
 end
 
-Then(/^I resolved the Source Opportunity$/) do
+Then(/^I resolved the Source Opportunity and rename with name "(.*?)"$/) do |arg|
   begin
       #Resolve Opportunity
     within("#bottomButtonRow") do
@@ -478,7 +482,7 @@ Then(/^I resolved the Source Opportunity$/) do
     end
     sleep 5
     #$automationRO = $automationOppName + "RO"
-    fill_in "Opportunity Name",:with=>  "RenewNetOpsTesting"
+    fill_in "Opportunity Name",:with=> arg
     sleep 1
     first(:button,'Save').click
     sleep 8
@@ -950,7 +954,7 @@ And(/^create a new Play with value "(.*?)" and "(.*?)" and "(.*?)" and its TaskN
     sleep 10
     if page.has_content?('Play Criteria have been saved')
       puts "Play Criteria have been saved"
-      sleep 3
+      sleep 5
     else
       raise "Play Criteria have been saved message not displayed"
     end
@@ -958,10 +962,15 @@ And(/^create a new Play with value "(.*?)" and "(.*?)" and "(.*?)" and its TaskN
     sleep 10
 
     all(:xpath, "//*[contains(@id, 'inputName')]").last.set(arg4)
+    sleep 4
     all(:xpath, "//*[contains(@id, 'playTaskComp:playTaskComp:pb1:taskList:0:coltype')]").last.select(arg5)
+    sleep 4
     all(:xpath, "//*[contains(@id, 'playTaskComp:pb1:taskList:0:inputDesc')]").last.set(arg7)
-    all(".dataRow").last.all("td")[5].first("select").select(arg6)
+    # sleep 4
+    # all(".dataRow").last.all("td")[5].first("select").select(arg6)
+     sleep 4
     all(:xpath, "//*[contains(@id, 'playTaskComp:pb1:taskList:0:inputDays')]").last.set(arg8)
+    sleep 6
     all('.btn')[0].click
     sleep 10
     if page.has_content?('Play Tasks have been saved')
