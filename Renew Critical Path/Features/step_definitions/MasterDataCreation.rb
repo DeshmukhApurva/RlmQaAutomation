@@ -273,7 +273,7 @@ Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Produ
     within("#bottomButtonRow") do
       click_on 'Save'
     end
-
+    sleep 5 
     click_on "Add Product"
     sleep 5
     first(:xpath, "//*[contains(@id, 'p1')]").select("Standard Price Book")
@@ -469,16 +469,16 @@ When(/^I create Source Opportunity with Line Items and resolve it and rename it 
     $endDateOLI = time.month.to_s + "/" + time.day.to_s + "/" + (time.year.to_i + 1).to_s
 
     fill_in "Opportunity Name",:with=>$automationOppName
-    sleep 1
+    sleep 3
     fill_in "Close Date",:with=> $oPPCloseDate
-    sleep 1
+    sleep 3
     fill_in "Earliest Expiration Date",:with=> $earliestExpirationDate
-    sleep 1
+    sleep 3
     select "Qualification", :from => "Stage"
-    sleep 1
+    sleep 3
     fill_in "Account Name",:with=> "QA Test"
 
-    sleep 1
+    sleep 3
 
     within(:id,"topButtonRow") do
       click_on "Save"

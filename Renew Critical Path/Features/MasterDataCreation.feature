@@ -12,11 +12,7 @@ Scenario: Rally Test Case ID:  : Renew: New account creation
 	When I click on "Account" tab 
 	Then I create new Renew Account with value "QA Test" 
 	
-	#@SuccessPlanCreation 
-	#Scenario: Rally Test Case ID: : Create Success plan 
-	#	When I click on "Success Plans" tab 
-	#	Then I create a SuccessPlan with template "APT-000019" with Account "PE Wealth"
-	
+
 @CreateAsset 
 Scenario: Rally Test Case ID:  : Renew: Asset creation 
 	When I click on "Assets" tab 
@@ -45,8 +41,7 @@ Scenario: Renew: Add on Renewals creation
 	Then I create new opportunity with Name "SourceOpportunity" with Account "QA Test" and Product "Product B"
 	When I click on "Service Contracts" tab 
     Then I create new Service Contracts with Name "RenewNetOpsService" with Account "QA Test" and Product "Product A"
-
-	
+    	
 @OppCreation 
 Scenario: Renew: Generate Opp 
 	When I click on "Opportunities" tab 
@@ -58,24 +53,14 @@ Scenario: Renew: Generate Opp
 	When I click on "Opportunities" tab 
 	Then I create new opportunity with Name "CreateOppfromOpp" with Account "QA Test" and Product "Product A"
 	When I click on "Opportunities" tab 
+	Then I create new opportunity with Name "RenewNetOpsService" with Account "QA Test" and Product "Product A"
+	When I click on "Opportunities" tab 
 	Then I create new opportunity with Name "Split_Target_Opportunity_RN" with Account "QA Test" and pricebook "Standard Price Book"
 	When I click on "Opportunities" tab 
 	Then I create new opportunity with Name "Source-RenewNetOpsTesting" with Account "QA Test" and Product "Product B"
 	Then I resolved the Source Opportunity
 	When I create Source Opportunity with Line Items and resolve it and rename it as "PES_Renewal_Opportunity"
-		
-#	When I click on "Service Contracts" tab 
-#	Then I create new Service Contracts with Name "SourceServiceContract" with Account "QA Test" 
-#	When I click on "Service Contracts" tab 
-#	Then I select with its Product "Product A" 
-#	When I click on "Home" tab 
-#	
-#	When I click on "Service Contracts" tab 
-#	And I select contract and generate Opportunity with Name "PesSrcOpp" with Account "QA Test" 
-#	When I click on "Home" tab 
-#	
- 
-
+	
 @StandardPricebooks 
 Scenario: Renew: new pricebook 
 	When I click on "All Tabs" tab 
