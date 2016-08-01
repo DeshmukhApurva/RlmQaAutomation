@@ -629,7 +629,7 @@ And (/^I set the Needs Status Update as true$/) do
     sleep 3
     all(".dataRow")[1].all(".dataCell")[0].click
     sleep 5
-    within(:id,"topButtonRow") do
+    within(:id,"bottomButtonRow") do
       click_on("Edit")
     end
     sleep 2
