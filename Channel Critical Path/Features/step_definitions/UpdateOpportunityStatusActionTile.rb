@@ -7,9 +7,9 @@ And(/^I open an opportunity for "(.*?)"$/) do |data|
 		arg = getReference data
 		select "My Opportunities", :from => "fcf"
 		sleep 3
-		within(".fBody") do
-			click_on "Go!"
-		end
+		#within(".fBody") do
+		click_on "Go!"
+		#end
 		sleep 5
 		foundCount = 0
 		begin 
