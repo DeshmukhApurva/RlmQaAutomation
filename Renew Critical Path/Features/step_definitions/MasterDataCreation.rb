@@ -100,7 +100,12 @@ Then (/^I click on Products and create product with the name "(.*?)"$/) do |arg|
     #find(:xpath, "//input[@value='Select']").click
     #first(:xpath, "//*[contains(@title, 'Select')]").click
     #first(:xpath, "//*[contains(@name, 'edit')]").click
-    click_on "Select"
+    first(:button, 'Select').click
+    sleep 5
+    find(:xpath, "//*[contains(@title, 'List Price 1')]").send_keys "3500"
+    sleep 5
+    click_on "Save"
+    sleep 5
 
     select 3
 
@@ -431,7 +436,7 @@ Then(/^I resolved the Source Opportunity$/) do
   end
 end
 
-When(/^I create Source Opportunity with Line Items and resolve it and rename it as PES_Renewal_Opportunity$/) do
+When(/^I create Source Opportunity with Line Items and resolve it and rename it as "(.*?)"$/) do |arg|
   begin
   # Components of a Time
   #    puts "Current Time : " + time.inspect
@@ -594,7 +599,7 @@ When(/^I create Source Opportunity with Line Items and resolve it and rename it 
     end
     sleep 5
     #$automationRO = $automationOppName + "RO"
-    fill_in "Opportunity Name",:with=> "PES_Renewal_Opportunity"
+    fill_in "Opportunity Name",:with=> arg
     sleep 1
     first(:button,'Save').click
     sleep 8
