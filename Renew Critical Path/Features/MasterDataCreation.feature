@@ -65,7 +65,7 @@ Scenario: Rally Test Case ID: TC2895 : Create Success plan
 @CreateAsset 
 Scenario: Rally Test Case ID:  : Renew: Asset creation 
 	When I click on "Assets" tab 
-	Then I create new Asset with Name "Test PEW Asset" and its Product "Product B" and its Status "Installed" and price "2500" and account "QA Test" 
+	Then I create new Asset with Name "PEW Asset" and its Product "Product B" and its Status "Installed" and price "2500" and account "QA Test" 
 	When I click on "Assets" tab 
 	Then I create new Asset with Name "CA_CP_Asset" and its Product "Product B" and its Status "Installed" and price "2000" and account "QA Test" 
 	When I click on "Assets" tab 
