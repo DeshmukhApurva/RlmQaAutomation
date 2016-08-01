@@ -185,7 +185,7 @@ end
 And (/^I verify the changes after sync for NewPartnerOpp Partner Opportunity$/) do
 	begin
 		arg1 = getReference "PartnerOpportunity"
-			within(:id,"topButtonRow") do
+			within(:id,"bottomButtonRow") do
 				click_on('Edit')
 			end
 			sleep 3
@@ -193,7 +193,7 @@ And (/^I verify the changes after sync for NewPartnerOpp Partner Opportunity$/) 
         find(:id,"opp11").select("Value Proposition")
 				sleep 3
 			end
-			within(:id,"topButtonRow") do
+			within(:id,"bottomButtonRow") do
 				click_on('Save')
 			end
 			sleep 10
@@ -275,7 +275,7 @@ When (/^I grant access to "(.*?)" for new Partner Opportunity$/) do |syncPicklis
 		#lookup
 		click_on('Grant Access')
     sleep 2
-		within(:id,'topButtonRow') do
+		within(:id,'bottomButtonRow') do
 			click_on('Edit')
     end
     sleep 2
@@ -283,7 +283,7 @@ When (/^I grant access to "(.*?)" for new Partner Opportunity$/) do |syncPicklis
 			fill_in "Partner Opportunity",:with=>arg["NewPartnerOpp"]+$Opp
 		end
 		sleep 3
-		within(:id,'topButtonRow') do
+		within(:id,'bottomButtonRow') do
 			click_on('Save')
 			# puts "Saved changes made for the 'Master Opportunity' Partner Opportunity"
 		end
@@ -313,7 +313,7 @@ And (/^I verify the master opportunity after changing the sync options$/) do
 			end
 		end
 		sleep 5
-		within(:id,'topButtonRow') do
+		within(:id,'bottomButtonRow') do
 		  click_on('Edit')
 		end
 		# within all(".pbSubsection")[0] do
@@ -323,7 +323,7 @@ And (/^I verify the master opportunity after changing the sync options$/) do
       # #find(:xpath, "//*[contains(@label,'opp11')]").find(:xpath, 'option[1]').select_option
 		# end
 		# sleep 3
-		within(:id,'topButtonRow') do
+		within(:id,'bottomButtonRow') do
 			click_on('Save')
 			puts "Saved changes made for the 'Master Opportunity' Partner Opportunity"
 		end

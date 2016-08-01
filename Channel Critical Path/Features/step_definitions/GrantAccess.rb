@@ -87,7 +87,7 @@ end
 
 And (/^I click on "(.*?)" primary button$/) do|data|
 	begin
-	within(:id,"topButtonRow") do		
+	within(:id,"bottomButtonRow") do		
 		find(:id,'workWithPortalButton').click		
 		sleep 5
 		if page.has_content? "View Partner User"

@@ -2560,7 +2560,7 @@ When(/^I create a pdf attachment for quotes$/) do
       if page.has_button?("Create PDF")
         puts "Successfully see the Create PDF button"
         sleep 5
-        within("#topButtonRow") do
+        within("#bottomButtonRow") do
           click_on 'Create PDF'
         end
         sleep 12

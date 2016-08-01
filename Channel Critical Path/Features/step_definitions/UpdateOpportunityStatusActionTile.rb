@@ -87,7 +87,7 @@ And(/^I enable the "(.*?)" field$/) do |arg|
 			puts "Enabled Need Status Update field on Partner Opportunity"
 		end
 		
-		within(:id,"topButtonRow") do
+		within(:id,"bottomButtonRow") do
 			click_on('Save') 
 		end
 		sleep 3

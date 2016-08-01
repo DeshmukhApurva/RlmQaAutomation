@@ -456,7 +456,7 @@ And(/^I update the fields on opportunity line item$/) do
 
     end
     sleep 3
-    within(:id,"topButtonRow")do
+    within(:id,"bottomButtonRow")do
       click_on "Save"
     end
     puts "Opportunity line item Custom field data saved"
@@ -669,7 +669,7 @@ And(/^I update the fields on quote line item$/) do
       sleep 3
     end
     sleep 3
-    within(:id,"topButtonRow")do
+    within(:id,"bottomButtonRow")do
       click_on "Save"
     end
     puts "Quote line item Custom field data saved"
@@ -1044,8 +1044,8 @@ And(/^I sync the quotes from Quote$/) do
       end
     end
     sleep 4
-    if page.has_css?("#topButtonRow")
-      within("#topButtonRow") do
+    if page.has_css?("#bottomButtonRow")
+      within("#bottomButtonRow") do
         puts "Successfully see quote sync page"
         sleep 3
         if page.has_css?(".syncStart")
@@ -1083,7 +1083,7 @@ And(/^I sync the quotes from Quote$/) do
     end
     sleep 3
     if page.has_css?(".pageDescription")
-      within("#topButtonRow") do
+      within("#bottomButtonRow") do
         puts "Successfully completed the quote syncing"
       end
     else
@@ -1223,8 +1223,8 @@ And(/^I stop the syncing of the quote$/) do
       end
     end
     sleep 4
-    if page.has_css?("#topButtonRow")
-      within("#topButtonRow") do
+    if page.has_css?("#bottomButtonRow")
+      within("#bottomButtonRow") do
         puts "Successfully see the quote sync page"
         sleep 3
         if page.has_css?(".syncStop")
@@ -1518,7 +1518,7 @@ When(/^I update the earliest expiration date$/) do |tab|
     sleep 5
     fill_in "Earliest Expiration Date",:with=> $earliestExpirationDate
     sleep 1
-    within(:id,"topButtonRow") do
+    within(:id,"bottomButtonRow") do
       click_on "Save"
     end
   rescue Exception => ex
@@ -1838,8 +1838,8 @@ end
 And(/^I sync the quotes from Quote Page$/) do
   begin
     sleep 4
-    if page.has_css?("#topButtonRow")
-      within("#topButtonRow") do
+    if page.has_css?("#bottomButtonRow")
+      within("#bottomButtonRow") do
         puts "Successfully see quote sync page"
         sleep 3
         if page.has_css?(".syncStart")
@@ -1886,7 +1886,7 @@ And(/^I sync the quotes from Quote Page$/) do
 
     sleep 3
     if page.has_css?(".pageDescription")
-      within("#topButtonRow") do
+      within("#bottomButtonRow") do
         puts "Successfully completed the quote syncing"
       end
     else

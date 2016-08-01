@@ -606,7 +606,7 @@ And (/^I set the Needs Status Update as true$/) do
   begin
     all(".dataRow")[0].all(".dataCell")[0].click
     sleep 5
-    within(:id,"topButtonRow") do
+    within(:id,"bottomButtonRow") do
       click_on("Edit")
     end
     sleep 2
@@ -619,7 +619,7 @@ And (/^I set the Needs Status Update as true$/) do
       end
       sleep 2
     end
-    within(:id,"topButtonRow") do
+    within(:id,"bottomButtonRow") do
       click_on('Save')
     end
     sleep 3
@@ -642,7 +642,7 @@ And (/^I set the Needs Status Update as true$/) do
       end
       sleep 2
     end
-    within(:id,"topButtonRow") do
+    within(:id,"bottomButtonRow") do
       click_on('Save')
     end
   rescue Exception => ex

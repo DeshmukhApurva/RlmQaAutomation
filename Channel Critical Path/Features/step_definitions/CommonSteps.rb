@@ -537,7 +537,7 @@ When(/^I create Source Opportunity with Line Items and resolve it$/) do
     fill_in "Account Name",:with=>arg["Account"]
     sleep 1
 
-    within(:id,"topButtonRow") do
+    within(:id,"bottomButtonRow") do
       click_on "Save"
     end
 

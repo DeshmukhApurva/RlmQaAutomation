@@ -276,7 +276,7 @@ And(/^I "([^"]*)" the quote page$/) do |button|
     isSyncing = 0
     sleep 3
     if page.has_css?("#bottomButtonRow")
-      within("#topButtonRow") do
+      within("#bottomButtonRow") do
         puts "Successfully quote sync page"
         sleep 3
         if page.has_css?(".syncStart")

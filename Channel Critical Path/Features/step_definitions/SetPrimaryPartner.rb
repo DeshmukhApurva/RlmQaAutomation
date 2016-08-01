@@ -151,14 +151,14 @@ Then (/^I change the values of selected Partner opportunity$/) do
     end
 
     sleep 3
-    within(:id,'topButtonRow') do
+    within(:id,'bottomButtonRow') do
       click_on('Edit')
     end
     within all(".pbSubsection")[0] do
       fill_in "Amount",:with=> arg['Amount']
     end
     sleep 3
-    within(:id,'topButtonRow') do
+    within(:id,'bottomButtonRow') do
       click_on('Save')
       puts "Saved changes made for the '#{arg1['First']}' Partner Opportunity"
     end
