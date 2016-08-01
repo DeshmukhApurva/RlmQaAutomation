@@ -826,7 +826,7 @@ And(/^I click on the "([^"]*)" link$/) do |request|
           sleep 5
           request_number = first("div").first("a").text
           puts request_number
-          sleep 10
+          sleep 15
           first("div").first("a").click
         end
       end
