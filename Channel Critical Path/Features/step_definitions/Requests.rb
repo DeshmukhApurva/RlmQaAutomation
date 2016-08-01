@@ -65,7 +65,8 @@ And(/^I add the "([^"]*)" attachment file$/) do |url|
     sleep 4
     file_path = "#{Dir.pwd}/#{url}"
     sleep 2
-    page.attach_file("btn-file-upload", file_path)
+    find(:xpath, ".//div/form/div[7]/div/div").set(file_path)
+    # page.attach_file("btn-file-upload", file_path)
     sleep 10
     puts "Successfully attached the file"
   rescue Exception => ex
