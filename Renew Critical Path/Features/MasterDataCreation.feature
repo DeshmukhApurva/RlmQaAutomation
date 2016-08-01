@@ -20,24 +20,26 @@ Scenario: Rally Test Case ID:  : Renew: New account creation
 @CreateAsset 
 Scenario: Rally Test Case ID:  : Renew: Asset creation 
 	When I click on "Assets" tab 
-	Then I create new Asset with Name "VV Test PEW Asset" and its Product "Product B" and its Status "Installed" and price "2500" and account "QA Test" 
+	Then I create new Asset with Name "Test PEW Asset" and its Product "Product B" and its Status "Installed" and price "2500" and account "QA Test" 
 	#When I click on "Home" tab 
 	When I click on "Assets" tab 
-	Then I create new Asset with Name "VVCA_CP_Asset" and its Product "Product B" and its Status "Installed" and price "2000" and account "QA Test" 
+	Then I create new Asset with Name "CA_CP_Asset" and its Product "Product B" and its Status "Installed" and price "2000" and account "QA Test" 
 	#When I click on "Home" tab 
 	When I click on "Assets" tab 
-	Then I create new Asset with Name "VVPESAsset" and its Product "Product A" and its Status "Installed" and price "1500" and account "QA Test" 
+	Then I create new Asset with Name "PESAsset" and its Product "Product A" and its Status "Installed" and price "1500" and account "QA Test" 
 	#When I click on "Home" tab 
 	When I click on "Assets" tab 
-	Then I create new Asset with Name "VVRenewNetOpsAsset" and its Product "Product A" and its Status "Installed" and price "500" and account "QA Test" 
+	Then I create new Asset with Name "RenewNetOpsAsset" and its Product "Product A" and its Status "Installed" and price "500" and account "QA Test" 
 	#When I click on "Home" tab 
 	When I click on "Assets" tab 
-	Then I create new Asset with Name "VVIBDRAsset" and its Product "Product A" and its Status "Installed" and price "3000" and account "QA Test" 
+	Then I create new Asset with Name "IBDRAsset" and its Product "Product A" and its Status "Installed" and price "3000" and account "QA Test" 
 	
 @CreateServiceContracts 
 Scenario: Rally Test Case ID:  : Renew: Asset creation 
 	When I click on "Service Contracts" tab 
-	Then I create new Service Contracts with Name "VV PEW SC" with Account "PE Wealth" and Product "Product B"
+	Then I create new Service Contracts with Name "PEW SC" with Account "PE Wealth" and Product "Product B"
+	When I click on "Service Contracts" tab 
+	Then I create new Service Contracts with Name "RenewNetOpsSCTest" with Account "QA Test" and Product "Product B"
 #	When I click on "Service Contracts" tab 
 #	Then I select with its Product "Product A" 
 	#	When I click on "Home" tab 
@@ -47,7 +49,7 @@ Scenario: Rally Test Case ID:  : Renew: Asset creation
 	#	Then I select with its Product "Product C" 
 	#	When I click on "Home" tab 
 		When I click on "Service Contracts" tab 
-		Then I create new Service Contracts with Name "VVSourceServiceContract" with Account "QA Test" and Product "Product C"
+		Then I create new Service Contracts with Name "SourceServiceContract" with Account "QA Test" and Product "Product C"
 	#	When I click on "Service Contracts" tab 
 	#	Then I select with its Product "Product B" 
 
@@ -65,41 +67,52 @@ Scenario: Renew: Add on Renewals creation
 @OppCreation 
 Scenario: Renew: Generate Opp 
 	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "PesSrcOpp" with Account "QA Test" 
+	Then I create new opportunity with Name "PesSrcOpp" with Account "QA Test" and Product "Product B"
 	When I click on "Opportunities" tab 
-	Then I select opportunity with its Product "Product B" 
-	When I click on "Home" tab 
+	Then I create new opportunity with Name "SourceOpportunity09" with Account "QA Test" and Product "Product B"
 	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "RenewNetOpsTesting" with Account "QA Test" 
+	Then I create new opportunity with Name "CreateOppfromOpp" with Account "QA Test" and Product "Product A"
 	When I click on "Opportunities" tab 
-	Then I select opportunity with its Product "Product B" 
-	When I click on "Home" tab 
+	Then I create new opportunity with Name "Split_Target_Opportunity_RN" with Account "QA Test" and pricebook "Standard Price Book"
+	When I click on "Opportunities" tab 
+	Then I create new opportunity with Name "Source-RenewNetOpsTesting" with Account "QA Test" and Product "Product B"
+	Then I resolved the Source Opportunity
+	When I create Source Opportunity with Line Items and resolve it and rename it as PES_Renewal_Opportunity
 	
-	When I click on "Service Contracts" tab 
-	Then I create new Service Contracts with Name "SourceServiceContract" with Account "QA Test" 
-	When I click on "Service Contracts" tab 
-	Then I select with its Product "Product A" 
-	When I click on "Home" tab 
-	
-	When I click on "Service Contracts" tab 
-	And I select contract and generate Opportunity with Name "PesSrcOpp" with Account "QA Test" 
-	When I click on "Home" tab 
-	
-	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "Split_Target_Opportunity_RN" with Account "QA Test" 
-	When I click on "Home" tab 
-	
-	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "CreateOppfromOpp" with Account "QA Test" 
-	When I click on "Opportunities" tab 
-	Then I select opportunity with its Product "Product B" 
-	When I click on "Home" tab 
-	
-	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "SourceOpportunity" with Account "QA Test" 
-	When I click on "Opportunities" tab 
-	Then I select opportunity with its Product "Product B" 
-	
+#	When I click on "Opportunities" tab 
+#	Then I select opportunity with its Product "Product B" 
+#	When I click on "Home" tab 
+#	When I click on "Opportunities" tab 
+#	Then I create new opportunity with Name "RenewNetOpsTesting" with Account "QA Test" 
+#	When I click on "Opportunities" tab 
+#	Then I select opportunity with its Product "Product B" 
+#	When I click on "Home" tab 
+#	
+#	When I click on "Service Contracts" tab 
+#	Then I create new Service Contracts with Name "SourceServiceContract" with Account "QA Test" 
+#	When I click on "Service Contracts" tab 
+#	Then I select with its Product "Product A" 
+#	When I click on "Home" tab 
+#	
+#	When I click on "Service Contracts" tab 
+#	And I select contract and generate Opportunity with Name "PesSrcOpp" with Account "QA Test" 
+#	When I click on "Home" tab 
+#	
+#	When I click on "Opportunities" tab 
+#	Then I create new opportunity with Name "Split_Target_Opportunity_RN" with Account "QA Test" 
+#	When I click on "Home" tab 
+#	
+#	When I click on "Opportunities" tab 
+#	Then I create new opportunity with Name "CreateOppfromOpp" with Account "QA Test" 
+#	When I click on "Opportunities" tab 
+#	Then I select opportunity with its Product "Product B" 
+#	When I click on "Home" tab 
+#	
+#	When I click on "Opportunities" tab 
+#	Then I create new opportunity with Name "SourceOpportunity" with Account "QA Test" 
+#	When I click on "Opportunities" tab 
+#	Then I select opportunity with its Product "Product B" 
+#	
 #@StandardPricebooks 
 #Scenario: Renew: new pricebook 
 #	When I click on "All Tabs" tab 
