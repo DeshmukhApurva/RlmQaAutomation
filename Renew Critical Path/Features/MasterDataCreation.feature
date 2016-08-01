@@ -12,6 +12,31 @@ Scenario: Rally Test Case ID:  : Renew: New account creation
 	When I click on "Account" tab 
 	Then I create new Renew Account with value "QA Test" 
 	
+@PlayCreation 
+Scenario: Rally Test Case ID : : Creation of Play 
+	When I click on "ServiceSource Setup" link 
+	And create a new Play with value "Play for Account" and "Account" and "High Risk Description" and its TaskName "PES Play Task" and its task type "Call" and AssignTo "CSM Manager" and Description "Enquiry of Play" and days "10" 
+	
+@PlaybookCreation 
+Scenario: Rally Test Case ID : : Creation of Playbook 
+	When I click on "ServiceSource Setup" link 
+	And create a new Playbook with value "PES PlayBook" with play "Play for Account" and its Short Description "High Risk Description" and Object "Account" and its TaskName "PES Play Task" and its task type "Call" and AssignTo "CSM Manager" and Description "Enquiry of Play" and days "10" 
+
+@CreateIndicatorGroupCreation
+Scenario: Rally Test Case ID : : Create Indicator Group and Add Indicators
+    When I click on "ServiceSource Setup" link
+	Then I create a new Indicator Group with name "CSM Indicator Group"
+	Then I add indicator
+
+@CreateSPTCreation
+Scenario: Rally Test Case ID : : Create Success Plan Template
+    When I click on "ServiceSource Setup" link
+	Then I create a new Success Plan Template with Template Name "PES New SPlan Template" PhaseName "PES SP Template Phase" Days "20" Indicator "Health Status" with PlayBook "PES PlayBook" Criteria1 Type: "Success" Criteria2 Type: "Meet" Criteria3 Type: "Fail" Criteria1: "Healthy" Criteria2: "Low Adoption" Criteria3: "Pending Churn"
+	
+@SuccessPlanCreation 
+Scenario: Rally Test Case ID: TC2895 : Create Success plan 
+	When I click on "Success Plans" tab 
+	Then I create a SuccessPlan with template "APT-000002" with Account "Action Machinery Co" 
 
 @CreateAsset 
 Scenario: Rally Test Case ID:  : Renew: Asset creation 
@@ -34,6 +59,14 @@ Scenario: Rally Test Case ID:  : Renew: Asset creation
 	Then I create new Service Contracts with Name "RenewNetOpsSCTest" with Account "QA Test" and Product "Product B"
 	When I click on "Service Contracts" tab 
 	Then I create new Service Contracts with Name "SourceServiceContract" with Account "QA Test" and Product "Product C"
+
+@Service_Contract_OppCreation 
+Scenario: Renew: Generate Contract 
+	When I click on "Service Contracts" tab 
+	Then I create new Service Contracts with Name "SourceServiceContract" with Account "QA Test" and Product "Product A"
+	When I click on "Service Contracts" tab 
+	And I select contract and generate Opportunity with Name "Service_Contract_Opp" with Account "QA Test" 
+	
 	
 @CreatemasterdataforAddOnRenewalOpp 
 Scenario: Renew: Add on Renewals creation 
@@ -47,6 +80,8 @@ Scenario: Renew: Generate Opp
 	When I click on "Opportunities" tab 
 	Then I create new opportunity with Name "PesSrcOpp" with Account "QA Test" and Product "Product B"
 	When I click on "Opportunities" tab 
+	Then I create new opportunity with Name "SplitOpportunity" with Account "QA Test" and Product "Product B"
+	When I click on "Opportunities" tab 
 	Then I create new opportunity with Name "SourceOpportunity" with Account "QA Test" and Product "Product B"
 	When I click on "Opportunities" tab 
 	Then I create new opportunity with Name "SourceOpportunity09" with Account "QA Test" and Product "Product B"
@@ -59,13 +94,13 @@ Scenario: Renew: Generate Opp
 	When I click on "Opportunities" tab 
 	Then I create new opportunity with Name "Source-RenewNetOpsTesting" with Account "QA Test" and Product "Product B"
 	Then I resolved the Source Opportunity
-	When I create Source Opportunity with Line Items and resolve it and rename it as "PES_Renewal_Opportunity"
 	
-@StandardPricebooks 
-Scenario: Renew: new pricebook 
-	When I click on "All Tabs" tab 
-	Then I click on Price Books with the name "Standard Price Book" 
+#@StandardPricebooks 
+#Scenario: Renew: new pricebook 
+#	When I click on "All Tabs" tab 
+#	Then I click on Price Books with the name "Standard Price Book" 
 
+	When I create Source Opportunity with Line Items and resolve it and rename it as "PES_Renewal_Opportunity"
 @CustomPricebooks
 Scenario: Renew: new pricebook 
     When I click on "All Tabs" tab  
@@ -88,12 +123,12 @@ Scenario: Renew: add products
 	Then I click on Products and create product with the name "Installation: Industrial - High"
 	
 
-@assignPricebooktoProduct 
-Scenario: Renew: assign pricebook to products 
-	When I click on the "All Tabs" grid tab 
-	Then I click on  pricebook "Test PriceBook" 
-	Then I add "Product A", "Product B", "Product c", "Product D" , "Installation: Industrial - High" and "GenWatt Diesel 10kW" 
-	
+#@assignPricebooktoProduct 
+#Scenario: Renew: assign pricebook to products 
+#	When I click on the "All Tabs" grid tab 
+#	Then I click on  pricebook "Test PriceBook" 
+#	Then I add "Product A", "Product B", "Product c", "Product D" , "Installation: Industrial - High" and "GenWatt Diesel 10kW" 
+#	
 	
 	
   
