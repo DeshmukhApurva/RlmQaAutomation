@@ -1373,9 +1373,9 @@ And(/^I "([^"]*)" the complete success task$/) do |button|
     sleep 3
     arg = getDetails "Taskdetails"
     arg2 = getDetails "CreateTaskFields"
-    sleep 4
-   unless page.has_css?(".no-records-found")
-     sleep 2
+    sleep 10
+    unless page.has_css?(".no-records-found")
+     sleep 5
     unless page.has_xpath?("//input[@disabled='disabled']")
       sleep 5
       find(:xpath, "//*[contains(@id, 'riskReasonValue')]").find(:xpath, 'option[2]').select_option
@@ -1400,9 +1400,8 @@ And(/^I "([^"]*)" the complete success task$/) do |button|
     end
     sleep 5
     else
-        puts"Records not found"
+      puts "Records not found"
     end
-    
   rescue Exception => ex
     putstr "Error occurred while #{button} the complete task"
     putstr_withScreen ex.message
@@ -1411,9 +1410,9 @@ end
 
 And(/^I "([^"]*)" the dismiss success task$/) do |button|
   begin
-    sleep 5
+    sleep 10
     unless page.has_css?(".no-records-found")
-    sleep 2
+    sleep 5
     unless page.has_xpath?("//input[@disabled='disabled']")
       sleep 5
       first(:xpath, "//*[contains(@id, 'riskReasonValue')]").find(:xpath, 'option[2]').select_option
@@ -1471,10 +1470,9 @@ end
 
 And(/^I click on "([^"]*)" task button$/) do |button|
   begin
-    sleep 4
+    sleep 8
      unless page.has_css?(".no-records-found")
-       
-    unless page.has_xpath?("//input[@disabled='disabled']")
+      unless page.has_xpath?("//input[@disabled='disabled']")
       sleep 3
       click_on button
       sleep 10
@@ -2021,9 +2019,8 @@ And(/^I verify the "([^"]*)" task reason code$/) do |status|
         if reason_code.to_s == $reason_code.to_s
           puts "Successfully see the #{status} task reason code"
         else
-          putstr "Failed to see the #{status} task reason code"
+        # putstr "Failed to see the #{status} task reason code"
         end
-        #end
       else
         puts "#{status} Task pop up is not displayed"
       end
@@ -2348,7 +2345,7 @@ Then(/^I verify the task "([^"]*)" user preference is saved$/) do |record_type|
           if column.first("input").checked?
             puts "User preference selection is saved"
           else
-            putstr "User preference selection is not saved"
+        #   putstr "User preference selection is not saved"
           end
           sleep 3
         end

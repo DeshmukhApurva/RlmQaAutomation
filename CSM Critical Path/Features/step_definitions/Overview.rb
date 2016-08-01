@@ -1266,7 +1266,7 @@ And(/^I click on Edit View link$/) do
     sleep 10
     click_on "Edit View"
     puts "Edit View clicked."
-    sleep 5
+    sleep 6
   rescue Exception => ex
     putstr "Error occurred while clicking Edit View link"
     putstr_withScreen ex.message
@@ -1316,6 +1316,50 @@ And(/^I select the Default checkbox and Save$/) do
     within(".pbBottomButtons") do
       click_on "Save"
     end
+    sleep 10
+  rescue Exception => ex
+    putstr "Error occurred while selecting Default Checkbox and Save"
+    putstr_withScreen ex.message
+  end
+end
+
+Then(/^I Clear the filter and Save$/) do
+  begin
+    sleep 10
+    click_on "Edit View"
+    puts "Edit View clicked."
+    
+    sleep 8
+    within(".detailList") do
+      unless all("tr")[3].first("td").first("input").checked?
+        all("tr")[3].first("td").first("input").click
+        puts "Successfully enabled the the product"
+        break
+      else
+        puts "Product is already enabled"
+      end
+    end
+    
+    within(".pbBottomButtons") do
+      click_on "Clear"
+    end
+    
+    sleep 10
+    within(".detailList") do
+      unless all("tr")[3].first("td").first("input").checked?
+        all("tr")[3].first("td").first("input").click
+        puts "Successfully enabled the the product"
+        break
+      else
+        puts "Product is already enabled"
+      end
+    end
+  
+    sleep 5
+    within(".pbBottomButtons") do
+      click_on "Save"
+    end
+    puts "Successfully clear the filter"
     sleep 10
   rescue Exception => ex
     putstr "Error occurred while selecting Default Checkbox and Save"
@@ -2166,8 +2210,6 @@ And(/^I mark the task as Not Started$/) do
              puts "Task status changed from Completed to Not started"
              sleep 2
              end          
-               
-             
    rescue Exception => ex
      putstr "Error occurred while changing the status from Completed to Not started"
      putstr_withScreen ex.message
@@ -2570,16 +2612,17 @@ end
 And(/^I change the filter attribute for Task$/) do
   begin
     arg = getDetails "Overview"
+    sleep 5
     find(:xpath, "//*[contains(@id, 'filterAttrViewList')]").select(arg["Filter_value1"])
-    sleep 5
+    sleep 10
     first(:xpath, "//*[contains(@title, 'Object Field Filter User Lookup (New Window)')]").click
-    sleep 5
+    sleep 6
     page.driver.browser.manage.window.maximize
     sleep 4
     page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
-    sleep 4
-    page.driver.browser.switch_to.frame("searchFrame")
     sleep 5
+    page.driver.browser.switch_to.frame("searchFrame")
+    sleep 8
     fill_in "lksrch",:with => arg["Search_value"]
     sleep 5
     click_on 'Go!'
@@ -2593,9 +2636,9 @@ And(/^I change the filter attribute for Task$/) do
     end
     sleep 3
     page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
-    sleep 3
+    sleep 10
     #find(:xpath, "//input[@value='Save']").click
-    sleep 5
+    
     puts "Filter Attribute selected."
 
     rescue Exception => ex
@@ -2640,7 +2683,8 @@ And(/^I provide Non\-Required additional details$/) do
   begin
     within all(".detailList")[1] do
       first("tbody").all("tr")[1].first("td").first("span").first("span").first("a").click
-      $date = first("tbody").all("tr")[1].first("td").first("span").first("span").first("a").text
+      sleep 5
+      $date = first("tbody").all("tr")[1].first("td").first("span").first("a").text
       puts "Value selected is: #{$date}"
     end
   rescue Exception => ex
@@ -2667,12 +2711,7 @@ Then(/^I verify the required details of the task$/) do
     end
     if page.has_text? ("Task")
       puts "Navigated to task page."
-      #within first(".pbBody") do
-        #within first(".detailList") do
-          #$count = all("tr")[6].all("td")[1].text
       $count = find(:xpath, "//*[contains(@id, '00No000000DVO0g_ileinner')]").text
-      puts ": #{$count}"
-      puts ": #{$x}"
       unless $count.to_i == $x.to_i
         puts "Required Additional Details Not Verified."
       else
@@ -2708,18 +2747,12 @@ Then(/^I verify the non\-required details of the task$/) do
     end
     if page.has_text? ("Task")
       puts "Navigated to task page."
-      #within all(".pbBody")[0] do
-        #within all(".detailList")[0] do
       $dat = find(:xpath, "//*[contains(@id, '00No000000DVO0b_ileinner')]").text
-      puts $dat
-      puts $date
       unless $dat == $date
         puts "Non-Required Additional Details Not Verified."
       else
         puts "Non-Required Additional Details Verified."
       end
-        #end
-      #end
     else
       puts "Not navigated to task page."
     end
@@ -2811,10 +2844,11 @@ And(/^I select Task FCG$/) do
           next if index == 0
           #puts index
           fc.click
+     puts "clicked on the fcg"
           sleep 10
           if page.has_css? (".ss-check")
             puts "Task FCG selected."
-          else
+           else
             puts "Task FCG not present."
             #puts index
           end

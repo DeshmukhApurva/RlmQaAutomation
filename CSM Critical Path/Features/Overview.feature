@@ -405,6 +405,13 @@ Scenario: Rally Test Case ID: TC5184: Verify records gets filtered on applying T
   Then I Verify result for Task as object
 
 
+@ClearTaskFilter
+Scenario:  Clear the filter
+  When I click on "Overview" link
+  And I Verify hamburger icon
+  Then I Clear the filter and Save
+  
+
 @TaskStateOverview
 Scenario: Rally Test Case ID: TC5195: Verifying Task State for Task from Overview page
   When I click on "Overview" link
