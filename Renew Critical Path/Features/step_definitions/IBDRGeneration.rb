@@ -416,7 +416,7 @@ Then(/^I verify the created products$/) do
       sleep 5
       if page.has_xpath?('//table/tbody/tr/th/a')
         puts "Successfully see the products"
-        sleep 1
+        sleep 4
         $first_product_name = all(:xpath,"//table/tbody/tr/th/a")[0].text
         #         sleep 4
         if page.has_xpath?('//table/tbody/tr[1]/th/a')
@@ -594,15 +594,20 @@ And(/^I select the products and covered assets$/) do
     puts "Successfully set the Covered Product"
     sleep 5
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[3]/input").set arg["ProductQuantity"]
+   
     sleep 5
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[6]/input").set arg["ProductSalesPrice"]
+    puts "2"
     sleep 5
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[9]/span/input").set arg2["IBDRCoveredAsset"]
+   
     sleep 4
     puts "Successfully set the Covered Asset"
     sleep 5
-    all(:xpath,'//td/input[@value=" Save "]')[0].click
-    sleep 6
+    
+    all(:xpath,'//td/input[@value=" Save "]')[1].click
+    
+    puts"clicked on the save"
   rescue Exception => ex
     putstr "Error occurred while selecting the product from grid, product quality, sales price, Covered Product and Covered Asset"
     putstr_withScreen  ex.message

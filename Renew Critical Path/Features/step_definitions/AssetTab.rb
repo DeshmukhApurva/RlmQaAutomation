@@ -385,7 +385,11 @@ end
 
 Then(/^I verify pagination$/) do
 	begin
+	  sleep 5
+	  unless page.has_css?(".no-records-found")
+		
 		prevpageinfo = find(".pagination-info").text
+		sleep 5
 		puts prevpageinfo
 		if page.has_css?(".pagination")
 		    currpage = find(".page-number.active").text.to_i
@@ -406,6 +410,9 @@ Then(/^I verify pagination$/) do
 			puts "No.of Records are less than the selected page-list to verify pagination"
 		end
 		
+		else
+		   puts "No Records found to verify pagination"
+		end 
 	rescue Exception =>ex
 		putstr "Error while verifying Pagination on grid"
 		putstr_withScreen  ex.message
