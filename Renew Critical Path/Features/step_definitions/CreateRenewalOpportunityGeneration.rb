@@ -135,7 +135,9 @@ end
 
 Then (/^I generate Opportunity from Opportunity$/) do
 begin
-      $product_name = find(:xpath,'//th[contains(text(),"Product")]/parent::tr/following-sibling::tr/th/a').text
+      
+      # $product_name = find(:xpath,'//th[contains(text(),"Product")]/parent::tr/following-sibling::tr/th/a').text
+      $product_name = first(:xpath, '//th[contains(text(),"Product")]/parent::tr/following-sibling::tr/th/a').text
       puts "$product_name = "
       puts $product_name 
 	arg = getDetails 'OppGenerationDetails'	
@@ -394,9 +396,9 @@ Then (/^I select the Renewal Opportunity$/) do
 	arg = getDetails "newOpportunity"
 	select "My Opportunities", :from => "fcf"
 		sleep 3
-		within(".fBody") do
+		#within(".fBody") do
 			click_on "Go!"
-		end
+		#end
 		sleep 5
 		foundCount = ""
 		begin  
@@ -1434,7 +1436,8 @@ begin
       putstr "Renewal field is not checked"
     end
     sleep 3
-    $generate_opportunity_prod = find(:xpath,'//th[contains(text(),"Product")]/parent::tr/following-sibling::tr/th/a').text
+    # $generate_opportunity_prod = find(:xpath,'//th[contains(text(),"Product")]/parent::tr/following-sibling::tr/th/a').text
+    $generate_opportunity_prod = first(:xpath,'//th[contains(text(),"Product")]/parent::tr/following-sibling::tr/th/a').text
     puts "$generate_opportunity_prod = "
     puts $generate_opportunity_prod
     within all('.list')[0] do 
