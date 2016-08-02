@@ -333,8 +333,7 @@ Scenario: Rally Test Case ID: TC5046,TC5047,TC5048,TC5049: Navigate to Focus Cat
 	When I click on "Overview" link
 	And I Verify Focus Category records
 	And I click on FC Header
-	Then I verify FC view details page
-	And I click Create New link
+  And I click Create New link
 	Then I save the new FC
 	And I click Edit link
 	Then I Save the changes
@@ -392,25 +391,6 @@ Scenario: Rally Test Case ID: TC5183: Availability of Task Object on Global filt
   And I Verify hamburger icon
   And I click on Edit View link
   Then I verify Task object present
-
-
-@TaskObjFilterValues
-Scenario: Rally Test Case ID: TC5184: Verify records gets filtered on applying Task filter
-  When I click on "Overview" link
-  And I Verify hamburger icon
-  And I click on Edit View link
-  And I select Task object
-  And I change the filter attribute for Task
-  And I select the Default checkbox and Save
-  Then I Verify result for Task as object
-
-
-@ClearTaskFilter
-Scenario:  Clear the filter
-  When I click on "Overview" link
-  And I Verify hamburger icon
-  Then I Clear the filter and Save
-  
 
 @TaskStateOverview
 Scenario: Rally Test Case ID: TC5195: Verifying Task State for Task from Overview page

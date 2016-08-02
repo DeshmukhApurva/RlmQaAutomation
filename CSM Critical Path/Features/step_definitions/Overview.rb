@@ -2091,6 +2091,7 @@ end
 
 And(/^I click Edit link$/) do
   begin
+    sleep 5
     if page.has_text? ("Success Tasks")
       click_on "Edit"
       puts "Edit link clicked."
@@ -2140,11 +2141,11 @@ end
 
 And(/^I click Record Name link$/) do
   begin
-     within("#fcFullList") do
+    within("#taskGrid") do
     sleep 5
-    $val = first("tbody").first("tr").all("td")[0].first("a").text
-    first("tbody").first("tr").all("td")[0].first("a").click
-end
+    $val = first("tbody").first("tr").all("td")[3].first("a").text
+    first("tbody").first("tr").all("td")[3].first("a").click
+   end
   rescue Exception => ex
     putstr "Error occurred while clicking on Record Name link"
     putstr_withScreen ex.message
@@ -2153,6 +2154,7 @@ end
 
 Then(/^I verify Record Name details page$/) do
   begin
+  sleep 5
     $check = find(".pageDescription").text
     if $val == $check
       puts "Record Name Verified."
