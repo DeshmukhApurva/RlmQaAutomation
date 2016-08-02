@@ -31,20 +31,20 @@ Scenario: Rally Test Case ID:  : Renew: Asset creation
 	Then I create new Service Contracts with Name "RenewService" with Account "GE Force" and Product "Product B"
 	When I click on "Service Contracts" tab 
 	Then I create new Service Contracts with Name "RenewNetOpsSCTest" with Account "GE Force" and Product "Product C"
-
-@Renew_Service_Contract_OppCreation 
-Scenario: Renew: Generate Contract 
-	When I click on "Service Contracts" tab 
-	Then I create new Service Contracts with Name "SourceServiceContract" with Account "GE Force" and Product "Product A"
-	When I click on "Service Contracts" tab 
-	And I select contract and generate Opportunity with Name "Service_Contract_Opp" with Account "GE Force" 
-	
-	  	
+    When I click on "Service Contracts" tab 
+	Then I create new Service Contracts with Name "SourceSCRenew" with Account "GE Force" and Product "Product C"
+    
 @Renew_OppCreation 
 Scenario: Renew: Generate Opp 
 	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "RenewTesting" with Account "GE Force" and Product "Product B"
-	When I click on "Opportunities" tab 
 	Then I create new opportunity with Name "RenewService" with Account "GE Force" and Product "Product B"
+	When I click on "Opportunities" tab 
+	Then I create new opportunity with Name "Split_Target_Opportunity_RU" with Account "GE Force" and Product "Product B"
+	
+@Renew_PES_Renewal_OpportunityresolveRenameOpp 
+Scenario: Renew: Generate Opp 
+	When I click on "Opportunities" tab 
+	Then I create new opportunity with Name "Source-RenewTesting" with Account "QA Test" and Product "Product B" 
+	Then I resolved the Source Opportunity and rename with name "RenewTesting" 
 	
 	
