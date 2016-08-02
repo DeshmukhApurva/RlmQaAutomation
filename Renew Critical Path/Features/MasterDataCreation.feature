@@ -5,30 +5,6 @@ Background: Login to the Application
 	Given that I navigate to the CRM application 
 	Then I should land on CRM home page 
 	
-@CustomPricebooks 
-Scenario: Renew: new pricebook 
-    When user logout from "RENEW" application
-    When I log into "SYSTEMADMIN_EETEST4" details	
-    When I click on "All Tabs" tab 
-	Then I click on Price Books and create pricebook with the name "Test PriceBook" 
-	
-@addProducts 
-Scenario: Renew: add products 
-    #When user logout from "RENEW" application
-    #When I log into "SYSTEMADMIN_EETEST4" details	
-    When I click on "All Tabs" tab 
-	Then I click on Products and create product with the name "Product A" 
-	When I click on "All Tabs" tab 
-	Then I click on Products and create product with the name "Product B" 
-	When I click on "All Tabs" tab 
-	Then I click on Products and create product with the name "Product C" 
-	When I click on "All Tabs" tab 
-	Then I click on Products and create product with the name "Product D" 
-	When I click on "All Tabs" tab 
-	Then I click on Products and create product with the name "GenWatt Diesel 10kW" 
-	When I click on "All Tabs" tab 
-	Then I click on Products and create product with the name "Installation: Industrial - High" 
-	
 @Createnewaccount 
 Scenario: Rally Test Case ID:  : Renew: New account creation 
 	When I click on "Account" tab 
@@ -87,7 +63,7 @@ Scenario: Rally Test Case ID:  : Renew: Asset creation
 @Service_Contract_OppCreation 
 Scenario: Renew: Generate Contract 
 	When I click on "Service Contracts" tab 
-	Then I create new Service Contracts with Name "SourceServiceContract" with Account "QA Test" and Product "Product A" 
+	Then I create new Service Contracts with Name "Source_Service_Contract" with Account "QA Test" and Product "Product A" 
 	When I click on "Service Contracts" tab 
 	And I select SC and generate Opportunity with Name "Service_Contract_Opp" with Account "QA Test" 
 	
@@ -132,12 +108,6 @@ Scenario: Renew: Generate Opp
 	
 
 	
-	#@assignPricebooktoProduct 
-	#Scenario: Renew: assign pricebook to products 
-	#	When I click on the "All Tabs" grid tab 
-	#	Then I click on  pricebook "Test PriceBook" 
-	#	Then I add "Product A", "Product B", "Product c", "Product D" , "Installation: Industrial - High" and "GenWatt Diesel 10kW" 
-	#	
 	
 	
   

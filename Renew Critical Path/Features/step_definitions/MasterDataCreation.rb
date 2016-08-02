@@ -59,7 +59,7 @@ Then(/^I click on Price Books and create pricebook with the name "(.*?)"$/) do |
     sleep 5
     fill_in "Price Book Name",:with=>arg1
     sleep 5
-    find('input[type=checkbox]').click
+   find(:xpath, "(//input[@id='IsActive'])").set(true)
     #topButtonRow
     within(".pbBottomButtons") do
       first(:xpath, "//*[contains(@name, 'save')]").click
@@ -76,67 +76,61 @@ end
 
 #Then(/^I click on Products and create product with the name "(.*?)" and product code "(.*?)" $/) do |arg1,arg2|
 #Then(/^I click on Products and create product with the name "(.*?)" and product code "(.*?)"$/) do |arg1,arg2|
-#Then (/^I click on Products and create product with the name "(.*?)"$/) do |arg|
-#begin
-#    sleep 8
-#    click_on "Products"
-#    sleep 8
-#    puts "I click on Products"
-#    sleep 10
-#
-#    #    within all(".bSubBlock brandSecondaryBrd secondaryPalette") do
-#    #      puts "m in"
-#    #      first(:xpath, "//*[contains(@name, 'go')]").click
-#    #    end
-#    click_on "New"
-#    puts "Adding products"
-#    sleep 5
-#    fill_in "Product Name",:with=>arg
-#    fill_in "Product Code",:with=> "Pro1234"
-#    sleep 5
-#   #find('input[type=checkbox]').click
-#    #topButtonRow
-#    find(:xpath, "(//input[@id='IsActive'])").set(true)
-#    sleep 5
-#    within(".pbBottomButtons") do
-#      first(:xpath, "//*[contains(@name, 'save')]").click
-#      sleep 5
-#    end
-#
-#    puts "Product added successfully"
-#    sleep 5
-#    click_on "Add"
-#    sleep 5
-#    first(:xpath, "//*[contains(@title, 'Unit Price')]").send_keys "3000"
-#    sleep 5
-#    click_on "Save"
-#    sleep 5
-#    puts "product price added successfully"
-#    sleep 5
-#    click_on "Add to Price Book"
-#    sleep 5
-#    find(:xpath, "//*[contains(@name, 'allBox')]").click
-#    sleep 3
-#    #find(:xpath, "//*[contains(@value, 'Select')]").click
-#    #find(:xpath, "//input[@value='Select']").click
-#    #first(:xpath, "//*[contains(@title, 'Select')]").click
-#    first(:xpath, "//*[contains(@name, 'edit')]").click
-#    
-#    puts "I click on Select"
-#    end
-#    sleep 5
-#    find(:xpath, "//*[contains(@title, 'List Price 1')]").send_keys "3500"
-#    sleep 5
-#    click_on "Save"
-#    sleep 5
-#
-#
-#  rescue Exception => ex
-#    raise "Error occurred while adding product"
-#    putstr_withScreen  ex.message
-#  #end
-#end
-#
+Then (/^I click on Products and create product with the name "(.*?)"$/) do |arg|
+begin
+   sleep 8
+   click_on "Products"
+   sleep 8
+   puts "I click on Products"
+   sleep 10
+
+   #    within all(".bSubBlock brandSecondaryBrd secondaryPalette") do
+   #      puts "m in"
+   #      first(:xpath, "//*[contains(@name, 'go')]").click
+   #    end
+   click_on "New"
+   puts "Adding products"
+   sleep 5
+   fill_in "Product Name",:with=>arg
+   fill_in "Product Code",:with=> "Pro1234"
+   sleep 5
+  #find('input[type=checkbox]').click
+   #topButtonRow
+   find(:xpath, "(//input[@id='IsActive'])").set(true)
+   sleep 5
+   within(".pbBottomButtons") do
+     first(:xpath, "//*[contains(@name, 'save')]").click
+     sleep 5
+   end
+
+   puts "Product added successfully"
+   sleep 5
+   click_on "Add"
+   sleep 5
+   first(:xpath, "//*[contains(@title, 'Unit Price')]").send_keys "3000"
+   sleep 5
+   click_on "Save"
+   sleep 5
+   puts "product price added successfully"
+   sleep 5
+   click_on "Add to Price Book"
+   sleep 5
+   find(:xpath, "//*[contains(@name, 'allBox')]").click
+   sleep 3
+   #find(:xpath, "//*[contains(@value, 'Select')]").click
+   #find(:xpath, "//input[@value='Select']").click
+   #first(:xpath, "//*[contains(@title, 'Select')]").click
+   first(:xpath, "//*[contains(@name, 'edit')]").click
+   
+   puts "I click on Select"
+   end
+   sleep 5
+   find(:xpath, "//*[contains(@title, 'List Price 1')]").send_keys "3500"
+   sleep 5
+   click_on "Save"
+   puts "Successfully Save"
+ end
+
 
 When(/^I click on "([^"]*)" tab$/) do |tab|
   begin
