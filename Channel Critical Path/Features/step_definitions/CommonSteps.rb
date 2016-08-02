@@ -489,6 +489,7 @@ When(/^I log into "(.*?)" details$/) do |arg1|
   rescue Exception => ex
     puts "Error while entering credentials"
     puts ex.message
+    ENV['UserRole'] = $userRole
   end
 end
 
@@ -552,7 +553,15 @@ When(/^I create Source Opportunity with Line Items and resolve it$/) do
     sleep 5
     click_on "Add Product"
     sleep 5
-
+    first(:option, 'Active (Product)').select_option
+    sleep 1
+    first(:option, 'equals').select_option
+    sleep 1
+    find(:xpath, '//span[contains(text(),"By Field Filter")]/following-sibling::div/div/input').set 'Active'
+    sleep 1
+    find(:xpath, '//input[contains(@id,"save_filter_PricebookEntry")]').click
+    sleep 5
+    
     find(:xpath, "(//input[@type='checkbox'])[2]").set(true)
     find(:xpath, "(//input[@type='checkbox'])[3]").set(true)
     find(:xpath, "(//input[@type='checkbox'])[4]").set(true)
