@@ -39,7 +39,7 @@ Scenario: Rally Test Case ID: TC3407,TC3408,TC3409,TC3410,TC3411,TC3413: Opportu
 	When I click on "Opportunities" link
 	And I select Renew View
 	And I click on the Go button if present
-	And I click on "RenewOpsTesting" link
+	And I click on "RenewNetOpsTesting" link
 	#And I go to existing renewal opportunities
 	And I open the asset
 	And I update the asset as per criteria set for asset field on opportunity generation
@@ -47,7 +47,7 @@ Scenario: Rally Test Case ID: TC3407,TC3408,TC3409,TC3410,TC3411,TC3413: Opportu
 	#And I go to the existing renewal opportunities
 	And I select Renew View
 	And I click on the Go button if present
-	And I click on "RenewOpsTesting" link
+	And I click on "RenewNetOpsTesting" link
 	Then I should see the Metrics fields values are recalculated on the opportunity
 @update_opportunity_checkbox
 Scenario: Rally Test Case ID: TC3412 : Opportunity Updates - Update opportunity checkbox
