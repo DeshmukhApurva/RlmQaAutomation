@@ -337,8 +337,8 @@ Scenario: Rally Test Case ID: TC5046,TC5047,TC5048,TC5049: Navigate to Focus Cat
 	Then I save the new FC
 	And I click Edit link
 	Then I Save the changes
-	And I click Record Name link
-	Then I verify Record Name details page
+#	And I click Record Name link
+#	Then I verify Record Name details page
 
 
 @VerifyCDpopupAddDetails
@@ -363,7 +363,7 @@ Scenario: Rally Test Case ID: TC5041,TC5042,TC5043: Verify Required/Non-Required
 	And I click on "Overview" link
 	And I click on Dismiss Action
 	Then I verify Additional Fields Section
-	And I provide Required additional details
+  And I provide Required additional details
 	And I click on Save
 	And I click on "Overview" link
 	Then I verify the required details of the task
@@ -383,6 +383,16 @@ Scenario: Rally Test Case ID: TC5096: Verify the Action links for task created b
   And I verify Task page
   And I click on "Overview" link
   Then I verify the User Access
+
+ @TaskObjFilterValues
+ Scenario: Rally Test Case ID: TC5211: Verify records gets filtered on applying Task filter
+ When I click on "Overview" link
+ And I Verify hamburger icon
+ And I click on Edit View link
+ And I select Task object
+ And I change the filter attribute for Task
+ And I select the Default checkbox and Save
+ Then I Verify result for Task as object
 
 
 @TaskObj

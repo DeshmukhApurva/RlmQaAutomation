@@ -370,8 +370,18 @@ Scenario: Rally Test Case ID: TC4769,TC4770,TC4771,TC4772: Navigate to Focus Cat
 	Then I save the new FC
 	And I click Edit link
 	Then I Save the changes
-	And I click Record Name link
-	Then I verify Record Name details page
+  #And I click Record Name link
+  #Then I verify Record Name details page
+
+ @CSM_TaskObjFilterValues
+ Scenario: Rally Test Case ID: TC5211: Verify records gets filtered on applying Task filter
+ When I click on "Overview" link
+ And I Verify hamburger icon
+ And I click on Edit View link
+ And I select Task object
+ And I change the filter attribute for Task
+ And I select the Default checkbox and Save
+ Then I Verify result for Task as object
 
 
 @CSM_ALDisabledTask

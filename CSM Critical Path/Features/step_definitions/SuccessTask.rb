@@ -892,8 +892,9 @@ And (/^I dismiss Success task$/) do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
     end
-    sleep 10
-     unless page.has_css?(".no-records-found")
+    
+    sleep 13
+    unless page.has_css?(".no-records-found")
     i=0
     within(:id,"taskGrid") do
       all("tr").each do |row|
@@ -1733,6 +1734,13 @@ end
 
 And(/^I open the "([^"]*)" pop up window$/) do |task|
   begin
+    sleep 5
+     searchStr = "In Progress"
+    within(".bootstrap-table") do
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
+    end
     sleep 5
     $ispopwindow = 0
     unless page.has_css?(".no-records-found")
