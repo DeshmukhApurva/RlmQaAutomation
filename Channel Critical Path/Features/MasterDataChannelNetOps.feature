@@ -19,25 +19,41 @@ Scenario: Rally Test Case ID:  : Renew: Asset creation
 Scenario: Rally Test Case ID:  : Renew: Asset creation 
 	When I click on "Service Contracts" tab 
 	Then I create new Service Contracts with Name "PES_Service_Contract" with Account "PES Channel Account" and Product "Product B" 
- 
-@RenewalOpportunityCreation 
-Scenario: Renew: Generate Renew Opp 
-    When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "Source-ChannelOpsTesting" with Account "PES Channel Account" and Product "Product B" 
-	Then I resolved the Source Opportunity and rename with name "ChannelOpsTesting" 
-	When I create Source Opportunity with Line Items and resolve it and rename it as "PES_Add_Partner" 
-	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "Source-ChannelOpsTesting" with Account "PES Channel Account" and Product "Product B" 
-	Then I resolved the Source Opportunity and rename with name "ChannelOpsTesting" 
-	When I create Source Opportunity with Line Items and resolve it and rename it as "PES_Pipeline_Opportunity" 
-	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "Source-ChannelOpsTesting" with Account "PES Channel Account" and Product "Product B" 
-	Then I resolved the Source Opportunity and rename with name "ChannelOpsTesting" 
-	When I create Source Opportunity with Line Items and resolve it and rename it as "PES_CHL_Opp" 
+
+@Createsourceopportunity
+Scenario: Rally Test Case ID:  : Renew: Asset creation 
+	When I click on "Service Contracts" tab 
+#@RenewalOpportunityCreation 
+#Scenario: Renew: Generate Renew Opp 
+#    When I click on "Opportunities" tab 
+#	Then I create new opportunity with Name "Source-ChannelOpsTesting" with Account "PES Channel Account" and Product "Product B" 
+#	Then I resolved the Source Opportunity and rename with name "ChannelOpsTesting" 
+#	When I create Source Opportunity with Line Items and resolve it and rename it as "PES_Add_Partner" 
+#	When I click on "Opportunities" tab 
+#	Then I create new opportunity with Name "Source-ChannelOpsTesting" with Account "PES Channel Account" and Product "Product B" 
+#	Then I resolved the Source Opportunity and rename with name "ChannelOpsTesting" 
+#	When I create Source Opportunity with Line Items and resolve it and rename it as "PES_Pipeline_Opportunity" 
+#	When I click on "Opportunities" tab 
+#	Then I create new opportunity with Name "Source-ChannelOpsTesting" with Account "PES Channel Account" and Product "Product B" 
+#	Then I resolved the Source Opportunity and rename with name "ChannelOpsTesting" 
+#	When I create Source Opportunity with Line Items and resolve it and rename it as "PES_CHL_Opp" 
 
 @PartnerOpportunityCreation
 Scenario: Channel: Generate Partner Opportunity 
-     When I create Source Opportunity with Line Items and resolve it and rename it as "PES_Pipeline_Opportunity" 
+#     When I create Source Opportunity with Line Items and resolve it and rename it as "PES_Pipeline_Opportunity" 
+#     And I click on "Add New Partner Opportunity" button
+#     And I select partner account one "PES Channel Account"
+#     And I navigate to "Partner Contact(s)" section
+#     And I select the partner account one contact "PES Channel User" from the contacts lookup list
+#     And I select the partner account one as "Reseller"
+#     And I select partner account two "PES Channel Account"
+#     And I navigate to "Partner Contact(s)" section
+#     And I select the partner account two contact "PES Channel User" from the contacts lookup list
+#     And I select the partner account two as "Distributor"
+#     And I rename the partner opportunity name as "PES_Orange_Pipeline"
+#     And I click on the "Grant Access"
+     
+     When I create Source Opportunity with Line Items and resolve it and rename it as "5 TierAutomationRO" 
      And I click on "Add New Partner Opportunity" button
      And I select partner account one "PES Channel Account"
      And I navigate to "Partner Contact(s)" section
@@ -47,12 +63,55 @@ Scenario: Channel: Generate Partner Opportunity
      And I navigate to "Partner Contact(s)" section
      And I select the partner account two contact "PES Channel User" from the contacts lookup list
      And I select the partner account two as "Distributor"
-     And I rename the partner opportunity name as "PES_Orange_Pipeline"
+     And I select the "To Master Opportunity" option from syncing dropdown
+     And I rename the partner opportunity name as "PES_NeedStatus"
      And I click on the "Grant Access"
+     And I navigate to Opportunity from partner Opportunity page
+     And I navigate to synced quote details page from opportunity
+     And I rename the quote as "5 Tier Quote"
      
-      
-     
-     
-     
-    
+#     When I create Source Opportunity with Line Items and resolve it and rename it as "PES_CHL_Opp"
+#     And I click on "Add New Partner Opportunity" button
+#     And I select partner account one "PES Channel Account"
+#     And I navigate to "Partner Contact(s)" section
+#     And I select the partner account one contact "PES Channel User" from the contacts lookup list
+#     And I select the partner account one as "Reseller"
+#     And I rename the partner opportunity name as "Portal Agreement"
+#     And I click on the "Grant Access"
+#     
+#     When I navigate to renewal opportunity "PES_CHL_Opp"
+#     And I click on "Add New Partner Opportunity" button
+#     And I select partner account one "PES Channel Account"
+#     And I navigate to "Partner Contact(s)" section
+#     And I select the partner account one contact "PES Channel User" from the contacts lookup list
+#     And I select the partner account one as "Reseller"
+#     And I rename the partner opportunity name as "Partner Agreement"
+#     And I click on the "Grant Access"
+#     
+#     When I navigate to renewal opportunity "PES_CHL_Opp"
+#     And I click on "Add New Partner Opportunity" button
+#     And I select partner account one "PES Channel Account"
+#     And I navigate to "Partner Contact(s)" section
+#     And I select the partner account one contact "PES Channel User" from the contacts lookup list
+#     And I select the partner account one as "Reseller"
+#     And I rename the partner opportunity name as "PES_NeedStatus"
+#     And I click on the "Grant Access"
+#     
+#     When I navigate to renewal opportunity "PES_CHL_Opp"
+#     And I click on "Add New Partner Opportunity" button
+#     And I select partner account one "PES Channel Account"
+#     And I navigate to "Partner Contact(s)" section
+#     And I select the partner account one contact "PES Channel User" from the contacts lookup list
+#     And I select the partner account one as "Reseller"
+#     And I rename the partner opportunity name as "PES_NeedStatus"
+#     And I click on the "Grant Access"
+#      
+#     
+#     
+#     
+#      
+#     
+#     
+#     
+#    
 		 

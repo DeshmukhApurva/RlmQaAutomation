@@ -239,23 +239,6 @@ When(/^I create Source Opportunity with Line Items and resolve it and rename it 
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[13]/td[5]/span/input").set $endDateOLI
     sleep 2
 
-    #Enter product sales price
-    #    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[6]/input").send_keys "1000"
-    #    sleep 2
-    #    find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[6]/input").send_keys "2000"
-    #    sleep 2
-    #    find(:xpath,"//*[@id='editPage']/table/tbody/tr[13]/td[6]/input").send_keys "1500"
-    #    sleep 2
-    #    find(:xpath,"//*[@id='editPage']/table/tbody/tr[17]/td[6]/input").send_keys "3000"
-    #    sleep 2
-    # find(:xpath,"//*[@id='editPage']/table/tbody/tr[21]/td[6]/input").set arg["ProductSalesPrice"]
-    # sleep 2
-    # find(:xpath,"//*[@id='editPage']/table/tbody/tr[25]/td[6]/input").set arg["ProductSalesPrice"]
-    # sleep 2
-    # find(:xpath,"//*[@id='editPage']/table/tbody/tr[29]/td[6]/input").set arg["ProductSalesPrice"]
-    # sleep 2
-    # find(:xpath,"//*[@id='editPage']/table/tbody/tr[33]/td[6]/input").set arg["ProductSalesPrice"]
-    # sleep 2
     all(:xpath,'//td/input[@value=" Save "]')[0].click
     sleep 6
 
@@ -464,7 +447,7 @@ And(/^I select the partner account one as "(.*?)"$/) do |arg|
     putstr "Failed to see the #{arg} field value" unless result
     sleep 8
     result = false
-    
+
   rescue Exception => ex
     putstr "Error occurred while selecting the partner account one #{arg} field values"
     putstr_withScreen  ex.message
@@ -483,7 +466,7 @@ And(/^I select the partner account two as "(.*?)"$/) do |arg|
     putstr "Failed to see the #{arg} field value" unless result
     sleep 8
     result = false
-    
+
   rescue Exception => ex
     putstr "Error occurred while selecting the partner account two #{arg} field values"
     putstr_withScreen  ex.message
@@ -494,8 +477,22 @@ And(/^I rename the partner opportunity name as "(.*?)"$/) do |arg|
   begin
     sleep 3
     all('input[type=text]')[0].set arg
-    puts "Renamed the partner opportunity name"
+    puts "Renamed the partner opportunity"
 
+  end
+end
+
+And(/^I rename the quote as "(.*?)"$/) do |arg|
+  begin
+    within ("#bottomButtonRow") do
+      first(:xpath, "//*[contains(@name, 'edit')]").click
+      sleep 5
+    end
+
+    fill_in "Quote Name",:with => arg
+    sleep 3
+    first(:xpath, "//*[contains(@name, 'save')]").click
+    puts "Quote renamed successfully"
   end
 end
 
