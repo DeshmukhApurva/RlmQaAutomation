@@ -11,7 +11,7 @@ Then(/^I create new Channel Account with value "(.*?)" with AccountNumber "(.*?)
     puts "Filled value for Account name"
     sleep 4
     fill_in "Account Number",:with =>arg2
-     puts "Filled value for Account Number"
+    puts "Filled value for Account Number"
     sleep 4
     fill_in "Billing Country" ,:with =>arg3
     puts "Filled value for Billing Country"
@@ -28,12 +28,12 @@ Then(/^I create new Channel Account with value "(.*?)" with AccountNumber "(.*?)
   end
 end
 
- And(/^I Manage External Account$/) do |arg|
-   begin
-     sleep 5
-     find(:xpath,"//*[@id='acc1_ileinner']/a[2]").click
-     puts "I change Owner"
-     # sleep 3
+And(/^I Manage External Account$/) do |arg|
+  begin
+    sleep 5
+    find(:xpath,"//*[@id='acc1_ileinner']/a[2]").click
+    puts "I change Owner"
+    # sleep 3
     # find(:xpath,"//select[contains(@title,'Search scope')]").select "User"
     sleep 3
     fill_in "Owner",:with=> "QA ChannelManager"
@@ -41,17 +41,17 @@ end
     click_on "Save"
     puts "I save Owner"
     sleep 6
-     within('#workWithPortal') do
+    within('#workWithPortal') do
       find(:xpath,"//*[@id='workWithPortalLabel']").click
-           puts "I Manage Account As Partner"
-            find(:xpath,"//*[@id='workWithPortalMenu']/a").click
-     puts "I click on Enabled Partner"
-      end
-     sleep 8
-     click_on "New Contact"
-     
-   end
- end
+      puts "I Manage Account As Partner"
+      find(:xpath,"//*[@id='workWithPortalMenu']/a").click
+      puts "I click on Enabled Partner"
+    end
+    sleep 8
+    click_on "New Contact"
+
+  end
+end
 
 Then(/^I create new Asset with Name "(.*?)" and its Product "(.*?)" and its Status "(.*?)" and price "(.*?)" and account "(.*?)"$/) do |arg1,arg2,arg3,arg4,arg5|
   begin
@@ -85,7 +85,6 @@ Then(/^I create new Asset with Name "(.*?)" and its Product "(.*?)" and its Stat
     puts ex.message
   end
 end
-
 
 Then(/^I create new Service Contracts with Name "(.*?)" with Account "(.*?)" and Product "(.*?)"$/) do |arg1,arg2,arg|
   begin
@@ -136,22 +135,20 @@ Then(/^I create new Service Contracts with Name "(.*?)" with Account "(.*?)" and
   end
 end
 
-
-
 When(/^I create Source Opportunity with Line Items and resolve it and rename it as "(.*?)"$/) do |arg|
   begin
-  # Components of a Time
-  #    puts "Current Time : " + time.inspect
-  #    puts time.year    # => Year of the date
-  #    puts time.month   # => Month of the date (1 to 12)
-  #    puts time.day     # => Day of the date (1 to 31 )
-  #    puts time.wday    # => 0: Day of week: 0 is Sunday
-  #    puts time.yday    # => 365: Day of year
-  #    puts time.hour    # => 23: 24-hour clock
-  #    puts time.min     # => 59
-  #    puts time.sec     # => 59
-  #    puts time.usec    # => 999999: microseconds
-  #    puts time.zone    # => "UTC": timezone name
+    # Components of a Time
+    #    puts "Current Time : " + time.inspect
+    #    puts time.year    # => Year of the date
+    #    puts time.month   # => Month of the date (1 to 12)
+    #    puts time.day     # => Day of the date (1 to 31 )
+    #    puts time.wday    # => 0: Day of week: 0 is Sunday
+    #    puts time.yday    # => 365: Day of year
+    #    puts time.hour    # => 23: 24-hour clock
+    #    puts time.min     # => 59
+    #    puts time.sec     # => 59
+    #    puts time.usec    # => 999999: microseconds
+    #    puts time.zone    # => "UTC": timezone name
     time = Time.new
     #oppDateTime =  +
     time = Time.new
@@ -204,7 +201,6 @@ When(/^I create Source Opportunity with Line Items and resolve it and rename it 
     find(:xpath, "(//input[@type='checkbox'])[5]").set(true)
     find(:xpath, "(//input[@type='checkbox'])[6]").set(true)
 
-    
     # find(:xpath, "(//input[@type='checkbox'])[6]").set(true)
     # find(:xpath, "(//input[@type='checkbox'])[7]").set(true)
     # find(:xpath, "(//input[@type='checkbox'])[8]").set(true)
@@ -244,14 +240,14 @@ When(/^I create Source Opportunity with Line Items and resolve it and rename it 
     sleep 2
 
     #Enter product sales price
-    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[6]/input").send_keys "1000"
-    sleep 2
-    find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[6]/input").send_keys "2000"
-    sleep 2
-    find(:xpath,"//*[@id='editPage']/table/tbody/tr[13]/td[6]/input").send_keys "1500"
-    sleep 2
-    find(:xpath,"//*[@id='editPage']/table/tbody/tr[17]/td[6]/input").send_keys "3000"
-#    sleep 2
+    #    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[6]/input").send_keys "1000"
+    #    sleep 2
+    #    find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[6]/input").send_keys "2000"
+    #    sleep 2
+    #    find(:xpath,"//*[@id='editPage']/table/tbody/tr[13]/td[6]/input").send_keys "1500"
+    #    sleep 2
+    #    find(:xpath,"//*[@id='editPage']/table/tbody/tr[17]/td[6]/input").send_keys "3000"
+    #    sleep 2
     # find(:xpath,"//*[@id='editPage']/table/tbody/tr[21]/td[6]/input").set arg["ProductSalesPrice"]
     # sleep 2
     # find(:xpath,"//*[@id='editPage']/table/tbody/tr[25]/td[6]/input").set arg["ProductSalesPrice"]
@@ -302,12 +298,204 @@ When(/^I create Source Opportunity with Line Items and resolve it and rename it 
     sleep 5
     #$automationRO = $automationOppName + "RO"
     fill_in "Opportunity Name",:with=> arg
-    sleep 1
+    sleep 3
+    fill_in "Earliest Expiration Date",:with=> $earliestExpirationDate
+    sleep 3
     first(:button,'Save').click
     sleep 8
   rescue Exception => ex
     puts "Error occurred while resolving Opportunities"
     puts ex.message
+  end
+end
+
+And(/^I select partner account one "(.*?)"$/) do |arg|
+  begin
+    sleep 2
+
+    if page.has_css?(".lookupIcon")
+      #puts "Successfully see the #{arg["PartnerAccount1FieldName"]} and #{arg["PartnerAccount2FieldName"]} lookup Icons"
+      sleep 1
+      main = page.driver.browser.window_handles.first
+      sleep 2
+      find("img[alt='Partner Account 1 Lookup (New Window)']").click
+      sleep 8
+      page.driver.browser.manage.window.maximize
+      sleep 3
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+      sleep 3
+      page.driver.browser.switch_to.frame("resultsFrame")
+      sleep 3
+      within('.list') do
+        #click_link arg2["PartnerAccount1Name"]
+        click_link arg
+      end
+      sleep 2
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+      sleep 1
+      #puts "Successfully Selected the #{arg["PartnerAccount1FieldName"]} from #{arg["PartnerOpportunityName"]} page"
+      puts "Selected partner account one"
+
+    end
+    sleep 4
+  rescue Exception => ex
+    putstr "test"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I select partner account two "(.*?)"$/) do |arg|
+  begin
+    sleep 2
+
+    if page.has_css?(".lookupIcon")
+      #puts "Successfully see the #{arg["PartnerAccount1FieldName"]} and #{arg["PartnerAccount2FieldName"]} lookup Icons"
+      sleep 1
+      main = page.driver.browser.window_handles.first
+      sleep 2
+      find("img[alt='Partner Account 2 Lookup (New Window)']").click
+      sleep 8
+      page.driver.browser.manage.window.maximize
+      sleep 3
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+      sleep 3
+      page.driver.browser.switch_to.frame("resultsFrame")
+      sleep 3
+      within('.list') do
+        #click_link arg2["PartnerAccount1Name"]
+        click_link arg
+      end
+      sleep 2
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+      sleep 1
+      #puts "Successfully Selected the #{arg["PartnerAccount1FieldName"]} from #{arg["PartnerOpportunityName"]} page"
+      puts "Selected partner account one"
+
+    end
+    sleep 4
+  rescue Exception => ex
+    putstr "test"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I select the partner account one contact "([^"]*)" from the contacts lookup list$/) do |arg|
+  begin
+    sleep 4
+    if page.has_css?(".lookupIcon")
+      puts "Successfully see the PartnerAccount1ContactFieldName"
+      sleep 2
+      main = page.driver.browser.window_handles.first
+      sleep 3
+      find("img[alt='Partner Account 1 Contact Lookup (New Window)']").click
+      sleep 8
+      page.driver.browser.manage.window.maximize
+      sleep 3
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+      sleep 5
+      page.driver.browser.switch_to.frame("resultsFrame")
+      sleep 3
+      within('.list') do
+        #click_link arg2["PartnerAccount1Contact"]
+        click_link arg
+      end
+      sleep 5
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+      sleep 3
+      puts "Successfully Selected the partner account 1 contact"
+      sleep 8
+      main = page.driver.browser.window_handles.first
+
+    else
+      putstr "Failed to see the partner account 1 contact lookup Icons"
+    end
+    sleep 4
+  rescue Exception => ex
+    putstr "Error occurred while selecting the partner account one contacts"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I select the partner account two contact "([^"]*)" from the contacts lookup list$/) do |arg|
+  begin
+    sleep 4
+    if page.has_css?(".lookupIcon")
+      puts "Successfully see the PartnerAccount1ContactFieldName"
+      sleep 2
+      main = page.driver.browser.window_handles.first
+      sleep 3
+      find("img[alt='Partner Account 2 Contact Lookup (New Window)']").click
+      sleep 8
+      page.driver.browser.manage.window.maximize
+      sleep 3
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+      sleep 5
+      page.driver.browser.switch_to.frame("resultsFrame")
+      sleep 3
+      within('.list') do
+        #click_link arg2["PartnerAccount1Contact"]
+        click_link arg
+      end
+      sleep 5
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+      sleep 3
+      puts "Successfully Selected the partner account 2 contact"
+      sleep 8
+      main = page.driver.browser.window_handles.first
+
+    else
+      putstr "Failed to see the partner account 2 contact lookup Icons"
+    end
+    sleep 4
+  rescue Exception => ex
+    putstr "Error occurred while selecting the partner account one contacts"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I select the partner account one as "(.*?)"$/) do |arg|
+  begin
+    sleep 5
+
+    find(:xpath, "//tbody/tr[1]/td[2]/select").select arg
+    puts "partner account type selected"
+    result = true
+
+    putstr "Failed to see the #{arg} field value" unless result
+    sleep 8
+    result = false
+    
+  rescue Exception => ex
+    putstr "Error occurred while selecting the partner account one #{arg} field values"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I select the partner account two as "(.*?)"$/) do |arg|
+  begin
+    sleep 5
+
+    find(:xpath, "//tbody/tr[2]/td[2]/select").select arg
+
+    puts "partner account type selected"
+    result = true
+
+    putstr "Failed to see the #{arg} field value" unless result
+    sleep 8
+    result = false
+    
+  rescue Exception => ex
+    putstr "Error occurred while selecting the partner account two #{arg} field values"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I rename the partner opportunity name as "(.*?)"$/) do |arg|
+  begin
+    sleep 3
+    all('input[type=text]')[0].set arg
+    puts "Renamed the partner opportunity name"
+
   end
 end
 
