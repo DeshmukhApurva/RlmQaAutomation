@@ -396,9 +396,12 @@ Then (/^I select the Renewal Opportunity$/) do
 	arg = getDetails "newOpportunity"
 	select "My Opportunities", :from => "fcf"
 		sleep 3
-		#within(".fBody") do
-			click_on "Go!"
-		#end
+#		within(".fBody") do
+#			click_on "Go!"
+#		end
+    if page.has_xpath?('//input[@name="go"]')
+      first(:button, "Go").click
+    end
 		sleep 5
 		foundCount = ""
 		begin  
