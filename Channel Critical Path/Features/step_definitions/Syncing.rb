@@ -29,6 +29,7 @@ end
 When (/^I select more than one Partner Opportunity$/) do
 	begin
 		within all('.listRelatedObject')[0] do
+			sleep 7
 			first("input[type='checkbox']").set(true)
 			click_on "Syncing"
 			sleep 5			
@@ -42,6 +43,7 @@ When (/^I select more than one Partner Opportunity$/) do
 		end
 		sleep 5
 		within all('.listRelatedObject')[0] do
+			sleep 7
 			first("input[type='checkbox']").set(false)			
 		end
 		sleep 3
