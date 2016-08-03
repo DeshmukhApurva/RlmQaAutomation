@@ -247,9 +247,12 @@ And(/^I update the fields on quote page$/) do
     setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
     setCursorPos.Call(500,10)
     arg = getDetails "QuoteSyncQuoteFields"
+    
+    within ("#bottomButtonRow") do
+      first(:xpath, "//*[contains(@name, 'edit')]").click
+      sleep 5
+    end
 
-    first(:xpath, "//*[contains(@name, 'edit')]").click
-    sleep 5
     fill_in "Automation_Cust_Text",:with => arg["Automation_Cust_Text"]
     sleep 3
     fill_in "Automation_Cust_Email",:with => arg["Automation_Cust_Email"]
@@ -1634,7 +1637,7 @@ And(/^I open the Quote Sync Renewal Opportunity$/) do
           first("tbody").all(".dataRow")[0].all("th")[0].first("a").click
           puts "Opportunity #{$automationRO} Found..."
         else
-          puts "Opportunity #{$automationRO} Not Found..."  
+          puts "Opportunity #{$automationRO} Not Found..."
         end
       end
     end

@@ -8,8 +8,9 @@ And(/^I open an opportunity for "(.*?)"$/) do |data|
 		select "My Opportunities", :from => "fcf"
 		sleep 3
 		#within(".fBody") do
-		click_on "Go!"
-		#end
+		if page.has_button?('Go!')
+		  click_on "Go!"
+		end
 		sleep 5
 		foundCount = 0
 		begin 

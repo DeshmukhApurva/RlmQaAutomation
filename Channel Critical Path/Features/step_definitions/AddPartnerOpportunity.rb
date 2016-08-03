@@ -540,6 +540,7 @@ Then(/^I should be able to see the partner opportunity account details$/) do
       within all(".pbSubsection")[0] do
         opportunity_name = first("tbody").all("tr")[1].all("td")[1].text
         $opportunity_name = first("tbody").all("tr")[1].all("td")[1].text
+        puts $opportunity_name
         if opportunity_name.to_s == arg["PartnerOpportunityName"].to_s
           puts "Successfully see the partner opportunity #{opportunity_name} name"
         else

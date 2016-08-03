@@ -731,9 +731,9 @@ end
 
 Then(/^I verify the "([^"]*)" link$/) do |request|
   begin
-    sleep 5
+    sleep 10
     if page.has_css?(".view-heading-section")
-      sleep 5
+      sleep 10
       within(".data-table.ng-scope") do
         $partner_opportunity = first("a").text
         puts $partner_opportunity
@@ -1035,7 +1035,7 @@ end
 
 Then(/^I verify the "([^"]*)" links$/) do |request_number|
   begin
-    sleep 5
+    expect(page).to have_content 'Request Number'
     rowcount = all(".ui-grid-row.ng-scope").count
     if rowcount > 0
       sleep 3

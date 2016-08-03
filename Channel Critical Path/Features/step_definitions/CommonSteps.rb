@@ -37,7 +37,7 @@ Given(/^that I navigate to the CRM application$/) do
     visit arg["url"]
     sleep 4
     #puts "Login as " + ENV['UserRole']
-
+    page.driver.browser.manage.window.maximize
     if arg["url"] == "https://login.salesforce.com/"
       sleep 4
       fill_in "username",:with => arg["userName"]
