@@ -322,7 +322,7 @@ Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Produ
   end
 end
 
-And(/^I select SC and generate Opportunity with Name "(.*?)" with Account "(.*?)"$/) do |arg1,arg2|
+And(/^I select SC and generate Opportunity with Name "(.*?)" with Account "(.*?)" with User "(.*?)"$/) do |arg1,arg2,arg3|
   begin
     sleep 5
     within('.list') do
@@ -343,7 +343,7 @@ And(/^I select SC and generate Opportunity with Name "(.*?)" with Account "(.*?)
     sleep 3
     find(:xpath,"//select[contains(@title,'Search scope')]").select "User"
     sleep 3
-    fill_in "Owner ID",:with=> "QA RenewNetOps"
+    fill_in "Owner ID",:with=> arg3
     sleep 8
     within("#pgbtn") do
       click_on 'Save'

@@ -33,18 +33,37 @@ Scenario: Rally Test Case ID:  : Renew: Asset creation
 	Then I create new Service Contracts with Name "RenewNetOpsSCTest" with Account "GE Force" and Product "Product C"
     When I click on "Service Contracts" tab 
 	Then I create new Service Contracts with Name "SourceSCRenew" with Account "GE Force" and Product "Product C"
-    
+ 
 @Renew_OppCreation 
 Scenario: Renew: Generate Opp 
 	When I click on "Opportunities" tab 
+	Then I create new opportunity with Name "PesSrcOpp" with Account "QA Test" and Product "Product B" 
+	When I click on "Opportunities" tab 
+	Then I create new opportunity with Name "SplitOpportunity" with Account "QA Test" and Product "Product B" 
+	When I click on "Opportunities" tab 
+	Then I create new opportunity with Name "SourceOpportunity" with Account "QA Test" and Product "Product B" 
+	When I click on "Opportunities" tab 
+	Then I create new opportunity with Name "CreateOppfromOpp" with Account "QA Test" and Product "Product A" 
+	When I click on "Opportunities" tab 
+	Then I create new opportunity with Name "RenewNetOpsService" with Account "QA Test" and Product "Product A" 
+	When I click on "Opportunities" tab 
 	Then I create new opportunity with Name "RenewService" with Account "GE Force" and Product "Product B"
 	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "Split_Target_Opportunity_RU" with Account "GE Force" and Product "Product B"
-	
-@Renew_PES_Renewal_OpportunityresolveRenameOpp 
-Scenario: Renew: Generate Opp 
-	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "Source-RenewTesting" with Account "QA Test" and Product "Product B" 
-	Then I resolved the Source Opportunity and rename with name "RenewTesting" 
+	Then I create new opportunity with Name "Split_Target_Opportunity_RU" with Account "QA Test" and pricebook "Standard Price Book" 
+    When I create Source Opportunity with Line Items and resolve it and rename it as "PES_Invalid_RR" 
+    When I create Source Opportunity with Line Items and resolve it and rename it as "PES_Renewal_Opportunity" 
+    When I create Source Opportunity with Line Items and resolve it and rename it as "SourceOpportunity9" 
+    When I create Source Opportunity with Line Items and resolve it and rename it as "FiscalOpportunity" 
+    When I create Source Opportunity with Line Items and resolve it and rename it as "RenewTesting" 
+    
+@Renew_Service_Contract_OppCreation 
+Scenario: Renew: Generate Contract 
+	When I click on "Service Contracts" tab 
+	Then I create new Service Contracts with Name "Auto_Source_Service_Contract" with Account "QA Test" and Product "Product A" 
+	When I click on "Service Contracts" tab 
+	And I select SC and generate Opportunity with Name "Service_Contract_Opp" with Account "QA Test" with User "QA User"
+	   
+
+
 	
 	
