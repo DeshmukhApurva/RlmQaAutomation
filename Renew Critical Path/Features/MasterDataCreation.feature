@@ -65,7 +65,7 @@ Scenario: Renew: Generate Contract
 	When I click on "Service Contracts" tab 
 	Then I create new Service Contracts with Name "Source_Service_Contract" with Account "QA Test" and Product "Product A" 
 	When I click on "Service Contracts" tab 
-	And I select SC and generate Opportunity with Name "Service_Contract_Opp" with Account "QA Test" with User "QANetOps" 
+	And I select SC and generate Opportunity with Name "Service_Contract_Opp" with Account "QA Test" with User "QA RenewNetOps" 
 	
 	
 @CreatemasterdataforAddOnRenewalOpp
