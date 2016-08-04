@@ -818,8 +818,10 @@ end
 
 And(/^I click on the "([^"]*)" link$/) do |request|
   begin
-    sleep 5
-    rowcount = all(".ui-grid-row.ng-scope").count
+    expect(page).to have_content 'Request Number'
+    rowcount = all(".ui-grid-cell-contents.ng-scope").count
+    puts rowcount
+    
     if rowcount > 0
       sleep 3
       within all(".ui-grid-canvas")[1] do
@@ -827,7 +829,6 @@ And(/^I click on the "([^"]*)" link$/) do |request|
           sleep 5
           request_number = first("div").first("a").text
           puts request_number
-          sleep 15
           first("div").first("a").click
         end
       end
