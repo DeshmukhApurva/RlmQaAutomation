@@ -1,5 +1,56 @@
 #All Renew master data creation
 #All Scenario mentioned in RenewMsterData.feature
+Then (/^I click on Products and create product with the name "(.*?)"$/) do |arg|
+begin
+   sleep 8
+   click_on "Products"
+   sleep 8
+   puts "I click on Products"
+   sleep 10
+
+      click_on "New"
+   puts "Adding products"
+   sleep 5
+   fill_in "Product Name",:with=>arg
+   fill_in "Product Code",:with=> "AutoProduct"
+   sleep 5
+  #find('input[type=checkbox]').click
+   #topButtonRow
+   find(:xpath, "(//input[@id='IsActive'])").set(true)
+   sleep 5
+   within(".pbBottomButtons") do
+     first(:xpath, "//*[contains(@name, 'save')]").click
+     sleep 5
+   end
+
+   puts "Product added successfully"
+   sleep 5
+   click_on "Add"
+   sleep 5
+   first(:xpath, "//*[contains(@title, 'Unit Price')]").send_keys "3000"
+   sleep 5
+   click_on "Save"
+   sleep 5
+   puts "product price added successfully"
+   sleep 5
+   click_on "Add to Price Book"
+   sleep 5
+   find(:xpath, "//*[contains(@name, 'allBox')]").click
+   sleep 3
+   
+   first(:xpath, "//*[contains(@name, 'edit')]").click
+   
+   puts "I click on Select"
+   end
+   sleep 5
+   find(:xpath, "//*[contains(@title, 'List Price 1')]").send_keys "3500"
+   sleep 5
+   click_on "Save"
+   puts "Successfully Save"
+ end
+
+
+
 Then(/^I create new Renew Account with value "(.*?)"$/) do |arg|
   begin
 
