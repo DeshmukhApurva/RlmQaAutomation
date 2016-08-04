@@ -44,11 +44,11 @@ Scenario: Channel: Generate Partner Opportunity
 	And I click on "Add New Partner Opportunity" button 
 	And I select partner account one "Automation Reseller" 
 	And I navigate to "Partner Contact(s)" section 
-	And I select the partner account one contact "" from the contacts lookup list 
+	And I select the partner account one contact "Reseller PartnerUser" from the contacts lookup list 
 	And I select the partner account one as "Reseller" 
 	And I select partner account two "Automation Distributor" 
 	And I navigate to "Partner Contact(s)" section 
-	And I select the partner account two contact "" from the contacts lookup list 
+	And I select the partner account two contact "Distributor PartnerUser" from the contacts lookup list 
 	And I select the partner account two as "Distributor" 
 	And I select the "To Master Opportunity" option from syncing dropdown 
 	And I rename the partner opportunity as "TwoTierAutomationPO" 
