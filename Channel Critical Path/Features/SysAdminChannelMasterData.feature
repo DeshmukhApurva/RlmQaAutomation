@@ -12,14 +12,14 @@ Scenario: Channel: new Account
 	And I Manage Partner Account with contact "PES Channel User" and its Owner "QA ChannelManager"     
 	When I click on "Account" tab 
 	Then I create new Channel Account with value "Automation Reseller" with AccountNumber "QA-0001" and Country "USA" 
-	And I Manage Partner Account with contact "PES Channel User" and its Owner "QA ChannelManager"    
+	And I Manage Partner Account with contact "Reseller PartnerUser" and its Owner "QA ChannelManager"    
 	When I click on "Account" tab 
 	Then I create new Channel Account with value "Automation Distributor" with AccountNumber "QA-0001" and Country "USA" 
-	And I Manage Partner Account with contact "PES Channel User" and its Owner "QA ChannelManager"  
+	And I Manage Partner Account with contact "Distributor PartnerUser" and its Owner "QA ChannelManager"  
 	When I click on "Account" tab 
 	Then I create new Channel Account with value "TwoTierAutomation" with AccountNumber "QA-0001" and Country "USA" 
 	And I Manage Partner Account with contact "PES Channel User" and its Owner "QA ChannelManager" 
 	When I click on "Account" tab 
 	Then I create new Channel Account with value "PartnerAccount1" with AccountNumber "QA-0001" and Country "USA" 
-	And I Manage Partner Account with contact "PES Channel User" and its Owner "QA ChannelManager"   
+	And I Manage Partner Account with contact "Con1PA1" and its Owner "QA ChannelManager"   
 	   

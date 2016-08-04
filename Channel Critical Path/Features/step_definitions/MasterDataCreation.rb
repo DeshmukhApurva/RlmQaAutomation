@@ -187,10 +187,14 @@ Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Produ
       click_on "New"
     end
     puts "New Opportunity button clicked."
+    sleep 6
     fill_in "Opportunity Name",:with=>arg1
+    sleep 6
     fill_in "Account Name",:with=>arg2
+    sleep 6
     time = Time.new
     fill_in "Close Date",:with=>time.month.to_s + "/" + time.day.to_s + "/" +time.year.to_s
+    sleep 6
     find("#opp11").select "Qualification"
     sleep 6
     within("#bottomButtonRow") do
@@ -228,7 +232,7 @@ Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Produ
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[5]/span/input").set $endDateOLI
     sleep 6
     all(:xpath,'//td/input[@value=" Save "]')[0].click
-    put "Successfully Save product and Source Opp"
+    puts "Successfully Save product and Source Opp"
 
   rescue Exception => ex
     putstr "Error occurred while creating opportunity"
