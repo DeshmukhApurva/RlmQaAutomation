@@ -248,10 +248,13 @@ And(/^I update the fields on quote page$/) do
     setCursorPos.Call(500,10)
     arg = getDetails "QuoteSyncQuoteFields"
     
-    within ("#bottomButtonRow") do
-      first(:xpath, "//*[contains(@name, 'edit')]").click
+    #within(".pbButtonb") do
+      #binding.pry
       sleep 5
-    end
+      find(:xpath,'//td[contains(@class,"pbButtonb")]//following-sibling::input[contains(@name, "edit")]').click
+      #find(:xpath, "//*[contains(@name, 'edit')]").click
+      sleep 5
+    #end
 
     fill_in "Automation_Cust_Text",:with => arg["Automation_Cust_Text"]
     sleep 3
