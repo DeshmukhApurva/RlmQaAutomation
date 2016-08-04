@@ -28,15 +28,19 @@ Then(/^I create new Channel Account with value "(.*?)" with AccountNumber "(.*?)
   end
 end
 
-And(/^I Manage External Account$/) do |arg|
+And(/^I Manage Partner Account with contact "(.*?)" and its Owner "(.*?)"$/) do |arg1,arg2|
   begin
+    time = Time.new
+    dateTime = time.day.to_s + time.month.to_s + time.year.to_s + time.hour.to_s + time.min.to_s + time.sec.to_s
+    $userName="servicesource"+dateTime+"@comitydesigns.com"
+    $nickname="servicesource"+dateTime
     sleep 5
     find(:xpath,"//*[@id='acc1_ileinner']/a[2]").click
     puts "I change Owner"
     # sleep 3
     # find(:xpath,"//select[contains(@title,'Search scope')]").select "User"
     sleep 3
-    fill_in "Owner",:with=> "QA ChannelManager"
+    fill_in "Owner",:with=> arg2
     sleep 5
     click_on "Save"
     puts "I save Owner"
@@ -48,8 +52,81 @@ And(/^I Manage External Account$/) do |arg|
       puts "I click on Enabled Partner"
     end
     sleep 8
-    click_on "New Contact"
+    page.driver.browser.switch_to.alert.accept
+    sleep 8
+    find(:xpath,"//*[@value='New Contact']").click
+    puts "I clicked On New Contact"
+    sleep 6
+    fill_in "Last Name",:with=> arg1
+    sleep 6
+    fill_in "Email",:with=> "servicesource@comitydesigns.com"
+    puts "Fill All Data"
+    sleep 6
+    within('#topButtonRow') do
+      click_on "Save"
+      puts "Save all data"
+    end
+    sleep 5
+    find(:xpath,'//*[@id="con1_ileinner"]/a[2]').click
+    puts "I change Owner"
+    sleep 3
+    fill_in "Owner",:with=> arg2
+    sleep 5
+    click_on "Save"
+    puts "I save Owner"
+    sleep 6
+    within('#workWithPortal') do
+      find(:xpath,"//*[@id='workWithPortalLabel']").click
+      puts "I Manage Account As Partner"
+      find(:xpath,"//*[@id='workWithPortalMenu']/a[2]").click
+      puts "I click on Enabled Partner"
+    end
+    sleep 6
+    fill_in "Username",:with=> $userName
+    sleep 6
+    fill_in "Nickname",:with=> $nickname
+    sleep 6
+    within('#topButtonRow') do
+      click_on "Save"
+      puts "Save all data"
+    end
+    sleep 10
+  rescue Exception => ex
+    puts "Error occurred while creating Account"
+    puts ex.message
+  end
+end
 
+Then(/^I create new Asset with Name "(.*?)" and its Product "(.*?)" and its Status "(.*?)" and price "(.*?)" and account "(.*?)"$/) do |arg1,arg2,arg3,arg4,arg5|
+  begin
+    sleep 10
+    click_on "New"
+    sleep 5
+    puts "Creating a new Asset"
+    sleep 5
+    fill_in "Name",:with => arg1
+    puts "Filled value for Asset name"
+    sleep 5
+    fill_in "Account",:with => arg5
+    puts "Filled value for Asset Account"
+    sleep 5
+    first(:xpath, "//*[contains(@id, 'Status')]").select(arg3)
+    sleep 5
+    fill_in "Product2",:with =>arg2
+    puts "Filled value for Asset Product"
+    sleep 8
+    fill_in "Price",:with =>arg4
+    fill_in "Quantity",:with => "1"
+    sleep 5
+
+    within(:id,"topButtonRow") do
+      click_on "Save"
+    end
+    sleep 8
+    puts "Asset  successfully created"
+  rescue Exception => ex
+    puts "Error occurred while creating Asset"
+    puts ex.message
   end
 end
 
@@ -132,6 +209,65 @@ Then(/^I create new Service Contracts with Name "(.*?)" with Account "(.*?)" and
   rescue Exception => ex
     puts "Error occurred while creating Service Contract"
     puts ex.message
+  end
+end
+
+Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Product$/) do |arg1,arg2|
+  begin
+    time = Time.new
+    $startDateOLI = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s
+    $endDateOLI = time.month.to_s + "/" + time.day.to_s + "/" + (time.year.to_i + 1).to_s
+    sleep 8
+    within (".pbHeader") do
+      click_on "New"
+    end
+    puts "New Opportunity button clicked."
+    fill_in "Opportunity Name",:with=>arg1
+    fill_in "Account Name",:with=>arg2
+    time = Time.new
+    fill_in "Close Date",:with=>time.month.to_s + "/" + time.day.to_s + "/" +time.year.to_s
+    find("#opp11").select "Qualification"
+    sleep 2
+    within("#bottomButtonRow") do
+      click_on 'Save'
+    end
+    sleep 5
+    click_on "Choose Price Book"
+    sleep 3
+    first(:option,'Standard Price Book').select_option
+    sleep 4
+    click_on "Save"
+    sleep 5 
+    click_on "Add Product"
+    sleep 5
+    find(:xpath, "(//input[@type='checkbox'])[3]").set(true)
+    sleep 5
+    find(:xpath, "(//input[@type='checkbox'])[4]").set(true)
+    sleep 5
+    click_on 'Select'
+    puts "Successfully select the product"
+    sleep 6
+    #Enter product Quantity
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[3]/input").send_keys "1"
+    sleep 6
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[3]/input").send_keys "1"
+    sleep 6
+    #Enter Start Date of Product
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[4]/span/input").set $startDateOLI
+    sleep 6
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[4]/span/input").set $startDateOLI
+    sleep 6
+    #Enter End Date of Product
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[5]/span/input").set $endDateOLI
+    sleep 6
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[5]/span/input").set $endDateOLI
+    sleep 6
+    all(:xpath,'//td/input[@value=" Save "]')[0].click
+    put "Successfully Save product and Source Opp"
+
+  rescue Exception => ex
+    putstr "Error occurred while creating opportunity"
+    putstr_withScreen ex.message
   end
 end
 

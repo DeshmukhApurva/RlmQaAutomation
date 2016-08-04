@@ -6,23 +6,29 @@ Background: Login to the Application
 	Then I should land on CRM home page 
 	
 @CreateNewAccount 
-Scenario: Rally Test Case ID:  : Renew: New account creation 
+Scenario: Channel : Renew: New account creation 
 	When I click on "Account" tab 
 	Then I create new Channel Account with value "PES Channel Account" with AccountNumber "QA-0001"
  
 @CreationAsset 
-Scenario: Rally Test Case ID:  : Renew: Asset creation 
+Scenario: Channel  : Renew: Asset creation 
 	When I click on "Assets" tab 
 	Then I create new Asset with Name "My_PES_Asset" and its Product "Product B" and its Status "Installed" and price "2500" and account "PES Channel Account" 
 
 @CreationServiceContracts 
-Scenario: Rally Test Case ID:  : Renew: Asset creation 
+Scenario: Channel : Renew: Service Contract creation 
 	When I click on "Service Contracts" tab 
 	Then I create new Service Contracts with Name "PES_Service_Contract" with Account "PES Channel Account" and Product "Product B" 
 
 @Createsourceopportunity
-Scenario: Rally Test Case ID:  : Renew: Asset creation 
-	When I click on "Service Contracts" tab 
+Scenario: Channel  : Renew: Asset creation 
+	When I click on "Opportunities" tab 
+	Then I create new opportunity with Name "PES_SplitOpp" with Account "PES Channel Account" and Product 
+	
+@RenewalOpportunityCreation 
+Scenario: Channel Generate Renew Opp 
+	When I create Source Opportunity with Line Items and resolve it and rename it as "PES_Add_Partner" 
+	When I create Source Opportunity with Line Items and resolve it and rename it as "PES_Split_Target_Opp" 
 
 @PartnerOpportunityCreation
 Scenario: Channel: Generate Partner Opportunity 
@@ -85,4 +91,4 @@ Scenario: Channel: Generate Partner Opportunity
      And I rename the partner opportunity name as "PES_NeedStatusUpdate"
      And I click on the "Grant Access"
      
-     
+		 
