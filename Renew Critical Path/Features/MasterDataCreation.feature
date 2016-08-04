@@ -91,7 +91,7 @@ Scenario: Renew: Generate Opp
 	Then I create new opportunity with Name "RenewNetOpsService" with Account "QA Test" and Product "Product A" 
 	When I click on "Opportunities" tab 
 	Then I create new opportunity with Name "Split_Target_Opportunity_RN" with Account "QA Test" and pricebook "Standard Price Book" 
-	When I create Source Opportunity with Line Items and resolve it and rename it as "PES_Invalid_RR" 
+	When I create Source Opportunity with Line Items with Account "QA Test" and resolve it and rename it as "PES_Invalid_RR" 
 
 	
 @PES_Renewal_OpportunityresolveRenameOpp 
@@ -99,14 +99,14 @@ Scenario: Renew: Generate Opp
 	When I click on "Opportunities" tab 
 	Then I create new opportunity with Name "Source-RenewNetOpsTesting" with Account "QA Test" and Product "Product B" 
 	Then I resolved the Source Opportunity and rename with name "RenewNetOpsTesting" 
-	When I create Source Opportunity with Line Items and resolve it and rename it as "PES_Renewal_Opportunity" 
+	When I create Source Opportunity with Line Items with Account "QA Test" with Account "PES Channel Account" and resolve it and rename it as "PES_Renewal_Opportunity" 
 	
 @FiscalOpportunityresolveRenameOpp 
 Scenario: Renew: Generate Opp 
 	When I click on "Opportunities" tab 
 	Then I create new opportunity with Name "Source-RenewNetOpsTesting" with Account "QA Test" and Product "Product B" 
 	Then I resolved the Source Opportunity and rename with name "RenewNetOpsTesting" 
-	When I create Source Opportunity with Line Items and resolve it and rename it as "FiscalOpportunity" 
+	When I create Source Opportunity with Line Items with Account "QA Test" and resolve it and rename it as "FiscalOpportunity" 
 	
 
 	

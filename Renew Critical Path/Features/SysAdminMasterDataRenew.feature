@@ -13,17 +13,17 @@ Scenario: Renew: new pricebook
 @addProducts 
 Scenario: Renew: add products 
     When I click on "All Tabs" tab 
-	Then I click on Products and create product with the name "TestProduct A" 
+	Then I click on Products and create product with the name "Product A" 
 	When I click on "All Tabs" tab 
-	Then I click on Products and create product with the name "TestProduct B" 
+	Then I click on Products and create product with the name "Product B" 
 	When I click on "All Tabs" tab 
-	Then I click on Products and create product with the name "TestProduct C" 
+	Then I click on Products and create product with the name "Product C" 
 	When I click on "All Tabs" tab 
-	Then I click on Products and create product with the name "TestProduct D" 
+	Then I click on Products and create product with the name "Product D" 
 	When I click on "All Tabs" tab 
-	Then I click on Products and create product with the name "TestGenWatt Diesel 10kW" 
+	Then I click on Products and create product with the name "GenWatt Diesel 10kW" 
 	When I click on "All Tabs" tab 
-	Then I click on Products and create product with the name "TestInstallation: Industrial - High"
+	Then I click on Products and create product with the name "Installation: Industrial - High"
 	
  
 		

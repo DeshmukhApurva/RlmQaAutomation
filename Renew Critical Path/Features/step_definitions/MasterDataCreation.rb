@@ -47,91 +47,6 @@ When(/^I click on the "(.*?)" grid tab$/) do |tab|
   end
 end
 
-Then(/^I click on Price Books and create pricebook with the name "(.*?)"$/) do |arg1|
-  begin
-    sleep 8
-    click_on "Price Books"
-    sleep 5
-    puts "I click on Price Book"
-    sleep 6
-    click_on "New"
-    puts "Creating Standard Price Book"
-    sleep 5
-    fill_in "Price Book Name",:with=>arg1
-    sleep 5
-   find(:xpath, "(//input[@id='IsActive'])").set(true)
-    #topButtonRow
-    within(".pbBottomButtons") do
-      first(:xpath, "//*[contains(@name, 'save')]").click
-      sleep 5
-    end
-
-    puts "Pricebook created"
-
-  rescue Exception => ex
-    raise "Error occurred while creating Price book"
-    putstr_withScreen  ex.message
-  end
-end
-
-#Then(/^I click on Products and create product with the name "(.*?)" and product code "(.*?)" $/) do |arg1,arg2|
-#Then(/^I click on Products and create product with the name "(.*?)" and product code "(.*?)"$/) do |arg1,arg2|
-Then (/^I click on Products and create product with the name "(.*?)"$/) do |arg|
-begin
-   sleep 8
-   click_on "Products"
-   sleep 8
-   puts "I click on Products"
-   sleep 10
-
-   #    within all(".bSubBlock brandSecondaryBrd secondaryPalette") do
-   #      puts "m in"
-   #      first(:xpath, "//*[contains(@name, 'go')]").click
-   #    end
-   click_on "New"
-   puts "Adding products"
-   sleep 5
-   fill_in "Product Name",:with=>arg
-   fill_in "Product Code",:with=> "Pro1234"
-   sleep 5
-  #find('input[type=checkbox]').click
-   #topButtonRow
-   find(:xpath, "(//input[@id='IsActive'])").set(true)
-   sleep 5
-   within(".pbBottomButtons") do
-     first(:xpath, "//*[contains(@name, 'save')]").click
-     sleep 5
-   end
-
-   puts "Product added successfully"
-   sleep 5
-   click_on "Add"
-   sleep 5
-   first(:xpath, "//*[contains(@title, 'Unit Price')]").send_keys "3000"
-   sleep 5
-   click_on "Save"
-   sleep 5
-   puts "product price added successfully"
-   sleep 5
-   click_on "Add to Price Book"
-   sleep 5
-   find(:xpath, "//*[contains(@name, 'allBox')]").click
-   sleep 3
-   #find(:xpath, "//*[contains(@value, 'Select')]").click
-   #find(:xpath, "//input[@value='Select']").click
-   #first(:xpath, "//*[contains(@title, 'Select')]").click
-   first(:xpath, "//*[contains(@name, 'edit')]").click
-   
-   puts "I click on Select"
-   end
-   sleep 5
-   find(:xpath, "//*[contains(@title, 'List Price 1')]").send_keys "3500"
-   sleep 5
-   click_on "Save"
-   puts "Successfully Save"
- end
-
-
 When(/^I click on "([^"]*)" tab$/) do |tab|
   begin
     sleep 8
@@ -179,9 +94,7 @@ end
 
 Then(/^I create new Service Contracts with Name "(.*?)" with Account "(.*?)" and Product "(.*?)"$/) do |arg1,arg2,arg|
   begin
-
     ProductName=arg
-
     click_on "New"
     sleep 2
     puts "Creating a new Service Contract"
@@ -213,8 +126,6 @@ Then(/^I create new Service Contracts with Name "(.*?)" with Account "(.*?)" and
     end
     click_on 'Select'
     puts "Successfully select the service contract line item"
-
-    #find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[3]/input").send_keys "1"
     find(:xpath, "//*[contains(@name, 'Quantity')]").send_keys "1"
     sleep 3
     all(:xpath,'//td/input[@value=" Save "]')[0].click
@@ -223,49 +134,6 @@ Then(/^I create new Service Contracts with Name "(.*?)" with Account "(.*?)" and
   rescue Exception => ex
     puts "Error occurred while creating Service Contract"
     puts ex.message
-  end
-end
-Then (/^I select with its Product "(.*?)"$/) do |arg|
-  begin
-    ProductName=arg
-    puts "ProductName"+ProductName
-    sleep 7
-    within('.list') do
-      first(:link).click
-    end
-    sleep 4
-    click_on "Add Line Item"
-    puts "Successfully click on  Add Line Items"
-    sleep 6
-    first(:xpath, "//*[contains(@id, 'p1')]").select("Standard Price Book")
-    sleep 6
-
-    click_on "Save"
-    puts "Select Price book"
-    sleep 6
-    within (".x-grid3-body") do
-      tr=all(".x-grid3-row")
-      tr.each do |row|
-        puts row
-        puts row.all("td")[1].text
-        if row.all("td")[1].text == ProductName
-          sleep 5
-          row.all("td")[0].first("div").first("input").click
-        end
-      end
-    end
-    sleep 5
-    click_on "Select"
-    puts "Successfully select the product"
-    sleep 8
-    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[3]/input").set arg["ProductQuantity"]
-    find(:xpath,"//*[@id='editPage']/table/tbody/tr[17]/td[4]/span/input").set $startDateOLI
-    find(:xpath,"//*[@id='editPage']/table/tbody/tr[17]/td[5]/span/input").set $endDateOLI
-    all(:xpath,'//td/input[@value=" Save "]')[0].click
-
-  rescue Exception => ex
-    putstr "Error occurred while opening a Product"
-    putstr_withScreen ex.message
   end
 end
 
@@ -280,11 +148,8 @@ Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Produ
     puts "New Opportunity button clicked."
     fill_in "Opportunity Name",:with=>arg1
     fill_in "Account Name",:with=>arg2
-    #    fill_in "Stage",:with=>arg["OpportunityStageValue"]
     time = Time.new
     fill_in "Close Date",:with=>time.month.to_s + "/" + time.day.to_s + "/" +time.year.to_s
-
-    #    find(:xpath, "//td/label[text()='Stage']").find(:xpath, '..').find(:xpath, "following-sibling::td").find(:xpath,"//select").select arg["OpportunityStageValue"]
     find("#opp11").select "Qualification"
     sleep 2
     within("#bottomButtonRow") do
@@ -309,8 +174,6 @@ Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Produ
     end
     click_on 'Select'
     puts "Successfully select the product"
-
-    #find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[3]/input").send_keys "1"
     find(:xpath, "//*[contains(@name, 'Quantity')]").send_keys "1"
     sleep 3
     all(:xpath,'//td/input[@value=" Save "]')[0].click
@@ -352,42 +215,6 @@ And(/^I select SC and generate Opportunity with Name "(.*?)" with Account "(.*?)
 end
 
 
-Then(/^I select opportunity with its Product "(.*?)"$/) do |arg|
-  begin
-    ProductName=arg
-    puts "ProductName"+ProductName
-    sleep 5
-    within('.list') do
-      first(:link).click
-    end
-    sleep 4
-    click_on "Add Product"
-    puts "Successfully click on  Add Line Items"
-    sleep 5
-    first(:xpath, "//*[contains(@id, 'p1')]").select("Standard Price Book")
-    sleep 5
-
-    click_on "Save"
-    puts "Select Price book"
-
-    within (".x-grid3-body") do
-      tr=all(".x-grid3-row")
-      tr.each do |row|
-        puts row
-        puts row.all("td")[1].text
-        if row.all("td")[1].text == ProductName
-          row.all("td")[0].first("div").first("input").click
-        end
-      end
-    end
-    puts "Successfully select the product"
-    sleep 8
-
-  rescue Exception => ex
-    putstr "Error occurred while opening a Product"
-    putstr_withScreen ex.message
-  end
-end
 
 And(/^I select contract and generate Opportunity with Name "(.*?)" with Account "(.*?)"$/) do |arg1,arg2|
   begin
@@ -414,31 +241,29 @@ And(/^I select contract and generate Opportunity with Name "(.*?)" with Account 
   end
 end
 
-#Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Pricebook "(.*?)"$/) do |arg1,arg2,arg3|
 Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and pricebook "(.*?)"$/) do |arg1,arg2,arg3|
   begin
-    #Pricebook=arg3
-
     sleep 8
     within (".pbHeader") do
       click_on "New"
     end
     puts "New Opportunity button clicked."
+    sleep 6
     fill_in "Opportunity Name",:with=>arg1
+    sleep 6
     fill_in "Account Name",:with=>arg2
-    #    fill_in "Stage",:with=>arg["OpportunityStageValue"]
     time = Time.new
+    sleep 6
     fill_in "Close Date",:with=>time.month.to_s + "/" + time.day.to_s + "/" +time.year.to_s
-
-    #    find(:xpath, "//td/label[text()='Stage']").find(:xpath, '..').find(:xpath, "following-sibling::td").find(:xpath,"//select").select arg["OpportunityStageValue"]
+    sleep 6
     find("#opp11").select "Qualification"
-    sleep 2
+    sleep 6
     within("#bottomButtonRow") do
       click_on 'Save'
     end
-
+    sleep 6
     click_on "Choose Price Book"
-    sleep 3
+    sleep 5
     first(:xpath, "//*[contains(@id, 'p1')]").select(arg3)
     sleep 3
     click_on "Save"
@@ -457,7 +282,6 @@ Then(/^I resolved the Source Opportunity and rename with name "(.*?)"$/) do |arg
     within("#bottomButtonRow") do
       click_on 'Edit'
     end
-    #first(:button,'Edit').click
     sleep 5
     first(:option,'Closed Won').select_option
     sleep 2
@@ -483,7 +307,7 @@ Then(/^I resolved the Source Opportunity and rename with name "(.*?)"$/) do |arg
   end
 end
 
-When(/^I create Source Opportunity with Line Items and resolve it and rename it as "(.*?)"$/) do |arg|
+When(/^I create Source Opportunity with Line Items with Account "(.*?)" and resolve it and rename it as "(.*?)"$/) do |arg1,arg2|
   begin
   # Components of a Time
   #    puts "Current Time : " + time.inspect
@@ -523,7 +347,7 @@ When(/^I create Source Opportunity with Line Items and resolve it and rename it 
     sleep 3
     select "Qualification", :from => "Stage"
     sleep 3
-    fill_in "Account Name",:with=> "QA Test"
+    fill_in "Account Name",:with=> arg1
 
     sleep 3
 
@@ -646,7 +470,7 @@ When(/^I create Source Opportunity with Line Items and resolve it and rename it 
     end
     sleep 5
     #$automationRO = $automationOppName + "RO"
-    fill_in "Opportunity Name",:with=> arg
+    fill_in "Opportunity Name",:with=> arg2
     sleep 1
     first(:button,'Save').click
     sleep 8
@@ -680,12 +504,7 @@ Then(/^I create a new Success Plan Template with Template Name "(.*?)" PhaseName
     else
       raise "Define Success Plan Phases section not displayed"
     end
-    #first(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]").select(arg["OppStage"])
     first(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]").find(:xpath, 'option[1]').select_option
-    # if first(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]").should have_content(arg["OppStage"])
-      # puts arg["OppStage"]
-    # end
-    #puts "Opportunity Location set to "+arg["OppStage"]
     click_on "Add Phase"
     sleep 5
     first(:xpath, "//*[contains(@id, 'csmName')]").set(arg2)
