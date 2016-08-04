@@ -72,7 +72,7 @@ Scenario: Rally Test Case ID: TC3412 : Opportunity Updates - Update opportunity 
 	When I click on "Opportunities" link
 	And I select Renew View
 	And I click on the Go button if present
-	And I click on "RenewOpsTesting" link
+	And I click on "RenewNetOpsTesting" link
 	#And I go to existing renewal opportunities
 	And I open the asset
 	#And I go to existing renewal opportunities
@@ -82,7 +82,7 @@ Scenario: Rally Test Case ID: TC3412 : Opportunity Updates - Update opportunity 
 	#And I go to existing renewal opportunities
 	And I select Renew View
 	And I click on the Go button if present
-	And I click on "RenewOpsTesting" link
+	And I click on "RenewNetOpsTesting" link
 	#And I go to existing renewal opportunities
 	Then I should not able to see the updated renewal opportunity
 
