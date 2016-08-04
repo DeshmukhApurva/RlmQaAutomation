@@ -4,7 +4,7 @@ Then(/^I create new Channel Account with value "(.*?)" with AccountNumber "(.*?)
   begin
     sleep 8
     click_on "New"
-    sleep 2
+    sleep 5
     puts "Creating a new Account"
     sleep 4
     fill_in "Account Name",:with => arg1
@@ -15,7 +15,7 @@ Then(/^I create new Channel Account with value "(.*?)" with AccountNumber "(.*?)
     sleep 4
     fill_in "Billing Country" ,:with =>arg3
     puts "Filled value for Billing Country"
-    sleep 1
+    sleep 5
     within(:id,"topButtonRow") do
       click_on "Save"
     end
@@ -39,7 +39,7 @@ And(/^I Manage Partner Account with contact "(.*?)" and its Owner "(.*?)"$/) do 
     puts "I change Owner"
     # sleep 3
     # find(:xpath,"//select[contains(@title,'Search scope')]").select "User"
-    sleep 3
+    sleep 5
     fill_in "Owner",:with=> arg2
     sleep 5
     click_on "Save"
@@ -69,7 +69,7 @@ And(/^I Manage Partner Account with contact "(.*?)" and its Owner "(.*?)"$/) do 
     sleep 5
     find(:xpath,'//*[@id="con1_ileinner"]/a[2]').click
     puts "I change Owner"
-    sleep 3
+    sleep 5
     fill_in "Owner",:with=> arg2
     sleep 5
     click_on "Save"
@@ -130,54 +130,19 @@ Then(/^I create new Asset with Name "(.*?)" and its Product "(.*?)" and its Stat
   end
 end
 
-Then(/^I create new Asset with Name "(.*?)" and its Product "(.*?)" and its Status "(.*?)" and price "(.*?)" and account "(.*?)"$/) do |arg1,arg2,arg3,arg4,arg5|
-  begin
-    sleep 10
-    click_on "New"
-    sleep 5
-    puts "Creating a new Asset"
-    sleep 5
-    fill_in "Name",:with => arg1
-    puts "Filled value for Asset name"
-    sleep 5
-    fill_in "Account",:with => arg5
-    puts "Filled value for Asset Account"
-    sleep 5
-    first(:xpath, "//*[contains(@id, 'Status')]").select(arg3)
-    sleep 5
-    fill_in "Product2",:with =>arg2
-    puts "Filled value for Asset Product"
-    sleep 8
-    fill_in "Price",:with =>arg4
-    fill_in "Quantity",:with => "1"
-    sleep 5
-
-    within(:id,"topButtonRow") do
-      click_on "Save"
-    end
-    sleep 8
-    puts "Asset  successfully created"
-  rescue Exception => ex
-    puts "Error occurred while creating Asset"
-    puts ex.message
-  end
-end
-
 Then(/^I create new Service Contracts with Name "(.*?)" with Account "(.*?)" and Product "(.*?)"$/) do |arg1,arg2,arg|
   begin
 
-    ProductName=arg
-
     click_on "New"
-    sleep 2
+    sleep 5
     puts "Creating a new Service Contract"
-    sleep 4
+    sleep 6
     fill_in "Name",:with => arg1
     puts "Filled value for Service Contract name"
-    sleep 4
+    sleep 6
     fill_in "Account",:with => arg2
     puts "Filled value for Account name"
-    sleep 5
+    sleep 6
     within(:id,"topButtonRow") do
       click_on "Save"
     end
@@ -192,7 +157,7 @@ Then(/^I create new Service Contracts with Name "(.*?)" with Account "(.*?)" and
       tr.each do |row|
         puts row
         puts row.all("td")[1].text
-        if row.all("td")[1].text == ProductName
+        if row.all("td")[1].text == arg3
           row.all("td")[0].first("div").first("input").click
         end
       end
@@ -227,17 +192,17 @@ Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Produ
     time = Time.new
     fill_in "Close Date",:with=>time.month.to_s + "/" + time.day.to_s + "/" +time.year.to_s
     find("#opp11").select "Qualification"
-    sleep 2
+    sleep 6
     within("#bottomButtonRow") do
       click_on 'Save'
     end
     sleep 5
     click_on "Choose Price Book"
-    sleep 3
+    sleep 6
     first(:option,'Standard Price Book').select_option
     sleep 4
     click_on "Save"
-    sleep 5 
+    sleep 5
     click_on "Add Product"
     sleep 5
     find(:xpath, "(//input[@type='checkbox'])[3]").set(true)
@@ -271,20 +236,20 @@ Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Produ
   end
 end
 
-When(/^I create Source Opportunity with Line Items and resolve it and rename it as "(.*?)"$/) do |arg|
+When(/^I create Source Opportunity with Line Items with Account "(.*?)" and resolve it and rename it as "(.*?)"$/) do |arg1,arg2|
   begin
-    # Components of a Time
-    #    puts "Current Time : " + time.inspect
-    #    puts time.year    # => Year of the date
-    #    puts time.month   # => Month of the date (1 to 12)
-    #    puts time.day     # => Day of the date (1 to 31 )
-    #    puts time.wday    # => 0: Day of week: 0 is Sunday
-    #    puts time.yday    # => 365: Day of year
-    #    puts time.hour    # => 23: 24-hour clock
-    #    puts time.min     # => 59
-    #    puts time.sec     # => 59
-    #    puts time.usec    # => 999999: microseconds
-    #    puts time.zone    # => "UTC": timezone name
+  # Components of a Time
+  #    puts "Current Time : " + time.inspect
+  #    puts time.year    # => Year of the date
+  #    puts time.month   # => Month of the date (1 to 12)
+  #    puts time.day     # => Day of the date (1 to 31 )
+  #    puts time.wday    # => 0: Day of week: 0 is Sunday
+  #    puts time.yday    # => 365: Day of year
+  #    puts time.hour    # => 23: 24-hour clock
+  #    puts time.min     # => 59
+  #    puts time.sec     # => 59
+  #    puts time.usec    # => 999999: microseconds
+  #    puts time.zone    # => "UTC": timezone name
     time = Time.new
     #oppDateTime =  +
     time = Time.new
@@ -304,16 +269,16 @@ When(/^I create Source Opportunity with Line Items and resolve it and rename it 
     $endDateOLI = time.month.to_s + "/" + time.day.to_s + "/" + (time.year.to_i + 1).to_s
 
     fill_in "Opportunity Name",:with=>$automationOppName
-    sleep 3
+    sleep 5
     fill_in "Close Date",:with=> $oPPCloseDate
-    sleep 3
+    sleep 5
     fill_in "Earliest Expiration Date",:with=> $earliestExpirationDate
-    sleep 3
+    sleep 5
     select "Qualification", :from => "Stage"
-    sleep 3
-    fill_in "Account Name",:with=> "PES Channel Account"
+    sleep 5
+    fill_in "Account Name",:with=> arg1
 
-    sleep 3
+    sleep 5
 
     within(:id,"topButtonRow") do
       click_on "Save"
@@ -323,9 +288,9 @@ When(/^I create Source Opportunity with Line Items and resolve it and rename it 
 
     sleep 5
     click_on "Choose Price Book"
-    sleep 3
+    sleep 5
     first(:option,'Standard Price Book').select_option
-    sleep 4
+    sleep 6
     click_on "Save"
     sleep 5
     click_on "Add Product"
@@ -337,50 +302,45 @@ When(/^I create Source Opportunity with Line Items and resolve it and rename it 
     find(:xpath, "(//input[@type='checkbox'])[5]").set(true)
     find(:xpath, "(//input[@type='checkbox'])[6]").set(true)
 
-    # find(:xpath, "(//input[@type='checkbox'])[6]").set(true)
-    # find(:xpath, "(//input[@type='checkbox'])[7]").set(true)
-    # find(:xpath, "(//input[@type='checkbox'])[8]").set(true)
-    # find(:xpath, "(//input[@type='checkbox'])[9]").set(true)'
-
     click_on 'Select'
     puts "Successfully select the product"
     sleep 6
     #Enter product Quantity
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[3]/input").send_keys "1"
-    sleep 2
+    sleep 5
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[3]/input").send_keys "1"
-    sleep 2
+    sleep 5
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[13]/td[3]/input").send_keys "1"
-    sleep 2
+    sleep 5
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[17]/td[3]/input").send_keys "1"
-    sleep 2
+    sleep 5
 
     #Enter Start Date of Product
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[17]/td[4]/span/input").set $startDateOLI
-    sleep 2
+    sleep 5
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[4]/span/input").set $startDateOLI
-    sleep 2
+    sleep 5
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[4]/span/input").set $startDateOLI
-    sleep 2
+    sleep 5
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[13]/td[4]/span/input").set $startDateOLI
-    sleep 2
+    sleep 5
 
     #Enter End Date of Product
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[17]/td[5]/span/input").set $endDateOLI
-    sleep 2
+    sleep 5
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[5]/span/input").set $endDateOLI
-    sleep 2
+    sleep 5
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[5]/span/input").set $endDateOLI
-    sleep 2
+    sleep 5
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[13]/td[5]/span/input").set $endDateOLI
-    sleep 2
+    sleep 5
 
     all(:xpath,'//td/input[@value=" Save "]')[0].click
     sleep 6
 
     within(".opportunityLineItemBlock") do
       within(".list") do
-        sleep 3
+        sleep 5
         $first_product = all(".dataRow")[0].all("th")[0].first("a").text
         puts $first_product
 
@@ -392,7 +352,7 @@ When(/^I create Source Opportunity with Line Items and resolve it and rename it 
 
         $fourth_product = all(".dataRow")[3].all("th")[0].first("a").text
         puts $fourth_product
-        sleep 3
+        sleep 5
       end
     end
 
@@ -403,7 +363,7 @@ When(/^I create Source Opportunity with Line Items and resolve it and rename it 
     #first(:button,'Edit').click
     sleep 5
     first(:option,'Closed Won').select_option
-    sleep 2
+    sleep 5
     first(:button,'Save').click
     sleep 8
 
@@ -416,10 +376,10 @@ When(/^I create Source Opportunity with Line Items and resolve it and rename it 
     end
     sleep 5
     #$automationRO = $automationOppName + "RO"
-    fill_in "Opportunity Name",:with=> arg
+    fill_in "Opportunity Name",:with=> arg2
     sleep 3
     fill_in "Earliest Expiration Date",:with=> $earliestExpirationDate
-    sleep 3
+    sleep 5
     first(:button,'Save').click
     sleep 8
   rescue Exception => ex
@@ -430,97 +390,89 @@ end
 
 And(/^I select partner account one "(.*?)"$/) do |arg|
   begin
-    sleep 2
-
+    sleep 5
     if page.has_css?(".lookupIcon")
-      #puts "Successfully see the #{arg["PartnerAccount1FieldName"]} and #{arg["PartnerAccount2FieldName"]} lookup Icons"
-      sleep 1
+      sleep 5
       main = page.driver.browser.window_handles.first
-      sleep 2
+      sleep 5
       find("img[alt='Partner Account 1 Lookup (New Window)']").click
       sleep 8
       page.driver.browser.manage.window.maximize
-      sleep 3
+      sleep 6
       page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
-      sleep 3
+      sleep 6
       page.driver.browser.switch_to.frame("resultsFrame")
-      sleep 3
+      sleep 6
       within('.list') do
-        #click_link arg2["PartnerAccount1Name"]
         click_link arg
       end
-      sleep 2
+      sleep 5
       page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
-      sleep 1
-      #puts "Successfully Selected the #{arg["PartnerAccount1FieldName"]} from #{arg["PartnerOpportunityName"]} page"
-      puts "Selected partner account one"
+      sleep 6
+      puts "Selected partner account -1" 
 
     end
-    sleep 4
+    sleep 5
   rescue Exception => ex
-    putstr "test"
+    putstr "Error occurred while selecting the partner account-1"
     putstr_withScreen  ex.message
   end
 end
 
 And(/^I select partner account two "(.*?)"$/) do |arg|
   begin
-    sleep 2
+    sleep 5
 
     if page.has_css?(".lookupIcon")
-      #puts "Successfully see the #{arg["PartnerAccount1FieldName"]} and #{arg["PartnerAccount2FieldName"]} lookup Icons"
-      sleep 1
+      sleep 6
       main = page.driver.browser.window_handles.first
-      sleep 2
+      sleep 5
       find("img[alt='Partner Account 2 Lookup (New Window)']").click
       sleep 8
       page.driver.browser.manage.window.maximize
-      sleep 3
+      sleep 5
       page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
-      sleep 3
+      sleep 5
       page.driver.browser.switch_to.frame("resultsFrame")
-      sleep 3
+      sleep 5
       within('.list') do
-        #click_link arg2["PartnerAccount1Name"]
         click_link arg
       end
-      sleep 2
+      sleep 5
       page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
-      sleep 1
-      #puts "Successfully Selected the #{arg["PartnerAccount1FieldName"]} from #{arg["PartnerOpportunityName"]} page"
-      puts "Selected partner account one"
+      sleep 5
+      puts "Selected partner account - 2"
 
     end
-    sleep 4
+    sleep 6
   rescue Exception => ex
-    putstr "test"
+    putstr "Error occurred while selecting the partner account-2"
     putstr_withScreen  ex.message
   end
 end
 
 And(/^I select the partner account one contact "([^"]*)" from the contacts lookup list$/) do |arg|
   begin
-    sleep 4
+    sleep 5
     if page.has_css?(".lookupIcon")
       puts "Successfully see the PartnerAccount1ContactFieldName"
-      sleep 2
+      sleep 5
       main = page.driver.browser.window_handles.first
-      sleep 3
+      sleep 6
       find("img[alt='Partner Account 1 Contact Lookup (New Window)']").click
       sleep 8
       page.driver.browser.manage.window.maximize
-      sleep 3
+      sleep 5
       page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
       sleep 5
       page.driver.browser.switch_to.frame("resultsFrame")
-      sleep 3
+      sleep 5
       within('.list') do
-        #click_link arg2["PartnerAccount1Contact"]
         click_link arg
       end
       sleep 5
       page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
-      sleep 3
+      sleep 5
       puts "Successfully Selected the partner account 1 contact"
       sleep 8
       main = page.driver.browser.window_handles.first
@@ -528,36 +480,35 @@ And(/^I select the partner account one contact "([^"]*)" from the contacts looku
     else
       putstr "Failed to see the partner account 1 contact lookup Icons"
     end
-    sleep 4
+    sleep 5
   rescue Exception => ex
-    putstr "Error occurred while selecting the partner account one contacts"
+    putstr "Error occurred while selecting the partner account 1 contacts"
     putstr_withScreen  ex.message
   end
 end
 
 And(/^I select the partner account two contact "([^"]*)" from the contacts lookup list$/) do |arg|
   begin
-    sleep 4
+    sleep 5
     if page.has_css?(".lookupIcon")
       puts "Successfully see the PartnerAccount1ContactFieldName"
-      sleep 2
+      sleep 4
       main = page.driver.browser.window_handles.first
-      sleep 3
+      sleep 5
       find("img[alt='Partner Account 2 Contact Lookup (New Window)']").click
       sleep 8
       page.driver.browser.manage.window.maximize
-      sleep 3
+      sleep 5
       page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
       sleep 5
       page.driver.browser.switch_to.frame("resultsFrame")
-      sleep 3
+      sleep 5
       within('.list') do
-        #click_link arg2["PartnerAccount1Contact"]
         click_link arg
       end
       sleep 5
       page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
-      sleep 3
+      sleep 5
       puts "Successfully Selected the partner account 2 contact"
       sleep 8
       main = page.driver.browser.window_handles.first
@@ -565,9 +516,9 @@ And(/^I select the partner account two contact "([^"]*)" from the contacts looku
     else
       putstr "Failed to see the partner account 2 contact lookup Icons"
     end
-    sleep 4
+    sleep 5
   rescue Exception => ex
-    putstr "Error occurred while selecting the partner account one contacts"
+    putstr "Error occurred while selecting the partner account 2 contacts"
     putstr_withScreen  ex.message
   end
 end
@@ -577,7 +528,7 @@ And(/^I select the partner account one as "(.*?)"$/) do |arg|
     sleep 5
 
     find(:xpath, "//tbody/tr[1]/td[2]/select").select arg
-    puts "partner account type selected"
+    puts "partner account #{arg} type selected"
     result = true
 
     putstr "Failed to see the #{arg} field value" unless result
@@ -585,7 +536,7 @@ And(/^I select the partner account one as "(.*?)"$/) do |arg|
     result = false
 
   rescue Exception => ex
-    putstr "Error occurred while selecting the partner account one #{arg} field values"
+    putstr "Error occurred while selecting the partner account 1 #{arg} field values"
     putstr_withScreen  ex.message
   end
 end
@@ -596,7 +547,7 @@ And(/^I select the partner account two as "(.*?)"$/) do |arg|
 
     find(:xpath, "//tbody/tr[2]/td[2]/select").select arg
 
-    puts "partner account type selected"
+    puts "partner account #{arg} type selected"
     result = true
 
     putstr "Failed to see the #{arg} field value" unless result
@@ -604,14 +555,14 @@ And(/^I select the partner account two as "(.*?)"$/) do |arg|
     result = false
 
   rescue Exception => ex
-    putstr "Error occurred while selecting the partner account two #{arg} field values"
+    putstr "Error occurred while selecting the partner account 2 #{arg} field values"
     putstr_withScreen  ex.message
   end
 end
 
-And(/^I rename the partner opportunity name as "(.*?)"$/) do |arg|
+And(/^I rename the partner opportunity as "(.*?)"$/) do |arg|
   begin
-    sleep 3
+    sleep 5
     all('input[type=text]')[0].set arg
     puts "Renamed the partner opportunity"
 
@@ -626,7 +577,7 @@ And(/^I rename the quote as "(.*?)"$/) do |arg|
     end
 
     fill_in "Quote Name",:with => arg
-    sleep 3
+    sleep 5
     first(:xpath, "//*[contains(@name, 'save')]").click
     puts "Quote renamed successfully"
   end
