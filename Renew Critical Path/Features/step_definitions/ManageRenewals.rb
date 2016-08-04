@@ -479,8 +479,11 @@ And(/^I open the renewal relationship opportunity$/) do
     arg = getReference "ManageRenewalsOpportunity"
     find('#fcf').select "My Opportunities"
     sleep 5
-    within (".fBody") do
-      click_button 'Go!'
+#    within (".fBody") do
+#      click_button 'Go!'
+#    end
+    if page.has_xpath?('//input[@name="go"]')
+      first(:button, "Go").click
     end
     sleep 10
     if page.has_css?(".listItemPad")
