@@ -7,9 +7,9 @@ Then (/^I select the "(.*?)" for Partner Opportunity$/) do |data|
 	arg = getReference data
 	select "All Accounts", :from => "fcf"
 		sleep 3
-		within(".fBody") do
-			click_on "Go!"
-		end
+		    if page.has_button?('Go!')
+      click_on "Go!"
+    end
 		sleep 5
 		foundCount = 0
 		begin  

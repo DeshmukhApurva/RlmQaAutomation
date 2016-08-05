@@ -21,8 +21,11 @@ And(/^I open the existing asset$/) do
     sleep 5
     arg = getReference "NonIncumbentPartnerPricingDisplay"
     sleep 5
-    within (".fBody") do
-      click_button 'Go!'
+#    within (".fBody") do
+#      click_button 'Go!'
+#    end
+    if page.has_button?('Go!')
+      click_on "Go!"
     end
     sleep 10
     if page.has_css?(".listItemPad")
@@ -180,8 +183,11 @@ And(/^I open the existing service contract$/) do
     sleep 5
     arg = getReference "NonIncumbentPartnerPricingDisplay"
     sleep 5
-    within (".fBody") do
-      click_button 'Go!'
+#    within (".fBody") do
+#      click_button 'Go!'
+#    end
+    if page.has_button?('Go!')
+      click_on "Go!"
     end
     sleep 10
     if page.has_css?(".listItemPad")

@@ -171,7 +171,7 @@ end
 
 And(/^I click on "(.*?)" button$/) do |button_text|
   begin
-    sleep 3
+    sleep 8
     #within all(".pbButton")[1] do
     first(:button, button_text).click
     sleep 5
@@ -232,9 +232,9 @@ And(/^I open the existing opportunity$/) do
     sleep 10
     # find('#fcf').select "My Opportunities"
     # sleep 5
-    # #within (".fBody") do
-    # click_button 'Go!'
-    # #end
+#     #within (".fBody") do
+#     click_button 'Go!'
+#     #end
     # sleep 8
     # if page.has_css?(".listItemPad")
       # sleep 4

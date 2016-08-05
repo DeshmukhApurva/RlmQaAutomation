@@ -7,8 +7,8 @@ And(/^I open the existing assets$/) do
     sleep 5
     arg = getReference "NonIncumbentPartnerPricingDisplay"
     sleep 5
-    within (".fBody") do
-      click_button 'Go!'
+    if page.has_button?('Go!')
+      click_on "Go!"
     end
     sleep 10
     if page.has_css?(".listItemPad")

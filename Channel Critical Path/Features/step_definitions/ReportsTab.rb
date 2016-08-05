@@ -10,8 +10,11 @@ And(/^I open the existing account$/) do
     sleep 3
     find('#fcf').select "My Accounts"
     sleep 4
-    within (".fBody") do
-      click_button 'Go!'
+#    within (".fBody") do
+#      click_button 'Go!'
+#    end
+    if page.has_button?('Go!')
+      click_on "Go!"
     end
     sleep 10
     if page.has_css?(".listItemPad")
