@@ -56,7 +56,7 @@ Scenario: Rally Test Case ID : TC2852,TC2856,TC2857,TC2859,TC2862 : Create Succe
 @SuccessPlanCreation 
 Scenario: Rally Test Case ID: TC2895 : Create Success plan 
 	When I click on "Success Plans" tab 
-	Then I create a SuccessPlan with template "APT-000002" with Account "Action Machinery Co" 
+	Then I create a SuccessPlan with template "APT-000025" with Account "Action Machinery Co" 
 		
 @EmailSPTaskCreation 
 Scenario: Rally Test Case ID: TC2908 : Complete task from Success Plan 
