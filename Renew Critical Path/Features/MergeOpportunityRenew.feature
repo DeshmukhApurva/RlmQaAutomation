@@ -10,19 +10,18 @@ Background: Login to the Application
 Scenario: Rally Test Case ID: TC3215,TC3218,TC3219,TC3220 : Merge Opportunities - Opportunities,Merge Opportunities - Select All link, Merge Opportunities - Covered assets and covered product Display, Merge Opportunities - "Renewal" check
     When I click on "Opportunities" link
     And I click on "New" button
-    And I create the new opportunity
+    And I create the new opportunity1
     And I click on "Choose Price Book" button
     When I choose the "Standard Price Book" Price book for the product
     When I click on "Opportunities" link
     And I click on "New" button
-    And I create the new opportunity
+    And I create the new opportunity2
     And I click on "Choose Price Book" button
     When I choose the "Standard Price Book" Price book for the product
     When I click on "Opportunities" link
     And I click on "Go!" button from opportunity page
     And I navigate to the merge opportunity section
-    And I select the opportunities
-    And I select the opportunities those are having same currency and same pricebook
+    And I select the opportunities those recently created
     And I click on "Merge" button
     And I select the master record from "Merge Opportunities" page
     And I click on "Merge" button from "Merge Opportunities" page
@@ -30,12 +29,12 @@ Scenario: Rally Test Case ID: TC3215,TC3218,TC3219,TC3220 : Merge Opportunities 
     When I click on "Opportunities" link
     And I click on "Go!" button from opportunity page
     And I navigate to the merge opportunity section
-    When I delete the created different price book opportunity
-    When I click on "Opportunities" link
-    And I click on "Go!" button from opportunity page
-    And I navigate to the merge opportunity section
-    And I select the opportunities
-    When I delete the created different price book opportunity
+#    When I delete the created different price book opportunity
+#    When I click on "Opportunities" link
+#    And I click on "Go!" button from opportunity page
+#    And I navigate to the merge opportunity section
+#    And I select the opportunities
+#    When I delete the created different price book opportunity
 
 
 @ren_merge_opportunity_consolidate_validation

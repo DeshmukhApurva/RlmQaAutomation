@@ -243,11 +243,6 @@ begin
   end
 end
 
-
-
-
-
-
 Then(/^create new contact with FirstName "(.*?)" and LastName "(.*?)" and email "(.*?)"$/) do |arg1,arg2,arg3|
   begin
     click_on "New"
