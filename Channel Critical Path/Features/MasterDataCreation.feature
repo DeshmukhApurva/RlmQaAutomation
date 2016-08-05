@@ -25,8 +25,8 @@ Scenario: Channel: Generate Renew Opp
 	When I create Source Opportunity with Line Items with Account "PES Channel Account" and resolve it and rename it as "PES_Add_Partner" 
 	When I create Source Opportunity with Line Items with Account "PES Channel Account" and resolve it and rename it as "PES_Split_Target_Opp" 
 	
-@PartnerOpportunityCreation 
-Scenario: Channel: Generate Partner Opportunity 
+@PartnerOpportunityCreation_PES_Orange_Pipeline 
+Scenario: Channel: Generate Partner Opportunity : PES_Orange_Pipeline
 	When I create Source Opportunity with Line Items with Account "PES Channel Account" and resolve it and rename it as "PES_Pipeline_Opportunity" 
 	And I click on "Add New Partner Opportunity" button 
 	And I select partner account one "PES Channel Account" 
@@ -39,7 +39,9 @@ Scenario: Channel: Generate Partner Opportunity
 	And I select the partner account two as "Distributor" 
 	And I rename the partner opportunity as "PES_Orange_Pipeline" 
 	And I click on the "Grant Access" 
-	
+
+@PartnerOpportunityCreation_TwoTierAutomationPO	
+Scenario: Channel: Generate Partner Opportunity  : TwoTierAutomationPO
 	When I create Source Opportunity with Line Items with Account "PES Channel Account" and resolve it and rename it as "TwoTierAutomationRO" 
 	And I click on "Add New Partner Opportunity" button 
 	And I select partner account one "Automation Reseller" 
@@ -56,7 +58,9 @@ Scenario: Channel: Generate Partner Opportunity
 	And I navigate to Opportunity from partner Opportunity page 
 	And I navigate to synced quote details page from opportunity 
 	And I rename the quote as "ResellerQuote" 
-	
+
+@PartnerOpportunityCreation_createPOforRenewOpp_PES_CHL_Opp
+Scenario: Channel: Generate Partner Opportunity  : Portal Agreement,PES_NeedStatusUpdate and Partner Agreement
 	When I create Source Opportunity with Line Items with Account "PES Channel Account" and resolve it and rename it as "PES_CHL_Opp" 
 	And I click on "Add New Partner Opportunity" button 
 	And I select partner account one "PES Channel Account" 
