@@ -324,6 +324,7 @@ Scenario: Rally Test Case ID: TC5045: Save Focus Category Preference
 Scenario: Rally Test Case ID: TC5044
 	When I click on "Overview" link
 	And I Verify Focus Category records
+    And I select Task FCG
 	And I click on Subject link value of FC Task
 	And I click on "Overview" link
 	Then I Verify Action link for the chosen FC Task
@@ -333,7 +334,7 @@ Scenario: Rally Test Case ID: TC5046,TC5047,TC5048,TC5049: Navigate to Focus Cat
 	When I click on "Overview" link
 	And I Verify Focus Category records
 	And I click on FC Header
-  And I click Create New link
+    And I click Create New link
 	Then I save the new FC
 	And I click Edit link
 	Then I Save the changes
@@ -344,10 +345,12 @@ Scenario: Rally Test Case ID: TC5046,TC5047,TC5048,TC5049: Navigate to Focus Cat
 @VerifyCDpopupAddDetails
 Scenario: Rally Test Case ID: TC5041,TC5042,TC5043: Verify Required/Non-Required Fields on Complete/Dismiss Task's popup window, Verify task complete/dismiss with Required fields input, Verify task complete/dismiss with Non-Required fields input, Error Messages
 	And I click on "Overview" link
-	And I select FCG
+	And I select Task FCG
+	#And I select FCG
 	And I mark the task as Not Started
 	And I click on "Overview" link
-	And I select FCG
+	And I select Task FCG
+	#And I select FCG
 	And I click on Complete Action
 	Then I verify Additional Fields Section
 	And I provide Required additional details
@@ -363,7 +366,7 @@ Scenario: Rally Test Case ID: TC5041,TC5042,TC5043: Verify Required/Non-Required
 	And I click on "Overview" link
 	And I click on Dismiss Action
 	Then I verify Additional Fields Section
-  And I provide Required additional details
+    And I provide Required additional details
 	And I click on Save
 	And I click on "Overview" link
 	Then I verify the required details of the task
@@ -378,7 +381,8 @@ Scenario: Rally Test Case ID: TC5041,TC5042,TC5043: Verify Required/Non-Required
 @ALDisabledTask
 Scenario: Rally Test Case ID: TC5096: Verify the Action links for task created by other user
   When I click on "Overview" link
-  And I select FCG
+  #And I select FCG
+  And I select Task FCG
   And I click on Subject link for Active Action link
   And I verify Task page
   And I click on "Overview" link

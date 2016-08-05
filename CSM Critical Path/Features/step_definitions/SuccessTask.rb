@@ -1785,6 +1785,13 @@ And(/^I open the "([^"]*)" task pop up window$/) do |task|
   begin
     sleep 4
     $ispopwindow = 0
+    sleep 5 
+     searchStr = "In Progress"
+    within(".bootstrap-table") do
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
+    end
     sleep 10
     unless page.has_css?(".no-records-found")
       within("#taskGrid") do

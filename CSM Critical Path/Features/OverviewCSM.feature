@@ -293,10 +293,12 @@ Scenario: Rally Test Case ID: TC4763: Edit Focus Category on Tile Portfolio Summ
 @CSM_VerifyCDpopupAddDetails
 Scenario: Rally Test Case ID: TC4764,TC4765,TC4766: Verify Required/Non-Required Fields on Complete/Dismiss Task's popup window, Verify task complete/dismiss with Required fields input, Verify task complete/dismiss with Non-Required fields input, Error Messages
 	And I click on "Overview" link
-	And I select FCG
+	#And I select FCG
+	And I select Task FCG
 	And I mark the task as Not Started
 	And I click on "Overview" link
-	And I select FCG
+	#And I select FCG
+	And I select Task FCG
 	And I click on Complete Action
 	Then I verify Additional Fields Section
 	And I provide Required additional details
@@ -328,6 +330,7 @@ Scenario: Rally Test Case ID: TC4764,TC4765,TC4766: Verify Required/Non-Required
 Scenario: Rally Test Case ID: TC4767
 	When I click on "Overview" link
 	And I Verify Focus Category records
+	And I select Task FCG
 	And I click on Subject link value of FC Task
 	And I click on "Overview" link
 	Then I Verify Action link for the chosen FC Task
@@ -387,7 +390,8 @@ Scenario: Rally Test Case ID: TC4769,TC4770,TC4771,TC4772: Navigate to Focus Cat
 @CSM_ALDisabledTask
 Scenario: Rally Test Case ID: TC4783: Verify the Action links for task created by other user
   When I click on "Overview" link
-  And I select FCG
+ #And I select FCG
+  And I select Task FCG
   And I click on Subject link for Active Action link
   And I verify Task page
   And I click on "Overview" link

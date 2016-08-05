@@ -1949,6 +1949,11 @@ end
 
 And(/^I click on Subject link value of FC Task$/) do
   begin
+    sleep 8
+    page.execute_script "window.scrollBy(0,10000)" 
+    sleep 5
+    page.driver.browser.manage.window.maximize
+    sleep 5
     if page.has_css? (".acc")
       within(".list") do
         all("tr")[1].all("td")[2].first("a").click
@@ -2150,6 +2155,11 @@ end
 
 And(/^I click on Complete Action$/) do
   begin
+    sleep 8
+    page.execute_script "window.scrollBy(0,10000)" 
+    sleep 5
+    page.driver.browser.manage.window.maximize
+    sleep 5
     within(".list") do
       tr = first("tbody").all("tr")
       tr.each_with_index do |row, index|
@@ -2188,7 +2198,11 @@ And(/^I mark the task as Not Started$/) do
       find(:xpath,'//a[contains(text(),"PES FC Task-Overview")]/parent::h3/parent::div/i').click
       sleep 5
     end
-
+    sleep 8
+    page.execute_script "window.scrollBy(0,10000)" 
+    sleep 5
+    page.driver.browser.manage.window.maximize
+    sleep 5
     within(".list") do
       tr = first("tbody").all("tr")
       all("td")[2].first("a").click
@@ -2306,6 +2320,11 @@ end
 
 And(/^I click on Dismiss Action$/) do
   begin
+    sleep 8
+    page.execute_script "window.scrollBy(0,10000)" 
+    sleep 5
+    page.driver.browser.manage.window.maximize
+    sleep 5
     within(".list") do
       tr = first("tbody").all("tr")
       tr.each_with_index do |row, index|
@@ -2840,6 +2859,11 @@ end
 
 And(/^I click on Subject of any Task$/) do
   begin
+    sleep 8
+    page.execute_script "window.scrollBy(0,10000)" 
+    sleep 5
+    page.driver.browser.manage.window.maximize
+    sleep 5
     $i = 0
     sleep 2
     if page.has_css? (".ss-check")
