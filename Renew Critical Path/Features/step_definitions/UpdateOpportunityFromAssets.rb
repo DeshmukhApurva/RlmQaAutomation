@@ -239,9 +239,12 @@ And(/^I go to existing renewal opportunities$/) do
    arg = getReference "AssetDetails"
    find('#fcf').select "My Opportunities"
    sleep 5
-   within (".fBody") do
-    click_button 'Go!'
-   end
+#   within (".fBody") do
+#    click_button 'Go!'
+#   end
+    if page.has_xpath?('//input[@name="go"]')
+      first(:button, "Go").click
+    end
    sleep 10
    if page.has_css?(".listItemPad")
      sleep 4
