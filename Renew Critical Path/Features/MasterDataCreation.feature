@@ -5,12 +5,12 @@ Background: Login to the Application
 	Given that I navigate to the CRM application 
 	Then I should land on CRM home page 
 	
-@Createnewaccount 
-Scenario: Rally Test Case ID:  : Renew: New account creation 
-	When I click on "Account" tab 
-	Then I create new Renew Account with value "PE Wealth" 
-	When I click on "Account" tab 
-	Then I create new Renew Account with value "QA Test" 
+#@Createnewaccount 
+#Scenario: Rally Test Case ID:  : Renew: New account creation 
+#	When I click on "Account" tab 
+#	Then I create new Renew Account with value "PE Wealth" 
+#	When I click on "Account" tab 
+#	Then I create new Renew Account with value "QA Test" 
 	
 @PlayCreation 
 Scenario: Rally Test Case ID : : Creation of Play 
@@ -22,11 +22,11 @@ Scenario: Rally Test Case ID : : Creation of Playbook
 	When I click on "ServiceSource Setup" link 
 	And create a new Playbook with value "PES PlayBook" with play "Play for Account" and its Short Description "High Risk Description" and Object "Account" and its TaskName "PES Play Task" and its task type "Call" and AssignTo "CSM Manager" and Description "Enquiry of Play" and days "10" 
 	
-@CreateIndicatorGroupCreation 
-Scenario: Rally Test Case ID : : Create Indicator Group and Add Indicators 
-	When I click on "ServiceSource Setup" link 
-	Then I create a new Indicator Group with name "CSM Indicator Group" 
-	Then I add indicator 
+#@CreateIndicatorGroupCreation 
+#Scenario: Rally Test Case ID : : Create Indicator Group and Add Indicators 
+#	When I click on "ServiceSource Setup" link 
+#	Then I create a new Indicator Group with name "CSM Indicator Group" 
+#	Then I add indicator 
 	
 @CreateSPTCreation 
 Scenario: Rally Test Case ID : : Create Success Plan Template 
@@ -99,13 +99,10 @@ Scenario: Renew: Generate Opp
 	When I click on "Opportunities" tab 
 	Then I create new opportunity with Name "Source-RenewNetOpsTesting" with Account "QA Test" and Product "Product B" 
 	Then I resolved the Source Opportunity and rename with name "RenewNetOpsTesting" 
-	When I create Source Opportunity with Line Items with Account "QA Test" with Account "PES Channel Account" and resolve it and rename it as "PES_Renewal_Opportunity" 
+	When I create Source Opportunity with Line Items with Account "QA Test" and resolve it and rename it as "PES_Renewal_Opportunity" 
 	
 @FiscalOpportunityresolveRenameOpp 
 Scenario: Renew: Generate Opp 
-	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "Source-RenewNetOpsTesting" with Account "QA Test" and Product "Product B" 
-	Then I resolved the Source Opportunity and rename with name "RenewNetOpsTesting" 
 	When I create Source Opportunity with Line Items with Account "QA Test" and resolve it and rename it as "FiscalOpportunity" 
 	
 
