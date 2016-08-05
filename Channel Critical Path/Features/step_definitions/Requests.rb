@@ -819,23 +819,38 @@ end
 And(/^I click on the "([^"]*)" link$/) do |request|
   begin
     expect(page).to have_content 'Request Number'
-    rowcount = all(".ui-grid-cell-contents.ng-scope").count
-    puts rowcount
+    if page.has_css?(".ui-grid-icon-ok")
+      rowcountCheckbox = all(".ui-grid-selection-row-header-buttons.ui-grid-icon-ok.ng-scope").count
+      puts "true"
+    end
     
-    if rowcount > 0
+    puts rowcountCheckbox
+    
+    if rowcountCheckbox > 0
       sleep 3
       within all(".ui-grid-canvas")[1] do
-        within all("div[role='gridcell']")[1] do
+        page.within all("div[role='gridcell']")[1] do
           sleep 5
           request_number = first("div").first("a").text
           puts request_number
+          puts "grid canvas 2 block"
           first("div").first("a").click
         end
       end
       sleep 5
       puts "Successfully open the #{request} details page"
     else
-      puts "No Opportunities Records Found"
+      within all(".ui-grid-canvas")[0] do
+        page.within all("div[role='gridcell']")[1] do
+          sleep 5
+          request_number = first("div").first("a").text
+          puts request_number
+          puts "grid canvas 1 block"
+          first("div").first("a").click
+        end
+      end
+      sleep 5
+      puts "Successfully open the #{request} details page"
     end
     sleep 5
   rescue Exception => ex
