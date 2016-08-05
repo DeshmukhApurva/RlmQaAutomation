@@ -215,18 +215,18 @@ Feature: All features related to Quote Syncing
     And I create new quote by OOB
     And I navigate to opportunity from quote page
     And I sync the quotes from Quote
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Consolidate Opportunity" button from renewal relationship page
     Then I should able to see the sync error message
     Then I should click on back to navigate to opportunity from manage renewals page
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Split Opportunity" button from renewal relationship page
     Then I should able to see the sync error message
     Then I should click on back to navigate to opportunity from manage renewals page
     And I delete the opportunity product
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Rebuild Opportunity" button from renewal relationship page
     Then I should able to see the sync error message
@@ -234,16 +234,16 @@ Feature: All features related to Quote Syncing
     And I stop the syncing of the quote
     And I navigate to opportunity from quote page
     And I delete the opportunity product
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Rebuild Opportunity" button from renewal relationship page
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the multiple "Renewal Relationship" product fields
     And I click on "Split Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Split Selected" button from renewal relationship page
     And I navigate to contributor opportunity
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I click on "Consolidate Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Consolidate" button from renewal relationship page
@@ -265,18 +265,18 @@ Feature: All features related to Quote Syncing
     Then I verify quote fields copied to opportunity fields on opportunity page
     Then I verify QLI fields copied to OLI
     Then I navigate to opportunity from product detail page
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Consolidate Opportunity" button from renewal relationship page
     Then I should able to see the sync error message
     Then I should click on back to navigate to opportunity from manage renewals page
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Split Opportunity" button from renewal relationship page
     Then I should able to see the sync error message
     Then I should click on back to navigate to opportunity from manage renewals page
     And I delete the opportunity product
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Rebuild Opportunity" button from renewal relationship page
     Then I should able to see the sync error message
@@ -284,16 +284,16 @@ Feature: All features related to Quote Syncing
     And I stop the syncing of the quote
     And I navigate to opportunity from quote page
     And I delete the opportunity product
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Rebuild Opportunity" button from renewal relationship page
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the multiple "Renewal Relationship" product fields
     And I click on "Split Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Split Selected" button from renewal relationship page
     And I navigate to contributor opportunity
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I click on "Consolidate Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Consolidate" button from renewal relationship page
@@ -324,18 +324,18 @@ Feature: All features related to Quote Syncing
     Then I verify OLI fields copied to QLI
     And I navigate to Quote detail page from QLI details page
     And I navigate to opportunity from quote page
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Consolidate Opportunity" button from renewal relationship page
     Then I should able to see the sync error message
     Then I should click on back to navigate to opportunity from manage renewals page
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Split Opportunity" button from renewal relationship page
     Then I should able to see the sync error message
     Then I should click on back to navigate to opportunity from manage renewals page
     And I delete the opportunity product
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Rebuild Opportunity" button from renewal relationship page
     Then I should able to see the sync error message
@@ -343,16 +343,16 @@ Feature: All features related to Quote Syncing
     And I stop the syncing of the quote
     And I navigate to opportunity from quote page
     And I delete the opportunity product
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Rebuild Opportunity" button from renewal relationship page
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the multiple "Renewal Relationship" product fields
     And I click on "Split Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Split Selected" button from renewal relationship page
     And I navigate to contributor opportunity
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I click on "Consolidate Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Consolidate" button from renewal relationship page
@@ -397,16 +397,16 @@ Feature: All features related to Quote Syncing
     And I create new quote by OOB
     And I navigate to opportunity from quote page
     And I delete the opportunity product
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Rebuild Opportunity" button from renewal relationship page
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the multiple "Renewal Relationship" product fields
     And I click on "Split Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Split Selected" button from renewal relationship page
     And I navigate to contributor opportunity
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I click on "Consolidate Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Consolidate" button from renewal relationship page
@@ -417,7 +417,7 @@ Feature: All features related to Quote Syncing
   #  Then I create Source Opportunity with Line Items and resolve it
   #  And I create new quote by OOB
   #  And I navigate to opportunity from quote page
-  #  When I click on "Manage Renewals" button
+  #  And I click on "Manage Renewals" button
   #  And I select the multiple "Renewal Relationship" product fields
   #  And I click on "Split Opportunity" button from renewal relationship page
   #  And I select the "New Opportunity" opportunity option and fill the required fields
@@ -433,18 +433,18 @@ Feature: All features related to Quote Syncing
     And I delete the product from "Quote" LineItem
     And I add the product to "Quote" object
     And I navigate to opportunity from quote page
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Consolidate Opportunity" button from renewal relationship page
     Then I should able to see the sync error message
     Then I should click on back to navigate to opportunity from manage renewals page
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Split Opportunity" button from renewal relationship page
     Then I should able to see the sync error message
     Then I should click on back to navigate to opportunity from manage renewals page
     And I delete the opportunity product
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Rebuild Opportunity" button from renewal relationship page
     Then I should able to see the sync error message
@@ -452,16 +452,16 @@ Feature: All features related to Quote Syncing
     And I stop the syncing of the quote
     And I navigate to opportunity from quote page
     And I delete the opportunity product
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Rebuild Opportunity" button from renewal relationship page
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the multiple "Renewal Relationship" product fields
     And I click on "Split Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Split Selected" button from renewal relationship page
     And I navigate to contributor opportunity
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I click on "Consolidate Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Consolidate" button from renewal relationship page
@@ -483,18 +483,18 @@ Feature: All features related to Quote Syncing
     Then I verify quote fields copied to opportunity fields on opportunity page
     Then I verify QLI fields copied to OLI
     Then I navigate to opportunity from product detail page
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Consolidate Opportunity" button from renewal relationship page
     Then I should able to see the sync error message
     Then I should click on back to navigate to opportunity from manage renewals page
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Split Opportunity" button from renewal relationship page
     Then I should able to see the sync error message
     Then I should click on back to navigate to opportunity from manage renewals page
     And I delete the opportunity product
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Rebuild Opportunity" button from renewal relationship page
     Then I should able to see the sync error message
@@ -502,16 +502,16 @@ Feature: All features related to Quote Syncing
     And I stop the syncing of the quote
     And I navigate to opportunity from quote page
     And I delete the opportunity product
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the "Renewal Relationship" product field
     And I click on "Rebuild Opportunity" button from renewal relationship page
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I select the multiple "Renewal Relationship" product fields
     And I click on "Split Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Split Selected" button from renewal relationship page
     And I navigate to contributor opportunity
-    When I click on "Manage Renewals" button
+    And I click on "Manage Renewals" button
     And I click on "Consolidate Opportunity" button from renewal relationship page
     And I select the "New Opportunity" opportunity option and fill the required fields
     And I click on "Consolidate" button from renewal relationship page
