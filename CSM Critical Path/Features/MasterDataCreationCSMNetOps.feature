@@ -15,12 +15,23 @@ Scenario: Rally Test Case ID :TC2898 :  Creation Of Account
 Scenario: Rally Test Case ID : TC2814,TC2818,TC2822 : Creation of Focus Category 
 	When I click on "ServiceSource Setup" link 
 	And create a new FC with value "PES FC Task" 
-	
-@TaskTypeCreation 
-Scenario: Rally Test Case ID: TC2935 : Create Task 
-	When I click on "Success Tasks" link 
-	Then create new Tasks with Type "Call" and its FCView "PES FC Task" with SPPL "SPPL-0000005" with Account "Action Machinery Co" with status "In Progress" 
-	
+
+@FCWidgetViewCreation 
+Scenario: 
+	Rally Test Case ID : TC2814,TC2818,TC2822 : Creation of Focus Category for Widget 
+	When I click on "ServiceSource Setup" link 
+	And create a new FC with value "FC for Widgets" 
+		
+@FCGroupCreation 
+Scenario: Rally Test Case ID: TC2827 : Creation of Focus Category Group 
+	When I click on "ServiceSource Setup" link 
+	And create a new FC group with value "PES Indicator Group" 
+		
+@FCCategoryCreation 
+Scenario: Rally Test Case ID: TC2827 : Creation of Focus Category Group 
+	When I click on "ServiceSource Setup" link 
+	And create a new FC group with value "PES FCG Overview" 
+			
 @PlayCreation 
 Scenario: Rally Test Case ID : TC2839,TC2840,TC2841 : Creation of Play 
 	When I click on "ServiceSource Setup" link 
@@ -30,28 +41,23 @@ Scenario: Rally Test Case ID : TC2839,TC2840,TC2841 : Creation of Play
 Scenario: Rally Test Case ID : TC2847,TC2848 : Creation of Playbook 
 	When I click on "ServiceSource Setup" link 
 	And create a new Playbook with value "PES PlayBook" with play "Play for Account" and its Short Description "High Risk Description" and Object "Account" and its TaskName "PES Play Task" and its task type "Call" and AssignTo "CSM Manager" and Description "Enquiry of Play" and days "10" 
+
+@CreateIndicatorGroupCreation
+Scenario: Rally Test Case ID : TC2836,TC2837,TC2838 : Create Indicator Group and Add Indicators
+    When I click on "ServiceSource Setup" link
+	Then I create a new Indicator Group with name "CSM Indicator Group"
+	Then I add indicator
+
+@CreateSPTCreation
+Scenario: Rally Test Case ID : TC2852,TC2856,TC2857,TC2859,TC2862 : Create Success Plan Template
+    When I click on "ServiceSource Setup" link
+	Then I create a new Success Plan Template with Template Name "PES New SPlan Template" PhaseName "PES SP Template Phase" Days "20" Indicator "Health Status" with PlayBook "PES PlayBook" Criteria1 Type: "Success" Criteria2 Type: "Meet" Criteria3 Type: "Fail" Criteria1: "Healthy" Criteria2: "Low Adoption" Criteria3: "Pending Churn"
 	
 @SuccessPlanCreation 
 Scenario: Rally Test Case ID: TC2895 : Create Success plan 
 	When I click on "Success Plans" tab 
-	Then I create a SuccessPlan with template "APT-000003" with Account "Action Machinery Co" 
-	
-@FCWidgetViewCreation 
-Scenario: 
-	Rally Test Case ID : TC2814,TC2818,TC2822 : Creation of Focus Category for Widget 
-	When I click on "ServiceSource Setup" link 
-	And create a new FC with value "FC for Widgets" 
-	
-@FCGroupCreation 
-Scenario: Rally Test Case ID: TC2827 : Creation of Focus Category Group 
-	When I click on "ServiceSource Setup" link 
-	And create a new FC group with value "PES Indicator Group" 
-	
-@FCCategoryCreation 
-Scenario: Rally Test Case ID: TC2827 : Creation of Focus Category Group 
-	When I click on "ServiceSource Setup" link 
-	And create a new FC group with value "PES FCG Overview" 
-	
+	Then I create a SuccessPlan with template "APT-000002" with Account "Action Machinery Co" 
+		
 @EmailSPTaskCreation 
 Scenario: Rally Test Case ID: TC2908 : Complete task from Success Plan 
 	When I click on "Contact" tab 

@@ -1,6 +1,253 @@
 #All MasterDetailCreation Specific Step Definitions
 #All Scenario mentioned in MasterDetailCreation.feature
 
+Then(/^I create a new Success Plan Template with Template Name "(.*?)" PhaseName "(.*?)" Days "(.*?)" Indicator "(.*?)" with PlayBook "(.*?)" Criteria1 Type: "(.*?)" Criteria2 Type: "(.*?)" Criteria3 Type: "(.*?)" Criteria1: "(.*?)" Criteria2: "(.*?)" Criteria3: "(.*?)"$/) do |arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11|
+  begin
+    arg=getDetails "SPT"
+    click_link('ServiceSource Setup')
+    sleep 5
+    click_link('Success Plan Templates')
+    puts "clicked successfully"
+    sleep 2
+    click_on "Create New"
+    puts "Creating a new SPT"
+    sleep 2
+    fill_in "Template Name",:with => arg1
+    sleep 2
+    within(".pbBottomButtons") do
+     click_on "Create"
+    end
+    puts "Successfully created SPT" 
+    sleep 10
+    if page.has_content?('Define Success Plan Phases')
+      puts "Define Success Plan Phases section displayed"
+      sleep 3
+    else
+      raise "Define Success Plan Phases section not displayed"
+    end
+    #first(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]").select(arg["OppStage"])
+    first(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]").find(:xpath, 'option[1]').select_option
+    # if first(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]").should have_content(arg["OppStage"])
+      # puts arg["OppStage"]
+    # end
+    #puts "Opportunity Location set to "+arg["OppStage"]
+    click_on "Add Phase"
+    sleep 5
+    first(:xpath, "//*[contains(@id, 'csmName')]").set(arg2)
+    first(:xpath, "//*[contains(@id, 'csmLength')]").set(arg3)
+    sleep 5
+    within all(".pbButton")[0] do
+          click_on "Save"
+        end
+    puts "Saved Success Plan Template"
+    sleep 5
+    if page.has_content?('Template has been saved')
+        puts "Template has been saved message displayed after saving"
+        sleep 3
+    else
+      raise "Template has been saved message not displayed"
+    end
+    if page.has_content?('Phase updates have been saved')
+        puts "Phase updates have been saved message displayed after saving"
+        sleep 3
+    else
+      raise "Phase updates have been saved message not displayed"
+    end
+    if page.has_content?('Define Opportunity Location on Success Plan Timeline')
+      puts "Define Opportunity Location on Success Plan Timeline section displayed"
+      sleep 3
+    else
+      raise "Define Opportunity Location on Success Plan Timeline section not displayed"
+    end
+    if page.has_content?('Define Success Plan Playbooks')
+      puts "Define Success Plan Playbooks section displayed"
+      sleep 3
+    else
+      raise "Define Success Plan Playbooks section not displayed"
+    end
+    click_on "Add Playbook"
+    sleep 5
+   
+    within('.list') do
+      tr = first("tbody").all("tr")
+      tr.each do |row|
+        if row.all("td")[1].text == arg5
+          row.all("td")[0].all('a')[0].click
+          break
+        end                        
+      end
+    end
+    puts "Added Playbook Sucessfully"
+    sleep 10
+    within all(".pbButton")[0] do
+          click_on "Save"
+        end
+    puts "Saved Success Plan Template"
+
+    if page.has_content?('Template has been saved')
+        puts "Template has been saved message displayed after saving"
+        sleep 3
+    else
+      raise "Template has been saved message not displayed"
+    end
+    if page.has_content?('Define Success Plan Indicators')
+      puts "Define Success Plan Indicators section displayed"
+      sleep 3
+    else
+      raise "Define Success Plan Indicators section not displayed"
+    end
+    click_on "Add Indicator"
+    puts "Clicked on Add Indicator"
+    sleep 10
+    within all(".dataRow").last do
+      all(".dataCell")[5].first(:xpath, ".//*[contains(@id, 'indicatorTemp:acctplanIndComp:pb1:accountPlanIndicatorsTable:0')]").select(arg8)
+    end
+    within all(".dataRow").last do
+      all(".dataCell")[7].first(:xpath, ".//*[contains(@id, 'indicatorTemp:acctplanIndComp:pb1:accountPlanIndicatorsTable:0')]").select(arg7)
+    end
+    first(:xpath, "//*[contains(@id, 'indicatorTemp:acctplanIndComp:pb1:accountPlanIndicatorsTable:0:indicator')]").select(arg6)  
+    all(:xpath, "//*[contains(@id, 'cr1fv')]").last.set(arg9)
+    all(:xpath, "//*[contains(@id, 'cr1tv')]").last.set(arg10)
+    sleep 5
+    all(:xpath, "//*[contains(@id, 'cr2fv')]").last.set(arg10)
+    all(:xpath, "//*[contains(@id, 'cr2tv')]").last.set(arg11)
+    sleep 5
+    all(:xpath, "//*[contains(@id, 'cr3fv')]").last.set(arg11)
+    all(:xpath, "//*[contains(@id, 'cr3tv')]").last.set(arg9)
+    sleep 5
+    main = page.driver.browser.window_handles.first
+    find("img[alt='Indicator Lookup (New Window)']").click
+    sleep 5
+    page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+    sleep 10
+    page.driver.browser.switch_to.frame("resultsFrame")
+    within('.list') do
+      tr = first("tbody").all("tr")
+      tr.each do |row|
+        if row.all("th")[0].text == arg4
+            row.all("th")[0].all('a')[0].click
+            break
+        end                        
+      end
+    end
+    sleep 3
+    page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+        sleep 5
+   within all(".pbButton")[0] do
+          click_on "Save"
+        end
+    puts "Saved Success Plan Templates"
+    sleep 5
+    if page.has_content?('Template has been saved')
+        puts "Template has been saved message displayed after saving"
+        sleep 3
+    else
+      puts "Template has been saved message not displayed"
+    end
+    if page.has_content?('Success Plan Template Indicators have been saved')
+        puts "Success Plan Template Indicators have been saved message displayed after saving"
+        sleep 3
+    else
+      puts "Success Plan Template Indicators have been saved message not displayed"
+    end
+    rescue Exception => ex
+    putstr "Error occurred while creating SPT"
+    putstr_withScreen ex.message
+  end 
+end
+
+Then (/^I create a new Indicator Group with name "(.*?)"$/) do |arg|
+  begin
+    
+    sleep 5
+    click_link('Indicator Groups')
+    sleep 5
+    if all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]").count == 0
+      click_on "Add Indicator Group"
+      sleep 2
+      within_window(page.driver.browser.window_handles.last) do
+        find(:xpath, "//*[contains(@id, 'itIndicatorGroupNameId')]").set(arg)
+        find('#saveNewIndicatorGroupButtonId').click
+      end
+      sleep 5
+      all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]")[0].select("Account")
+      sleep 3
+      all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slFieldId')]")[0].select("Annual Revenue")
+      click_on "Add Field"
+      sleep 4
+      all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]")[0].select("Opportunity")
+      sleep 3
+      all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slFieldId')]")[0].select("Expected Amount")
+      click_on "Add Field"
+      sleep 4
+      all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]")[0].select("Contact")
+      sleep 3
+      all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slFieldId')]")[0].select("Level")
+      click_on "Add Field"
+      sleep 4
+      click_on "Save"
+      if page.has_content?('Indicators have been saved')
+      puts "Indicators have been saved message displayed after saving"
+      sleep 3
+    else
+      raise "Indicators have been saved message not displayed"
+    end
+    else
+      puts "Indicator Group already exists"
+    end
+    sleep 3
+  rescue Exception => ex
+    putstr "Error occurred while Creating an Indicator Group"
+    putstr_withScreen ex.message
+  end
+end
+
+Then (/^I add indicator$/) do
+begin
+  sleep 5
+  click_link('Indicator Groups')
+  sleep 5
+  if all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]").count == 0
+    sleep 3
+    all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]")[0].select("Account")
+    sleep 3
+    all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slFieldId')]")[0].select("Annual Revenue")
+    click_on "Add Field"
+    sleep 4
+    all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]")[0].select("Opportunity")
+    sleep 3
+    all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slFieldId')]")[0].select("Expected Amount")
+    click_on "Add Field"
+    sleep 4
+    all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]")[0].select("Contact")
+    sleep 3
+    all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slFieldId')]")[0].select("Level")
+    sleep 4
+    click_on "Add Field"
+    sleep 4
+    click_on "Save"
+    puts "Indicators have been added"
+    sleep 5
+    if page.has_content?('Indicators have been saved')
+      puts "Indicators have been saved message displayed after saving"
+      sleep 3
+    else
+      putstr "Indicators have been saved message not displayed"
+    end
+  else
+    puts "Indicator Group already exists"
+  end
+  sleep 3
+  rescue Exception => ex
+    putstr "Indicators Already exist"
+  end
+end
+
+
+
+
+
+
 Then(/^create new contact with FirstName "(.*?)" and LastName "(.*?)" and email "(.*?)"$/) do |arg1,arg2,arg3|
   begin
     click_on "New"
@@ -39,8 +286,10 @@ Then(/^I create new Account with value "(.*?)"$/) do |arg|
     sleep 1
 
     find("option[value='Healthy']").click
-
-    sleep 1
+     sleep 3
+      fill_in 'Annual Revenue', :with => 1000
+      
+    sleep 5
     within(:id,"topButtonRow") do
       click_on "Save"
     end
@@ -285,6 +534,7 @@ end
 Then(/^I create a SuccessPlan with template "(.*?)" with Account "(.*?)"$/) do |arg,arg1|
   begin
     puts "Create a new Success Plan"
+    
     click_on "New"
     puts "New button is clicked successfully"
     puts "I am Standing on Success Plan Edit page"
@@ -410,8 +660,89 @@ Then(/^create new Tasks with Type "(.*?)" and its FCView "(.*?)" with SPPL "(.*?
   end
 end
 
+And(/^ I send email for SP Task to "(.*?)"$/) do |arg|
+  begin
+    sleep 5
+    first(".envEnabled").click
+    sleep 5
+    fill_in 'Subject', :with => 'Send Email'
+    arg = getReference "Reference"
+    fill_in 'To', :with => arg
+    within(:id, 'topButtonRow') do
+      click_button('Send')
+      puts "Email sent"
+      sleep 5
+    end
+    sleep 10
+    if all(".envEnabled").count > 0
+      puts "Email sent successfully"
+    else
+      puts "Email could not be sent"
+    end
+  rescue Exception =>ex
+    putstr "Error while sending task email from Success Plan"
+    putstr_withScreen ex.message
+  end
+end
+
+And(/^I send email for SP Task to "(.*?)"$/) do |arg|
+  begin
+    sleep 5
+    first(".envEnabled").click
+    sleep 5
+    fill_in 'Subject', :with => 'Send Email'
+
+    fill_in 'To', :with => arg
+    within(:id, 'topButtonRow') do
+      click_button('Send')
+      puts "Email sent"
+      sleep 5
+    end
+    sleep 10
+    if all(".envEnabled").count > 0
+      puts "Email sent successfully"
+    else
+      puts "Email could not be sent"
+    end
+  rescue Exception =>ex
+    putstr "Error while sending task email from Success Plan"
+    putstr_withScreen ex.message
+  end
+end
 
 
+And (/^I verify widgets for SP Task with value "(.*?)"$/) do |arg|
+  begin
+    sleep 5
+    first(".detailEnabled").click
+    sleep 5
 
+    contactMatch = 0
 
+    begin
+      within(:id,'tbodyA') do
+        rows = all("tr")
+        rows.each do |row|
+          if row.text == arg
+          contactMatch = 1
+          break
+          end
+        end
+
+        sleep 5
+      end
+    rescue Exception =>ex1
+      puts "Verification issue"
+    end
+
+    if contactMatch > 0
+      puts "Contact Widget Verified"
+    else
+      puts "Contact Widget verification completed"
+    end
+  rescue Exception =>ex
+    putstr "Error while verifying Contact Widget from Success Plan"
+    putstr_withScreen ex.message
+  end
+end
 
