@@ -1,6 +1,5 @@
 #All Overview Specific Step Definitions
 #All Scenario mentioned in Overview.feature
-require 'pry'
 
 Then /^I click on login button$/ do
   begin
@@ -1955,9 +1954,12 @@ And(/^I click on Subject link value of FC Task$/) do
     page.driver.browser.manage.window.maximize
     sleep 5
     if page.has_css? (".acc")
-      within(".list") do
-        all("tr")[1].all("td")[2].first("a").click
-      end
+     
+     find(:xpath,"//table[@class='list']/tbody/tr[2]/td[3]").click
+      sleep 8 
+      # within(".list") do
+        # all("tr")[1].all("td")[2].first("a").click
+      # end
       puts "Subject link value clicked."
     else
       puts "Subject link value cannot be clicked."
@@ -2170,8 +2172,8 @@ And(/^I click on Complete Action$/) do
           
           $valuerow = row.all("td")[2].first("a").text
           puts $valuerow 
-          row.all("td")[0].first("span").first("a").click
-          sleep 2
+         row.all("td")[0].first("span").first("a").click
+        sleep 5
           if page.has_css? ("#fcDialogTask")
             puts "Complete Action link Active: #{index} #{$valuerow} #{$valuerow1}"
           $popwin = 1
@@ -2203,9 +2205,12 @@ And(/^I mark the task as Not Started$/) do
     sleep 5
     page.driver.browser.manage.window.maximize
     sleep 5
-    within(".list") do
-      tr = first("tbody").all("tr")
-      all("td")[2].first("a").click
+     find(:xpath,"//table[@class='list']/tbody/tr[2]/td[3]").click
+     sleep 8
+     within(".list") do
+      # tr = first("tbody").all("tr")
+      # all("td")[2].first("a").click
+      
       puts "Navigated to Task page"
       sleep 5
       first(:xpath, "//*[contains(@name, 'edit')]").click
@@ -2332,8 +2337,9 @@ And(/^I click on Dismiss Action$/) do
         unless row.has_css? (".ss-disabled")
           $index_number = index
           $valuerow = row.all("td")[2].first("a").text
-          row.all("td")[0].first("span").all("a")[1].click
-          sleep 2
+         row.all("td")[0].first("span").all("a")[1].click
+        #find(:xpath,"//table[@class='list']/tbody/tr[2]/td[1]/span/a[2]").click
+          sleep 3
           page.has_text? ("Dismiss Task")
           puts "Dismiss Action link Active: #{index} #{$valuerow} #{$valuerow1}"
         break
@@ -2759,6 +2765,11 @@ end
 
 And(/^I click on Subject link for Active Action link$/) do
   begin
+    sleep 8
+    page.execute_script "window.scrollBy(0,10000)" 
+    sleep 5
+    page.driver.browser.manage.window.maximize
+    sleep 5
     within(".list") do
       tr = first("tbody").all("tr")
       tr.each_with_index do |row, index|
@@ -2766,7 +2777,9 @@ And(/^I click on Subject link for Active Action link$/) do
         unless row.has_css? (".ss-disabled")
           $index_number = index
           $valuerow = row.all("td")[2].first("a").text
-          row.all("td")[2].first("a").click
+         # row.all("td")[2].first("a").click
+          find(:xpath,"//table[@class='list']/tbody/tr[2]/td[3]").click
+          sleep 8 
           puts "Subject link value clicked."
         break
         else
@@ -2865,7 +2878,7 @@ And(/^I click on Subject of any Task$/) do
     page.driver.browser.manage.window.maximize
     sleep 5
     $i = 0
-    sleep 2
+    sleep 5
     if page.has_css? (".ss-check")
       within(".list") do
         tr = first("tbody").all("tr")
@@ -2873,7 +2886,9 @@ And(/^I click on Subject of any Task$/) do
           next if index == 0
           unless row.has_css? (".ss-disabled")
             #$valuerow = row.all("td")[2].first("a").text
-            row.all("td")[2].first("a").click
+           # row.all("td")[2].first("a").click
+           find(:xpath,"//table[@class='list']/tbody/tr[2]/td[3]").click
+           sleep 8 
             puts "Subject link value clicked."
             sleep 15
           $i = 1
