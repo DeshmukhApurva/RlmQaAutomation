@@ -23,7 +23,7 @@ begin
 		Capybara.javascript_driver      = :selenium_firefox
 		Capybara.run_server             = false
 		Capybara.default_selector       = :css
-		Capybara.default_max_wait_time = 30
+		Capybara.default_max_wait_time = 60
 	elsif ENV['Browser'] == 'ie'
 		Capybara.register_driver :ie do |app|
 			Capybara::Selenium::Driver.new(app, :browser => :ie)
@@ -35,7 +35,7 @@ begin
 			Capybara::Selenium::Driver.new(app, :browser => :chrome, :switches => %w[ --disable-extensions ])
 		end
 		Capybara.default_driver = :chrome
-		Capybara.default_max_wait_time = 45
+		Capybara.default_max_wait_time = 120
 	end
 end
 
