@@ -848,7 +848,12 @@ Then(/^I verify QLI fields copied to OLI$/) do
     else
       puts "#{$quoteli_auto_Discount} - standard field - Discount - NOT copied from quote line item  to opportunity line item"
     end
+    rescue Exception => ex
+    putstr "Error occurred while verifying QLI fields copied to OLI"
+    putstr_withScreen  ex.message
+  
   end
+  
 end
 
 And(/^I navigate to Quote detail page from QLI details page$/) do
