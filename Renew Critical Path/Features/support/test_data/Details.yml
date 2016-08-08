@@ -238,7 +238,7 @@ MergeOpportunity:
  SecondOpportunityCheckboxIndex: 1
  RenewalStage: "Closed Won"
  CurrencyCode: "$"
- NewMergeOpportunity: "Merge_Opportunity"
+ NewMergeOpportunity: "M.erge_Opportunity"
  OpportunityCloseDate: "4/15/2017"
  MergeOpportunityStageValue: "Prospecting"
  MergeAmount: "3500"
@@ -443,3 +443,12 @@ ManageRenewalsOpportunity:
   StopSync: "Stop Sync"
   QuoteName: "OpportunityQuote"
   SyncErrorMessage: "The current Opportunity has a Quote Synced to it. Please stop the Sync and retry this process."
+  
+RenewableLineItem:
+  Existing Product: "Product X"
+  Existing Start Date: "8/6/2016"
+  Existing End Date: "8/6/2016"
+  New Start Date: "8/8/2016"
+  New End Date: "8/8/2016"
+  Quantity: "3"  
+  OwnerName: "QA RenewNetOps"
