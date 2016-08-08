@@ -1,6 +1,15 @@
 #All Opportunity Management - Merge Opportunity specific Step definitions
 #All Scenario mentioned in MergeOpportunity.feature
 
+And(/^I select My Opportunities$/) do
+  begin
+    select "My Opportunities", :from => "fcf" 
+    if page.has_xpath?('//input[@name="go"]')
+      first(:button, "Go").click
+    end      
+  end
+end
+
 And(/^I click on "([^"]*)" button from opportunity page$/) do |button_text|
   begin
   sleep 5
@@ -80,30 +89,48 @@ end
 
 
 
-And(/^I select the opportunities those are having same currency and same pricebook$/) do
+And(/^I select the opportunities those recently created$/) do
   begin
-    sleep 10
-    arg = getReference "MergeOpportunity"
-    count = 0
-    $product.each do |product|
-      sleep 5
-      if product['amount'].to_s.include? arg["CurrencyCode"].to_s
-        puts "Successfully see the same currency opportunity"
-        count = count + 1
-        product['opportunity_checkbox'].click
-        puts "Successfully selected the same currency opportunity"
-        if count ==2
-          break
-        end
-      else
-        puts "Failed to see the same currency opportunity"
-      end
-    end
+
+  # arg = getDetails "MergeOpportunity"
+  # oppName1 = arg["NewMergeOpportunity1"] 
+  # oppName1 = arg["NewMergeOpportunity2"] 
+    # result = false
+    # all(:xpath, '//div/table/tbody/tr/td[4]/div/a/span').each do |activity|
+      # if activity.text == oppName1
+       # find(:xpath,'//div/table/tbody/tr/td[4]/div/a/span').set(true)
+      # end
+    # end  
+
+   find(:xpath, "(//input[@type='checkbox'])[2]").set(true)
+   find(:xpath, "(//input[@type='checkbox'])[3]").set(true)
+#     
   rescue Exception => ex
     putstr "Error occurred while selecting the same currency and same pricebook"
     putstr_withScreen  ex.message
   end
 end
+
+    # sleep 10
+    # arg = getReference "MergeOpportunity"
+    # count = 0
+    # $product.each do |product|
+      # sleep 5
+      # if product['opportunity_name'].to_s == arg["NewMergeOpportunity"].to_s
+        # puts "Product name"+product['opportunity_name'].to_s
+#         
+        # puts "Successfully see the same Name opportunity"
+        # count = count + 1
+        # product['opportunity_checkbox'].click
+        # puts "Successfully selected the same currency opportunity"
+        # if count ==2
+          # break
+        # end
+      # else
+        # puts "Failed to see the same currency opportunity"
+      # end
+    # end
+  
 
 
 And(/^I select more than two opportunities$/) do
@@ -600,6 +627,38 @@ And(/^I create the new opportunity$/) do
   end
 end
 
+And(/^I create the new opportunity2$/) do
+  begin
+    sleep 5
+    arg = getDetails "MergeOpportunity"
+    arg1 = getReference "newOpportunity"
+    sleep 5
+    # $new_merge_opportunity = "#{arg["NewMergeOpportunity"]} #{Time.now.strftime('%m%d_%H%M_%S')}"
+    # sleep 4
+    within all(".pbSubsection")[0] do
+      sleep 3
+      all("input[type='text']")[0].set arg["NewMergeOpportunity2"]
+      sleep 4
+      all("input[type='text']")[1].set arg1["Account Name"]
+      sleep 4
+      all("input[type='text']")[3].set arg["OpportunityCloseDate"]
+      sleep 3
+      all("input[type='text']")[6].set arg["MergeAmount"]
+      sleep 3
+      find("#opp11").select arg["MergeOpportunityStageValue"]
+    end
+    sleep 5
+    within("#bottomButtonRow") do
+      click_on 'Save'
+    end
+    sleep 3
+    puts "Successfully created the #{arg["NewMergeOpportunity"]} opportunity"
+  rescue Exception => ex
+    putstr "Error occurred while entering the mandatory details in #{arg["NewMergeOpportunity"]} opportunity page"
+    putstr_withScreen  ex.message
+  end
+end
+
 
 And(/^I navigate to the merge opportunity section$/) do
   begin
@@ -747,5 +806,11 @@ When(/^I delete opportunity with "(.*?)"$/) do |data|
   rescue Exception => ex
     putstr "Error occurred while deleting the opportunity"
     putstr_withScreen  ex.message
+  end
+end
+
+And(/^I select Master Merge Opportunity$/) do
+  begin
+   find(:xpath,'//input[@name="masterId"][1]').click
   end
 end

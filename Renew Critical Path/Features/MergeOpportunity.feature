@@ -19,14 +19,14 @@ Scenario: Rally Test Case ID: TC3511,TC3514,TC3515,TC3516 - Merge Opportunities 
     And I click on "Choose Price Book" button
     When I choose the "Standard Price Book" Price book for the product
     When I click on "Opportunities" link
-    And I click on "Go!" button from opportunity page
+    And I select My Opportunities
+   # And I click on "Go!" button from opportunity page
     And I navigate to the merge opportunity section
-    And I select the opportunities
-	And I select the opportunities those are having same currency and same pricebook
-	And I click on "Merge" button
-	And I select the master record from "Merge Opportunities" page
-	And I click on "Merge" button from "Merge Opportunities" page
-	Then I verify the opportunity which is merged with the master opportunity
+    And I select the opportunities those recently created
+    And I click on "Merge" button
+    And I select the master record from "Merge Opportunities" page
+    And I click on "Merge" button from "Merge Opportunities" page
+    Then I verify the opportunity which is merged with the master opportunity
     When I click on "Opportunities" link
     And I click on "Go!" button from opportunity page
     And I navigate to the merge opportunity section
