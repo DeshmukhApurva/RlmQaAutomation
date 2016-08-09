@@ -75,6 +75,24 @@ And(/^I add the "([^"]*)" attachment file$/) do |url|
   end
 end
 
+Then(/^I click on Cancel button$/) do
+  begin
+    arg = getDetails "OpportunitySalesRequest"
+    sleep 2
+    click_on "Cancel"
+    sleep 2
+    puts "Successfully clicked on Cancel button"
+    if page.has_content?(arg["OOppCancel"])
+      sleep 2
+      puts "Navigated to Opportunity grid"
+    end
+
+  rescue Exception => ex
+    putstr "Error occurred while click on Cancel"
+    putstr_withScreen  ex.message
+  end
+end
+
 When(/^I enter subject line "([^"]*)"$/) do |name|
   begin
     sleep 5
@@ -109,6 +127,42 @@ And(/^I select the Account "([^"]*)" from drop down$/) do |account_name|
   end
 end
 
+Then(/^I should be able to see autopupulated account$/) do
+  begin
+    sleep 3
+    within all(".col-xs-8")[1] do
+      sleep 5
+      $reqaccount=find(:xpath, '//div[2]/div/div/div/span/span[2]').text
+      puts "#{$reqaccount}"
+    end
+    if  $oppgridpartneraccount == $reqaccount
+      puts "Account Name  #{$oppgridpartneraccount} displaying on opp grid matching with the account name #{$reqaccount} displaying on request page "
+    end
+  end
+end
+
+Then(/^I should be able to see autopupulated opportunity name$/) do
+  begin
+    sleep 3
+    within all(".col-xs-8")[1] do
+      sleep 5
+      reqopportunity=first(:xpath, '//div[3]/div/div/div/span/span[2]/span').text
+
+      puts "#{reqopportunity}"
+    end
+    within all(".col-xs-8")[1] do
+      sleep 5
+      $reqopportunityname=first(:xpath, '//div[2]/div/div/span/span[2]/span').text
+      puts "#{$reqopportunityname}"
+      if  $oppgridoppname == $reqopportunityname
+        puts "Opportunity Name  #{$oppgridoppname} displaying on opp grid matching with the opportunity name #{$reqopportunityname} displaying on request page "
+      end
+    end
+  rescue Exception => ex
+    putstr "Opportunity name is NOT autopopulate"
+    putstr_withScreen  ex.message
+  end
+end
 And(/^I select the Related To "([^"]*)" and "([^"]*)" from drop down$/) do |opportunity, opportunity_name|
   begin
     sleep 3
@@ -199,6 +253,123 @@ And(/^I select the Related To "([^"]*)" and "([^"]*)" from drop down$/) do |oppo
   end
 end
 
+And(/^I select the Related To Quote from drop down$/) do
+  begin
+    sleep 3
+    arg = getDetails "OpportunitySalesRequest"
+    sleep 5
+    # Select Search Quote...
+    find("div[placeholder='Select...']").click
+    sleep 4
+    find("input[placeholder='Select...']").send_keys arg["OppRelatedToSelectField1"]
+    sleep 3
+    puts "Successfully see the #{arg["OppRelatedToSelectField1"]} field"
+    find("input[placeholder='Select...']").send_keys :enter
+    sleep 5
+    puts "Successfully selected the #{arg["OppRelatedToSelectField1"]} field value"
+    find("div[placeholder='Search...']").click
+    sleep 4
+    find("input[placeholder='Search...']").send_keys [:control, 'a'], :backspace
+    sleep 3
+    find("input[placeholder='Search...']").send_keys arg["OppRelatedToSelectRelatedField1"]
+    sleep 3
+    find("input[placeholder='Search...']").send_keys :enter
+    sleep 5
+    puts "Successfully enter the #{arg["OppRelatedToSelectRelatedField1"]} name"
+  end
+end
+And(/^I select the Related To Asset from drop down$/) do
+  begin
+    sleep 3
+    arg = getDetails "OpportunitySalesRequest"
+    sleep 5
+    # Select Search Asset...
+    find("div[placeholder='Select...']").click
+    sleep 4
+    find("input[placeholder='Select...']").send_keys arg["OppRelatedToSelectField2"]
+    sleep 3
+    puts "Successfully see the #{arg["OppRelatedToSelectField2"]} field"
+    find("input[placeholder='Select...']").send_keys :enter
+    sleep 5
+    puts "Successfully selected the #{arg["OppRelatedToSelectField2"]} field value"
+    find("div[placeholder='Search...']").click
+    sleep 4
+    find("input[placeholder='Search...']").send_keys [:control, 'a'], :backspace
+    sleep 3
+    find("input[placeholder='Search...']").send_keys arg["OppRelatedToSelectRelatedField2"]
+    sleep 3
+    find("input[placeholder='Search...']").send_keys :enter
+    sleep 5
+    puts "Successfully enter the #{arg["OppRelatedToSelectRelatedField2"]} name"
+  end
+end
+And(/^I select the Related To Service Contract from drop down$/) do
+  begin
+    sleep 3
+    arg = getDetails "OpportunitySalesRequest"
+    sleep 5
+    # Select Search Service Contract...
+    find("div[placeholder='Select...']").click
+    sleep 4
+    find("input[placeholder='Select...']").send_keys arg["OppRelatedToSelectField3"]
+    sleep 3
+    puts "Successfully see the #{arg["OppRelatedToSelectField3"]} field"
+    find("input[placeholder='Select...']").send_keys :enter
+    sleep 5
+    puts "Successfully selected the #{arg["OppRelatedToSelectField3"]} field value"
+    find("div[placeholder='Search...']").click
+    sleep 4
+    find("input[placeholder='Search...']").send_keys [:control, 'a'], :backspace
+    sleep 3
+    find("input[placeholder='Search...']").send_keys arg["OppRelatedToSelectRelatedField3"]
+    sleep 3
+    find("input[placeholder='Search...']").send_keys :enter
+    sleep 5
+    puts "Successfully enter the #{arg["OppRelatedToSelectRelatedField3"]} name"
+  end
+end
+And(/^I select the Related To Opportunity from drop down$/) do
+  begin
+    sleep 3
+    arg = getDetails "OpportunitySalesRequest"
+    sleep 5
+    # Select Search Opportunity...
+    find("div[placeholder='Select...']").click
+    sleep 4
+    find("input[placeholder='Select...']").send_keys arg["OppRelatedToSelectField4"]
+    sleep 3
+    puts "Successfully see the #{arg["OppRelatedToSelectField4"]} field"
+    find("input[placeholder='Select...']").send_keys :enter
+    sleep 5
+    puts "Successfully selected the #{arg["OppRelatedToSelectField4"]} field value"
+    find("div[placeholder='Search...']").click
+    sleep 4
+    find("input[placeholder='Search...']").send_keys [:control, 'a'], :backspace
+    sleep 3
+    find("input[placeholder='Search...']").send_keys arg["OppRelatedToSelectRelatedField4"]
+    sleep 3
+    find("input[placeholder='Search...']").send_keys :enter
+    sleep 5
+    puts "Successfully enter the #{arg["OppRelatedToSelectRelatedField4"]} name"
+  end
+end
+
+And(/^I select the opportunity-quote Request Type "([^"]*)" from drop down$/) do |arg|
+  begin
+    # Select Request Type...
+    sleep 5
+    find("div[placeholder='Select Request Type...']").click
+    sleep 5
+    find("input[placeholder='Select Request Type...']").send_keys arg
+    sleep 5
+    puts "Successfully see the #{arg} field"
+    find("input[placeholder='Select Request Type...']").send_keys :enter
+    sleep 8
+    puts "Successfully selected the #{arg} field value"
+
+  end
+end
+
 And(/^I select the Request Type "([^"]*)" from drop down$/) do |type|
   begin
     sleep 3
@@ -245,6 +416,19 @@ And(/^I select the Request Type "([^"]*)" from drop down$/) do |type|
   rescue Exception => ex
     putstr "Error occurred while selecting the request type #{arg["SelectRequestTypeField1"]},#{arg["SelectRequestTypeField2"]},#{arg["SelectRequestTypeField3"]} and #{type} field values"
     putstr_withScreen  ex.message
+  end
+end
+
+And(/^I select the opportunity-request-Priority "([^"]*)" from drop down$/) do |arg|
+  begin
+    find("div[placeholder='Select Priority...']").click
+    sleep 5
+    find("input[placeholder='Select Priority...']").send_keys arg
+    sleep 5
+    puts "Successfully see the #{arg} field"
+    find("input[placeholder='Select Priority...']").send_keys :enter
+    sleep 5
+    puts "Successfully selected the #{arg} field value"
   end
 end
 
@@ -823,9 +1007,9 @@ And(/^I click on the "([^"]*)" link$/) do |request|
       rowcountCheckbox = all(".ui-grid-selection-row-header-buttons.ui-grid-icon-ok.ng-scope").count
       puts "true"
     end
-    
+
     puts rowcountCheckbox
-    
+
     if rowcountCheckbox > 0
       sleep 3
       within all(".ui-grid-canvas")[1] do
