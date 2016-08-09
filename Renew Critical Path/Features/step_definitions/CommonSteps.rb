@@ -1243,3 +1243,152 @@ Then(/^I should able to see the "([^"]*)" alert message$/) do |alert_message|
     putstr_withScreen  ex.message
   end
 end
+
+And(/^I Create New Source Opportunity$/) do
+  begin
+    sleep 5
+    arg = getReference "SourceOpportunity"
+        
+    time = Time.new
+    oppDateTime = time.day.to_s + time.month.to_s + time.year.to_s + time.hour.to_s + time.min.to_s + time.sec.to_s
+    year = time.year.to_i + 2
+    click_link('Opportunities')
+    sleep 5
+    click_on "New"
+    sleep 5
+    puts "Creating a new opportunity"
+
+    $RenAutomationSO = arg["SourceOppName"] + oppDateTime.to_s
+
+    $earliestExpirationDate = "12/30/" + year.to_s
+    $oPPCloseDate = "12/31/" + year.to_s
+
+    fill_in "Opportunity Name",:with=> $RenAutomationSO
+    sleep 1
+    fill_in "Close Date",:with=> $oPPCloseDate
+    sleep 1
+    fill_in "Earliest Expiration Date",:with=> $earliestExpirationDate
+    sleep 1
+    select arg["SourceOppStage"], :from => "Stage"
+    sleep 1
+    fill_in "Account Name",:with=>arg["Account"]
+    sleep 1
+
+    within(:id,"bottomButtonRow") do
+      click_on "Save"
+    end
+
+    puts "Successfully Created Source Opportunity #{$RenAutomationSO}"
+
+  rescue Exception => ex
+    raise "Error occurred while creating new source opportunity #{$RenAutomationSO}"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I Add "([^"]*)" Products to Source Opportunity$/) do |totalProducts|
+  begin
+    sleep 5
+    time = Time.new
+
+    $startDateOLI = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s
+    $endDateOLI = time.month.to_s + "/" + time.day.to_s + "/" + (time.year.to_i + 1).to_s
+
+    click_on "Choose Price Book"
+    sleep 5
+    first(:option,'Standard Price Book').select_option
+    sleep 2
+    click_on "Save"
+    sleep 5
+    
+    click_on "Add Product"
+    sleep 5
+    first(:option, 'Active (Product)').select_option
+    sleep 1
+    first(:option, 'equals').select_option
+    sleep 1
+    find(:xpath, '//span[contains(text(),"By Field Filter")]/following-sibling::div/div/input').set 'Active'
+    sleep 1
+    find(:xpath, '//input[contains(@id,"save_filter_PricebookEntry")]').click
+    sleep 5
+    
+    i = 1
+    while i <= totalProducts.to_i do
+      puts i.to_s 
+      find(:xpath, "//div[contains(@class,'x-grid3-body')]/div[#{i}]/table/tbody/tr/td[1]/div/input").set(true)
+      i = i + 1
+      sleep 2
+    end
+    click_on 'Select'
+    puts "Successfully select the product"    
+    sleep 5
+    
+    #Enter product Quantity
+    pos = 1
+    $nums = Array.new(totalProducts.to_i)
+    for i in 2..totalProducts.to_i + 1
+      $nums[i] = 4 +  pos.to_i
+      pos = $nums[i].to_i
+      puts pos
+      find(:xpath,"//*[@id='editPage']/table/tbody/tr[#{$nums[i]}]/td[3]/input").set arg["ProductQuantity"]
+      sleep 2
+      find(:xpath,"//*[@id='editPage']/table/tbody/tr[#{$nums[i]}]/td[4]/span/input").set $startDateOLI
+      sleep 2
+      find(:xpath,"//*[@id='editPage']/table/tbody/tr[#{$nums[i]}]/td[5]/span/input").set $endDateOLI
+      sleep 2
+      find(:xpath,"//*[@id='editPage']/table/tbody/tr[#{$nums[i]}]/td[6]/input").set arg["ProductSalesPrice"]
+      sleep 2      
+    end
+    
+    all(:xpath,'//td/input[@value=" Save "]')[0].click
+
+    sleep 5
+    $productsTitle = Array.new(totalProducts.to_i)
+    i= 0
+    for i in 0..totalProducts.to_i - 1
+     within(".opportunityLineItemBlock") do
+      within(".list") do        
+        $productsTitle[i] = all(".dataRow")[i].all("th")[0].first("a").text
+        puts $productsTitle[i]
+        sleep 3
+      end
+     end
+    end
+    
+  rescue Exception => ex
+    raise "Error occurred while adding products to source opp"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I Renew Source Opportunity$/) do |tab|
+  begin
+    sleep 5
+    within("#bottomButtonRow") do
+      click_on 'Edit'
+    end
+    
+    sleep 5
+    first(:option,'Closed Won').select_option
+    sleep 2
+    first(:button,'Save').click
+    sleep 10
+
+    find(:xpath, "//th[text()='Contributed To']").find(:xpath, '..').find(:xpath, "following-sibling::tr/td[2]/a").click
+    sleep 10
+
+    within("#bottomButtonRow") do
+      click_on 'Edit'
+    end
+    sleep 5
+    
+    $RenAutomationRO = $RenAutomationSO + "RO"
+    fill_in "Opportunity Name",:with=> $RenAutomationRO
+    sleep 1
+    first(:button,'Save').click
+    sleep 10
+  rescue Exception => ex
+    raise "Error occurred while renewing opportunity"
+    putstr_withScreen  ex.message
+  end
+end

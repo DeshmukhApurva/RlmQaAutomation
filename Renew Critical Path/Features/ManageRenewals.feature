@@ -315,3 +315,10 @@ Scenario: Rally Test Case ID: TC5367,TC5369 - Manage Renewals - Disable RR Conso
     And I select the "Renewal Relationship" product field
     And I click on "Consolidate Opportunity" button
     Then I should able to see the sync error message
+
+@SplitOppNewClonedOppEditDetails
+Scenario: Rally Test Case ID: TC6461 - Split Opportunity - New Cloned Opportunity Details editable
+    When I click on the "Opportunities" grid tab
+		And I Create New Source Opportunity
+		And I Add "2" Products to Source Opportunity
+		And I Renew Source Opportunity    

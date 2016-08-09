@@ -82,3 +82,7 @@ FiscalOpp:
 ManageRenewalsOpportunity:
  RenewalRelationshipOpportunity: "PES_Renewal_Opportunity"
  InvalidRenewalRelationshipOpportunity: "PES_Invalid_RR"
+ 
+SourceOpportunity:
+ SourceOppName: "AutomationSO"   
+ Account: "ARAcc"
