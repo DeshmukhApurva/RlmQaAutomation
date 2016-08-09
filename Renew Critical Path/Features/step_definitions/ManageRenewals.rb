@@ -276,10 +276,10 @@ end
 
 And(/^I select multiple renewable line items$/) do
   begin
-      find(:xpath, "(//input[@name='btSelectItem'])[1]").set(true)
-      sleep 2
-      find(:xpath, "(//input[@name='btSelectItem'])[2]").set(true)
-      sleep 2
+    find(:xpath, "(//input[@name='btSelectItem'])[1]").set(true)
+    sleep 2
+    find(:xpath, "(//input[@name='btSelectItem'])[2]").set(true)
+    sleep 2
   end
 end
 
@@ -479,9 +479,9 @@ And(/^I open the renewal relationship opportunity$/) do
     arg = getReference "ManageRenewalsOpportunity"
     find('#fcf').select "My Opportunities"
     sleep 5
-#    within (".fBody") do
-#      click_button 'Go!'
-#    end
+    #    within (".fBody") do
+    #      click_button 'Go!'
+    #    end
     if page.has_xpath?('//input[@name="go"]')
       first(:button, "Go").click
     end
@@ -1351,7 +1351,7 @@ And(/^I sync the quotes to renewal opportunity$/) do
   if page.has_css?("#syncQuoteOverlay_buttons")
     puts "Successfully see the sync quote overlay"
     #within("#bottomButtonRow") do
-      click_on 'Sync'
+    click_on 'Sync'
     #end
   else
     puts "Failed to see the sync quote overlay"
@@ -1497,5 +1497,100 @@ And(/^I select Sync$/) do
   begin
     select "Sync", :from => "fcf"
     sleep 3
+  end
+end
+
+And(/^I select the "([^"]*)" Split Opportunity option$/) do |drop_down_value|
+  begin
+    sleep 3
+    unless page.has_css?(".no-records-found")
+      find(:xpath,"//div/table/tbody/tr[1]/td/select").select drop_down_value
+      sleep 2
+      puts "Successfully selected the #{drop_down_value}"
+      sleep 10
+    else
+      puts "No matching records found"
     end
+  rescue Exception => ex
+    putstr "Error occurred while selecting the #{drop_down_value}"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I fill the required fields on Split Opportunity$/) do
+  begin
+    sleep 5
+    arg = getDetails "SplitOpportunity"
+    arg2 = getReference "SplitOpportunity"
+    sleep 5
+    unless page.has_css?(".no-records-found")
+      within all(".pbSubsection")[1] do
+        sleep 5
+        all('input[type=text]')[0].set arg["TargetOpportunityName"]
+        sleep 5
+        all('input[type=text]')[2].set arg["TargetOpportunityCloseDate"]
+        sleep 5
+        find(".class_StageName").select arg["TargetOpportunityStage"]
+        sleep 5
+        all('input[type=text]')[3].set arg2["TargetOpportunityOwnerID"]
+        sleep 5
+        all('input[type=text]')[4].set arg["TargetOpportunityProbability"]
+        sleep 5
+      end
+    else
+      puts "No matching records found"
+    end
+  rescue Exception => ex
+    putstr "Error occurred while selecting the #{drop_down_value}"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I verify required fields value on New Split Opportunity$/) do
+  begin
+    expect(page).to have_content 'Opportunity Detail'
+    arg = getDetails "SplitOpportunity"
+    arg2 = getReference "SplitOpportunity"
+    sleep 2
+
+    puts find(:xpath, '//*/td[text()="Opportunity Name"]/following-sibling::td/div').text 
+    puts find(:xpath, '//*/td[text()="Opportunity Owner"]/following-sibling::td/div/a').text
+    puts find(:xpath, '//*/td[text()="Stage"]/following-sibling::td/div').text
+    puts find(:xpath, '//*/td[text()="Probability (%)"]/following-sibling::td/div').text
+    puts find(:xpath, '//*/td[text()="Close Date"]/following-sibling::td/div').text
+
+    if find(:xpath, '//*/td[text()="Opportunity Name"]/following-sibling::td/div', :match => :prefer_exact).text == arg["TargetOpportunityName"]
+      puts "#{arg["TargetOpportunityName"]} displayed successfully"
+    else
+      puts "#{arg["TargetOpportunityName"]} does not displayed successfully"   
+    end
+    sleep 1
+    if find(:xpath, '//*/td[text()="Opportunity Owner"]/following-sibling::td/div/a').text == arg2["TargetOpportunityOwnerID"]
+      puts "#{arg2["TargetOpportunityOwnerID"]} displayed successfully"
+    else
+      puts "#{arg2["TargetOpportunityOwnerID"]} does not displayed successfully"   
+    end
+    sleep 1
+    if find(:xpath, '//*/td[text()="Stage"]/following-sibling::td/div').text == arg["TargetOpportunityStage"]
+      puts "#{arg["TargetOpportunityStage"]} displayed successfully"
+    else
+      puts "#{arg["TargetOpportunityStage"]} does not displayed successfully"   
+    end
+    sleep 1
+    if find(:xpath, '//*/td[text()="Probability (%)"]/following-sibling::td/div').text == arg["TargetOpportunityProbability"]
+      puts "#{arg["TargetOpportunityProbability"]} displayed successfully"
+    else
+      puts "#{arg["TargetOpportunityProbability"]} does not displayed successfully"   
+    end
+    sleep 1
+    if find(:xpath, '//*/td[text()="Close Date"]/following-sibling::td/div').text == arg["TargetOpportunityCloseDate"]
+      puts "#{arg["TargetOpportunityCloseDate"]} displayed successfully"
+    else
+      puts "#{arg["TargetOpportunityCloseDate"]} does not displayed successfully"   
+    end
+
+  rescue Exception => ex
+    putstr "Error occurred while veifying Split Opportunity fields"
+    putstr_withScreen  ex.message
+  end
 end

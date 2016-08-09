@@ -1252,8 +1252,7 @@ And(/^I Create New Source Opportunity$/) do
     time = Time.new
     oppDateTime = time.day.to_s + time.month.to_s + time.year.to_s + time.hour.to_s + time.min.to_s + time.sec.to_s
     year = time.year.to_i + 2
-    click_link('Opportunities')
-    sleep 5
+
     click_on "New"
     sleep 5
     puts "Creating a new opportunity"
@@ -1289,6 +1288,7 @@ end
 And(/^I Add "([^"]*)" Products to Source Opportunity$/) do |totalProducts|
   begin
     sleep 5
+    arg = getReference "SourceOpportunity"
     time = Time.new
 
     $startDateOLI = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s
@@ -1329,15 +1329,10 @@ And(/^I Add "([^"]*)" Products to Source Opportunity$/) do |totalProducts|
     for i in 2..totalProducts.to_i + 1
       $nums[i] = 4 +  pos.to_i
       pos = $nums[i].to_i
-      puts pos
       find(:xpath,"//*[@id='editPage']/table/tbody/tr[#{$nums[i]}]/td[3]/input").set arg["ProductQuantity"]
-      sleep 2
       find(:xpath,"//*[@id='editPage']/table/tbody/tr[#{$nums[i]}]/td[4]/span/input").set $startDateOLI
-      sleep 2
       find(:xpath,"//*[@id='editPage']/table/tbody/tr[#{$nums[i]}]/td[5]/span/input").set $endDateOLI
-      sleep 2
       find(:xpath,"//*[@id='editPage']/table/tbody/tr[#{$nums[i]}]/td[6]/input").set arg["ProductSalesPrice"]
-      sleep 2      
     end
     
     all(:xpath,'//td/input[@value=" Save "]')[0].click
@@ -1361,7 +1356,7 @@ And(/^I Add "([^"]*)" Products to Source Opportunity$/) do |totalProducts|
   end
 end
 
-And(/^I Renew Source Opportunity$/) do |tab|
+And(/^I Renew Source Opportunity$/) do
   begin
     sleep 5
     within("#bottomButtonRow") do
@@ -1381,7 +1376,6 @@ And(/^I Renew Source Opportunity$/) do |tab|
       click_on 'Edit'
     end
     sleep 5
-    
     $RenAutomationRO = $RenAutomationSO + "RO"
     fill_in "Opportunity Name",:with=> $RenAutomationRO
     sleep 1

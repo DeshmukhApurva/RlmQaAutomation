@@ -321,4 +321,11 @@ Scenario: Rally Test Case ID: TC6461 - Split Opportunity - New Cloned Opportunit
     When I click on the "Opportunities" grid tab
 		And I Create New Source Opportunity
 		And I Add "2" Products to Source Opportunity
-		And I Renew Source Opportunity    
+		And I Renew Source Opportunity
+		When I click on "Manage Renewals" button
+		And I select the "Renewal Relationship" product field
+    And I click on "Split Opportunity" button from renewal relationship page
+    And I select the "New Opportunity" Split Opportunity option
+    And I fill the required fields on Split Opportunity
+    And I click on "Split Selected" button
+    And I verify required fields value on New Split Opportunity

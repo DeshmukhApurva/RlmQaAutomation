@@ -84,5 +84,8 @@ ManageRenewalsOpportunity:
  InvalidRenewalRelationshipOpportunity: "PES_Invalid_RR"
  
 SourceOpportunity:
- SourceOppName: "AutomationSO"   
+ SourceOppName: "ASO"   
  Account: "ARAcc"
+ SourceOppStage: "Qualification"
+ ProductQuantity: 1
+ ProductSalesPrice: 5000 
