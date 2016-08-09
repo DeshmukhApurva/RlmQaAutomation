@@ -1,59 +1,5 @@
 #All Channel master data creation
-
 #All Scenario mentioned in MasterDataCreationChannel.feature
-
-Then (/^I click on Products and create product with the name "(.*?)"$/) do |arg|
-  begin
-    sleep 8
-    click_on "Products"
-    sleep 8
-    puts "I click on Products"
-    sleep 10
-
-    click_on "New"
-    puts "Adding products"
-    sleep 5
-    fill_in "Product Name",:with=>arg
-    fill_in "Product Code",:with=> "AutoProduct"
-    sleep 5
-    #find('input[type=checkbox]').click
-    #topButtonRow
-    find(:xpath, "(//input[@id='IsActive'])").set(true)
-    sleep 5
-    within(".pbBottomButtons") do
-      first(:xpath, "//*[contains(@name, 'save')]").click
-      sleep 5
-    end
-
-    puts "Product added successfully"
-    sleep 5
-    click_on "Add"
-    sleep 5
-    first(:xpath, "//*[contains(@title, 'Unit Price')]").send_keys "3000"
-    sleep 5
-    click_on "Save"
-    sleep 5
-    puts "product price added successfully"
-    sleep 5
-    click_on "Add to Price Book"
-    sleep 5
-    find(:xpath, "//*[contains(@name, 'allBox')]").click
-    sleep 3
-
-    first(:xpath, "//*[contains(@name, 'edit')]").click
-
-    puts "I click on Select"
-
-    sleep 5
-    find(:xpath, "//*[contains(@title, 'List Price 1')]").send_keys "3500"
-    sleep 5
-    click_on "Save"
-    puts "Successfully Save"
-  rescue Exception => ex
-    putstr "Error occurred adding product and assigning price book"
-    putstr_withScreen  ex.message
-  end
-end
 Then(/^I create new Channel Account with value "(.*?)" with AccountNumber "(.*?)" and Country "(.*?)"$/) do |arg1,arg2,arg3|
   begin
     sleep 8
@@ -76,8 +22,8 @@ Then(/^I create new Channel Account with value "(.*?)" with AccountNumber "(.*?)
 
     puts "Account  successfully created For"+arg
   rescue Exception => ex
-    putstr "Error occurred while creating Account"
-    putstr_withScreen  ex.message
+    puts "Error occurred while creating Account"
+    puts ex.message
 
   end
 end
@@ -146,9 +92,8 @@ And(/^I Manage Partner Account with contact "(.*?)" and its Owner "(.*?)"$/) do 
     end
     sleep 10
   rescue Exception => ex
-    putstr "Error occurred while creating Account"
-    putstr_withScreen  ex.message
-
+    puts "Error occurred while creating Account"
+    puts ex.message
   end
 end
 
@@ -180,8 +125,8 @@ Then(/^I create new Asset with Name "(.*?)" and its Product "(.*?)" and its Stat
     sleep 8
     puts "Asset  successfully created"
   rescue Exception => ex
-    putstr "Error occurred while creating Asset"
-    putstr_withScreen  ex.message
+    puts "Error occurred while creating Asset"
+    puts ex.message
   end
 end
 
@@ -227,12 +172,12 @@ Then(/^I create new Service Contracts with Name "(.*?)" with Account "(.*?)" and
     puts "Successfully added product to service contract"
 
   rescue Exception => ex
-    putstr "Error occurred while creating Service Contract"
-    putstr_withScreen  ex.message
+    puts "Error occurred while creating Service Contract"
+    puts ex.message
   end
 end
 
-Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Product$/) do |arg1,arg2|
+Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and pricebook "(.*?)"$/) do |arg1,arg2,arg3| 
   begin
     time = Time.new
     $startDateOLI = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s
@@ -258,7 +203,7 @@ Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Produ
     sleep 5
     click_on "Choose Price Book"
     sleep 6
-    first(:option,'Standard Price Book').select_option
+    first(:xpath, "//*[contains(@id, 'p1')]").select(arg3)    
     sleep 4
     click_on "Save"
     sleep 5
@@ -294,21 +239,116 @@ Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Produ
     putstr_withScreen ex.message
   end
 end
+Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Product "(.*?)"$/) do |arg1,arg2,arg|
+  begin
+    ProductName=arg
+
+    sleep 8
+    within (".pbHeader") do
+      click_on "New"
+    end
+    puts "New Opportunity button clicked."
+    fill_in "Opportunity Name",:with=>arg1
+    fill_in "Account Name",:with=>arg2
+    time = Time.new
+    fill_in "Close Date",:with=>time.month.to_s + "/" + time.day.to_s + "/" +time.year.to_s
+    find("#opp11").select "Qualification"
+    sleep 2
+    within("#bottomButtonRow") do
+      click_on 'Save'
+    end
+    sleep 5 
+    click_on "Add Product"
+    sleep 5
+    first(:xpath, "//*[contains(@id, 'p1')]").select("Standard Price Book")
+    sleep 3
+    click_on "Save"
+    # find(:xpath, "(//input[@type='checkbox'])[2]").set(true)
+    within (".x-grid3-body") do
+      tr=all(".x-grid3-row")
+      tr.each do |row|
+        puts row
+        puts row.all("td")[1].text
+        if row.all("td")[1].text == ProductName
+          row.all("td")[0].first("div").first("input").click
+        end
+      end
+    end
+    click_on 'Select'
+    puts "Successfully select the product"
+    find(:xpath, "//*[contains(@name, 'Quantity')]").send_keys "1"
+    sleep 3
+    all(:xpath,'//td/input[@value=" Save "]')[0].click
+    puts "Successfully added product to opportunity"
+
+  rescue Exception => ex
+    putstr "Error occurred while creating opportunity"
+    putstr_withScreen ex.message
+  end
+end
+
+Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Pricebook "(.*?)" and Product "(.*?)" $/) do |arg1,arg2,arg3,arg4|
+  begin
+    ProductName=arg4
+
+    sleep 8
+    within (".pbHeader") do
+      click_on "New"
+    end
+    puts "New Opportunity button clicked."
+    fill_in "Opportunity Name",:with=>arg1
+    fill_in "Account Name",:with=>arg2
+    time = Time.new
+    fill_in "Close Date",:with=>time.month.to_s + "/" + time.day.to_s + "/" +time.year.to_s
+    find("#opp11").select "Qualification"
+    sleep 2
+    within("#bottomButtonRow") do
+      click_on 'Save'
+    end
+    sleep 5 
+    click_on "Add Product"
+    sleep 5
+    first(:xpath, "//*[contains(@id, 'p1')]").select(arg3)
+    sleep 3
+    click_on "Save"
+    # find(:xpath, "(//input[@type='checkbox'])[2]").set(true)
+    within (".x-grid3-body") do
+      tr=all(".x-grid3-row")
+      tr.each do |row|
+        puts row
+        puts row.all("td")[1].text
+        if row.all("td")[1].text == ProductName
+          row.all("td")[0].first("div").first("input").click
+        end
+      end
+    end
+    click_on 'Select'
+    puts "Successfully select the product"
+    find(:xpath, "//*[contains(@name, 'Quantity')]").send_keys "1"
+    sleep 3
+    all(:xpath,'//td/input[@value=" Save "]')[0].click
+    puts "Successfully added product to opportunity"
+
+  rescue Exception => ex
+    putstr "Error occurred while creating opportunity"
+    putstr_withScreen ex.message
+  end
+end
 
 When(/^I create Source Opportunity with Line Items with Account "(.*?)" and resolve it and rename it as "(.*?)"$/) do |arg1,arg2|
   begin
-    # Components of a Time
-    #    puts "Current Time : " + time.inspect
-    #    puts time.year    # => Year of the date
-    #    puts time.month   # => Month of the date (1 to 12)
-    #    puts time.day     # => Day of the date (1 to 31 )
-    #    puts time.wday    # => 0: Day of week: 0 is Sunday
-    #    puts time.yday    # => 365: Day of year
-    #    puts time.hour    # => 23: 24-hour clock
-    #    puts time.min     # => 59
-    #    puts time.sec     # => 59
-    #    puts time.usec    # => 999999: microseconds
-    #    puts time.zone    # => "UTC": timezone name
+  # Components of a Time
+  #    puts "Current Time : " + time.inspect
+  #    puts time.year    # => Year of the date
+  #    puts time.month   # => Month of the date (1 to 12)
+  #    puts time.day     # => Day of the date (1 to 31 )
+  #    puts time.wday    # => 0: Day of week: 0 is Sunday
+  #    puts time.yday    # => 365: Day of year
+  #    puts time.hour    # => 23: 24-hour clock
+  #    puts time.min     # => 59
+  #    puts time.sec     # => 59
+  #    puts time.usec    # => 999999: microseconds
+  #    puts time.zone    # => "UTC": timezone name
     time = Time.new
     #oppDateTime =  +
     time = Time.new
@@ -442,8 +482,8 @@ When(/^I create Source Opportunity with Line Items with Account "(.*?)" and reso
     first(:button,'Save').click
     sleep 8
   rescue Exception => ex
-  putstr "Error occurred while resolving Opportunities"
-  putstr_withScreen  ex.message
+    puts "Error occurred while resolving Opportunities"
+    puts ex.message
   end
 end
 
@@ -460,14 +500,6 @@ And(/^I select partner account one "(.*?)"$/) do |arg|
       sleep 6
       page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
       sleep 6
-      page.driver.browser.switch_to.frame("searchFrame")
-      sleep 8
-      fill_in "lksrch",:with => arg
-      sleep 5
-      click_on 'Go!'
-      sleep 3
-      page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
-      sleep 3
       page.driver.browser.switch_to.frame("resultsFrame")
       sleep 6
       within('.list') do
@@ -476,7 +508,7 @@ And(/^I select partner account one "(.*?)"$/) do |arg|
       sleep 5
       page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
       sleep 6
-      puts "Selected partner account -1"
+      puts "Selected partner account -1" 
 
     end
     sleep 5
@@ -500,14 +532,6 @@ And(/^I select partner account two "(.*?)"$/) do |arg|
       sleep 5
       page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
       sleep 5
-      page.driver.browser.switch_to.frame("searchFrame")
-      sleep 8
-      fill_in "lksrch",:with => arg
-      sleep 5
-      click_on 'Go!'
-      sleep 3
-      page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
-      sleep 3
       page.driver.browser.switch_to.frame("resultsFrame")
       sleep 5
       within('.list') do
@@ -540,14 +564,6 @@ And(/^I select the partner account one contact "([^"]*)" from the contacts looku
       sleep 5
       page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
       sleep 5
-      page.driver.browser.switch_to.frame("searchFrame")
-      sleep 8
-      fill_in "lksrch",:with => arg
-      sleep 5
-      click_on 'Go!'
-      sleep 3
-      page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
-
       page.driver.browser.switch_to.frame("resultsFrame")
       sleep 5
       within('.list') do
@@ -584,15 +600,6 @@ And(/^I select the partner account two contact "([^"]*)" from the contacts looku
       sleep 5
       page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
       sleep 5
-
-      page.driver.browser.switch_to.frame("searchFrame")
-      sleep 8
-      fill_in "lksrch",:with => arg
-      sleep 5
-      click_on 'Go!'
-      sleep 3
-      page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
-      sleep 3
       page.driver.browser.switch_to.frame("resultsFrame")
       sleep 5
       within('.list') do
@@ -657,9 +664,7 @@ And(/^I rename the partner opportunity as "(.*?)"$/) do |arg|
     sleep 5
     all('input[type=text]')[0].set arg
     puts "Renamed the partner opportunity"
-  rescue Exception => ex
-    putstr "Error occurred while renaming partner opportunity"
-    putstr_withScreen  ex.message
+
   end
 end
 
@@ -674,9 +679,6 @@ And(/^I rename the quote as "(.*?)"$/) do |arg|
     sleep 5
     first(:xpath, "//*[contains(@name, 'save')]").click
     puts "Quote renamed successfully"
-  rescue Exception => ex
-    putstr "Error occurred while renaming Quote"
-    putstr_withScreen  ex.message
   end
 end
 

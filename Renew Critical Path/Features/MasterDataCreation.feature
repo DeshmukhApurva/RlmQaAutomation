@@ -36,7 +36,7 @@ Scenario: Rally Test Case ID : : Create Success Plan Template
 @SuccessPlanCreation 
 Scenario: Rally Test Case ID: TC2895 : Create Success plan 
 	When I click on "Success Plans" tab 
-	Then I create a SuccessPlan with template "APT-000002" with Account "Action Machinery Co" 
+	Then I create a SuccessPlan with template "APT-000025" with Account "Action Machinery Co" 
 	
 @CreateAsset 
 Scenario: Rally Test Case ID:  : Renew: Asset creation 
@@ -90,7 +90,11 @@ Scenario: Renew: Generate Opp
 	When I click on "Opportunities" tab 
 	Then I create new opportunity with Name "RenewNetOpsService" with Account "QA Test" and Product "Product A" 
 	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "Split_Target_Opportunity_RN" with Account "QA Test" and pricebook "Standard Price Book" 
+	Then I create new opportunity with Name "Split_Target_Opportunity_RN" with Account "QA Test" and Product "Product B" with pricebook "Standard Price Book" 
+    When I click on "Opportunities" tab 
+    Then I create new opportunity with Name "N.ew1Opportunity_StNd_Pricebook" with Account "QA Test" and Product "Product B" with pricebook "Standard Price Book" 
+	When I click on "Opportunities" tab 
+	Then I create new opportunity with Name "N.ew1Opportunity_Test_Pricebook" with Account "QA Test" and Product "Product B" with pricebook "Test_PriceBook"
 	When I create Source Opportunity with Line Items with Account "QA Test" and resolve it and rename it as "PES_Invalid_RR" 
 
 	
