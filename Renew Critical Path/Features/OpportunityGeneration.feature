@@ -84,3 +84,29 @@ Scenario: Rally Test Case ID: TC3388,TC3396,TC3401,TC3404,TC3405,TC3406 - Opport
 	And I clear the "Contract Name" mapping for Service Contracts
 	And I save the Mapping
 	
+	@renew_set_new_opportunity_as_renewal_checked	 
+  Scenario: Rally Test Case ID: TC6459,TC6460 : Renew - check Renew checkbox from custom settings
+    When user logout from "RENEW" application
+    When I log into "SYSTEMADMIN_EETEST25" details
+    And I click on "Setup" from "Admin" app
+    And I search for "Custom Settings" from Quick Find
+    And I select "CSM Admin" from Custom Settings
+    And I click on "Manage" button
+    And check the set renewal checkbox in CSM Admin custom setting if it is not checked
+
+	
+	@renew_set_new_opportunity_as_renewal_unchecked	 
+  Scenario: Rally Test Case ID: TC6459,TC6460 : Renew - uncheck Renew checkbox from custom settings
+    When user logout from "RENEW" application
+    When I log into "SYSTEMADMIN_EETEST25" details
+    And I click on "Setup" from "Admin" app
+    And I search for "Custom Settings" from Quick Find
+    And I select "CSM Admin" from Custom Settings
+    And I click on "Manage" button
+    And uncheck the set renewal checkbox in CSM Admin custom setting if it is checked
+    
+    
+  
+		
+		
+	
