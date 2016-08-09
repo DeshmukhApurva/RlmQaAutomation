@@ -90,7 +90,17 @@ RequestGrid:
  SortAscendingOrder: "Sort Ascending"
  SortDescendingOrder: "Sort Descending"
 
-
+OpportunitySalesRequest:
+ OppRelatedToSelectField1: "Quote"
+ OppRelatedToSelectRelatedField1: "PES_CHL_Opp"
+ OppRelatedToSelectField2: "Asset"
+ OppRelatedToSelectRelatedField2: "My_PES_Asset"
+ OppRelatedToSelectField3: "Service Contract"
+ OppRelatedToSelectRelatedField3: "PES_Service_Contract"
+ OppRelatedToSelectField4: "Opportunity"
+ OppRelatedToSelectRelatedField4: "PES_Orange_Pipeline"
+ OppCancel: "Search Opportunities..."
+ 
 OpportunityModule:
  OpportunityGridField1: "Name"
  OpportunityGridField2: "Account"

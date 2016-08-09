@@ -4,6 +4,7 @@ require 'Win32API'
 
 Given(/^that I navigate to the CRM application$/) do
   begin
+    $userRole = ENV['UserRole']
     setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
     setCursorPos.Call(500,10)
     visit env
@@ -26,6 +27,69 @@ Given(/^that I navigate to the CRM application$/) do
     puts ex.message
   end
 end
+
+#newly added
+When(/^user logout from "([^"]*)" application$/) do |environment|
+  begin
+    sleep 5
+    find("#userNav-arrow").click
+    sleep 6
+    click_on "Logout"
+    sleep 5
+    puts "Successfully logout from the #{environment}"
+  rescue Exception => ex
+    puts "Error occurred while logout the #{environment} application"
+    puts ex.message
+  end
+end
+
+
+#admin login
+When(/^I log into "(.*?)" details$/) do |arg1|
+  begin
+    sleep 5
+    ENV['UserRole'] = arg1
+    puts ENV['UserRole']
+
+    arg = getCredentialInfo
+
+    ENV['UserRole'] = $userRole
+    puts ENV['UserRole']
+
+    visit arg["url"]
+    sleep 4
+    #puts "Login as " + ENV['UserRole']
+    if arg["url"] == "https://login.salesforce.com/"
+      sleep 4
+      fill_in "username",:with => arg["userName"]
+      sleep 4
+      fill_in "Password",:with => arg["pwd"]
+      puts "Entered Credentials"
+      find(:id,"Login").click
+      page.driver.browser.manage.window.maximize
+      sleep 10
+    else
+      sleep 4
+      fill_in "username",:with => arg["userName"]
+      sleep 4
+      
+      find("input[name='pw']").send_keys arg["pwd"]
+      puts "Entered Credentials"
+      sleep 4
+      click_on 'Log In'
+      sleep 5
+      page.driver.browser.manage.window.maximize
+      sleep 6
+    end
+
+  rescue Exception => ex
+    puts "Error while entering credentials"
+    puts ex.message
+    ENV['UserRole'] = $userRole
+  end
+end
+
+#newly added end
 
 Then(/^I should land on CRM home page$/) do
   begin
@@ -1383,6 +1447,116 @@ And(/^I Renew Source Opportunity$/) do
     sleep 10
   rescue Exception => ex
     raise "Error occurred while renewing opportunity"
+    putstr_withScreen  ex.message
+  end
+end
+
+#newly added
+
+And(/^I click on "([^"]*)" from "([^"]*)" app$/) do |link, app|
+  begin
+    sleep 3
+    if page.has_css?("#userNavButton")
+      puts "Successfully see the #{app} app link"
+      sleep 3
+      first("#userNavButton").click
+      sleep 5
+      click_on link
+      sleep 4
+    else
+      putstr "Failed to see the #{app} app link"
+    end
+    puts "Successfully click the #{link} from #{app} app"
+  rescue Exception => ex
+    putstr "Error occurred while clicking the #{link} from #{app} app"
+    putstr_withScreen ex.message
+  end
+end
+
+
+And(/^I search for "([^"]*)" from Quick Find$/) do |searchText|
+  begin   
+    sleep 3  
+    find("input[placeholder='Quick Find / Search...']").send_keys [:control, 'a'], :backspace    
+    find("input[placeholder='Quick Find / Search...']").send_keys searchText
+    sleep 3
+    puts "Entered text #{searchText} to search in Quick search box"   
+    #within("#DevToolsIntegrate_child") do  CustomSettings_font    
+      click_link(searchText)
+    #end
+  rescue Exception => ex
+    putstr "Error while searching #{searchText}"
+    putstr_withScreen  ex.message
+  end
+
+end
+
+
+#I select CSM Admin from Custom Settings
+And(/^I select "([^"]*)" from Custom Settings$/) do |user|
+  begin   
+    sleep 3
+    puts user
+    within (".listRelatedObject") do
+      first(:xpath, ".//th/a[contains(text(),'#{user}')]").click
+    end
+  rescue Exception => ex
+    putstr "Error while selecting CSM Admin"
+    putstr_withScreen  ex.message
+  end
+end  
+
+And(/^check the set renewal checkbox in CSM Admin custom setting if it is not checked$/) do
+  begin   
+    sleep 3    
+    puts page.has_xpath?("//th[contains(text(),'Set new Opportunity as Renewal')]//following-sibling::td/span/img[@alt='Not Checked']")
+    puts page.has_xpath?("//th[contains(text(),'Set new Opportunity as Renewal')]//following-sibling::td/span/img[@alt='Checked']")
+    
+    if page.has_xpath?("//th[contains(text(),'Set new Opportunity as Renewal')]//following-sibling::td/span/img[@alt='Not Checked']") == true
+      puts "checkbox is not checked"
+      click_button 'Edit'
+      sleep 3
+      if page.has_css?(".editPage")
+        puts "Successfully see the edit form"
+        find(:xpath, "//label[contains(text(),'Set new Opportunity as Renewal')]/parent::th/following-sibling::td/input").click
+        sleep 3
+        click_button 'Save'
+        puts "successfully checked the checkbox"
+      else
+        putstr "Failed to see the edit form"
+      end     
+    else
+      puts "checkbox is already checked"
+    end
+  rescue Exception => ex
+    putstr "Error while checking the checkbox"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^uncheck the set renewal checkbox in CSM Admin custom setting if it is checked$/) do
+  begin   
+    sleep 3    
+    puts page.has_xpath?("//th[contains(text(),'Set new Opportunity as Renewal')]//following-sibling::td/span/img[@alt='Not Checked']")
+    puts page.has_xpath?("//th[contains(text(),'Set new Opportunity as Renewal')]//following-sibling::td/span/img[@alt='Checked']")   
+    if page.has_xpath?("//th[contains(text(),'Set new Opportunity as Renewal')]//following-sibling::td/span/img[@alt='Checked']") == true
+      puts "checkbox is checked"
+      click_button 'Edit'
+      sleep 3
+      if page.has_css?(".editPage")
+        puts "Successfully see the edit form"
+        find(:xpath, "//label[contains(text(),'Set new Opportunity as Renewal')]/parent::th/following-sibling::td/input").click
+        sleep 3
+        click_button 'Save'
+        puts "successfully unchecked the checkbox"
+      else
+        putstr "Failed to see the edit form"
+      end     
+    else
+      puts "checkbox is already unchecked"
+    end
+  rescue Exception => ex
+    putstr "Error while unchecking the checkbox"
     putstr_withScreen  ex.message
   end
 end
