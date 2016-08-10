@@ -1,6 +1,6 @@
 #All Opportunity - Manage Renewals specific Step definitions
 #All Scenario mentioned in ManageRenewals.feature
-
+require 'pry'
 When(/^I click on "([^"]*)" edit link$/) do |renewal_relationship|
   begin
 
@@ -1552,38 +1552,38 @@ And(/^I verify required fields value on New Split Opportunity$/) do
     arg = getDetails "SplitOpportunity"
     arg2 = getReference "SplitOpportunity"
     sleep 2
+    binding.pry
+    puts first(:xpath, '//*/td[text()="Opportunity Name"]/following-sibling::td/div').text 
+    puts first(:xpath, '//*/td[text()="Opportunity Owner"]/following-sibling::td/div/a').text
+    puts first(:xpath, '//*/td[text()="Stage"]/following-sibling::td/div').text
+    puts first(:xpath, '//*/td[text()="Probability (%)"]/following-sibling::td/div').text
+    puts first(:xpath, '//*/td[text()="Close Date"]/following-sibling::td/div').text
 
-    puts find(:xpath, '//*/td[text()="Opportunity Name"]/following-sibling::td/div').text 
-    puts find(:xpath, '//*/td[text()="Opportunity Owner"]/following-sibling::td/div/a').text
-    puts find(:xpath, '//*/td[text()="Stage"]/following-sibling::td/div').text
-    puts find(:xpath, '//*/td[text()="Probability (%)"]/following-sibling::td/div').text
-    puts find(:xpath, '//*/td[text()="Close Date"]/following-sibling::td/div').text
-
-    if find(:xpath, '//*/td[text()="Opportunity Name"]/following-sibling::td/div', :match => :prefer_exact).text == arg["TargetOpportunityName"]
+    if first(:xpath, '//*/td[text()="Opportunity Name"]/following-sibling::td/div').text == arg["TargetOpportunityName"]
       puts "#{arg["TargetOpportunityName"]} displayed successfully"
     else
       puts "#{arg["TargetOpportunityName"]} does not displayed successfully"   
     end
     sleep 1
-    if find(:xpath, '//*/td[text()="Opportunity Owner"]/following-sibling::td/div/a').text == arg2["TargetOpportunityOwnerID"]
+    if first(:xpath, '//*/td[text()="Opportunity Owner"]/following-sibling::td/div/a').text == arg2["TargetOpportunityOwnerID"]
       puts "#{arg2["TargetOpportunityOwnerID"]} displayed successfully"
     else
       puts "#{arg2["TargetOpportunityOwnerID"]} does not displayed successfully"   
     end
     sleep 1
-    if find(:xpath, '//*/td[text()="Stage"]/following-sibling::td/div').text == arg["TargetOpportunityStage"]
+    if first(:xpath, '//*/td[text()="Stage"]/following-sibling::td/div').text == arg["TargetOpportunityStage"]
       puts "#{arg["TargetOpportunityStage"]} displayed successfully"
     else
       puts "#{arg["TargetOpportunityStage"]} does not displayed successfully"   
     end
     sleep 1
-    if find(:xpath, '//*/td[text()="Probability (%)"]/following-sibling::td/div').text == arg["TargetOpportunityProbability"]
+    if first(:xpath, '//*/td[text()="Probability (%)"]/following-sibling::td/div').text == arg["TargetOpportunityProbability"]
       puts "#{arg["TargetOpportunityProbability"]} displayed successfully"
     else
       puts "#{arg["TargetOpportunityProbability"]} does not displayed successfully"   
     end
     sleep 1
-    if find(:xpath, '//*/td[text()="Close Date"]/following-sibling::td/div').text == arg["TargetOpportunityCloseDate"]
+    if first(:xpath, '//*/td[text()="Close Date"]/following-sibling::td/div').text == arg["TargetOpportunityCloseDate"]
       puts "#{arg["TargetOpportunityCloseDate"]} displayed successfully"
     else
       puts "#{arg["TargetOpportunityCloseDate"]} does not displayed successfully"   
