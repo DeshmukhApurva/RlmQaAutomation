@@ -5,6 +5,7 @@ require 'Win32API'
 Given(/^that I navigate to the CRM application$/) do
   begin
     $userRole = ENV['UserRole']
+    puts $userRole
     setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
     setCursorPos.Call(500,10)
     visit env
@@ -1348,8 +1349,22 @@ And(/^I Create New Source Opportunity$/) do
     putstr_withScreen  ex.message
   end
 end
+And(/^I select "([^"]*)" pricebook$/) do |priceBookName|
+  begin
+    sleep 5
+    click_on "Choose Price Book"
+    sleep 5
+    first(:option, priceBookName).select_option
+    sleep 2
+    click_on "Save"
+    sleep 5
+  rescue Exception => ex
+    raise "Error occurred while selecting pricebook #{priceBookName}"
+    putstr_withScreen  ex.message
+  end
+end
 
-And(/^I Add "([^"]*)" Products to Source Opportunity$/) do |totalProducts|
+And(/^I Add "([^"]*)" Products having product name as "([^"]*)" to Opportunity$/) do |totalProducts,productName|
   begin
     sleep 5
     arg = getReference "SourceOpportunity"
@@ -1357,16 +1372,18 @@ And(/^I Add "([^"]*)" Products to Source Opportunity$/) do |totalProducts|
 
     $startDateOLI = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s
     $endDateOLI = time.month.to_s + "/" + time.day.to_s + "/" + (time.year.to_i + 1).to_s
-
-    click_on "Choose Price Book"
-    sleep 5
-    first(:option,'Standard Price Book').select_option
-    sleep 2
-    click_on "Save"
-    sleep 5
-    
+  
     click_on "Add Product"
-    sleep 5
+    
+    within(:id,'field_name_PricebookEntry')do
+      searchField = find(:id, 'search')
+      searchField.send_keys(productName)    
+      puts "add search criteria"
+    end
+#   
+    # click_on 'save_filter_PricebookEntry'
+    # puts "click on search"
+    # sleep 5
     first(:option, 'Active (Product)').select_option
     sleep 1
     first(:option, 'equals').select_option
@@ -1557,6 +1574,61 @@ And(/^uncheck the set renewal checkbox in CSM Admin custom setting if it is chec
     end
   rescue Exception => ex
     putstr "Error while unchecking the checkbox"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I will verify renewal status for the opportunity$/) do
+  begin   
+    sleep 3    
+    puts page.has_xpath?("//td[contains(text(),'Renewal')]//following-sibling::td/div/img[@alt='Checked']")
+    rStatus = page.has_xpath?("//td[contains(text(),'Renewal')]//following-sibling::td/div/img[@alt='Checked']")   
+    #putstr "renewal status: #{rStatus}"
+    if page.has_xpath?("//td[contains(text(),'Renewal')]//following-sibling::td/div/img[@alt='Checked']") == true
+      puts "Renewal checkbox is checked"   
+    else
+      puts "Renewal checkbox is unchecked"
+    end
+    
+  rescue Exception => ex
+    putstr "Error while checking the renewal status"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I Save Adds Amount and Adds ratio values$/) do
+  begin
+    sleep 3
+    $addsAmount = first(:xpath, "//tr/td[contains(text(),'Adds Amount')]//following-sibling::td/div").text    
+    $addsRatio = find(:xpath, "//tr/td[contains(text(),'Adds Ratio')]//following-sibling::td/div").text
+    puts "AddsAmount: "+$addsAmount
+    puts "AddsRatio: "+$addsRatio
+  rescue Exception => ex
+    putstr "Error in adding products to the Opportunity"
+    putstr_withScreen  ex.message
+  end
+end
+
+Then (/^I verify Adds Amount and Adds Ratio$/) do
+  begin
+    puts 'verify Adds Amount and Ratio'
+    sleep 3
+    addsAmountNew = first(:xpath, "//tr/td[contains(text(),'Adds Amount')]//following-sibling::td/div").text    
+    addsRatioNew = find(:xpath, "//tr/td[contains(text(),'Adds Ratio')]//following-sibling::td/div").text
+    
+    puts "AddsRatioNew: "+addsRatioNew
+    puts "AddsAmountNew: "+addsAmountNew
+    #addsTempR = "100.00%"
+    #addsTempA = "USD 2,000.00"
+    
+    if $addsAmount == addsAmountNew && $addsRatio == addsRatioNew
+      puts "Values for Adds Amount and Adds Ratio are not populated correctly."
+    else 
+      puts "Correct values for Adds Amount and Adds Ratio are populated."
+    end
+       
+  rescue Exception => ex
+    putstr "Error while verifying Adds Amount and Adds Ratio"
     putstr_withScreen  ex.message
   end
 end
