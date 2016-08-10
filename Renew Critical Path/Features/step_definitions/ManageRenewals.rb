@@ -1,6 +1,6 @@
 #All Opportunity - Manage Renewals specific Step definitions
 #All Scenario mentioned in ManageRenewals.feature
-
+require 'pry'
 When(/^I click on "([^"]*)" edit link$/) do |renewal_relationship|
   begin
 
@@ -1552,45 +1552,80 @@ And(/^I verify required fields value on New Split Opportunity$/) do
     arg = getDetails "SplitOpportunity"
     arg2 = getReference "SplitOpportunity"
     sleep 2
+    puts first(:xpath, '//*/td[text()="Opportunity Name"]/following-sibling::td/div').text
+    puts first(:xpath, '//*/td[text()="Opportunity Owner"]/following-sibling::td/div/a').text
+    puts first(:xpath, '//*/td[text()="Stage"]/following-sibling::td/div').text
+    puts first(:xpath, '//*/td[text()="Probability (%)"]/following-sibling::td/div').text
+    puts first(:xpath, '//*/td[text()="Close Date"]/following-sibling::td/div').text
 
-    puts find(:xpath, '//*/td[text()="Opportunity Name"]/following-sibling::td/div').text 
-    puts find(:xpath, '//*/td[text()="Opportunity Owner"]/following-sibling::td/div/a').text
-    puts find(:xpath, '//*/td[text()="Stage"]/following-sibling::td/div').text
-    puts find(:xpath, '//*/td[text()="Probability (%)"]/following-sibling::td/div').text
-    puts find(:xpath, '//*/td[text()="Close Date"]/following-sibling::td/div').text
-
-    if find(:xpath, '//*/td[text()="Opportunity Name"]/following-sibling::td/div', :match => :prefer_exact).text == arg["TargetOpportunityName"]
+    if first(:xpath, '//*/td[text()="Opportunity Name"]/following-sibling::td/div').text == arg["TargetOpportunityName"]
       puts "#{arg["TargetOpportunityName"]} displayed successfully"
     else
-      puts "#{arg["TargetOpportunityName"]} does not displayed successfully"   
+      puts "#{arg["TargetOpportunityName"]} does not displayed successfully"
     end
     sleep 1
-    if find(:xpath, '//*/td[text()="Opportunity Owner"]/following-sibling::td/div/a').text == arg2["TargetOpportunityOwnerID"]
+    if first(:xpath, '//*/td[text()="Opportunity Owner"]/following-sibling::td/div/a').text == arg2["TargetOpportunityOwnerID"]
       puts "#{arg2["TargetOpportunityOwnerID"]} displayed successfully"
     else
-      puts "#{arg2["TargetOpportunityOwnerID"]} does not displayed successfully"   
+      puts "#{arg2["TargetOpportunityOwnerID"]} does not displayed successfully"
     end
     sleep 1
-    if find(:xpath, '//*/td[text()="Stage"]/following-sibling::td/div').text == arg["TargetOpportunityStage"]
+    if first(:xpath, '//*/td[text()="Stage"]/following-sibling::td/div').text == arg["TargetOpportunityStage"]
       puts "#{arg["TargetOpportunityStage"]} displayed successfully"
     else
-      puts "#{arg["TargetOpportunityStage"]} does not displayed successfully"   
+      puts "#{arg["TargetOpportunityStage"]} does not displayed successfully"
     end
     sleep 1
-    if find(:xpath, '//*/td[text()="Probability (%)"]/following-sibling::td/div').text == arg["TargetOpportunityProbability"]
+    if first(:xpath, '//*/td[text()="Probability (%)"]/following-sibling::td/div').text == arg["TargetOpportunityProbability"]
       puts "#{arg["TargetOpportunityProbability"]} displayed successfully"
     else
-      puts "#{arg["TargetOpportunityProbability"]} does not displayed successfully"   
+      puts "#{arg["TargetOpportunityProbability"]} does not displayed successfully"
     end
     sleep 1
-    if find(:xpath, '//*/td[text()="Close Date"]/following-sibling::td/div').text == arg["TargetOpportunityCloseDate"]
+    if first(:xpath, '//*/td[text()="Close Date"]/following-sibling::td/div').text == arg["TargetOpportunityCloseDate"]
       puts "#{arg["TargetOpportunityCloseDate"]} displayed successfully"
     else
-      puts "#{arg["TargetOpportunityCloseDate"]} does not displayed successfully"   
+      puts "#{arg["TargetOpportunityCloseDate"]} does not displayed successfully"
     end
 
   rescue Exception => ex
     putstr "Error occurred while veifying Split Opportunity fields"
+    putstr_withScreen  ex.message
+  end
+end
+
+Then(/^I select "([^"]*)" product from "([^"]*)" page$/) do |totalPoduct,renewal_relationship|
+  begin
+    sleep 6
+    if find(".pageDescription").text == renewal_relationship
+      puts "Successfully see the #{renewal_relationship} page"
+      sleep 5
+      unless page.has_css?(".no-records-found")
+        sleep 4
+        if page.has_css?("#renewalRelationshipGrid")
+          sleep 4
+          binding.pry
+          for cnt in 1..totalPoduct.to_i
+            if find(:xpath, "//table[@id='renewalRelationshipGrid']//tr[#{cnt}]/td[1]/input").checked?
+              puts "#{renewal_relationship} product field is already checked"
+            else
+              find(:xpath, "//table[@id='renewalRelationshipGrid']//tr[#{cnt}]/td[1]/input").click
+              sleep 4
+            end
+          end
+
+        else
+          puts "No to renewal relationship grid"
+        end
+      else
+        puts "No matching records found"
+      end
+    else
+      putstr "Failed to see the #{renewal_relationship} page"
+    end
+    sleep 5
+  rescue Exception => ex
+    putstr "Error occurred while selecting the #{renewal_relationship} product"
     putstr_withScreen  ex.message
   end
 end

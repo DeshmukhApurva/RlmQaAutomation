@@ -44,7 +44,6 @@ When(/^user logout from "([^"]*)" application$/) do |environment|
   end
 end
 
-
 #admin login
 When(/^I log into "(.*?)" details$/) do |arg1|
   begin
@@ -73,7 +72,7 @@ When(/^I log into "(.*?)" details$/) do |arg1|
       sleep 4
       fill_in "username",:with => arg["userName"]
       sleep 4
-      
+
       find("input[name='pw']").send_keys arg["pwd"]
       puts "Entered Credentials"
       sleep 4
@@ -124,7 +123,7 @@ And(/^I maximize the page$/) do
     page.driver.browser.manage.window.maximize
     sleep 5
     page.driver.browser.manage.window.maximize
-    sleep 5       
+    sleep 5
   end
 end
 
@@ -233,26 +232,26 @@ end
 And(/^I click on the Go button if present$/) do
   begin
     if page.has_xpath?('//input[@name="go"]')
-       first(:button, "Go").click
+      first(:button, "Go").click
+    end
   end
-end
 end
 
 And(/^I select Created Today view$/) do
   begin
-    select "Created Today", :from => "fcf"       
+    select "Created Today", :from => "fcf"
   end
 end
 
 And(/^I select OppToOpp view$/) do
   begin
-    select "OppToOpp", :from => "fcf"       
+    select "OppToOpp", :from => "fcf"
   end
 end
 
 And(/^I select SCOpp view$/) do
   begin
-    select "SCOpp", :from => "fcf"       
+    select "SCOpp", :from => "fcf"
   end
 end
 
@@ -432,7 +431,6 @@ And /^I create a new Account$/ do
   end
 end
 
-
 When(/^I Navigate to (.*?) tab$/) do |arg1|
   sleep 10
   first(:link, arg1).click
@@ -461,7 +459,6 @@ And (/^I switch back to first tab$/)do
   page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
   sleep 10
 end
-
 
 Then(/^I should be able to see help page$/) do
   sleep 15
@@ -512,8 +509,6 @@ Then (/^I should see the hamburger icon$/) do
   sleep 15
 end
 
-
-
 And (/^I cancel creation of new SuccessPlan$/) do
   click_on "New"
   arg = getDetails "SuccessPlan"
@@ -549,10 +544,6 @@ And (/^I open on first SuccessPlan$/) do
   end
   puts "Successfully created Opportunity"
 end
-
-
-
-
 
 And (/^I verify edit link of focus category$/) do
   sleep 10
@@ -741,7 +732,6 @@ And (/^I Verify Chart and Tiles Visibility$/) do
   sleep 5
 end
 
-
 When(/^I Navigate to "([^"]*)" tab$/) do |arg1|
   sleep 10
   first(:link, arg1).click
@@ -749,14 +739,13 @@ When(/^I Navigate to "([^"]*)" tab$/) do |arg1|
   puts "Navigated to #{arg1} tab"
 end
 
-
 Then(/^I clicked on "(.*?)" link "(.*?)"$/) do |arg1,grid|
   # puts arg1
   # puts grid
   arg2 = getDetails grid
   param = getDetails grid+"Param"
-  begin       
-    within all(".pbSubsection")[param['section']]do 
+  begin
+    within all(".pbSubsection")[param['section']]do
       within(".detailList")do
         if first(:xpath,".//*[contains(@id,'addFilterLogicId')]").text == arg1
           first(:link, arg1).click
@@ -771,80 +760,80 @@ Then(/^I clicked on "(.*?)" link "(.*?)"$/) do |arg1,grid|
         end
       end
     end
-    
-    within all(".pbSubsection")[param['section']]do 
+
+    within all(".pbSubsection")[param['section']]do
       within(".detailList")do
         filter = first(:xpath,".//*[contains(@id,'addFilterLogicId')]").text
         puts filter
       end
     end
-  rescue Exception => ex  
+  rescue Exception => ex
     putstr_withScreen  ex.message
   end
 end
 
 Then(/^I Specify the conditions for "(.*?)" in "(.*?)"$/) do |grid,screen|
-  arg = getDetails grid+"Criteria"  
-  begin 
+  arg = getDetails grid+"Criteria"
+  begin
     if (grid == "OppFields")
-    
+
       puts "Setting Criteria for Opportunity section fields"
-      
-      all(".dataRow")[0].all(".dataCell")[2].select(arg["Fieldvalue2"])   
-      sleep 8
-      all(".dataRow")[0].all(".dataCell")[3].select(arg["Operator2"])   
-      sleep 10        
-      all(".dataRow")[0].all(".dataCell")[4].first("input").set(arg["Value2"])
-      sleep 5 
 
-      all(".dataRow")[1].all(".dataCell")[2].select(arg["Fieldvalue1"])     
-      sleep 8 
-      all(".dataRow")[1].all(".dataCell")[3].select(arg["Operator1"])         
+      all(".dataRow")[0].all(".dataCell")[2].select(arg["Fieldvalue2"])
+      sleep 8
+      all(".dataRow")[0].all(".dataCell")[3].select(arg["Operator2"])
       sleep 10
-      all(".dataRow")[1].all(".dataCell")[4].first("input").set(arg["Value1"])    
-      sleep 5   
+      all(".dataRow")[0].all(".dataCell")[4].first("input").set(arg["Value2"])
+      sleep 5
 
-      all(".dataRow")[2].all(".dataCell")[2].select(arg["Fieldvalue3"])   
+      all(".dataRow")[1].all(".dataCell")[2].select(arg["Fieldvalue1"])
       sleep 8
-      all(".dataRow")[2].all(".dataCell")[3].select(arg["Operator3"])   
-      sleep 10    
+      all(".dataRow")[1].all(".dataCell")[3].select(arg["Operator1"])
+      sleep 10
+      all(".dataRow")[1].all(".dataCell")[4].first("input").set(arg["Value1"])
+      sleep 5
+
+      all(".dataRow")[2].all(".dataCell")[2].select(arg["Fieldvalue3"])
+      sleep 8
+      all(".dataRow")[2].all(".dataCell")[3].select(arg["Operator3"])
+      sleep 10
       all(".dataRow")[2].all(".dataCell")[4].first("input").set((arg["Value3"]))
-      sleep 5 
-      
+      sleep 5
+
     elsif (grid == "ProductFields")
-    
+
       puts "Setting criteria for Renewable Product section fields"
-      
-      all(".dataRow")[3].all(".dataCell")[2].select(arg["Fieldvalue2"])   
+
+      all(".dataRow")[3].all(".dataCell")[2].select(arg["Fieldvalue2"])
       sleep 8
-      all(".dataRow")[3].all(".dataCell")[3].select(arg["Operator2"])   
-      sleep 10    
+      all(".dataRow")[3].all(".dataCell")[3].select(arg["Operator2"])
+      sleep 10
       all(".dataRow")[3].all(".dataCell")[4].first("input").set((arg["Value2"]))
-      sleep 5 
-      
-      all(".dataRow")[4].all(".dataCell")[2].select(arg["Fieldvalue3"])   
+      sleep 5
+
+      all(".dataRow")[4].all(".dataCell")[2].select(arg["Fieldvalue3"])
       sleep 8
-      all(".dataRow")[4].all(".dataCell")[3].select(arg["Operator3"])   
-      sleep 10    
+      all(".dataRow")[4].all(".dataCell")[3].select(arg["Operator3"])
+      sleep 10
       all(".dataRow")[4].all(".dataCell")[4].first("input").set((arg["Value3"]))
-      sleep 5 
-      
-      all(".dataRow")[5].all(".dataCell")[2].select(arg["Fieldvalue4"])   
+      sleep 5
+
+      all(".dataRow")[5].all(".dataCell")[2].select(arg["Fieldvalue4"])
       sleep 8
-      all(".dataRow")[5].all(".dataCell")[3].select(arg["Operator4"])   
-      sleep 10    
+      all(".dataRow")[5].all(".dataCell")[3].select(arg["Operator4"])
+      sleep 10
       all(".dataRow")[5].all(".dataCell")[4].first("input").set((arg["Value4"]))
-      sleep 5 
+      sleep 5
     end
-    
-    within(:css ,".pbButton") do  
+
+    within(:css ,".pbButton") do
       click_on "Save"
     end
-    
+
     if screen == "OpportunityGeneration"
       screen = "Renewal Opportunity"
-    end 
-    
+    end
+
     if page.has_content?("#{screen} configuration has been saved.")
       puts "#{screen} configuration has been saved message is displayed"
     else
@@ -858,14 +847,14 @@ end
 
 Then (/^I Specify the conditions for generation of renewal opportunities$/) do
   begin
-    all(".dataRow")[0].all(".dataCell")[2].select("Name")     
-    sleep 8   
-    all(".dataRow")[0].all(".dataCell")[3].select("LIKE")         
-    sleep 10      
-    all(".dataRow")[0].all(".dataCell")[4].first("input").set("Sourceopp")    
-    sleep 5   
-    
-    within(:css ,".pbButton") do  
+    all(".dataRow")[0].all(".dataCell")[2].select("Name")
+    sleep 8
+    all(".dataRow")[0].all(".dataCell")[3].select("LIKE")
+    sleep 10
+    all(".dataRow")[0].all(".dataCell")[4].first("input").set("Sourceopp")
+    sleep 5
+
+    within(:css ,".pbButton") do
       click_on "Save"
     end
   rescue Exception => ex
@@ -877,25 +866,25 @@ end
 Then(/^I clicked on "(.*?)" link$/) do |arg1|
   first(:link, arg1).click
   sleep 10
-  puts "Clicked on " + arg1 + " link" 
+  puts "Clicked on " + arg1 + " link"
 end
 
 Then (/^I edit "(.*?)" filter Logic for "(.*?)"$/) do |grid,screen|
   puts screen
-  puts grid 
+  puts grid
   param = getDetails grid+"Param"
-  begin 
-    within all(".pbSubsection")[param["section"]] do  
+  begin
+    within all(".pbSubsection")[param["section"]] do
       first(:xpath,".//*[contains(@id,'bool_filter')]").first("input").set("1 OR 2 OR 3")
     end
-    within(:css ,".pbButton") do  
+    within(:css ,".pbButton") do
       click_on "Save"
     end
     if page.has_content?("#{screen} configuration has been saved.")
       puts "#{screen} configuration is set and saved."
     else
       putstr "#{screen} configuration is set and not saved."
-    end 
+    end
   rescue Exception => ex
     puts "Error while editing filter logic for #{screen}"
     putstr_withScreen  ex.message
@@ -904,24 +893,24 @@ end
 
 Then (/^I select a Source Opportunity$/) do
   begin
-  sleep 5
-  arg = getDetails "Sourceopp"
-  select "My Opportunities", :from => "fcf"
+    sleep 5
+    arg = getDetails "Sourceopp"
+    select "My Opportunities", :from => "fcf"
     sleep 5
     within(".fBody") do
       click_on "Go!"
     end
     sleep 5
     foundCount = ""
-    begin  
+    begin
       within(".x-grid3-body") do
         tr = all(".x-grid3-row")
         tr.each do |row|
           if row.all("td")[2].text==arg["Name"]
-          row.all("td")[2].all('a')[0].click
-          foundCount = "found"
-          break
-          end 
+            row.all("td")[2].all('a')[0].click
+            foundCount = "found"
+            break
+          end
         end
       end
       if page.has_css?('.next')
@@ -934,77 +923,77 @@ Then (/^I select a Source Opportunity$/) do
     if foundCount==""
       within(".x-grid3-body") do
         tr = all(".x-grid3-row")
-        tr.each do |row|        
-         if row.all("td")[2].text==arg["Name"]
-          row.all("td")[2].all('a')[0].click_on
-          foundCount = "found"
-          break
-          end 
+        tr.each do |row|
+          if row.all("td")[2].text==arg["Name"]
+            row.all("td")[2].all('a')[0].click_on
+            foundCount = "found"
+            break
+          end
         end
       end
     end
-  sleep 5 
+    sleep 5
   rescue Exception => ex
     puts "Error in Selecting the source opportunity"
     putstr_withScreen  ex.message
   end
 end
-  
+
 Then (/^I enter the wrong details for the criteria$/) do
   arg = getDetails "Wrongdetails"
   arg1 = getDetails "OppFieldsCriteria"
   begin
-    all(".dataRow")[2].all(".dataCell")[2].select(arg["Fieldvalue1"])   
+    all(".dataRow")[2].all(".dataCell")[2].select(arg["Fieldvalue1"])
     sleep 8
-    all(".dataRow")[2].all(".dataCell")[3].select(arg["Operator1"])   
-    sleep 10    
+    all(".dataRow")[2].all(".dataCell")[3].select(arg["Operator1"])
+    sleep 10
     all(".dataRow")[2].all(".dataCell")[4].first("input").set((arg["Value1"]))
-    sleep 5 
-    
-    within(:css ,".pbButton") do  
+    sleep 5
+
+    within(:css ,".pbButton") do
       click_on "Save"
     end
-    
-    if page.has_content?"Value must be populated for Quantity" 
+
+    if page.has_content?"Value must be populated for Quantity"
       puts "User is able to see the error message"
     else
       putstr "User is unable to see the error message"
     end
-    
-    within all(".pbSubsection")[0] do   
-      first(:xpath,"//*[contains(@id,'bool_filter')]").first("input").set("1 OR 2 3")   
+
+    within all(".pbSubsection")[0] do
+      first(:xpath,"//*[contains(@id,'bool_filter')]").first("input").set("1 OR 2 3")
     end
-    
-    within(:css ,".pbButton") do  
+
+    within(:css ,".pbButton") do
       click_on "Save"
-    end 
-    
+    end
+
     if page.has_content?"Some filter conditions are defined but not referenced in your filter logic."
       puts "User is able to see the error message of filter criteria"
     else
       putstr "User is unable to see the error message of filter criteria"
     end
-    
-    all(".dataRow")[2].all(".dataCell")[2].select(arg1["Fieldvalue3"])    
+
+    all(".dataRow")[2].all(".dataCell")[2].select(arg1["Fieldvalue3"])
     sleep 8
-    all(".dataRow")[2].all(".dataCell")[3].select(arg1["Operator3"])    
-    sleep 10    
+    all(".dataRow")[2].all(".dataCell")[3].select(arg1["Operator3"])
+    sleep 10
     all(".dataRow")[2].all(".dataCell")[4].first("input").set((arg1["Value3"]))
-    sleep 5 
-    
-    within all(".pbSubsection")[0] do   
-      first(:xpath,"//*[contains(@id,'bool_filter')]").first("input").set("1 OR 2 OR 3")    
+    sleep 5
+
+    within all(".pbSubsection")[0] do
+      first(:xpath,"//*[contains(@id,'bool_filter')]").first("input").set("1 OR 2 OR 3")
     end
-    
-    within(:css ,".pbButton") do  
+
+    within(:css ,".pbButton") do
       click_on "Save"
     end
-    
+
     if page.has_content?("Renewal Opportunity configuration has been saved.")
       puts "Renewal Opportunity configuration criteria is set and saved"
     else
       putstr "Renewal Opportunity configuration criteria is not saved and set"
-    end 
+    end
   rescue Exception => ex
     puts "Error while setting incorrect criteria"
     putstr_withScreen  ex.message
@@ -1012,7 +1001,7 @@ Then (/^I enter the wrong details for the criteria$/) do
 end
 
 Then (/^I Match the source opp criteria with "(.*?)" criteria$/) do |grid|
-  puts grid 
+  puts grid
   arg1 = getDetails grid
   param = getDetails grid+"Criteria"
   begin
@@ -1021,7 +1010,7 @@ Then (/^I Match the source opp criteria with "(.*?)" criteria$/) do |grid|
     end
     sleep 5
     select param["Value1"] ,:from => "opp11"
-    within(:id ,"topButtonRow") do  
+    within(:id ,"topButtonRow") do
       click_on "Save"
     end
     sleep 5
@@ -1031,9 +1020,9 @@ Then (/^I Match the source opp criteria with "(.*?)" criteria$/) do |grid|
   end
 end
 
-Then (/^I fetch the dropdown selected values$/) do 
-begin   
-  putstr all(".dataRow")[0].find('option[selected]').text
+Then (/^I fetch the dropdown selected values$/) do
+  begin
+    putstr all(".dataRow")[0].find('option[selected]').text
   rescue Exception => ex
     putstr_withScreen  ex.message
   end
@@ -1042,26 +1031,26 @@ end
 And(/^I verify the Data Types of "(.*?)"$/) do |item|
   arg = getDetails item
   param = getDetails item+"Param"
-  
+
   begin
-  within all(".pbSubsection")[param["section"]] do
-    within('.detailList') do
-      
-      LOV = all(:xpath, ".//*[contains(@id, 'slFieldId')]")[param["rowNum"]].all('option').collect(&:text)
-      #LOV = all(:xpath, "//*[contains(@id, 'slFieldId')]")[param["rowNum"]].all('option').collect(&:text)
-      #LOV = all(".dataRow")[0].all(".dataCell")[2].first("select").all('option').collect(&:text)
-      puts "Dropdown values : #{LOV}"
-      arg.each do |key,value|
-        k = key
-        v = value
-        if LOV.include? v
-          puts "#{k} : #{v} is present in Picklist values"
-        else
-          putstr "#{k} : #{v} does not exist in Picklist values"
+    within all(".pbSubsection")[param["section"]] do
+      within('.detailList') do
+
+        LOV = all(:xpath, ".//*[contains(@id, 'slFieldId')]")[param["rowNum"]].all('option').collect(&:text)
+        #LOV = all(:xpath, "//*[contains(@id, 'slFieldId')]")[param["rowNum"]].all('option').collect(&:text)
+        #LOV = all(".dataRow")[0].all(".dataCell")[2].first("select").all('option').collect(&:text)
+        puts "Dropdown values : #{LOV}"
+        arg.each do |key,value|
+          k = key
+          v = value
+          if LOV.include? v
+            puts "#{k} : #{v} is present in Picklist values"
+          else
+            putstr "#{k} : #{v} does not exist in Picklist values"
+          end
         end
       end
     end
-  end 
   rescue Exception => ex
     puts "Error while verifying the Data Types for - #{item}"
     putstr_withScreen  ex.message
@@ -1073,25 +1062,25 @@ And(/^I verify the list of Operators for "(.*?)"$/) do |item|
   param = getDetails item+"Param"
   operator = getDetails "Operators"
   begin
-  within all(".pbSubsection")[param["section"]] do
-    within('.detailList') do 
-      arg.each do |key,value|
-        k = key
-        v = value
-        operators = Array.new
-        operators = operator[k].split(",")
-        puts operators
-        all(".dataRow")[0].all(".dataCell")[2].select(v)
-        puts "#{v} is selected"
-        sleep 5
-        operators.each do |ele|
-          all(".dataRow")[0].all(".dataCell")[3].select(ele)
+    within all(".pbSubsection")[param["section"]] do
+      within('.detailList') do
+        arg.each do |key,value|
+          k = key
+          v = value
+          operators = Array.new
+          operators = operator[k].split(",")
+          puts operators
+          all(".dataRow")[0].all(".dataCell")[2].select(v)
+          puts "#{v} is selected"
           sleep 5
-          # puts "#{arg[v]} operator : #{ele}"
+          operators.each do |ele|
+            all(".dataRow")[0].all(".dataCell")[3].select(ele)
+            sleep 5
+            # puts "#{arg[v]} operator : #{ele}"
+          end
         end
       end
     end
-  end 
   rescue Exception => ex
     puts "Error while verifying the list of Operators - #{item}"
     putstr_withScreen  ex.message
@@ -1099,32 +1088,32 @@ And(/^I verify the list of Operators for "(.*?)"$/) do |item|
 end
 
 # And(/^I select all the "(.*?)"$/) do |item|
-  # begin
-    # param = getDetails item+"Param"
-    # i=0
-    # LOVcount = 0
-    # within all(".pbSubsection")[param["section"]] do
-      # within('.detailList') do
-        # LOV = all(:xpath, ".//*[contains(@id, 'slFieldId')]")[param["rowNum"]].all('option').collect(&:text)
-        # LOVcount = LOV.size
-        # puts "Picklist values : #{LOV}"
-        
-        # LOV.each do |value|
-          # all(".dataRow")[0].all(".dataCell")[2].select(value)
-          # sleep 5
-          # i+=1
-        # end
-      # end
-    # end
-    # if i == LOVcount
-      # puts "All values are selected"
-    # else
-      # puts "Unable to select all values"
-    # end
-  # rescue Exception => ex
-    # puts "Error while Selecting the #{item}"
-    # putstr_withScreen  ex.message
-  # end
+# begin
+# param = getDetails item+"Param"
+# i=0
+# LOVcount = 0
+# within all(".pbSubsection")[param["section"]] do
+# within('.detailList') do
+# LOV = all(:xpath, ".//*[contains(@id, 'slFieldId')]")[param["rowNum"]].all('option').collect(&:text)
+# LOVcount = LOV.size
+# puts "Picklist values : #{LOV}"
+
+# LOV.each do |value|
+# all(".dataRow")[0].all(".dataCell")[2].select(value)
+# sleep 5
+# i+=1
+# end
+# end
+# end
+# if i == LOVcount
+# puts "All values are selected"
+# else
+# puts "Unable to select all values"
+# end
+# rescue Exception => ex
+# puts "Error while Selecting the #{item}"
+# putstr_withScreen  ex.message
+# end
 # end
 
 And(/^I select all the "(.*?)"$/) do |item|
@@ -1167,7 +1156,7 @@ And(/^I verify the Data Types and list of Operators for "(.*?)"$/) do |item|
     param = getDetails item+"Param"
     operator = getDetails "Operators"
     rowNum = 0
-    
+
     within all(".pbSubsection")[param["section"]] do
       within(".detailList") do
         within(".list") do
@@ -1187,7 +1176,7 @@ And(/^I verify the Data Types and list of Operators for "(.*?)"$/) do |item|
           end
           operators = Array.new
           operators = operator[k].split(",")
-          
+
           all(".dataRow")[rowNum].all(".dataCell")[2].select(v)
           sleep 10
           listofoperators = all(:xpath, ".//*[contains(@id, 'outOperator')]")[rowNum].all('option').collect(&:text)
@@ -1203,7 +1192,7 @@ And(/^I verify the Data Types and list of Operators for "(.*?)"$/) do |item|
           sleep 4
         end
       end
-    end 
+    end
   rescue Exception => ex
     puts "Error while verifying the data types and its list of operators for #{item}"
     putstr_withScreen  ex.message
@@ -1212,15 +1201,15 @@ end
 
 And(/^I enable "(.*?)" checkbox$/) do |labeltext|
   # within all(".detailList")[0] do
-    # row.all('input[type=checkbox]').each do |checkbox |         
-      # unless checkbox.checked?
-        # checkbox.click
-        # puts "#{arg["Asset1"]} is selected"
-        # break
-      # else
-        # putstr "#{arg["Asset1"]} is not selected"
-      # end         
-    # end
+  # row.all('input[type=checkbox]').each do |checkbox |
+  # unless checkbox.checked?
+  # checkbox.click
+  # puts "#{arg["Asset1"]} is selected"
+  # break
+  # else
+  # putstr "#{arg["Asset1"]} is not selected"
+  # end
+  # end
   # foundCount = "found"
   # break
   # end
@@ -1240,34 +1229,31 @@ end
 Then(/^I Clear the conditions specified for "(.*?)"$/) do |ren|
   begin
     arg2 = getDetails ren
-    initialRowCount = 0 
-    within all(".pbSubsection")[arg2["section"]] do   
+    initialRowCount = 0
+    within all(".pbSubsection")[arg2["section"]] do
       initialRowCount = all(:link,"Delete").count
-    end 
-    within all(".pbSubsection")[arg2["section"]] do 
+    end
+    within all(".pbSubsection")[arg2["section"]] do
       first(:link, "Delete").click
       sleep 5
-    end 
+    end
     finalRowCount = 0
-    within all(".pbSubsection")[arg2["section"]] do 
+    within all(".pbSubsection")[arg2["section"]] do
       finalRowCount = all(:link,"Delete").count
-    end 
+    end
     if initialRowCount > finalRowCount
-      puts "Opportunity criteria row is getting removed"  
+      puts "Opportunity criteria row is getting removed"
     end
   rescue Exception => ex
     putstr_withScreen  ex.message
   end
 end
 
-
-
-
 And(/^I click on "([^"]*)" button$/) do |button_text|
   begin
-  click_on button_text
-  sleep 8
-  puts "Successfully click the #{button_text} button"
+    click_on button_text
+    sleep 8
+    puts "Successfully click the #{button_text} button"
   rescue Exception => ex
     putstr "Error occurred while clicking on #{button_text} button"
     putstr_withScreen  ex.message
@@ -1286,11 +1272,11 @@ And (/^I save the Mapping$/) do
     #Bottom Save button click
     first(".pbButtonb").first(".btn").click
     sleep 10
-    puts "Saved Mapping" 
+    puts "Saved Mapping"
   rescue Exception => ex
     putstr "Error occurred while saving Mapping."
     putstr_withScreen  ex.message
-  end 
+  end
 end
 
 Then(/^I should able to see the "([^"]*)" alert message$/) do |alert_message|
@@ -1313,7 +1299,7 @@ And(/^I Create New Source Opportunity$/) do
   begin
     sleep 5
     arg = getReference "SourceOpportunity"
-        
+
     time = Time.new
     oppDateTime = time.day.to_s + time.month.to_s + time.year.to_s + time.hour.to_s + time.min.to_s + time.sec.to_s
     year = time.year.to_i + 2
@@ -1372,15 +1358,15 @@ And(/^I Add "([^"]*)" Products having product name as "([^"]*)" to Opportunity$/
 
     $startDateOLI = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s
     $endDateOLI = time.month.to_s + "/" + time.day.to_s + "/" + (time.year.to_i + 1).to_s
-  
+
     click_on "Add Product"
-    
+
     within(:id,'field_name_PricebookEntry')do
       searchField = find(:id, 'search')
-      searchField.send_keys(productName)    
+      searchField.send_keys(productName)
       puts "add search criteria"
     end
-#   
+    #
     # click_on 'save_filter_PricebookEntry'
     # puts "click on search"
     # sleep 5
@@ -1392,18 +1378,18 @@ And(/^I Add "([^"]*)" Products having product name as "([^"]*)" to Opportunity$/
     sleep 1
     find(:xpath, '//input[contains(@id,"save_filter_PricebookEntry")]').click
     sleep 5
-    
+
     i = 1
     while i <= totalProducts.to_i do
-      puts i.to_s 
+      puts i.to_s
       find(:xpath, "//div[contains(@class,'x-grid3-body')]/div[#{i}]/table/tbody/tr/td[1]/div/input").set(true)
       i = i + 1
       sleep 2
     end
     click_on 'Select'
-    puts "Successfully select the product"    
+    puts "Successfully select the product"
     sleep 5
-    
+
     #Enter product Quantity
     pos = 1
     $nums = Array.new(totalProducts.to_i)
@@ -1415,22 +1401,22 @@ And(/^I Add "([^"]*)" Products having product name as "([^"]*)" to Opportunity$/
       find(:xpath,"//*[@id='editPage']/table/tbody/tr[#{$nums[i]}]/td[5]/span/input").set $endDateOLI
       find(:xpath,"//*[@id='editPage']/table/tbody/tr[#{$nums[i]}]/td[6]/input").set arg["ProductSalesPrice"]
     end
-    
+
     all(:xpath,'//td/input[@value=" Save "]')[0].click
 
     sleep 5
     $productsTitle = Array.new(totalProducts.to_i)
     i= 0
     for i in 0..totalProducts.to_i - 1
-     within(".opportunityLineItemBlock") do
-      within(".list") do        
-        $productsTitle[i] = all(".dataRow")[i].all("th")[0].first("a").text
-        puts $productsTitle[i]
-        sleep 3
+      within(".opportunityLineItemBlock") do
+        within(".list") do
+          $productsTitle[i] = all(".dataRow")[i].all("th")[0].first("a").text
+          puts $productsTitle[i]
+          sleep 3
+        end
       end
-     end
     end
-    
+
   rescue Exception => ex
     raise "Error occurred while adding products to source opp"
     putstr_withScreen  ex.message
@@ -1443,7 +1429,7 @@ And(/^I Renew Source Opportunity$/) do
     within("#bottomButtonRow") do
       click_on 'Edit'
     end
-    
+
     sleep 5
     first(:option,'Closed Won').select_option
     sleep 2
@@ -1490,16 +1476,32 @@ And(/^I click on "([^"]*)" from "([^"]*)" app$/) do |link, app|
   end
 end
 
+And(/^I select "([^"]*)" products from Products section$/) do |totalProducts|
+  begin
+    sleep 5
+    within(".opportunityLineItemBlock") do
+      for cnt in 0..totalProducts.to_i - 1
+        productName = all(".dataRow")[cnt.to_i].all("th")[0].first("a").text
+        puts productName
+        all(".dataRow")[cnt.to_i].all("td")[0].first("input").click
+        sleep 1
+      end
+    end
+  rescue Exception => ex
+    putstr "Error occurred while selecting the multiple #{renewal_relationship} products"
+    putstr_withScreen  ex.message
+  end
+end
 
 And(/^I search for "([^"]*)" from Quick Find$/) do |searchText|
-  begin   
-    sleep 3  
-    find("input[placeholder='Quick Find / Search...']").send_keys [:control, 'a'], :backspace    
+  begin
+    sleep 3
+    find("input[placeholder='Quick Find / Search...']").send_keys [:control, 'a'], :backspace
     find("input[placeholder='Quick Find / Search...']").send_keys searchText
     sleep 3
-    puts "Entered text #{searchText} to search in Quick search box"   
-    #within("#DevToolsIntegrate_child") do  CustomSettings_font    
-      click_link(searchText)
+    puts "Entered text #{searchText} to search in Quick search box"
+    #within("#DevToolsIntegrate_child") do  CustomSettings_font
+    click_link(searchText)
     #end
   rescue Exception => ex
     putstr "Error while searching #{searchText}"
@@ -1508,10 +1510,9 @@ And(/^I search for "([^"]*)" from Quick Find$/) do |searchText|
 
 end
 
-
 #I select CSM Admin from Custom Settings
 And(/^I select "([^"]*)" from Custom Settings$/) do |user|
-  begin   
+  begin
     sleep 3
     puts user
     within (".listRelatedObject") do
@@ -1521,14 +1522,14 @@ And(/^I select "([^"]*)" from Custom Settings$/) do |user|
     putstr "Error while selecting CSM Admin"
     putstr_withScreen  ex.message
   end
-end  
+end
 
 And(/^check the set renewal checkbox in CSM Admin custom setting if it is not checked$/) do
-  begin   
-    sleep 3    
+  begin
+    sleep 3
     puts page.has_xpath?("//th[contains(text(),'Set new Opportunity as Renewal')]//following-sibling::td/span/img[@alt='Not Checked']")
     puts page.has_xpath?("//th[contains(text(),'Set new Opportunity as Renewal')]//following-sibling::td/span/img[@alt='Checked']")
-    
+
     if page.has_xpath?("//th[contains(text(),'Set new Opportunity as Renewal')]//following-sibling::td/span/img[@alt='Not Checked']") == true
       puts "checkbox is not checked"
       click_button 'Edit'
@@ -1541,7 +1542,7 @@ And(/^check the set renewal checkbox in CSM Admin custom setting if it is not ch
         puts "successfully checked the checkbox"
       else
         putstr "Failed to see the edit form"
-      end     
+      end
     else
       puts "checkbox is already checked"
     end
@@ -1552,10 +1553,10 @@ And(/^check the set renewal checkbox in CSM Admin custom setting if it is not ch
 end
 
 And(/^uncheck the set renewal checkbox in CSM Admin custom setting if it is checked$/) do
-  begin   
-    sleep 3    
+  begin
+    sleep 3
     puts page.has_xpath?("//th[contains(text(),'Set new Opportunity as Renewal')]//following-sibling::td/span/img[@alt='Not Checked']")
-    puts page.has_xpath?("//th[contains(text(),'Set new Opportunity as Renewal')]//following-sibling::td/span/img[@alt='Checked']")   
+    puts page.has_xpath?("//th[contains(text(),'Set new Opportunity as Renewal')]//following-sibling::td/span/img[@alt='Checked']")
     if page.has_xpath?("//th[contains(text(),'Set new Opportunity as Renewal')]//following-sibling::td/span/img[@alt='Checked']") == true
       puts "checkbox is checked"
       click_button 'Edit'
@@ -1568,7 +1569,7 @@ And(/^uncheck the set renewal checkbox in CSM Admin custom setting if it is chec
         puts "successfully unchecked the checkbox"
       else
         putstr "Failed to see the edit form"
-      end     
+      end
     else
       puts "checkbox is already unchecked"
     end
@@ -1579,17 +1580,17 @@ And(/^uncheck the set renewal checkbox in CSM Admin custom setting if it is chec
 end
 
 And(/^I will verify renewal status for the opportunity$/) do
-  begin   
-    sleep 3    
+  begin
+    sleep 3
     puts page.has_xpath?("//td[contains(text(),'Renewal')]//following-sibling::td/div/img[@alt='Checked']")
-    rStatus = page.has_xpath?("//td[contains(text(),'Renewal')]//following-sibling::td/div/img[@alt='Checked']")   
+    rStatus = page.has_xpath?("//td[contains(text(),'Renewal')]//following-sibling::td/div/img[@alt='Checked']")
     #putstr "renewal status: #{rStatus}"
     if page.has_xpath?("//td[contains(text(),'Renewal')]//following-sibling::td/div/img[@alt='Checked']") == true
-      puts "Renewal checkbox is checked"   
+      puts "Renewal checkbox is checked"
     else
       puts "Renewal checkbox is unchecked"
     end
-    
+
   rescue Exception => ex
     putstr "Error while checking the renewal status"
     putstr_withScreen  ex.message
@@ -1599,7 +1600,7 @@ end
 And(/^I Save Adds Amount and Adds ratio values$/) do
   begin
     sleep 3
-    $addsAmount = first(:xpath, "//tr/td[contains(text(),'Adds Amount')]//following-sibling::td/div").text    
+    $addsAmount = first(:xpath, "//tr/td[contains(text(),'Adds Amount')]//following-sibling::td/div").text
     $addsRatio = find(:xpath, "//tr/td[contains(text(),'Adds Ratio')]//following-sibling::td/div").text
     puts "AddsAmount: "+$addsAmount
     puts "AddsRatio: "+$addsRatio
@@ -1613,20 +1614,20 @@ Then (/^I verify Adds Amount and Adds Ratio$/) do
   begin
     puts 'verify Adds Amount and Ratio'
     sleep 3
-    addsAmountNew = first(:xpath, "//tr/td[contains(text(),'Adds Amount')]//following-sibling::td/div").text    
+    addsAmountNew = first(:xpath, "//tr/td[contains(text(),'Adds Amount')]//following-sibling::td/div").text
     addsRatioNew = find(:xpath, "//tr/td[contains(text(),'Adds Ratio')]//following-sibling::td/div").text
-    
+
     puts "AddsRatioNew: "+addsRatioNew
     puts "AddsAmountNew: "+addsAmountNew
     #addsTempR = "100.00%"
     #addsTempA = "USD 2,000.00"
-    
+
     if $addsAmount == addsAmountNew && $addsRatio == addsRatioNew
       puts "Values for Adds Amount and Adds Ratio are not populated correctly."
-    else 
+    else
       puts "Correct values for Adds Amount and Adds Ratio are populated."
     end
-       
+
   rescue Exception => ex
     putstr "Error while verifying Adds Amount and Adds Ratio"
     putstr_withScreen  ex.message

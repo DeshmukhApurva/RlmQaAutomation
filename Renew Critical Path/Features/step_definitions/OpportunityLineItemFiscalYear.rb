@@ -7,8 +7,11 @@ Then (/^I select the opportunity to set the date$/)do
     arg = getReference "FiscalOpp"
     select "My Opportunities", :from => "fcf"
     sleep 3
-    within(".fBody") do
-      click_on "Go!"
+#    within(".fBody") do
+#      click_on "Go!"
+#    end
+    if page.has_xpath?('//input[@name="go"]')
+          first(:button, "Go").click
     end
     sleep 5
     foundCount = ""
