@@ -8,13 +8,13 @@ Background: Login to the Application
 
 @service_contracts_line_item
 Scenario: Rally Test Case ID: TC3414,TC3415,TC3416,TC3417: Opportunity Updates - Service Contract Line Item Change on Add/Edit
-#	When I click on "ServiceSource Setup" link
-#	And I click on "Opportunity Generation" link
-#	And I select the "Enable Generation of Opportunities" checkbox on opp generation
-#	When I click on "ServiceSource Setup" link
-#	And I click on "Mappings" link
-#	And I click on "Opportunity → Renewal Opportunity" link
-#	And I save the Mapping
+	When I click on "ServiceSource Setup" link
+	And I click on "Opportunity Generation" link
+	And I select the "Enable Generation of Opportunities" checkbox on opp generation
+	When I click on "ServiceSource Setup" link
+	And I click on "Mappings" link
+	And I click on "Opportunity → Renewal Opportunity" link
+	And I save the Mapping
 	When I click on "ServiceSource Setup" link
 	And I click on "Opportunity Updates" link
 	And I select the "Update opportunities when the following service contract line item fields change" checkbox
@@ -53,9 +53,11 @@ Scenario: Rally Test Case ID: TC3418,TC3419 : Opportunity Updates - No Change to
 	And I unselect the "Update opportunities when the following service contract line item fields change" checkbox
 	And I add asset criteria and multiple filters logic "1 AND 2 OR 3" and "1 OR 2 OR 3"
 	When I click on "Opportunities" link
-	And I go to existing renewal opportunities
+	Then I select SCOpp view
+	And I click on the Go button if present
+	And I click on "Service_Contract_Opp" link
 	And I click on service contract link
-	And I update the service contract line item fields
+    And I update the service contract line item fields
 	Then I verify that renewal opportunity update accordingly
 
 @service_contracts_data_types

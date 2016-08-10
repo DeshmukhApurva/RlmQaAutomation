@@ -94,6 +94,20 @@ Scenario: Rally Test Case ID: TC3388,TC3396,TC3401,TC3404,TC3405,TC3406 - Opport
     And I click on "Manage" button
     And check the set renewal checkbox in CSM Admin custom setting if it is not checked
 
+	@create_normal_opportunity
+  Scenario: Rally Test Case ID: TC6459 : Renew - create opportunity and check renewal checkbox is checked
+		When I click on the "Opportunities" grid tab
+		And I Create New Source Opportunity
+		And I will verify renewal status for the opportunity
+	
+	@verify_adds_amount_and_ratio	
+	Scenario: Rally Test Case ID: TC6460 :Verify correct values of Adds Amount & Adds Ratio metric fields are populated on the opportunity
+  	When I click on the "Opportunities" grid tab
+		And I Create New Source Opportunity
+		And I Save Adds Amount and Adds ratio values
+		And I select "Standard Price Book" pricebook
+		And I Add "1" Products having product name as "Product" to Opportunity
+		Then I verify Adds Amount and Adds Ratio
 	
 	@renew_set_new_opportunity_as_renewal_unchecked	 
   Scenario: Rally Test Case ID: TC6459,TC6460 : Renew - uncheck Renew checkbox from custom settings
@@ -105,8 +119,6 @@ Scenario: Rally Test Case ID: TC3388,TC3396,TC3401,TC3404,TC3405,TC3406 - Opport
     And I click on "Manage" button
     And uncheck the set renewal checkbox in CSM Admin custom setting if it is checked
     
-    
-  
 		
 		
 	

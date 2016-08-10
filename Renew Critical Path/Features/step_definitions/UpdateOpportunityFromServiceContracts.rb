@@ -263,31 +263,20 @@ end
 And(/^I click on service contract link$/) do
   begin
     sleep 6
-    within all(".customnotabBlock")[0] do
-      within(".pbBody") do
-        sleep 5
-        service_contract = all("tr")[2].all("td")[9].first("a").text
-        puts service_contract
-        sleep 5
-        all("tr")[2].all("td")[9].first("a").send_keys :page_down
-        sleep 5
-        page.driver.browser.manage.window.maximize
-        sleep 6
-        all("tr")[2].all("td")[9].first("a").click
-        sleep 5
-      end
-    end
+   find(:xpath, "//th[text()='Service Contract']").find(:xpath, '..').all(:xpath, "following-sibling::tr/td[9]/a")[1].click
+   # find(:xpath,"//table[@class='list']/tbody/tr[2]/td[9]/a").click
+    puts "Clicked on the SC"
     sleep 3
     puts "Successfully open the service contract page"
-    sleep 5
-    within all(".pbSubsection")[0] do
-      $before_updated_term_months = all("tr")[3].all("td")[3].text
-    end
-    sleep 5
-    within all(".pbSubsection")[1] do
-      $before_updated_shipping_and_handling = all("tr")[0].all("td")[3].text
-      $before_updated_tax = all("tr")[1].all("td")[3].text
-    end
+    # sleep 5
+    # within all(".pbSubsection")[0] do
+      # $before_updated_term_months = all("tr")[3].all("td")[3].text
+    # end
+    # sleep 5
+    # within all(".pbSubsection")[1] do
+      # $before_updated_shipping_and_handling = all("tr")[0].all("td")[3].text
+      # $before_updated_tax = all("tr")[1].all("td")[3].text
+    # end
   rescue Exception => ex
     putstr "Error occurred while clicking on service contract link"
   putstr_withScreen  ex.message

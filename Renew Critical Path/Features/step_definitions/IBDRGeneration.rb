@@ -515,18 +515,11 @@ end
 
 And(/^I verify the service contract get generated$/) do
   begin
-    sleep 5
+       
+       sleep 10
     arg = getDetails "InstallBaseDataRules"
-    sleep 3
-    within all(".customnotabBlock")[0] do
-      within(".pbBody") do
-        sleep 5
-        #all("tr")[2].all("td")[9].first("a").send_keys :page_down
-
-        sleep 5
-        page.driver.browser.manage.window.maximize
-        sleep 5
-        service_contract = all("tr")[2].all("td")[9].first("a").text
+   
+        service_contract = find(:xpath,"//table[@class='list']/tbody/tr[2]/td[9]/a").text
         puts service_contract
         sleep 5
         if service_contract == arg["IBDRServiceContractMapping"]
@@ -535,8 +528,7 @@ And(/^I verify the service contract get generated$/) do
           putstr "Failed to see the #{service_contract} service contract"
         end
         sleep 5
-      end
-    end
+     
   rescue Exception => ex
     putstr "Error occurred while verifying the service contracts"
     putstr_withScreen  ex.message
