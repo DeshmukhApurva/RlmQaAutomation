@@ -59,3 +59,21 @@ Scenario: Rally Test Case ID: TC5894 : Two Tier Pricing - Distributor to view bo
     When I enter subject line "Community"
     And I select the Account "TwoTierAutomation" from drop down
     And I "Distributor" verify Reseller and Distributor Quotes in Related To Quote field    
+    
+    
+    
+@TwoTireDistributerVsResellerQuote
+Scenario: Rally Test Case ID: TC6441 : Create Distributor Quote and Compare with Reseller Quote
+		When I log into "CHANNELMANAGER_DEV25" details
+		And I click on "Opportunities" tab
+		And I Create New Source Opportunity
+		And I select "Standard Price Book" pricebook
+		And I Add "2" Products having product name as "Product" to Opportunity
+		And I Renew Source Opportunity
+		
+		
+		
+		
+
+
+

@@ -35,3 +35,10 @@ SplitOpportunity:
 Pricebooks:
  first: "Standard Price Book"
  second: "Test_PriceBook"
+
+SourceOpportunity:
+ SourceOppName: "ASO"   
+ Account: "TwoTierAutomation"
+ SourceOppStage: "Qualification" 
+ ProductQuantity: 1
+ ProductSalesPrice: 5000
