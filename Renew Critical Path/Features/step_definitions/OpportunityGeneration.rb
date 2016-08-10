@@ -567,3 +567,58 @@ And(/^I add multiple criteria and filter logic "([^"]*)" and "([^"]*)" on opp ge
 		putstr_withScreen  ex.message
 	end
 end
+
+And(/^I will verify renewal status for the opportunity$/) do
+  begin   
+    sleep 3    
+    puts page.has_xpath?("//td[contains(text(),'Renewal')]//following-sibling::td/div/img[@alt='Checked']")
+    rStatus = page.has_xpath?("//td[contains(text(),'Renewal')]//following-sibling::td/div/img[@alt='Checked']")   
+    #putstr "renewal status: #{rStatus}"
+    if page.has_xpath?("//td[contains(text(),'Renewal')]//following-sibling::td/div/img[@alt='Checked']") == true
+      puts "Renewal checkbox is checked"   
+    else
+      puts "Renewal checkbox is unchecked"
+    end
+    
+  rescue Exception => ex
+    putstr "Error while checking the renewal status"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I Save Adds Amount and Adds ratio values$/) do
+  begin
+    sleep 3
+    $addsAmount = first(:xpath, "//tr/td[contains(text(),'Adds Amount')]//following-sibling::td/div").text    
+    $addsRatio = find(:xpath, "//tr/td[contains(text(),'Adds Ratio')]//following-sibling::td/div").text
+    puts "AddsAmount: "+$addsAmount
+    puts "AddsRatio: "+$addsRatio
+  rescue Exception => ex
+    putstr "Error in adding products to the Opportunity"
+    putstr_withScreen  ex.message
+  end
+end
+
+Then (/^I verify Adds Amount and Adds Ratio$/) do
+  begin
+    puts 'verify Adds Amount and Ratio'
+    sleep 3
+    addsAmountNew = first(:xpath, "//tr/td[contains(text(),'Adds Amount')]//following-sibling::td/div").text    
+    addsRatioNew = find(:xpath, "//tr/td[contains(text(),'Adds Ratio')]//following-sibling::td/div").text
+    
+    puts "AddsRatioNew: "+addsRatioNew
+    puts "AddsAmountNew: "+addsAmountNew
+    #addsTempR = "100.00%"
+    #addsTempA = "USD 2,000.00"
+    
+    if $addsAmount == addsAmountNew && $addsRatio == addsRatioNew
+      puts "Values for Adds Amount and Adds Ratio are not populated correctly."
+    else 
+      puts "Correct values for Adds Amount and Adds Ratio are populated."
+    end
+       
+  rescue Exception => ex
+    putstr "Error while verifying Adds Amount and Adds Ratio"
+    putstr_withScreen  ex.message
+  end
+end
