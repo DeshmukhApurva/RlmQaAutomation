@@ -263,20 +263,12 @@ end
 And(/^I click on service contract link$/) do
   begin
     sleep 6
-   find(:xpath, "//th[text()='Service Contract']").find(:xpath, '..').all(:xpath, "following-sibling::tr/td[9]/a")[1].click
-   # find(:xpath,"//table[@class='list']/tbody/tr[2]/td[9]/a").click
+   # find(:xpath, "//th[text()='Service Contract']").find(:xpath, '..').all(:xpath, "following-sibling::tr/td[9]/a")[1].click
+   find(:xpath,"//table[@class='list']/tbody/tr[2]/td[9]/a").click
     puts "Clicked on the SC"
     sleep 3
     puts "Successfully open the service contract page"
-    # sleep 5
-    # within all(".pbSubsection")[0] do
-      # $before_updated_term_months = all("tr")[3].all("td")[3].text
-    # end
-    # sleep 5
-    # within all(".pbSubsection")[1] do
-      # $before_updated_shipping_and_handling = all("tr")[0].all("td")[3].text
-      # $before_updated_tax = all("tr")[1].all("td")[3].text
-    # end
+    
   rescue Exception => ex
     putstr "Error occurred while clicking on service contract link"
   putstr_withScreen  ex.message
