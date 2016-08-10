@@ -1,53 +1,55 @@
 #All Renew master data creation
 #All Scenario mentioned in RenewMsterData.feature
-#Then (/^I click on Products and create product with the name "(.*?)"$/) do |arg|
-#begin
-#   sleep 8
-#   click_on "Products"
-#   sleep 8
-#   puts "I click on Products"
-#   sleep 10
-#
-#      click_on "New"
-#   puts "Adding products"
-#   sleep 5
-#   fill_in "Product Name",:with=>arg
-#   fill_in "Product Code",:with=> "AutoProduct"
-#   sleep 5
-#  #find('input[type=checkbox]').click
-#   #topButtonRow
-#   find(:xpath, "(//input[@id='IsActive'])").set(true)
-#   sleep 5
-#   within(".pbBottomButtons") do
-#     first(:xpath, "//*[contains(@name, 'save')]").click
-#     sleep 5
-#   end
-#
-#   puts "Product added successfully"
-#   sleep 5
-#   click_on "Add"
-#   sleep 5
-#   first(:xpath, "//*[contains(@title, 'Unit Price')]").send_keys "3000"
-#   sleep 5
-#   click_on "Save"
-#   sleep 5
-#   puts "product price added successfully"
-#   sleep 5
-#   click_on "Add to Price Book"
-#   sleep 5
-#   find(:xpath, "//*[contains(@name, 'allBox')]").click
-#   sleep 3
-#
-#   first(:xpath, "//*[contains(@name, 'edit')]").click
-#
-#   puts "I click on Select"
-#   end
-#   sleep 5
-#   find(:xpath, "//*[contains(@title, 'List Price 1')]").send_keys "3500"
-#   sleep 5
-#   click_on "Save"
-#   puts "Successfully Save"
-# end
+Then (/^I click on Products and create product with the name "(.*?)"$/) do |arg|
+begin
+   sleep 8
+   click_on "Products"
+   sleep 8
+   puts "I click on Products"
+   sleep 10
+
+      click_on "New"
+   puts "Adding products"
+   sleep 5
+   fill_in "Product Name",:with=>arg
+   fill_in "Product Code",:with=> "AutoProduct"
+   sleep 5
+  #find('input[type=checkbox]').click
+   #topButtonRow
+   find(:xpath, "(//input[@id='IsActive'])").set(true)
+   sleep 5
+   within(".pbBottomButtons") do
+     first(:xpath, "//*[contains(@name, 'save')]").click
+     sleep 5
+   end
+
+   puts "Product added successfully"
+   sleep 5
+   click_on "Add"
+   sleep 5
+   first(:xpath, "//*[contains(@title, 'Unit Price')]").send_keys "3000"
+   sleep 5
+   click_on "Save"
+   sleep 5
+   puts "product price added successfully"
+   sleep 5
+   click_on "Add to Price Book"
+   sleep 5
+   find(:xpath, "//*[contains(@name, 'allBox')]").click
+   sleep 3
+   
+   first(:xpath, "//*[contains(@name, 'edit')]").click
+   
+   puts "I click on Select"
+   end
+   sleep 5
+   find(:xpath, "//*[contains(@title, 'List Price 1')]").send_keys "3500"
+   sleep 5
+   click_on "Save"
+   puts "Successfully Save"
+ end
+
+
 
 Then(/^I create new Renew Account with value "(.*?)"$/) do |arg|
   begin
@@ -58,7 +60,7 @@ Then(/^I create new Renew Account with value "(.*?)"$/) do |arg|
     sleep 4
     fill_in "acc2",:with => arg
     puts "Filled value for Account name"
-
+   
     sleep 1
     within(:id,"topButtonRow") do
       click_on "Save"
@@ -66,8 +68,8 @@ Then(/^I create new Renew Account with value "(.*?)"$/) do |arg|
 
     puts "Account  successfully created For"+arg
   rescue Exception => ex
-    putstr "Error occurred while creating Account"
-    putstr_withScreen  ex.message
+    puts "Error occurred while creating Account"
+    puts ex.message
 
   end
 end
@@ -136,8 +138,8 @@ Then(/^I create new Asset with Name "(.*?)" and its Product "(.*?)" and its Stat
     sleep 8
     puts "Asset  successfully created"
   rescue Exception => ex
-    putstr "Error occurred while creating Asset"
-    putstr_withScreen  ex.message
+    puts "Error occurred while creating Asset"
+    puts ex.message
   end
 end
 
@@ -181,14 +183,14 @@ Then(/^I create new Service Contracts with Name "(.*?)" with Account "(.*?)" and
     puts "Successfully added product to service contract"
 
   rescue Exception => ex
-    putstr "Error occurred while creating Service Contract"
-    putstr_withScreen  ex.message
+    puts "Error occurred while creating Service Contract"
+    puts ex.message
   end
 end
 
-Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Product "(.*?)"$/) do |arg1,arg2,arg|
+Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Product "(.*?)" with pricebook "(.*?)"$/) do |arg1,arg2,arg3,arg4|
   begin
-    ProductName=arg
+    ProductName=arg3
 
     sleep 8
     within (".pbHeader") do
@@ -204,7 +206,55 @@ Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Produ
     within("#bottomButtonRow") do
       click_on 'Save'
     end
+    sleep 5 
+    click_on "Add Product"
     sleep 5
+    first(:xpath, "//*[contains(@id, 'p1')]").select(arg4)
+    sleep 3
+    click_on "Save"
+    # find(:xpath, "(//input[@type='checkbox'])[2]").set(true)
+    within (".x-grid3-body") do
+      tr=all(".x-grid3-row")
+      tr.each do |row|
+        puts row
+        puts row.all("td")[1].text
+        if row.all("td")[1].text == ProductName
+          row.all("td")[0].first("div").first("input").click
+        end
+      end
+    end
+    click_on 'Select'
+    puts "Successfully select the product"
+    find(:xpath, "//*[contains(@name, 'Quantity')]").send_keys "1"
+    sleep 3
+    all(:xpath,'//td/input[@value=" Save "]')[0].click
+    puts "Successfully added product to opportunity"
+
+  rescue Exception => ex
+    putstr "Error occurred while creating opportunity"
+    putstr_withScreen ex.message
+  end
+end
+
+Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Product "(.*?)"$/) do |arg1,arg2,arg3|
+  begin
+    ProductName=arg3
+
+    sleep 8
+    within (".pbHeader") do
+      click_on "New"
+    end
+    puts "New Opportunity button clicked."
+    fill_in "Opportunity Name",:with=>arg1
+    fill_in "Account Name",:with=>arg2
+    time = Time.new
+    fill_in "Close Date",:with=>time.month.to_s + "/" + time.day.to_s + "/" +time.year.to_s
+    find("#opp11").select "Qualification"
+    sleep 2
+    within("#bottomButtonRow") do
+      click_on 'Save'
+    end
+    sleep 5 
     click_on "Add Product"
     sleep 5
     first(:xpath, "//*[contains(@id, 'p1')]").select("Standard Price Book")
@@ -234,6 +284,8 @@ Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and Produ
   end
 end
 
+
+
 And(/^I select SC and generate Opportunity with Name "(.*?)" with Account "(.*?)" with User "(.*?)"$/) do |arg1,arg2,arg3|
   begin
     sleep 5
@@ -260,11 +312,10 @@ And(/^I select SC and generate Opportunity with Name "(.*?)" with Account "(.*?)
     within("#pgbtn") do
       click_on 'Save'
     end
-  rescue Exception => ex
-    putstr "Error occurred while creating opportunity from Service Contract"
-    putstr_withScreen  ex.message
   end
 end
+
+
 
 And(/^I select contract and generate Opportunity with Name "(.*?)" with Account "(.*?)"$/) do |arg1,arg2|
   begin
@@ -288,50 +339,13 @@ And(/^I select contract and generate Opportunity with Name "(.*?)" with Account 
     within("#pgbtn") do
       click_on 'Save'
     end
-  rescue Exception => ex
-    putstr "Error occurred while selecting contract and generating opportunity"
-    putstr_withScreen  ex.message
   end
 end
 
-Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and pricebook "(.*?)"$/) do |arg1,arg2,arg3|
-  begin
-    sleep 8
-    within (".pbHeader") do
-      click_on "New"
-    end
-    puts "New Opportunity button clicked."
-    sleep 6
-    fill_in "Opportunity Name",:with=>arg1
-    sleep 6
-    fill_in "Account Name",:with=>arg2
-    time = Time.new
-    sleep 6
-    fill_in "Close Date",:with=>time.month.to_s + "/" + time.day.to_s + "/" +time.year.to_s
-    sleep 6
-    find("#opp11").select "Qualification"
-    sleep 6
-    within("#bottomButtonRow") do
-      click_on 'Save'
-    end
-    sleep 6
-    click_on "Choose Price Book"
-    sleep 5
-    first(:xpath, "//*[contains(@id, 'p1')]").select(arg3)
-    sleep 3
-    click_on "Save"
-    sleep 3
-    "Opportunity created and selected the pricebook"
-
-  rescue Exception => ex
-    putstr "Error occurred while creating opportunity and selecting the pricebook"
-    putstr_withScreen ex.message
-  end
-end
 
 Then(/^I resolved the Source Opportunity and rename with name "(.*?)"$/) do |arg|
   begin
-    #Resolve Opportunity
+      #Resolve Opportunity
     within("#bottomButtonRow") do
       click_on 'Edit'
     end
@@ -355,26 +369,25 @@ Then(/^I resolved the Source Opportunity and rename with name "(.*?)"$/) do |arg
     first(:button,'Save').click
     sleep 8
   rescue Exception => ex
-    putstr "Error occurred while resolving the opportunity"
-    putstr_withScreen  ex.message
-
+    puts "Error occurred while resolving the opportunity"
+    puts ex.message
   end
 end
 
 When(/^I create Source Opportunity with Line Items with Account "(.*?)" and resolve it and rename it as "(.*?)"$/) do |arg1,arg2|
   begin
-    # Components of a Time
-    #    puts "Current Time : " + time.inspect
-    #    puts time.year    # => Year of the date
-    #    puts time.month   # => Month of the date (1 to 12)
-    #    puts time.day     # => Day of the date (1 to 31 )
-    #    puts time.wday    # => 0: Day of week: 0 is Sunday
-    #    puts time.yday    # => 365: Day of year
-    #    puts time.hour    # => 23: 24-hour clock
-    #    puts time.min     # => 59
-    #    puts time.sec     # => 59
-    #    puts time.usec    # => 999999: microseconds
-    #    puts time.zone    # => "UTC": timezone name
+  # Components of a Time
+  #    puts "Current Time : " + time.inspect
+  #    puts time.year    # => Year of the date
+  #    puts time.month   # => Month of the date (1 to 12)
+  #    puts time.day     # => Day of the date (1 to 31 )
+  #    puts time.wday    # => 0: Day of week: 0 is Sunday
+  #    puts time.yday    # => 365: Day of year
+  #    puts time.hour    # => 23: 24-hour clock
+  #    puts time.min     # => 59
+  #    puts time.sec     # => 59
+  #    puts time.usec    # => 999999: microseconds
+  #    puts time.zone    # => "UTC": timezone name
     time = Time.new
     #oppDateTime =  +
     time = Time.new
@@ -427,6 +440,7 @@ When(/^I create Source Opportunity with Line Items with Account "(.*?)" and reso
     find(:xpath, "(//input[@type='checkbox'])[5]").set(true)
     find(:xpath, "(//input[@type='checkbox'])[6]").set(true)
 
+    
     # find(:xpath, "(//input[@type='checkbox'])[6]").set(true)
     # find(:xpath, "(//input[@type='checkbox'])[7]").set(true)
     # find(:xpath, "(//input[@type='checkbox'])[8]").set(true)
@@ -473,7 +487,7 @@ When(/^I create Source Opportunity with Line Items with Account "(.*?)" and reso
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[13]/td[6]/input").send_keys "1500"
     sleep 2
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[17]/td[6]/input").send_keys "3000"
-    #    sleep 2
+#    sleep 2
     # find(:xpath,"//*[@id='editPage']/table/tbody/tr[21]/td[6]/input").set arg["ProductSalesPrice"]
     # sleep 2
     # find(:xpath,"//*[@id='editPage']/table/tbody/tr[25]/td[6]/input").set arg["ProductSalesPrice"]
@@ -528,9 +542,8 @@ When(/^I create Source Opportunity with Line Items with Account "(.*?)" and reso
     first(:button,'Save').click
     sleep 8
   rescue Exception => ex
-  putstr "Error occurred while resolving Opportunities"
-  putstr_withScreen  ex.message
-
+    puts "Error occurred while resolving Opportunities"
+    puts ex.message
   end
 end
 
@@ -548,9 +561,9 @@ Then(/^I create a new Success Plan Template with Template Name "(.*?)" PhaseName
     fill_in "Template Name",:with => arg1
     sleep 2
     within(".pbBottomButtons") do
-      click_on "Create"
+     click_on "Create"
     end
-    puts "Successfully created SPT"
+    puts "Successfully created SPT" 
     sleep 10
     if page.has_content?('Define Success Plan Phases')
       puts "Define Success Plan Phases section displayed"
@@ -565,19 +578,19 @@ Then(/^I create a new Success Plan Template with Template Name "(.*?)" PhaseName
     first(:xpath, "//*[contains(@id, 'csmLength')]").set(arg3)
     sleep 5
     within all(".pbButton")[0] do
-      click_on "Save"
-    end
+          click_on "Save"
+        end
     puts "Saved Success Plan Template"
     sleep 5
     if page.has_content?('Template has been saved')
-      puts "Template has been saved message displayed after saving"
-      sleep 3
+        puts "Template has been saved message displayed after saving"
+        sleep 3
     else
       raise "Template has been saved message not displayed"
     end
     if page.has_content?('Phase updates have been saved')
-      puts "Phase updates have been saved message displayed after saving"
-      sleep 3
+        puts "Phase updates have been saved message displayed after saving"
+        sleep 3
     else
       raise "Phase updates have been saved message not displayed"
     end
@@ -595,26 +608,26 @@ Then(/^I create a new Success Plan Template with Template Name "(.*?)" PhaseName
     end
     click_on "Add Playbook"
     sleep 5
-
+   
     within('.list') do
       tr = first("tbody").all("tr")
       tr.each do |row|
         if row.all("td")[1].text == arg5
           row.all("td")[0].all('a')[0].click
           break
-        end
+        end                        
       end
     end
     puts "Added Playbook Sucessfully"
     sleep 10
     within all(".pbButton")[0] do
-      click_on "Save"
-    end
+          click_on "Save"
+        end
     puts "Saved Success Plan Template"
 
     if page.has_content?('Template has been saved')
-      puts "Template has been saved message displayed after saving"
-      sleep 3
+        puts "Template has been saved message displayed after saving"
+        sleep 3
     else
       raise "Template has been saved message not displayed"
     end
@@ -633,7 +646,7 @@ Then(/^I create a new Success Plan Template with Template Name "(.*?)" PhaseName
     within all(".dataRow").last do
       all(".dataCell")[7].first(:xpath, ".//*[contains(@id, 'indicatorTemp:acctplanIndComp:pb1:accountPlanIndicatorsTable:0')]").select(arg7)
     end
-    first(:xpath, "//*[contains(@id, 'indicatorTemp:acctplanIndComp:pb1:accountPlanIndicatorsTable:0:indicator')]").select(arg6)
+    first(:xpath, "//*[contains(@id, 'indicatorTemp:acctplanIndComp:pb1:accountPlanIndicatorsTable:0:indicator')]").select(arg6)  
     all(:xpath, "//*[contains(@id, 'cr1fv')]").last.set(arg9)
     all(:xpath, "//*[contains(@id, 'cr1tv')]").last.set(arg10)
     sleep 5
@@ -653,40 +666,40 @@ Then(/^I create a new Success Plan Template with Template Name "(.*?)" PhaseName
       tr = first("tbody").all("tr")
       tr.each do |row|
         if row.all("th")[0].text == arg4
-          row.all("th")[0].all('a')[0].click
-          break
-        end
+            row.all("th")[0].all('a')[0].click
+            break
+        end                        
       end
     end
     sleep 3
     page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
-    sleep 5
-    within all(".pbButton")[0] do
-      click_on "Save"
-    end
+        sleep 5
+   within all(".pbButton")[0] do
+          click_on "Save"
+        end
     puts "Saved Success Plan Templates"
     sleep 5
     if page.has_content?('Template has been saved')
-      puts "Template has been saved message displayed after saving"
-      sleep 3
+        puts "Template has been saved message displayed after saving"
+        sleep 3
     else
       puts "Template has been saved message not displayed"
     end
     if page.has_content?('Success Plan Template Indicators have been saved')
-      puts "Success Plan Template Indicators have been saved message displayed after saving"
-      sleep 3
+        puts "Success Plan Template Indicators have been saved message displayed after saving"
+        sleep 3
     else
       puts "Success Plan Template Indicators have been saved message not displayed"
     end
-  rescue Exception => ex
+    rescue Exception => ex
     putstr "Error occurred while creating SPT"
     putstr_withScreen ex.message
-  end
+  end 
 end
 
 Then (/^I create a new Indicator Group with name "(.*?)"$/) do |arg|
   begin
-
+    
     sleep 5
     click_link('Indicator Groups')
     sleep 5
@@ -715,11 +728,11 @@ Then (/^I create a new Indicator Group with name "(.*?)"$/) do |arg|
       sleep 4
       click_on "Save"
       if page.has_content?('Indicators have been saved')
-        puts "Indicators have been saved message displayed after saving"
-        sleep 3
-      else
-        raise "Indicators have been saved message not displayed"
-      end
+      puts "Indicators have been saved message displayed after saving"
+      sleep 3
+    else
+      raise "Indicators have been saved message not displayed"
+    end
     else
       puts "Indicator Group already exists"
     end
@@ -731,45 +744,43 @@ Then (/^I create a new Indicator Group with name "(.*?)"$/) do |arg|
 end
 
 Then (/^I add indicator$/) do
-  begin
-    sleep 5
-    click_link('Indicator Groups')
-    sleep 5
-    if all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]").count == 0
-      sleep 3
-      all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]")[0].select("Account")
-      sleep 3
-      all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slFieldId')]")[0].select("Annual Revenue")
-      click_on "Add Field"
-      sleep 4
-      all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]")[0].select("Opportunity")
-      sleep 3
-      all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slFieldId')]")[0].select("Expected Amount")
-      click_on "Add Field"
-      sleep 4
-      all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]")[0].select("Contact")
-      sleep 3
-      all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slFieldId')]")[0].select("Level")
-      sleep 4
-      click_on "Add Field"
-      sleep 4
-      click_on "Save"
-      puts "Indicators have been added"
-      sleep 5
-      if page.has_content?('Indicators have been saved')
-        puts "Indicators have been saved message displayed after saving"
-        sleep 3
-      else
-        putstr "Indicators have been saved message not displayed"
-      end
-    else
-      puts "Indicator Group already exists"
-    end
+begin
+  sleep 5
+  click_link('Indicator Groups')
+  sleep 5
+  if all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]").count == 0
     sleep 3
+    all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]")[0].select("Account")
+    sleep 3
+    all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slFieldId')]")[0].select("Annual Revenue")
+    click_on "Add Field"
+    sleep 4
+    all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]")[0].select("Opportunity")
+    sleep 3
+    all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slFieldId')]")[0].select("Expected Amount")
+    click_on "Add Field"
+    sleep 4
+    all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]")[0].select("Contact")
+    sleep 3
+    all(:xpath, "//*[contains(@id, 'pbIndicatorListId:slFieldId')]")[0].select("Level")
+    sleep 4
+    click_on "Add Field"
+    sleep 4
+    click_on "Save"
+    puts "Indicators have been added"
+    sleep 5
+    if page.has_content?('Indicators have been saved')
+      puts "Indicators have been saved message displayed after saving"
+      sleep 3
+    else
+      putstr "Indicators have been saved message not displayed"
+    end
+  else
+    puts "Indicator Group already exists"
+  end
+  sleep 3
   rescue Exception => ex
     putstr "Indicators Already exist"
-    putstr_withScreen  ex.message
-
   end
 end
 
@@ -805,7 +816,7 @@ And(/^create a new Play with value "(.*?)" and "(.*?)" and "(.*?)" and its TaskN
       all(".dataRow").each do |row|
         if row.all("td")[1].text == "Annual Revenue"
           row.first(:link,"Delete").click
-          break
+        break
         end
       end
     end
@@ -834,7 +845,7 @@ And(/^create a new Play with value "(.*?)" and "(.*?)" and "(.*?)" and its TaskN
     all(:xpath, "//*[contains(@id, 'playTaskComp:pb1:taskList:0:inputDesc')]").last.set(arg7)
     # sleep 4
     # all(".dataRow").last.all("td")[5].first("select").select(arg6)
-    sleep 4
+     sleep 4
     all(:xpath, "//*[contains(@id, 'playTaskComp:pb1:taskList:0:inputDays')]").last.set(arg8)
     sleep 6
     all('.btn')[0].click
@@ -880,8 +891,8 @@ And(/^create a new Playbook with value "(.*?)" with play "(.*?)" and its Short D
     all(".dataRow").each do |tr|
       if tr.all(".dataCell")[1].text == arg2
         tr.all(".dataCell")[0].all('a')[0].click
-        addFound = 1
-        break
+      addFound = 1
+      break
       end
     end
     if addFound == 0
@@ -913,7 +924,7 @@ And(/^create a new Playbook with value "(.*?)" with play "(.*?)" and its Short D
         all(".dataRow").each do |row|
           if row.all("td")[1].text == "Annual Revenue"
             row.first(:link,"Delete").click
-            break
+          break
           end
         end
       end
@@ -957,8 +968,8 @@ And(/^create a new Playbook with value "(.*?)" with play "(.*?)" and its Short D
     sleep 2
     all(".dataRow").each do |tr|
       if tr.all(".dataCell")[1].text == arg2
-        found = 1
-        break
+      found = 1
+      break
       end
     end
     sleep 5
@@ -978,7 +989,7 @@ end
 Then(/^I create a SuccessPlan with template "(.*?)" with Account "(.*?)"$/) do |arg,arg1|
   begin
     puts "Create a new Success Plan"
-
+    
     click_on "New"
     puts "New button is clicked successfully"
     puts "I am Standing on Success Plan Edit page"
@@ -1004,3 +1015,82 @@ Then(/^I create a SuccessPlan with template "(.*?)" with Account "(.*?)"$/) do |
   end
 end
 
+And(/^I click on create new Batch$/) do
+  begin
+    sleep 6
+    click_on 'Create New'
+    puts "I successfully clicked on Button"
+  end
+end
+And(/^I create Asset filter for batch$/) do
+  begin
+    sleep 6
+    first(:xpath,"//input[@value='New']").click
+      puts "I successfully clicked Filter Area"
+   end
+end
+
+And(/^I put view Name for Asset Filter "(.*?)" and add criteria$/) do |arg|
+  begin
+     sleep 6
+     fill_in "View Name" ,:with => arg
+     puts "I successfully Named to Filter"
+     sleep 6 
+     first(:xpath, "//*[contains(@id, 'slFieldId')]").select("Asset Name")
+     sleep 8
+     first(:xpath, "//*[contains(@id, 'outOperator')]").select("!=")
+     sleep 6
+    within(".pbBottomButtons") do
+      click_on 'Save'
+      #first(:xpath, "//*[contains(@name, 'save')]").click
+      puts "Asset Filter Created"
+      sleep 5
+    end
+     
+  end
+end
+
+And(/^I put view Name for Asset Filter "Asset Filter 2" with two criteria$/) do |arg|
+  begin
+   sleep 6
+     fill_in "View Name" ,:with => arg
+     puts "I successfully Named to Filter"
+     sleep 6 
+     first(:xpath, "//*[contains(@id, 'slFieldId')]").select("Asset Name")
+     sleep 8
+     first(:xpath, "//*[contains(@id, 'outOperator')]").select("!=")
+     sleep 6
+    within(".pbBottomButtons") do
+      click_on 'Save'
+      #first(:xpath, "//*[contains(@name, 'save')]").click
+      puts "Asset Filter Created"
+      sleep 5
+    end 
+  end
+end
+
+And(/^I create Group Logic for batch$/) do
+  begin
+    sleep 6
+      first(:xpath,"//*[@id='group-grid-toolbar']/input").click
+      puts "I successfully clicked Group Logic"
+     sleep 10
+   end
+end
+
+And(/^I put view Name for Asset Filter "(.*?)" and add Row$/) do |arg|
+  begin
+    sleep 6
+     fill_in "View Name" ,:with => arg
+     puts "I successfully Named to Group logic"
+     sleep 6 
+     first(:xpath, "//input[@value='Add Row']").click
+     puts "Successfully Add row in Group logic"
+    within(".pbBottomButtons") do
+      click_on 'Save'
+      #first(:xpath, "//*[contains(@name, 'save')]").click
+      puts "Group logic created Created"
+      sleep 5
+    end
+  end
+end
