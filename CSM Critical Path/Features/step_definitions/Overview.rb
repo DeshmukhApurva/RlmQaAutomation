@@ -1954,7 +1954,6 @@ And(/^I click on Subject link value of FC Task$/) do
     page.driver.browser.manage.window.maximize
     sleep 5
     if page.has_css? (".acc")
-     
      find(:xpath,"//table[@class='list']/tbody/tr[2]/td[3]").click
       sleep 8 
       # within(".list") do
@@ -2204,7 +2203,7 @@ And(/^I mark the task as Not Started$/) do
     page.execute_script "window.scrollBy(0,10000)" 
     sleep 5
     page.driver.browser.manage.window.maximize
-    sleep 5
+     sleep 5
      find(:xpath,"//table[@class='list']/tbody/tr[2]/td[3]").click
      sleep 8
      within(".list") do
@@ -2703,7 +2702,9 @@ Then(/^I verify the required details of the task$/) do
       tr = first("tbody").all("tr")
       tr.each_with_index do |row, index|
         if index == $index_number
-          row.all("td")[2].first("a").click
+         # row.all("td")[2].first("a").click
+          sleep 5
+          find(:xpath,"//table[@class='list']/tbody/tr[2]/td[3]").click
           sleep 5
         break
         else
@@ -2737,8 +2738,10 @@ Then(/^I verify the non\-required details of the task$/) do
       tr = first("tbody").all("tr")
       tr.each_with_index do |row, index|
         if index == $index_number
-          row.all("td")[2].first("a").click
-          sleep 5
+         # row.all("td")[2].first("a").click
+         sleep 5
+     find(:xpath,"//table[@class='list']/tbody/tr[2]/td[3]").click
+         sleep 5
         break
         else
           puts "index_number does not match"
@@ -2778,6 +2781,7 @@ And(/^I click on Subject link for Active Action link$/) do
           $index_number = index
           $valuerow = row.all("td")[2].first("a").text
          # row.all("td")[2].first("a").click
+          sleep 5
           find(:xpath,"//table[@class='list']/tbody/tr[2]/td[3]").click
           sleep 8 
           puts "Subject link value clicked."
@@ -2887,6 +2891,7 @@ And(/^I click on Subject of any Task$/) do
           unless row.has_css? (".ss-disabled")
             #$valuerow = row.all("td")[2].first("a").text
            # row.all("td")[2].first("a").click
+           sleep 5
            find(:xpath,"//table[@class='list']/tbody/tr[2]/td[3]").click
            sleep 8 
             puts "Subject link value clicked."
