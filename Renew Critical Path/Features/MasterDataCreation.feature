@@ -115,28 +115,28 @@ Scenario: Renew: Batch_generation_Activity
 	And I click on "Batch Generation Activity" link
 	And I click on create new Batch
 	And I create Asset filter for batch
-	And I put view Name for Asset Filter "Asset Filter 1" and add criteria
-#	And I create Asset filter for batch
-#	And I put view Name for Asset Filter "Asset Filter 2" with two criteria
+	And I put view Name for Asset Filter "Filter 1" and add criteria
 	And I create Asset filter for batch
-	And I put view Name for Asset Filter "Asset Filter 3" and add criteria
+	And I put view Name for Asset Filter "Filter 2" with two criteria
 	And I create Asset filter for batch
-	And I put view Name for Asset Filter "Asset Filter 4" and add criteria
+	And I put view Name for Asset Filter "Filter 3" and add criteria
 	And I create Asset filter for batch
-	And I put view Name for Asset Filter "Asset Filter 5" and add criteria
+	And I put view Name for Asset Filter "Filter 4" and add criteria
 	And I create Asset filter for batch
-	And I put view Name for Asset Filter "Asset Filter 6" and add criteria
+	And I put view Name for Asset Filter "Filter 5" and add criteria
+	And I create Asset filter for batch
+	And I put view Name for Asset Filter "Filter 6" and add criteria
 	And I create Group Logic for batch
-    And I put view Name for Asset Filter "Group Logic 1" and add Row
+    And I put view Name for Asset Filter "Grouping 1" and add Row
     And I create Group Logic for batch
-    And I put view Name for Asset Filter "Group Logic 2" and add Row
+    And I put view Name for Asset Filter "Grouping 2" and add Row
     And I create Group Logic for batch
-    And I put view Name for Asset Filter "Group Logic 3" and add Row
+    And I put view Name for Asset Filter "Grouping 3" and add Row
     And I create Group Logic for batch
-    And I put view Name for Asset Filter "Group Logic 4" and add Row
+    And I put view Name for Asset Filter "Grouping 4" and add Row
     And I create Group Logic for batch
-    And I put view Name for Asset Filter "Group Logic 5" and add Row
+    And I put view Name for Asset Filter "Grouping 5" and add Row
     And I create Group Logic for batch
-    And I put view Name for Asset Filter "Group Logic 6" and add Row
+    And I put view Name for Asset Filter "Grouping 6" and add Row
 
 	

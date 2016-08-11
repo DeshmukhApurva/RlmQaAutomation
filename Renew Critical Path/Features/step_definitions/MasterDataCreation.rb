@@ -1020,6 +1020,7 @@ And(/^I click on create new Batch$/) do
     sleep 6
     click_on 'Create New'
     puts "I successfully clicked on Button"
+    sleep 10
   end
 end
 And(/^I create Asset filter for batch$/) do
@@ -1050,7 +1051,7 @@ And(/^I put view Name for Asset Filter "(.*?)" and add criteria$/) do |arg|
   end
 end
 
-And(/^I put view Name for Asset Filter "Asset Filter 2" with two criteria$/) do |arg|
+And(/^I put view Name for Asset Filter "(.*?)" with two criteria$/) do |arg|
   begin
    sleep 6
      fill_in "View Name" ,:with => arg
@@ -1059,7 +1060,12 @@ And(/^I put view Name for Asset Filter "Asset Filter 2" with two criteria$/) do 
      first(:xpath, "//*[contains(@id, 'slFieldId')]").select("Asset Name")
      sleep 8
      first(:xpath, "//*[contains(@id, 'outOperator')]").select("!=")
-     sleep 6
+     sleep 8
+     find(:xpath,"//*[contains(@id,'criteriaList')]/div[2]").find(:xpath, '..').all(:xpath, "//*[contains(@id, 'slFieldId')]").last.select("Quantity")
+     sleep 8
+     find(:xpath,"//*[contains(@id,'criteriaList')]/div[2]").find(:xpath, '..').all(:xpath, "//*[contains(@id, 'outOperator')]").last.select("!=")
+    
+     sleep 8
     within(".pbBottomButtons") do
       click_on 'Save'
       #first(:xpath, "//*[contains(@name, 'save')]").click
