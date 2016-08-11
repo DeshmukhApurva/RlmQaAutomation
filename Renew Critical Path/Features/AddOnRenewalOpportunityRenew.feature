@@ -1,7 +1,5 @@
 @RenOpportunityManagement
 @RenAddOnRenewalOpportunityFeature
-
-
 Feature: All features related to Renew User - Opportunity Management - Add on Renewal Opportunity
 
 Background: Login to the Application
@@ -30,8 +28,9 @@ Scenario: Rally Test Case ID: TC3247,TC3248,TC3250 : AddOn Opportunity - Validat
 @ren_no_auto_renewal_opportunity_generated
 Scenario: Rally Test Case ID: TC3245,TC3246 : AddOn Opportunity - Resolution, AddOn Opportunity - No auto renewal opportunity generated if user resolves the add-on
 	When I click on "Opportunities" link
-    And I click on "Go!" button from opportunity page
-    And I open the first opportunity
+    Then I select Renew View 
+	And I click on the Go button if present
+	And I open the first opportunity
 	And I associate opportunity to "Destination Renewal Opportunity"
 	And I add new line items to the "Source Opportunities" and resolve the source opportunity
 	Then I verify the associated "Destination Renewal Opportunity" and "Source Opportunities"
