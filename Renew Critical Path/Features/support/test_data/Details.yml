@@ -445,10 +445,10 @@ ManageRenewalsOpportunity:
   SyncErrorMessage: "The current Opportunity has a Quote Synced to it. Please stop the Sync and retry this process."
   
 RenewableLineItem:
-  Existing Product: "Product X"
+  Existing Product: "Product A"
   Existing Start Date: "8/6/2016"
   Existing End Date: "8/6/2016"
   New Start Date: "8/8/2016"
   New End Date: "8/8/2016"
-  Quantity: "3"  
+  Quantity: "3.00"  
   OwnerName: "QA RenewNetOps"

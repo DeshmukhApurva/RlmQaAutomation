@@ -139,7 +139,7 @@ And(/^I associate opportunity to "([^"]*)"$/) do |destination_renewal_opportunit
   end
 end
 
-And(/^I add new line items to the "([^"]*)" and resolve the source opportunity$/) do |source_opportunity|
+And(/^I add on destination opp to "([^"]*)" and resolve the source opportunity "(.*?)"$/) do |destination_opp,source_opportunity|
   begin
     sleep 5
     arg = getDetails "AddOnRenewalOpportunity"
@@ -148,25 +148,26 @@ And(/^I add new line items to the "([^"]*)" and resolve the source opportunity$/
       click_on 'Edit'
     end
     sleep 5
-    within all(".pbSubsection")[1] do
-      sleep 5
-      all("input[type='text']")[0].send_keys [:control, 'a'], :backspace
-      sleep 5
-      all(".lookupIcon")[0].click
-      sleep 10
-    end
-    sleep 5
-    main = page.driver.browser.window_handles.first
-    sleep 5
-    page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
-    sleep 10
-    page.driver.browser.switch_to.frame("resultsFrame")
-    within('.list') do
-      sleep 3
-      first("tbody").all("tr")[2].first("th").first("a").click
-    end
-    sleep 5
-    page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+    fill_in "Destination Renewal Opportunity" ,:with => destination_opp
+    # within all(".pbSubsection")[1] do
+      # sleep 5
+      # all("input[type='text']")[0].send_keys [:control, 'a'], :backspace
+      # sleep 5
+      # all(".lookupIcon")[0].click
+      # sleep 10
+    # end
+    # sleep 5
+    # main = page.driver.browser.window_handles.first
+    # sleep 5
+    # page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+    # sleep 10
+    # page.driver.browser.switch_to.frame("resultsFrame")
+    # within('.list') do
+      # sleep 3
+      # first("tbody").all("tr")[2].first("th").first("a").click
+    # end
+    # sleep 5
+    # page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
     sleep 6
     within all(".pbSubsection")[0] do
       sleep 4
@@ -301,5 +302,193 @@ Then(/^I should be able to see the "([^"]*)" should get resolved$/) do |source|
   rescue Exception => ex
     putstr "Error occurred while #{source} recalculated on the opportunity"
     putstr_withScreen  ex.message
+  end
+end
+
+
+And(/^I enter mandatory details in "([^"]*)" opportunity$/) do |new_opportunity|
+  begin
+    sleep 3
+    arg = getDetails "AddOnRenewalOpportunity"
+    sleep 4
+    $create_new_opportunity = new_opportunity
+    sleep 3
+    within all(".pbSubsection")[0] do
+      sleep 3
+      all("input[type='text']")[0].set $create_new_opportunity
+      sleep 4
+      all("input[type='text']")[3].set arg["RenewalOpportunityCloseDate"]
+      sleep 3
+      find("#opp11").select arg["OpportunityStageValue"]
+    end
+    sleep 5
+    within("#bottomButtonRow") do
+      click_on 'Save'
+    end
+    sleep 10 
+    $url = URI.parse(current_url)
+    puts $url
+    sleep 3
+    puts "Successfully created the #{new_opportunity} opportunity"
+  rescue Exception => ex
+    putstr "Error occurred while entering the mandatory details in #{new_opportunity} opportunity page"
+    putstr_withScreen  ex.message
+  end
+end
+
+When(/^I create Source Opportunity "(.*?)" with Line Items and resolve it with destination "(.*?)"$/) do |arg1,arg2|
+  begin
+    sleep 6
+    arg = getDetails "AddOnRenewalOpportunity"
+   
+    sleep 6   
+    time = Time.new
+    time = Time.new
+    oppDateTime = time.day.to_s + time.month.to_s + time.year.to_s + time.hour.to_s + time.min.to_s + time.sec.to_s
+    year = time.year.to_i + 2
+    click_link('Opportunities')
+    sleep 5
+    click_on "New"
+    sleep 5
+    puts "Creating a new opportunity"
+
+    $automationOppName = "SourceOpp" + oppDateTime.to_s
+    $earliestExpirationDate = "12/30/" + year.to_s
+    $oPPCloseDate = "12/31/" + year.to_s
+
+    $startDateOLI = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s
+    $endDateOLI = time.month.to_s + "/" + time.day.to_s + "/" + (time.year.to_i + 1).to_s
+
+    fill_in "Opportunity Name",:with=>$automationOppName
+    sleep 3
+    fill_in "Close Date",:with=> $oPPCloseDate
+    sleep 3
+    fill_in "Earliest Expiration Date",:with=> $earliestExpirationDate
+    sleep 3
+    select "Qualification", :from => "Stage"
+    sleep 3
+    fill_in "Account Name",:with=> arg["Account Name"]
+    
+    sleep 3
+
+    within(:id,"topButtonRow") do
+      click_on "Save"
+    end
+    $url1 = URI.parse(current_url)
+    puts $url1
+    puts "Successfully created Opportunity"
+
+    sleep 5
+    click_on "Choose Price Book"
+    sleep 3
+    first(:option,'Standard Price Book').select_option
+    sleep 4
+    click_on "Save"
+    sleep 5
+    click_on "Add Product"
+    sleep 5
+    find(:xpath, "(//input[@type='checkbox'])[3]").set(true)
+    click_on 'Select'
+    puts "Successfully select the product"
+    sleep 6
+    #Enter product Quantity
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[3]/input").send_keys "1"
+    sleep 2
+
+    #Enter Start Date of Product
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[4]/span/input").set $startDateOLI
+    
+    sleep 2
+
+    #Enter End Date of Product
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[5]/span/input").set $endDateOLI
+    
+    sleep 2
+
+    #Enter product sales price
+    find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[6]/input").send_keys "1000"
+    sleep 5
+    all(:xpath,'//td/input[@value=" Save "]')[0].click
+    sleep 6
+
+    within(".opportunityLineItemBlock") do
+      within(".list") do
+        sleep 3
+        $first_product = all(".dataRow")[0].all("th")[0].first("a").text
+        puts $first_product
+       end
+    end
+
+    #Resolve Opportunity
+    within("#bottomButtonRow") do
+      click_on 'Edit'
+    end
+    #first(:button,'Edit').click
+    sleep 5
+    first(:option,'Closed Won').select_option
+    sleep 2
+    first(:button,'Save').click
+    sleep 8
+
+    find(:xpath, "//th[text()='Contributed To']").find(:xpath, '..').find(:xpath, "following-sibling::tr/td[2]/a").click
+    sleep 8
+
+    # first(:button,'Edit').click
+    within("#bottomButtonRow") do
+      click_on 'Edit'
+    end
+    sleep 5
+    fill_in "Opportunity Name",:with=> arg1
+    sleep 5
+    fill_in "Destination Renewal Opportunity" ,:with => arg2
+    sleep 1
+    first(:button,'Save').click
+    sleep 8
+  rescue Exception => ex
+    puts "Error occurred while resolving Opportunities"
+    puts ex.message
+  end
+end
+      
+And(/^I manually delete destination opp$/) do
+  begin
+  visit($url)
+  puts "I Successfully Visited Destination Opp"
+  sleep 10
+  first(:button,'Delete').click
+    sleep 4
+    page.driver.browser.switch_to.alert.accept
+    sleep 5
+    puts "Deleted the Opportunity Successfully"
+  end
+end
+
+And(/^I manually delete Source opp$/) do
+  begin
+  visit($url1)
+  puts "I Successfully Visited Destination Opp"
+  sleep 10
+   within(:xpath,'//div[1]/div[2]/table/tbody/tr/td[2]/div[7]/div[1]') do
+    #within all('.customnotabBlock')[1] do
+      #within('.customnotabBlock')[1] do
+      delCount = all(:link,'Del').count
+      puts "delCount = "
+      puts delCount
+      unless delCount == 0
+        first(:link,'Del').click
+        sleep 5
+        page.driver.browser.switch_to.alert.accept
+        sleep 5
+        #find(:xpath, "//th[text()='Asset']").find(:xpath, '..').all(:xpath, "following-sibling::tr/td[3]/a")[1].click  # Asset link click
+        #find(:xpath, "//th[text()='Service Contract']").find(:xpath, '..').all(:xpath, "following-sibling::tr/td[9]/a")[1].click  # Service Contract link click
+      end
+    end
+
+    first(:button,'Delete').click
+    sleep 4
+    page.driver.browser.switch_to.alert.accept
+    sleep 5
+    puts "Deleted the Opportunity Successfully"
+
   end
 end

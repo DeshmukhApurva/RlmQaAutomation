@@ -27,10 +27,12 @@ Scenario: Rally Test Case ID: TC3543,TC3544,TC3546 - AddOn Opportunity - Same Cu
 
 @no_auto_renewal_opportunity_generated
 Scenario: Rally Test Case ID: TC3541,TC3542 - AddOn Opportunity - Resolution,No auto renewal opportunity generated if user resolves the add-on
-	When I click on "Opportunities" link
-    And I click on "Go!" button from opportunity page
-    And I open the first opportunity
-	And I associate opportunity to "Destination Renewal Opportunity"
-	And I add new line items to the "Source Opportunities" and resolve the source opportunity
-	Then I verify the associated "Destination Renewal Opportunity" and "Source Opportunities"
-
+	When I click on "Opportunities" link 
+	And I click on "New" button 
+	And I enter mandatory details in "Destination_Renewal_Opportunity" opportunity 
+	And I click on "Choose Price Book" button 
+	Then I Choose the Pricebook for the product 
+	When I create Source Opportunity "Opportunity_Line_Item" with Line Items and resolve it with destination "Destination_Renewal_Opportunity" 
+	Then I verify the associated "Destination Renewal Opportunity" and "Source Opportunities" 
+	And I manually delete destination opp
+	And I manually delete Source opp

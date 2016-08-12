@@ -566,59 +566,170 @@ And(/^I add multiple criteria and filter logic "([^"]*)" and "([^"]*)" on opp ge
 		putstr "Error occurred while adding the multiple criteria and filter logics"
 		putstr_withScreen  ex.message
 	end
+	end
+	
+	And(/^I create new Opportunity$/) do
+  begin
+    arg= getDetails "newOpportunity"
+    fill_in "Opportunity Name",:with=> arg["Opportunity Name"]
+    time = Time.new
+    fill_in "Close Date",:with=> arg["Close Date"]
+    find("#opp11").select arg["Stage"]
+    sleep 2
+    within("#bottomButtonRow") do
+      click_on 'Save'
+    end
+    sleep 5 
+    click_on "Choose Price Book"
+    sleep 5
+    first(:xpath, "//*[contains(@id, 'p1')]").select("Standard Price Book")
+    sleep 3
+    click_on "Save"
+    puts "Successfully Created opportunity"
+    rescue Exception => ex
+    puts "Error in Creating opportunity"
+    putstr_withScreen  ex.message
+    
+  end
 end
 
-And(/^I will verify renewal status for the opportunity$/) do
-  begin   
-    sleep 3    
-    puts page.has_xpath?("//td[contains(text(),'Renewal')]//following-sibling::td/div/img[@alt='Checked']")
-    rStatus = page.has_xpath?("//td[contains(text(),'Renewal')]//following-sibling::td/div/img[@alt='Checked']")   
-    #putstr "renewal status: #{rStatus}"
-    if page.has_xpath?("//td[contains(text(),'Renewal')]//following-sibling::td/div/img[@alt='Checked']") == true
-      puts "Renewal checkbox is checked"   
+And(/^I verify RR All FieldSet$/) do
+  begin
+    sleep 5
+    if page.has_field? "Existing Product"
+      puts "Existing Product is Successfully See on Field Set"
     else
-      puts "Renewal checkbox is unchecked"
+      puts "Existing Product is not Successfully See on Field Set"
     end
-    
-  rescue Exception => ex
-    putstr "Error while checking the renewal status"
-    putstr_withScreen  ex.message
-  end
-end
-
-And(/^I Save Adds Amount and Adds ratio values$/) do
-  begin
-    sleep 3
-    $addsAmount = first(:xpath, "//tr/td[contains(text(),'Adds Amount')]//following-sibling::td/div").text    
-    $addsRatio = find(:xpath, "//tr/td[contains(text(),'Adds Ratio')]//following-sibling::td/div").text
-    puts "AddsAmount: "+$addsAmount
-    puts "AddsRatio: "+$addsRatio
-  rescue Exception => ex
-    putstr "Error in adding products to the Opportunity"
-    putstr_withScreen  ex.message
-  end
-end
-
-Then (/^I verify Adds Amount and Adds Ratio$/) do
-  begin
-    puts 'verify Adds Amount and Ratio'
-    sleep 3
-    addsAmountNew = first(:xpath, "//tr/td[contains(text(),'Adds Amount')]//following-sibling::td/div").text    
-    addsRatioNew = find(:xpath, "//tr/td[contains(text(),'Adds Ratio')]//following-sibling::td/div").text
-    
-    puts "AddsRatioNew: "+addsRatioNew
-    puts "AddsAmountNew: "+addsAmountNew
-    #addsTempR = "100.00%"
-    #addsTempA = "USD 2,000.00"
-    
-    if $addsAmount == addsAmountNew && $addsRatio == addsRatioNew
-      puts "Values for Adds Amount and Adds Ratio are not populated correctly."
-    else 
-      puts "Correct values for Adds Amount and Adds Ratio are populated."
+    sleep 5
+    if page.has_field? "Existing Start Date"
+      puts "Existing Product is Successfully See on Field Set"
+    else
+      puts "Existing Product is not Successfully See on Field Set"
     end
-       
-  rescue Exception => ex
-    putstr "Error while verifying Adds Amount and Adds Ratio"
+    sleep 5
+    if page.has_field? "Existing End Date"
+      puts "Existing Product is Successfully See on Field Set"
+    else
+      puts "Existing Product is not Successfully See on Field Set"
+    end
+    sleep 5
+    if page.has_field? "New Start Date"
+      puts "Existing Product is Successfully See on Field Set"
+    else
+      puts "Existing Product is not Successfully See on Field Set"
+    end
+    sleep 5
+    if page.has_field? "New End Date"
+      puts "Existing Product is Successfully See on Field Set"
+    else
+      puts "Existing Product is not Successfully See on Field Set"
+    end
+    sleep 5
+    if page.has_field? "Quantity"
+      puts "Existing Product is Successfully See on Field Set"
+    else
+      puts "Existing Product is not Successfully See on Field Set"
+    end
+    rescue Exception => ex
+    puts "Error in Verifying Field Sets"
     putstr_withScreen  ex.message
+    end
+end    
+
+And(/^I fill data in RR fields$/) do
+  begin
+    sleep 10
+    arg = getDetails "RenewableLineItem"
+     sleep 6
+     fill_in "Existing Product",:with=> arg["Existing Product"]
+     puts "Successfully Fill Existing Product"
+     sleep 6
+     fill_in "New Start Date",:with=> arg["New Start Date"]
+     puts "Successfully Fill New Start Date"
+     sleep 6
+     fill_in "New End Date",:with=> arg["New End Date"]
+     puts "Successfully Fill New End Date"
+     sleep 6
+     fill_in "Existing Start Date",:with=> arg["Existing Start Date"]
+     puts "Successfully Fill Existing Start Date"
+     sleep 6
+     fill_in "Existing End Date",:with=> arg["Existing End Date"]
+     puts "Successfully Fill Existing End Date"
+     sleep 6
+     fill_in "Quantity",:with=> arg["Quantity"]
+     puts "Successfully Fill Quantity"
+     sleep 6
+        within all(".lookupInput")[2] do
+          first("input").send_keys arg["OwnerName"]
+          puts "Successfully Fill Existing Owner"
+        end
+     
+     sleep 6
+     within('.pbButton') do
+       click_on "Save"
+       puts "Successfully Save all Renewable Line Item Data"
+     end
+     rescue Exception => ex
+    puts "Error in Filling Data"
+    putstr_withScreen  ex.message
+    end
+  end
+     
+And(/^I verify all data after saving$/)	do
+  begin
+    sleep 10
+    arg = getDetails "RenewableLineItem"
+    sleep 6
+    Existing_End_Date= first(:xpath,'//td[contains(text(),"Existing End Date")]/following-sibling::td/div').text
+     puts Existing_End_Date
+     sleep 6
+     if Existing_End_Date.to_s == arg["Existing End Date"].to_s
+      puts "Successfully see the #{Existing_End_Date} so its Editable Field"
+      else
+         putstr "Failed to see the #{Existing_End_Date} so its not Editable Field"
+      end
+      sleep 6
+    Existing_Start_Date= first(:xpath,'//td[contains(text(),"Existing Start Date")]/following-sibling::td/div').text
+     puts Existing_Start_Date
+     sleep 6
+     if Existing_Start_Date.to_s == arg["Existing Start Date"].to_s
+      puts "Successfully see the #{Existing_Start_Date} so its Editable Field"
+      else
+         putstr "Failed to see the #{Existing_Start_Date} so its not Editable Field"
+      end
+      sleep 6
+     New_End_Date= first(:xpath,'//td[contains(text(),"New End Date")]/following-sibling::td/div').text
+     sleep 6
+     if New_End_Date.to_s == arg["New End Date"].to_s
+      puts "Successfully see the #{New_End_Date} so its Editable Field"
+      else
+         putstr "Failed to see the #{New_End_Date} so its not Editable Field"
+      end
+      sleep 6
+      New_Start_Date= first(:xpath,'//td[contains(text(),"New Start Date")]/following-sibling::td/div').text
+     sleep 6
+     if New_Start_Date.to_s == arg["New Start Date"].to_s
+      puts "Successfully see the #{New_Start_Date} so its Editable Field"
+      else
+         putstr "Failed to see the #{New_Start_Date} so its not Editable Field"
+      end
+      sleep 6
+      Existing_Product= first(:xpath,'//td[contains(text(),"Existing Product")]/following-sibling::td/div/a').text
+     sleep 6
+     if Existing_Product.to_s == arg["Existing Product"].to_s
+      puts "Successfully see the #{Existing_Product} so its Editable Field"
+      else
+         putstr "Failed to see the #{Existing_Product} so its not Editable Field"
+      end
+      sleep 6
+      quantity = first(:xpath,'//td[contains(text(),"Quantity")]/following-sibling::td/div').text
+    sleep 6
+     if quantity.to_s == arg["Quantity"].to_s
+      puts "Successfully see the #{quantity} so its Editable Field"
+      else
+         putstr "Failed to see the #{quantity} so its not Editable Field"
+      end 
   end
 end
+		
