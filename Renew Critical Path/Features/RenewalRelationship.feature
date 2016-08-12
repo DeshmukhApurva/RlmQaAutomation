@@ -8,13 +8,16 @@ Background: Login to the Application
 
 @view_contract_line_item
 Scenario: Rally Test Case ID: TC3586 - Renewal Relationship - View a contract line item to covered asset relationship in a service contract: Covered Asset
-	When I create Source Opportunity with Line Items and resolve it and rename
+	When I click on "Opportunities" link
+	And I go to existing renewal opportunities
+	And I click on "Add Product" button
+	And I select one or more product from the grid
 	And I go to created renew opp which showing renewal service to covered asset relationship
-    And I click on "Opportunities" link
-    And I select Opportunity 
-    And I click to service contract line item details link
-    Then I verify that associated covered asset getting display there
-    
+	And I click on "Opportunities" link
+	And I go to existing renewal opportunities
+	And I click to service contract line item details link
+	Then I verify that associated covered asset getting display there
+
 @view_renewal_relationship_data
 Scenario: Rally Test Case ID: TC3587 - Renewal Relationship -  View Renewal relationship data with service contract and service contract line item details
     When I click on "Opportunities" link
@@ -39,3 +42,16 @@ Scenario: Rally Test Case ID: TC3588 - Renewal Relationship - Product Associatio
     And I resolve the "Opportunity"
 	Then I should able to see the "Renewal Relationship" section
 	Then I verify product getting associated with renewal relationship
+
+@clone_renewal_relationship
+Scenario: Rally
+	When I Navigate to "Service Contracts" tab
+	#Then I select the Source Service Contract for Opportunity Generation from ServiceContract
+	Then I select Test SC view
+	And I click on the Go button if present
+	And I click on "RenewNetOpsSCTest" link
+	Then I generate Opportunity from the Service Contract	
+	And I clone the existing renewal relationship
+	And I verify the cloned renewal relationship id is different from the existing renewal relationship id
+	And I manually delete the opportunity
+

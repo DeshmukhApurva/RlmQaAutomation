@@ -611,4 +611,91 @@ Then(/^I should able to see the "([^"]*)" and "([^"]*)"$/) do |close_date, asset
  end
 end
 
+And (/^I verify record count displayed for Asset Filter and Grouping Logic$/) do
+  begin
+    within all(".pbSubsection")[0] do
+      $assetfilters = all(:link,'Del').count
+      puts "Asset Filter Count = "
+      puts $assetfilters
+    end
 
+    within all(".pbSubsection")[1] do
+      $groupings = all(:link,'Del').count
+      puts "Grouping Logic Count = "
+      puts $groupings
+    end
+    if $assetfilters.to_s == $limitvalue.to_s and $groupings.to_s == $limitvalue.to_s
+      puts "Batch Record Limit set matches the actual count of records displayed on Batch Grid"
+    end
+  end
+end
+
+And (/^I confirm the Batch Record limit set on Custom Settings$/) do
+  begin
+  sleep 5
+  first(:id,'userNavLabel').click
+  sleep 3
+  first(:link,'Setup').click
+  sleep 5
+  find(:id,'setupSearch').set "Custom Settings"  
+  sleep 5
+  first(:link,'Custom Settings').click
+  sleep 5
+  first(:link,'CSM Admin').click
+  sleep 5
+#  first(:button,'Manage').click
+#  sleep 5
+  $limitcount = find(:xpath,'//th[text()="Batch Opp Genration Grid Rec Limit"]/following-sibling::td[1]').text
+  puts "Navigated to Custom Settings to check Batch record limit set"
+  puts "Batch Record set = "
+  puts $limitcount
+  if $assetfilters.to_s == $limitcount.to_s and $groupings.to_s == $limitcount.to_s
+    puts "Batch Record Limit set matches the actual count of records displayed on Batch Grid"
+  end
+  end
+end
+
+And(/^I set the Batch Record Limit value in CSM Admin custom setting as it is not set$/) do
+  begin
+    sleep 3
+    #    puts page.has_xpath?("//th[contains(text(),'Batch Opp Genration Grid Rec Limit')]//following-sibling::td/span/img[@alt='Not Checked']")
+    #    puts page.has_xpath?("//th[contains(text(),'Batch Opp Genration Grid Rec Limit')]//following-sibling::td/span/img[@alt='Checked']")
+
+#    if page.has_xpath?('//th[text()="Batch Opp Genration Grid Rec Limit"]/following-sibling::td[1]') == ' '
+      puts "Limit value is null"
+      click_button 'Edit'
+      sleep 5
+      find(:xpath, '//label[text()="Batch Opp Genration Grid Rec Limit"]/parent::th/following-sibling::td/input').set "4"
+      sleep 5
+      click_button 'Save'
+      sleep 5
+      puts "Limit value = 4 is set"
+      $limitvalue = "4"
+#    end
+  rescue Exception => ex
+    putstr "Error while setting value"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I reset the Batch Record Limit value to null in CSM Admin custom setting as it is not null$/) do
+  begin
+    sleep 3
+#    puts page.has_xpath?("//th[contains(text(),'Batch Opp Genration Grid Rec Limit')]//following-sibling::td/span/img[@alt='Not Checked']")
+#    puts page.has_xpath?("//th[contains(text(),'Batch Opp Genration Grid Rec Limit')]//following-sibling::td/span/img[@alt='Checked']")
+#    if page.has_xpath?('//th[text()="Batch Opp Genration Grid Rec Limit"]/following-sibling::td[1]') != ' '
+      puts "Limit Value is set already"
+      click_button 'Edit'
+      sleep 5
+      puts "Successfully see the edit form"
+      find(:xpath, '//label[text()="Batch Opp Genration Grid Rec Limit"]/parent::th/following-sibling::td/input').set ""
+      sleep 5
+      click_button 'Save'
+      sleep 5
+      puts "Limit Value is set to null"
+#    end
+  rescue Exception => ex
+    putstr "Error while setting null value to Limit"
+    putstr_withScreen  ex.message
+  end
+end
