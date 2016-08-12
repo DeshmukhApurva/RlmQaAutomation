@@ -269,7 +269,9 @@ Then(/^I select one or more the opportunity "([^"]*)" and verify opportunity for
     puts allExpYears
 
     within all(".ui-select-match")[1] do
-      find(:css, ".close.ui-select-match-close").click
+      if has_selector?(:css, ".close.ui-select-match-close")
+        find(:css, ".close.ui-select-match-close").click
+      end
     end
 
     allExpQuarters.each do |value|
@@ -279,7 +281,9 @@ Then(/^I select one or more the opportunity "([^"]*)" and verify opportunity for
     end
 
     within all(".ui-select-match")[2] do
-      find(:css, ".close.ui-select-match-close").click
+      if has_selector?(:css, ".close.ui-select-match-close")
+        find(:css, ".close.ui-select-match-close").click
+      end
     end
 
     allExpYears.each do |value|
@@ -289,12 +293,12 @@ Then(/^I select one or more the opportunity "([^"]*)" and verify opportunity for
     end
     sleep 5
 
-#    allTwoTierData = getReference "TwoTier"
-#
-#    find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").send_keys [:control, 'a'], :space
-#    sleep 1
-#    find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").send_keys allTwoTierData["PartnerOpportunity"]
-#    sleep 1
+    #    allTwoTierData = getReference "TwoTier"
+    #
+    #    find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").send_keys [:control, 'a'], :space
+    #    sleep 1
+    #    find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").send_keys allTwoTierData["PartnerOpportunity"]
+    #    sleep 1
 
     rowcount = 0
     presentIndex = Array.new
@@ -467,7 +471,9 @@ Then(/^I select one or more the opportunity "([^"]*)" and verify opportunity for
     puts allExpYears
 
     within all(".ui-select-match")[1] do
-      find(:css, ".close.ui-select-match-close").click
+      if has_selector?(:css, ".close.ui-select-match-close")
+        find(:css, ".close.ui-select-match-close").click
+      end
     end
 
     allExpQuarters.each do |value|
@@ -477,7 +483,9 @@ Then(/^I select one or more the opportunity "([^"]*)" and verify opportunity for
     end
 
     within all(".ui-select-match")[2] do
-      find(:css, ".close.ui-select-match-close").click
+      if has_selector?(:css, ".close.ui-select-match-close")
+        find(:css, ".close.ui-select-match-close").click
+      end
     end
 
     allExpYears.each do |value|
@@ -487,12 +495,12 @@ Then(/^I select one or more the opportunity "([^"]*)" and verify opportunity for
     end
     sleep 5
 
-#    allTwoTierData = getReference "TwoTier"
-#
-#    find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").send_keys [:control, 'a'], :space
-#    sleep 1
-#    find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").send_keys allTwoTierData["PartnerOpportunity"]
-#    sleep 5
+    #    allTwoTierData = getReference "TwoTier"
+    #
+    #    find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").send_keys [:control, 'a'], :space
+    #    sleep 1
+    #    find(:xpath, "//div[2]/div/div[2]/div/div/div[1]/div[5]/input").send_keys allTwoTierData["PartnerOpportunity"]
+    #    sleep 5
 
     rowcount = 0
     presentIndex = Array.new

@@ -1604,7 +1604,6 @@ Then(/^I select "([^"]*)" product from "([^"]*)" page$/) do |totalPoduct,renewal
         sleep 4
         if page.has_css?("#renewalRelationshipGrid")
           sleep 4
-          binding.pry
           for cnt in 1..totalPoduct.to_i
             if find(:xpath, "//table[@id='renewalRelationshipGrid']//tr[#{cnt}]/td[1]/input").checked?
               puts "#{renewal_relationship} product field is already checked"

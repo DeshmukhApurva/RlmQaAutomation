@@ -144,7 +144,8 @@ Scenario: Rally Test Case ID:TC6358,TC6357: Opportunity grid - request - Opportu
 	And I select the Related To Opportunity from drop down 
 	And I select the opportunity-quote Request Type "Data Update" from drop down 
 	And I select the opportunity-request-Priority "Low" from drop down 
-	And I add the "Test_Message_opportunity related request from opportunity" message 
+	And I add the "Test_Message_opportunity related request from opportunity" message
+	And I attach "Documents/DataStage.pdf" file 
 	And I click on the "Submit" 
 	When I click on "Requests" tab 
 	Then I should able to see the created "Community" request 

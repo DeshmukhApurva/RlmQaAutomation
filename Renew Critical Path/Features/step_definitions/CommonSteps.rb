@@ -1633,3 +1633,14 @@ Then (/^I verify Adds Amount and Adds Ratio$/) do
     putstr_withScreen  ex.message
   end
 end
+
+When(/^I get the SalesforceAPI details of "([^"]*)" user$/) do |user_role|
+  begin
+    arg = Array.new
+    arg = getSalesForceAPIinfo user_role
+    puts "Data #{arg}"
+    connectSalesforceAPI
+  rescue Exception => ex
+    puts ex.message
+  end
+end

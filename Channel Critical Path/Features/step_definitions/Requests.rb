@@ -1277,6 +1277,20 @@ And(/^I attach the "([^"]*)" file$/) do |url|
   end
 end
 
+And(/^I attach "([^"]*)" file$/) do |url|
+  begin
+    sleep 4
+    file_path = "#{Dir.pwd}/#{url}"
+    sleep 6
+    page.attach_file("btn-file-upload", file_path)
+    sleep 6
+    puts "Successfully attached the file"
+  rescue Exception => ex
+    putstr "Error occurred while attaching the file"
+    putstr_withScreen  ex.message
+  end
+end
+
 And(/^I filter the "([^"]*)" record$/) do |related_to|
   begin
     sleep 3
