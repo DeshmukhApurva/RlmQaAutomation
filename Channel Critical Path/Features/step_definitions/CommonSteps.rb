@@ -29,6 +29,7 @@ require 'Win32API'
 Given(/^that I navigate to the CRM application$/) do
   begin
     $userRole = ENV['UserRole']
+    $currentBrowser = ENV['Browser']
     puts "#{$userRole} is logged in"
     sleep 5
     setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
@@ -715,5 +716,398 @@ And(/^I verify the current expiration year value in Expiration Year filter$/) do
   rescue Exception => ex
     puts "Error occurred while creating Opportunities"
     puts ex.message
+  end
+end
+
+#copied from renew
+  
+And(/^I Create New Source Opportunity$/) do
+  begin
+    sleep 5
+    arg = getReference "SourceOpportunity"
+    puts arg    
+    time = Time.new
+    oppDateTime = time.day.to_s + time.month.to_s + time.year.to_s + time.hour.to_s + time.min.to_s + time.sec.to_s
+    year = time.year.to_i + 2
+
+    click_on "New"
+    sleep 5
+    puts "Creating a new opportunity"
+
+    $RenAutomationSO = arg["SourceOppName"] + oppDateTime.to_s
+
+    $earliestExpirationDate = "12/30/" + year.to_s
+    $oPPCloseDate = "12/31/" + year.to_s
+
+    fill_in "Opportunity Name",:with=> $RenAutomationSO
+    sleep 1
+    fill_in "Close Date",:with=> $oPPCloseDate
+    sleep 1
+    fill_in "Earliest Expiration Date",:with=> $earliestExpirationDate
+    sleep 1
+    select arg["SourceOppStage"], :from => "Stage"
+    sleep 1
+    fill_in "Account Name",:with=>arg["Account"]
+    sleep 1
+
+    within(:id,"bottomButtonRow") do
+      click_on "Save"
+    end
+
+    puts "Successfully Created Source Opportunity #{$RenAutomationSO}"
+
+  rescue Exception => ex
+    raise "Error occurred while creating new source opportunity #{$RenAutomationSO}"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I select "([^"]*)" pricebook$/) do |priceBookName|
+  begin
+    sleep 5
+    click_on "Choose Price Book"
+    sleep 5
+    first(:option, priceBookName).select_option
+    sleep 2
+    click_on "Save"
+    sleep 5
+  rescue Exception => ex
+    raise "Error occurred while selecting pricebook #{priceBookName}"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I Add "([^"]*)" Products having product name as "([^"]*)" to Opportunity$/) do |totalProducts,productName|
+  begin
+    sleep 5
+    arg = getReference "SourceOpportunity"
+    time = Time.new
+
+    $startDateOLI = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s
+    $endDateOLI = time.month.to_s + "/" + time.day.to_s + "/" + (time.year.to_i + 1).to_s
+  
+    click_on "Add Product"
+    
+    within(:id,'field_name_PricebookEntry')do
+      searchField = find(:id, 'search')
+      searchField.send_keys(productName)    
+      puts "add search criteria"
+    end
+    first(:option, 'Active (Product)').select_option
+    sleep 1
+    first(:option, 'equals').select_option
+    sleep 1
+    find(:xpath, '//span[contains(text(),"By Field Filter")]/following-sibling::div/div/input').set 'Active'
+    sleep 1
+    find(:xpath, '//input[contains(@id,"save_filter_PricebookEntry")]').click
+    sleep 5
+    
+    i = 1
+    while i <= totalProducts.to_i do
+      puts i.to_s 
+      find(:xpath, "//div[contains(@class,'x-grid3-body')]/div[#{i}]/table/tbody/tr/td[1]/div/input").set(true)
+      i = i + 1
+      sleep 2
+    end
+    click_on 'Select'
+    puts "Successfully select the product"    
+    sleep 5
+    
+    #Enter product Quantity
+    pos = 1
+    $nums = Array.new(totalProducts.to_i)
+    for i in 2..totalProducts.to_i + 1
+      $nums[i] = 4 +  pos.to_i
+      pos = $nums[i].to_i
+      find(:xpath,"//*[@id='editPage']/table/tbody/tr[#{$nums[i]}]/td[3]/input").set arg["ProductQuantity"]
+      find(:xpath,"//*[@id='editPage']/table/tbody/tr[#{$nums[i]}]/td[4]/span/input").set $startDateOLI
+      find(:xpath,"//*[@id='editPage']/table/tbody/tr[#{$nums[i]}]/td[5]/span/input").set $endDateOLI
+      find(:xpath,"//*[@id='editPage']/table/tbody/tr[#{$nums[i]}]/td[6]/input").set arg["ProductSalesPrice"]
+    end
+    
+    all(:xpath,'//td/input[@value=" Save "]')[0].click
+    sleep 5
+    $productsTitle = Array.new(totalProducts.to_i)
+    i= 0
+    for i in 0..totalProducts.to_i - 1
+     within(".opportunityLineItemBlock") do
+      within(".list") do        
+        $productsTitle[i] = all(".dataRow")[i].all("th")[0].first("a").text
+        puts $productsTitle[i]
+        sleep 3
+      end
+     end
+    end    
+  rescue Exception => ex
+    raise "Error occurred while adding products to source opp"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I Renew Source Opportunity$/) do
+  begin
+    sleep 5
+    within("#bottomButtonRow") do
+      click_on 'Edit'
+    end
+    puts 'Editing the status'
+    sleep 5
+    first(:option,'Closed Won').select_option
+    sleep 2
+    first(:button,'Save').click
+    sleep 10
+    puts 'Editing the status to Closed Won'
+    find(:xpath, "//th[text()='Contributed To']").find(:xpath, '..').find(:xpath, "following-sibling::tr/td[2]/a").click
+    sleep 10
+
+    within("#bottomButtonRow") do
+      click_on 'Edit'
+    end
+    sleep 5
+    $RenAutomationRO = $RenAutomationSO + "RO"
+    fill_in "Opportunity Name",:with=> $RenAutomationRO
+    sleep 1
+    first(:button,'Save').click
+    sleep 10
+  rescue Exception => ex
+    raise "Error occurred while renewing opportunity"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I select the partner accounts from the accounts lookup list for Two Tire$/) do
+  begin
+    arg = getDetails "TwoTier"
+    arg2 = getReference "TwoTier"
+    sleep 2
+    $partnerOppName = find(:xpath, ".//th/label[contains(text(), 'Partner Opportunity')]//parent::th//following-sibling::td/div/input").value
+    puts $partnerOppName
+    puts "Add partner accounts"
+    sleep 5
+    if page.has_css?(".lookupIcon")
+      puts "Successfully see the lookup icons"
+      sleep 1
+      main = page.driver.browser.window_handles.first
+      sleep 2
+      find("img[alt='Partner Account 1 Lookup (New Window)']").click
+      sleep 8
+      page.driver.browser.manage.window.maximize
+      sleep 3
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+      sleep 3
+      page.driver.browser.switch_to.frame("resultsFrame")
+      sleep 3
+      within('.list') do
+        click_link arg2["DistributorAccount"]     
+      end
+      sleep 2
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+      sleep 1
+      puts "Successfully Selected the first"
+      sleep 1
+      main = page.driver.browser.window_handles.first
+      sleep 3
+      find("img[alt='Partner Account 2 Lookup (New Window)']").click
+      sleep 8
+      page.driver.browser.manage.window.maximize
+      sleep 3
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+      sleep 5
+      page.driver.browser.switch_to.frame("resultsFrame")
+      within('.list') do
+        click_link arg2["ResellerAccount"]
+      end
+      sleep 5
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+      sleep 5
+      puts "Successfully Selected the second account"
+    else
+      putstr "Failed to see the accounts fields"
+    end
+    sleep 4
+    
+    ####Add contacts for account
+    puts "Add partner contacts"
+    if page.has_css?(".lookupIcon")
+      #puts "Successfully see the #{arg["PartnerAccount1ContactFieldName"]} and #{arg["PartnerAccount2ContactFieldName"]} lookup Icons"
+      puts "Successfully see the ContactField lookup Icons"
+      sleep 2
+      main = page.driver.browser.window_handles.first
+      sleep 3
+      find("img[alt='Partner Account 1 Contact Lookup (New Window)']").click
+      sleep 8
+      page.driver.browser.manage.window.maximize
+      sleep 3
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+      sleep 5
+      page.driver.browser.switch_to.frame("resultsFrame")
+      sleep 3
+      within('.list') do
+        click_link arg2["DistributorContact"]
+      end
+      sleep 5
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+      sleep 3
+      #puts "Successfully Selected the #{arg["PartnerAccount1ContactFieldName"]} from #{arg["PartnerOpportunityName"]} page"
+      puts "Successfully Selected the first contact"
+      sleep 8
+      main = page.driver.browser.window_handles.first
+      sleep 3
+      find("img[alt='Partner Account 2 Contact Lookup (New Window)']").click
+      sleep 8
+      page.driver.browser.manage.window.maximize
+      sleep 3
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+      sleep 5
+      page.driver.browser.switch_to.frame("resultsFrame")
+      within('.list') do
+        click_on arg2["ResellerContact"]
+      end
+      sleep 5
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+      sleep 5
+      puts "Successfully Selected the second contact"
+    else
+      putstr "Failed to see the #{arg["PartnerAccount1ContactFieldName"]} and #{arg["PartnerAccount2ContactFieldName"]} lookup Icons"
+    end
+    sleep 4
+  rescue Exception => ex
+    putstr_withScreen  ex.message
+  end
+end
+
+
+And(/^I select the Reseller Quote from the quote related list$/) do
+  begin
+    sleep 5
+    puts 'checking the Distibuter quote checkbox'
+    within("#bodyCell") do
+      within(".quoteBlock") do
+        puts $RenAutomationRO
+        sleep 3
+        find(:xpath,".//tr/td/a[contains(text(),'#{$RenAutomationRO}')]").click
+      end
+    end
+  rescue Exception => ex
+    raise "Error occurred while selecting Reseller Quote"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I check the distributor quote checkbox status for "([^"]*)"$/) do |partnerUser|
+  begin
+    sleep 5
+    puts 'checking the Distibuter quote checkbox'
+    if partnerUser == "reseller"
+      distCheckBox = has_xpath?(".//tr/td[contains(text(),'Distributor Quote')]//following-sibling::td/div/img[@alt = 'Not Checked']")
+      puts "For Reseller Distributor checkbox not checked: "
+      puts distCheckBox
+    else
+      distCheckBox = has_xpath?(".//tr/td[contains(text(),'Distributor Quote')]//following-sibling::td/div/img[@alt = 'Checked']")
+      puts "For Distributor checkbox checked: "
+      puts distCheckBox
+    end
+  rescue Exception => ex
+    raise "Error occurred while checking the distributor quote checkbox status for #{partnerUser}"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I edit the quotename as "(.*?)"$/) do |arg|
+  begin
+    within ("#bottomButtonRow") do
+      first(:xpath, "//*[contains(@name, 'edit')]").click
+      sleep 5
+    end
+    fill_in "Name",:with => arg
+    sleep 5
+    within ("#bottomButtonRow") do
+      first(:xpath, "//*[contains(@name, 'save')]").click
+      puts "Quote renamed successfully"
+    end
+  rescue Exception => ex
+    putstr "Error occurred while editing quotename"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I create Distributor Quote from Reseller Quote$/) do
+  begin
+    sleep 5
+    page.execute_script "window.scrollBy(0,10000)"
+    find("#bottomButtonRow").click
+    sleep 3
+    within ("#bottomButtonRow") do
+      first(:xpath, "//*[contains(@title, 'Create Distributor Quote')]").click
+      puts "Created distributor quote successfully"
+      sleep 5
+    end
+    if $currentBrowser == 'chrome'
+      alert_message = page.driver.browser.switch_to.alert.text
+      puts alert_message
+      sleep 5
+      if alert_message == "Distributor Quote Created Successfully."
+        puts "in if block"
+        page.driver.browser.switch_to.alert.accept
+        puts "Distributor Quote Created Successfully."
+      else
+        page.driver.browser.switch_to.alert.deny
+        putstr "Did not created"
+      end
+    else
+      binding.pry
+    end  
+    sleep 5
+  # rescue Exception => ex
+    # putstr "Error occurred while creating distributor quote"
+    # putstr_withScreen  ex.message
+   end  
+end
+
+
+And(/^I check checkbox status for reseller and distributor quotes$/) do
+  begin
+    sleep 5
+    TTResellerStatus = has_xpath?(".//tr/td/a[contains(text(),'TTReseller Quote')]//parent::td//parent::tr/td[8]/img[@alt = 'Not Checked']")    
+    puts "TTResellerStatus: "
+    puts TTResellerStatus
+    if TTResellerStatus == true
+      puts "Checkbox is not checked for Reseller quote"
+    else 
+      puts "Checkbox is checked for Reseller quote"
+    end
+    TTDistributorStatus = has_xpath?(".//tr/td/a[contains(text(),'TTDistributor Quote')]//parent::td//parent::tr/td[8]/img[@alt = 'Checked']")
+    puts "TTDistributorStatus:"
+    puts TTDistributorStatus
+    if TTDistributorStatus == true
+      puts "Checkbox is checked for Distributor quote"
+    else
+      puts "Checkbox is not checked for Distributor quote"
+    end
+  rescue Exception => ex
+    putstr "Error while checking status for reseller and distributor quotes"
+    putstr_withScreen  ex.message     
+  end
+end
+
+And(/^I create new "([^"]*)" quote for TwoTire$/) do |resellerQuote|
+  begin
+    sleep 5
+    click_on "New Quote"
+    sleep 5
+    within all(".pbSubsection")[0] do
+      first(:xpath, "//*[contains(@name, 'Name')]").send_keys resellerQuote
+      sleep 2
+      fill_in "Partner Opportunity",:with => $partnerOppName
+      sleep 2
+    end
+    within(".pbBottomButtons") do
+      first(:xpath, "//*[contains(@name, 'save')]").click
+      puts "New Quote created"
+      sleep 5
+    end
+  rescue Exception => ex
+    putstr "Error occurred while creating new quote"
+    putstr_withScreen  ex.message
   end
 end
