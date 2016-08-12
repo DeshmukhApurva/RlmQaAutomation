@@ -36,3 +36,23 @@ SplitOpportunity:
 Pricebooks:
  first: "Standard Price Book"
  second: "Test_PriceBook"
+ 
+SourceOpportunity:
+ SourceOppName: "ASO"   
+ Account: "TwoTierAutomation"
+ SourceOppStage: "Qualification" 
+ ProductQuantity: 1
+ ProductSalesPrice: 5000
+
+TwoTier:
+  ResellerAccount: "Automation Reseller"
+  DistributorAccount: "Automation Distributor"
+  ResellerContact: "Reseller Contact"
+  DistributorContact: "Distributor Contact"
+  Account: "TwoTierAutomation"
+  RenewalOpportunity: "TwoTierAutomationRO"
+  PartnerOpportunity: "TwoTierAutomationPO"
+  ResellerQuote: "ResellerQuote"
+  DistributorQuote: "DistributorQuote"
+  ResellerQuoteNumber: "00000883"
+  DistributorQuoteNumber: "00000884"
