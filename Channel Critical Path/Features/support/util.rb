@@ -74,8 +74,8 @@ end
 # # ...
 # end
 # client = Restforce.new :username => 'amit-csmdev07@comitydesigns.com',
-# :password       => 'Passw0rd',
-# :security_token => 'Gq1XDz3NcJessTy8n9H3rGTK',
+# :password       => 'Passw7rd',
+# :security_token => 'ECVzzSlTX8HHrE0PE0vStyW2',
 # :client_id      => '3MVG9fMtCkV6eLhdTHzExvFId0bZutnJg30N.KV_OFKhgrEgIip4kq6HzduedM7RPBRcNWGDkgrTyyNrVpVJm',
 # :client_secret  => '7847893736189474237'
 # puts "#{client}"
