@@ -68,6 +68,7 @@ def getExpirationYears(noOfPlusMinusYears)
   return ary
 end
 
+<<<<<<< HEAD
 begin
   Restforce.configure do |config|
     config.api_version = "37.0"
@@ -97,3 +98,26 @@ begin
   end
   puts "#{currentQuarter}"
 end
+=======
+# begin
+# Restforce.configure do |config|
+# config.api_version = "36.0"
+# # ...
+# end
+# client = Restforce.new :username => 'amit-csmdev07@comitydesigns.com',
+# :password       => 'Passw7rd',
+# :security_token => 'ECVzzSlTX8HHrE0PE0vStyW2',
+# :client_id      => '3MVG9fMtCkV6eLhdTHzExvFId0bZutnJg30N.KV_OFKhgrEgIip4kq6HzduedM7RPBRcNWGDkgrTyyNrVpVJm',
+# :client_secret  => '7847893736189474237'
+# puts "#{client}"
+# accounts = client.query("select p.Number, f.Name from Period p, p.FiscalYearSettings f where Type = 'Quarter' and p.StartDate <=today and p.EndDate >=today limit 1")
+# if accounts.first.nil?
+# fiscalYearMonthList = client.query("select FiscalYearStartMonth from Organization where id='00Dj0000000HEmn'")
+# fiscalYearMonth = fiscalYearMonthList.first
+# currentQuarter = ((Date.today.month - fiscalYearMonth.FiscalYearStartMonth)/3) + 1
+# else
+# currentQuarter = accounts.first.Number
+# end
+# puts "#{currentQuarter}"
+# end
+>>>>>>> refs/remotes/origin/612_v1.36.8
