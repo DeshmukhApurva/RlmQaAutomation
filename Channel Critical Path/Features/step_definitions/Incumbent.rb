@@ -546,27 +546,12 @@ And(/^I Verify Price is Present on Assests$/)do
     sleep 5
     find("input[placeholder='Search...']").send_keys $automationAssetName
     puts $automationAssetName
-    rowcount = all(".ui-grid-row.ng-scope").count
-    if rowcount > 0
-      within all(".ui-grid-canvas")[2] do
-        within all("div[role='gridcell']")[0] do
-          assetName = first("div").text
-          puts assetName
-          price = all("div")[4].text
-          puts "Entered assestName"
-          puts assetName
-        end
-      end
-    else
-      puts "No Opportunities Records Found"
-    end
-
-    find(:xpath,"//*[contains(@id,'uiGrid-000A-cell')]/div").text
-    $Assetpricerate = find(:xpath,"//div[contains(@id,'uiGrid-000A-cell')]/div").text
+    $Assetpricerate = first(:xpath,"//div[contains(@id,'uiGrid-000A-cell')]/div").text
+    puts $Assetpricerate 
     if $Assetpricerate.to_s == $AssetPrice.to_s
-      puts "Successfully see the Assests #{Assetpricerate} Price"
-    else
-      putstr "Failed to see the Assests #{Assetpricerate} Price"
+       putstr "Failed to see the Assests #{Assetpricerate} Price"
+     else
+       puts "Successfully see the Assests #{Assetpricerate} Price" 
     end
     puts "Assets Price verified successfully"
 
@@ -581,7 +566,7 @@ And(/^I Verify Price is Present on Contracts$/)do
   begin
     sleep 5
     find("input[placeholder='Search...']").send_keys
-    find(:xpath,"//*[contains(@id,'uiGrid-00KN-cell']/div')]/div").text
+    #find(:xpath,"//*[contains(@id,'uiGrid-00KN-cell']/div')]/div").text
     $Contractprice=find(:xpath,"//*[contains(@id,'uiGrid-00KN-cell']/div')]/div").text
     if $Contractprice ==$ServiceContractPrice
       puts "Successfully see the Service Contracts #{Contractprice} Price"
