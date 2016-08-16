@@ -148,4 +148,25 @@ Scenario: Rally Test Case ID: TC3667,TC3669,TC3670,TC3671,TC3672: Check for the 
 	And I click on "Create New" button	
 	Then I check for validation error message
 	
-
+@FilterGroupingLimit 
+Scenario: Rally Test Case ID: TC6253, TC6254, TC6255, TC6256 
+#	When user logout from "RENEW" application 
+	When I log into "SYSTEMADMIN_EETEST4" details 
+	And I click on "Setup" from "Admin" app 
+	And I search for "Custom Settings" from Quick Find 
+	And I select "CSM Admin" from Custom Settings 
+	And I click on "Manage" button 
+	And I set the Batch Record Limit value in CSM Admin custom setting as it is not set 
+	When I click on "ServiceSource Setup" link 
+	And I click on "Batch Generation Activity" link 
+	And I click on "Create New" button 
+	And I verify record count displayed for Asset Filter and Grouping Logic 
+#	And I confirm the Batch Record limit set on Custom Settings 
+#	When user logout from "RENEW" application 
+#	When I log into "SYSTEMADMIN_EETEST4" details 
+	And I click on "Setup" from "Admin" app 
+	And I search for "Custom Settings" from Quick Find 
+	And I select "CSM Admin" from Custom Settings 
+	And I click on "Manage" button 
+	And I reset the Batch Record Limit value to null in CSM Admin custom setting as it is not null 
+	

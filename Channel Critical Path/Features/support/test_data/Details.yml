@@ -344,6 +344,20 @@ QuoteSync:
  ProductQuantity: 1
  ProductSalesPrice: 5000
  
+IncumbentPo:
+ SourceOppName: "AU"
+ SourceOppStage: "Qualification"   
+ Account: "PES Channel Account"
+ FirstProductCheckboxIndex: 1
+ SecondProductCheckboxIndex: 2
+ RenewalStatusOpen: "Open"
+ RenewalStatusLost: "Lost"
+ RenewalStatusWon: "Won"
+ SyncErrorMessage: "The current Opportunity has a Quote Synced to it. Please stop the Sync and retry this process."  
+ SingleProductCheckboxIndex: 1
+ MultipleProductCheckboxIndex: 2
+ ProductQuantity: 1
+ ProductSalesPrice: 5000
 
 QuoteSyncCreateNewQuote:
  QuoteName: "Automation Standard Quote"
