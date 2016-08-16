@@ -173,3 +173,223 @@ And(/^I "(.*?)" verify Reseller and Distributor Quotes in Related To Quote field
     putstr_withScreen  ex.message
   end
 end
+#twotire opportunity
+
+And(/^I select the partner accounts from the accounts lookup list for Two Tire$/) do
+  begin
+    #arg = getDetails "TwoTier"
+    arg2 = getReference "TwoTier"
+    sleep 2
+    $partnerOppName = find(:xpath, ".//th/label[contains(text(), 'Partner Opportunity')]//parent::th//following-sibling::td/div/input").value
+    puts $partnerOppName
+    puts "Add partner accounts"
+    sleep 5
+    if page.has_css?(".lookupIcon")
+      puts "Successfully see the lookup icons"
+      sleep 1
+      main = page.driver.browser.window_handles.first
+      sleep 2
+      find("img[alt='Partner Account 1 Lookup (New Window)']").click
+      sleep 8
+      page.driver.browser.manage.window.maximize
+      sleep 3
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+      sleep 3
+      page.driver.browser.switch_to.frame("resultsFrame")
+      sleep 3
+      within('.list') do
+        click_link arg2["DistributorAccount"]     
+      end
+      sleep 2
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+      sleep 1
+      puts "Successfully Selected the first"
+      sleep 1
+      main = page.driver.browser.window_handles.first
+      sleep 3
+      find("img[alt='Partner Account 2 Lookup (New Window)']").click
+      sleep 8
+      page.driver.browser.manage.window.maximize
+      sleep 3
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+      sleep 5
+      page.driver.browser.switch_to.frame("resultsFrame")
+      within('.list') do
+        click_link arg2["ResellerAccount"]
+      end
+      sleep 5
+      page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+      sleep 5
+      puts "Successfully Selected the second account"
+    else
+      putstr "Failed to see the accounts fields"
+    end
+    sleep 4
+    
+    ####Add contacts for account
+    puts "Add partner contacts"
+    find(:xpath, "//label[contains(text(),'Partner Account 1 Contact')]/parent::th/following-sibling::td/span/input").send_keys arg2["DistributorContact"]
+    sleep 2
+    find(:xpath, "//label[contains(text(),'Partner Account 2 Contact')]/parent::th/following-sibling::td/span/input").send_keys arg2["ResellerContact"]
+    sleep 2
+    # if page.has_css?(".lookupIcon")
+      # puts "Successfully see the ContactField lookup Icons"
+      # sleep 2
+      # main = page.driver.browser.window_handles.first
+      # sleep 3
+      # find("img[alt='Partner Account 1 Contact Lookup (New Window)']").click
+      # sleep 8
+      # page.driver.browser.manage.window.maximize
+      # sleep 3
+      # page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+      # sleep 5
+      # page.driver.browser.switch_to.frame("resultsFrame")
+      # sleep 3
+      # within('.list') do
+        # click_link arg2["DistributorContact"]
+      # end
+      # sleep 5
+      # page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+      # sleep 3
+      # #puts "Successfully Selected the #{arg["PartnerAccount1ContactFieldName"]} from #{arg["PartnerOpportunityName"]} page"
+      # puts "Successfully Selected the first contact"
+      # sleep 8
+      # main = page.driver.browser.window_handles.first
+      # sleep 3
+      # find("img[alt='Partner Account 2 Contact Lookup (New Window)']").click
+      # sleep 8
+      # page.driver.browser.manage.window.maximize
+      # sleep 3
+      # page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+      # sleep 5
+      # page.driver.browser.switch_to.frame("resultsFrame")
+      # within('.list') do
+        # click_on arg2["ResellerContact"]
+      # end
+      # sleep 5
+      # page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+      # sleep 5
+      # puts "Successfully Selected the second contact"
+    # else
+      # putstr "Failed to see the #{arg["PartnerAccount1ContactFieldName"]} and #{arg["PartnerAccount2ContactFieldName"]} lookup Icons"
+    # end
+    sleep 4
+  rescue Exception => ex
+    putstr_withScreen  ex.message
+  end
+end
+
+
+And(/^I select the Reseller Quote from the quote related list$/) do
+  begin
+    sleep 5
+    puts 'checking the Distibuter quote checkbox'
+    within("#bodyCell") do
+      within(".quoteBlock") do
+        puts $RenAutomationRO
+        sleep 3
+        find(:xpath,".//tr/td/a[contains(text(),'#{$RenAutomationRO}')]").click
+      end
+    end
+  rescue Exception => ex
+    raise "Error occurred while selecting Reseller Quote"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I check the distributor quote checkbox status for "([^"]*)"$/) do |partnerUser|
+  begin
+    sleep 5
+    puts 'checking the Distibuter quote checkbox'
+    if partnerUser == "reseller"
+      distCheckBox = has_xpath?(".//tr/td[contains(text(),'Distributor Quote')]//following-sibling::td/div/img[@alt = 'Not Checked']")
+      puts "For Reseller Distributor checkbox not checked: #{distCheckBox}"  
+    else
+      distCheckBox = has_xpath?(".//tr/td[contains(text(),'Distributor Quote')]//following-sibling::td/div/img[@alt = 'Checked']")
+      puts "For Distributor checkbox checked: #{distCheckBox}"
+    end
+  rescue Exception => ex
+    raise "Error occurred while checking the distributor quote checkbox status for #{partnerUser}"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I edit the quotename as "(.*?)"$/) do |arg|
+  begin
+    within ("#bottomButtonRow") do
+      first(:xpath, "//*[contains(@name, 'edit')]").click
+      sleep 5
+    end
+    fill_in "Name",:with => arg
+    sleep 5
+    within ("#bottomButtonRow") do
+      first(:xpath, "//*[contains(@name, 'save')]").click
+      puts "Quote renamed successfully"
+    end
+  rescue Exception => ex
+    putstr "Error occurred while editing quotename"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I create Distributor Quote from Reseller Quote$/) do
+  begin
+    sleep 5
+    page.execute_script "window.scrollBy(0,10000)"
+    sleep 3
+    first(:xpath, "//*[contains(@title, 'Create Distributor Quote')]").click
+    sleep 10
+    alert_message = page.driver.browser.switch_to.alert.text
+    puts alert_message
+    sleep 5
+    page.driver.browser.switch_to.alert.accept
+  rescue Exception => ex
+    putstr "Error occurred while creating distributor quote"
+    putstr_withScreen  ex.message
+  end  
+end
+
+And(/^I check checkbox status for reseller and distributor quotes$/) do
+  begin
+    sleep 5
+    TTResellerStatus = has_xpath?(".//tr/td/a[contains(text(),'TTReseller Quote')]//parent::td//parent::tr/td[8]/img[@alt = 'Not Checked']")    
+    puts "TTResellerStatus Not Checked: #{TTResellerStatus}" 
+    if TTResellerStatus == true
+      puts "Checkbox is not checked for Reseller quote"
+    else 
+      puts "Checkbox is checked for Reseller quote"
+    end
+    TTDistributorStatus = has_xpath?(".//tr/td/a[contains(text(),'TTDistributor Quote')]//parent::td//parent::tr/td[8]/img[@alt = 'Checked']")
+    puts "TTDistributorStatus Checked: #{TTDistributorStatus}" 
+    if TTDistributorStatus == true
+      puts "Checkbox is checked for Distributor quote"
+    else
+      puts "Checkbox is not checked for Distributor quote"
+    end
+  rescue Exception => ex
+    putstr "Error while checking status for reseller and distributor quotes"
+    putstr_withScreen  ex.message     
+  end
+end
+
+And(/^I create new "([^"]*)" quote for TwoTire$/) do |resellerQuote|
+  begin
+    sleep 5
+    click_on "New Quote"
+    sleep 5
+    within all(".pbSubsection")[0] do
+      first(:xpath, "//*[contains(@name, 'Name')]").send_keys resellerQuote
+      sleep 2
+      fill_in "Partner Opportunity",:with => $partnerOppName
+      sleep 2
+    end
+    within(".pbBottomButtons") do
+      first(:xpath, "//*[contains(@name, 'save')]").click
+      puts "New Quote created"
+      sleep 5
+    end
+  rescue Exception => ex
+    putstr "Error occurred while creating new quote"
+    putstr_withScreen  ex.message
+  end
+end

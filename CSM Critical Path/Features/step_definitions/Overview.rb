@@ -1953,16 +1953,11 @@ And(/^I click on Subject link value of FC Task$/) do
     sleep 5
     page.driver.browser.manage.window.maximize
     sleep 5
-    if page.has_css? (".acc")
      find(:xpath,"//table[@class='list']/tbody/tr[2]/td[3]").click
       sleep 8 
       # within(".list") do
         # all("tr")[1].all("td")[2].first("a").click
       # end
-      puts "Subject link value clicked."
-    else
-      puts "Subject link value cannot be clicked."
-    end
     sleep 10
     if page.has_text? ("Task")
       puts "Navigated to Subject link Value's page."

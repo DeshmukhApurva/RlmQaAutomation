@@ -255,16 +255,16 @@ And(/^I check the Incumbent Checkbox and Renewal Opportunity$/)do
     else
       puts "Renewal flag  is checked not checked"
     end
-    
-   if page.has_xpath?("//td[contains(text(),'Incumbent')]//following-sibling::td/div/img[@alt='Checked']") == true
-     puts "Incumbent flag is checked"
+
+    if page.has_xpath?("//td[contains(text(),'Incumbent')]//following-sibling::td/div/img[@alt='Checked']") == true
+      puts "Incumbent flag is checked"
     else
-    $notcheckedincumbentcheckbox = page.has_xpath?("//td[contains(text(),'Incumbent')]//following-sibling::td/div/img[@alt='Checked']") == true
-    puts $notcheckedincumbentcheckbox
-    puts "Incumbent flag is NOT checked"
+      $notcheckedincumbentcheckbox = page.has_xpath?("//td[contains(text(),'Incumbent')]//following-sibling::td/div/img[@alt='Checked']") == true
+      puts $notcheckedincumbentcheckbox
+      puts "Incumbent flag is NOT checked"
     end
-   
-   puts "Successfully verified incumbent Checkbox and Renewal Opportunity"  
+
+    puts "Successfully verified incumbent Checkbox and Renewal Opportunity"
   rescue Exception => ex
     puts "Error occurred while checking the Incumbent Checkbox"
     puts ex.message
@@ -374,13 +374,13 @@ And(/^I verify contacts Accounts in Service Contract$/)do
     end
     puts "clicked on save"
     sleep 5
-     $ServiceContractPrice = first(:xpath,'//td[contains(text(),"Total Price")]/following-sibling::td/div').text
-     puts $ServiceContractPrice
-    
-   # $abc  = first(:xpath,'//*[contains(@id,"TotalPrice_ileinner")]').text
-   # puts $abc
+    $ServiceContractPrice = first(:xpath,'//td[contains(text(),"Total Price")]/following-sibling::td/div').text
+    puts $ServiceContractPrice
+
+    # $abc  = first(:xpath,'//*[contains(@id,"TotalPrice_ileinner")]').text
+    # puts $abc
     puts "Taken servicecontracts price"
-    
+
     sleep 8
     arg = getReference "AddPartnerOpportunity"
     sleep 2
@@ -581,16 +581,16 @@ And(/^I Verify Price is Present on Assests$/)do
     sleep 5
     find("input[placeholder='Search...']").send_keys $automationAssetName
     puts $automationAssetName
-    Assetpricerate = first(:xpath,"//div[contains(@id,'uiGrid-000A-cell')]/div").text
+    Assetpricerate = first(:xpath,"//*[contains(@class,'ui-grid-canvas')]/div[contains(@class,'ui-grid-row')]/div[contains(@class,'ng-isolate-scope')]/div[5]").text
     puts Assetpricerate
-    
+
     if  $AssetPrice == Assetpricerate
-     putstr "Failed to see the Assests #{Assetpricerate} Price"
-     else
-     puts "Successfully see the Assests #{Assetpricerate} Price"
-     end
+      putstr "Failed to see the Assests #{Assetpricerate} Price"
+    else
+      puts "Successfully see the Assests #{Assetpricerate} Price"
+    end
     puts "Assets Price verified successfully"
-    sleep 4
+    sleep 5
   rescue Exception => ex
     putstr "Error occurred while verifying Assest Price"
     putstr_withScreen  ex.message
@@ -600,15 +600,22 @@ end
 And(/^I Verify Price is Present on Contracts$/)do
   begin
     sleep 5
-    find("input[placeholder='Search...']").send_keys
-    #find(:xpath,"//*[contains(@id,'uiGrid-00KN-cell']/div')]/div").text
-    Contractprice = find(:xpath,"//*[contains(@id,'uiGrid-00KN-cell']/div')]/div").text
-     if $ServiceContractPrice == Contractprice  
-     puts "Successfully see the Service Contracts  Price"
-     else
-     putstr "Failed to see the Service Contracts  Price"
-     end
-    puts "Contracts name verified successfully"
+    # find("input[placeholder='Search...']").send_keys $automationContractName
+    # puts $automationContractName
+    #Contractprice = find(:xpath,"//*[contains(@id,'uiGrid-000A-cell']/div").text
+    $Contractprice = first(:xpath,"//*[contains(@class,'ui-grid-canvas')]/div[contains(@class,'ui-grid-row')]/div[contains(@class,'ng-isolate-scope')]/div[6]").text
+    puts $Contractprice
+
+    # within(".grid-container")do
+    # $Contractprice = find(:xpath," //*[contains(@class,'ui-grid-canvas')]/div[contains(@class,'ui-grid-row')]/div[contains(@class,'ng-isolate-scope')]/div[5]").find(:xpath, '..').find(:xpath, "following-sibling::div").text
+    # puts $Contractprice
+    # # if $ServiceContractPrice == Contractprice
+    # # puts "Successfully see the Service Contracts #{Contractprice} Price"
+    # # else
+    # # putstr "Failed to see the Service Contracts #{Contractprice} Price"
+    # # end
+    # end
+    puts "Contracts name verified  successfully"
     sleep 4
   rescue Exception => ex
     putstr "Error occurred Verify Price is Present on Contracts"
@@ -630,34 +637,41 @@ end
 
 And(/^I verified incumbent checkbox in service contracts$/)do
   begin
-     if page.has_xpath?("//td[contains(text(),'Incumbent')]//following-sibling::td/div/img[@alt='Checked']") == true
-     puts "Incumbent flag is checked"
+    if page.has_xpath?("//td[contains(text(),'Incumbent')]//following-sibling::td/div/img[@alt='Checked']") == true
+      puts "Incumbent flag is checked"
     else
-     puts "Incumbent flag is NOT checked"
+      incumbentcheckbox = page.has_xpath?("//td[contains(text(),'Incumbent')]//following-sibling::td/div/img[@alt='Checked']") == true
+      puts $notcheckedincumbentcheckbox
+      puts "Incumbent flag is NOT checked"
     end
-   rescue Exception => ex
+
+    if $notcheckedincumbentcheckbox == incumbentcheckbox
+      puts "Incumbent Checkbox is not checked and verified successfully"
+    else
+      puts "incumbent flag is checked"
+    end
+  rescue Exception => ex
     putstr "Error occurred while verifying incumbent checkbox in service contracts"
     putstr_withScreen  ex.message
   end
 end
 
-
 And(/^I verified incumbent checkbox in Assests$/)do
   begin
-   if page.has_xpath?("//td[contains(text(),'Incumbent')]//following-sibling::td/div/img[@alt='Checked']") == true
-     puts "Incumbent flag is checked"
+    if page.has_xpath?("//td[contains(text(),'Incumbent')]//following-sibling::td/div/img[@alt='Checked']") == true
+      puts "Incumbent flag is checked"
     else
-    incumbentcheckbox = page.has_xpath?("//td[contains(text(),'Incumbent')]//following-sibling::td/div/img[@alt='Checked']") == true
-    puts $notcheckedincumbentcheckbox
-    puts "Incumbent flag is NOT checked"
+      incumbentcheckbox = page.has_xpath?("//td[contains(text(),'Incumbent')]//following-sibling::td/div/img[@alt='Checked']") == true
+      puts $notcheckedincumbentcheckbox
+      puts "Incumbent flag is NOT checked"
     end
-   
-   if $notcheckedincumbentcheckbox == incumbentcheckbox
-     puts "Incumbent Checkbox is not checked and verified successfully"
-   else
-     puts "incumbent flag is checked"
-   end
-    
+
+    if $notcheckedincumbentcheckbox == incumbentcheckbox
+      puts "Incumbent Checkbox is not checked and verified successfully"
+    else
+      puts "incumbent flag is checked"
+    end
+
   rescue Exception => ex
     putstr "Error occurred while verifying incumbent checkbox in Assests"
     putstr_withScreen  ex.message

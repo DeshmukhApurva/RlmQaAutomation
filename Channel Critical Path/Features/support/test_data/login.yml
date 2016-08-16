@@ -109,6 +109,20 @@ CHANNELPARTNER_DEV25:
  channelNetops_url: "https://login.salesforce.com"
  channelNetops_userName: "qa-channelnetops-csmdev25@servicesource.com"
  channelNetops_pwd: "pass@word1"
+ 
+CHANNELPARTNER_DEV25_USER2:
+ userName: "servicesource232465623232@comitydesigns.com"
+ pwd: "passw0rd"
+ Instance: "ChannelPartnerDEV25"
+ url: "https://csmdev25-developer-edition.na17.force.com/ServiceSource1__CHL_PartnerLogin"
+ Name: "QA ChannelPartner"
+ oem_url: "https://login.salesforce.com/"
+ oem_userName: "qa-channelmanager-csmdev25@servicesource.com"
+ oem_pwd: "pass@word1"
+ channelNetops_url: "https://login.salesforce.com"
+ channelNetops_userName: "qa-channelnetops-csmdev25@servicesource.com"
+ channelNetops_pwd: "pass@word1"
+
 
 
 CHANNELNETOPS_EETEST2:
