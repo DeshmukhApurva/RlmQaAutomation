@@ -5,12 +5,12 @@ Background: Login to the Application
 	Given that I navigate to the CRM application 
 	Then I should land on CRM home page 
 	
-@Renew_Createnewaccount 
-Scenario: Rally Test Case ID:  : Renew: New account creation 
-	When I click on "Account" tab 
-	Then I create new Renew Account with value "Revenue Industries" 
-	When I click on "Account" tab 
-	Then I create new Renew Account with value "GE Force" 
+#@Renew_Createnewaccount 
+#Scenario: Rally Test Case ID:  : Renew: New account creation 
+#	When I click on "Account" tab 
+#	Then I create new Renew Account with value "Revenue Industries" 
+#	When I click on "Account" tab 
+#	Then I create new Renew Account with value "GE Force" 
 	
 @Renew_CreateAsset 
 Scenario: Rally Test Case ID:  : Renew: Asset creation 
@@ -55,7 +55,7 @@ Scenario: Renew: Generate Opp
     When I click on "Opportunities" tab
     Then I create new opportunity with Name "N.ew1Opportunity_StNd_Pricebook" with Account "QA Test" and Product "Product B" with pricebook "Standard Price Book" 
 	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "N.ew1Opportunity_Test_Pricebook" with Account "QA Test" and Product "Product B" with pricebook "Test_Pricebook" 
+	Then I create new opportunity with Name "N.ew1Opportunity_Test_Pricebook" with Account "QA Test" and Product "Product B" with pricebook "Test_PriceBook" 
     When I create Source Opportunity with Line Items with Account "QA Test" and resolve it and rename it as "PES_Invalid_RR" 
     When I create Source Opportunity with Line Items with Account "QA Test" and resolve it and rename it as "PES_Renewal_Opportunity" 
     When I create Source Opportunity with Line Items with Account "QA Test" and resolve it and rename it as "SourceOpportunity9" 

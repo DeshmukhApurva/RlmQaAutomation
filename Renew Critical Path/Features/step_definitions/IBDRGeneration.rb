@@ -413,24 +413,16 @@ end
 Then(/^I verify the created products$/) do
   begin
     within all(".pbBody")[1] do
-      sleep 5
-      if page.has_xpath?('//table/tbody/tr/th/a')
-        puts "Successfully see the products"
         sleep 4
-        $first_product_name = all(:xpath,"//table/tbody/tr/th/a")[0].text
-        #         sleep 4
-        if page.has_xpath?('//table/tbody/tr[1]/th/a')
-          $second_product_name = all(:xpath,"//table/tbody/tr/th/a")[1].text
-          puts $second_product_name
-        end
+        $first_product_name = find(:xpath,"//table/tbody/tr[2]/th/a").text
         puts $first_product_name
-        sleep 1
-      else
-        putstr "Failed to see the products"
-      end
+        $second_product_name = find(:xpath,"//table/tbody/tr[3]/th/a").text
+        puts $second_product_name
+        sleep 5
+        puts "Successfully see the products"
     end
-    sleep 1
-  rescue Exception => ex
+    sleep 10
+      rescue Exception => ex
     putstr "Error occurred while verifying the created products"
     putstr_withScreen  ex.message
   end

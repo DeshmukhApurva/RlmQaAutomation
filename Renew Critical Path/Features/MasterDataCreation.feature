@@ -92,7 +92,7 @@ Scenario: Renew: Generate Opp
 	When I click on "Opportunities" tab 
 	Then I create new opportunity with Name "N.ew1Opportunity_StNd_Pricebook" with Account "QA Test" and Product "Product B" with pricebook "Standard Price Book" 
 	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "N.ew1Opportunity_Test_Pricebook" with Account "QA Test" and Product "Product B" with pricebook "Test_Pricebook" 
+	Then I create new opportunity with Name "N.ew1Opportunity_Test_Pricebook" with Account "QA Test" and Product "Product B" with pricebook "Test_PriceBook" 
 	When I create Source Opportunity with Line Items with Account "QA Test" and resolve it and rename it as "PES_Invalid_RR" 
 	
 	
