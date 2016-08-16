@@ -521,6 +521,7 @@ Then(/^I navigate to opportunity from product detail page$/) do
   begin
     setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
     setCursorPos.Call(500,10)
+    page.execute_script "window.scrollBy(0,7000)"
     find(:xpath, '//td[text()="Opportunity"]/following-sibling::td/div/a', :match => :prefer_exact).click
     sleep 5
     puts "Navigated opportunity page"
@@ -734,6 +735,7 @@ And(/^I navigate to opportunity from quote page$/) do
     sleep 5
     setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
     setCursorPos.Call(500,10)
+    page.execute_script "window.scrollBy(0,7000)"
     sleep 5
     find(:xpath, '//td[text()="Opportunity Name"]/following-sibling::td/div/a', :match => :prefer_exact).click
     sleep 7
