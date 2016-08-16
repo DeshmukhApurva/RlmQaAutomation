@@ -241,23 +241,32 @@ And(/^I change the Stage into Closed won$/)do
     end
     sleep 5
   rescue Exception => ex
-    puts "Error occurred while creating Opportunities"
+    puts "Error occurred while stage into closed won"
     puts ex.message
   end
 end
 
-And(/^I check the Incumbent Checkbox$/)do
+And(/^I check the Incumbent Checkbox and Renewal Opportunity$/)do
   begin
     if page.has_xpath?("//td[contains(text(),'Renewal')]//following-sibling::td/div/img[@alt='Checked']") == true
       puts "Renewal flag  is checked"
-      $notcheckedincumbent = page.has_xpath?("//td[contains(text(),'Renewal')]//following-sibling::td/div/img[@alt='Checked']") == true
-      puts "value of renewal flag"
-      puts $notcheckedincumbent
+      $RenewalOpportunity = page.has_xpath?("//td[contains(text(),'Renewal')]//following-sibling::td/div/img[@alt='Checked']") == true
+      puts $RenewalOpportunity
     else
-      puts " flag is NOT checked"
+      puts "Renewal flag  is checked not checked"
     end
+    
+   if page.has_xpath?("//td[contains(text(),'Incumbent')]//following-sibling::td/div/img[@alt='Checked']") == true
+     puts "Incumbent flag is checked"
+    else
+    $notcheckedincumbentcheckbox = page.has_xpath?("//td[contains(text(),'Incumbent')]//following-sibling::td/div/img[@alt='Checked']") == true
+    puts $notcheckedincumbentcheckbox
+    puts "Incumbent flag is NOT checked"
+    end
+   
+   puts "Successfully verified incumbent Checkbox and Renewal Opportunity"  
   rescue Exception => ex
-    puts "Error occurred while creating Opportunities"
+    puts "Error occurred while checking the Incumbent Checkbox"
     puts ex.message
   end
 end
@@ -363,11 +372,15 @@ And(/^I verify contacts Accounts in Service Contract$/)do
     within(:id,"bottomButtonRow") do
       click_on "Save"
     end
-
-    within all(".detailList")do
-      $ServiceContractPrice = first(:xpath,'//td[contains(text(),"Total Price")]/following-sibling::td/div').text
-      puts $ServiceContractPrice
-    end
+    puts "clicked on save"
+    sleep 5
+     $ServiceContractPrice = first(:xpath,'//td[contains(text(),"Total Price")]/following-sibling::td/div').text
+     puts $ServiceContractPrice
+    
+   # $abc  = first(:xpath,'//*[contains(@id,"TotalPrice_ileinner")]').text
+   # puts $abc
+    puts "Taken servicecontracts price"
+    
     sleep 8
     arg = getReference "AddPartnerOpportunity"
     sleep 2
@@ -391,7 +404,7 @@ And(/^I verify contacts Accounts in Service Contract$/)do
     end
     sleep 8
   rescue Exception => ex
-    putstr "Error occurred while navigating to opportunity page"
+    putstr "Error occurred while verify contacts Accounts in Service Contract"
     putstr_withScreen  ex.message
   end
 end
@@ -482,7 +495,7 @@ Then(/^I click on Assests and Verified Accounts and Contacts$/)do
     sleep 5
     puts "Verified Account and Contacts in Assests"
   rescue Exception => ex
-    putstr "Error occurred while navigating to opportunity page"
+    putstr "Error occurred Verified Accounts and Contacts"
     putstr_withScreen  ex.message
   end
 end
@@ -514,7 +527,7 @@ And(/^I click on Service Contracts and Verified Accounts and Contacts$/)do
     end
     sleep 8
   rescue Exception => ex
-    putstr "Error occurred while navigating to opportunity page"
+    putstr "Error occurred in Verified Accounts and Contacts"
     putstr_withScreen  ex.message
   end
 end
@@ -536,7 +549,29 @@ Then(/^I search an Account Name and verify Price is present in Assest$/)do
     puts "Entered text #{AccountName} to search in Account search box"
 
   rescue Exception => ex
-    putstr "Error occurred while navigating to opportunity page"
+    putstr "Error occurred verify Price is present in Assest"
+    putstr_withScreen  ex.message
+  end
+end
+
+Then(/^I search an Account Name and verify Total Price is present in Contracts$/)do
+  begin
+    arg1 = getDetails "IncumbentPo"
+    AccountName = arg1["Account"]
+
+    find("div[placeholder='Search Accounts...']").click
+    sleep 3
+
+    find("input[placeholder='Search Accounts...']").send_keys [:control, 'a'], :backspace
+
+    find("input[placeholder='Search Accounts...']").send_keys AccountName
+    sleep 3
+    find("input[placeholder='Search Accounts...']").send_keys :enter
+    sleep 8
+    puts "Entered text #{AccountName} to search in Account search box"
+
+  rescue Exception => ex
+    putstr "Error occurred verify Price is present in Assest"
     putstr_withScreen  ex.message
   end
 end
@@ -546,18 +581,18 @@ And(/^I Verify Price is Present on Assests$/)do
     sleep 5
     find("input[placeholder='Search...']").send_keys $automationAssetName
     puts $automationAssetName
-    $Assetpricerate = first(:xpath,"//div[contains(@id,'uiGrid-000A-cell')]/div").text
-    puts $Assetpricerate 
-    if $Assetpricerate.to_s == $AssetPrice.to_s
-       putstr "Failed to see the Assests #{Assetpricerate} Price"
+    Assetpricerate = first(:xpath,"//div[contains(@id,'uiGrid-000A-cell')]/div").text
+    puts Assetpricerate
+    
+    if  $AssetPrice == Assetpricerate
+     putstr "Failed to see the Assests #{Assetpricerate} Price"
      else
-       puts "Successfully see the Assests #{Assetpricerate} Price" 
-    end
+     puts "Successfully see the Assests #{Assetpricerate} Price"
+     end
     puts "Assets Price verified successfully"
-
     sleep 4
   rescue Exception => ex
-    putstr "Error occurred while navigating to opportunity page"
+    putstr "Error occurred while verifying Assest Price"
     putstr_withScreen  ex.message
   end
 end
@@ -567,16 +602,16 @@ And(/^I Verify Price is Present on Contracts$/)do
     sleep 5
     find("input[placeholder='Search...']").send_keys
     #find(:xpath,"//*[contains(@id,'uiGrid-00KN-cell']/div')]/div").text
-    $Contractprice=find(:xpath,"//*[contains(@id,'uiGrid-00KN-cell']/div')]/div").text
-    if $Contractprice ==$ServiceContractPrice
-      puts "Successfully see the Service Contracts #{Contractprice} Price"
-    else
-      putstr "Failed to see the Service Contracts #{Contractprice} Price"
-    end
+    Contractprice = find(:xpath,"//*[contains(@id,'uiGrid-00KN-cell']/div')]/div").text
+     if $ServiceContractPrice == Contractprice  
+     puts "Successfully see the Service Contracts  Price"
+     else
+     putstr "Failed to see the Service Contracts  Price"
+     end
     puts "Contracts name verified successfully"
     sleep 4
   rescue Exception => ex
-    putstr "Error occurred while navigating to opportunity page"
+    putstr "Error occurred Verify Price is Present on Contracts"
     putstr_withScreen  ex.message
   end
 end
@@ -587,5 +622,44 @@ And(/^I clicked on Contributed to$/)do
     find(:xpath, "//th[text()='Contributed To']").find(:xpath, '..').find(:xpath, "following-sibling::tr/td[2]/a").click
     puts "Clicked on Contributed"
     sleep 4
+  rescue Exception => ex
+    putstr "Error occurred while clicking on Contribute"
+    putstr_withScreen  ex.message
+  end
+end
+
+And(/^I verified incumbent checkbox in service contracts$/)do
+  begin
+     if page.has_xpath?("//td[contains(text(),'Incumbent')]//following-sibling::td/div/img[@alt='Checked']") == true
+     puts "Incumbent flag is checked"
+    else
+     puts "Incumbent flag is NOT checked"
+    end
+   rescue Exception => ex
+    putstr "Error occurred while verifying incumbent checkbox in service contracts"
+    putstr_withScreen  ex.message
+  end
+end
+
+
+And(/^I verified incumbent checkbox in Assests$/)do
+  begin
+   if page.has_xpath?("//td[contains(text(),'Incumbent')]//following-sibling::td/div/img[@alt='Checked']") == true
+     puts "Incumbent flag is checked"
+    else
+    incumbentcheckbox = page.has_xpath?("//td[contains(text(),'Incumbent')]//following-sibling::td/div/img[@alt='Checked']") == true
+    puts $notcheckedincumbentcheckbox
+    puts "Incumbent flag is NOT checked"
+    end
+   
+   if $notcheckedincumbentcheckbox == incumbentcheckbox
+     puts "Incumbent Checkbox is not checked and verified successfully"
+   else
+     puts "incumbent flag is checked"
+   end
+    
+  rescue Exception => ex
+    putstr "Error occurred while verifying incumbent checkbox in Assests"
+    putstr_withScreen  ex.message
   end
 end
