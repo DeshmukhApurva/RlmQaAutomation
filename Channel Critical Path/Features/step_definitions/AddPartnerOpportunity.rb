@@ -107,44 +107,54 @@ And(/^I select the "([^"]*)" from the contacts lookup list$/) do |partner_accoun
     sleep 4
     if page.has_css?(".lookupIcon")
       puts "Successfully see the #{arg["PartnerAccount1ContactFieldName"]} and #{arg["PartnerAccount2ContactFieldName"]} lookup Icons"
+      find(:xpath, "//label[contains(text(),'Partner Account 1 Contact')]/parent::th/following-sibling::td/span/input").send_keys arg2["PartnerAccount1Contact"]
       sleep 2
-      main = page.driver.browser.window_handles.first
-      sleep 3
-      find("img[alt='Partner Account 1 Contact Lookup (New Window)']").click
-      sleep 8
-      page.driver.browser.manage.window.maximize
-      sleep 3
-      page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
-      sleep 5
-      page.driver.browser.switch_to.frame("resultsFrame")
-      sleep 3
-      within('.list') do
-        click_link arg2["PartnerAccount1Contact"]
-      end
-      sleep 5
-      page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
-      sleep 3
-      puts "Successfully Selected the #{arg["PartnerAccount1ContactFieldName"]} from #{arg["PartnerOpportunityName"]} page"
-      sleep 8
-      main = page.driver.browser.window_handles.first
-      sleep 3
-      find("img[alt='Partner Account 2 Contact Lookup (New Window)']").click
-      sleep 8
-      page.driver.browser.manage.window.maximize
-      sleep 3
-      page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
-      sleep 5
-      page.driver.browser.switch_to.frame("resultsFrame")
-      within('.list') do
-        click_on arg2["PartnerAccount2Contact"]
-      end
-      sleep 5
-      page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
-      sleep 5
-      puts "Successfully Selected the #{arg["PartnerAccount2ContactFieldName"]} from #{arg["PartnerOpportunityName"]} page"
+      find(:xpath, "//label[contains(text(),'Partner Account 2 Contact')]/parent::th/following-sibling::td/span/input").send_keys arg2["PartnerAccount2Contact"]
+      sleep 2
     else
       putstr "Failed to see the #{arg["PartnerAccount1ContactFieldName"]} and #{arg["PartnerAccount2ContactFieldName"]} lookup Icons"
     end
+    #    if page.has_css?(".lookupIcon")
+    #      puts "Successfully see the #{arg["PartnerAccount1ContactFieldName"]} and #{arg["PartnerAccount2ContactFieldName"]} lookup Icons"
+    #      sleep 2
+    #      main = page.driver.browser.window_handles.first
+    #      sleep 3
+    #      find("img[alt='Partner Account 1 Contact Lookup (New Window)']").click
+    #      sleep 8
+    #      page.driver.browser.manage.window.maximize
+    #      sleep 3
+    #      page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+    #      sleep 5
+    #      page.driver.browser.switch_to.frame("resultsFrame")
+    #      sleep 3
+    #      within('.list') do
+    #        click_link arg2["PartnerAccount1Contact"]
+    #      end
+    #      sleep 5
+    #      page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+    #      sleep 3
+    #      puts "Successfully Selected the #{arg["PartnerAccount1ContactFieldName"]} from #{arg["PartnerOpportunityName"]} page"
+    #      sleep 8
+    #      main = page.driver.browser.window_handles.first
+    #      sleep 3
+    #      find("img[alt='Partner Account 2 Contact Lookup (New Window)']").click
+    #      sleep 8
+    #      page.driver.browser.manage.window.maximize
+    #      sleep 3
+    #      page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+    #      sleep 5
+    #      page.driver.browser.switch_to.frame("resultsFrame")
+    #      within('.list') do
+    #        click_on arg2["PartnerAccount2Contact"]
+    #      end
+    #      sleep 5
+    #      page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+    #      sleep 5
+    #      puts "Successfully Selected the #{arg["PartnerAccount2ContactFieldName"]} from #{arg["PartnerOpportunityName"]} page"
+    #    else
+    #      putstr "Failed to see the #{arg["PartnerAccount1ContactFieldName"]} and #{arg["PartnerAccount2ContactFieldName"]} lookup Icons"
+    #    end
+
     sleep 4
   rescue Exception => ex
     putstr "Error occurred while clicking the #{arg["PartnerAccount1ContactFieldName"]} and #{arg["PartnerAccount2ContactFieldName"]} lookup Icons and #{partner_account_contacts}"
@@ -168,8 +178,8 @@ And(/^I select the account as "([^"]*)" or "([^"]*)"$/) do |account1, account2|
           sleep 4
           #first("tbody").first("tr")[1].all("td")[2].first("select").select account1
           find(:xpath, "//tbody/tr[1]/td[2]/select").select account1
-        result = true
-        break
+          result = true
+          break
         end
       end
       putstr "Failed to see the #{account1} field value" unless result
@@ -185,8 +195,8 @@ And(/^I select the account as "([^"]*)" or "([^"]*)"$/) do |account1, account2|
           sleep 4
 
           find(:xpath, "//tbody/tr[2]/td[2]/select").select account2
-        result = true
-        break
+          result = true
+          break
         end
       end
       putstr "Failed to see the #{account2} field value" unless result
@@ -620,7 +630,7 @@ And(/^I set the "([^"]*)" opportunity$/) do |primary_checkbox|
       within all(".pbBody")[1] do
         if all("tr")[1].all("td")[5].first("img")[:title] == "Checked"
           puts "Partner Opportunity primary checkbox is checked"
-        break
+          break
         else
           sleep 4
           if all("input[type=checkbox]")[1].checked?

@@ -1374,7 +1374,7 @@ And(/^I Add "([^"]*)" Products having product name as "([^"]*)" to Opportunity$/
     sleep 1
     first(:option, 'equals').select_option
     sleep 1
-    find(:xpath, '//span[contains(text(),"By Field Filter")]/following-sibling::div/div/input').set 'Active'
+    find(:xpath, '//span[contains(text(),"By Field Filter")]/following-sibling::div/div/input').set 'True'
     sleep 1
     find(:xpath, '//input[contains(@id,"save_filter_PricebookEntry")]').click
     sleep 5
