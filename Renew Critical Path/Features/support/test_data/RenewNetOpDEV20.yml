@@ -88,3 +88,10 @@ FiscalOpp:
 ManageRenewalsOpportunity:
  RenewalRelationshipOpportunity: "PES_Renewal_Opportunity"
  InvalidRenewalRelationshipOpportunity: "PES_Invalid_RR"
+ 
+SourceOpportunity:
+ SourceOppName: "ASO"   
+ Account: "ARNAcc"
+ SourceOppStage: "Qualification" 
+ ProductQuantity: 1
+ ProductSalesPrice: 5000

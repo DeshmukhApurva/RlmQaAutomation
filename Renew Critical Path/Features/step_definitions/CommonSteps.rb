@@ -1,6 +1,7 @@
 #All Common Step Definitions which are common across modules
 #All scenarios mentioned in all features
 require 'Win32API'
+require 'pry'
 
 Given(/^that I navigate to the CRM application$/) do
   begin
@@ -1327,7 +1328,8 @@ And(/^I Create New Source Opportunity$/) do
     within(:id,"bottomButtonRow") do
       click_on "Save"
     end
-
+    sleep 10
+    $sourceOppURL = URI.parse(current_url)
     puts "Successfully Created Source Opportunity #{$RenAutomationSO}"
 
   rescue Exception => ex
@@ -1423,6 +1425,16 @@ And(/^I Add "([^"]*)" Products having product name as "([^"]*)" to Opportunity$/
   end
 end
 
+And(/^I delete SourceOppRenewalOppSourceObject record$/) do
+  begin
+    deleteOppRenOppSourceObj($RenAutomationSO, $RenAutomationRO)
+    sleep 5
+  rescue Exception => ex
+    raise "Error occurred while renewing opportunity"
+    putstr_withScreen  ex.message
+  end
+end
+
 And(/^I Renew Source Opportunity$/) do
   begin
     sleep 5
@@ -1448,6 +1460,7 @@ And(/^I Renew Source Opportunity$/) do
     sleep 1
     first(:button,'Save').click
     sleep 10
+    $renOppURL = URI.parse(current_url)
   rescue Exception => ex
     raise "Error occurred while renewing opportunity"
     putstr_withScreen  ex.message
@@ -1634,12 +1647,22 @@ Then (/^I verify Adds Amount and Adds Ratio$/) do
   end
 end
 
-When(/^I get the SalesforceAPI details of "([^"]*)" user$/) do |user_role|
+When(/^I connect to SalesforceAPI using "([^"]*)" user role$/) do |user_role|
   begin
     arg = Array.new
     arg = getSalesForceAPIinfo user_role
     puts "Data #{arg}"
-    connectSalesforceAPI
+    sleep 5
+    connectSalesforceAPI(arg) 
+  rescue Exception => ex
+    puts ex.message
+  end
+end
+
+When(/^I delete the SourceOpp_RenOpp_SourceObjects$/) do
+  begin
+    sleep 5
+    deleteOppRenOppSourceObj("$RenAutomationSO", "$RenAutomationRO") 
   rescue Exception => ex
     puts ex.message
   end

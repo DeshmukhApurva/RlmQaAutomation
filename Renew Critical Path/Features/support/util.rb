@@ -59,39 +59,83 @@ def getReference(yamlInfo)
   myoptions[yamlInfo]
 end
 
-def connectSalesforceAPI
+def connectSalesforceAPI(salesForceAppConnectDetails)
+  sleep 5
   Restforce.configure do |config|
     config.api_version = "36.0"
     # ...
   end
-#    client = Restforce.new :username => 'amit-csmdev07@comitydesigns.com',
-#    :password       => 'Passw7rd',
-#    :security_token => 'ECVzzSlTX8HHrE0PE0vStyW2',
-#    :client_id      => '3MVG9fMtCkV6eLhdTHzExvFId0bZutnJg30N.KV_OFKhgrEgIip4kq6HzduedM7RPBRcNWGDkgrTyyNrVpVJm',
-#    :client_secret  => '7847893736189474237'
 
-  client = Restforce.new :username => 'vishal-csmdev20@comitydesigns.com',
-  :password       => 'passw0rd',
-  :client_id      => '3MVG9fMtCkV6eLhf.aL9eep2R9flaPaK00XxIzX7SwD5OyoRcRTsTV9eGABbZwa5R005iVcwZ4d6MgkloNZF4',
-  :client_secret  => '9181097014607636178'
-  puts "#{client.user_info.username}"
+  $client = Restforce.new :username => salesForceAppConnectDetails["userName"],
+  :password       => salesForceAppConnectDetails["pwd"],
+  :security_token => salesForceAppConnectDetails["security_token"],  
+  :client_id      => salesForceAppConnectDetails["client_id"],
+  :client_secret  => salesForceAppConnectDetails["client_secret"]
+  puts "#{$client.user_info.username} connected"
 
-  accounts = client.query("select Name from Account where Id='001j000000uBebwAAC'")
-  account = accounts.first
-  puts "#{account.Name}"
-  # Get the global describe for all sobjects
-  client.describe
-  # => { ... }
-  
-  # Get the describe for the Account object
-  fields = client.describe_fieldSets('Opportunity','Opportunity Split Edit')
-  #fieldSet = fields.fieldSets('Opportunity Split Edit')
-  puts fields
-  # => { ... }
 end
 
 def getSalesForceAPIinfo(userRole)
+  sleep 5
   yamlinput = "../features/support/test_data/login.yml"
   myoptions = YAML.load_file(yamlinput)
   myoptions[userRole]
+end
+
+def deleteOppRenOppSourceObj(sourceOpp, renOpp)
+  sleep 5
+  puts $RenAutomationSO
+  puts $RenAutomationRO
+  puts $renOppURL
+  puts $sourceOppURL
+  sleep 10
+  oppRecord = $client.query("SELECT Id,Name FROM Opportunity where Name = \'#{sourceOpp}\'")
+  renOppRecord = $client.query("SELECT Id,Name FROM Opportunity where Name = \'#{renOpp}\'")
+
+  opp = oppRecord.first
+  renOpp = renOppRecord.first
+  puts opp.Id + " " + opp.Name
+  puts renOpp.Id + " " + renOpp.Name
+
+  oppid = opp.Id
+  renOppid = renOpp.Id
+
+  sourceObj = $client.query("select Id,Name from ServiceSource1__REN_Source__c where ServiceSource1__REN_Inheriting_Opportunity__c = \'#{renOppid}\'")
+  puts sourceObj
+  sourceOppRecords = Array.new
+  sourceOppRecords = sourceObj
+  sourceOppRecords.each do |rec|
+    puts sourceOppfirstRecord.Name
+    sourceOppfirstRecord.destroy
+  end    
+
+#  puts sourceOppfirstRecord.Name + " " + sourceOppfirstRecord.Name
+#  sourceOppfirstRecord.destroy
+#  sleep 3
+#
+#  sourceRecord = $client.query("select Id,Name from ServiceSource1__REN_Source__c where ServiceSource1__REN_Inheriting_Opportunity__c = \'#{renOppid}\'")
+#  sourceOppfirstRecord = sourceRecord.first
+#  puts sourceOppfirstRecord.Name
+#  sourceOppfirstRecord.destroy
+  sleep 3
+
+  $client.destroy!('Opportunity', renOppid[0,15])
+  sleep 5
+  $client.destroy!('Opportunity', oppid[0,15])
+  #oPPRecord.destroy
+  sleep 5
+
+  #binding.pry
+  visit $renOppURL
+  sleep 5
+  if page.has_content?('Record deleted')
+    puts "Source Opportunity #{$RenAutomationRO} deleted"
+  end
+
+  visit $sourceOppURL
+  sleep 5
+  if page.has_content?('Record deleted')
+    puts "Source Opportunity #{$RenAutomationSO} deleted"
+  end
+  sleep 5
 end

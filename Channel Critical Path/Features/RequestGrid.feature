@@ -160,4 +160,3 @@ Rally Test Case ID:TC6359: Opportunity grid - request page - Cancel
 	And I verify the current expiration year value in Expiration Year filter 
 	And I click on Request icon 
 	Then I click on Cancel button
-	
