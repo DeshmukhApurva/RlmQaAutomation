@@ -18,17 +18,17 @@ And (/^I select the opportunity for field update for "(.*?)"$/) do |data|
     sleep 3
     sleep 10
     #find("div[placeholder='Select Opportunity Type...']").click
-    find(:xpath, "//div[contains(@placeholder, 'Select Opportunity Type')]").click    
+    find(:xpath, "//div[contains(@placeholder, 'Select Opportunity Type')]").click
     sleep 5
     #find("input[placeholder='Select Opportunity Type...']").send_keys "New Last Week"
-    find(:xpath, "//input[contains(@placeholder, 'Select Opportunity Type')]").send_keys "New Last Week"    
+    find(:xpath, "//input[contains(@placeholder, 'Select Opportunity Type')]").send_keys "New Last Week"
     sleep 3
     puts "Successfully see the New Last Week filter"
     #find("input[placeholder='Select Opportunity Type...']").send_keys :arrow_down
-    find(:xpath, "//input[contains(@placeholder, 'Select Opportunity Type')]").send_keys :arrow_down    
+    find(:xpath, "//input[contains(@placeholder, 'Select Opportunity Type')]").send_keys :arrow_down
     sleep 5
     #find("input[placeholder='Select Opportunity Type...']").send_keys :enter
-    find(:xpath, "//input[contains(@placeholder, 'Select Opportunity Type')]").send_keys :enter    
+    find(:xpath, "//input[contains(@placeholder, 'Select Opportunity Type')]").send_keys :enter
     sleep 5
     find('.srevicon-dots-md').click
     sleep 3
@@ -272,10 +272,35 @@ Then(/^I select one or more the opportunity "([^"]*)" and verify opportunity for
     allExpYears = allExpYearsArg["filterValues"].split(",")
     puts allExpYears
 
+    # within all(".ui-select-match")[1] do
+    # if has_selector?(:css, ".close.ui-select-match-close")
+    # find(:css, ".close.ui-select-match-close").click
+    # end
+    # end
+    #
+    # allExpQuarters.each do |value|
+    # find(:xpath, "//div/div[2]/div/div[2]/div/div/div[1]/div[1]/div/div/div/input").click
+    # click_on(value)
+    # sleep 1
+    # end
+    #
+    # within all(".ui-select-match")[2] do
+    # if has_selector?(:css, ".close.ui-select-match-close")
+    # find(:css, ".close.ui-select-match-close").click
+    # end
+    # end
+
     within all(".ui-select-match")[1] do
-      if has_selector?(:css, ".close.ui-select-match-close")
-        find(:css, ".close.ui-select-match-close").click
+      #binding.pry
+      spanCount = all(:css, ".close.ui-select-match-close").count
+      while spanCount > 0  do
+        puts("deleting quarters" )
+        first(:css, ".close.ui-select-match-close").click
+        spanCount -=1
       end
+    # if has_selector?(:css, ".close.ui-select-match-close")
+    # find(:css, ".close.ui-select-match-close").click
+    # end
     end
 
     allExpQuarters.each do |value|
@@ -285,8 +310,14 @@ Then(/^I select one or more the opportunity "([^"]*)" and verify opportunity for
     end
 
     within all(".ui-select-match")[2] do
-      if has_selector?(:css, ".close.ui-select-match-close")
-        find(:css, ".close.ui-select-match-close").click
+    # if has_selector?(:css, ".close.ui-select-match-close")
+    # find(:css, ".close.ui-select-match-close").click
+    # end
+      spanCount = all(:css, ".close.ui-select-match-close").count
+      while spanCount > 0  do
+        puts("deleting quarters" )
+        first(:css, ".close.ui-select-match-close").click
+        spanCount -=1
       end
     end
 
@@ -330,7 +361,7 @@ Then(/^I select one or more the opportunity "([^"]*)" and verify opportunity for
         tr = all(".ui-grid-row")
         tr.each_with_index do |row, index|
           if row.all("div[role='gridcell']")[12].has_css?'.btn-round-sm.srevicon-pencil.ng-isolate-scope.btn-orange'
-            presentIndex << index
+          presentIndex << index
           end
         end
       end
@@ -476,9 +507,16 @@ Then(/^I select one or more the opportunity "([^"]*)" and verify opportunity for
     puts allExpYears
 
     within all(".ui-select-match")[1] do
-      if has_selector?(:css, ".close.ui-select-match-close")
-        find(:css, ".close.ui-select-match-close").click
+      #binding.pry
+      spanCount = all(:css, ".close.ui-select-match-close").count
+      while spanCount > 0  do
+        puts("deleting quarters" )
+        first(:css, ".close.ui-select-match-close").click
+        spanCount -=1
       end
+    # if has_selector?(:css, ".close.ui-select-match-close")
+    # find(:css, ".close.ui-select-match-close").click
+    # end
     end
 
     allExpQuarters.each do |value|
@@ -488,8 +526,14 @@ Then(/^I select one or more the opportunity "([^"]*)" and verify opportunity for
     end
 
     within all(".ui-select-match")[2] do
-      if has_selector?(:css, ".close.ui-select-match-close")
-        find(:css, ".close.ui-select-match-close").click
+    # if has_selector?(:css, ".close.ui-select-match-close")
+    # find(:css, ".close.ui-select-match-close").click
+    # end
+      spanCount = all(:css, ".close.ui-select-match-close").count
+      while spanCount > 0  do
+        puts("deleting quarters" )
+        first(:css, ".close.ui-select-match-close").click
+        spanCount -=1
       end
     end
 
@@ -534,7 +578,7 @@ Then(/^I select one or more the opportunity "([^"]*)" and verify opportunity for
         tr = all(".ui-grid-row")
         tr.each_with_index do |row, index|
           if row.all("div[role='gridcell']")[12].has_css?'.btn-round-sm.srevicon-pencil.ng-isolate-scope.btn-orange'
-            presentIndex << index
+          presentIndex << index
           end
         end
       end
