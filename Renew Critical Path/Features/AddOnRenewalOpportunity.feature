@@ -34,5 +34,8 @@ Scenario: Rally Test Case ID: TC3541,TC3542 - AddOn Opportunity - Resolution,No 
 	Then I Choose the Pricebook for the product 
 	When I create Source Opportunity "Opportunity_Line_Item" with Line Items and resolve it with destination "Destination_Renewal_Opportunity" 
 	Then I verify the associated "Destination Renewal Opportunity" and "Source Opportunities" 
-	And I manually delete destination opp
 	And I manually delete Source opp
+	And I manually delete Sources Inbound records
+	And I manually delete destination opp
+	
+    

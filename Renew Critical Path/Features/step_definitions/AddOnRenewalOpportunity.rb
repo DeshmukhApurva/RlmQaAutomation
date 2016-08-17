@@ -139,57 +139,6 @@ And(/^I associate opportunity to "([^"]*)"$/) do |destination_renewal_opportunit
   end
 end
 
-And(/^I add on destination opp to "([^"]*)" and resolve the source opportunity "(.*?)"$/) do |destination_opp,source_opportunity|
-  begin
-    sleep 5
-    arg = getDetails "AddOnRenewalOpportunity"
-    sleep 6
-    within("#bottomButtonRow") do
-      click_on 'Edit'
-    end
-    sleep 5
-    fill_in "Destination Renewal Opportunity" ,:with => destination_opp
-    # within all(".pbSubsection")[1] do
-      # sleep 5
-      # all("input[type='text']")[0].send_keys [:control, 'a'], :backspace
-      # sleep 5
-      # all(".lookupIcon")[0].click
-      # sleep 10
-    # end
-    # sleep 5
-    # main = page.driver.browser.window_handles.first
-    # sleep 5
-    # page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
-    # sleep 10
-    # page.driver.browser.switch_to.frame("resultsFrame")
-    # within('.list') do
-      # sleep 3
-      # first("tbody").all("tr")[2].first("th").first("a").click
-    # end
-    # sleep 5
-    # page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
-    sleep 6
-    within all(".pbSubsection")[0] do
-      sleep 4
-      if page.has_css?("#opp11")
-        find("#opp11").select arg["SourceOpportunityStageValue"]
-        sleep 3
-        puts "Successfully resolve the source opportunity"
-      else
-        puts "Failed to see the Stage Value"
-      end
-    end
-    within("#bottomButtonRow") do
-      sleep 3
-      click_on 'Save'
-    end
-    sleep 5
-  rescue Exception => ex
-    putstr "Error occurred while selecting the #{source_opportunity} opportunity"
-    putstr_withScreen  ex.message
-  end
-end
-
 Then(/^I verify the associated "([^"]*)" and "([^"]*)"$/) do |destination, source|
   begin
     sleep 6
@@ -318,6 +267,8 @@ And(/^I enter mandatory details in "([^"]*)" opportunity$/) do |new_opportunity|
       all("input[type='text']")[0].set $create_new_opportunity
       sleep 4
       all("input[type='text']")[3].set arg["RenewalOpportunityCloseDate"]
+      sleep 4
+      fill_in "Account Name",:with=>arg["Account Name"]
       sleep 3
       find("#opp11").select arg["OpportunityStageValue"]
     end
@@ -423,46 +374,27 @@ When(/^I create Source Opportunity "(.*?)" with Line Items and resolve it with d
     within("#bottomButtonRow") do
       click_on 'Edit'
     end
-    #first(:button,'Edit').click
-    sleep 5
-    first(:option,'Closed Won').select_option
-    sleep 2
-    first(:button,'Save').click
-    sleep 8
-
-    find(:xpath, "//th[text()='Contributed To']").find(:xpath, '..').find(:xpath, "following-sibling::tr/td[2]/a").click
-    sleep 8
-
-    # first(:button,'Edit').click
-    within("#bottomButtonRow") do
-      click_on 'Edit'
-    end
     sleep 5
     fill_in "Opportunity Name",:with=> arg1
     sleep 5
+    first(:option,'Closed Won').select_option
+    sleep 3
+    fill_in "Account Name",:with=> arg["Account Name"]
+    sleep 5
     fill_in "Destination Renewal Opportunity" ,:with => arg2
-    sleep 1
+    sleep 2
     first(:button,'Save').click
+    
+    # sleep 8
+    # find(:xpath, "//th[text()='Contributed To']").find(:xpath, '..').find(:xpath, "following-sibling::tr/td[2]/a").click
     sleep 8
-  rescue Exception => ex
+
+   rescue Exception => ex
     puts "Error occurred while resolving Opportunities"
     puts ex.message
   end
 end
       
-And(/^I manually delete destination opp$/) do
-  begin
-  visit($url)
-  puts "I Successfully Visited Destination Opp"
-  sleep 10
-  first(:button,'Delete').click
-    sleep 4
-    page.driver.browser.switch_to.alert.accept
-    sleep 5
-    puts "Deleted the Opportunity Successfully"
-  end
-end
-
 And(/^I manually delete Source opp$/) do
   begin
   visit($url1)
@@ -491,4 +423,44 @@ And(/^I manually delete Source opp$/) do
     puts "Deleted the Opportunity Successfully"
 
   end
+end
+
+And(/^I manually delete destination opp$/) do
+  begin
+  visit($url)
+  puts "I Successfully Visited Destination Opp"
+    sleep 8
+    first(:button,'Delete').click
+    sleep 4
+    page.driver.browser.switch_to.alert.accept
+    sleep 5
+    puts "Deleted the Opportunity Successfully"
+
+  end
+end
+
+And(/^I manually delete Sources Inbound records$/) do
+ begin
+   sleep 8
+   visit($url)
+   within(:xpath,'//div[1]/div[2]/table/tbody/tr/td[2]/div[7]/div[1]') do
+     #    within all('.customnotabBlock')[1] do
+     delCount = all(:link,'Del').count
+     puts "delCount = "
+     puts delCount
+     #until delCount == 0
+     first(:link,'Del').click
+     sleep 5
+     page.driver.browser.switch_to.alert.accept
+     sleep 8
+     first(:link,'Del').click
+     sleep 8
+     page.driver.browser.switch_to.alert.accept
+    
+     sleep 8
+     #find(:xpath, "//th[text()='Asset']").find(:xpath, '..').all(:xpath, "following-sibling::tr/td[3]/a")[1].click  # Asset link click
+     #find(:xpath, "//th[text()='Service Contract']").find(:xpath, '..').all(:xpath, "following-sibling::tr/td[9]/a")[1].click  # Service Contract link click
+     #end
+   end
+ end
 end

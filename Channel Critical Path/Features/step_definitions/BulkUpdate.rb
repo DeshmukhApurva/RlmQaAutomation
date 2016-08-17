@@ -17,14 +17,18 @@ And (/^I select the opportunity for field update for "(.*?)"$/) do |data|
     end
     sleep 3
     sleep 10
-    find("div[placeholder='Select Opportunity Type...']").click
+    #find("div[placeholder='Select Opportunity Type...']").click
+    find(:xpath, "//div[contains(@placeholder, 'Select Opportunity Type')]").click    
     sleep 5
-    find("input[placeholder='Select Opportunity Type...']").send_keys "New Last Week"
+    #find("input[placeholder='Select Opportunity Type...']").send_keys "New Last Week"
+    find(:xpath, "//input[contains(@placeholder, 'Select Opportunity Type')]").send_keys "New Last Week"    
     sleep 3
     puts "Successfully see the New Last Week filter"
-    find("input[placeholder='Select Opportunity Type...']").send_keys :arrow_down
+    #find("input[placeholder='Select Opportunity Type...']").send_keys :arrow_down
+    find(:xpath, "//input[contains(@placeholder, 'Select Opportunity Type')]").send_keys :arrow_down    
     sleep 5
-    find("input[placeholder='Select Opportunity Type...']").send_keys :enter
+    #find("input[placeholder='Select Opportunity Type...']").send_keys :enter
+    find(:xpath, "//input[contains(@placeholder, 'Select Opportunity Type')]").send_keys :enter    
     sleep 5
     find('.srevicon-dots-md').click
     sleep 3
@@ -432,7 +436,8 @@ And (/^I update the notes for particular Opportunity$/) do
       puts "Unable to see the filter values"
     end
     sleep 5
-    find("input[placeholder='Search Opportunities...']").send_keys [:control, 'a'], :backspace
+    #find("input[placeholder='Search Opportunities...']").send_keys [:control, 'a'], :backspace
+    find(:xpath, "//input[contains(@placeholder, 'Search Opportunities')]").send_keys [:control, 'a'], :backspace
     sleep 3
     puts "Successfully see the '#{arg1['Name']}' Opportunity"
     sleep 2

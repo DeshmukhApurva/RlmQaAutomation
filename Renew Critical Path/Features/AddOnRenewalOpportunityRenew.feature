@@ -30,12 +30,13 @@ Scenario:
 @ren_no_auto_renewal_opportunity_generated 
 Scenario: 
 	Rally Test Case ID: TC3245,TC3246 : AddOn Opportunity - Resolution, AddOn Opportunity - No auto renewal opportunity generated if user resolves the add-on 
-	When I click on "Opportunities" link 
+		When I click on "Opportunities" link 
 	And I click on "New" button 
 	And I enter mandatory details in "Destination_Renewal_Opportunity" opportunity 
 	And I click on "Choose Price Book" button 
 	Then I Choose the Pricebook for the product 
 	When I create Source Opportunity "Opportunity_Line_Item" with Line Items and resolve it with destination "Destination_Renewal_Opportunity" 
 	Then I verify the associated "Destination Renewal Opportunity" and "Source Opportunities" 
-	And I manually delete destination opp
 	And I manually delete Source opp
+	And I manually delete Sources Inbound records
+	And I manually delete destination opp

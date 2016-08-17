@@ -653,14 +653,18 @@ end
 And(/^I select the "([^"]*)" filter value$/) do |filter|
   begin
     sleep 10
-    find("div[placeholder='Select Opportunity Type...']").click
+    #find("div[placeholder='Select Opportunity Type...']").click
+    find(:xpath, "//div[contains(@placeholder, 'Select Opportunity Type')]").click    
     sleep 5
-    find("input[placeholder='Select Opportunity Type...']").send_keys filter
+    #find("input[placeholder='Select Opportunity Type...']").send_keys filter
+    find(:xpath, "//input[contains(@placeholder, 'Select Opportunity Type')]").send_keys filter
     sleep 3
     puts "Successfully see the #{filter} filter"
-    find("input[placeholder='Select Opportunity Type...']").send_keys :arrow_down
+    #find("input[placeholder='Select Opportunity Type...']").send_keys :arrow_down
+    find(:xpath, "//input[contains(@placeholder, 'Select Opportunity Type')]").send_keys :arrow_down
     sleep 5
-    find("input[placeholder='Select Opportunity Type...']").send_keys :enter
+    #find("input[placeholder='Select Opportunity Type...']").send_keys :enter
+    find(:xpath, "//input[contains(@placeholder, 'Select Opportunity Type')]").send_keys :enter
     sleep 5
   rescue Exception => ex
     putstr "Error occurred while selecting the #{filter} filter"
