@@ -177,17 +177,13 @@ And(/^I select the Related To "([^"]*)" and "([^"]*)" from drop down$/) do |oppo
     find("input[placeholder='Select...']").send_keys :enter
     sleep 5
     puts "Successfully selected the #{arg["RelatedToSelectField1"]} field value"
-    find("div[placeholder='Search...']").click
-    #find(:xpath, "//div[contains(@placeholder, 'Search...')]").click  
+    find("div[placeholder='Search...']").click  
     sleep 4
     find("input[placeholder='Search...']").send_keys [:control, 'a'], :backspace
-    #find(:xpath, "//input[contains(@placeholder, 'Search...')]").send_keys [:control, 'a'], :backspace
     sleep 3
     find("input[placeholder='Search...']").send_keys arg["RelatedToSelectRelatedField1"]
-    #find(:xpath, "//input[contains(@placeholder, 'Search...')]").send_keys arg["RelatedToSelectRelatedField1"]
     sleep 3
     find("input[placeholder='Search...']").send_keys :enter
-    #find(:xpath, "//input[contains(@placeholder, 'Search...')]").send_keys :enter
     sleep 5
     puts "Successfully enter the #{arg["RelatedToSelectRelatedField1"]} name"
 
@@ -1286,7 +1282,10 @@ And(/^I attach "([^"]*)" file$/) do |url|
     sleep 4
     file_path = "#{Dir.pwd}/#{url}"
     sleep 6
+    page.execute_script("$('.btn-file').css('position','static')")
+    sleep 3
     page.attach_file("btn-file-upload", file_path)
+    #find(:xpath, ".//div/form/div[7]/div/div").set(file_path)    
     sleep 6
     puts "Successfully attached the file"
   rescue Exception => ex
