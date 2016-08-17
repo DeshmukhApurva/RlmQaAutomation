@@ -6,9 +6,7 @@ Background: Login to the Application
     Given that I navigate to the CRM application
     Then I should land on CRM home page
 
-
 @opportunity_filters
-
 Scenario: Rally Test Case ID: TC5838,TC5839,TC5841,TC5842,TC5844,TC5845,TC5847,TC5848,TC5850,TC5851,TC5853,TC5854  : Opportunity - Open opportunities,Closed opportunities,Won opportunities,Lost opportunities,Needs Status Update,Expiration Quarter and opportunity filter these two filters should work together 
    #TC4361,TC4362,TC4363,TC4364,TC4365,TC4366 - invalid test cases after latest changes.
    When I click on "Opportunities" tab

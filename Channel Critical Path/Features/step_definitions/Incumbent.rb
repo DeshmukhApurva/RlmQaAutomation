@@ -21,7 +21,8 @@ Then (/^I Select the "(.*?)" Partner Opportunity$/) do |argument1|
     # end
 
     sleep 5
-    find("input[placeholder='Search Opportunities...']").send_keys $arg['Name']
+    #find("input[placeholder='Search Opportunities...']").send_keys $arg['Name']
+    find(:xpath, "//input[contains(@placeholder, 'Search Opportunities')]").send_keys $arg['Name']
     sleep 3
     puts "Successfully see the Partner Agreement Opportunity"
     sleep 2
