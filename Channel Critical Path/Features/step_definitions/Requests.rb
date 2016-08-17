@@ -177,13 +177,17 @@ And(/^I select the Related To "([^"]*)" and "([^"]*)" from drop down$/) do |oppo
     find("input[placeholder='Select...']").send_keys :enter
     sleep 5
     puts "Successfully selected the #{arg["RelatedToSelectField1"]} field value"
-    find("div[placeholder='Search Quote...']").click
+    find("div[placeholder='Search...']").click
+    #find(:xpath, "//div[contains(@placeholder, 'Search...')]").click  
     sleep 4
-    find("input[placeholder='Search Quote...']").send_keys [:control, 'a'], :backspace
+    find("input[placeholder='Search...']").send_keys [:control, 'a'], :backspace
+    #find(:xpath, "//input[contains(@placeholder, 'Search...')]").send_keys [:control, 'a'], :backspace
     sleep 3
-    find("input[placeholder='Search Quote...']").send_keys arg["RelatedToSelectRelatedField1"]
+    find("input[placeholder='Search...']").send_keys arg["RelatedToSelectRelatedField1"]
+    #find(:xpath, "//input[contains(@placeholder, 'Search...')]").send_keys arg["RelatedToSelectRelatedField1"]
     sleep 3
-    find("input[placeholder='Search Quote...']").send_keys :enter
+    find("input[placeholder='Search...']").send_keys :enter
+    #find(:xpath, "//input[contains(@placeholder, 'Search...')]").send_keys :enter
     sleep 5
     puts "Successfully enter the #{arg["RelatedToSelectRelatedField1"]} name"
 
@@ -197,13 +201,13 @@ And(/^I select the Related To "([^"]*)" and "([^"]*)" from drop down$/) do |oppo
     find("input[placeholder='Select...']").send_keys :enter
     puts "Successfully selected the #{arg["RelatedToSelectField2"]} field value"
     sleep 5
-    find("div[placeholder='Search Asset...']").click
+    find("div[placeholder='Search...']").click
     sleep 4
-    find("input[placeholder='Search Asset...']").send_keys [:control, 'a'], :backspace
+    find("input[placeholder='Search...']").send_keys [:control, 'a'], :backspace
     sleep 3
-    find("input[placeholder='Search Asset...']").send_keys arg["RelatedToSelectRelatedField2"]
+    find("input[placeholder='Search...']").send_keys arg["RelatedToSelectRelatedField2"]
     sleep 3
-    find("input[placeholder='Search Asset...']").send_keys :enter
+    find("input[placeholder='Search...']").send_keys :enter
     sleep 5
     puts "Successfully enter the #{arg["RelatedToSelectRelatedField2"]} name"
 
@@ -217,13 +221,13 @@ And(/^I select the Related To "([^"]*)" and "([^"]*)" from drop down$/) do |oppo
     find("input[placeholder='Select...']").send_keys :enter
     puts "Successfully selected the #{arg["RelatedToSelectField3"]} field value"
     sleep 5
-    find("div[placeholder='Search Service Contract...']").click
+    find("div[placeholder='Search...']").click
     sleep 4
-    find("input[placeholder='Search Service Contract...']").send_keys [:control, 'a'], :backspace
+    find("input[placeholder='Search...']").send_keys [:control, 'a'], :backspace
     sleep 3
-    find("input[placeholder='Search Service Contract...']").send_keys arg["RelatedToSelectRelatedField3"]
+    find("input[placeholder='Search...']").send_keys arg["RelatedToSelectRelatedField3"]
     sleep 3
-    find("input[placeholder='Search Service Contract...']").send_keys :enter
+    find("input[placeholder='Search...']").send_keys :enter
     sleep 5
     puts "Successfully enter the #{arg["RelatedToSelectRelatedField3"]} name"
 
@@ -237,13 +241,13 @@ And(/^I select the Related To "([^"]*)" and "([^"]*)" from drop down$/) do |oppo
     find("input[placeholder='Select...']").send_keys :enter
     puts "Successfully selected the #{opportunity} field value"
     sleep 5
-    find("div[placeholder='Search Opportunity...']").click
+    find("div[placeholder='Search...']").click
     sleep 4
-    find("input[placeholder='Search Opportunity...']").send_keys [:control, 'a'], :backspace
+    find("input[placeholder='Search...']").send_keys [:control, 'a'], :backspace
     sleep 3
-    find("input[placeholder='Search Opportunity...']").send_keys opportunity_name
+    find("input[placeholder='Search...']").send_keys opportunity_name
     sleep 3
-    find("input[placeholder='Search Opportunity...']").send_keys :enter
+    find("input[placeholder='Search...']").send_keys :enter
     sleep 5
     puts "Successfully enter the #{opportunity_name} name"
     sleep 5
