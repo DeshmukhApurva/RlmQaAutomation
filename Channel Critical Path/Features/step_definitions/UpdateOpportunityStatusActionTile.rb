@@ -180,11 +180,14 @@ And(/^I click on "(.*?)" tile$/) do |arg|
 		end
 		
 		if $sum.to_i > 0
-			find("input[placeholder='Search Opportunities...']").send_keys [:control, 'a'], :backspace
+			#find("input[placeholder='Search Opportunities...']").send_keys [:control, 'a'], :backspace
+			find(:xpath, "//input[contains(@placeholder, 'Search Opportunities')]").send_keys [:control, 'a'], :backspace
 			sleep 3
-			find("input[placeholder='Search Opportunities...']").send_keys partnerOppName
+			#find("input[placeholder='Search Opportunities...']").send_keys partnerOppName
+			find(:xpath, "//input[contains(@placeholder, 'Search Opportunities')]").send_keys partnerOppName
 			sleep 3
-			find("input[placeholder='Search Opportunities...']").send_keys :enter
+			#find("input[placeholder='Search Opportunities...']").send_keys :enter
+			find(:xpath, "//input[contains(@placeholder, 'Search Opportunities')]").send_keys :enter
 			sleep 5
 			rowcount = all(".ui-grid-row.ng-scope").count
 			if rowcount > 0
