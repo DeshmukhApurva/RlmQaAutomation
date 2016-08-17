@@ -82,27 +82,27 @@ Scenario:
 	And I click on Assests and Verified Accounts and Contacts 
 	And I verified incumbent checkbox in Assests 
 	
-	#	When I create Opportunities and add the Product 
-	#	And I change the Stage to Closed won 
-	#	And I clicked on Contributed to 
-	#	And I click on "Add New Partner Opportunity" button 
-	#	And I select the "Partner Accounts" from the accounts lookup list 
-	#	And I select the "Partner Accounts" from the accounts lookup list 
-	#	And I navigate to "Partner Contact(s)" section 
-	#	And I select the "Partner Account Contacts" from the contacts lookup list 
-	#	And I select the "To Master Opportunity" option from syncing dropdown 
-	#	And I select the account as "Reseller" or "Distributor" 
-	#	And I click on the "Grant Access" 
-	#	Then I should see partner opportunity account details 
-	#	And I Navigated to Opportunity 
-	#	And I change the Stage to Closed won 
-	#	And I check the Incumbent Checkbox and Renewal Opportunity 
-	#	And I verify contacts Accounts in Service Contract 
-	#	When I click on Account 
-	#	Then I open Accounts 
-	#	And I click on Service Contracts and Verified Accounts and Contacts 
-	#	And I verified incumbent checkbox in service contracts 
-	#	
+	When I create Opportunities and add the Product 
+	And I change the Stage to Closed won 
+	And I clicked on Contributed to 
+	And I click on "Add New Partner Opportunity" button 
+	And I select the "Partner Accounts" from the accounts lookup list 
+	And I select the "Partner Accounts" from the accounts lookup list 
+	And I navigate to "Partner Contact(s)" section 
+	And I select the "Partner Account Contacts" from the contacts lookup list 
+	And I select the "To Master Opportunity" option from syncing dropdown 
+	And I select the account as "Reseller" or "Distributor" 
+	And I click on the "Grant Access" 
+	Then I should see partner opportunity account details 
+	And I Navigated to Opportunity 
+	And I change the Stage to Closed won 
+	And I check the Incumbent Checkbox and Renewal Opportunity 
+	And I verify contacts Accounts in Service Contract 
+	When I click on Account 
+	Then I open Accounts 
+	And I click on Service Contracts and Verified Accounts and Contacts 
+	And I verified incumbent checkbox in service contracts 
+	
 	
 	
 @Incumbentflagisunchecked 
@@ -180,7 +180,7 @@ Scenario:
 	And I click on "Contracts" tab 
 	And I Verify Price is Present on Contracts 
 	
-
+	
 @Incumbent 
 Scenario: 
 	Rally-ID : TC4520 : Opportunity Details and Renewal Tab: Value of Renewal Target field/Renewal Target column/Previous Price column when Incumbent flag is checked for PO 
@@ -189,4 +189,4 @@ Scenario:
 	And I verify the current expiration year value in Expiration Year filter 
 	Then I Select the "Incumbent" Partner Opportunity 
 	When I Navigate to "Details" tab 
-	And I verify the "Renewal Target" field value 	
+	And I verify the "Renewal Target" field value 
