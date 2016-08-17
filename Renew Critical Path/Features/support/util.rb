@@ -84,13 +84,8 @@ end
 
 def deleteOppRenOppSourceObj(sourceOpp, renOpp)
   sleep 5
-  puts $RenAutomationSO
-  puts $RenAutomationRO
-  puts $renOppURL
-  puts $sourceOppURL
-  sleep 10
-  oppRecord = $client.query("SELECT Id,Name FROM Opportunity where Name = \'#{sourceOpp}\'")
-  renOppRecord = $client.query("SELECT Id,Name FROM Opportunity where Name = \'#{renOpp}\'")
+  oppRecord = $client.query("select Id,Name from Opportunity where Name = \'#{sourceOpp}\'")
+  renOppRecord = $client.query("select Id,Name from Opportunity where Name = \'#{renOpp}\'")
 
   opp = oppRecord.first
   renOpp = renOppRecord.first
@@ -102,11 +97,13 @@ def deleteOppRenOppSourceObj(sourceOpp, renOpp)
 
   sourceObj = $client.query("select Id,Name from ServiceSource1__REN_Source__c where ServiceSource1__REN_Inheriting_Opportunity__c = \'#{renOppid}\'")
   puts sourceObj
+
   sourceOppRecords = Array.new
   sourceOppRecords = sourceObj
+  
   sourceOppRecords.each do |rec|
-    puts sourceOppfirstRecord.Name
-    sourceOppfirstRecord.destroy
+    puts rec.Id + " " + rec.Name
+    rec.destroy
   end    
 
 #  puts sourceOppfirstRecord.Name + " " + sourceOppfirstRecord.Name

@@ -1212,7 +1212,6 @@ And(/^I delete the opportunity product$/) do
     putstr "Error occurred while deleting the Opportunity product"
     putstr_withScreen  ex.message
   end
-
 end
 
 And(/^I delete the "([^"]*)" opportunity product$/) do |renewal_relationship|

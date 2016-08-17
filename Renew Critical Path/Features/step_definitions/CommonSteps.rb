@@ -1662,7 +1662,7 @@ end
 When(/^I delete the SourceOpp_RenOpp_SourceObjects$/) do
   begin
     sleep 5
-    deleteOppRenOppSourceObj("$RenAutomationSO", "$RenAutomationRO") 
+    deleteOppRenOppSourceObj($RenAutomationSO, $RenAutomationRO) 
   rescue Exception => ex
     puts ex.message
   end

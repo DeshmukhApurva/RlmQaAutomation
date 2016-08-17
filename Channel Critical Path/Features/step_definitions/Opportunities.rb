@@ -1003,21 +1003,25 @@ Then(/^I verify the updated "([^"]*)" field$/) do |title|
   end
 end
 Then(/^I click on Request icon$/) do
-
   begin
     sleep 5
     arg = getDetails "OpportunityModule"
     sleep 4
-    rowcount = all(".ui-grid-row.ng-scope").count
-    if rowcount > 0
+
+    if page.has_css?(".ui-grid-icon-ok")
+      rowcountCheckbox = all(".ui-grid-selection-row-header-buttons.ui-grid-icon-ok.ng-scope").count
+      puts rowcountCheckbox
+    end
+
+    if rowcountCheckbox > 0
       sleep 3
       if page.has_content?(arg["OpportunityModuleField10"])
         within all(".ui-grid-canvas")[1] do
           within all("div[role='gridcell']")[12] do
             sleep 3
             #first("div").first("div").click
+            #accountName = find(:xpath, "//*[contains(@title, 'New Request')]").text
             first(:xpath, "//*[contains(@title, 'New Request')]").click
-
           end
         end
         puts "Clicked on new request"
@@ -1027,7 +1031,6 @@ Then(/^I click on Request icon$/) do
             sleep 3
             #first("div").first("div").click
             first(:xpath, "//*[contains(@title, 'New Request')]").click
-
           end
         end
         sleep 3
@@ -1035,12 +1038,64 @@ Then(/^I click on Request icon$/) do
       sleep 5
       puts "Successfully click the Request icon"
     else
-      puts "No Opportunities Records Found"
+      sleep 3
+      if page.has_content?(arg["OpportunityModuleField10"])
+        within all(".ui-grid-canvas")[0] do
+          within all("div[role='gridcell']")[12] do
+            sleep 3
+            #first("div").first("div").click
+            #accountName = find(:xpath, "//*[contains(@title, 'New Request')]").text
+            first(:xpath, "//*[contains(@title, 'New Request')]").click
+          end
+        end
+        puts "Clicked on new request"
+      else
+        within all(".ui-grid-canvas")[0] do
+          within all("div[role='gridcell']")[11] do
+            sleep 3
+            #first("div").first("div").click
+            first(:xpath, "//*[contains(@title, 'New Request')]").click
+          end
+        end
+        sleep 3
+      end
+      sleep 5
+      puts "Successfully click the Request icon"
     end
+
+    #    rowcount = all(".ui-grid-row.ng-scope").count
+    #    if rowcount > 0
+    #      sleep 3
+    #      if page.has_content?(arg["OpportunityModuleField10"])
+    #        within all(".ui-grid-canvas")[1] do
+    #          within all("div[role='gridcell']")[12] do
+    #            sleep 3
+    #            #first("div").first("div").click
+    #            accountName = find(:xpath, "//*[contains(@title, 'New Request')]").click
+    #            first(:xpath, "//*[contains(@title, 'New Request')]").click
+    #
+    #          end
+    #        end
+    #        puts "Clicked on new request"
+    #      else
+    #        within all(".ui-grid-canvas")[1] do
+    #          within all("div[role='gridcell']")[11] do
+    #            sleep 3
+    #            #first("div").first("div").click
+    #            first(:xpath, "//*[contains(@title, 'New Request')]").click
+    #
+    #          end
+    #        end
+    #        sleep 3
+    #      end
+    #      sleep 5
+    #      puts "Successfully click the Request icon"
+    #    else
+    #      puts "No Opportunities Records Found"
+    #    end
   rescue Exception => ex
     putstr "Error occurred while clicking the Request icon"
     putstr_withScreen  ex.message
-
   end
 end
 
@@ -1101,24 +1156,33 @@ Then(/^I should able to see the all the renewal partner opportunities associated
 end
 
 Then(/^I should able to see partner opportunities account$/) do
-
   begin
     sleep 5
     arg = getDetails "OpportunityModule"
     sleep 3
     rowcount = all(".ui-grid-row.ng-scope").count
-    if rowcount > 0
-      sleep 4
-      #all(:xpath, '//div[3]/div[2]/div/div[position() <= 15]/div/div[2]/div').each do |activity|
-      #find(:xpath, '//div/div[2]/div/div[2]/div/div/div[2]/div[1]/div[3]/div[2]/div/div[1]/div/div[2]/div')do |activity|
-      $oppgridpartneraccount = find(:xpath, '//div/div[2]/div/div[2]/div/div/div[2]/div[1]/div[3]/div[2]/div/div[1]/div/div[2]/div').text
-
-      #puts activity.text
-      #$oppgridpartneraccount = activity.text
-      puts "Successfully see the renewal partner opportunity account #{$oppgridpartneraccount}"
-
+    puts rowcount
+    if page.has_css?(".ui-grid-icon-ok")
+      rowcountCheckbox = all(".ui-grid-selection-row-header-buttons.ui-grid-icon-ok.ng-scope").count
+      puts rowcountCheckbox
+    end
+    if rowcountCheckbox > 0
+      sleep 3
+      within all(".ui-grid-canvas")[1] do
+        page.within all("div[role='gridcell']")[1] do
+          sleep 5
+          $oppgridpartneraccount = first('div').text
+          puts "Successfully see the renewal partner opportunity account #{$oppgridpartneraccount}"
+        end
+      end
     else
-      puts "No Opportunities Records Found"
+      within all(".ui-grid-canvas")[0] do
+        page.within all("div[role='gridcell']")[1] do
+          sleep 5
+          $oppgridpartneraccount = first('div').text
+          puts "Successfully see the renewal partner opportunity account #{$oppgridpartneraccount}"
+        end
+      end
     end
     sleep 5
   rescue Exception => ex
