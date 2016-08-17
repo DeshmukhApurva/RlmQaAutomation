@@ -228,7 +228,7 @@ When(/^I create Opportunities and add the Product$/) do
   end
 end
 
-And(/^I change the Stage into Closed won$/)do
+And(/^I change the Stage to Closed won$/)do
   begin
     sleep 5
     within(:id,"bottomButtonRow") do
@@ -468,7 +468,7 @@ And(/^I verify contacts Accounts in Assets$/)do
   end
 end
 
-Then(/^I click on Assests and Verified Accounts and Contacts$/)do
+And(/^I click on Assests and Verified Accounts and Contacts$/)do
   begin
     sleep 5
     find(:xpath,"//*[contains(@id,'RelatedAssetList_body')]/table/tbody/tr[3]/th/a").click
@@ -627,7 +627,7 @@ end
 And(/^I clicked on Contributed to$/)do
   begin
     sleep 5
-    find(:xpath, "//th[text()='Contributed To']").find(:xpath, '..').find(:xpath, "following-sibling::tr/td[2]/a").click
+    find(:xpath,"//th[text()='Contributed To']").find(:xpath, '..').find(:xpath, "following-sibling::tr/td[2]/a").click
     puts "Clicked on Contributed"
     sleep 4
   rescue Exception => ex
