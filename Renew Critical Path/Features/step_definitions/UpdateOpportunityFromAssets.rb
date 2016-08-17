@@ -233,18 +233,52 @@ And(/^I go to existing opportunities$/) do
   end
 end
 
+And(/^I go to opportunities$/) do
+  begin
+    
+    sleep 6
+       arg = getReference "AssetDetails"
+       # find('#fcf').select "My Opportunities"
+       # sleep 5
+       # #within (".fBody") do
+        # click_button 'Go!'
+       # #end
+       sleep 10
+       if page.has_css?(".listItemPad")
+         sleep 4
+         puts "Successfully see the Alphabetic Pagination"
+         all(".listItemPad")[13].click
+         sleep 8
+         all(".selectArrow")[0].click
+         sleep 8
+         within(".bottomNav") do
+           first("table").all("tr")[4].click
+         end
+       else
+         putstr "Failed to see the Alphabetic Pagination"
+       end
+    
+        find(:xpath, "(//input[@type='checkbox'])[2]").set(true)
+        puts "Successfully selected the Standard Pricebook Opportunity"
+        find(:xpath, "(//input[@type='checkbox'])[3]").set(true)
+        puts "Successfully selected the Test Pricebook Opportunity"
+       
+       click_on "Merge"
+       puts "Clicked on Merge Button"
+       sleep 10
+       
+  end
+end
+
 And(/^I go to existing renewal opportunities$/) do
   begin
    sleep 6
    arg = getReference "AssetDetails"
    find('#fcf').select "My Opportunities"
    sleep 5
-#   within (".fBody") do
-#    click_button 'Go!'
-#   end
-    if page.has_xpath?('//input[@name="go"]')
-      first(:button, "Go").click
-    end
+   within (".fBody") do
+    click_button 'Go!'
+   end
    sleep 10
    if page.has_css?(".listItemPad")
      sleep 4
