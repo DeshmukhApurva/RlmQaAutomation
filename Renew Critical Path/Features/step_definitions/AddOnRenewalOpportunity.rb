@@ -397,6 +397,7 @@ end
       
 And(/^I manually delete Source opp$/) do
   begin
+    sleep 10
   visit($url1)
   puts "I Successfully Visited Destination Opp"
   sleep 10
@@ -406,7 +407,9 @@ And(/^I manually delete Source opp$/) do
       delCount = all(:link,'Del').count
       puts "delCount = "
       puts delCount
+      sleep 8
       unless delCount == 0
+        sleep 8
         first(:link,'Del').click
         sleep 5
         page.driver.browser.switch_to.alert.accept
@@ -421,12 +424,16 @@ And(/^I manually delete Source opp$/) do
     page.driver.browser.switch_to.alert.accept
     sleep 5
     puts "Deleted the Opportunity Successfully"
-
+    sleep 10
+    rescue Exception => ex
+    puts "Error occurred while resolving Opportunities"
+    puts ex.message
   end
 end
 
 And(/^I manually delete destination opp$/) do
   begin
+    sleep 10
   visit($url)
   puts "I Successfully Visited Destination Opp"
     sleep 8
@@ -441,7 +448,7 @@ end
 
 And(/^I manually delete Sources Inbound records$/) do
  begin
-   sleep 8
+   sleep 10
    visit($url)
    within(:xpath,'//div[1]/div[2]/table/tbody/tr/td[2]/div[7]/div[1]') do
      #    within all('.customnotabBlock')[1] do
@@ -449,6 +456,7 @@ And(/^I manually delete Sources Inbound records$/) do
      puts "delCount = "
      puts delCount
      #until delCount == 0
+     sleep 8
      first(:link,'Del').click
      sleep 5
      page.driver.browser.switch_to.alert.accept
