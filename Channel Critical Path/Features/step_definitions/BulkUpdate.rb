@@ -395,7 +395,7 @@ Then(/^I select one or more the opportunity "([^"]*)" and verify opportunity for
             find(:css, ".ng-binding").click
             sleep 3
           end
-          find("input[placeholder='Select or search...']").send_keys arg1["Sales Stage"]
+          find(:xpath, "//input[contains(@placeholder,'Select or search')]").send_keys arg1["Sales Stage"]
           sleep 3
           find("input[placeholder='Select or search...']").send_keys :enter
           sleep 5
