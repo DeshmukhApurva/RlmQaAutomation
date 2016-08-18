@@ -302,6 +302,7 @@ Feature: All features related to Opportunity Management - Manage Renewals
 
   @SplitOppLineItemNewClonedOppEditDetails
   Scenario: Rally Test Case ID: TC6461 - Split Opportunity Line Items - New Cloned Opportunity Details editable
+    When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
     When I click on the "Opportunities" grid tab
     And I Create New Source Opportunity
     And I select "Standard Price Book" pricebook
@@ -313,9 +314,11 @@ Feature: All features related to Opportunity Management - Manage Renewals
     And I fill the required fields on Split Opportunity
     And I click on "Split Selected" button
     And I verify required fields value on New Split Opportunity
+    And I delete the SourceOpp_RenOpp_SourceObjects
 
   @SplitOppRRNewClonedOppEditDetails
   Scenario: Rally Test Case ID: TC6462 - Split Opportunity RR - New Cloned Opportunity Details editable
+    When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
     When I click on the "Opportunities" grid tab
     And I Create New Source Opportunity
     And I select "Standard Price Book" pricebook
@@ -328,9 +331,11 @@ Feature: All features related to Opportunity Management - Manage Renewals
     And I fill the required fields on Split Opportunity
     And I click on "Split Selected" button
     And I verify required fields value on New Split Opportunity
+    And I delete the SourceOpp_RenOpp_SourceObjects
 
   @ConsolidateOppRRNewClonedOppEditDetails
   Scenario: Rally Test Case ID: TC6462 - Split Opportunity RR - New Cloned Opportunity Details editable
+    When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
     When I click on the "Opportunities" grid tab
     And I Create New Source Opportunity
     And I select "Standard Price Book" pricebook
@@ -343,13 +348,14 @@ Feature: All features related to Opportunity Management - Manage Renewals
     And I fill the required fields on Split Opportunity
     And I click on "Consolidate" button
     And I verify required fields value on New Split Opportunity
-
-  @testsalesforceapi
-  Scenario: 
-    When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
-    When I click on the "Opportunities" grid tab
-    And I Create New Source Opportunity
-    And I select "Standard Price Book" pricebook
-    And I Add "2" Products having product name as "Product" to Opportunity
-    And I Renew Source Opportunity
     And I delete the SourceOpp_RenOpp_SourceObjects
+    
+  # @testsalesforceapi
+  # Scenario: 
+    # When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
+    # When I click on the "Opportunities" grid tab
+    # And I Create New Source Opportunity
+    # And I select "Standard Price Book" pricebook
+    # And I Add "2" Products having product name as "Product" to Opportunity
+    # And I Renew Source Opportunity
+    # And I delete the SourceOpp_RenOpp_SourceObjects
