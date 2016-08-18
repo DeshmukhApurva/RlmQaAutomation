@@ -26,7 +26,7 @@ Scenario:
 	And I check the Incumbent Checkbox and Renewal Opportunity 
 	And I verify contacts Accounts in Assets 
 	When user logout from "CHANNELMANAGER" application 
-	When I log into "CHANNELPARTNER_DEV25" details 
+	When I log into "CHANNELPARTNER_EETEST4" details 
 	Then I search an Account Name and verify Price is present in Assest 
 	And I click on "Assets" tab 
 	And I Verify Price is Present on Assests 
@@ -34,7 +34,6 @@ Scenario:
 @AssetPriceandContractPriceOnAssetIncumbentcheckornot 
 Scenario: 
 	Rally-ID : TC6122: TC6132: Opportunity Details and Community Partner Link : User should be able to see Contract  Total price on Contract tab of Account page irrespective of whether Incumbent flag is checked or not
-   
 	When I create Opportunities and add the Product 
 	And I change the Stage to Closed won 
 	And I clicked on Contributed to 
@@ -52,7 +51,7 @@ Scenario:
 	And I check the Incumbent Checkbox and Renewal Opportunity 
 	And I verify contacts Accounts in Service Contract 
 	When user logout from "CHANNELMANAGER" application 
-	When I log into "CHANNELPARTNER_DEV25" details 
+	When I log into "CHANNELPARTNER_EETEST4" details 
 	Then I search an Account Name and verify Total Price is present in Contracts 
 	And I click on "Contracts" tab 
 	And I Verify Price is Present on Contracts 
@@ -168,7 +167,7 @@ Scenario:
 	And I check the Incumbent Checkbox and Renewal Opportunity 
 	And I verify contacts Accounts in Assets 
 	When user logout from "CHANNELMANAGER" application 
-	When I log into "CHANNELPARTNER_DEV25" details 
+	When I log into "CHANNELPARTNER_EETEST4" details 
 	Then I search an Account Name and verify Price is present in Assest 
 	And I click on "Assets" tab 
 	And I Verify Price is Present on Assests 
