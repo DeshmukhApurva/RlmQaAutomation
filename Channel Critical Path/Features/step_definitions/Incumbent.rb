@@ -543,4 +543,3 @@ And(/^I check the Incumbent Checkbox$/)do
     putstr_withScreen  ex.message
   end
 end
-
