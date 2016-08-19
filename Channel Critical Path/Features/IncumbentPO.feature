@@ -28,7 +28,7 @@ Scenario:
     And I check the Price in Asset 
 #   And I verify Partner accounts Details
     When user logout from "CHANNELMANAGER" application 
-	When I log into "CHANNELPARTNER_DEV25" details 
+	When I log into "CHANNELPARTNER_EETEST4" details 
 	Then I search an Account Name 
 	And I click on "Assets" tab 
 	And I Verify Price is Present on Assets 
@@ -54,7 +54,7 @@ Scenario:
 	And I click on Service Contracts
 	#  And I verify Partner accounts Details
     When user logout from "CHANNELMANAGER" application 
-	When I log into "CHANNELPARTNER_DEV25" details 
+	When I log into "CHANNELPARTNER_EETEST4" details 
 	Then I search an Account Name  
 	And I click on "Contracts" tab 
 	And I Verify Price is Present on Contracts 
@@ -170,14 +170,14 @@ Scenario:
     And I check the Price in Asset 
 #   And I verify Partner accounts Details
     When user logout from "CHANNELMANAGER" application 
-	When I log into "CHANNELPARTNER_DEV25" details 
+	When I log into "CHANNELPARTNER_EETEST4" details 
 	Then I search an Account Name
 	And I click on "Assets" tab 
 	And I Verify Price is Present on Assets  
 	And I click on "Contracts" tab 
 	And I Verify Price is Present on Contracts 
 	When user logout from "CHANNELMANAGER" application 
-	When I log into "CHANNELPARTNER_DEV25_USER2" details 
+	When I log into "CHANNELDISTRIBUTOR_EETEST4" details 
 	Then I search an Account Name  
 	And I click on "Assets" tab 
 	And I Verify Price is Present on Assets  
