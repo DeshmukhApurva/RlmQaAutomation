@@ -300,55 +300,55 @@ Feature: All features related to Opportunity Management - Manage Renewals
     And I click on "Consolidate Opportunity" button
     Then I should able to see the sync error message
 
-  @SplitOppLineItemNewClonedOppEditDetails
-  Scenario: Rally Test Case ID: TC6461 - Split Opportunity Line Items - New Cloned Opportunity Details editable
-    When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
-    When I click on the "Opportunities" grid tab
-    And I Create New Source Opportunity
-    And I select "Standard Price Book" pricebook
-    And I Add "2" Products having product name as "Product" to Opportunity
-    And I Renew Source Opportunity
-    And I select "1" products from Products section
-    When I click on "Split Opportunity" button
-    And I select the "New Cloned Opportunity" Split Opportunity option
-    And I fill the required fields on Split Opportunity
-    And I click on "Split Selected" button
-    And I verify required fields value on New Split Opportunity
-    And I delete the SourceOpp_RenOpp_SourceObjects
-
-  @SplitOppRRNewClonedOppEditDetails
-  Scenario: Rally Test Case ID: TC6462 - Split Opportunity RR - New Cloned Opportunity Details editable
-    When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
-    When I click on the "Opportunities" grid tab
-    And I Create New Source Opportunity
-    And I select "Standard Price Book" pricebook
-    And I Add "2" Products having product name as "Product" to Opportunity
-    And I Renew Source Opportunity
-    When I click on "Manage Renewals" button
-    And I select the "Renewal Relationship" product field
-    And I click on "Split Opportunity" button from renewal relationship page
-    And I select the "New Cloned Opportunity" Split Opportunity option
-    And I fill the required fields on Split Opportunity
-    And I click on "Split Selected" button
-    And I verify required fields value on New Split Opportunity
-    And I delete the SourceOpp_RenOpp_SourceObjects
-
-  @ConsolidateOppRRNewClonedOppEditDetails
-  Scenario: Rally Test Case ID: TC6462 - Split Opportunity RR - New Cloned Opportunity Details editable
-    When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
-    When I click on the "Opportunities" grid tab
-    And I Create New Source Opportunity
-    And I select "Standard Price Book" pricebook
-    And I Add "2" Products having product name as "Product" to Opportunity
-    And I Renew Source Opportunity
-    When I click on "Manage Renewals" button
-    Then I select "1" product from "Renewal Relationship" page
-    And I click on "Consolidate Opportunity" button from renewal relationship page
-    And I select the "New Cloned Opportunity" Split Opportunity option
-    And I fill the required fields on Split Opportunity
-    And I click on "Consolidate" button
-    And I verify required fields value on New Split Opportunity
-    And I delete the SourceOpp_RenOpp_SourceObjects
+  # @SplitOppLineItemNewClonedOppEditDetails
+  # Scenario: Rally Test Case ID: TC6461 - Split Opportunity Line Items - New Cloned Opportunity Details editable
+    # When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
+    # When I click on the "Opportunities" grid tab
+    # And I Create New Source Opportunity
+    # And I select "Standard Price Book" pricebook
+    # And I Add "2" Products having product name as "Product" to Opportunity
+    # And I Renew Source Opportunity
+    # And I select "1" products from Products section
+    # When I click on "Split Opportunity" button
+    # And I select the "New Cloned Opportunity" Split Opportunity option
+    # And I fill the required fields on Split Opportunity
+    # And I click on "Split Selected" button
+    # And I verify required fields value on New Split Opportunity
+    # And I delete the SourceOpp_RenOpp_SourceObjects
+# 
+  # @SplitOppRRNewClonedOppEditDetails
+  # Scenario: Rally Test Case ID: TC6462 - Split Opportunity RR - New Cloned Opportunity Details editable
+    # When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
+    # When I click on the "Opportunities" grid tab
+    # And I Create New Source Opportunity
+    # And I select "Standard Price Book" pricebook
+    # And I Add "2" Products having product name as "Product" to Opportunity
+    # And I Renew Source Opportunity
+    # When I click on "Manage Renewals" button
+    # And I select the "Renewal Relationship" product field
+    # And I click on "Split Opportunity" button from renewal relationship page
+    # And I select the "New Cloned Opportunity" Split Opportunity option
+    # And I fill the required fields on Split Opportunity
+    # And I click on "Split Selected" button
+    # And I verify required fields value on New Split Opportunity
+    # And I delete the SourceOpp_RenOpp_SourceObjects
+# 
+  # @ConsolidateOppRRNewClonedOppEditDetails
+  # Scenario: Rally Test Case ID: TC6462 - Split Opportunity RR - New Cloned Opportunity Details editable
+    # When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
+    # When I click on the "Opportunities" grid tab
+    # And I Create New Source Opportunity
+    # And I select "Standard Price Book" pricebook
+    # And I Add "2" Products having product name as "Product" to Opportunity
+    # And I Renew Source Opportunity
+    # When I click on "Manage Renewals" button
+    # Then I select "1" product from "Renewal Relationship" page
+    # And I click on "Consolidate Opportunity" button from renewal relationship page
+    # And I select the "New Cloned Opportunity" Split Opportunity option
+    # And I fill the required fields on Split Opportunity
+    # And I click on "Consolidate" button
+    # And I verify required fields value on New Split Opportunity
+    # And I delete the SourceOpp_RenOpp_SourceObjects
     
   # @testsalesforceapi
   # Scenario: 
