@@ -397,7 +397,7 @@ Then(/^I select one or more the opportunity "([^"]*)" and verify opportunity for
           end
           find(:xpath, "//input[contains(@placeholder,'Select or search')]").send_keys arg1["Sales Stage"]
           sleep 3
-          find("input[placeholder='Select or search...']").send_keys :enter
+          find(:xpath, "//input[contains(@placeholder,'Select or search')]").send_keys :enter
           sleep 5
           find("input[ng-model='formData.probability']").set(arg1['Probability'])
           sleep 3
@@ -405,17 +405,17 @@ Then(/^I select one or more the opportunity "([^"]*)" and verify opportunity for
             find(:css, ".ng-binding").click
             sleep 3
           end
-          find("input[placeholder='Select or search...']").send_keys arg1["Reseller Rep"]
+          find(:xpath, "//input[contains(@placeholder,'Select or search')]").send_keys arg1["Reseller Rep"]
           sleep 3
-          find("input[placeholder='Select or search...']").send_keys :enter
+          find(:xpath, "//input[contains(@placeholder,'Select or search')]").send_keys :enter
           sleep 5
           within all(".ui-select-match")[2] do
             find(:css, ".ng-binding").click
             sleep 3
           end
-          find("input[placeholder='Select or search...']").send_keys arg1["Distributor Rep"]
+          find(:xpath, "//input[contains(@placeholder,'Select or search')]").send_keys arg1["Distributor Rep"]
           sleep 3
-          find("input[placeholder='Select or search...']").send_keys :enter
+          find(:xpath, "//input[contains(@placeholder,'Select or search')]").send_keys :enter
           sleep 5
           click_on(argument1)
           puts "Clicked on #{argument1} button"
@@ -606,9 +606,9 @@ Then(/^I select one or more the opportunity "([^"]*)" and verify opportunity for
             find(:css, ".ng-binding").click
             sleep 3
           end
-          find("input[placeholder='Select or search...']").send_keys arg1["Sales Stage"]
+          find(:xpath, "//input[contains(@placeholder,'Select or search')]").send_keys arg1["Sales Stage"]
           sleep 3
-          find("input[placeholder='Select or search...']").send_keys :enter
+          find(:xpath, "//input[contains(@placeholder,'Select or search')]").send_keys :enter
           sleep 5
           find("input[ng-model='formData.probability']").set(arg1['Probability'])
           sleep 3
@@ -616,17 +616,17 @@ Then(/^I select one or more the opportunity "([^"]*)" and verify opportunity for
             find(:css, ".ng-binding").click
             sleep 3
           end
-          find("input[placeholder='Select or search...']").send_keys arg1["Reseller Rep"]
+          find(:xpath, "//input[contains(@placeholder,'Select or search')]").send_keys arg1["Reseller Rep"]
           sleep 3
-          find("input[placeholder='Select or search...']").send_keys :enter
+          find(:xpath, "//input[contains(@placeholder,'Select or search')]").send_keys :enter
           sleep 5
           within all(".ui-select-match")[2] do
             find(:css, ".ng-binding").click
             sleep 3
           end
-          find("input[placeholder='Select or search...']").send_keys arg1["Distributor Rep"]
+          find(:xpath, "//input[contains(@placeholder,'Select or search')]").send_keys arg1["Distributor Rep"]
           sleep 3
-          find("input[placeholder='Select or search...']").send_keys :enter
+          find(:xpath, "//input[contains(@placeholder,'Select or search')]").send_keys :enter
           sleep 5
           click_on(argument1)
           puts "Clicked on #{argument1} button"
