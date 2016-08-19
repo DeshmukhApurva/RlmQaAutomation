@@ -363,7 +363,7 @@ And(/^I check the Price in Asset$/)do
     within(:id,"bottomButtonRow") do
       click_on "Save"
     end
-
+    sleep 10
     $AssetPrice = first(:xpath,'//td[contains(text(),"Price")]/following-sibling::td/div').text
     puts "Assest Price #{$AssetPrice} displayed"
   rescue Exception => ex
