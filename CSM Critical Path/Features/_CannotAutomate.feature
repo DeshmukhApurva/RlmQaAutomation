@@ -2,7 +2,7 @@
 Feature: All features that cannot be verified since the Manual Test Cases are not valid and features that might be used later
 	
 @LastHealthStatusTiles 
-Scenario:Filter Tile records by Last Health Status
+Scenario:	Filter Tile records by Last Health Status
 	When I click on "Overview" link
 	Then click on edit view to change the Last Health Status
 	Then count the number of tiles
@@ -12,7 +12,7 @@ Scenario:Filter Tile records by Last Health Status
 	Then Verify the Tile Records 
 
 @LastHealthStatusFCR 
-Scenario:Filter Focus Category records by Last Health Status
+Scenario:	Filter Focus Category records by Last Health Status
 	When I click on "Overview" link
 	Then click on edit view to change the Last Health Status
 	Then select the focus category
@@ -23,7 +23,7 @@ Scenario:Filter Focus Category records by Last Health Status
 	Then Verify the Account in Focus category	
 
 @FFCBARR 
-Scenario:Filter Focus Category records by ARR
+Scenario:	Filter Focus Category records by ARR
 	When I click on "Overview" link
 	Then click on edit view to change the ARR
 	Then select the focus category
@@ -34,7 +34,7 @@ Scenario:Filter Focus Category records by ARR
 	Then Verify the Account in Focus category	
 	
 @FTBARR 
-Scenario:Verify the Tile records filtered by ARR
+Scenario:	Verify the Tile records filtered by ARR
 	When I click on "Overview" link
 	Then click on edit view to change the ARR
 	Then count the number of tiles
@@ -44,21 +44,21 @@ Scenario:Verify the Tile records filtered by ARR
 	Then Verify the Tile Records 
 
 @FHMCBHS
-Scenario:Filter Health Donut Chart by Last Health Status
+Scenario:	Filter Health Donut Chart by Last Health Status
 	When I click on "Overview" link
 	And I stored data of Donut Chart
 	Then click on edit view to change the Last Health Status
 	Then verify Health Donut Chart 
 	
 @FBARR
-Scenario: Filter Health Donut Chart by ARR
+Scenario:   Filter Health Donut Chart by ARR
 	When I click on "Overview" link
 	And I stored data of Donut Chart
 	Then click on edit view to change the ARR
 	Then verify Health Donut Chart 
 
 @FHMCBLHS
-Scenario: Filter Heatmap Chart by Last Health Status
+Scenario: 	Filter Heatmap Chart by Last Health Status
 		When I click on "Overview" link
 		And I Verify hamburger icon
 		And I select Show Charts and Tiles
@@ -67,7 +67,7 @@ Scenario: Filter Heatmap Chart by Last Health Status
 		Then click on the edit view to change the different Account Owner
 		And navigate to heatMapChart to verify records	
 @FC	
-Scenario: Focus Category Test Cases
+Scenario:   Focus Category Test Cases
 	When I click on "Overview" link
 	And I Verify hamburger icon
 	And I select Show Charts and Tiles
@@ -95,7 +95,7 @@ Scenario: CSM
 	Then I view Success Tasks
 
 @CSMTab
-Scenario: CSM Test Cases
+Scenario:  CSM Test Cases
 	When I Navigate to Overview tab
 	And I click on "Help for this Page" link
 	Then I should be able to see help page
@@ -104,14 +104,14 @@ Scenario: CSM Test Cases
     And I select Edit View
 	
 @SuccessTasksTab
-Scenario: Success Tasks
+Scenario:  Success Tasks
 	When I Navigate to Success Tasks tab
 	And I click choose icon
 	And I switch to new tab
 	And I click on "Details" link
 
 @overviewTab
-Scenario: CSM
+Scenario:  CSM
 	When I click on "Overview" link
 	And I choose Healthy chart
 

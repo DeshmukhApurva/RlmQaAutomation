@@ -331,9 +331,9 @@ Scenario: Rally Test Case ID: TC4767
 	When I click on "Overview" link
 	And I Verify Focus Category records
 	And I select Task FCG
-	And I click on Subject link value of FC Task
-	And I click on "Overview" link
-	Then I Verify Action link for the chosen FC Task
+#	And I click on Subject link value of FC Task
+#	And I click on "Overview" link
+#	Then I Verify Action link for the chosen FC Task
 
 
 @CSM_FocusCategoryPreference

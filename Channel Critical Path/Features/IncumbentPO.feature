@@ -27,11 +27,11 @@ Scenario:
 	And I click on Asset
     And I check the Price in Asset 
 #   And I verify Partner accounts Details
-    When user logout from "CHANNELMANAGER" application 
-	When I log into "CHANNELPARTNER_EETEST4" details 
-	Then I search an Account Name 
-	And I click on "Assets" tab 
-	And I Verify Price is Present on Assets 
+#    When user logout from "CHANNELMANAGER" application 
+#	When I log into "CHANNELPARTNER_EETEST4" details 
+#	Then I search an Account Name 
+#	And I click on "Assets" tab 
+#	And I Verify Price is Present on Assets 
 	
 @AssetPriceandContractPriceOnAssetIncumbentcheckornot 
 Scenario: 
@@ -52,12 +52,12 @@ Scenario:
 	And I change the Stage to Closed won 
     And I clicked on Contributed to 
 	And I click on Service Contracts
-	#  And I verify Partner accounts Details
-    When user logout from "CHANNELMANAGER" application 
-	When I log into "CHANNELPARTNER_EETEST4" details 
-	Then I search an Account Name  
-	And I click on "Contracts" tab 
-	And I Verify Price is Present on Contracts 
+#   And I verify Partner accounts Details
+#   When user logout from "CHANNELMANAGER" application 
+#	When I log into "CHANNELPARTNER_EETEST4" details 
+#	Then I search an Account Name  
+#	And I click on "Contracts" tab 
+#	And I Verify Price is Present on Contracts 
 	
 @IncumbentFlagnotinAssestandService 
 Scenario: 
@@ -176,14 +176,14 @@ Scenario:
 	And I Verify Price is Present on Assets  
 	And I click on "Contracts" tab 
 	And I Verify Price is Present on Contracts 
-	When user logout from "CHANNELMANAGER" application 
-	When I log into "CHANNELDISTRIBUTOR_EETEST4" details 
-	Then I search an Account Name  
-	And I click on "Assets" tab 
-	And I Verify Price is Present on Assets  
-	And I click on "Contracts" tab 
-	And I Verify Price is Present on Contracts 
-	
+#	When user logout from "CHANNELMANAGER" application 
+#	When I log into "CHANNELDISTRIBUTOR_EETEST4" details 
+#	Then I search an Account Name  
+#	And I click on "Assets" tab 
+#	And I Verify Price is Present on Assets  
+#	And I click on "Contracts" tab 
+#	And I Verify Price is Present on Contracts 
+#	
 	
 @Incumbent 
 Scenario: 
