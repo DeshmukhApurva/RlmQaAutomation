@@ -18,7 +18,7 @@ CSM_EETEST2:
 
 CSMNetOps_DEV20:
  userName: "pes-csmnetopsuser20@csm.com"
- pwd: "pass@word1"
+ pwd: "passw0rd"
  Role: "CSM NetOps"
  Server: "EEtest4"
  Instance: "CSMNetOps_EETEST4"
