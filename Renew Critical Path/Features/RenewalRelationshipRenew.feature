@@ -10,8 +10,6 @@ Background: Login to the Application
 Scenario: Rally Test Case ID: TC3290 : Renewal Relationship - View a contract line item to covered asset relationship in a service contract: Covered Asset
 	When I create Source Opportunity with Line Items and resolve it and rename
 	And I go to created renew opp which showing renewal service to covered asset relationship
-    And I click on "Opportunities" link
-    And I select Opportunity 
     And I click to service contract line item details link
     Then I verify that associated covered asset getting display there
     
