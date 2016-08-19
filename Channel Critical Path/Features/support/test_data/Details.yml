@@ -346,6 +346,8 @@ QuoteSync:
  
 IncumbentPo:
  SourceOppName: "AU"
+ AssetName: "AS"
+ ServiceContractName: "SC"
  SourceOppStage: "Qualification"   
  Account: "PES Channel Account"
  FirstProductCheckboxIndex: 1
