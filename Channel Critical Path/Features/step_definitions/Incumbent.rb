@@ -247,6 +247,25 @@ And(/^I change the Stage to Closed won$/)do
   end
 end
 
+And(/^I change the Stage to Qualification$/)do
+  begin
+    sleep 5
+    within(:id,"bottomButtonRow") do
+      click_on("Edit")
+    end
+    sleep 5
+    select "Qualification", :from => "Stage"
+    sleep 4
+    within(:id,"bottomButtonRow") do
+      click_on "Save"
+    end
+    sleep 5
+  rescue Exception => ex
+    puts "Error occurred while changing stage to Closed won"
+    puts ex.message
+  end
+end
+
 Then(/^I should see partner opportunity account details$/) do
   begin
     sleep 5
@@ -522,7 +541,7 @@ end
 And(/^I click on Service Contracts$/)do
   begin
     sleep 5
-    find(:xpath,"//table[@class='list']/tbody/tr[3]/td[4]/a").click
+    find(:xpath,"//table[@class='list']/tbody/tr[3]/td[9]/a").click
     sleep 5
   rescue Exception => ex
     putstr "Error occurred while clicking on Service Contracts"

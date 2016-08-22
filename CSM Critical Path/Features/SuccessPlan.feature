@@ -380,11 +380,6 @@ Scenario:Rally Test Case ID: TC5017,TC5018,TC5019,TC5023,TC5025 - CSMSuccessPlan
 	And I navigate to the account page
 	And I should able to see the "Has Success Plan" field value
 
-
-
-
-
-
 @verify_action_tab_columns
 Scenario:Rally Test Case ID: TC5439,TC5440,TC5441 - Success Plan - Actions Tab: Availability of Task Record Type Column,Ability of the user to select Record Type and Task Type columns,Verify Record Type and Task Type columns saved in User Preference
 	When I click on "Success Plans" tab
@@ -454,3 +449,48 @@ Scenario: Rally Test Case ID: TC5197: Verifying Task State for Task from Success
   And I click on Subject of any task on the Action Tab
   And I check Task detail page to edit status to Completed
   Then I verify Task State
+  
+                      ######################################In Development################################### 
+  
+@PlayBookColumnHidden
+Scenario: Rally Test Case ID: TC5197,TC6001: Playbook column should be hidden in Action sub tab of Success Plan by default Users should be allowed to see Playbook column if user checkes it from column picker.
+  When I click on "Success Plans" tab
+  And I click on "Go!" button from "Success Plans" page
+  And I select the existing success plan
+  And I click on "Actions" tab 
+  And I click on "Columns" picker
+  Then I verify "Playbook" is default unchecked in the column picker
+  And I click on "Activity Stream" tab
+  And I click on "Columns" picker
+  Then I verify "Playbook" is default unchecked in the column picker
+  
+@PlayBookColumnOrder
+Scenario: Rally Test Case ID: TC5198,TC6002 Users should be allowed to see Playbook after play and before Assigned To columns
+  When I click on "Success Plans" tab
+  And I click on "Go!" button from "Success Plans" page
+  And I select the existing success plan
+  And I click on "Actions" tab 
+  And I select "Playbook" from Column picker 
+  And I verify for Playbook column order 
+#  And I click on "Activity Stream" tab
+#  And I click on "Columns" picker
+#  And I select "Playbook" from Column picker 
+#  And I verify for Playbook column order
+# 
+ 
+ @Playbookcolumnvisible 
+  Scenario: Rally Test Case ID: TC5199,TC6003 Users should be allowed to see Playbook column visible in Action subtab on navigating from other tab or login/out
+  When I click on "Success Plans" tab
+  And I click on "Go!" button from "Success Plans" page
+  And I select the existing success plan
+  And I click on "Actions" tab 
+  And I verify for Playbook column order
+  When I user logout from "CSM" application
+  And that I navigate to the CRM application
+  Then I should land on CRM home page
+  When I click on "Success Plans" tab
+  And I click on "Go!" button from "Success Plans" page
+  And I select the existing success plan
+  And I click on "Actions" tab 
+  And I verify for Playbook column order
+  

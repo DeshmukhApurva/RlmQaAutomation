@@ -748,7 +748,7 @@ And(/^I click on "([^"]*)" button from success plan creation$/) do |button|
     within("#topButtonRow") do
 		click_on button
     end
-		sleep 10
+		sleep 5
 		puts "Successfully clicked the #{button} button"
 	rescue Exception => ex
 		putstr "Error occurred while clicking the #{button} button"
@@ -912,8 +912,7 @@ And(/^I select the existing success plan$/) do
 	begin
 		sleep 5
 		arg = getReference "Reference"
-		sleep 5
-		foundCount = 0
+    foundCount = 0
 		begin
 			within(".x-grid3-body") do
 				tr = all(".x-grid3-row-table")
@@ -2439,4 +2438,84 @@ And(/^I click on Subject of any task on the Action Tab$/) do
 		putstr "Error occurred while clicking on Subject of any task on the Action Tab."
 		putstr_withScreen ex.message
 	end
+end
+
+
+
+Then(/^I verify "([^"]*)" is default unchecked in the column picker$/) do |playbook| 
+  begin
+    sleep 6
+    within all(".dropdown-menu")[0] do
+      all("li").each do |column|
+        sleep 3
+        if column.first("label").text == playbook
+          puts "Successfully see the #{playbook} field"
+          sleep 3
+          if column.first("input").checked?
+            puts "#{playbook} field is selected"
+          else
+            puts "#{playbook} field is not selected by Default"
+          end
+          sleep 3
+        end  
+  end
+  puts "Successfully see the PlayBook field Unchecked"
+  end
+  rescue Exception => ex
+    putstr "Error occurred while click verifying the #{Playbook} is by default Checked"
+    putstr_withScreen ex.message
+  end
+end
+
+And(/^I select ([^"]*) from Column picker$/)do |playbook| 
+  begin
+    sleep 6
+    within all(".dropdown-menu")[0] do
+      all("li").each do |column|
+        sleep 3
+        if column.first("label").text == playbook
+          puts "Successfully see the #{playbook} field"
+          sleep 3
+          if column.first("input").checked?
+            puts "#{playbook} field is already selected"
+          else
+            column.first("input").click
+            puts "#{playbook} field has selected"
+          end
+          sleep 3
+        end  
+  end
+  puts "Successfully see the PlayBook field Unchecked"
+  end
+  rescue Exception => ex
+    putstr "Error occurred while click verifying the #{Playbook} is by default Checked"
+    putstr_withScreen ex.message
+  end
+end
+
+And(/^I verify for Playbook column order$/) do 
+  begin
+      page.execute_script "window.scrollBy(0,10000)"
+      
+     # find(:xpath,"//*[contains(@class,'dropdown-toggle')]").click
+      # puts "I successfully Clicked on Column Picker"
+     # sleep 10
+     # within('.dropdown-menu') do
+     # sleep 6
+     # find(:xpath,"//li[4]/label[contains(text(),'Playbook')]/input").set(true)
+     # puts "Play Filter Is on Activity Stream tab Page"    
+     # end
+   
+    within("#actionSpGrid") do
+    sleep 5
+  if page.has_xpath? (".//div[text()='Playbook']")
+        puts "Successfully verified Playbook Column"
+      else
+        puts "Playbook column is Not Verified"
+      end
+  end
+  rescue Exception => ex
+    putstr "Error occurred while verifying Playbook column order"
+    putstr_withScreen ex.message
+  end
 end
