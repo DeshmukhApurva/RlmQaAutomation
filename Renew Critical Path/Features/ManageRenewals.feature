@@ -318,7 +318,7 @@ Feature: All features related to Opportunity Management - Manage Renewals
 # 
   # @SplitOppRRNewClonedOppEditDetails
   # Scenario: Rally Test Case ID: TC6462 - Split Opportunity RR - New Cloned Opportunity Details editable
-    # When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
+    # When I connect to SalesforceAPI using "SYSTEMADMIN_EE4" user role
     # When I click on the "Opportunities" grid tab
     # And I Create New Source Opportunity
     # And I select "Standard Price Book" pricebook
@@ -335,7 +335,7 @@ Feature: All features related to Opportunity Management - Manage Renewals
 # 
   # @ConsolidateOppRRNewClonedOppEditDetails
   # Scenario: Rally Test Case ID: TC6462 - Split Opportunity RR - New Cloned Opportunity Details editable
-    # When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
+    # When I connect to SalesforceAPI using "SYSTEMADMIN_EE4" user role
     # When I click on the "Opportunities" grid tab
     # And I Create New Source Opportunity
     # And I select "Standard Price Book" pricebook
@@ -352,7 +352,7 @@ Feature: All features related to Opportunity Management - Manage Renewals
     
   # @testsalesforceapi
   # Scenario: 
-    # When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
+    # When I connect to SalesforceAPI using "SYSTEMADMIN_EE4" user role
     # When I click on the "Opportunities" grid tab
     # And I Create New Source Opportunity
     # And I select "Standard Price Book" pricebook

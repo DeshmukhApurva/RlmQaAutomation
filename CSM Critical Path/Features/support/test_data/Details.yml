@@ -219,3 +219,17 @@ Overview:
  Display_Msg1: "Displaying data for: Assigned To"
  Display_Msg2: "Displaying data for: Created By"
  Display_msg3: "Displaying data for: Last Modified By"
+
+SPPBSPPL:
+ ASPT1: "ASPT1"
+ ASPT2: "ASPT2"
+ APB1ASPT1: "APB1-ASPT1"
+ APB2ASPT2: "APB2-ASPT2"
+ APL1APB1: "APL1-APB1"
+ APL2APB1: "APL2-APB1"
+ APL3APB2: "APL3-APB2"
+ APL4APB2: "APL4-APB2"
+ AT1APL1: "AT1-APL1"
+ AT2APL2: "AT2-APL2"
+ AT3APL3: "AT3-APL3"
+ AT4APL4: "AT4-APL4"

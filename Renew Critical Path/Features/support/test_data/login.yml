@@ -64,3 +64,10 @@ SYSTEMADMIN_CSMDEV20:
  security_token: "QxjEy98viCwNuHsYrewaVaYt"
  client_id: "3MVG9fMtCkV6eLhf.aL9eep2R9flaPaK00XxIzX7SwD5OyoRcRTsTV9eGABbZwa5R005iVcwZ4d6MgkloNZF4"
  client_secret: "9181097014607636178"
+ 
+SYSTEMADMIN_EE4:
+ userName: "devuser-ee4@comitydesigns.com"
+ pwd: "passw0rd"
+ security_token: "CWawBvkETvrhCCZtq6BcxAIZ"
+ client_id: "3MVG9xOCXq4ID1uEl6dfOlj_.zIXf3UQDXYGvLthNpLZKynuyne4NI05htYMpYDWhV1fkKAlKZUH0xkNBzQ6c"
+ client_secret: "7175916564577598450"

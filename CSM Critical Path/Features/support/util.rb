@@ -1,6 +1,11 @@
 require 'rubygems'
 require 'rspec/expectations'
 require 'Capybara'
+require 'Restforce'
+require 'openssl'
+require 'pry'
+
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
 @data1
 @data2
@@ -96,4 +101,28 @@ def getArraySum(name)
 			@num = @num + row
 		 end
 	@num	 
+end
+
+
+def connectSalesforceAPI(salesForceAppConnectDetails)
+  sleep 5
+  Restforce.configure do |config|
+    config.api_version = "36.0"
+    # ...
+  end
+
+  $client = Restforce.new :username => salesForceAppConnectDetails["userName"],
+  :password       => salesForceAppConnectDetails["pwd"],
+  :security_token => salesForceAppConnectDetails["security_token"],  
+  :client_id      => salesForceAppConnectDetails["client_id"],
+  :client_secret  => salesForceAppConnectDetails["client_secret"]
+  puts "#{$client.user_info.username} connected"
+
+end
+
+def getSalesForceAPIinfo(userRole)
+  sleep 5
+  yamlinput = "../features/support/test_data/login.yml"
+  myoptions = YAML.load_file(yamlinput)
+  myoptions[userRole]
 end
