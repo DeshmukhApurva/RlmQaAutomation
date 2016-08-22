@@ -813,18 +813,44 @@ When(/^I connect to SalesforceAPI using "([^"]*)" user role$/) do |user_role|
   end
 end
 
+And(/^I create Account using map data "([^"]*)"$/) do |mapName|
+  begin
+    sleep 5
+    arg = getDetails mapName
+    time = Time.new
+    accDateTime = time.hour.to_s + time.min.to_s + time.sec.to_s
+    $accName = arg["AccountName"] + accDateTime.to_s
+    $client.create('Account',Name: $accName)
+    record = $client.query("SELECT Id from Account where Name = \'#{$accName}\'")
+    accRec = record.first
+    puts accRec.Id
+    $accId = accRec.Id
+  rescue Exception => ex
+    puts "Error occurred creating Account #{$accName}"
+    puts ex.message
+  end
+end
+
 And(/^I create PLAY using map data "([^"]*)"$/) do |mapName|
   begin
     sleep 5
     arg = getDetails mapName
     puts arg["APL1APB1"] + " " + arg["APL2APB1"] + " " + arg["APL3APB2"] + " " + arg["APL4APB2"]
-    #$client.create('ServiceSource1__CSM_Play__c',ServiceSource1__CSM_Display_Name__c: arg["APL1APB1"], ServiceSource1__CSM_IsActive__c: 'True', ServiceSource1__CSM_Object_Name__c: 'Account')
     $client.create('ServiceSource1__CSM_Play__c',ServiceSource1__CSM_Display_Name__c: arg["APL1APB1"])
-    sleep 2
+
     record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Play__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APL1APB1"]}\'")
     play = record.first
+    $pL1Id = play.Id
     puts play.Id + " " + play.Name + " " + play.ServiceSource1__CSM_Display_Name__c
-    sleep 5
+    $client.update('ServiceSource1__CSM_Play__c', Id: $pL1Id, ServiceSource1__CSM_IsActive__c: true)
+    $client.update('ServiceSource1__CSM_Play__c', Id: $pL1Id, ServiceSource1__CSM_Object_Name__c: 'Account')
+    
+    $client.upsert('ServiceSource1__CSM_Play_Task__c', ServiceSource1__CSM_Play__c: $pL1Id, Name: arg["APL1APB1"]) 
+    $client.upsert('ServiceSource1__CSM_Play_Task__c', ServiceSource1__CSM_Play__c: $pL1Id, ServiceSource1__CSM_Type__c: 'Meeting')
+    $client.upsert('ServiceSource1__CSM_Play_Task__c', ServiceSource1__CSM_Play__c: $pL1Id, ServiceSource1__CSM_Days_Until_Due__c: '10')
+    $client.upsert('ServiceSource1__CSM_Play_Task__c', ServiceSource1__CSM_Play__c: $pL1Id, ServiceSource1__CSM_IsActive__c: true)
+    $client.upsert('ServiceSource1__CSM_Play_Task__c', ServiceSource1__CSM_Play__c: $pL1Id, ServiceSource1__CSM_Description__c: arg["APL1APB1"])
+
   rescue Exception => ex
     puts "Error occurred creating play #{arg["APL1APB1"]}"
     puts ex.message
