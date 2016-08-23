@@ -1,6 +1,7 @@
 #All Step Definitions which are common across modules
 require 'Win32API'
 require 'pry'
+
 Given(/^that I navigate to the CRM application$/) do
   begin
     setCursorPos = Win32API.new("user32", "SetCursorPos", ['I','I'], 'V')
@@ -831,14 +832,15 @@ And(/^I create Account using map data "([^"]*)"$/) do |mapName|
   end
 end
 
-And(/^I create PLAY using map data "([^"]*)"$/) do |mapName|
+And(/^I create PLAY with TASK using map data "([^"]*)"$/) do |mapName|
   begin
     sleep 5
     time = Time.new
     puts time
     arg = getDetails mapName
 
-    $client.create!('ServiceSource1__CSM_Play__c',ServiceSource1__CSM_Display_Name__c: arg["APL1APB1"])    
+    #Create Play1Task1
+    $client.create!('ServiceSource1__CSM_Play__c',ServiceSource1__CSM_Display_Name__c: arg["APL1APB1"])
     record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Play__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APL1APB1"]}\'")
     play = record.first
     $pL1Id = play.Id
@@ -847,20 +849,127 @@ And(/^I create PLAY using map data "([^"]*)"$/) do |mapName|
     $client.update('ServiceSource1__CSM_Play__c', Id: $pL1Id, ServiceSource1__CSM_Object_Name__c: 'Account')
     $client.update('ServiceSource1__CSM_Play__c', Id: $pL1Id, OwnerId: '005j0000000E6MWAA0')
     $client.update('ServiceSource1__CSM_Play__c', Id: $pL1Id, CreatedById: '005j0000000E6MWAA0')
-    
+
     $client.create!('ServiceSource1__CSM_Play_Task__c',ServiceSource1__CSM_Play__c: $pL1Id)
     record = $client.query("SELECT Id,Name FROM ServiceSource1__CSM_Play_Task__c where ServiceSource1__CSM_Play__c = \'#{$pL1Id}\'")
     task = record.first
     $T1Id = task.Id
     puts task.Id + " " + task.Name
-    $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T1Id, Name: arg["APL1APB1"])
+    $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T1Id, Name: arg["AT1APL1"])
     $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T1Id, ServiceSource1__CSM_Type__c: 'Meeting')
     $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T1Id, ServiceSource1__CSM_Days_Until_Due__c: '10')
     $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T1Id, ServiceSource1__CSM_IsActive__c: true)
-    $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T1Id, ServiceSource1__CSM_Description__c: arg["APL1APB1"])  
-    
+    $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T1Id, ServiceSource1__CSM_Description__c: arg["AT1APL1"])
+    time = Time.new
+    puts time
+
+    #Create Play2Task2
+    $client.create!('ServiceSource1__CSM_Play__c',ServiceSource1__CSM_Display_Name__c: arg["APL2APB1"])
+    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Play__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APL2APB1"]}\'")
+    play = record.first
+    $pL2Id = play.Id
+    puts play.Id + " " + play.Name + " " + play.ServiceSource1__CSM_Display_Name__c
+    $client.update('ServiceSource1__CSM_Play__c', Id: $pL2Id, ServiceSource1__CSM_IsActive__c: true)
+    $client.update('ServiceSource1__CSM_Play__c', Id: $pL2Id, ServiceSource1__CSM_Object_Name__c: 'Account')
+    $client.update('ServiceSource1__CSM_Play__c', Id: $pL2Id, OwnerId: '005j0000000E6MWAA0')
+    $client.update('ServiceSource1__CSM_Play__c', Id: $pL2Id, CreatedById: '005j0000000E6MWAA0')
+
+    $client.create!('ServiceSource1__CSM_Play_Task__c',ServiceSource1__CSM_Play__c: $pL2Id)
+    record = $client.query("SELECT Id,Name FROM ServiceSource1__CSM_Play_Task__c where ServiceSource1__CSM_Play__c = \'#{$pL2Id}\'")
+    task = record.first
+    $T2Id = task.Id
+    puts task.Id + " " + task.Name
+    $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T2Id, Name: arg["AT2APL2"])
+    $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T2Id, ServiceSource1__CSM_Type__c: 'Meeting')
+    $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T2Id, ServiceSource1__CSM_Days_Until_Due__c: '10')
+    $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T2Id, ServiceSource1__CSM_IsActive__c: true)
+    $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T2Id, ServiceSource1__CSM_Description__c: arg["AT2APL2"])
+    time = Time.new
+    puts time
+
+    #Create Play3Task3
+    $client.create!('ServiceSource1__CSM_Play__c',ServiceSource1__CSM_Display_Name__c: arg["APL3APB2"])
+    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Play__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APL3APB2"]}\'")
+    play = record.first
+    $pL3Id = play.Id
+    puts play.Id + " " + play.Name + " " + play.ServiceSource1__CSM_Display_Name__c
+    $client.update('ServiceSource1__CSM_Play__c', Id: $pL3Id, ServiceSource1__CSM_IsActive__c: true)
+    $client.update('ServiceSource1__CSM_Play__c', Id: $pL3Id, ServiceSource1__CSM_Object_Name__c: 'Account')
+    $client.update('ServiceSource1__CSM_Play__c', Id: $pL3Id, OwnerId: '005j0000000E6MWAA0')
+    $client.update('ServiceSource1__CSM_Play__c', Id: $pL3Id, CreatedById: '005j0000000E6MWAA0')
+
+    $client.create!('ServiceSource1__CSM_Play_Task__c',ServiceSource1__CSM_Play__c: $pL3Id)
+    record = $client.query("SELECT Id,Name FROM ServiceSource1__CSM_Play_Task__c where ServiceSource1__CSM_Play__c = \'#{$pL3Id}\'")
+    task = record.first
+    $T3Id = task.Id
+    puts task.Id + " " + task.Name
+    $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T3Id, Name: arg["AT3APL3"])
+    $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T3Id, ServiceSource1__CSM_Type__c: 'Meeting')
+    $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T3Id, ServiceSource1__CSM_Days_Until_Due__c: '10')
+    $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T3Id, ServiceSource1__CSM_IsActive__c: true)
+    $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T3Id, ServiceSource1__CSM_Description__c: arg["AT3APL3"])
+    time = Time.new
+    puts time
+
+    #Create Play4Task4
+    $client.create!('ServiceSource1__CSM_Play__c',ServiceSource1__CSM_Display_Name__c: arg["APL4APB2"])
+    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Play__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APL4APB2"]}\'")
+    play = record.first
+    $pL4Id = play.Id
+    puts play.Id + " " + play.Name + " " + play.ServiceSource1__CSM_Display_Name__c
+    $client.update('ServiceSource1__CSM_Play__c', Id: $pL4Id, ServiceSource1__CSM_IsActive__c: true)
+    $client.update('ServiceSource1__CSM_Play__c', Id: $pL4Id, ServiceSource1__CSM_Object_Name__c: 'Account')
+    $client.update('ServiceSource1__CSM_Play__c', Id: $pL4Id, OwnerId: '005j0000000E6MWAA0')
+    $client.update('ServiceSource1__CSM_Play__c', Id: $pL4Id, CreatedById: '005j0000000E6MWAA0')
+
+    $client.create!('ServiceSource1__CSM_Play_Task__c',ServiceSource1__CSM_Play__c: $pL4Id)
+    record = $client.query("SELECT Id,Name FROM ServiceSource1__CSM_Play_Task__c where ServiceSource1__CSM_Play__c = \'#{$pL4Id}\'")
+    task = record.first
+    $T4Id = task.Id
+    puts task.Id + " " + task.Name
+    $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T4Id, Name: arg["AT4APL4"])
+    $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T4Id, ServiceSource1__CSM_Type__c: 'Meeting')
+    $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T4Id, ServiceSource1__CSM_Days_Until_Due__c: '10')
+    $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T4Id, ServiceSource1__CSM_IsActive__c: true)
+    $client.update!('ServiceSource1__CSM_Play_Task__c', Id: $T4Id, ServiceSource1__CSM_Description__c: arg["AT4APL4"])
+    time = Time.new
+    puts time
+
   rescue Exception => ex
     puts "Error occurred creating play #{arg["APL1APB1"]}"
+    puts ex.message
+  end
+end
+
+And(/^I create PLAY with TASK using map data "([^"]*)"$/) do |mapName|
+  begin
+    sleep 5
+    time = Time.new
+    puts time
+    arg = getDetails mapName
+
+    #Create PlayBook1/AddPlay1
+    $client.create!('ServiceSource1__CSM_Playbook__c', ServiceSource1__CSM_Display_Name__c: arg["APB1ASPT1"])
+    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Playbook__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APB1ASPT1"]}\'")
+    playBook = record.first
+    $pb1Id = playBook.Id
+    puts playBook.Id + " " + playBook.Name + " " + playBook.ServiceSource1__CSM_Display_Name__c
+    $client.update!('ServiceSource1__CSM_Playbook__c', Id: $pb1Id, ServiceSource1__CSM_IsActive__c: true)
+    $client.update!('ServiceSource1__CSM_Playbook__c', Id: $pb1Id, OwnerId: '005j0000000E6MWAA0')
+
+    $client.create!('ServiceSource1__CSM_PlaybookPlay__c',ServiceSource1__CSM_Playbook__c: $pb1Id)
+    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Playbook__c,ServiceSource1__CSM_Play__c FROM ServiceSource1__CSM_Play_Task__c where ServiceSource1__CSM_Play__c = \'#{$pb1Id}\'")
+    pbpl = record.first
+    $pbpl1Id = pbpl.Id
+    puts pbpl.Id + " " + pbpl.Name+ " " + pbpl.ServiceSource1__CSM_Playbook__c + " " + pbpl.ServiceSource1__CSM_Play__c
+    $client.update!('ServiceSource1__CSM_PlaybookPlay__c', Id: $pbpl1Id, ServiceSource1__CSM_Play__c: $pL1Id)
+
+    time = Time.new
+    puts time
+
+
+  rescue Exception => ex
+    puts "Error occurred creating PlayBook #{arg["APL1APB1"]}"
     puts ex.message
   end
 end
