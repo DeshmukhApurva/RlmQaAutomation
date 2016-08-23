@@ -22,7 +22,8 @@ Feature: All features related to Partner user - Opportunities - Incumbent PO
     And I select the account as "Reseller" or "Distributor"
     And I click on the "Grant Access"
     And I Navigated to Renewal Opportunity
-    And I change the Stage to Closed won
+    And I change the Stage to Qualification   
+   #And I change the Stage to Closed won
     And I clicked on Contributed to
     And I click on Asset
     And I check the Price in Asset
@@ -49,7 +50,8 @@ Feature: All features related to Partner user - Opportunities - Incumbent PO
     And I select the account as "Reseller" or "Distributor"
     And I click on the "Grant Access"
     And I Navigated to Renewal Opportunity
-    And I change the Stage to Closed won
+    And I change the Stage to Qualification 
+    #And I change the Stage to Closed won
     And I clicked on Contributed to
     And I click on Service Contracts
 
@@ -75,7 +77,8 @@ Feature: All features related to Partner user - Opportunities - Incumbent PO
     And I select the account as "Reseller" or "Distributor"
     And I click on the "Grant Access"
     And I Navigated to Renewal Opportunity
-    And I change the Stage to Closed won
+    And I change the Stage to Qualification 
+   #And I change the Stage to Closed won
     #   And I clicked on Contributed to
     #	And I click on Asset
     #   And I verify partner Accounts in Assets
@@ -96,7 +99,8 @@ Feature: All features related to Partner user - Opportunities - Incumbent PO
     And I select the account as "Reseller" or "Distributor"
     And I click on the "Grant Access"
     And I Navigated to Renewal Opportunity
-    And I change the Stage to Closed won
+    And I change the Stage to Qualification 
+    #And I change the Stage to Closed won
     #   And I clicked on Contributed to
     #	And I click on Asset
     #   And I verify partner Accounts in Assets
@@ -122,10 +126,12 @@ Feature: All features related to Partner user - Opportunities - Incumbent PO
     And I select the account as "Reseller" or "Distributor"
     And I click on the "Grant Access"
     And I Navigated to Renewal Opportunity
-    And I change the Stage to Closed won
+    And I change the Stage to Qualification 
+    #And I change the Stage to Closed won
     And I clicked on Contributed to
     And I click on Asset
     And I check the Incumbent Checkbox
+    
     When I create Opportunities and add the Product
     And I change the Stage to Closed won
     And I clicked on Contributed to
@@ -138,7 +144,8 @@ Feature: All features related to Partner user - Opportunities - Incumbent PO
     And I select the account as "Reseller" or "Distributor"
     And I click on the "Grant Access"
     And I Navigated to Renewal Opportunity
-    And I change the Stage to Closed won
+    And I change the Stage to Qualification 
+   #And I change the Stage to Closed won
     And I clicked on Contributed to
     And I click on Service Contracts
     And I check the Incumbent Checkbox
@@ -159,7 +166,8 @@ Feature: All features related to Partner user - Opportunities - Incumbent PO
     And I select the account as "Reseller" or "Distributor"
     And I click on the "Grant Access"
     And I Navigated to Renewal Opportunity
-    And I change the Stage to Closed won
+    And I change the Stage to Qualification 
+   #And I change the Stage to Closed won
     And I clicked on Contributed to
     And I click on Asset
     And I check the Price in Asset

@@ -1017,7 +1017,7 @@ Then (/^I verify SP Details Widget on Success task$/) do
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
     end
-    sleep 10
+    sleep 12
     unless page.has_css?(".no-records-found")
       sleep 4
       first(".detailEnabled").click
