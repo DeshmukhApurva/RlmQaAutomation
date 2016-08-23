@@ -1129,10 +1129,11 @@ Then (/^I verify Play widget$/) do
     first(:xpath, "//*[contains(@id, 'selTasks')]").select(arg["FCWidgetView"])
     sleep 5
     #Added piece of code,it will be remove further(SearchBox)
-    within(".bootstrap-table") do
+    searchStr = "In Progress"
+    within(".bootstrap-table") do 
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys [:control, 'a']
       find(:xpath, "//*[contains(@class, 'form-control')]").send_keys :backspace
-      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys ''
+      find(:xpath, "//*[contains(@class, 'form-control')]").send_keys searchStr
     end
     sleep 10
     unless page.has_css?(".no-records-found")

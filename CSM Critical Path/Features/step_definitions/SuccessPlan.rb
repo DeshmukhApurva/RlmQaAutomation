@@ -2252,9 +2252,9 @@ end
 And(/^I click on "([^"]*)" picker$/) do |column|
 	begin
     sleep 5
-    within(".keep-open") do
-      first("button").click
-    end
+     within(".keep-open") do
+       first("button").click
+     end
 		# find("//div[@title='Columns']").click
     sleep 3
     puts "Successfully click the #{column}"
@@ -2263,6 +2263,19 @@ And(/^I click on "([^"]*)" picker$/) do |column|
 		putstr_withScreen ex.message
 	end
 end
+
+# And(/^I click column picker for Activity Stream$/) do |column|
+  # begin
+    # sleep 5
+    # find(:xpath,"//*[contains(@class,'dropdown-toggle')]").click
+    # puts "I successfully Clicked on Column Picker"
+    # sleep 3
+    # puts "Successfully click the column"
+  # rescue Exception => ex
+    # putstr "Error occurred while click on the column picker"
+    # putstr_withScreen ex.message
+  # end
+# end
 
 Then(/^I verify the "([^"]*)" and "([^"]*)" fields$/) do |record_type, task_type|
 	begin
@@ -2459,7 +2472,6 @@ Then(/^I verify "([^"]*)" is default unchecked in the column picker$/) do |playb
           sleep 3
         end  
   end
-  puts "Successfully see the PlayBook field Unchecked"
   end
   rescue Exception => ex
     putstr "Error occurred while click verifying the #{Playbook} is by default Checked"
@@ -2467,55 +2479,91 @@ Then(/^I verify "([^"]*)" is default unchecked in the column picker$/) do |playb
   end
 end
 
-And(/^I select ([^"]*) from Column picker$/)do |playbook| 
+And(/^I select Playbook from Column picker for Actions$/)do 
   begin
-    sleep 6
-    within all(".dropdown-menu")[0] do
-      all("li").each do |column|
-        sleep 3
-        if column.first("label").text == playbook
-          puts "Successfully see the #{playbook} field"
-          sleep 3
-          if column.first("input").checked?
-            puts "#{playbook} field is already selected"
-          else
-            column.first("input").click
-            puts "#{playbook} field has selected"
-          end
-          sleep 3
-        end  
-  end
-  puts "Successfully see the PlayBook field Unchecked"
-  end
+      sleep 3
+      find(:xpath,"//*[contains(@class,'dropdown-toggle')]").click
+      puts "I successfully Clicked on Column Picker"
+      sleep 6
+      within('.dropdown-menu') do
+      find(:xpath,"//li[4]/label[contains(text(),'Playbook')]/input").set(true)
+      puts "Play Filter Is on Activity Stream tab Page"    
+      end
   rescue Exception => ex
-    putstr "Error occurred while click verifying the #{Playbook} is by default Checked"
+    putstr "Error occurred while selecting the Playbook"
     putstr_withScreen ex.message
   end
 end
+
+And(/^I select Playbook from Column picker for Activity Stream$/)do 
+  begin
+      sleep 5
+      find(:xpath,"//*[contains(@class,'dropdown-toggle')]").click
+      puts "I successfully Clicked on Column Picker"
+      sleep 6
+      within('.dropdown-menu') do
+      find(:xpath,"//li[5]/label[contains(text(),'Playbook')]/input").set(true)
+      puts "Play Filter Is on Activity Stream tab Page"    
+      end
+  rescue Exception => ex
+    putstr "Error occurred while selecting the Playbook"
+    putstr_withScreen ex.message
+  end
+end
+
 
 And(/^I verify for Playbook column order$/) do 
   begin
-      page.execute_script "window.scrollBy(0,10000)"
-      
-     # find(:xpath,"//*[contains(@class,'dropdown-toggle')]").click
-      # puts "I successfully Clicked on Column Picker"
-     # sleep 10
-     # within('.dropdown-menu') do
-     # sleep 6
-     # find(:xpath,"//li[4]/label[contains(text(),'Playbook')]/input").set(true)
-     # puts "Play Filter Is on Activity Stream tab Page"    
-     # end
-   
-    within("#actionSpGrid") do
     sleep 5
-  if page.has_xpath? (".//div[text()='Playbook']")
+    page.execute_script "window.scrollBy(0,10000)"
+    within("#actionSpGrid")do
+   if page.has_xpath? (".//div[text()='Playbook']")
         puts "Successfully verified Playbook Column"
       else
         puts "Playbook column is Not Verified"
-      end
+   end
   end
   rescue Exception => ex
     putstr "Error occurred while verifying Playbook column order"
+    putstr_withScreen ex.message
+  end
+end
+
+And(/^I verify for Playbook column order for Activity Stream$/) do 
+  begin
+    sleep 5
+    page.execute_script "window.scrollBy(0,10000)"
+    within("#ActivityHistory")do
+   if page.has_xpath? (".//div[text()='Playbook']")
+        puts "Successfully verified Playbook Column"
+      else
+        puts "Playbook column is Not Verified"
+   end
+  end
+  rescue Exception => ex
+    putstr "Error occurred while verifying Playbook column order"
+    putstr_withScreen ex.message
+  end
+end
+
+And(/^I click on Playbook link and navigate to Playbook Detail page for Action Tab$/) do 
+  begin
+   find(:xpath,"//*[@id='actionSpGrid']/tbody/tr[1]/td[5]/a").click
+   puts "Successfully clicked on Playbook and Navigated to Playbook Detail Page"
+   sleep 10
+  rescue Exception => ex
+    putstr "Error occurred while clicking on Playbook link"
+    putstr_withScreen ex.message
+  end
+end
+
+And(/^I click on Playbook link and navigate to Playbook Detail page for Activity Stream$/) do 
+  begin
+   find(:xpath,"//*[@id='ActivityHistory']/tbody/tr/td[5]/a").click
+   puts "Successfully clicked on Playbook and Navigated to Playbook Detail Page"
+sleep 8
+   rescue Exception => ex
+    putstr "Error occurred while clicking on Playbook link"
     putstr_withScreen ex.message
   end
 end
