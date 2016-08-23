@@ -909,10 +909,29 @@ And(/^I update the "([^"]*)" sales field$/) do |title|
       sleep 3
       if page.has_css?(".btn-orange")
         sleep 3
-        within all(".ui-grid-canvas")[1] do
-          within all("div[role='gridcell']")[11] do
-            sleep 3
-            $before_current_date = first("div").text
+        # within all(".ui-grid-canvas")[1] do
+          # within all("div[role='gridcell']")[11] do
+            # sleep 3
+            # $before_current_date = first("div").text
+          # end
+        # end
+        gridCanvasCount = all(".ui-grid-canvas").count
+        puts "gridCanvasCount: #{gridCanvasCount}"
+        if gridCanvasCount == 2
+          puts "Grid count is 2"
+          within all(".ui-grid-canvas")[1] do
+            within all("div[role='gridcell']")[11] do
+              sleep 3
+              $before_current_date = first("div").text
+            end
+          end
+        else
+          puts "Grid count is 1"
+          within all(".ui-grid-canvas")[0] do
+            within all("div[role='gridcell']")[11] do
+              sleep 3
+              $before_current_date = first("div").text
+            end
           end
         end
         sleep 5

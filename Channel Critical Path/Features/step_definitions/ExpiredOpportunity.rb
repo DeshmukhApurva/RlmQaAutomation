@@ -85,26 +85,67 @@ And(/^I verify the "(.*?)" display$/) do |arg|
 			end	
 		end
 		
+		# if rowPresent > 0
+			# within all(".ui-grid-canvas")[1] do
+				# if all(:css, ".ui-grid-row.ng-scope").count > 0
+        # 
+					# oppCount = all(:css, ".ui-grid-row.ng-scope").count
+					# puts "No.of Opportunities on Opportunity grid: #{oppCount}"
+          # 
+          # rows = all(:css, ".ui-grid-row.ng-scope")[0]
+          # if rows.all(".ng-binding.ng-scope")[1].text != ""
+            # rowStage = rows.all(".ng-binding.ng-scope")[1].text
+            # isStageExists = 1
+          # else
+            # isStageExists = 0
+          # end
+          # 
+				# else
+					# oppCount = 0
+				# end
+			# end
+		# end
 		if rowPresent > 0
-			within all(".ui-grid-canvas")[1] do
-				if all(:css, ".ui-grid-row.ng-scope").count > 0
-
-					oppCount = all(:css, ".ui-grid-row.ng-scope").count
-					puts "No.of Opportunities on Opportunity grid: #{oppCount}"
-
-          rows = all(:css, ".ui-grid-row.ng-scope")[0]
-          if rows.all(".ng-binding.ng-scope")[1].text != ""
-            rowStage = rows.all(".ng-binding.ng-scope")[1].text
-            isStageExists = 1
+      #if gridCount == 2
+      gridCanvasCount = all(".ui-grid-canvas").count
+      puts "gridCanvasCount: #{gridCanvasCount}"
+      if gridCanvasCount == 2
+        puts "Grid count is 2"
+        within all(".ui-grid-canvas")[1] do
+          if all(:css, ".ui-grid-row.ng-scope").count > 0
+            oppCount = all(:css, ".ui-grid-row.ng-scope").count
+            puts "No.of Opportunities on Opportunity grid: #{oppCount}"
+    
+            rows = all(:css, ".ui-grid-row.ng-scope")[0]
+            if rows.all(".ng-binding.ng-scope")[1].text != ""
+              rowStage = rows.all(".ng-binding.ng-scope")[1].text
+              isStageExists = 1
+            else
+              isStageExists = 0
+            end
           else
-            isStageExists = 0
+            oppCount = 0
           end
-
-				else
-					oppCount = 0
-				end
-			end
-		end
+        end
+      else
+        puts "Grid count is 1"
+        within all(".ui-grid-canvas")[0] do
+          if all(:css, ".ui-grid-row.ng-scope").count > 0
+            oppCount = all(:css, ".ui-grid-row.ng-scope").count
+            puts "No.of Opportunities on Opportunity grid: #{oppCount}"    
+            rows = all(:css, ".ui-grid-row.ng-scope")[0]
+            if rows.all(".ng-binding.ng-scope")[1].text != ""
+              rowStage = rows.all(".ng-binding.ng-scope")[1].text
+              isStageExists = 1
+            else
+              isStageExists = 0
+            end
+          else
+            oppCount = 0
+          end
+        end
+      end
+    end
 
     if isStageExists > 0
       if (rowStage.to_s == @stage.to_s)
