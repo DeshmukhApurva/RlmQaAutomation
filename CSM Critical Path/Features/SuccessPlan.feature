@@ -542,4 +542,13 @@ Scenario: Rally Test Case ID: TC5198,TC6002 Users should be allowed to see Playb
    And I fill the required task details
    And I "SAVE" the "Create Task"
    And I click on Subject of any task on the Action Tab
+   And I verify value in Task Detail Page
    
+   
+#   When I click on "Success Tasks" link
+#   And I select Task based FC from dropdown
+#   And I click on "Create Task" button
+#   And I fill the required task details
+#   And I "SAVE" the "Create Task"
+#   And I click on Subject of any task on the Action Tab
+#   And I verify value in Task Detail Page

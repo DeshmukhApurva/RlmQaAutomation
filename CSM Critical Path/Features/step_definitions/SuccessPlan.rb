@@ -1131,6 +1131,8 @@ And(/^I fill the required task details$/) do
 	arg = getDetails "Taskdetails"
 	arg2 = getDetails "CreateTaskFields"
 	spPlay = getReference "Reference"
+  $SuccessPlanValue = spPlay["SuccessPlanPlay"]
+  puts $SuccessPlanValue 
   sleep 4
 	within all('.pbSubsection').last do
 		sleep 5
@@ -1143,7 +1145,7 @@ And(/^I fill the required task details$/) do
 		#first(:xpath, "//*[contains(@id, 'taskNameValue')]").set("Call")
     first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").click
     first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").set(spPlay["SuccessPlanPlay"])
-		sleep 4
+   	sleep 4
 		first(:xpath, "//*[contains(@id, 'taskTypeValue')]").click
 		first(:xpath, "//*[contains(@id, 'taskTypeValue')]").select("Call")
 		first(:xpath, "//*[contains(@id, 'commentsValue')]").click
@@ -2564,6 +2566,28 @@ And(/^I click on Playbook link and navigate to Playbook Detail page for Activity
 sleep 8
    rescue Exception => ex
     putstr "Error occurred while clicking on Playbook link"
+    putstr_withScreen ex.message
+  end
+end
+
+
+
+And(/^I verify value in Task Detail Page$/) do
+  begin
+    if page.has_text? ("Task")
+      puts "Navigated to task page."
+    end
+  sleep 5  
+   TaskValue = find(:xpath,'//*/td[text()="Success Plan Play"]/following-sibling::td/div').text
+   puts TaskValue
+   if $SuccessPlanValue == TaskValue
+    puts "Task Value verified Successfully"
+   else
+    puts "Task Value is not Verified"
+    end
+   sleep 3 
+  rescue Exception => ex
+    putstr "Error occurred while verifying Task State status."
     putstr_withScreen ex.message
   end
 end
