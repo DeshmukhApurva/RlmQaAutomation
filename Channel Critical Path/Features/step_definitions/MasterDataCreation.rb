@@ -682,3 +682,201 @@ And(/^I rename the quote as "(.*?)"$/) do |arg|
   end
 end
 
+Then(/^I move Sales stages for pipeline from "(.*?)" to "(.*?)"$/) do |item1,item2|
+  begin
+    arg1 = getDetails "SalesStages"
+    arg2 = getDetails "Number of Days Between Updates"
+    arg3 = getDetails "Days Before Expiration"
+    saveMessage = arg1["CorrectText"]
+    
+    within all(".divelement")[1] do 
+      
+      availableStages = find(:xpath, ".//*[contains(@id, 'destinationSelectList')]").all('option').collect(&:text)
+      
+      
+      if availableStages.to_s.size > 0
+        puts "SalesStages available in #{item2} : #{availableStages}"
+        
+        availableStages.each do |option|
+          find(:xpath, ".//*[contains(@id, 'destinationSelectList')]").select(option)
+          puts "Selected #{option}"
+          sleep 2
+        end
+        
+        find(:css, ".leftArrowIcon").click
+        puts "Moved all the stages from #{item2} to #{item1}"
+        sleep 2
+
+      else
+        puts "#{item2} is empty"
+      end
+    end
+    
+    # sleep 5
+#     
+    # within all(".divelement")[0] do 
+#     
+      # LOV = find(:xpath, ".//*[contains(@id, 'targetSelectList')]").all('option').collect(&:text)
+#       
+      # if LOV.size > 0
+#         
+        # LOV.each do |option|
+          # find(:xpath, ".//*[contains(@id, 'targetSelectList')]").select(option)
+          # puts "Selected #{option}"
+          # sleep 2
+        # end
+#         
+        # find(:css, ".rightArrowIcon").click
+        # puts "Moved Sales stages from #{item1} to #{item2}"
+        # sleep 2
+# 
+      # else
+        # puts "No Sales stages to select to move from #{item1} to #{item2}"
+      # end
+    # end
+    
+    sleep 5
+    
+    within all(".pbSubsection")[5] do
+      first(:xpath, ".//*[contains(@id, 'in_field_req')]").set(arg2["CorrectValue"])
+      puts "Entered #{arg2["CorrectValue"]} in Number of Days Between Updates field"
+    end
+    
+    within all(".pbSubsection")[6] do
+      first(:xpath, ".//*[contains(@id, 'in_field_req')]").set(arg3["CorrectValue"])
+      puts "Entered #{arg3["CorrectValue"]} in Days Before Expiration field"
+    end
+    
+    within(".pbButtonb") do
+      click_on "Save"
+      puts "Clicked on Save button"
+    end
+    sleep 3
+    
+    if page.has_content? saveMessage
+      puts "#{saveMessage} message displayed."
+    else
+      puts "#{saveMessage} message is not displayed."
+    end
+    sleep 3
+    
+  rescue Exception => ex
+    putstr "Error occurred while moving Sales stages from #{item1} to #{item2}"
+    putstr_withScreen ex.message
+  end
+end 
+ 
+ Then(/^I move Sales stages for Partners from "(.*?)" to "(.*?)"$/) do |item1,item2|
+  begin
+    arg1 = getDetails "SalesStages"
+    arg2 = getDetails "Number of Days Between Updates"
+    arg3 = getDetails "Days Before Expiration"
+    saveMessage = arg1["CorrectText"]
+    
+    within all(".divelement")[0] do 
+      
+      availableStages = find(:xpath, ".//*[contains(@id, 'destinationSelectList')]").all('option').collect(&:text)
+      
+      
+      if availableStages.to_s.size > 0
+        puts "SalesStages available in #{item2} : #{availableStages}"
+        
+        availableStages.each do |option|
+          find(:xpath, ".//*[contains(@id, 'destinationSelectList')]").select(option)
+          puts "Selected #{option}"
+          sleep 2
+        end
+        
+        find(:css, ".leftArrowIcon").click
+        puts "Moved all the stages from #{item2} to #{item1}"
+        sleep 2
+
+      else
+        puts "#{item2} is empty"
+      end
+    end
+    
+    # sleep 5
+#     
+    # within all(".divelement")[0] do 
+#     
+      # LOV = find(:xpath, ".//*[contains(@id, 'targetSelectList')]").all('option').collect(&:text)
+#       
+      # if LOV.size > 0
+#         
+        # LOV.each do |option|
+          # find(:xpath, ".//*[contains(@id, 'targetSelectList')]").select(option)
+          # puts "Selected #{option}"
+          # sleep 2
+        # end
+#         
+        # find(:css, ".rightArrowIcon").click
+        # puts "Moved Sales stages from #{item1} to #{item2}"
+        # sleep 2
+# 
+      # else
+        # puts "No Sales stages to select to move from #{item1} to #{item2}"
+      # end
+    # end
+#     
+    sleep 5
+    
+    within all(".pbSubsection")[5] do
+      first(:xpath, ".//*[contains(@id, 'in_field_req')]").set(arg2["CorrectValue"])
+      puts "Entered #{arg2["CorrectValue"]} in Number of Days Between Updates field"
+    end
+    
+    within all(".pbSubsection")[6] do
+      first(:xpath, ".//*[contains(@id, 'in_field_req')]").set(arg3["CorrectValue"])
+      puts "Entered #{arg3["CorrectValue"]} in Days Before Expiration field"
+    end
+    
+    within(".pbButtonb") do
+      click_on "Save"
+      puts "Clicked on Save button"
+    end
+    sleep 3
+    
+    if page.has_content? saveMessage
+      puts "#{saveMessage} message displayed."
+    else
+      puts "#{saveMessage} message is not displayed."
+    end
+    sleep 3
+    
+  rescue Exception => ex
+    putstr "Error occurred while moving Sales stages from #{item1} to #{item2}"
+    putstr_withScreen ex.message
+  end
+end  
+
+And(/^I Add Partner Opportunity field "(.*?)"$/) do |field1|
+  begin
+    sleep 3
+    addDisabled = 1
+    within all(".pbSubsection")[1] do
+      if page.has_css?(".btnDisabled")
+      addDisabled = 0
+      end
+    end
+    sleep 5
+    if (addDisabled > 0)
+      within all(".pbSubsection")[1] do
+        click_on "Add"
+        puts "Add clicked"
+      end
+      sleep 8
+      first(:xpath, ".//*[contains(@id, 'fieldsName')]").select(field1)
+      
+      sleep 8
+    within all(".pbButton")[1] do
+    click_on 'Save'
+    end
+    sleep 5
+    end
+    puts "Added Partner Opportunity field"
+  rescue Exception => ex
+    putstr "Error occurred while adding Partner Opportunity field"
+    putstr_withScreen  ex.message
+  end
+end

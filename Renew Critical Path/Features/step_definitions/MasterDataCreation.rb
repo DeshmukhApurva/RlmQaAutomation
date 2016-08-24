@@ -1086,17 +1086,29 @@ end
 
 And(/^I put view Name for Asset Filter "(.*?)" and add Row$/) do |arg|
   begin
-    sleep 6
+    sleep 8
      fill_in "View Name" ,:with => arg
      puts "I successfully Named to Group logic"
-     sleep 6 
+     sleep 8 
      first(:xpath, "//input[@value='Add Row']").click
+     sleep 8
      puts "Successfully Add row in Group logic"
+    sleep 8
     within(".pbBottomButtons") do
       click_on 'Save'
       #first(:xpath, "//*[contains(@name, 'save')]").click
       puts "Group logic created Created"
       sleep 5
     end
+  end
+end
+
+And(/^I delete Product Criteria$/) do
+  begin
+    sleep 8
+   within all('.pbSubsection')[1] do
+     first(:link).click
+     puts "Successfully Delete Product criteria"
+   end
   end
 end
