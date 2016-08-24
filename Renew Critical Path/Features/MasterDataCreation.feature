@@ -37,7 +37,15 @@ Background: Login to the Application
 #Scenario: Rally Test Case ID: TC2895 : Create Success plan 
 #	When I click on "Success Plans" tab 
 #	Then I create a SuccessPlan with template "APT-000004" with Account "QA Test" 
-	
+
+@renewManagement	
+Scenario: Rally Test Case ID:  : Renew: Asset creation 
+    When I Navigate to "ServiceSource Setup" tab 
+	And I click on "Opportunity Generation" link 
+    And I delete Product Criteria
+    And I click on "Install Base Data Rules" link 
+    And I delete Product Criteria
+    
 @CreateAsset 
 Scenario: Rally Test Case ID:  : Renew: Asset creation 
 	When I click on "Assets" tab 
@@ -77,22 +85,22 @@ Scenario: Renew: Add on Renewals creation
 	
 @OppCreation 
 Scenario: Renew: Generate Opp 
-	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "PesSrcOpp" with Account "QA Test" and Product "Product B" 
-	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "SplitOpportunity" with Account "QA Test" and Product "Product B" 
-	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "SourceOpportunity09" with Account "QA Test" and Product "Product B" 
-	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "CreateOppfromOpp" with Account "QA Test" and Product "Product A" 
-	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "RenewNetOpsService" with Account "QA Test" and Product "Product A" 
-	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "Split_Target_Opportunity_RN" with Account "QA Test" and Product "Product B" with pricebook "Standard Price Book" 
-	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "N.ew1Opportunity_StNd_Pricebook" with Account "QA Test" and Product "Product B" with pricebook "Standard Price Book" 
-	When I click on "Opportunities" tab 
-	Then I create new opportunity with Name "N.ew1Opportunity_Test_Pricebook" with Account "QA Test" and Product "Product B" with pricebook "Test_PriceBook" 
+#	When I click on "Opportunities" tab 
+#	Then I create new opportunity with Name "PesSrcOpp" with Account "QA Test" and Product "Product B" 
+#	When I click on "Opportunities" tab 
+#	Then I create new opportunity with Name "SplitOpportunity" with Account "QA Test" and Product "Product B" 
+#	When I click on "Opportunities" tab 
+#	Then I create new opportunity with Name "SourceOpportunity09" with Account "QA Test" and Product "Product B" 
+#	When I click on "Opportunities" tab 
+#	Then I create new opportunity with Name "CreateOppfromOpp" with Account "QA Test" and Product "Product A" 
+#	When I click on "Opportunities" tab 
+#	Then I create new opportunity with Name "RenewNetOpsService" with Account "QA Test" and Product "Product A" 
+#	When I click on "Opportunities" tab 
+#	Then I create new opportunity with Name "Split_Target_Opportunity_RN" with Account "QA Test" and Product "Product B" with pricebook "Standard Price Book" 
+#	When I click on "Opportunities" tab 
+#	Then I create new opportunity with Name "N.ew1Opportunity_StNd_Pricebook" with Account "QA Test" and Product "Product B" with pricebook "Standard Price Book" 
+#	When I click on "Opportunities" tab 
+#	Then I create new opportunity with Name "N.ew1Opportunity_Test_Pricebook" with Account "QA Test" and Product "Product B" with pricebook "Test_PriceBook" 
 	When I create Source Opportunity with Line Items with Account "QA Test" and resolve it and rename it as "PES_Invalid_RR" 
 	
 	
@@ -112,18 +120,18 @@ Scenario: Renew: Batch_generation_Activity
 	When I click on "ServiceSource Setup" link
 	And I click on "Batch Generation Activity" link
 	And I click on create new Batch
-	And I create Asset filter for batch
-	And I put view Name for Asset Filter "Filter 1" and add criteria
-	And I create Asset filter for batch
-	And I put view Name for Asset Filter "Filter 2" with two criteria
-	And I create Asset filter for batch
-	And I put view Name for Asset Filter "Filter 3" and add criteria
-	And I create Asset filter for batch
-	And I put view Name for Asset Filter "Filter 4" and add criteria
-	And I create Asset filter for batch
-	And I put view Name for Asset Filter "Filter 5" and add criteria
-	And I create Asset filter for batch
-	And I put view Name for Asset Filter "Filter 6" and add criteria
+#	And I create Asset filter for batch
+#	And I put view Name for Asset Filter "Filter 1" and add criteria
+#	And I create Asset filter for batch
+#	And I put view Name for Asset Filter "Filter 2" with two criteria
+#	And I create Asset filter for batch
+#	And I put view Name for Asset Filter "Filter 3" and add criteria
+#	And I create Asset filter for batch
+#	And I put view Name for Asset Filter "Filter 4" and add criteria
+#	And I create Asset filter for batch
+#	And I put view Name for Asset Filter "Filter 5" and add criteria
+#	And I create Asset filter for batch
+#	And I put view Name for Asset Filter "Filter 6" and add criteria
 	And I create Group Logic for batch
     And I put view Name for Asset Filter "Grouping 1" and add Row
     And I create Group Logic for batch
