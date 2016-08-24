@@ -221,7 +221,7 @@ Overview:
  Display_msg3: "Displaying data for: Last Modified By"
 
 SPPBSPPL:
- AccountName: "AutoCSM" 
+ AccountName: "AAcc" 
  ASPT1: "ASPT1"
  ASPT2: "ASPT2"
  APB1ASPT1: "APB1-ASPT1"
