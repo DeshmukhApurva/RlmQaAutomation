@@ -36,6 +36,18 @@ Scenario: Rally Test Case ID: TC3588 - Renewal Relationship - Product Associatio
     Then I verify the created products
     And I resolve the "Opportunity"
 	Then I should able to see the "Renewal Relationship" section
-	Then I verify product getting associated with renewal relationship0
+	Then I verify product getting associated with renewal relationship
+	
+@clone_renewal_relationship
+Scenario: Rally
+	When I Navigate to "Service Contracts" tab
+	#Then I select the Source Service Contract for Opportunity Generation from ServiceContract
+	Then I select Test SC view
+	And I click on the Go button if present
+	And I click on "RenewNetOpsSCTest" link
+	Then I generate Opportunity from the Service Contract	
+	And I clone the existing renewal relationship
+	And I verify the cloned renewal relationship id is different from the existing renewal relationship id
+	And I manually delete the opportunity	
 
 
