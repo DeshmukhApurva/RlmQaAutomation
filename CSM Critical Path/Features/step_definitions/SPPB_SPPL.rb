@@ -286,7 +286,7 @@ Then(/^I create SuccessPlan using map "(.*?)" and key "(.*?)"$/) do |mapName, ke
     #within(:class,".pbButton") do
     record = $client.query("SELECT Id,Name FROM ServiceSource1__CSM_Account_Plan_Template__c where ServiceSource1__CSM_Template_Name__c = \'#{arg["#{keyName}"]}\'")
     sPTName = record.first.Name
-    
+
     puts "SPT1: " + sPTName
     click_on "New"
     #end
@@ -374,7 +374,30 @@ end
 
 Then(/^I open Success Plan record$/) do
   begin
-    first(:link, $SPName).click
+    if page.has_button?('Go!')
+      click_on "Go!"
+    end
+    if page.has_css?(".listItemPad")
+      sleep 4
+      puts "Successfully see the Alphabetic Pagination"
+      all(".selectArrow")[0].click
+      sleep 8
+      within(".bottomNav") do
+        first("table").all("tr")[4].click
+      end
+    else
+      putstr "Failed to see the Alphabetic Pagination"
+    end
+    within(".x-grid3-body") do
+      within all(".x-grid3-row").each do
+        puts all("//table/tbody/tr/td[3]/div").first("a").text
+        if all("//table/tbody/tr/td[3]/div").first("a").text == $SPName
+          all("//table/tbody/tr/td[2]/div").first(:link, 'Edit').click
+        end
+        break
+      end
+      break
+    end
     sleep 10
     puts "Navigated to " + $SPName + " tab"
   rescue Exception => ex
