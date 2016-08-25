@@ -822,11 +822,13 @@ And(/^I create Account using map data "([^"]*)"$/) do |mapName|
     time = Time.new
     accDateTime = time.hour.to_s + time.min.to_s + time.sec.to_s
     $accountName = arg["AccountName"] + accDateTime.to_s
+    puts $accountName 
     $client.create('Account',Name: $accountName)
     record = $client.query("SELECT Id,Name from Account where Name = \'#{$accountName}\'")
     accRec = record.first
     puts accRec.Id
     $accId = accRec.Id
+    $client.update!('Account', Id: accRec.Id, OwnerId: '005j0000000E6MW')
   rescue Exception => ex
     puts ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
@@ -975,17 +977,17 @@ And(/^I create PLAYBOOK with PLAY using map data "([^"]*)"$/) do |mapName|
 #    $client.update!('ServiceSource1__CSM_Playbook__c', Id: $pb2Id, OwnerId: '005j0000000E6MWAA0')
 
     $client.create!('ServiceSource1__CSM_PlaybookPlay__c', ServiceSource1__CSM_Play__c: $pL2Id, ServiceSource1__CSM_Playbook__c: $pb2Id)
-    $client.create!('ServiceSource1__CSM_PlaybookPlay__c', ServiceSource1__CSM_Play__c: $pL3Id, ServiceSource1__CSM_Playbook__c: $pb2Id)
+    #$client.create!('ServiceSource1__CSM_PlaybookPlay__c', ServiceSource1__CSM_Play__c: $pL3Id, ServiceSource1__CSM_Playbook__c: $pb2Id)
 
     record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Playbook__c,ServiceSource1__CSM_Play__c FROM ServiceSource1__CSM_PlaybookPlay__c where ServiceSource1__CSM_Play__c = \'#{$pL2Id}\' and ServiceSource1__CSM_Playbook__c = \'#{$pb2Id}\'")
     pbplRecords = record.first
     $pbpl2Id = pbplRecords.Id 
     puts "PlayBookPlay1: " + pbplRecords.Id + " " + pbplRecords.Name+ " " + pbplRecords.ServiceSource1__CSM_Playbook__c + " " + pbplRecords.ServiceSource1__CSM_Play__c
 
-    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Playbook__c,ServiceSource1__CSM_Play__c FROM ServiceSource1__CSM_PlaybookPlay__c where ServiceSource1__CSM_Play__c = \'#{$pL3Id}\' and ServiceSource1__CSM_Playbook__c = \'#{$pb2Id}\'")
-    pbplRecords = record.first
-    $pbpl3Id = pbplRecords.Id
-    puts "PlayBookPlay2: " + pbplRecords.Id + " " + pbplRecords.Name+ " " + pbplRecords.ServiceSource1__CSM_Playbook__c + " " + pbplRecords.ServiceSource1__CSM_Play__c
+#    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Playbook__c,ServiceSource1__CSM_Play__c FROM ServiceSource1__CSM_PlaybookPlay__c where ServiceSource1__CSM_Play__c = \'#{$pL3Id}\' and ServiceSource1__CSM_Playbook__c = \'#{$pb2Id}\'")
+#    pbplRecords = record.first
+#    $pbpl3Id = pbplRecords.Id
+#    puts "PlayBookPlay2: " + pbplRecords.Id + " " + pbplRecords.Name+ " " + pbplRecords.ServiceSource1__CSM_Playbook__c + " " + pbplRecords.ServiceSource1__CSM_Play__c
     time = Time.new
     puts time
   rescue Exception => ex
@@ -1059,6 +1061,24 @@ And(/^I delete Play_PlayBook_SPT$/) do
     $client.destroy!('ServiceSource1__CSM_Account_Plan_Template__c', $sPT2Id)
     
     #Delete Account
+    #$client.destroy!('Account', $accId)
+    #puts $client.find('Account', $accId)
+    time = Time.new
+    puts time
+  rescue Exception => ex
+    puts ex.message
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+  end
+end
+
+And(/^I delete Account$/) do
+  begin
+    #$accId/$pL1Id/$pL2Id/$pL3Id/$pL4Id/$pb1Id/$pbpl1Id/$pb2Id/$pbpl2Id/$pbpl3Id/$sPT1Id/s$sPT2Id
+    sleep 5
+    time = Time.new
+    puts time
+   
+    #Delete Account
     $client.destroy!('Account', $accId)
     #puts $client.find('Account', $accId)
     time = Time.new
@@ -1068,6 +1088,7 @@ And(/^I delete Play_PlayBook_SPT$/) do
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
   end
 end
+
 
 When(/^I click on the "(.*?)" grid tab$/) do |tab|
   begin
