@@ -821,9 +821,9 @@ And(/^I create Account using map data "([^"]*)"$/) do |mapName|
     arg = getDetails mapName
     time = Time.new
     accDateTime = time.hour.to_s + time.min.to_s + time.sec.to_s
-    $accName = arg["AccountName"] + accDateTime.to_s
-    $client.create('Account',Name: $accName)
-    record = $client.query("SELECT Id from Account where Name = \'#{$accName}\'")
+    $accountName = arg["AccountName"] + accDateTime.to_s
+    $client.create('Account',Name: $accountName)
+    record = $client.query("SELECT Id,Name from Account where Name = \'#{$accountName}\'")
     accRec = record.first
     puts accRec.Id
     $accId = accRec.Id
@@ -845,6 +845,7 @@ And(/^I create PLAY with TASK using map data "([^"]*)"$/) do |mapName|
     record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Play__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APL1APB1"]}\'")
     play = record.first
     $pL1Id = play.Id
+    $pL1Name = play.Name
     puts play.Id + " " + play.Name + " " + play.ServiceSource1__CSM_Display_Name__c
 
     $client.create!('ServiceSource1__CSM_Play_Task__c',ServiceSource1__CSM_Play__c: $pL1Id, Name: arg["AT1APL1"], ServiceSource1__CSM_Type__c: 'Meeting', ServiceSource1__CSM_Days_Until_Due__c: '10', ServiceSource1__CSM_IsActive__c: true)
@@ -861,6 +862,7 @@ And(/^I create PLAY with TASK using map data "([^"]*)"$/) do |mapName|
     record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Play__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APL2APB1"]}\'")
     play = record.first
     $pL2Id = play.Id
+    $pL2Name = play.Name
     puts play.Id + " " + play.Name + " " + play.ServiceSource1__CSM_Display_Name__c
 #    $client.update('ServiceSource1__CSM_Play__c', Id: $pL2Id, ServiceSource1__CSM_IsActive__c: true)
 #    $client.update('ServiceSource1__CSM_Play__c', Id: $pL2Id, ServiceSource1__CSM_Object_Name__c: 'Account')
@@ -885,6 +887,7 @@ And(/^I create PLAY with TASK using map data "([^"]*)"$/) do |mapName|
     record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Play__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APL3APB2"]}\'")
     play = record.first
     $pL3Id = play.Id
+    $pL3Name = play.Name
     puts play.Id + " " + play.Name + " " + play.ServiceSource1__CSM_Display_Name__c
 #    $client.update('ServiceSource1__CSM_Play__c', Id: $pL3Id, ServiceSource1__CSM_IsActive__c: true)
 #    $client.update('ServiceSource1__CSM_Play__c', Id: $pL3Id, ServiceSource1__CSM_Object_Name__c: 'Account')
@@ -909,6 +912,7 @@ And(/^I create PLAY with TASK using map data "([^"]*)"$/) do |mapName|
     record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Play__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APL4APB2"]}\'")
     play = record.first
     $pL4Id = play.Id
+    $pL4Name = play.Name
     puts play.Id + " " + play.Name + " " + play.ServiceSource1__CSM_Display_Name__c
 #    $client.update('ServiceSource1__CSM_Play__c', Id: $pL4Id, ServiceSource1__CSM_IsActive__c: true)
 #    $client.update('ServiceSource1__CSM_Play__c', Id: $pL4Id, ServiceSource1__CSM_Object_Name__c: 'Account')
@@ -946,6 +950,7 @@ And(/^I create PLAYBOOK with PLAY using map data "([^"]*)"$/) do |mapName|
     record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Playbook__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APB1ASPT1"]}\'")
     playBook = record.first
     $pb1Id = playBook.Id
+    $pb1Name = playBook.Name
     puts "Play Book1: " + playBook.Id + " " + playBook.Name + " " + playBook.ServiceSource1__CSM_Display_Name__c
 #    $client.update!('ServiceSource1__CSM_Playbook__c', Id: $pb1Id, ServiceSource1__CSM_IsActive__c: true)
 #    $client.update!('ServiceSource1__CSM_Playbook__c', Id: $pb1Id, OwnerId: '005j0000000E6MWAA0')
@@ -964,6 +969,7 @@ And(/^I create PLAYBOOK with PLAY using map data "([^"]*)"$/) do |mapName|
     record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Playbook__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APB2ASPT2"]}\'")
     playBook = record.first
     $pb2Id = playBook.Id
+    $pb2Name = playBook.Name
     puts "Play Book2: " + playBook.Id + " " + playBook.Name + " " + playBook.ServiceSource1__CSM_Display_Name__c
 #    $client.update!('ServiceSource1__CSM_Playbook__c', Id: $pb2Id, ServiceSource1__CSM_IsActive__c: true)
 #    $client.update!('ServiceSource1__CSM_Playbook__c', Id: $pb2Id, OwnerId: '005j0000000E6MWAA0')
@@ -1000,6 +1006,7 @@ And(/^I create SPT with PLAYBOOK using map data "([^"]*)"$/) do |mapName|
     record = $client.query("SELECT Id,Name FROM ServiceSource1__CSM_Account_Plan_Template__c where ServiceSource1__CSM_Template_Name__c = \'#{arg["ASPT1"]}\'")
     sPT = record.first
     $sPT1Id = sPT.Id
+    $sPT1Name = sPT.Name
     puts "SPT1: " + sPT.Id + " " + sPT.Name
 
     $client.create!('ServiceSource1__CSM_Account_Plan_Phase__c', ServiceSource1__CSM_Account_Plan_Template__c: $sPT1Id, ServiceSource1__CSM_Length__c: '10', ServiceSource1__CSM_Order__c: '1', ServiceSource1__CSM_Phase_Name__c: 'Automation SPT1 Phase')
@@ -1014,6 +1021,7 @@ And(/^I create SPT with PLAYBOOK using map data "([^"]*)"$/) do |mapName|
     record = $client.query("SELECT Id,Name FROM ServiceSource1__CSM_Account_Plan_Template__c where ServiceSource1__CSM_Template_Name__c = \'#{arg["ASPT2"]}\'")
     sPT = record.first
     $sPT2Id = sPT.Id
+    $sPT2Name = sPT.Name
     puts "SPT2: " + sPT.Id + " " + sPT.Name
 
     $client.create!('ServiceSource1__CSM_Account_Plan_Phase__c', ServiceSource1__CSM_Account_Plan_Template__c: $sPT2Id, ServiceSource1__CSM_Length__c: '10', ServiceSource1__CSM_Order__c: '1', ServiceSource1__CSM_Phase_Name__c: 'Automation SPT1 Phase')
@@ -1058,5 +1066,30 @@ And(/^I delete Play_PlayBook_SPT$/) do
   rescue Exception => ex
     puts ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+  end
+end
+
+When(/^I click on the "(.*?)" grid tab$/) do |tab|
+  begin
+    sleep 5
+    if page.has_css?("#AllTab_Tab")
+      sleep 3
+      find(".allTabsArrow").click
+      sleep 4
+      within(".bPageBlock") do
+        find("#p1").select "All Tabs"
+        puts "Click On All TAb"
+        sleep 4
+        click_on tab
+      end
+      sleep 3
+      puts "Successfully navigate to the #{tab} page"
+    else
+      raise "Failed to see the All Tab Icon"
+    end
+    sleep 8
+  rescue Exception => ex
+    raise "Error occurred while clicking the #{tab} tab"
+    putstr_withScreen  ex.message
   end
 end
