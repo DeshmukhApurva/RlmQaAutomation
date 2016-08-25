@@ -82,7 +82,7 @@ Feature: All features related to Opportunity Management - Manage Renewals
 	Then I click on "Playbooks" tab
 	Then I verify Playbooks subtab for Playbooks and Plays Grid
 	Then I click on "Add Playbook" link
-	Then I add playbook to SP using map data "SPPBSPPL" and key "APB2"
+	Then I add playbook or add and skip criteria to SP using map data "SPPBSPPL" and key "APB2"
 	Then I click on "Playbooks" tab
   Then I verify Playbooks subtab using map data "SPPBSPPL" for "APB2" after "adding" playbook
   When I click on "ServiceSource Setup" link
