@@ -49,7 +49,7 @@ Then(/^I fetch URI of template$/) do
     sleep 4
     record = $client.query("SELECT Name FROM ServiceSource1__CSM_Account_Plan_Template__c WHERE Id = \'#{templateId}\'")
     $playBookTempForPlan = record.first.Name
-    puts "Playbook :"+$playBookTempForPlan
+    puts "SPT :"+$playBookTempForPlan
     sleep 5
   rescue Exception => ex
     putstr "Error occurred while fetching SPT ID"
@@ -92,11 +92,12 @@ end
 Then(/^I Save success plan Name value$/) do
   begin
     templatePath = URI.parse(current_url).request_uri
-    templateId = templatePath.split('id=')[1].split('&')[0]
-    templateId = templateId[0,15] 
-    puts "PlanId: "+templateId
+    planId = templatePath.split('id=')[1].split('&')[0]
+    planId = planId[0,15] 
+    puts "PlanId: "+planId
+    $sPlanId = planId
     sleep 4
-    record = $client.query("SELECT Name FROM ServiceSource1__CSM_Account_Plan__c WHERE Id = \'#{templateId}\'")
+    record = $client.query("SELECT Name FROM ServiceSource1__CSM_Account_Plan__c WHERE Id = \'#{planId}\'")
     $SuccessPlanName = record.first.Name
     #puts play.Id + " " + play.Name + " " + play.ServiceSource1__CSM_Display_Name__c
     puts "Success Plan :"+$SuccessPlanName
@@ -242,13 +243,13 @@ Then(/I delete playbook from SPT using map data "(.*?)" and key "(.*?)"$/) do |m
     # puts "Select '#{templateName}' template"
     # first(:xpath, ".//tr/td/span[contains(text(), '#{templateName}')]//parent::td//preceding-sibling::td/a[contains(text(), 'Edit')]").click
     # sleep 3
-    if page.has_content?('Define Success Plan Playbooks')
-      puts "Define Success Plan Playbooks section displayed"
+    if page.has_content?('Define Success Plan Playbooks') || page.has_content?('Define Playbook Plays')
+      puts "Define Success Plan Playbooks/Plays section displayed"
       sleep 3
     else
-      raise "Define Success Plan Playbook section not displayed"
+      raise "Define Success Plan Playbook/Plays section not displayed"
     end 
-    puts "Delete '#{playbook}' playbook."
+    puts "Delete '#{playbook}' playbook/Play."
     sleep 5
     first(:xpath, ".//tr/td/span[contains(text(), '#{playbook}')]//parent::td//preceding-sibling::td/a[contains(text(), 'Delete')]").click
     sleep 5
@@ -258,7 +259,7 @@ Then(/I delete playbook from SPT using map data "(.*?)" and key "(.*?)"$/) do |m
     within all(".pbButton")[0] do
       click_on "Save"
     end
-    puts "Successfully deleted '#{playbook}' playbook from '#{templateName}'Success Plan Template"
+    puts "Successfully deleted '#{playbook}' playbook/Play from Success Plan Template"
     sleep 5
   rescue Exception => ex
     putstr "Error occurred while deleting playbook"
@@ -345,13 +346,12 @@ Then (/^I delete a Playbook "(.*?)" from SP using mapdata "(.*?)"$/) do |keyName
       first(:xpath, "//tr/td/a[contains(text(), '#{playbook}')]//parent::td//preceding-sibling::td/a[contains(text(), Del)]").click
     end    
     puts "Clicked on the Delete link of Playbook '#{playbook}'"
-    sleep 3
-    if page.has_content?('Success Plan Template Playbook has been deleted')
-      puts "Success Plan Template PlayBook has been deleted message displayed"
-      sleep 3
-    else
-      raise "Success Plan Template PlayBook has been deleted message not displayed"
-    end
+    sleep 7
+    # if page.has_content?('Success Plan Template Playbook has been deleted')
+      # puts "Success Plan Template PlayBook has been deleted message displayed"
+    # else
+      # raise "Success Plan Template PlayBook has been deleted message not displayed"
+    # end
     rescue Exception => ex
     putstr "Error occurred while deleting playbook '#{playbook}' from SP"
     putstr_withScreen ex.message
@@ -457,32 +457,10 @@ Then(/^I store "(.*?)" Play and PlayBook details of Succcess Plan$/) do |old_new
   end
 end 
 
-Then(/^I open Success Plan record$/) do
+
+Then(/^I "(.*?)" Success Plan record$/) do |action|
  begin
-#    if page.has_button?('Go!')
-#      click_on "Go!"
-#    end
-#    sleep 10
-#    if page.has_css?(".listItemPad")
-#      sleep 4
-#      puts "Successfully see the Alphabetic Pagination"
-#      all(".selectArrow")[0].click
-#      sleep 8
-#      within(".bottomNav") do
-#        first("table").all("tr")[4].click
-#      end
-#    else
-#      putstr "Failed to see the Alphabetic Pagination"
-#    end
-#    sleep 10
-#    puts page.has_xpath? ('//table/descendant::span[contains(text(),"#{$SPName}")]')
-#    if page.has_xpath? ('//table/descendant::span[contains(text(),"#{$SPName}")]')
-#      #//table/descendant::span[contains(text(),"SP-001821")]/ancestor-or-self::td[1]/preceding-sibling::td[1]/div/a/span[contains(text(),"Edit")]
-#      #all("//table/tbody/tr/td[2]/div").first(:link, 'Edit').click
-#      find(:xpath, '//table/descendant::span[contains(text(),"#{$SPName}")]/ancestor-or-self::td[1]/preceding-sibling::td[1]/div/a/span[contains(text(),"Edit")').click
-#      sleep 5
-#    end
-#
+   $SPName = "SP-000082"
    find(:xpath, '//input[contains(@placeholder,"Search...")]').click
    sleep 2
    find(:xpath, '//input[contains(@placeholder,"Search...")]').set $SPName
@@ -491,9 +469,14 @@ Then(/^I open Success Plan record$/) do
    sleep 8
    within("#ServiceSource1__CSM_Account_Plan__c_body") do
      within(".list") do
+       
        if first("tbody").all(".dataRow")[0].all("th")[0].first("a").text == $SPName
-         first("tbody").all(".dataRow")[0].all("td")[0].first("a").click
-         puts "Success Plan #{$SPName} Found..."
+         if action == "Edit"
+          first("tbody").all(".dataRow")[0].all("td")[0].first("a").click
+          puts "Success Plan #{$SPName} Found..."
+         else
+          first("tbody").all(".dataRow")[0].all("th")[0].first("a").click
+         end   
        else
          puts "Success Plan #{$SPName} Not Found..."
        end
@@ -510,9 +493,9 @@ Then(/^I change the SPT of SP using map "(.*?)" and key "(.*?)"$/) do |mapName, 
  begin
    sleep 5
    arg = getDetails mapName
-   within("#bottomButtonRow") do
-     click_on "Edit"
-   end
+   # within("#bottomButtonRow") do
+     # click_on "Edit"
+   # end
    sleep 10
    record = $client.query("SELECT Id,Name FROM ServiceSource1__CSM_Account_Plan_Template__c where ServiceSource1__CSM_Template_Name__c = \'#{arg["#{keyName}"]}\'")
    sPTName = record.first.Name
@@ -529,7 +512,7 @@ Then(/^I change the SPT of SP using map "(.*?)" and key "(.*?)"$/) do |mapName, 
  end
 end
 
-Then(/^I verify Play and PlayBook details of Succcess Plan$/) do |old_new|
+Then(/^I verify Play and PlayBook details of Succcess Plan$/) do
   begin
     sleep 3
     if page.has_table?("playbookSPGrid")
@@ -537,6 +520,8 @@ Then(/^I verify Play and PlayBook details of Succcess Plan$/) do |old_new|
       puts "No. of PlayBooks: #{playBookCount}"
       while playBookCount >=0
         within(:id, "playbookSPGrid") do
+           puts $OldPlayBook[playBookCount]
+           puts $NewPlayBook[playBookCount] 
           if $OldPlayBook[playBookCount] != $NewPlayBook[playBookCount]
             puts "PlayBook has been updated"
           else
@@ -553,11 +538,11 @@ Then(/^I verify Play and PlayBook details of Succcess Plan$/) do |old_new|
       playsCount = all("#successPlanPlayGrid tr").count-2
       puts "No. of Plays: #{playsCount}"
 
-      $OldPlay = Array.New
-      $NewPlay = Array.New
       while playsCount >=0
         within(:id, "successPlanPlayGrid") do
-          if $OldPlay[playBookCount] != $NewPlay[playBookCount]
+          puts $OldPlay[playsCount]
+          puts $NewPlay[playsCount]
+          if $OldPlay[playsCount] != $NewPlay[playsCount]
             puts "Play has been updated"
           else
             raise "Play has not been updated"

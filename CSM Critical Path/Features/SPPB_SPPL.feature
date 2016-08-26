@@ -21,29 +21,59 @@ Feature: All features related to Opportunity Management - Manage Renewals
     Then I create SuccessPlan using map "SPPBSPPL" and key "ASPT1"
     Then I click on "Playbooks" tab
     Then I store "Old" Play and PlayBook details of Succcess Plan
-    When I click on the "Success Plans" grid tab
-    Then I open Success Plan record
+    Then I "Edit" Success Plan record
     Then I change the SPT of SP using map "SPPBSPPL" and key "ASPT2"
+    Then I "Open" Success Plan record
     Then I click on "Playbooks" tab
     Then I store "New" Play and PlayBook details of Succcess Plan
     Then I verify Play and PlayBook details of Succcess Plan
     And I delete Account
+ 
+ 	@US1276 @DeletePlayFromSPT 
+	Scenario: US1276, Rally TC ID:TC5953: Success Plan - Playbook: Delete play from playbook from SPT (Success Plan is associated)
+	  When I click on "ServiceSource Setup" link
+		Then I click on "Success Plan Templates" link
+		Then I click on "Edit" link of SPT for "SPPBSPPL" and key "ASPT2"
+		Then I verify playbooks in SPT using map data "SPPBSPPL" and key "APB2ASPT2"
+		Then I click on "Edit" link of SPT for "SPPBSPPL" and key "APB2ASPT2"
+		Then I verify playbooks in SPT using map data "SPPBSPPL" and key "APL2APB2"
+		Then I delete playbook from SPT using map data "SPPBSPPL" and key "APL2APB2"	
+	  When I click on the "Success Plans" grid tab
+	  Then I "Open" Success Plan record
+	  Then I click on "Playbooks" tab
+	  Then I verify Playbooks subtab for Playbooks and Plays Grid
   
+  
+   
+  @US1276 @AddPlayToSPTForSP 
+	  Scenario: US1276, Rally TC ID: TC5951: Success Plan - Playbook: Add play to playbook on SPT (Success Plan is associated)  	
+	  When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
+	  And I create Account using map data "SPPBSPPL"
+	  When I click on the "Success Plans" grid tab
+	  Then I create SuccessPlan using map "SPPBSPPL" and key "ASPT1"
+	  Then I click on "Playbooks" tab
+	  When I click on "ServiceSource Setup" link
+		Then I click on "Success Plan Templates" link
+		Then I click on "Edit" link of SPT for "SPPBSPPL" and key "ASPT1"
+		Then I verify playbooks in SPT using map data "SPPBSPPL" and key "APB1ASPT1"
+		Then I click on "Edit" link of SPT for "SPPBSPPL" and key "APB1ASPT1"
+		Then I Add Play "Edit" link of SPT for "SPPBSPPL" and key "APB1ASPT1"
+
   #@US1200 
    
 	@US1200 @NewPlaybookSPT
   Scenario: US1200 Rally Test Case ID : TC5911 : Success Plan - Playbook: Create new SPT , associate it with success plan and add playbook
-	When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
-	And I create Account using map data "SPPBSPPL" 
-	When I click on "ServiceSource Setup" link
-	Then I click on "Success Plan Templates" link
-	Then I create a new Success Plan Template with mapData "SPPBSPPL" and playbook "APB1"
-	Then I fetch URI of template
-	When I click on "Success Plans" tab
-	Then I create a SuccessPlan using map data "SPPBSPPL"
-	Then I Save success plan Name value
-	Then I click on "Playbooks" tab
-	Then I verify Playbooks subtab using map data "SPPBSPPL" for "APB1" after "adding" playbook
+		When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
+		And I create Account using map data "SPPBSPPL" 
+		When I click on "ServiceSource Setup" link
+		Then I click on "Success Plan Templates" link
+		Then I create a new Success Plan Template with mapData "SPPBSPPL" and playbook "APB1"
+		Then I fetch URI of template
+		When I click on "Success Plans" tab
+		Then I create a SuccessPlan using map data "SPPBSPPL"
+		Then I Save success plan Name value
+		Then I click on "Playbooks" tab
+		Then I verify Playbooks subtab using map data "SPPBSPPL" for "APB1" after "adding" playbook
 	
   @US1200 @AddAnotherPlaybookSPT
   Scenario: US1200 Rally Test Case ID : TC5906 : Success Plan - Playbook: Add playbook @SPT (Success Plan is associated)
@@ -111,8 +141,11 @@ Feature: All features related to Opportunity Management - Manage Renewals
   Then I click on "Success Plan Templates" link
   Then I click on "Edit" link of SPT for "SPPBSPPL" and key "SPT1"
   Then I verify playbooks in SPT using map data "SPPBSPPL" and key "APB2"
+  And I delete Success Plan from DB
   And I delete Account
+
 
   @DeleteRecordsPL_PB_SPT_ACC
   Scenario: Rally Test Case ID: TC6462 - Split Opportunity RR - New Cloned Opportunity Details editable
+    And I delete Success Plan from DB
     And I delete Play_PlayBook_SPT

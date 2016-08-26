@@ -1099,7 +1099,7 @@ And(/^I delete Play_PlayBook_SPT$/) do
     #Delete SPT1 and SPT2 
     $client.destroy!('ServiceSource1__CSM_Account_Plan_Template__c', $sPT1Id)
     $client.destroy!('ServiceSource1__CSM_Account_Plan_Template__c', $sPT2Id)
-    #$client.destroy!('ServiceSource1__CSM_Account_Plan_Template__c', $sPT3Id)
+    $client.destroy!('ServiceSource1__CSM_Account_Plan_Template__c', $sPT3Id)
     
     #Delete Account
     #$client.destroy!('Account', $accId)
@@ -1130,6 +1130,24 @@ And(/^I delete Account$/) do
   end
 end
 
+And(/^I delete Success Plan from DB/) do
+  begin
+    #$accId/$pL1Id/$pL2Id/$pL3Id/$pL4Id/$pb1Id/$pbpl1Id/$pb2Id/$pbpl2Id/$pbpl3Id/$sPT1Id/s$sPT2Id
+    sleep 5
+    time = Time.new
+    puts time
+   
+    #Delete Account
+    $client.destroy!('ServiceSource1__CSM_Account_Plan__c', $sPlanId)
+    #puts $client.find('Account', $accId)
+    time = Time.new
+    puts time
+  rescue Exception => ex
+    puts ex.message
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+  end
+end
+$sPlanId
 
 When(/^I click on the "(.*?)" grid tab$/) do |tab|
   begin
