@@ -29,9 +29,9 @@ Feature: All features related to Opportunity Management - Manage Renewals
     Then I verify Play and PlayBook details of Succcess Plan
     And I delete Account
   
-  #US1200 
+  #@US1200 
    
-	@NewPlaybookSPT
+	@US1200 @NewPlaybookSPT
   Scenario: US1200 Rally Test Case ID : TC5911 : Success Plan - Playbook: Create new SPT , associate it with success plan and add playbook
 	When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
 	And I create Account using map data "SPPBSPPL" 
@@ -45,7 +45,7 @@ Feature: All features related to Opportunity Management - Manage Renewals
 	Then I click on "Playbooks" tab
 	Then I verify Playbooks subtab using map data "SPPBSPPL" for "APB1" after "adding" playbook
 	
-  @AddAnotherPlaybookSPT
+  @US1200 @AddAnotherPlaybookSPT
   Scenario: US1200 Rally Test Case ID : TC5906 : Success Plan - Playbook: Add playbook @SPT (Success Plan is associated)
 	When I click on "ServiceSource Setup" link
 	Then I click on "Success Plan Templates" link 
@@ -55,7 +55,7 @@ Feature: All features related to Opportunity Management - Manage Renewals
 	Then I click on "Playbooks" tab
 	Then I verify Playbooks subtab using map data "SPPBSPPL" for "APB2" after "adding" playbook
 	
-  @DeletePlaybookSPT
+  @US1200 @DeletePlaybookSPT
   Scenario: US1200 Rally Test Case ID : TC5913 : Success Plan - Playbook: Delete playbook from SPT (Success Plan is associated)
 	When I click on "Success Plans" tab
 	Then I select SP for verifying Playbooks
@@ -71,7 +71,7 @@ Feature: All features related to Opportunity Management - Manage Renewals
 	Then I verify Playbooks subtab using map data "SPPBSPPL" for "APB2" after "deleting" playbook
 
  	
- 	@AddPlaybookToSP
+ 	@US1200 @AddPlaybookToSP
   Scenario: US1200 Rally Test Case ID : TC5915 : Success Plan - Playbook:: Add playbook with Add button.
  	When I click on "Success Plans" tab
 	Then I select SP for verifying Playbooks
@@ -86,7 +86,7 @@ Feature: All features related to Opportunity Management - Manage Renewals
   Then I click on "Edit" link of SPT for "SPPBSPPL" and key "SPT1"
   Then I verify playbooks in SPT using map data "SPPBSPPL" and key "APB2"
   
-  @DeletePlaybookFromSP
+  @US1200 @DeletePlaybookFromSP
   Scenario: US1200 Rally Test Case ID : TC5920 : Success Plan - Playbook:: Delete playbook.
   When I click on "Success Plans" tab
 	Then I select SP for verifying Playbooks
@@ -97,7 +97,7 @@ Feature: All features related to Opportunity Management - Manage Renewals
 	Then I click on "Playbooks" tab
 	Then I verify Playbooks subtab using map data "SPPBSPPL" for "APB2" after "deleting" playbook
   
- 	@AddPlaybookWithAddAndSkipToSP
+ 	@US1200 @AddPlaybookWithAddAndSkipToSP
   Scenario: US1200 Rally Test Case ID : TC5918 : Success Plan - Playbook:: Add playbook with Add & Skip criteria button.
  	When I click on "Success Plans" tab
 	Then I select SP for verifying Playbooks
