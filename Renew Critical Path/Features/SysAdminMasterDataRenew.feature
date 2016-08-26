@@ -21,9 +21,9 @@ Scenario: Renew: add products
 	When I click on "All Tabs" tab 
 	Then I click on Products and create product with the name "Product D" 
 	When I click on "All Tabs" tab 
-	Then I click on Products and create product with the name "GenWatt Diesel 10kW" 
+	Then I click on Products and create product with the name "Product E" 
 	When I click on "All Tabs" tab 
-	Then I click on Products and create product with the name "Installation: Industrial - High"
+	Then I click on Products and create product with the name "Product F"
 	
  
 		

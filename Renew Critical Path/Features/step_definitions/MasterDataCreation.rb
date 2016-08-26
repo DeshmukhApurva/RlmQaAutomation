@@ -1,3 +1,5 @@
+
+
 #All Renew master data creation
 #All Scenario mentioned in RenewMsterData.feature
 Then (/^I click on Products and create product with the name "(.*?)"$/) do |arg|
@@ -1103,6 +1105,239 @@ And(/^I put view Name for Asset Filter "(.*?)" and add Row$/) do |arg|
   end
 end
 
+
+
+And(/^I click "(.*?)" link$/) do |arg|
+  begin
+    sleep 10
+    click_on arg
+  end
+end
+And(/^I Fill All data for View "(.*?)" with "(.*?)" and "(.*?)" with "(.*?)" with "(.*?)" and "(.*?)"$/) do |arg1,arg2,arg3,arg4,arg5,arg6|
+  begin
+   sleep 8
+   fill_in "View Name",:with => arg1 
+   puts "I Put Name for View"
+   sleep 8
+   find(:xpath, "//*[contains(@id, 'fcol1')]").select(arg2)
+   puts "I Put Name for View"
+   sleep 8
+   find(:xpath, "//*[contains(@id, 'fop1')]").select(arg4)
+   puts "I Put Name for View"
+   sleep 8
+   find(:xpath, "//*[contains(@id, 'fval1')]").set arg5
+   puts "I Put Name for View"
+   sleep 8
+   find(:xpath, "//*[contains(@id, 'fcol2')]").select(arg3)
+   puts "I Put Name for View"
+   sleep 8
+   find(:xpath, "//*[contains(@id, 'fop2')]").select(arg4)
+   puts "I Put Name for View"
+   sleep 8
+   find(:xpath, "//*[contains(@id, 'fval2')]").set arg6
+   puts "I Put Name for View"
+   sleep 8
+    first(".pbButtonb").first(".btn").click
+    puts "I Successfully Create View"
+ end
+end
+
+And(/^I Go to next Maping with Value "(.*?)"$/) do |arg|
+  begin
+    sleep 10
+    puts "Inside"
+    sleep 10
+    within all(".pbSubsection")[0] do
+      sleep 10
+      first(:xpath, "//*[contains(@id, 'ren_mappings')]").select(arg)
+       puts "I selected on new Mapping"
+      if page.has_button?('Go')
+      sleep 10
+      click_on "Go"
+    end
+   end
+  end
+end
+
+And(/^I Add Mapping Fields "(.*?)" and Mapping Field "(.*?)"$/) do |arg1,arg2|
+  begin
+    sleep 10
+   within all(".pbSubsection")[2] do
+        click_on "Add"
+        sleep 10
+        puts "Add clicked"
+      end
+      sleep 10
+      first(:xpath, "//*[contains(@id, 'fieldsName')]").select(arg1)
+      sleep 12
+      first(:xpath, "//*[contains(@id, 'FM_sourceFieldId')]").select(arg2)
+      sleep 10
+    within all(".pbButton")[1] do
+    sleep 10
+    click_on 'Save'
+    end
+    sleep 8
+  end 
+end
+
+And(/^I Add Mapping Fields on oppTr "(.*?)" and Mapping Field "(.*?)"$/) do |arg1,arg2|
+  begin
+   within all(".pbSubsection")[3] do
+        click_on "Add"
+        puts "Add clicked"
+      end
+      sleep 10
+      first(:xpath, "//*[contains(@id, 'fieldsName')]").select(arg1)
+      sleep 12
+      first(:xpath, "//*[contains(@id, 'FM_sourceFieldId')]").select(arg2)
+      sleep 10
+    within all(".pbButton")[1] do
+    sleep 10
+    click_on 'Save'
+    end
+  sleep 8
+  end 
+end
+
+And(/^I Add Mapping Fields on oppTorr "(.*?)" and Mapping Field "(.*?)"$/) do |arg1,arg2|
+  begin
+    sleep 8
+    first(:xpath,"//*[text()='Renewal Opportunity Line Item Fields']/following-sibling::td/input").click
+       sleep 10
+      first(:xpath, "//*[contains(@id, 'fieldsName')]").select(arg1)
+      sleep 12
+      first(:xpath, "//*[contains(@id, 'FM_sourceFieldId')]").select(arg2)
+      sleep 10
+    within all(".pbButton")[1] do
+    sleep 10
+    click_on 'Save'
+    end
+  sleep 8
+  end 
+end
+
+And(/^I Add Mapping Fields on Asset "(.*?)" and Mapping Field "(.*?)"$/) do |arg1,arg2|
+  begin
+    sleep 8
+    first(:xpath,"//*[text()='Asset Fields']/following-sibling::td/input").click
+       sleep 10
+      first(:xpath, "//*[contains(@id, 'fieldsName')]").select(arg1)
+      sleep 12
+      first(:xpath, "//*[contains(@id, 'FM_sourceFieldId')]").select(arg2)
+      sleep 10
+    within all(".pbButton")[1] do
+    sleep 10
+    click_on 'Save'
+    end
+  sleep 8
+  end 
+end
+
+And(/^I Add Mapping Fields on oppTosc "(.*?)" and Mapping Field "(.*?)"$/) do |arg1,arg2|
+  begin
+    sleep 8
+    first(:xpath,"//*[text()='Contract Line Item Fields']/following-sibling::td/input").click
+       sleep 10
+      first(:xpath, "//*[contains(@id, 'fieldsName')]").select(arg1)
+      sleep 12
+      first(:xpath, "//*[contains(@id, 'FM_sourceFieldId')]").select(arg2)
+      sleep 10
+    within all(".pbButton")[1] do
+    sleep 10
+    click_on 'Save'
+    end
+  sleep 8
+  end 
+end
+
+And(/^I Add Mapping Fields on scTopp "(.*?)" and Mapping Field "(.*?)"$/) do |arg1,arg2|
+  begin
+    sleep 15
+    first(:xpath,"//*[text()='Opportunity Product Line Fields']/following-sibling::td/input").click
+       sleep 18
+      first(:xpath, "//*[contains(@id, 'fieldsName')]").select(arg1)
+      sleep 12
+      first(:xpath, "//*[contains(@id, 'FM_sourceFieldId')]").select(arg2)
+      sleep 10
+    within all(".pbButton")[1] do
+    sleep 10
+    click_on 'Save'
+    end
+  sleep 8
+  end 
+end
+
+And(/^I Put Sales Stage as "(.*?)"$/) do |arg|
+  begin
+   sleep 8 
+   find(:xpath,"//*[text()='Stage']/following-sibling::td/select[contains(@id,'FDFields')]").select("--Default Value--")
+   puts "Successfully Set Default value to Sales Stage"
+   sleep 6
+   find(:xpath,"//*[text()='Stage']/following-sibling::td/input[contains(@id,'FM_DefaultTextField')]").set arg
+   puts "Successfully Set Default value to Sales Stage"
+    end
+end
+
+And(/^I Put Close Date as "(.*?)"$/) do |arg|
+  begin
+   sleep 8 
+   find(:xpath,"//*[text()='Close Date']/following-sibling::td/select[contains(@id,'FDFields')]").select("--Default Value--")
+   puts "Successfully Set Default value to Close Date"
+   sleep 6
+   find(:xpath,"//*[text()='Close Date']/following-sibling::td/input[contains(@id,'FM_DefaultTextField')]").set arg
+   puts "Successfully Set Default value to Close Date"
+   end 
+end    
+
+And(/^I Put Close Date as on Opp "(.*?)"$/) do |arg|
+  begin
+    sleep 8 
+   find(:xpath,"//*[text()='Close Date']/following-sibling::td/select[contains(@id,'FDFields')]").select(arg)
+   puts "Successfully Set Default value to Close Date"
+  end
+end
+
+And(/^I Put Owner ID as "(.*?)"$/) do |arg|
+  begin
+    sleep 8 
+   find(:xpath,"//*[text()='Owner ID']/following-sibling::td/select[contains(@id,'FDFields')]").select(arg)
+   puts "Successfully Set Default value to Owner ID"
+   
+  end
+end
+
+And(/^I select first Mapping$/) do
+    begin
+     sleep 10
+     within('.pbSubsection') do
+     first(:link).click
+     puts "Successfully Clicked First mapping"  
+    end
+    end
+  end
+  
+And(/^I add criteria for Sale Stage$/) do
+  begin
+    
+    sleep 10
+    first(:xpath,'//input[@value="Add Criteria"]').click
+    puts "I successfully clicked On Add criteria"
+    sleep 8
+    
+    first(:xpath, "//*[contains(@id, 'slFieldId')]").select("Stage")
+    sleep 5
+    first(:xpath, "//*[contains(@id, 'outOperator')]").select("=")
+    sleep 5
+    first(:xpath, "//*[contains(@id, 'outValue')]").set "Closed Won"
+    puts "I succcessfully Set Criteria"
+    sleep 8
+    within all(".pbButton ")[0] do
+          click_on 'Save'
+          sleep 3
+        end
+  end
+end
+
 And(/^I delete Product Criteria$/) do
   begin
     sleep 8
@@ -1110,5 +1345,77 @@ And(/^I delete Product Criteria$/) do
      first(:link).click
      puts "Successfully Delete Product criteria"
    end
+  end
+end
+
+And(/^I Choose Lost Value with "(.*?)"$/) do |arg|
+   begin
+     find(:xpath, "//*[text()='Lost']/following-sibling::td/select").select arg
+   end
+ end 
+
+And(/^I Choose Open Value with "(.*?)"$/) do |arg|
+   begin
+     find(:xpath, "//*[text()='Open']/following-sibling::td/select").select arg
+   end
+ end 
+ 
+ And(/^I Choose Won Value with "(.*?)"$/) do |arg|
+   begin
+     find(:xpath, "//*[text()='Won']/following-sibling::td/select").select arg
+   end
+ end 
+And(/^I Save All Data$/) do
+  begin
+    sleep 10
+    within all(".pbButton ")[0] do
+      click_on 'Save'
+      puts "I Succesfully Save Mapping"
+    end
+  end 
+end
+
+And(/^I Add Opportunity Fields on "(.*?)" and "(.*?)"$/) do |arg1,arg2|
+  begin
+    sleep 6
+    addDisabled = 1
+    within all(".pbSubsection")[1] do
+      if page.has_css?(".btnDisabled")
+        addDisabled = 0
+      end
+    end
+    sleep 8
+    if (addDisabled > 0)
+      within all(".pbSubsection")[1] do
+        click_on "Add"
+        sleep 10
+        puts "Add clicked"
+      end
+      sleep 15
+      result = false
+      first(:xpath, ".//*[contains(@id, 'fieldsName')]").all('option').each do |field|
+        if field.text.to_s.include? arg1.to_s
+          sleep 5
+          puts "Successfully see the #{arg1} field value"
+          first(:xpath, ".//*[contains(@id, 'fieldsName')]").select(arg1)
+          sleep 10
+          first(:xpath, ".//*[contains(@id, 'FM_sourceFieldId')]").select(arg2)
+          sleep 5
+          result = true
+          break
+        end
+      end
+      putstr "Unable to find the #{arg1} field value" unless result
+      sleep 10
+      within all(".pbButton")[1] do
+        click_on 'Save'
+      end
+      sleep 5
+    end
+    puts "Added Opportunity Field"
+    sleep 10
+  rescue Exception => ex
+    putstr "Error occurred while adding Opportunity Fields."
+    putstr_withScreen  ex.message
   end
 end
