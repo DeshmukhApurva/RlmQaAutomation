@@ -374,35 +374,50 @@ end
 
 Then(/^I open Success Plan record$/) do
   begin
-    if page.has_button?('Go!')
-      click_on "Go!"
-    end
-    if page.has_css?(".listItemPad")
-      sleep 4
-      puts "Successfully see the Alphabetic Pagination"
-      all(".selectArrow")[0].click
-      sleep 8
-      within(".bottomNav") do
-        first("table").all("tr")[4].click
-      end
-    else
-      putstr "Failed to see the Alphabetic Pagination"
-    end
-    within(".x-grid3-body") do
-      within all(".x-grid3-row").each do
-        puts all("//table/tbody/tr/td[3]/div").first("a").text
-        if all("//table/tbody/tr/td[3]/div").first("a").text == $SPName
-          all("//table/tbody/tr/td[2]/div").first(:link, 'Edit').click
+#    if page.has_button?('Go!')
+#      click_on "Go!"
+#    end
+#    sleep 10
+#    if page.has_css?(".listItemPad")
+#      sleep 4
+#      puts "Successfully see the Alphabetic Pagination"
+#      all(".selectArrow")[0].click
+#      sleep 8
+#      within(".bottomNav") do
+#        first("table").all("tr")[4].click
+#      end
+#    else
+#      putstr "Failed to see the Alphabetic Pagination"
+#    end
+#    sleep 10
+#    puts page.has_xpath? ('//table/descendant::span[contains(text(),"#{$SPName}")]')
+#    if page.has_xpath? ('//table/descendant::span[contains(text(),"#{$SPName}")]')
+#      #//table/descendant::span[contains(text(),"SP-001821")]/ancestor-or-self::td[1]/preceding-sibling::td[1]/div/a/span[contains(text(),"Edit")]
+#      #all("//table/tbody/tr/td[2]/div").first(:link, 'Edit').click
+#      find(:xpath, '//table/descendant::span[contains(text(),"#{$SPName}")]/ancestor-or-self::td[1]/preceding-sibling::td[1]/div/a/span[contains(text(),"Edit")').click
+#      sleep 5
+#    end
+#
+    find(:xpath, '//input[contains(@placeholder,"Search...")]').click
+    sleep 2
+    find(:xpath, '//input[contains(@placeholder,"Search...")]').set $SPName
+    sleep 2
+    find(:xpath, '//input[contains(@id,"phSearchButton")]').click
+    sleep 8
+    within("#ServiceSource1__CSM_Account_Plan__c_body") do
+      within(".list") do
+        if first("tbody").all(".dataRow")[0].all("th")[0].first("a").text == $SPName
+          first("tbody").all(".dataRow")[0].all("td")[0].first("a").click
+          puts "Success Plan #{$SPName} Found..."
+        else
+          puts "Success Plan #{$SPName} Not Found..."
         end
-        break
       end
-      break
     end
     sleep 10
-    puts "Navigated to " + $SPName + " tab"
   rescue Exception => ex
-    putstr_withScreen ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+    putstr_withScreen ex.message
   end
 end
 
