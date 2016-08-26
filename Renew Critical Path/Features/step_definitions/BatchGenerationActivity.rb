@@ -44,9 +44,10 @@ When(/^I edit an Asset Filter$/) do
 		sleep 10			
 		all(".dataRow")[1].all(".dataCell")[4].first("input").set("0")		
 		sleep 5	
-		within all(".pbBottomButtons")[0] do
-			click_on "Save"
-		end 
+#		within all(".pbBottomButtons")[0] do
+#			click_on "Save"
+#		end
+		first(:button,'Save').click 
 		puts "Asset Filter Edited Successfully. Added Additional Filter Criteria"
 	rescue Exception => ex
 	putstr "Error occurred while creating Asset Filter."
@@ -57,17 +58,20 @@ end
 When(/^I view result of Asset Filter$/) do
 	begin
 		sleep 5
-		within all(".search")[0] do
-			first("input").set("Asset "+$Opp)
-		end
-		sleep 2
+#		within all(".search")[0] do
+#			first("input").set("Asset "+$Opp)
+#		end
+#		sleep 2
 		within all(".pbSubsection")[0] do
 			first(:link,"Edit").click
 		end
-		sleep 2
-		within all(".pbBottomButtons")[0] do
-			click_on "View Result"
-		end 
+		#find(:xpath,'//div[3]/div[2]/div[2]/table/tbody/tr[1]/td[1]/a').click
+		sleep 8
+#		within all(".pbBottomButtons")[0] do
+#			click_on "View Result"
+#		end
+		first(:button,'View Result').click
+		sleep 5 
 		puts "Asset Filter View Result verified Successfully."
 	rescue Exception => ex
 		putstr "Error occurred while verifying Asset Filter View Result."
@@ -94,22 +98,40 @@ When(/^I verify record count of Asset Filter$/) do
 	end
 end
 
+When(/^I verify the record count of Asset Filter$/) do
+  begin
+    find(:xpath,'//table[@id="filterWidget"]/tbody/tr[1]/td[1]/input').set(true)
+    filter_result = find(:xpath,'//*[@id="tbody"]/tr/td/div[4]').text
+    filter_result_trimm = filter_result[18,1]
+    sleep 3
+    puts "Asset Filter Record Count = " + filter_result_trimm
+    puts "Asset Filter Record Count Display verified Successfully."
+  end
+end
 
 Then(/^I delete an Asset Filter$/) do
 	begin
-	sleep 5
-	within all(".search")[0] do
-		first("input").set("Asset "+$Opp)
-	end
+#	sleep 5
+#	within all(".search")[0] do
+#		first("input").set("Asset "+$Opp)
+#	end
 	sleep 2
-	within all(".pbSubsection")[0] do
-		page.accept_confirm { first(:link,"Del").click }
-	end
-	sleep 2
+#	within all(".pbSubsection")[0] do
+#	  first(:link,"Del").click
+#		#page.accept_confirm { first(:link,"Del").click }
+#	  sleep 5
+#	end
+  first(:link,"Del").click
+  sleep 10
+  #click_on 'OK'
+	page.driver.browser.switch_to.alert.accept
+	sleep 4
+   # driver.switch_to.alert.accept
+    
 	puts "Asset Filter Deleted Successfully."
-	rescue Exception => ex
-		putstr "Error occurred while deleting Asset Filter."
-		putstr_withScreen  ex.message
+#	rescue Exception => ex
+#		putstr "Error occurred while deleting Asset Filter."
+#		putstr_withScreen  ex.message
 	end
 end
 

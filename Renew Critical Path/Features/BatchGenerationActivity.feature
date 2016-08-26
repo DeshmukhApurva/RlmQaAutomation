@@ -12,7 +12,7 @@ Scenario: Rally Test Case ID: TC3651,TC3652,TC3653,TC3654,TC3655,TC3656,TC3694,T
 	And I click on "Batch Generation Activity" link
 	And I click on "Create New" button
 	And I create a new Asset Filter
-	And I verify record count of Asset Filter
+	And I verify the record count of Asset Filter
 	And I edit an Asset Filter
 	
 	And I click on "ServiceSource Setup" link
