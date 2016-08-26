@@ -540,15 +540,15 @@ Scenario: Rally Test Case ID: TC5198,TC6002 Users should be allowed to see Playb
    And I select the existing success plan
    And I click on "Create Task" button
    And I fill the required task details
-   And I "SAVE" the "Create Task"
-   And I click on Subject of any task on the Action Tab
+   And I click on the Subject for Success Plan
    And I verify value in Task Detail Page
    
    
-#   When I click on "Success Tasks" link
-#   And I select Task based FC from dropdown
-#   And I click on "Create Task" button
-#   And I fill the required task details
-#   And I "SAVE" the "Create Task"
-#   And I click on Subject of any task on the Action Tab
-#   And I verify value in Task Detail Page
+   When I click on "Success Tasks" link
+   And I select Task based FC from dropdown
+   And I click on "Create Task" button
+   And I fill the required task details
+   And I save the Task
+   And I click on the Subject for Success Task
+   And I verify value in Task Detail Page
+   

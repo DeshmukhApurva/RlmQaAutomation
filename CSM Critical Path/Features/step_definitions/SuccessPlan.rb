@@ -1131,32 +1131,49 @@ And(/^I fill the required task details$/) do
 	arg = getDetails "Taskdetails"
 	arg2 = getDetails "CreateTaskFields"
 	spPlay = getReference "Reference"
+	AccountDetails = getReference "Reference"
+  AccountDetail = AccountDetails["Account"]
+  puts AccountDetail
   $SuccessPlanValue = spPlay["SuccessPlanPlay"]
   puts $SuccessPlanValue 
   sleep 4
 	within all('.pbSubsection').last do
 		sleep 5
 		$current_date = "#{Time.now.strftime("%m-%d-%Y")}"
-    sleep 4
-	    first(:xpath, "//*[contains(@id, 'dueValue')]").set $current_date
-		sleep 4
+    sleep 1
+	  first(:xpath, "//*[contains(@id, 'dueValue')]").set $current_date
+		sleep 1
 		first(:xpath, "//*[contains(@id, 'taskNameValue')]").click
 		first(:xpath, "//*[contains(@id, 'taskNameValue')]").set("Call")
 		#first(:xpath, "//*[contains(@id, 'taskNameValue')]").set("Call")
     first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").click
     first(:xpath, "//*[contains(@id,'successPlanPlayValue')]").set(spPlay["SuccessPlanPlay"])
-   	sleep 4
-		first(:xpath, "//*[contains(@id, 'taskTypeValue')]").click
+   	# find("img[alt='Related To Lookup (New Window)']").click
+   	# page.driver.browser.manage.window.maximize
+    # sleep 10
+   	# find(:xpath,'//input[contains(@placeholder,"Search...")]').send_keys AccountDetail
+   	# sleep 1
+   	# if page.has_button?('Go!')
+      # click_on "Go!"
+    # end
+    # sleep 3
+    # first(:xpath,"//*[@id='new']/div/div[2]/div/div[2]/table/tbody/tr[2]/th/a").click
+    # first(:xpath, "//*[contains(@title,'Related To')]").click
+   	sleep 1
+		#first(:xpath, "//*[contains(@id, 'taskTypeValue')]").click
 		first(:xpath, "//*[contains(@id, 'taskTypeValue')]").select("Call")
-		first(:xpath, "//*[contains(@id, 'commentsValue')]").click
+		#first(:xpath, "//*[contains(@id, 'commentsValue')]").click
 		first(:xpath, "//*[contains(@id, 'commentsValue')]").set(arg["CommentsValue"])
-		sleep 5
+		sleep 1
 		first(:xpath,"//*[contains(@id, 'taskStatusValue1')]").select arg2["NotStartedStatusfield"]
-		sleep 4
+		sleep 1
+		first(:xpath, "//*[contains(@title,'Related To')]").set(AccountDetails["Account"])
+		sleep 3
 	end
   puts "Successfully fill the task details"
 	rescue Exception => ex
 	  putstr "Error occurred while filling the required task details"
+	  puts ex.backtrace.select { |x| x.match(/step_definitions/) }
 	  putstr_withScreen ex.message
  end
 end
@@ -2443,7 +2460,7 @@ And(/^I click on Subject of any task on the Action Tab$/) do
 					end
 				end
 			else
-				puts "No Tasks present."
+			#	puts "No Tasks present."
 			end
 		else
 			puts "No Tasks present on Action Tab."
@@ -2591,3 +2608,65 @@ And(/^I verify value in Task Detail Page$/) do
     putstr_withScreen ex.message
   end
 end
+
+
+
+And(/^I save the Task and click on the Subject$/) do
+  begin
+    within(".pbButtonb") do
+      click_on "SAVE"
+     puts "Clicked on Save button"
+    end
+    
+    find(:xpath,"//*[@id='actionSpGrid']/tbody/tr[1]/td[3]/a").click
+    puts "Successfully click on the Subject"
+  
+  rescue Exception => ex
+    putstr "Error occurred while verifying Task State status."
+    putstr_withScreen ex.message
+  end
+end
+
+
+And(/^I save the Task$/) do
+  begin
+   within(".pbButtonb") do
+      click_on "SAVE"
+     puts "Clicked on Save button"
+    end
+   sleep 8
+  
+   within(:id,"topButtonRow") do
+      click_on "Save"
+    end
+  rescue Exception => ex
+    putstr "Error occurred while verifying Task State status."
+    putstr_withScreen ex.message
+  end
+end
+
+And(/^I click on the Subject for Success Plan$/) do
+  begin
+   
+   find(:xpath,"//*[@id='actionSpGrid']/tbody/tr[1]/td[3]/a").click
+   puts "Successfully click on the Subject"
+  
+  rescue Exception => ex
+    putstr "Error occurred while verifying Task State status."
+    putstr_withScreen ex.message
+  end
+end
+
+And(/^I click on the Subject for Success Task$/) do
+  begin
+   
+find(:xpath,"//*[@id='taskGrid']/tbody/tr[1]/td[4]/a").click
+   puts "Successfully click on the Subject"
+  
+  rescue Exception => ex
+    putstr "Error occurred while verifying Task State status."
+    putstr_withScreen ex.message
+  end
+end
+
+

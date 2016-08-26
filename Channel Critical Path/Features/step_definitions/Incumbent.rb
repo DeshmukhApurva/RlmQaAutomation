@@ -128,9 +128,11 @@ Then(/^I open Accounts$/)do
       sleep 5
       all(".selectArrow")[0].click
       sleep 3
-      # within(".bottomNav") do
-      # first("table").all("tr")[4].click
-      # end
+      
+      within(".bottomNav") do
+      first("table").all("tr")[4].click
+      end
+      
       within(".x-grid3") do
         click_link arg["Account"]
       end
