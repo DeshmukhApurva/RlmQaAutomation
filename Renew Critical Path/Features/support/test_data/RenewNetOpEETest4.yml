@@ -1,7 +1,7 @@
 ---
 Reference:
- SuccessPlan: "SP-001567"
- Account: "PE Wealth"
+ SuccessPlan: "SP-001822"
+ Account: "QA Test"
 
 AssetsRef:
  Name: "PEW Asset"
