@@ -1,7 +1,7 @@
 ---
 Reference:
- SuccessPlan: "SP-001568"
- Account: "Revenue Industries"
+ SuccessPlan: "SP-001822"
+ Account: "QA Test"
 
 AssetsRef:
  Name: "RI Asset"

@@ -442,7 +442,7 @@ end
 When(/^I click on "(.*?)" link$/) do |arg1|
   begin
     first(:link, arg1).click
-    sleep 4
+    sleep 10
     puts "Navigated to " + arg1 + " tab"
   rescue Exception => ex
     puts "Error while navigating to #{arg1}"

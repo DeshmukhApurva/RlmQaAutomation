@@ -45,6 +45,7 @@ Then(/^I fetch URI of template$/) do
     templateId = templatePath.split('id=')[1].split('&')[0]
     templateId = templateId[0,15] 
     puts "templateId: "+templateId
+    $sPT3Id = templateId
     sleep 4
     record = $client.query("SELECT Name FROM ServiceSource1__CSM_Account_Plan_Template__c WHERE Id = \'#{templateId}\'")
     $playBookTempForPlan = record.first.Name
@@ -64,13 +65,15 @@ Then(/^I create a SuccessPlan using map data "(.*?)"$/) do |mapName|
     puts "Creating Success Plan with Template '#{$playBookTempForPlan}' and Account '#{$accName}'"
     sleep 5
     arg = getDetails mapName
+    time = Time.new
+    phase_Start_Date = time.month.to_s + "/" + time.day.to_s + "/" + (time.year.to_i + 1).to_s
     sleep 2
     fill_in "Success Plan Template", :with => $playBookTempForPlan
     sleep 2
     fill_in "Account",:with => $accountName
     sleep 2
     #add code for Phase Start Date instead of taking from yml
-    fill_in "Phase Start Date", :with=> arg["Phase Start Date"]
+    fill_in "Phase Start Date", :with=> phase_Start_Date
     sleep 2
     within(:id,"topButtonRow") do
       click_on "Save"
@@ -111,10 +114,10 @@ Then(/^I verify Playbooks subtab using map data "(.*?)" for "(.*?)" after "(.*?)
     arg = getDetails mapName
     if playbookNumber == 'APB1'
       playbook_name = arg["APB1"]
-      play_name = arg["PL1"]
+      play_name = arg["APL3APB3"]
     else
       playbook_name = arg["APB2"]
-      play_name = arg["PL2"]
+      play_name = arg["APL4APB4"]
     end 
     if page.has_table?("playbookSPGrid")
       within(:id, "playbookSPGrid") do
@@ -290,7 +293,7 @@ Then(/I add playbook or add and skip criteria to SP using map data "(.*?)" and k
       # click_on "Save"
     # end
   rescue Exception => ex
-    putstr "Error occurred while adding playbook"
+    putstr "Error occurred while adding playbook or add and skip criteria to SP"
     putstr_withScreen ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
   end
@@ -349,6 +352,10 @@ Then (/^I delete a Playbook "(.*?)" from SP using mapdata "(.*?)"$/) do |keyName
     else
       raise "Success Plan Template PlayBook has been deleted message not displayed"
     end
+    rescue Exception => ex
+    putstr "Error occurred while deleting playbook '#{playbook}' from SP"
+    putstr_withScreen ex.message
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
   end
 end  
 
@@ -451,7 +458,7 @@ Then(/^I store "(.*?)" Play and PlayBook details of Succcess Plan$/) do |old_new
 end 
 
 Then(/^I open Success Plan record$/) do
-  begin
+ begin
 #    if page.has_button?('Go!')
 #      click_on "Go!"
 #    end
@@ -476,50 +483,51 @@ Then(/^I open Success Plan record$/) do
 #      sleep 5
 #    end
 #
-    find(:xpath, '//input[contains(@placeholder,"Search...")]').click
-    sleep 2
-    find(:xpath, '//input[contains(@placeholder,"Search...")]').set $SPName
-    sleep 2
-    find(:xpath, '//input[contains(@id,"phSearchButton")]').click
-    sleep 8
-    within("#ServiceSource1__CSM_Account_Plan__c_body") do
-      within(".list") do
-        if first("tbody").all(".dataRow")[0].all("th")[0].first("a").text == $SPName
-          first("tbody").all(".dataRow")[0].all("td")[0].first("a").click
-          puts "Success Plan #{$SPName} Found..."
-        else
-          puts "Success Plan #{$SPName} Not Found..."
-        end
-      end
-    end
-    sleep 10
-  rescue Exception => ex
-    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
-    putstr_withScreen ex.message
-  end
-end 
+   find(:xpath, '//input[contains(@placeholder,"Search...")]').click
+   sleep 2
+   find(:xpath, '//input[contains(@placeholder,"Search...")]').set $SPName
+   sleep 2
+   find(:xpath, '//input[contains(@id,"phSearchButton")]').click
+   sleep 8
+   within("#ServiceSource1__CSM_Account_Plan__c_body") do
+     within(".list") do
+       if first("tbody").all(".dataRow")[0].all("th")[0].first("a").text == $SPName
+         first("tbody").all(".dataRow")[0].all("td")[0].first("a").click
+         puts "Success Plan #{$SPName} Found..."
+       else
+         puts "Success Plan #{$SPName} Not Found..."
+       end
+     end
+   end
+   sleep 10
+ rescue Exception => ex
+   puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+   putstr_withScreen ex.message
+ end
+end
 
 Then(/^I change the SPT of SP using map "(.*?)" and key "(.*?)"$/) do |mapName, keyName|
-  begin
-    sleep 5
-    arg = getDetails mapName
-    within("#bottomButtonRow") do
-      click_on "Edit"
-    end
-    sleep 10
-    record = $client.query("SELECT Id,Name FROM ServiceSource1__CSM_Account_Plan_Template__c where ServiceSource1__CSM_Template_Name__c = \'#{arg["keyName"]}\'")
-    sPTName = record.first.name
-    fill_in "Success Plan Template", :with => arg["#{sPTName}"]
-    sleep 2
-    within("#bottomButtonRow") do
-      click_on "Save"
-    end
-    sleep 10
-  rescue Exception => ex
-    putstr_withScreen ex.message
-    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
-  end
-end 
+ begin
+   sleep 5
+   arg = getDetails mapName
+   within("#bottomButtonRow") do
+     click_on "Edit"
+   end
+   sleep 10
+   record = $client.query("SELECT Id,Name FROM ServiceSource1__CSM_Account_Plan_Template__c where ServiceSource1__CSM_Template_Name__c = \'#{arg["#{keyName}"]}\'")
+   sPTName = record.first.Name
+   puts sPTName 
+   fill_in "Success Plan Template", :with => sPTName
+   sleep 2
+   within("#bottomButtonRow") do
+     click_on "Save"
+   end
+   sleep 10
+ rescue Exception => ex
+   putstr_withScreen ex.message
+   puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+ end
+end
 
 Then(/^I verify Play and PlayBook details of Succcess Plan$/) do |old_new|
   begin
