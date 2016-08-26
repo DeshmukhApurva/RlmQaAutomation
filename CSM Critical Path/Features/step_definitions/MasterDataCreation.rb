@@ -741,3 +741,50 @@ And (/^I verify widgets for SP Task with value "(.*?)"$/) do |arg|
   end
 end
 
+And(/^I click on Edit Button$/)do 
+  begin
+     click_link('Edit')
+     puts "Successfully clicked on Edit Button"
+     sleep 10
+  rescue Exception =>ex
+    putstr "Error while clicking on Edit Button"
+    putstr_withScreen ex.message
+  end
+end
+
+
+And(/^I fill the Details in the FC$/)do 
+  begin
+  
+  arg = getReference "Reference" 
+ 
+  find(:xpath,"//*[contains(@id,'categoryGroupNameSectionItem')]/ancestor::th/following-sibling::td/input").set(arg["FCCategory"])
+  sleep 5
+  find(:xpath,"//*[contains(@id,'focusCategoryColumnNameIT')]").set(arg["FCTask"])
+  sleep 5
+  click_link('Create New')
+  sleep 2
+  
+  puts "Successfully fill the Details in Focus Category"
+  rescue Exception =>ex
+    putstr "Error while filling the details in FC"
+    putstr_withScreen ex.message
+  end
+end
+
+And(/^I Select FC Task$/)do 
+  begin
+  arg = getReference "Reference" 
+  first(:xpath,"//*[contains(@id,'selectObjectType')]").select(arg["FCTask"]) 
+  sleep 2
+  first(:xpath,"//*[contains(@id, 'selectfocusCategoryView')]").select(arg["FCView4Overview"])  
+  sleep 1
+  click_link('Add Category')
+  sleep 3
+  puts "Successfully Selected the FC Task"
+  rescue Exception =>ex
+    putstr "Error while clicking on Edit Button"
+    putstr_withScreen ex.message
+  end
+end
+

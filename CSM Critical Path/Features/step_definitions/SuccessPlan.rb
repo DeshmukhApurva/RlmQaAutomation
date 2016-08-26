@@ -2525,7 +2525,7 @@ And(/^I select Playbook from Column picker for Activity Stream$/)do
       puts "Play Filter Is on Activity Stream tab Page"    
       end
   rescue Exception => ex
-    putstr "Error occurred while selecting the Playbook"
+    putstr "Error occurred while selecting the Playbook for Activity Stream"
     putstr_withScreen ex.message
   end
 end
@@ -2560,7 +2560,7 @@ And(/^I verify for Playbook column order for Activity Stream$/) do
    end
   end
   rescue Exception => ex
-    putstr "Error occurred while verifying Playbook column order"
+    putstr "Error occurred while verifying Playbook column order for Activity Stream"
     putstr_withScreen ex.message
   end
 end
@@ -2640,7 +2640,7 @@ And(/^I save the Task$/) do
       click_on "Save"
     end
   rescue Exception => ex
-    putstr "Error occurred while verifying Task State status."
+    putstr "Error occurred while verifying saving the Task."
     putstr_withScreen ex.message
   end
 end
@@ -2652,7 +2652,7 @@ And(/^I click on the Subject for Success Plan$/) do
    puts "Successfully click on the Subject"
   
   rescue Exception => ex
-    putstr "Error occurred while verifying Task State status."
+    putstr "Error occurred while clicking on the Subject."
     putstr_withScreen ex.message
   end
 end
@@ -2664,7 +2664,7 @@ find(:xpath,"//*[@id='taskGrid']/tbody/tr[1]/td[4]/a").click
    puts "Successfully click on the Subject"
   
   rescue Exception => ex
-    putstr "Error occurred while verifying Task State status."
+    putstr "Error occurred while clicking on the Subject."
     putstr_withScreen ex.message
   end
 end

@@ -20,7 +20,7 @@ Scenario: Rally Test Case ID : TC2814,TC2818,TC2822 : Creation of Focus Category
 Scenario: 
 	Rally Test Case ID : TC2814,TC2818,TC2822 : Creation of Focus Category for Widget 
 	When I click on "ServiceSource Setup" link 
-	And create a new FC with value "FC for Widgets" 
+	And create a new FC with value "PES FC for Widgets" 
 		
 @FCGroupCreation 
 Scenario: Rally Test Case ID: TC2827 : Creation of Focus Category Group 
@@ -73,4 +73,11 @@ Scenario: Add one Account
 	When I click on "Contact" tab 
 	Then create new contact with FirstName "Martin" and LastName "Liner" and email "xyz@comitydesigns.com"
 	
-		    
+@OverviewTaskCreation
+Scenario: Add one Task to PEC FCG Overview
+    When I click on "Overview" tab  
+    And I select FCG
+    And I click on Edit Button
+    And I fill the Details in the FC
+    And I click on Edit Button
+    And I Select FC Task
