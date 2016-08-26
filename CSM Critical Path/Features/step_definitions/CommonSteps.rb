@@ -860,8 +860,8 @@ And(/^I create PLAY with TASK using map data "([^"]*)"$/) do |mapName|
     puts time
 
     #Create Play2Task2
-    $client.create!('ServiceSource1__CSM_Play__c',ServiceSource1__CSM_Display_Name__c: arg["APL2APB1"], ServiceSource1__CSM_IsActive__c: true, ServiceSource1__CSM_Object_Name__c: 'Account', OwnerId: '005j0000000E6MWAA0')
-    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Play__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APL2APB1"]}\'")
+    $client.create!('ServiceSource1__CSM_Play__c',ServiceSource1__CSM_Display_Name__c: arg["APL2APB2"], ServiceSource1__CSM_IsActive__c: true, ServiceSource1__CSM_Object_Name__c: 'Account', OwnerId: '005j0000000E6MWAA0')
+    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Play__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APL2APB2"]}\'")
     play = record.first
     $pL2Id = play.Id
     $pL2Name = play.Name
@@ -885,8 +885,8 @@ And(/^I create PLAY with TASK using map data "([^"]*)"$/) do |mapName|
     puts time
 
     #Create Play3Task3
-    $client.create!('ServiceSource1__CSM_Play__c',ServiceSource1__CSM_Display_Name__c: arg["APL3APB2"], ServiceSource1__CSM_IsActive__c: true, ServiceSource1__CSM_Object_Name__c: 'Account', OwnerId: '005j0000000E6MWAA0')
-    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Play__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APL3APB2"]}\'")
+    $client.create!('ServiceSource1__CSM_Play__c',ServiceSource1__CSM_Display_Name__c: arg["APL3APB3"], ServiceSource1__CSM_IsActive__c: true, ServiceSource1__CSM_Object_Name__c: 'Account', OwnerId: '005j0000000E6MWAA0')
+    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Play__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APL3APB3"]}\'")
     play = record.first
     $pL3Id = play.Id
     $pL3Name = play.Name
@@ -910,8 +910,8 @@ And(/^I create PLAY with TASK using map data "([^"]*)"$/) do |mapName|
     puts time
 
     #Create Play4Task4
-    $client.create!('ServiceSource1__CSM_Play__c',ServiceSource1__CSM_Display_Name__c: arg["APL4APB2"], ServiceSource1__CSM_IsActive__c: true, ServiceSource1__CSM_Object_Name__c: 'Account', OwnerId: '005j0000000E6MWAA0')
-    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Play__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APL4APB2"]}\'")
+    $client.create!('ServiceSource1__CSM_Play__c',ServiceSource1__CSM_Display_Name__c: arg["APL4APB4"], ServiceSource1__CSM_IsActive__c: true, ServiceSource1__CSM_Object_Name__c: 'Account', OwnerId: '005j0000000E6MWAA0')
+    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Play__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APL4APB4"]}\'")
     play = record.first
     $pL4Id = play.Id
     $pL4Name = play.Name
@@ -990,6 +990,44 @@ And(/^I create PLAYBOOK with PLAY using map data "([^"]*)"$/) do |mapName|
 #    puts "PlayBookPlay2: " + pbplRecords.Id + " " + pbplRecords.Name+ " " + pbplRecords.ServiceSource1__CSM_Playbook__c + " " + pbplRecords.ServiceSource1__CSM_Play__c
     time = Time.new
     puts time
+    
+    #Create PlayBook_1 for SP/AddPlay3
+    $client.create!('ServiceSource1__CSM_Playbook__c', ServiceSource1__CSM_Display_Name__c: arg["APB1"], ServiceSource1__CSM_IsActive__c: true, OwnerId: '005j0000000E6MWAA0')
+    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Playbook__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APB1"]}\'")
+    playBook = record.first
+    $pb3Id = playBook.Id
+    $pb3Name = playBook.Name
+    puts "Play Book1: " + playBook.Id + " " + playBook.Name + " " + playBook.ServiceSource1__CSM_Display_Name__c
+#    $client.update!('ServiceSource1__CSM_Playbook__c', Id: $pb1Id, ServiceSource1__CSM_IsActive__c: true)
+#    $client.update!('ServiceSource1__CSM_Playbook__c', Id: $pb1Id, OwnerId: '005j0000000E6MWAA0')
+
+    $client.create!('ServiceSource1__CSM_PlaybookPlay__c', ServiceSource1__CSM_Play__c: $pL3Id, ServiceSource1__CSM_Playbook__c: $pb3Id)
+    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Playbook__c,ServiceSource1__CSM_Play__c FROM ServiceSource1__CSM_PlaybookPlay__c where ServiceSource1__CSM_Play__c = \'#{$pL3Id}\' and ServiceSource1__CSM_Playbook__c = \'#{$pb3Id}\'")
+    pbpl = record.first
+    $pbpl3Id = pbpl.Id
+    puts "PlayBookPlay1: " + pbpl.Id + " " + pbpl.Name+ " " + pbpl.ServiceSource1__CSM_Playbook__c + " " + pbpl.ServiceSource1__CSM_Play__c
+
+    time = Time.new
+    puts time
+    
+    #Create PlayBook_2 for SP/AddPlay4
+    $client.create!('ServiceSource1__CSM_Playbook__c', ServiceSource1__CSM_Display_Name__c: arg["APB2"], ServiceSource1__CSM_IsActive__c: true, OwnerId: '005j0000000E6MWAA0')
+    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Playbook__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APB2"]}\'")
+    playBook = record.first
+    $pb4Id = playBook.Id
+    $pb4Name = playBook.Name
+    puts "Play Book1: " + playBook.Id + " " + playBook.Name + " " + playBook.ServiceSource1__CSM_Display_Name__c
+#    $client.update!('ServiceSource1__CSM_Playbook__c', Id: $pb1Id, ServiceSource1__CSM_IsActive__c: true)
+#    $client.update!('ServiceSource1__CSM_Playbook__c', Id: $pb1Id, OwnerId: '005j0000000E6MWAA0')
+
+    $client.create!('ServiceSource1__CSM_PlaybookPlay__c', ServiceSource1__CSM_Play__c: $pL4Id, ServiceSource1__CSM_Playbook__c: $pb4Id)
+    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Playbook__c,ServiceSource1__CSM_Play__c FROM ServiceSource1__CSM_PlaybookPlay__c where ServiceSource1__CSM_Play__c = \'#{$pL4Id}\' and ServiceSource1__CSM_Playbook__c = \'#{$pb4Id}\'")
+    pbpl = record.first
+    $pbpl4Id = pbpl.Id
+    puts "PlayBookPlay1: " + pbpl.Id + " " + pbpl.Name+ " " + pbpl.ServiceSource1__CSM_Playbook__c + " " + pbpl.ServiceSource1__CSM_Play__c
+
+    time = Time.new
+    puts time
   rescue Exception => ex
     puts ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
@@ -1055,10 +1093,13 @@ And(/^I delete Play_PlayBook_SPT$/) do
     #Delete PB11 and PB2
     $client.destroy!('ServiceSource1__CSM_Playbook__c', $pb1Id) 
     $client.destroy!('ServiceSource1__CSM_Playbook__c', $pb2Id)
+    $client.destroy!('ServiceSource1__CSM_Playbook__c', $pb3Id)
+    $client.destroy!('ServiceSource1__CSM_Playbook__c', $pb4Id)
     
     #Delete SPT1 and SPT2 
     $client.destroy!('ServiceSource1__CSM_Account_Plan_Template__c', $sPT1Id)
     $client.destroy!('ServiceSource1__CSM_Account_Plan_Template__c', $sPT2Id)
+    #$client.destroy!('ServiceSource1__CSM_Account_Plan_Template__c', $sPT3Id)
     
     #Delete Account
     #$client.destroy!('Account', $accId)

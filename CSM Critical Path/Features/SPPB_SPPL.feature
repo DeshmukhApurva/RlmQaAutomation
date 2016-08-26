@@ -28,10 +28,6 @@ Feature: All features related to Opportunity Management - Manage Renewals
     Then I store "New" Play and PlayBook details of Succcess Plan
     Then I verify Play and PlayBook details of Succcess Plan
     And I delete Account
-
-  @DeleteRecordsPL_PB_SPT_ACC
-  Scenario: Rally Test Case ID: TC6462 - Split Opportunity RR - New Cloned Opportunity Details editable
-    And I delete Play_PlayBook_SPT
   
   #US1200 
    
@@ -115,4 +111,8 @@ Feature: All features related to Opportunity Management - Manage Renewals
   Then I click on "Success Plan Templates" link
   Then I click on "Edit" link of SPT for "SPPBSPPL" and key "SPT1"
   Then I verify playbooks in SPT using map data "SPPBSPPL" and key "APB2"
+  And I delete Account
 
+  @DeleteRecordsPL_PB_SPT_ACC
+  Scenario: Rally Test Case ID: TC6462 - Split Opportunity RR - New Cloned Opportunity Details editable
+    And I delete Play_PlayBook_SPT
