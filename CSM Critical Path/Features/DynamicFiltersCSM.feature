@@ -1,5 +1,5 @@
-@CSMSuccessPlan
-@CSMSuccessPlanTabFeature
+#@CSMSuccessPlan
+#@CSMSuccessPlanTabFeature
 Feature: All features related to Success Plan - Success Plan Tab,Actions Subtab,Contacts Widget,Play Details Widgets,Activity Stream Subtab,Usage Subtab,Details Subtab,Playbooks,Opportunities
  
 Background: Login to the Application
