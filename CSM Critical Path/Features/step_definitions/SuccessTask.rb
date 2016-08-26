@@ -1,19 +1,6 @@
 #All Success Tasks Specific Step Definitions
 #All Scenario mentioned in SuccessTasks.feature
 
-Then(/^I select the SP$/) do
-begin
-   sleep 5
-  within('.list') do
-    first(:link).click
-    puts "I Click on the Success Plan "
-  end
-  sleep 10
-  rescue Exception => ex
-    putstr "Error occurred while opening a SuccessPlan"
-    putstr_withScreen ex.message
-  end
-end
 
 
 And(/^I select task$/) do
