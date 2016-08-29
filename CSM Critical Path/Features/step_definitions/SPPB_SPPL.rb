@@ -12,7 +12,7 @@ Then(/^I create a new Success Plan Template with mapData "(.*?)" and playbook "(
     fill_in "Template Name",:with => templateName
     sleep 2
     within(".pbBottomButtons") do
-     click_on "Create"
+      click_on "Create"
     end
     puts "Successfully created SPT: "+templateName
     sleep 10
@@ -32,7 +32,6 @@ Then(/^I create a new Success Plan Template with mapData "(.*?)" and playbook "(
     puts "Successfully added '#{playbookName}' playbook to Success Plan Template"
     sleep 5
   rescue Exception => ex
-    putstr "Error occurred while creating Success Plan Template"
     putstr_withScreen ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
   end
@@ -43,7 +42,7 @@ Then(/^I fetch URI of template$/) do
     puts "Get Template ID from URL"
     templatePath = URI.parse(current_url).request_uri
     templateId = templatePath.split('id=')[1].split('&')[0]
-    templateId = templateId[0,15] 
+    templateId = templateId[0,15]
     puts "templateId: "+templateId
     $sPT3Id = templateId
     sleep 4
@@ -79,21 +78,20 @@ Then(/^I create a SuccessPlan using map data "(.*?)"$/) do |mapName|
       click_on "Save"
     end
     sleep 10
-    puts "Successfully created Success Plan" 
+    puts "Successfully created Success Plan"
     sleep 3
-    
+
   rescue Exception => ex
-    putstr "Error occurred while creating Success Plan"
     putstr_withScreen ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
   end
-end 
+end
 
 Then(/^I Save success plan Name value$/) do
   begin
     templatePath = URI.parse(current_url).request_uri
     planId = templatePath.split('id=')[1].split('&')[0]
-    planId = planId[0,15] 
+    planId = planId[0,15]
     puts "PlanId: "+planId
     $sPlanId = planId
     sleep 4
@@ -103,7 +101,6 @@ Then(/^I Save success plan Name value$/) do
     puts "Success Plan :"+$SuccessPlanName
     sleep 5
   rescue Exception => ex
-    putstr "Error occurred while saving Success Plan name"
     putstr_withScreen ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
   end
@@ -119,7 +116,7 @@ Then(/^I verify Playbooks subtab using map data "(.*?)" for "(.*?)" after "(.*?)
     else
       playbook_name = arg["APB2"]
       play_name = arg["APL4APB4"]
-    end 
+    end
     if page.has_table?("playbookSPGrid")
       within(:id, "playbookSPGrid") do
         playStatus = has_xpath?(".//td/a[contains(text(), '#{playbook_name}')]")
@@ -146,15 +143,14 @@ Then(/^I verify Playbooks subtab using map data "(.*?)" for "(.*?)" after "(.*?)
       raise "Plays grid is not present."
     end
   rescue Exception => ex
-    putstr "Error occurred while verifying records from Playbooks Tab of SP"
     putstr_withScreen ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
   end
-end 
+end
 
 Then(/I add another playbook using map data "(.*?)" to SPT$/) do |mapName|
   begin
-    sleep 5  
+    sleep 5
     arg = getDetails mapName
     templateName = arg["SPT1"]
     playbook = arg["APB2"]
@@ -181,10 +177,30 @@ Then(/I add another playbook using map data "(.*?)" to SPT$/) do |mapName|
     putstr_withScreen ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
   end
-end 
+end
+
+Then(/I add play to SPT using map data "(.*?)" and key "(.*?)"$/) do |mapName, keyName|
+  begin
+    sleep 5
+    arg = getDetails mapName
+    playName = arg["#{keyName}"]
+    find(:xpath, '//input[@type="search"]').send_keys playName
+    sleep 2
+    first(:xpath, ".//tr/td/span[contains(text(), '#{playName}')]//parent::td//preceding-sibling::td/a").click
+    sleep 10
+    within all(".pbButton")[0] do
+      click_on "Save"
+    end
+    puts "Successfully added play to PlayBook"
+    sleep 10
+  rescue Exception => ex
+    putstr_withScreen ex.message
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+  end
+end
 
 Then(/^I select SP for verifying Playbooks/) do
-  begin       
+  begin
     within(:class, ".hotListElement") do
       #find(:xpath, ".//th/a[contains(text(), 'SP-000052')]").click
       find(:xpath, ".//th/a[contains(text(), '#{$SuccessPlanName}')]").click
@@ -195,18 +211,18 @@ Then(/^I select SP for verifying Playbooks/) do
     putstr_withScreen ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
   end
-end 
+end
 
 Then(/^I verify Playbooks subtab for Playbooks and Plays Grid/) do
-  begin       
+  begin
     sleep 5
     #find(:xpath, ".//li/a[contains(text(), 'Playbooks')]").click
     #sleep 3
     if page.has_table?("playbookSPGrid")
-      playBookCount = all("#playbookSPGrid tr").count-2 
-      puts "No. of PlayBooks: #{playBookCount + 1}"      
+      playBookCount = all("#playbookSPGrid tr").count-2
+      puts "No. of PlayBooks: #{playBookCount + 1}"
       puts "Playbooks: "
-      while playBookCount >=0       
+      while playBookCount >=0
         playBook = find(:xpath, "//table[@id='playbookSPGrid']//descendant::tr[@data-index = '#{playBookCount}'][1]/td[2]/a").text
         puts playBook
         playBookCount -= 1
@@ -216,10 +232,10 @@ Then(/^I verify Playbooks subtab for Playbooks and Plays Grid/) do
     end
     sleep 3
     if page.has_table?("successPlanPlayGrid")
-      playsCount = all("#successPlanPlayGrid tr").count-2 
+      playsCount = all("#successPlanPlayGrid tr").count-2
       puts "No. of Plays: #{playsCount + 1}"
-      puts "Plays: "      
-      while playsCount >=0 
+      puts "Plays: "
+      while playsCount >=0
         play = find(:xpath, "//table[@id='successPlanPlayGrid']//descendant::tr[@data-index = '#{playsCount}'][1]/td[1]/a").text
         puts play
         playsCount -= 1
@@ -228,51 +244,46 @@ Then(/^I verify Playbooks subtab for Playbooks and Plays Grid/) do
       raise "Plays grid is not present."
     end
   rescue Exception => ex
-    putstr "Error occurred while verifying playbooks and plays for Success Plan"
     putstr_withScreen ex.message
+    puts ex.backtrace.inspect
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
   end
-end 
+end
 
-Then(/I delete playbook from SPT using map data "(.*?)" and key "(.*?)"$/) do |mapName, key|
+Then(/I delete playbook from SPT using map data "(.*?)" and key "(.*?)"$/) do |mapName, keyName|
   begin
     sleep 5
     arg = getDetails mapName
-    templateName = arg["SPT1"]
-    playbook = arg[key]
-    # puts "Select '#{templateName}' template"
-    # first(:xpath, ".//tr/td/span[contains(text(), '#{templateName}')]//parent::td//preceding-sibling::td/a[contains(text(), 'Edit')]").click
-    # sleep 3
-    if page.has_content?('Define Success Plan Playbooks') || page.has_content?('Define Playbook Plays')
-      puts "Define Success Plan Playbooks/Plays section displayed"
-      sleep 3
-    else
-      raise "Define Success Plan Playbook/Plays section not displayed"
-    end 
-    puts "Delete '#{playbook}' playbook/Play."
-    sleep 5
+    playbook = arg[keyName]
+
+    find(:xpath, '//input[@type="search"]').send_keys playbook
+    sleep 2
     first(:xpath, ".//tr/td/span[contains(text(), '#{playbook}')]//parent::td//preceding-sibling::td/a[contains(text(), 'Delete')]").click
     sleep 5
-    puts "Accept the alert"
-    page.driver.browser.switch_to.alert.accept
-    sleep 2
+
+    if page.has_content?('Define Success Plan Playbooks')
+      puts "Accept the alert"
+      page.driver.browser.switch_to.alert.accept
+      sleep 2
+    end
+
     within all(".pbButton")[0] do
       click_on "Save"
     end
+
     puts "Successfully deleted '#{playbook}' playbook/Play from Success Plan Template"
     sleep 5
   rescue Exception => ex
-    putstr "Error occurred while deleting playbook"
     putstr_withScreen ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
   end
-end 
+end
 
 Then(/I add playbook or add and skip criteria to SP using map data "(.*?)" and key "(.*?)"$/) do |mapName, key|
   begin
-    sleep 5  
+    sleep 5
     arg = getDetails mapName
-    puts "playbook = "+arg[key] 
+    puts "playbook = "+arg[key]
     playbook = arg[key]
     fill_in "Search:",:with => playbook
     #first(:xpath, ".//tr/td/a")
@@ -291,14 +302,13 @@ Then(/I add playbook or add and skip criteria to SP using map data "(.*?)" and k
     #first(:xpath, ".//tr/td/span[contains(text(), '#{playbook}')]//parent::td//preceding-sibling::td/a").click
     # sleep 5
     # within all(".pbButton")[0] do
-      # click_on "Save"
+    # click_on "Save"
     # end
   rescue Exception => ex
-    putstr "Error occurred while adding playbook or add and skip criteria to SP"
     putstr_withScreen ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
   end
-end 
+end
 
 Then(/I click on "(.*?)" link of SPT for "(.*?)" and key "(.*?)"$/) do |action, mapName, keyName|
   begin
@@ -309,11 +319,10 @@ Then(/I click on "(.*?)" link of SPT for "(.*?)" and key "(.*?)"$/) do |action, 
     first(:xpath, ".//tr/td/span[contains(text(), '#{SPT}')]//parent::td//preceding-sibling::td/a[contains(text(), '#{action}')]").click
     puts "Clicked on '#{action}' of SPT '#{SPT}'"
   rescue Exception => ex
-    putstr "Error occurred while clicking on '#{action}' of SPT '#{SPT}'"
     putstr_withScreen ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
   end
-end 
+end
 
 Then(/I verify playbooks in SPT using map data "(.*?)" and key "(.*?)"$/) do |mapName, keyName|
   begin
@@ -321,22 +330,21 @@ Then(/I verify playbooks in SPT using map data "(.*?)" and key "(.*?)"$/) do |ma
     arg = getDetails mapName
     playbook = arg[keyName]
     puts "Verifying '#{playbook}' playbook is visible in template."
-    if page.has_content?('Define Success Plan Playbooks')
-      puts "Define Success Plan Playbooks section displayed"
+    if page.has_content?('Define Success Plan Playbooks') or page.has_content?('Define Playbook Plays')
+      puts "Define Success Plan Playbooks/Define Playbook Plays section displayed"
       sleep 3
     else
-      raise "Define Success Plan Playbook section not displayed"
-    end 
+      raise "Define Success Plan Playbook/Define Playbook Plays section not displayed"
+    end
     #add code here
     playBookStatus = has_xpath?(".//td/span[contains(text(), '#{playbook}')]")
-    puts "Playbook '#{playbook}' is visible in SPT: '#{playBookStatus}'"
+    puts "Playbook/Play '#{playbook}' is visible in SPT: '#{playBookStatus}'"
   rescue Exception => ex
-    putstr "Error occurred while verifying playbook '#{playbook}' in SPT"
+    putstr "Error occurred while verifying Playbook/Play '#{playbook}' in SPT"
     putstr_withScreen ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
   end
-end 
-
+end
 
 Then (/^I delete a Playbook "(.*?)" from SP using mapdata "(.*?)"$/) do |keyName, mapName|
   begin
@@ -344,20 +352,20 @@ Then (/^I delete a Playbook "(.*?)" from SP using mapdata "(.*?)"$/) do |keyName
     playbook = arg[keyName]
     within(:id,"playbookSPGrid") do
       first(:xpath, "//tr/td/a[contains(text(), '#{playbook}')]//parent::td//preceding-sibling::td/a[contains(text(), Del)]").click
-    end    
+    end
     puts "Clicked on the Delete link of Playbook '#{playbook}'"
     sleep 7
     # if page.has_content?('Success Plan Template Playbook has been deleted')
-      # puts "Success Plan Template PlayBook has been deleted message displayed"
+    # puts "Success Plan Template PlayBook has been deleted message displayed"
     # else
-      # raise "Success Plan Template PlayBook has been deleted message not displayed"
+    # raise "Success Plan Template PlayBook has been deleted message not displayed"
     # end
-    rescue Exception => ex
+  rescue Exception => ex
     putstr "Error occurred while deleting playbook '#{playbook}' from SP"
     putstr_withScreen ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
   end
-end  
+end
 
 #US1276
 Then(/^I create SuccessPlan using map "(.*?)" and key "(.*?)"$/) do |mapName, keyName|
@@ -403,7 +411,7 @@ Then(/^I create SuccessPlan using map "(.*?)" and key "(.*?)"$/) do |mapName, ke
     putstr_withScreen ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
   end
-end 
+end
 
 Then(/^I store "(.*?)" Play and PlayBook details of Succcess Plan$/) do |old_new|
   begin
@@ -453,63 +461,63 @@ Then(/^I store "(.*?)" Play and PlayBook details of Succcess Plan$/) do |old_new
     end
   rescue Exception => ex
     putstr_withScreen ex.message
+    puts ex.backtrace.inspect
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
   end
-end 
-
+end
 
 Then(/^I "(.*?)" Success Plan record$/) do |action|
- begin
-   $SPName = "SP-000082"
-   find(:xpath, '//input[contains(@placeholder,"Search...")]').click
-   sleep 2
-   find(:xpath, '//input[contains(@placeholder,"Search...")]').set $SPName
-   sleep 2
-   find(:xpath, '//input[contains(@id,"phSearchButton")]').click
-   sleep 8
-   within("#ServiceSource1__CSM_Account_Plan__c_body") do
-     within(".list") do
-       
-       if first("tbody").all(".dataRow")[0].all("th")[0].first("a").text == $SPName
-         if action == "Edit"
-          first("tbody").all(".dataRow")[0].all("td")[0].first("a").click
-          puts "Success Plan #{$SPName} Found..."
-         else
-          first("tbody").all(".dataRow")[0].all("th")[0].first("a").click
-         end   
-       else
-         puts "Success Plan #{$SPName} Not Found..."
-       end
-     end
-   end
-   sleep 10
- rescue Exception => ex
-   puts ex.backtrace.select { |x| x.match(/step_definitions/) }
-   putstr_withScreen ex.message
- end
+  begin
+    #$SPName = "SP-000082"
+    find(:xpath, '//input[contains(@placeholder,"Search...")]').click
+    sleep 2
+    find(:xpath, '//input[contains(@placeholder,"Search...")]').set $SPName
+    sleep 2
+    find(:xpath, '//input[contains(@id,"phSearchButton")]').click
+    sleep 8
+    within("#ServiceSource1__CSM_Account_Plan__c_body") do
+      within(".list") do
+
+        if first("tbody").all(".dataRow")[0].all("th")[0].first("a").text == $SPName
+          if action == "Edit"
+            first("tbody").all(".dataRow")[0].all("td")[0].first("a").click
+            puts "Success Plan #{$SPName} Found..."
+          else
+            first("tbody").all(".dataRow")[0].all("th")[0].first("a").click
+          end
+        else
+          puts "Success Plan #{$SPName} Not Found..."
+        end
+      end
+    end
+    sleep 10
+  rescue Exception => ex
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+    putstr_withScreen ex.message
+  end
 end
 
 Then(/^I change the SPT of SP using map "(.*?)" and key "(.*?)"$/) do |mapName, keyName|
- begin
-   sleep 5
-   arg = getDetails mapName
-   # within("#bottomButtonRow") do
-     # click_on "Edit"
-   # end
-   sleep 10
-   record = $client.query("SELECT Id,Name FROM ServiceSource1__CSM_Account_Plan_Template__c where ServiceSource1__CSM_Template_Name__c = \'#{arg["#{keyName}"]}\'")
-   sPTName = record.first.Name
-   puts sPTName 
-   fill_in "Success Plan Template", :with => sPTName
-   sleep 2
-   within("#bottomButtonRow") do
-     click_on "Save"
-   end
-   sleep 10
- rescue Exception => ex
-   putstr_withScreen ex.message
-   puts ex.backtrace.select { |x| x.match(/step_definitions/) }
- end
+  begin
+    sleep 5
+    arg = getDetails mapName
+    # within("#bottomButtonRow") do
+    # click_on "Edit"
+    # end
+    sleep 10
+    record = $client.query("SELECT Id,Name FROM ServiceSource1__CSM_Account_Plan_Template__c where ServiceSource1__CSM_Template_Name__c = \'#{arg["#{keyName}"]}\'")
+    sPTName = record.first.Name
+    puts sPTName
+    fill_in "Success Plan Template", :with => sPTName
+    sleep 2
+    within("#bottomButtonRow") do
+      click_on "Save"
+    end
+    sleep 10
+  rescue Exception => ex
+    putstr_withScreen ex.message
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+  end
 end
 
 Then(/^I verify Play and PlayBook details of Succcess Plan$/) do
@@ -520,8 +528,8 @@ Then(/^I verify Play and PlayBook details of Succcess Plan$/) do
       puts "No. of PlayBooks: #{playBookCount}"
       while playBookCount >=0
         within(:id, "playbookSPGrid") do
-           puts $OldPlayBook[playBookCount]
-           puts $NewPlayBook[playBookCount] 
+          puts $OldPlayBook[playBookCount]
+          puts $NewPlayBook[playBookCount]
           if $OldPlayBook[playBookCount] != $NewPlayBook[playBookCount]
             puts "PlayBook has been updated"
           else
@@ -557,4 +565,30 @@ Then(/^I verify Play and PlayBook details of Succcess Plan$/) do
     putstr_withScreen ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
   end
-end 
+end
+
+Then(/^I verify Play "(.*?)" on Success Plan using map data "(.*?)" after "(.*?)" it to_From playbook$/) do |playName, mapName, action|
+  begin
+    sleep 3
+    arg = getDetails mapName
+    playName = arg["#{playName}"]
+    if page.has_table?("successPlanPlayGrid")
+      within("#successPlanPlayGrid") do
+        playStatus = has_xpath?(".//td/a[contains(text(), '#{playName}')]")
+        if action == "adding"
+          puts "After adding play, in Play Grid '#{playName}' visible: #{playStatus}"
+        else
+          puts "After deleting play, in Play Grid '#{playName}' visible: #{playStatus}"
+        end
+
+      end
+    else
+      raise "Play grid is not present."
+    end
+    sleep 5
+  rescue Exception => ex
+    putstr_withScreen ex.message
+    puts ex.backtrace.inspect
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+  end
+end
