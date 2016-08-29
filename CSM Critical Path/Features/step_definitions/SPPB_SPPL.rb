@@ -257,16 +257,19 @@ Then(/I delete playbook from SPT using map data "(.*?)" and key "(.*?)"$/) do |m
     sleep 5
     arg = getDetails mapName
     playbook = arg[keyName]
-
-    find(:xpath, '//input[@type="search"]').send_keys playbook
-    sleep 2
-    first(:xpath, ".//tr/td/span[contains(text(), '#{playbook}')]//parent::td//preceding-sibling::td/a[contains(text(), 'Delete')]").click
-    sleep 5
-
     if page.has_content?('Define Success Plan Playbooks')
+      find(:xpath, "//h3[contains(text(), 'Define Success Plan Playbooks')]//parent::div//following-sibling::div[@class='pbSubsection']//descendant::input[@type='search']").send_keys playbook
+      sleep 2
+      first(:xpath, ".//tr/td/span[contains(text(), '#{playbook}')]//parent::td//preceding-sibling::td/a[contains(text(), 'Delete')]").click
+      sleep 7
       puts "Accept the alert"
       page.driver.browser.switch_to.alert.accept
       sleep 2
+    else
+      find(:xpath, '//input[@type="search"]').send_keys playbook
+      sleep 2
+      first(:xpath, ".//tr/td/span[contains(text(), '#{playbook}')]//parent::td//preceding-sibling::td/a[contains(text(), 'Delete')]").click
+      sleep 5    
     end
 
     within all(".pbButton")[0] do
