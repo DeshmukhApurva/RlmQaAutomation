@@ -1147,7 +1147,6 @@ And(/^I delete Success Plan from DB/) do
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
   end
 end
-$sPlanId
 
 When(/^I click on the "(.*?)" grid tab$/) do |tab|
   begin
@@ -1173,3 +1172,13 @@ When(/^I click on the "(.*?)" grid tab$/) do |tab|
     putstr_withScreen  ex.message
   end
 end
+
+Then(/^I make call to YML$/) do
+begin
+  sleep 3
+  puts "call YML"
+  arg = setDetails("Details.yml", "Demo", "Name", "Shashi")
+  puts "after call YML"
+  puts arg
+end
+end  
