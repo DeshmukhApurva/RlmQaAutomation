@@ -49,6 +49,8 @@ Then(/^I fetch URI of template$/) do
     record = $client.query("SELECT Name FROM ServiceSource1__CSM_Account_Plan_Template__c WHERE Id = \'#{templateId}\'")
     $playBookTempForPlan = record.first.Name
     puts "SPT :"+$playBookTempForPlan
+    setDetails("Details.yml", "SPPBSPPL", 'SPT1Id', $sPT3Id)
+    setDetails("Details.yml", "SPPBSPPL", 'SPT1Name', $playBookTempForPlan)
     sleep 5
   rescue Exception => ex
     putstr "Error occurred while fetching SPT ID"

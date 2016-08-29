@@ -125,15 +125,13 @@ end
 
 def setDetails(fileName, mapName, keyName, value)
   begin
-    puts "in util"
     yamlinput = "../features/support/test_data/#{fileName}"
     myoptions = YAML.load_file(yamlinput)
-    myoptions[mapName]
-    #data["users"]["new_user"] = new_user_info
-    File.open("../features/support/test_data/#{fileName}", 'w') {|f| f.write myoptions.to_yaml } #Store
-    myoptions = YAML.load_file(yamlinput)
-
-    myoptions[mapName] = {"Name"=>"Test"}
+#    myoptions[mapName]
+#    #data["users"]["new_user"] = new_user_info
+#    File.open("../features/support/test_data/#{fileName}", 'w') {|f| f.write myoptions.to_yaml } #Store
+#    myoptions = YAML.load_file(yamlinput)
+    myoptions[mapName][keyName] = value
     File.open("../features/support/test_data/#{fileName}", 'w') {|f| f.write myoptions.to_yaml }
     #File.open("../features/support/test_data/#{fileName}", 'w+') { |f| YAML.dump(myoptions, f) }
   rescue Exception => ex

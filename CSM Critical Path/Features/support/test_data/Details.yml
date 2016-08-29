@@ -1,241 +1,206 @@
 ---
 Account Details:
- Account Name: "Central Steel"
- Website: "www.positiveedge.net" 
- 
+  Account Name: Central Steel
+  Website: www.positiveedge.net
 Account:
- Account Name: "PES MediumIndustries"
- Website: "www.positiveedgeindustries.net" 
- Phone: "9999999999"
- Annual Revenue: 501000
- 
+  Account Name: PES MediumIndustries
+  Website: www.positiveedgeindustries.net
+  Phone: '9999999999'
+  Annual Revenue: 501000
 Contact Details:
- First Name: "PesFirstName"
- Last Name: "PesLName1"
- Title: "Engineer"
- 
-
+  First Name: PesFirstName
+  Last Name: PesLName1
+  Title: Engineer
 Opportunity Details:
- Opportunity Name: "SuccessPlan Opp1"
- Close Date: "8/31/2016"
- 
+  Opportunity Name: SuccessPlan Opp1
+  Close Date: 8/31/2016
 PlayBook Details:
- Display Name: "PES Play Book"
- Short Description: "Risk Description"
- 
+  Display Name: PES Play Book
+  Short Description: Risk Description
 SPTPlayBook Details:
- Display Name: "PB1 for SPT"
- Short Description: "Risk Description"
- 
+  Display Name: PB1 for SPT
+  Short Description: Risk Description
 SPTPlayBookEdit Details:
- Display Name: "PB1 for SPT"
- NewDisplay Name: "Updated PB1 for SPT"
- 
+  Display Name: PB1 for SPT
+  NewDisplay Name: Updated PB1 for SPT
 Play Details:
- Display Name: "Play for Account" 
- Short Description: "High Risk Description"
- Object: "Account"
- userName: "qa-renewnetops-eetest4@servicesource.com"
- pwd: "passw0rd1"
-
+  Display Name: Play for Account
+  Short Description: High Risk Description
+  Object: Account
+  userName: qa-renewnetops-eetest4@servicesource.com
+  pwd: passw0rd1
 PlayforPB Details:
- Display Name: "Play for Account" 
- Short Description: "High Risk Description"
- Object: "Account"
- 
+  Display Name: Play for Account
+  Short Description: High Risk Description
+  Object: Account
 Play Delete:
- Display Name: "PlayTesting" 
- 
+  Display Name: PlayTesting
 Play Tasks:
- TaskName: "PES Play Task"
- Type: "Call"
- Description: "Enquiry of Play"
- AssignTo: "CSM Manager"
- Days: 10
-
-
+  TaskName: PES Play Task
+  Type: Call
+  Description: Enquiry of Play
+  AssignTo: CSM Manager
+  Days: 10
 Focus Category:
- Display Name: "PES Test FC"
- FocusCategoryName: "Testing_PES_1"
-
-
+  Display Name: PES Test FC
+  FocusCategoryName: Testing_PES_1
 FocusCategoryDetails:
- AddFilterLogicAssetText: "Add Filter Logic"
- FocusCategoryFieldValue: "Owner ID"
- FocusCategoryOperator: "="
- FocusCategoryValue: "User"
- FocusCategoryFieldValue1: "Annual Revenue"
- FocusCategoryOperator1: ">"
- FocusCategoryValue1: "500000"
- FilterLogicErrorMessage: "Some filter conditions are defined but not referenced in your filter logic."
- FocusCategoryPaginationSize: "50"
- FocusCategoryPaginationSize1: "100"
-
+  AddFilterLogicAssetText: Add Filter Logic
+  FocusCategoryFieldValue: Owner ID
+  FocusCategoryOperator: "="
+  FocusCategoryValue: User
+  FocusCategoryFieldValue1: Annual Revenue
+  FocusCategoryOperator1: ">"
+  FocusCategoryValue1: '500000'
+  FilterLogicErrorMessage: Some filter conditions are defined but not referenced in
+    your filter logic.
+  FocusCategoryPaginationSize: '50'
+  FocusCategoryPaginationSize1: '100'
 FC View:
- Display Name: "PES New FC View" 
- 
+  Display Name: PES New FC View
 IndicatorGroup:
- Name: "CSM Indicator Group" 
- 
+  Name: CSM Indicator Group
 Focus Category for use:
- Display Name: "PES FCat"
- 
- 
+  Display Name: PES FCat
 Focus Category Group:
- Group Name: "PES FCGroup"
- FoucsCategoryGroupName: "PES_Focus_Category_1"
- col1: "FC Col1"
- col2: "FC Col2"
- col3: "FC Col3"
- 
+  Group Name: PES FCGroup
+  FoucsCategoryGroupName: PES_Focus_Category_1
+  col1: FC Col1
+  col2: FC Col2
+  col3: FC Col3
 Renewal Insights:
- - Available
- - Unresolved
- - Resolved
- - Lost
- - Won
- - Conversion
- - Added
- - Total
- 
+- Available
+- Unresolved
+- Resolved
+- Lost
+- Won
+- Conversion
+- Added
+- Total
 HamburgerMenu:
- - Edit View
- - Hide Charts and Tiles
- - Hide Inactive Categories
- 
+- Edit View
+- Hide Charts and Tiles
+- Hide Inactive Categories
 SuccessPlan:
- Phase Start Date: "8/31/2016"
- Display Name: "PES Success Plan"
-
+  Phase Start Date: 8/31/2016
+  Display Name: PES Success Plan
 TemplateforSP:
- TemplateName: "SP Template"
-
- 
+  TemplateName: SP Template
 EditSuccessPlan:
- Display Name: "Edited SuccessPlan"
- 
+  Display Name: Edited SuccessPlan
 SPT:
- Template Name: "PES New SPlan Template"
- PhaseName: "PES SP Template Phase"
- Days: 20
- Indicator: "Health Status"
- OppStage: "Close Date"
- Criteria1 Type: "Success" 
- Criteria2 Type: "Meet"
- Criteria3 Type: "Fail"
- Criteria1: "Healthy"
- Criteria2: "Low Adoption"
- Criteria3: "Pending Churn"
-
+  Template Name: PES New SPlan Template
+  PhaseName: PES SP Template Phase
+  Days: 20
+  Indicator: Health Status
+  OppStage: Close Date
+  Criteria1 Type: Success
+  Criteria2 Type: Meet
+  Criteria3 Type: Fail
+  Criteria1: Healthy
+  Criteria2: Low Adoption
+  Criteria3: Pending Churn
 Taskdetails:
- Task Name: "Call"
- Account: "Action Machinery Co"
- Tasktype: "Call"
- DueDate: "12/11/2015"
- CommentsValue: "Success Task for call"
- Status: "In Progress"
- 
+  Task Name: Call
+  Account: Action Machinery Co
+  Tasktype: Call
+  DueDate: 12/11/2015
+  CommentsValue: Success Task for call
+  Status: In Progress
 PlayBookForSP:
- Display Name: "PlayBook for SP"
-
+  Display Name: PlayBook for SP
 AccountForSPCreate:
- Name: "SPAccount"
- Annual Revenue: "5000000"
-
+  Name: SPAccount
+  Annual Revenue: '5000000'
 PlayforSP:
- Display Name: "Play for SP"
- Short Description: "Play for SP Description"
- Object: "Account"
- PlayCriteria: "9000"
- PlayCriteriaField: "Annual Revenue"
- PlayTaskName: "Play Task for SP"
-
-
+  Display Name: Play for SP
+  Short Description: Play for SP Description
+  Object: Account
+  PlayCriteria: '9000'
+  PlayCriteriaField: Annual Revenue
+  PlayTaskName: Play Task for SP
 CreateTaskFields:
- NotStartedStatusfield: "Not Started"
- InProgressStatusfield: "In Progress"
- CompletedStatusfield: "Completed"
- WaitingStatusfield: "Waiting on someone else"
- DeferredStatusfield: "Deferred"
- SucessPlanDetailsWidget: "Success Plan Details"
- SucessPlanDetailsWidget1: "Current Phase"
- SucessPlanDetailsWidget2: "Success Plan"
- SucessPlanDetailsWidget3: "Renewal Date"
- SucessPlanDetailsWidget4: "Account Manager"
- SucessPlanDetailsWidget5: "Support Contact"
- CSMAdminCustomFields1: "Success Plan Account Manager Replacement"
- CSMAdminCustomFields2: "Success Plan CSM Manager Replacement"
- CSMAdminCustomFields3: "Success Plan CSM Replacement"
- CSMAdminCustomFields4: "Success Plan Exec Sponsor Replacement"
- CSMAdminCustomFields5: "Success Plan Filter Attribute"
- CSMAdminCustomFields6: "Success Plan Renewal Manager Replacement"
- CSMAdminCustomFields7: "Success Plan Renewal Rep Replacement"
- CSMAdminCustomFields8: "Success Plan Support Contact Replacement"
- DetailsSubTabDefaultLabels1: "Current Phase"
- DetailsSubTabDefaultLabels2: "Account Owner"
- DetailsSubTabDefaultLabels3: "Related Account"
- DetailsSubTabDefaultLabels4: "Phase Start Date"
- DetailsSubTabDefaultLabels5: "Display Name"
- DetailsSubTabDefaultLabels6: "Support Contact"
- DetailsSubTabDefaultLabels7: "Renewal Rep"
- DetailsSubTabDefaultLabels8: "CSM"
- DetailsSubTabDefaultLabels9: "Renewal Manager"
- DetailsSubTabDefaultLabels10: "CSM Manager"
- DetailsSubTabDefaultLabels11: "Exec Sponsor"
- DetailsSubTabDefaultLabels12: "Account Manager"
- DetailsSubTabDefaultLabels13: "Customer Success Manager"
- ActionFilterField: "Related To Account"
- SucessPlanRelatedToField: "Account"
- ActionDefaultFilterField: "Has Play"
- AccountName1: "TestAccount"
- DefinePlayCriteriaSection: "Define Play Criteria"
- DefinePlayTasksSection: "Define Play Tasks"
- DefinePlayCriteriaFieldValue: "Annual Revenue"
- DefinePlayCriteriaOperator: ">"
- DefinePlayCriteriaValue: "500000"
- RecordTypeValue: "Service_Source_Record"
-
-
+  NotStartedStatusfield: Not Started
+  InProgressStatusfield: In Progress
+  CompletedStatusfield: Completed
+  WaitingStatusfield: Waiting on someone else
+  DeferredStatusfield: Deferred
+  SucessPlanDetailsWidget: Success Plan Details
+  SucessPlanDetailsWidget1: Current Phase
+  SucessPlanDetailsWidget2: Success Plan
+  SucessPlanDetailsWidget3: Renewal Date
+  SucessPlanDetailsWidget4: Account Manager
+  SucessPlanDetailsWidget5: Support Contact
+  CSMAdminCustomFields1: Success Plan Account Manager Replacement
+  CSMAdminCustomFields2: Success Plan CSM Manager Replacement
+  CSMAdminCustomFields3: Success Plan CSM Replacement
+  CSMAdminCustomFields4: Success Plan Exec Sponsor Replacement
+  CSMAdminCustomFields5: Success Plan Filter Attribute
+  CSMAdminCustomFields6: Success Plan Renewal Manager Replacement
+  CSMAdminCustomFields7: Success Plan Renewal Rep Replacement
+  CSMAdminCustomFields8: Success Plan Support Contact Replacement
+  DetailsSubTabDefaultLabels1: Current Phase
+  DetailsSubTabDefaultLabels2: Account Owner
+  DetailsSubTabDefaultLabels3: Related Account
+  DetailsSubTabDefaultLabels4: Phase Start Date
+  DetailsSubTabDefaultLabels5: Display Name
+  DetailsSubTabDefaultLabels6: Support Contact
+  DetailsSubTabDefaultLabels7: Renewal Rep
+  DetailsSubTabDefaultLabels8: CSM
+  DetailsSubTabDefaultLabels9: Renewal Manager
+  DetailsSubTabDefaultLabels10: CSM Manager
+  DetailsSubTabDefaultLabels11: Exec Sponsor
+  DetailsSubTabDefaultLabels12: Account Manager
+  DetailsSubTabDefaultLabels13: Customer Success Manager
+  ActionFilterField: Related To Account
+  SucessPlanRelatedToField: Account
+  ActionDefaultFilterField: Has Play
+  AccountName1: TestAccount
+  DefinePlayCriteriaSection: Define Play Criteria
+  DefinePlayTasksSection: Define Play Tasks
+  DefinePlayCriteriaFieldValue: Annual Revenue
+  DefinePlayCriteriaOperator: ">"
+  DefinePlayCriteriaValue: '500000'
+  RecordTypeValue: Service_Source_Record
 SuccessPlanTemplates:
- AlertMessage: "You are attempting to delete a Success Plan Template that belongs to one or more Success Plans, summarized below. Please assign a new Success Plan Template to the Success Plan(s) or delete these Success Plan(s) before deleting this template."
- SaveMessage1: "Template has been saved"
- SaveMessage2: "Phase updates have been saved"
- DeletePhaseMessage: "The Phase Onboarding has been deleted"
- PhaseRecord: "No data available in table"
- AlertMsage: "This playbook is already present on the Success Plan Template. Please choose another playbook to add."
- SaveMessage3: "Success Plan Template Indicators have been saved"
-
-
+  AlertMessage: You are attempting to delete a Success Plan Template that belongs
+    to one or more Success Plans, summarized below. Please assign a new Success Plan
+    Template to the Success Plan(s) or delete these Success Plan(s) before deleting
+    this template.
+  SaveMessage1: Template has been saved
+  SaveMessage2: Phase updates have been saved
+  DeletePhaseMessage: The Phase Onboarding has been deleted
+  PhaseRecord: No data available in table
+  AlertMsage: This playbook is already present on the Success Plan Template. Please
+    choose another playbook to add.
+  SaveMessage3: Success Plan Template Indicators have been saved
 PlayRecordTask:
- SaveMsg1: "Play Criteria have been saved"
- SaveMsg2: "Play has been saved"
- SaveMsg3: "Play Tasks have been saved"
-
+  SaveMsg1: Play Criteria have been saved
+  SaveMsg2: Play has been saved
+  SaveMsg3: Play Tasks have been saved
 Overview:
- Filter_value1: "Assigned To"
- Filter_value2: "Created By"
- Filter_value3: "Last Modified By"
- Search_value: "QA CSMNetOps"
- Display_Msg1: "Displaying data for: Assigned To"
- Display_Msg2: "Displaying data for: Created By"
- Display_msg3: "Displaying data for: Last Modified By"
-
+  Filter_value1: Assigned To
+  Filter_value2: Created By
+  Filter_value3: Last Modified By
+  Search_value: QA CSMNetOps
+  Display_Msg1: 'Displaying data for: Assigned To'
+  Display_Msg2: 'Displaying data for: Created By'
+  Display_msg3: 'Displaying data for: Last Modified By'
 SPPBSPPL:
- AccountName: "AAcc"
- SP: "ASP" 
- ASPT1: "ASPT1"
- ASPT2: "ASPT2"
- APB1ASPT1: "APB1-ASPT1"
- APB2ASPT2: "APB2-ASPT2"
- APB1: "SPPB1"
- APB2: "SPPB2"
- APL1APB1: "APL1-APB1"
- APL2APB2: "APL2-APB2"
- APL3APB3: "APL3-APB3"
- APL4APB4: "APL4-APB4"
- AT1APL1: "AT1-APL1"
- AT2APL2: "AT2-APL2"
- AT3APL3: "AT3-APL3"
- AT4APL4: "AT4-APL4"
- SPT1: "AutoSPT1"
-
+  AccountName: AAcc
+  SP: ASP
+  ASPT1: ASPT1
+  ASPT2: ASPT2
+  APB1ASPT1: APB1-ASPT1
+  APB2ASPT2: APB2-ASPT2
+  APB1: SPPB1
+  APB2: SPPB2
+  APL1APB1: APL1-APB1
+  APL2APB2: APL2-APB2
+  APL3APB3: APL3-APB3
+  APL4APB4: APL4-APB4
+  AT1APL1: AT1-APL1
+  AT2APL2: AT2-APL2
+  AT3APL3: AT3-APL3
+  AT4APL4: AT4-APL4
+  SPT1: AutoSPT1
