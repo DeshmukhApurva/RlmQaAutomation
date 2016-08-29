@@ -3,7 +3,7 @@ And (/^I select the QA Test SP$/) do
     if page.has_xpath?('//input[@name="go"]')
       first(:button, "Go").click
     end
-    first(:link,'SP-000045').click
+    first(:link,'SP-001829').click
     puts "Opened QA Test Success Plan"
   end
 end
@@ -24,6 +24,8 @@ And (/^I check Record Type checkbox is checked or not$/) do
     end
   end
 end
+
+
 
 And (/^I check the Action tab Record Type checkbox if not checked$/) do
   begin
@@ -586,12 +588,12 @@ And(/^I verify Playbook values Present in filter as "(.*?)" and "(.*?)"$/) do |p
   end   
    And(/^I verify that Detail Has Picklist$/) do
      begin
-       if page.has_xpath?("//*[@id='actionSpGrid']/thead/tr/th[11]/div[text()='Detail']") 
+       if page.has_xpath?("//*[@id='actionSpGrid']/thead/tr/th[12]/div[text()='Detail']") 
       puts "Detail has not its Picklist Value"
       else
         "Detail have Picklist"
       end
-      xpathvalue = find(:xpath,"//*[@id='actionSpGrid']/thead/tr/th[11]/div[text()='Detail']/following-sibling::div/div").text
+      xpathvalue = find(:xpath,"//*[@id='actionSpGrid']/thead/tr/th[12]/div[text()='Detail']/following-sibling::div/div").text
       puts "Xpath Value= " + xpathvalue
       if xpathvalue == ""
         puts "Detail has No Picklist" 
@@ -656,27 +658,72 @@ And(/^I verify all filters Present on Activity Stream tab page$/) do
     sleep 10
     find(:xpath,"//*[contains(@class,'dropdown-toggle')]").click
     puts "I successfully Clicked on Column Picker"
-      sleep 10
       within('.dropdown-menu') do
-      sleep 6
-      find(:xpath,"//li[4]/label[contains(text(),'Play')]/input").set(true)
-      puts "Play Filter Is on Activity Stream tab Page"
-      sleep 6
-      find(:xpath,"//li[5]/label[contains(text(),'Playbook')]/input").set(true)
-      puts "Playbook Filter Is on Activity Stream tab Page"
-      sleep 6
-      find(:xpath,"//li[6]/label[contains(text(),'Assigned To')]/input").set(true)
-      puts "Assigned To Filter Is on Activity Stream tab Page"
-      sleep 16
-      find(:xpath,"//li[9]/label[contains(text(),'Task State')]/input").set(true)
-      puts "Related To Filter Is on Activity Stream tab Page"
-      sleep 6
-      find(:xpath,"//li[7]/label[contains(text(),'Task Type')]/input").set(true)
-      puts "Task Type Filter Is on Activity Stream tab Page"
-      sleep 6
-      find(:xpath,"//li[10]/label[contains(text(),'Has Play')]/input").set(true)
-      puts "Has Play Filter Is on Activity Stream tab Page"
-      end  
+        if all("li")[4].first("input").checked?
+          puts "Play Filter is checked no need to check it"
+        else
+          all("li")[4].first("input").click
+          puts "Play Filter is not checked so checking it"
+          sleep 7
+        end
+        if all("li")[5].first("input").checked?
+          puts "Playbook Filter is checked no need to check it"
+        else
+          all("li")[5].first("input").click
+          puts "Playbook Filter is not checked so checking it"
+          sleep 7
+        end
+        if all("li")[6].first("input").checked?
+          puts "Assigned To is checked no need to check it"
+        else
+          all("li")[6].first("input").click
+          puts "Assigned To is not checked so checking it"
+          sleep 7
+        end
+        if all("li")[9].first("input").checked?
+          puts "Related To Filter is checked no need to check it"
+        else
+          all("li")[9].first("input").click
+          puts "Related To Filter is not checked so checking it"
+          sleep 7
+        end
+        if all("li")[7].first("input").checked?
+          puts "Task Type Filter is checked no need to check it"
+        else
+          all("li")[7].first("input").click
+          puts "Task Type Filter is not checked so checking it"
+          sleep 7
+        end
+        if all("li")[10].first("input").checked?
+          puts "Has Play Filter is checked no need to check it"
+        else
+          all("li")[10].first("input").click
+          puts "Has Play Filter is not checked so checking it"
+          sleep 7
+        end
+      end
+      
+      # sleep 10
+      # within('.dropdown-menu') do
+      # sleep 6
+      # find(:xpath,"//li[4]/label[contains(text(),'Play')]/input").set(true)
+      # puts "Play Filter Is on Activity Stream tab Page"
+      # sleep 6
+      # find(:xpath,"//li[5]/label[contains(text(),'Playbook')]/input").set(true)
+      # puts "Playbook Filter Is on Activity Stream tab Page"
+      # sleep 6
+      # find(:xpath,"//li[6]/label[contains(text(),'Assigned To')]/input").set(true)
+      # puts "Assigned To Filter Is on Activity Stream tab Page"
+      # sleep 16
+      # find(:xpath,"//li[9]/label[contains(text(),'Task State')]/input").set(true)
+      # puts "Related To Filter Is on Activity Stream tab Page"
+      # sleep 6
+      # find(:xpath,"//li[7]/label[contains(text(),'Task Type')]/input").set(true)
+      # puts "Task Type Filter Is on Activity Stream tab Page"
+      # sleep 6
+      # find(:xpath,"//li[10]/label[contains(text(),'Has Play')]/input").set(true)
+      # puts "Has Play Filter Is on Activity Stream tab Page"
+      # end  
       sleep 8
       find(:xpath,"//*[contains(@class,'dropdown-toggle')]").click
   sleep 10

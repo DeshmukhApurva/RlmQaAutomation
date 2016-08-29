@@ -4,7 +4,7 @@
 Then(/^I create a new Success Plan Template with Template Name "(.*?)" PhaseName "(.*?)" Days "(.*?)" Indicator "(.*?)" with PlayBook "(.*?)" Criteria1 Type: "(.*?)" Criteria2 Type: "(.*?)" Criteria3 Type: "(.*?)" Criteria1: "(.*?)" Criteria2: "(.*?)" Criteria3: "(.*?)"$/) do |arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11|
   begin
     arg=getDetails "SPT"
-    click_link('ServiceSource Setup')
+    # click_link('ServiceSource Setup')
     sleep 5
     click_link('Success Plan Templates')
     puts "clicked successfully"
@@ -297,16 +297,16 @@ Then(/^I create new Account with value "(.*?)"$/) do |arg|
   end
 end
 
-And(/^create a new FC with value "(.*?)"$/) do |arg|
+And(/^create a new FC with value "(.*?)" with "(.*?)"$/) do |arg1,arg2|
   begin
 
     click_link('Focus Categories')
     puts "Clicked Focus Categories link successfully"
     sleep 2
-    select "Account", :from => "thePage:theForm:pbFocusCategoryList:selList1"
+    select arg2, :from => "thePage:theForm:pbFocusCategoryList:selList1"
     click_on "Create New"
     sleep 2
-    fill_in "Display Name",:with => arg
+    fill_in "Display Name",:with => arg1
     click_on "Create"
     sleep 5
     click_on "Save"
@@ -756,11 +756,11 @@ end
 And(/^I fill the Details in the FC$/)do 
   begin
   
-  arg = getReference "Reference" 
+  arg = getDetails "FCTask" 
  
   find(:xpath,"//*[contains(@id,'categoryGroupNameSectionItem')]/ancestor::th/following-sibling::td/input").set(arg["FCCategory"])
   sleep 5
-  find(:xpath,"//*[contains(@id,'focusCategoryColumnNameIT')]").set(arg["FCTask"])
+  find(:xpath,"//*[contains(@id,'focusCategoryColumnNameIT')]").set(arg["Task"])
   sleep 5
   click_link('Create New')
   sleep 2
@@ -774,17 +774,305 @@ end
 
 And(/^I Select FC Task$/)do 
   begin
-  arg = getReference "Reference" 
-  first(:xpath,"//*[contains(@id,'selectObjectType')]").select(arg["FCTask"]) 
+  arg = getDetails "FCTask" 
+  first(:xpath,"//*[contains(@id,'selectObjectType')]").select(arg["Task"]) 
   sleep 2
-  first(:xpath,"//*[contains(@id, 'selectfocusCategoryView')]").select(arg["FCView4Overview"])  
+  first(:xpath,"//*[contains(@id,'selectfocusCategoryView')]").select(arg["FCView4Overview"])  
   sleep 1
   click_link('Add Category')
   sleep 3
   puts "Successfully Selected the FC Task"
+  sleep 10
+  first(:button,'Save').click
+  sleep 8
   rescue Exception =>ex
     putstr "Error while clicking on Edit Button"
     putstr_withScreen ex.message
   end
 end
 
+And(/^create a new Play with value "(.*?)" and "(.*?)" and "(.*?)" and its first TaskName "(.*?)" and its task type "(.*?)" and AssignTo "(.*?)" and Description "(.*?)" and days "(.*?)" its second TaskName "(.*?)" and its task type "(.*?)" and AssignTo "(.*?)" and Description "(.*?)" and days "(.*?)" its third TaskName "(.*?)" and its task type "(.*?)" and AssignTo "(.*?)" and Description "(.*?)" and days "(.*?)" its fourth TaskName "(.*?)" and its task type "(.*?)" and AssignTo "(.*?)" and Description "(.*?)" and days "(.*?)"$/) do |arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,arg14,arg15,arg16,arg17,arg18,arg19,arg20,arg21,arg22,arg23| 
+ begin
+        click_link('Plays')
+    puts "Opened Plays Page successfully"
+    sleep 2
+    click_on "Create Play"
+    sleep 2
+    fill_in "Display Name",:with => arg1
+    fill_in "Short Description",:with => arg3
+    find(:xpath, "//*[contains(@id, 'slObjectId')]").select(arg2)
+    all('.btn')[0].click
+    sleep 5
+    puts "Successfully created Play"
+    if page.has_content?('Define Play Criteria')
+      puts "Define Play Criteria section displayed"
+      sleep 3
+    else
+      raise "Define Play Criteria section not displayed"
+    end
+    if page.has_content?('Define Play Tasks')
+      puts "Define Play Tasks section displayed"
+      sleep 3
+    else
+      raise "Define Play Tasks section not displayed"
+    end
+    # sleep 10
+     amt = 50
+    # if all(".dataRow").count > 0
+      # all(".dataRow").each do |row|
+        # if row.all("td")[1].text == "Annual Revenue"
+          # row.first(:link,"Delete").click
+        # break
+        # end
+      # end
+    # end
+    sleep 10
+    click_on "Add Criteria"
+    sleep 10
+    first(:xpath, "//*[contains(@id, 'slFieldId')]").select("Amount")
+    sleep 8
+    first(:xpath, "//*[contains(@id, 'outOperator')]").select(">")
+    sleep 8
+    first(:xpath, "//*[contains(@id, 'outValue')]").set(amt)
+    sleep 8
+    first(:xpath, "//*[contains(@id, 'outValue')]").set(amt)
+     all('.btn')[0].click
+    sleep 10
+    if page.has_content?('Play Criteria have been saved')
+      puts "Play Criteria have been saved"
+      sleep 3
+    else
+      raise "Play Criteria have been saved message not displayed"
+    end
+    click_on "Add Task"
+    sleep 10
+
+    all(:xpath, "//*[contains(@id, 'inputName')]").last.set(arg4)
+    all(:xpath, "//*[contains(@id, 'playTaskComp:playTaskComp:pb1:taskList:0:coltype')]").last.select(arg5)
+    all(:xpath, "//*[contains(@id, 'playTaskComp:pb1:taskList:0:inputDesc')]").last.set(arg7)
+    all(".dataRow").last.all("td")[5].first("select").select(arg6)
+    all(:xpath, "//*[contains(@id, 'playTaskComp:pb1:taskList:0:inputDays')]").last.set(arg8)
+     all('.btn')[0].click
+    # within('.dataRow even')
+    sleep 10
+    click_on "Add Task"
+    sleep 10
+     all(:xpath, "//*[contains(@id, 'inputName')]").last.set(arg9)
+     sleep 8
+     all(:xpath, "//*[contains(@id, 'playTaskComp:playTaskComp:pb1:taskList:1:coltype')]").last.select(arg10)
+      sleep 8
+     all(:xpath, "//*[contains(@id, 'playTaskComp:pb1:taskList:1:inputDesc')]").last.set(arg12)
+      sleep 8
+     all(".dataRow").last.all("td")[5].first("select").select(arg11)
+      sleep 8
+     all(:xpath, "//*[contains(@id, 'playTaskComp:pb1:taskList:1:inputDays')]").last.set(arg13)
+    
+    sleep 10
+    click_on "Add Task"
+    sleep 10
+     all(:xpath, "//*[contains(@id, 'inputName')]").last.set(arg14)
+     sleep 8
+     all(:xpath, "//*[contains(@id, 'playTaskComp:playTaskCp:pb1:taskList:2:coltype')]").last.select(arg15)
+      sleep 8
+     all(:xpath, "//*[contains(@id, 'playTaskComp:pb1:taskList:2:inputDesc')]").last.set(arg17)
+      sleep 8
+     all(".dataRow").last.all("td")[5].first("select").select(arg16)
+      sleep 8
+     all(:xpath, "//*[contains(@id, 'playTaskComp:pb1:taskList:2:inputDays')]").last.set(arg18)
+     all('.btn')[0].click
+     sleep 10
+    click_on "Add Task"
+    sleep 10
+     all(:xpath, "//*[contains(@id, 'inputName')]").last.set(arg19)
+     sleep 8
+     all(:xpath, "//*[contains(@id, 'playTaskComp:playTaskComp:pb1:taskList:3:coltype')]").last.select(arg20)
+      sleep 8
+     all(:xpath, "//*[contains(@id, 'playTaskComp:pb1:taskList:3:inputDesc')]").last.set(arg22)
+      sleep 8
+     all(".dataRow").last.all("td")[5].first("select").select(arg21)
+      sleep 8
+     all(:xpath, "//*[contains(@id, 'playTaskComp:pb1:taskList:3:inputDays')]").last.set(arg23)
+    sleep 10
+    all('.btn')[0].click
+    sleep 10
+    if page.has_content?('Play Tasks have been saved')
+      puts "Play Tasks have been saved message displayed"
+      sleep 3
+    else
+      raise "Play Tasks have been saved message not displayed"
+    end
+  rescue Exception => ex
+    putstr "Error occurred while creating a Play"
+    putstr_withScreen ex.message
+  end
+end 
+
+Then(/^I create a new Success Plan Template with Template Name "Dynamic_Filters_SPT" PhaseName "Phase1" Days "20" Indicator "Health Status" with PlayBook "Test_Playbook 2" and "Dynamic_Filters_Play" Criteria1 Type: "Success" Criteria2 Type: "Meet" Criteria3 Type: "Fail" Criteria1: "Healthy" Criteria2: "Low Adoption" Criteria3: "Pending Churn"$/) do |arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12|
+  begin
+    arg=getDetails "SPT"
+    click_link('ServiceSource Setup')
+    sleep 5
+    click_link('Success Plan Templates')
+    puts "clicked successfully"
+    sleep 2
+    click_on "Create New"
+    puts "Creating a new SPT"
+    sleep 2
+    fill_in "Template Name",:with => arg1
+    sleep 2
+    within(".pbBottomButtons") do
+     click_on "Create"
+    end
+    puts "Successfully created SPT" 
+    sleep 10
+    if page.has_content?('Define Success Plan Phases')
+      puts "Define Success Plan Phases section displayed"
+      sleep 3
+    else
+      raise "Define Success Plan Phases section not displayed"
+    end
+    #first(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]").select(arg["OppStage"])
+    first(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]").find(:xpath, 'option[1]').select_option
+    # if first(:xpath, "//*[contains(@id, 'pbIndicatorListId:slObjectId')]").should have_content(arg["OppStage"])
+      # puts arg["OppStage"]
+    # end
+    #puts "Opportunity Location set to "+arg["OppStage"]
+    click_on "Add Phase"
+    sleep 5
+    first(:xpath, "//*[contains(@id, 'csmName')]").set(arg2)
+    first(:xpath, "//*[contains(@id, 'csmLength')]").set(arg3)
+    sleep 5
+    within all(".pbButton")[0] do
+          click_on "Save"
+        end
+    puts "Saved Success Plan Template"
+    sleep 5
+    if page.has_content?('Template has been saved')
+        puts "Template has been saved message displayed after saving"
+        sleep 3
+    else
+      raise "Template has been saved message not displayed"
+    end
+    if page.has_content?('Phase updates have been saved')
+        puts "Phase updates have been saved message displayed after saving"
+        sleep 3
+    else
+      raise "Phase updates have been saved message not displayed"
+    end
+    if page.has_content?('Define Opportunity Location on Success Plan Timeline')
+      puts "Define Opportunity Location on Success Plan Timeline section displayed"
+      sleep 3
+    else
+      raise "Define Opportunity Location on Success Plan Timeline section not displayed"
+    end
+    if page.has_content?('Define Success Plan Playbooks')
+      puts "Define Success Plan Playbooks section displayed"
+      sleep 3
+    else
+      raise "Define Success Plan Playbooks section not displayed"
+    end
+    click_on "Add Playbook"
+    sleep 5
+   
+    within('.list') do
+      tr = first("tbody").all("tr")
+      tr.each do |row|
+        if row.all("td")[1].text == arg5
+          row.all("td")[0].all('a')[0].click
+          break
+        end                        
+      end
+    end
+    puts "Added Playbook Sucessfully"
+    sleep 10
+    
+    click_on "Add Playbook"
+    sleep 5
+   
+    within('.list') do
+      tr = first("tbody").all("tr")
+      tr.each do |row|
+        if row.all("td")[1].text == arg6
+          row.all("td")[0].all('a')[0].click
+          break
+        end                        
+      end
+    end
+    puts "Added Playbook Sucessfully"
+    sleep 10
+    within all(".pbButton")[0] do
+          click_on "Save"
+        end
+    puts "Saved Success Plan Template"
+
+    if page.has_content?('Template has been saved')
+        puts "Template has been saved message displayed after saving"
+        sleep 3
+    else
+      raise "Template has been saved message not displayed"
+    end
+    if page.has_content?('Define Success Plan Indicators')
+      puts "Define Success Plan Indicators section displayed"
+      sleep 3
+    else
+      raise "Define Success Plan Indicators section not displayed"
+    end
+    click_on "Add Indicator"
+    puts "Clicked on Add Indicator"
+    sleep 10
+    within all(".dataRow").last do
+      all(".dataCell")[5].first(:xpath, ".//*[contains(@id, 'indicatorTemp:acctplanIndComp:pb1:accountPlanIndicatorsTable:0')]").select(arg9)
+    end
+    within all(".dataRow").last do
+      all(".dataCell")[7].first(:xpath, ".//*[contains(@id, 'indicatorTemp:acctplanIndComp:pb1:accountPlanIndicatorsTable:0')]").select(arg8)
+    end
+    first(:xpath, "//*[contains(@id, 'indicatorTemp:acctplanIndComp:pb1:accountPlanIndicatorsTable:0:indicator')]").select(arg7)  
+    all(:xpath, "//*[contains(@id, 'cr1fv')]").last.set(arg10)
+    all(:xpath, "//*[contains(@id, 'cr1tv')]").last.set(arg11)
+    sleep 5
+    all(:xpath, "//*[contains(@id, 'cr2fv')]").last.set(arg11)
+    all(:xpath, "//*[contains(@id, 'cr2tv')]").last.set(arg12)
+    sleep 5
+    all(:xpath, "//*[contains(@id, 'cr3fv')]").last.set(arg12)
+    all(:xpath, "//*[contains(@id, 'cr3tv')]").last.set(arg10)
+    sleep 5
+    main = page.driver.browser.window_handles.first
+    find("img[alt='Indicator Lookup (New Window)']").click
+    sleep 5
+    page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+    sleep 10
+    page.driver.browser.switch_to.frame("resultsFrame")
+    within('.list') do
+      tr = first("tbody").all("tr")
+      tr.each do |row|
+        if row.all("th")[0].text == arg4
+            row.all("th")[0].all('a')[0].click
+            break
+        end                        
+      end
+    end
+    sleep 3
+    page.driver.browser.switch_to.window(page.driver.browser.window_handles.first)
+        sleep 5
+   within all(".pbButton")[0] do
+          click_on "Save"
+        end
+    puts "Saved Success Plan Templates"
+    sleep 5
+    if page.has_content?('Template has been saved')
+        puts "Template has been saved message displayed after saving"
+        sleep 3
+    else
+      puts "Template has been saved message not displayed"
+    end
+    if page.has_content?('Success Plan Template Indicators have been saved')
+        puts "Success Plan Template Indicators have been saved message displayed after saving"
+        sleep 3
+    else
+      puts "Success Plan Template Indicators have been saved message not displayed"
+    end
+    rescue Exception => ex
+    putstr "Error occurred while creating SPT"
+    putstr_withScreen ex.message
+  end
+end

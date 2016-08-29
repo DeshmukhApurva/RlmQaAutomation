@@ -47,6 +47,10 @@ begin
    sleep 5
    find(:xpath, "//*[contains(@title, 'List Price 1')]").send_keys "3500"
    sleep 5
+   find(:xpath, "//*[contains(@title, 'List Price 2')]").send_keys "3500"
+   sleep 5
+   find(:xpath, "//*[contains(@title, 'List Price 3')]").send_keys "3500"
+   sleep 5
    click_on "Save"
    puts "Successfully Save"
  end
@@ -1142,6 +1146,25 @@ And(/^I Fill All data for View "(.*?)" with "(.*?)" and "(.*?)" with "(.*?)" wit
  end
 end
 
+And(/^I Fill for AccountView "(.*?)" with "(.*?)" with "(.*?)" with "(.*?)"$/) do |arg1,arg2,arg3,arg4|
+  begin
+   sleep 8
+   fill_in "View Name",:with => arg1 
+   sleep 8
+   find(:xpath, "//*[contains(@id, 'fcol1')]").select(arg2)
+   sleep 8
+   find(:xpath, "//*[contains(@id, 'fop1')]").select(arg3)
+   sleep 8
+   find(:xpath, "//*[contains(@id, 'fval1')]").set arg4
+   sleep 8
+    first(".pbButtonb").first(".btn").click
+    puts "I Successfully Create View"
+    sleep 3
+  rescue Exception => ex
+    putstr "Already exist"
+ end
+end
+
 And(/^I Go to next Maping with Value "(.*?)"$/) do |arg|
   begin
     sleep 10
@@ -1340,11 +1363,14 @@ end
 
 And(/^I delete Product Criteria$/) do
   begin
-    sleep 8
+    sleep 4
    within all('.pbSubsection')[1] do
-     first(:link).click
+     first(:link,'Delete').click
+     sleep 10
      puts "Successfully Delete Product criteria"
    end
+    first(:button,'Save').click
+   sleep 10
   end
 end
 

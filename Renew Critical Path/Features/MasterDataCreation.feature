@@ -12,6 +12,9 @@ Background: Login to the Application
 	#	When I click on "Account" tab 
 	#	Then I create new Renew Account with value "QA Test" 
 	
+
+	
+
 #@PlayCreation 
 #Scenario: Rally Test Case ID : : Creation of Play 
 #	When I click on "ServiceSource Setup" link 
@@ -38,27 +41,33 @@ Background: Login to the Application
 #	When I click on "Success Plans" tab 
 #	Then I create a SuccessPlan with template "APT-000716" with Account "QA Test" 
 
-@renewManagement	
+@renewManagement_OppGen	
 Scenario: Rally Test Case ID:  : Renew: Setup 
     When I click on "All Tabs" tab 
     When I Navigate to "ServiceSource Setup" tab 
 	And I click on "Opportunity Generation" link 
-	And I select the "Enable Generation of Opportunities" checkbox on opp generation 
-	And I add criteria for Sale Stage
     And I delete Product Criteria
-    When I click on "All Tabs" tab
-    When I Navigate to "ServiceSource Setup" tab 
-    And I click on "Install Base Data Rules" link
-    And I enable "Enable Generation of Assets" checkbox
-    And I enable "Enable Generation of Service Contract" checkbox 
-    And I add criteria for Sale Stage
-    And I delete Product Criteria
+ 
+@renewManagement_IBDR	
+  Scenario: Rally Test Case ID:  : Renew: Setup 
     When I click on "All Tabs" tab 
     When I Navigate to "ServiceSource Setup" tab 
-	And I click on "Opportunity Updates" link 
-    And I unselect the "Update opportunities when the following service contract line item fields change" 
-    And I unselect the "Update opportunities when the following assets fields change"
-    And I unselect the "Update opportunities when new service contract line items are created"
+	And I click on "Install Base Data Rules" link 
+    And I delete Product Criteria  
+    
+#    When I click on "All Tabs" tab
+#    When I Navigate to "ServiceSource Setup" tab 
+#    And I click on "Install Base Data Rules" link
+#    And I enable "Enable Generation of Assets" checkbox
+#    And I enable "Enable Generation of Service Contract" checkbox 
+#    And I add criteria for Sale Stage
+#    And I delete Product Criteria
+#    When I click on "All Tabs" tab 
+#    When I Navigate to "ServiceSource Setup" tab 
+#	And I click on "Opportunity Updates" link 
+#    And I unselect the "Update opportunities when the following service contract line item fields change" 
+#    And I unselect the "Update opportunities when the following assets fields change"
+#    And I unselect the "Update opportunities when new service contract line items are created"
 
 @renewManagementMApping
 Scenario: Rally Test Case ID:  : Renew: Setup 
@@ -96,12 +105,17 @@ Scenario: Rally Test Case ID:  : Renew: Setup
 
 @createView
 Scenario: Renew: View creation
-    When I click on "Opportunities" tab
+    When I click on "Accounts" tab
     And I click "Create New View" link
-    And I Fill All data for View "OppToOpp" with "Opportunity Name" and "Owner Last Name" with "equals" with "CreateOppfromOpp" and "RenewNetOps"
-    And I Fill All data for View "ScOpp" with "Opportunity Name" and "Owner Last Name" with "equals" with "Service_Contract_Opp" and "RenewNetOps"
-    And I Fill All data for View "Renew View" with "Opportunity Name" and "Owner Last Name" with "equals" with "RenewNetOpsTesting" and "RenewNetOps"
-    And I Fill All data for View "RenewNetOpsSCTest" with "Opportunity Name" and "Owner Last Name" with "equals" with "CreateOppfromOpp" and "RenewNetOps"
+    And I Fill for AccountView "QA Test" with "Account Name" with "equals" with "QA Test"
+    
+#    When I click on "Opportunities" tab
+#    And I click "Create New View" link
+#    And I Fill All data for View "OppToOpp" with "Opportunity Name" and "Owner Last Name" with "equals" with "CreateOppfromOpp" and "RenewNetOps"
+#    And I Fill All data for View "ScOpp" with "Opportunity Name" and "Owner Last Name" with "equals" with "Service_Contract_Opp" and "RenewNetOps"
+#    And I Fill All data for View "Renew View" with "Opportunity Name" and "Owner Last Name" with "equals" with "RenewNetOpsTesting" and "RenewNetOps"
+#    And I Fill All data for View "RenewNetOpsSCTest" with "Opportunity Name" and "Owner Last Name" with "equals" with "CreateOppfromOpp" and "RenewNetOps"
+   
     
 #@CreateAsset 
 #Scenario: Rally Test Case ID:  : Renew: Asset creation 
