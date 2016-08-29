@@ -8,14 +8,14 @@ Feature: All features related to Opportunity Management - Manage Renewals
 		
   @CreatePL_PLC_SPT
   Scenario: Rally Test Case ID: TC6462 - Split Opportunity RR - New Cloned Opportunity Details editable
-    When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
+    When I connect to SalesforceAPI using "SYSTEMADMIN_EE4" user role
     And I create PLAY with TASK using map data "SPPBSPPL"
     And I create PLAYBOOK with PLAY using map data "SPPBSPPL"
     And I create SPT with PLAYBOOK using map data "SPPBSPPL"
 
   @US1276 @SPPBEditSPT
   Scenario: US1276, Rally TC ID: TC5949 - user edit the SPT for the SP then entries should get update in SP-PB subtab.
-    When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
+    When I connect to SalesforceAPI using "SYSTEMADMIN_EE4" user role
     And I create Account using map data "SPPBSPPL"
     When I click on the "Success Plans" grid tab
     Then I create SuccessPlan using map "SPPBSPPL" and key "ASPT1"
@@ -32,7 +32,7 @@ Feature: All features related to Opportunity Management - Manage Renewals
 
   @US1276 @DeletePlayFromSPT
   Scenario: US1276, Rally TC ID:TC5953: Success Plan - Playbook: Delete play from playbook from SPT (Success Plan is associated)
-    When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
+    When I connect to SalesforceAPI using "SYSTEMADMIN_EE4" user role
     And I create Account using map data "SPPBSPPL"
     When I click on the "Success Plans" grid tab
     Then I create SuccessPlan using map "SPPBSPPL" and key "ASPT2"
@@ -53,7 +53,7 @@ Feature: All features related to Opportunity Management - Manage Renewals
   
   @US1276 @AddPlayToSPTForSP
   Scenario: US1276, Rally TC ID: TC5951: Success Plan - Playbook: Add play to playbook on SPT (Success Plan is associated)
-    When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
+    When I connect to SalesforceAPI using "SYSTEMADMIN_EE4" user role
     And I create Account using map data "SPPBSPPL"
     When I click on the "Success Plans" grid tab
     Then I create SuccessPlan using map "SPPBSPPL" and key "ASPT1"
@@ -74,7 +74,7 @@ Feature: All features related to Opportunity Management - Manage Renewals
   #@US1200
   @US1200 @NewPlaybookSPT
   Scenario: US1200 Rally Test Case ID : TC5911 : Success Plan - Playbook: Create new SPT , associate it with success plan and add playbook
-    When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
+    When I connect to SalesforceAPI using "SYSTEMADMIN_EE4" user role
     And I create Account using map data "SPPBSPPL"
     When I click on "ServiceSource Setup" link
     Then I click on "Success Plan Templates" link
@@ -161,6 +161,6 @@ Feature: All features related to Opportunity Management - Manage Renewals
     
   @Yml_Test
   Scenario: Rally Test Case ID: TC6462 - Split Opportunity RR - New Cloned Opportunity Details editable
-    When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
+    When I connect to SalesforceAPI using "SYSTEMADMIN_EE4" user role
     And I create Account using map data "SPPBSPPL"
     
