@@ -464,17 +464,17 @@ Scenario: Rally Test Case ID: TC5197,TC6001: Playbook column should be hidden in
   And I click on "Columns" picker
   Then I verify "Playbook" is default unchecked in the column picker
   
-@PlayBookColumnOrder
+@PlayBookColumnUserPreference
 Scenario: Rally Test Case ID: TC5198,TC6002 Users should be allowed to see Playbook after play and before Assigned To columns
   When I click on "Success Plans" tab
   And I click on "Go!" button from "Success Plans" page
   And I select the existing success plan
   And I click on "Actions" tab 
   And I select Playbook from Column picker for Actions
-  And I verify for Playbook column order 
+  And I verify Playbook for Action Tab 
   And I click on "Activity Stream" tab
   And I select Playbook from Column picker for Activity Stream 
-  And I verify for Playbook column order for Activity Stream
+  And I verify Playbook for Activity Stream Tab
  
  
  @PlaybookcolumnvisibleAction 
@@ -485,7 +485,7 @@ Scenario: Rally Test Case ID: TC5198,TC6002 Users should be allowed to see Playb
    And I select the existing success plan
    And I click on "Actions" tab 
    And I select Playbook from Column picker for Actions
-   And I verify for Playbook column order 
+   And I verify Playbook for Action Tab 
    When I user logout from "CSM" application
    And that I navigate to the CRM application
    Then I should land on CRM home page
@@ -493,8 +493,7 @@ Scenario: Rally Test Case ID: TC5198,TC6002 Users should be allowed to see Playb
    And I click on "Go!" button from "Success Plans" page
    And I select the existing success plan
    And I click on "Actions" tab 
-   And I select Playbook from Column picker for Actions
-   And I verify for Playbook column order 
+   And I verify Playbook for Action Tab 
   
   
   @PlaybookcolumnvisibleActivityStream
@@ -505,7 +504,7 @@ Scenario: Rally Test Case ID: TC5198,TC6002 Users should be allowed to see Playb
    And I select the existing success plan
    And I click on "Activity Stream" tab
    And I select Playbook from Column picker for Activity Stream 
-   And I verify for Playbook column order for Activity Stream
+   And I verify Playbook for Activity Stream Tab
    When I user logout from "CSM" application
    And that I navigate to the CRM application
    Then I should land on CRM home page
@@ -513,8 +512,7 @@ Scenario: Rally Test Case ID: TC5198,TC6002 Users should be allowed to see Playb
    And I click on "Go!" button from "Success Plans" page
    And I select the existing success plan
    And I click on "Activity Stream" tab
-   And I select Playbook from Column picker for Activity Stream 
-   And I verify for Playbook column order for Activity Stream
+   And I verify Playbook for Activity Stream Tab
    
    @PlaybookColumnDisplayedandNavigated
    Scenario: Rally Test Case ID: TC6000,TC6004 Users should be allowed to see Playbook as Hyperlinks which navigate to a playbook detail page on Clicking

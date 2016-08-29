@@ -448,3 +448,105 @@ Scenario:  Rally Test Case ID: TC5214: Verifying Task State for Task from Succes
   And I click on Subject of any task on the Action Tab
   And I check Task detail page to edit status to Completed
   Then I verify Task State
+  
+  
+@CSM_PlayBookColumnHidden
+Scenario: Rally Test Case ID: TC5197,TC6001: Playbook column should be hidden in Action sub tab of Success Plan by default Users should be allowed to see Playbook column if user checkes it from column picker.
+  When I click on "Success Plans" tab
+  And I click on "Go!" button from "Success Plans" page
+  And I select the existing success plan
+  And I click on "Actions" tab 
+  And I click on "Columns" picker
+  Then I verify "Playbook" is default unchecked in the column picker
+  And I click on "Activity Stream" tab
+  And I click on "Columns" picker
+  Then I verify "Playbook" is default unchecked in the column picker
+  
+@CSM_PlayBookColumnOrder
+Scenario: Rally Test Case ID: TC5198,TC6002 Users should be allowed to see Playbook after play and before Assigned To columns
+  When I click on "Success Plans" tab
+  And I click on "Go!" button from "Success Plans" page
+  And I select the existing success plan
+  And I click on "Actions" tab 
+  And I select Playbook from Column picker for Actions
+  And I verify for Playbook column order 
+  And I click on "Activity Stream" tab
+  And I select Playbook from Column picker for Activity Stream 
+  And I verify for Playbook column order for Activity Stream
+ 
+ 
+@CSM_PlaybookcolumnvisibleAction 
+  Scenario: Rally Test Case ID: TC5199 Users should be allowed to see Playbook column visible in Action subtab on navigating from other tab or login/out
+ 
+   When I click on "Success Plans" tab
+   And I click on "Go!" button from "Success Plans" page
+   And I select the existing success plan
+   And I click on "Actions" tab 
+   And I select Playbook from Column picker for Actions
+   And I verify for Playbook column order 
+   When I user logout from "CSM" application
+   And that I navigate to the CRM application
+   Then I should land on CRM home page
+   When I click on "Success Plans" tab
+   And I click on "Go!" button from "Success Plans" page
+   And I select the existing success plan
+   And I click on "Actions" tab 
+   And I select Playbook from Column picker for Actions
+   And I verify for Playbook column order 
+  
+  
+ @CSM_PlaybookcolumnvisibleActivityStream
+   Scenario: Rally Test Case ID: TC6003 Users should be allowed to see Playbook column visible in Activity Stream subtab on navigating from other tab or login/out
+   
+   When I click on "Success Plans" tab
+   And I click on "Go!" button from "Success Plans" page
+   And I select the existing success plan
+   And I click on "Activity Stream" tab
+   And I select Playbook from Column picker for Activity Stream 
+   And I verify for Playbook column order for Activity Stream
+   When I user logout from "CSM" application
+   And that I navigate to the CRM application
+   Then I should land on CRM home page
+   When I click on "Success Plans" tab
+   And I click on "Go!" button from "Success Plans" page
+   And I select the existing success plan
+   And I click on "Activity Stream" tab
+   And I select Playbook from Column picker for Activity Stream 
+   And I verify for Playbook column order for Activity Stream
+   
+  @CSM_PlaybookColumnDisplayedandNavigated
+   Scenario: Rally Test Case ID: TC6000,TC6004 Users should be allowed to see Playbook as Hyperlinks which navigate to a playbook detail page on Clicking
+   When I click on "Success Plans" tab
+   And I click on "Go!" button from "Success Plans" page
+   And I select the existing success plan
+   And I click on "Actions" tab 
+   And I select Playbook from Column picker for Actions
+   And I click on Playbook link and navigate to Playbook Detail page for Action Tab
+   
+   When I click on "Success Plans" tab
+   And I click on "Go!" button from "Success Plans" page
+   And I select the existing success plan
+   And I click on "Activity Stream" tab
+   And I select Playbook from Column picker for Activity Stream 
+   And I click on Playbook link and navigate to Playbook Detail page for Activity Stream
+   
+  @CSM_CreateTaskwithSuccessPlanPlay
+   Scenario: Rally Test Case ID: TC5947 User should be able Create Task with Success Plan Play and Value should be displayed on Task detail page
+   
+   When I click on "Success Plans" tab
+   And I click on "Go!" button from "Success Plans" page
+   And I select the existing success plan
+   And I click on "Create Task" button
+   And I fill the required task details
+   And I click on the Subject for Success Plan
+   And I verify value in Task Detail Page
+   
+   
+   When I click on "Success Tasks" link
+   And I select Task based FC from dropdown
+   And I click on "Create Task" button
+   And I fill the required task details
+   And I save the Task
+   And I click on the Subject for Success Task
+   And I verify value in Task Detail Page
+     

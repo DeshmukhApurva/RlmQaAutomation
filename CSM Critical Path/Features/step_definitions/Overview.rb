@@ -2546,12 +2546,7 @@ end
 
 And(/^I select FCG$/) do
   begin
-    within(".select2-container") do
-      first("a").first("span").click
-    end
-    within(".select2-drop") do
-      first("ul").all("li")[2].click
-    end
+   find(:xpath,"//*[contains(@id,':lblCategoryGroup')]/following-sibling::select").select 'PES FCG Overview'
     sleep 5
   rescue Exception => ex
     putstr "Error occurred while selecting FCG"
