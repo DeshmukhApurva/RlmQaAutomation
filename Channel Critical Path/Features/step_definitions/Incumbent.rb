@@ -116,9 +116,11 @@ Then(/^I open Accounts$/)do
     sleep 6
     find('#fcf').select "All Accounts"
     sleep 5
-    within (".fBody") do
-      if page.has_xpath?('//input[@name="go"]')
-        first(:button, "Go").click
+    if page.has_css?(".fBody")
+      within (".fBody") do
+        if page.has_xpath?('//input[@name="go"]')
+          first(:button, "Go").click
+        end
       end
     end
     if page.has_css?(".listItemPad")
