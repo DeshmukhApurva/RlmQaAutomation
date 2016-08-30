@@ -450,8 +450,7 @@ Scenario: Rally Test Case ID: TC5197: Verifying Task State for Task from Success
   And I check Task detail page to edit status to Completed
   Then I verify Task State
   
-                      ######################################In Development################################### 
-  
+                     
 @PlayBookColumnHidden
 Scenario: Rally Test Case ID: TC5197,TC6001: Playbook column should be hidden in Action sub tab of Success Plan by default Users should be allowed to see Playbook column if user checkes it from column picker.
   When I click on "Success Plans" tab
@@ -531,7 +530,7 @@ Scenario: Rally Test Case ID: TC5198,TC6002 Users should be allowed to see Playb
    And I click on Playbook link and navigate to Playbook Detail page for Activity Stream
    
    @CreateTaskwithSuccessPlanPlay
-   Scenario: Rally Test Case ID: TC5947 User should be able Create Task with Success Plan Play and Value should be displayed on Task detail page
+   Scenario: Rally Test Case ID: TC5947 ,TC5948 8User should be able Create Task with Success Plan Play and Value should be displayed on Task detail page
    
    When I click on "Success Plans" tab
    And I click on "Go!" button from "Success Plans" page

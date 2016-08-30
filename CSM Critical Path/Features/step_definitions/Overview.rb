@@ -2546,7 +2546,7 @@ end
 
 And(/^I select FCG$/) do
   begin
-   find(:xpath,"//*[contains(@id,':lblCategoryGroup')]/following-sibling::select").select 'PES FCG Overview'
+   find(:xpath,"//*[contains(@id,':lblCategoryGroup')]/following-sibling::select").select 'PES FCGroup'
     sleep 5
   rescue Exception => ex
     putstr "Error occurred while selecting FCG"
@@ -2834,30 +2834,31 @@ end
 
 And(/^I select Task FCG$/) do
   begin
-    unless page.has_css? (".ss-check")
-      within(".select2-container") do
-        first("a").first("span").click
-      end
-      within(".select2-drop") do
-        first("ul").all("li").each_with_index do |fc,index|
-          next if index == 0
-          #puts index
-          fc.click
-          puts "clicked on the fcg"
-          sleep 10
-          if page.has_css? (".ss-check")
-            puts "Task FCG selected."
-          else
-            puts "Task FCG not present."
-          #puts index
-          end
-          break
-        end
-        sleep 10
-      end
-    else
-      puts "Page already has Task FCG selected."
-    end
+   find(:xpath,"//*[contains(@id,':lblCategoryGroup')]/following-sibling::select").select 'PES FCG Overview'
+    # unless page.has_css? (".ss-check")
+      # within(".select2-container") do
+        # first("a").first("span").click
+      # end
+      # within(".select2-drop") do
+        # first("ul").all("li").each_with_index do |fc,index|
+          # next if index == 0
+          # #puts index
+          # fc.click
+          # puts "clicked on the fcg"
+          # sleep 10
+          # if page.has_css? (".ss-check")
+            # puts "Task FCG selected."
+          # else
+            # puts "Task FCG not present."
+          # #puts index
+          # end
+          # break
+        # end
+        # sleep 10
+      # end
+    # else
+      # puts "Page already has Task FCG selected."
+    # end
   rescue Exception => ex
     putstr "Error occurred while verifying User Access."
     putstr_withScreen ex.message

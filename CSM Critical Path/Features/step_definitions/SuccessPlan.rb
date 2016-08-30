@@ -2571,6 +2571,11 @@ And(/^I click on Playbook link and navigate to Playbook Detail page for Action T
    find(:xpath,"//*[@id='actionSpGrid']/tbody/tr[1]/td[5]/a").click
    puts "Successfully clicked on Playbook and Navigated to Playbook Detail Page"
    sleep 10
+   
+   if page.has_text? ("Playbook")
+      puts "Navigated to Playbook page."
+    end
+ 
   rescue Exception => ex
     putstr "Error occurred while clicking on Playbook link"
     putstr_withScreen ex.message
@@ -2579,14 +2584,13 @@ end
 
 And(/^I click on Playbook link and navigate to Playbook Detail page for Activity Stream$/) do 
   begin
-   find(:xpath,"//*[@id='ActivityHistory']/tbody/tr/td[5]/a").click
+   first(:xpath,"//*[@id='ActivityHistory']/tbody/tr/td[5]/a").click
    puts "Successfully clicked on Playbook"
    
    if page.has_text? ("Playbook")
       puts "Navigated to Playbook page."
     end
-       puts "Navigated to Playbook page."
-    sleep 8
+     
    rescue Exception => ex
     putstr "Error occurred while clicking on Playbook link"
     putstr_withScreen ex.message
