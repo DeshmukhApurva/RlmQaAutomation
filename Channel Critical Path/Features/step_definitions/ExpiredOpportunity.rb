@@ -224,7 +224,7 @@ And(/^I validate the "(.*?)" section$/) do |arg|
 					recordCount = all(:css, ".ui-grid-row.ng-scope").count
 					puts "No.of Opportunities on Opportunity grid: #{recordCount}"
 					
-					rows = all(:css, ".ui-grid-row.ng-scope")[1]
+					rows = all(:css, ".ui-grid-row.ng-scope")[0]
 					if rows.all(".ng-binding.ng-scope")[1].text != ""
 						Stage = rows.all(".ng-binding.ng-scope")[1].text
 						isStageExists = 1
