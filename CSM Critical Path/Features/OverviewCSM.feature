@@ -295,10 +295,10 @@ Scenario: Rally Test Case ID: TC4764,TC4765,TC4766: Verify Required/Non-Required
 	And I click on "Overview" link
 	#And I select FCG
 	And I select Task FCG
-	And I mark the task as Not Started
-	And I click on "Overview" link
-	#And I select FCG
-	And I select Task FCG
+#	And I mark the task as Not Started
+#	And I click on "Overview" link
+#   And I select FCG
+#	And I select Task FCG
 	And I click on Complete Action
 	Then I verify Additional Fields Section
 	And I provide Required additional details

@@ -2198,13 +2198,14 @@ And(/^I mark the task as Not Started$/) do
     page.execute_script "window.scrollBy(0,10000)" 
     sleep 5
     page.driver.browser.manage.window.maximize
-     sleep 5
-     find(:xpath,"//table[@class='list']/tbody/tr[2]/td[3]").click
-     sleep 8
-     within(".list") do
+     
+    sleep 5
+    find(:xpath,"//table[@class='list']/tbody/tr[2]/td[3]").click
+    sleep 15
+     
       # tr = first("tbody").all("tr")
       # all("td")[2].first("a").click
-      
+      within(".list") do 
       puts "Navigated to Task page"
       sleep 5
       first(:xpath, "//*[contains(@name, 'edit')]").click

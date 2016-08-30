@@ -347,9 +347,9 @@ Scenario: Rally Test Case ID: TC5041,TC5042,TC5043: Verify Required/Non-Required
 	And I click on "Overview" link
 	And I select Task FCG
 	#And I select FCG
-	And I mark the task as Not Started
-	And I click on "Overview" link
-	And I select Task FCG
+#	And I mark the task as Not Started
+#	And I click on "Overview" link
+#	And I select Task FCG
 	#And I select FCG
 	And I click on Complete Action
 	Then I verify Additional Fields Section
@@ -393,7 +393,6 @@ Scenario: Rally Test Case ID: TC5096: Verify the Action links for task created b
  When I click on "Overview" link
  And I Verify hamburger icon
  And I click on Edit View link
- #And I select FCG
  And I select Task object
  And I change the filter attribute for Task
  And I select the Default checkbox and Save
