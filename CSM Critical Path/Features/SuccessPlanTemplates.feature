@@ -20,7 +20,7 @@ Scenario:Rally Test Case ID : TC2855 : Clone a Success Plan Template
 Scenario: Rally Test Case ID : TC2853,TC2863 : Edit success plan template,Delete Indicator from Success Plan Template
 	When I click on "ServiceSource Setup" link
 	And I edit Success Plan Templates
-	Then I delete SuccessPlanIndicator
+   #Then I delete SuccessPlanIndicator
 
 @SPTCloneDelete
 Scenario: Rally Test Case ID : TC2854 : Delete Clone of a Success Plan Template to verify Success Plan Delete
