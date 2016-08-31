@@ -6,7 +6,7 @@ CHANNELNETOPS_DEV19:
  url: "https://login.salesforce.com/"
  admin_url: "https://login.salesforce.com"
  admin_userName: "devuser-ee4@comitydesigns.com"
- admin_pwd: "passw0rd"
+ 
 
 CHANNELMANAGER_DEV19:
  userName: "qa-channelmanager-csmdev19@servicesource.com"
@@ -18,7 +18,7 @@ CHANNELMANAGER_DEV19:
  partner_pwd: "pass@word1"
  admin_url: "https://login.salesforce.com"
  admin_userName: "devuser-ee4@comitydesigns.com"
- admin_pwd: "passw0rd"
+ 
 
 CHANNELPARTNER_DEV19:
  userName: "qa-channelpartner-csmdev19@servicesource.com"
@@ -47,7 +47,7 @@ CHANNELNETOPS_DEV20:
  url: "https://login.salesforce.com/"
  admin_url: "https://login.salesforce.com"
  admin_userName: "devuser-ee4@comitydesigns.com"
- admin_pwd: "passw0rd"
+ 
 
 CHANNELMANAGER_DEV20:
  userName: "qa-channelmanager-csmdev20@servicesource.com"
@@ -59,8 +59,7 @@ CHANNELMANAGER_DEV20:
  partner_pwd: "pass@word1"
  admin_url: "https://login.salesforce.com"
  admin_userName: "devuser-ee4@comitydesigns.com"
- admin_pwd: "passw0rd"
-
+ 
 CHANNELPARTNER_DEV20:
  userName: "qa-channelpartner-csmdev20@servicesource.com"
  pwd: "pass@word1"
@@ -82,7 +81,7 @@ CHANNELNETOPS_DEV25:
  url: "https://login.salesforce.com/"
  admin_url: "https://login.salesforce.com"
  admin_userName: "devuser-ee4@comitydesigns.com"
- admin_pwd: "passw0rd"
+ 
 
 
 CHANNELMANAGER_DEV25:
@@ -95,7 +94,7 @@ CHANNELMANAGER_DEV25:
  partner_pwd: "pass@word1"
  admin_url: "https://login.salesforce.com"
  admin_userName: "devuser-ee4@comitydesigns.com"
- admin_pwd: "passw0rd"
+ 
 
 CHANNELPARTNER_DEV25:
  userName: "qa-channelpartner-csmdev25@servicesource.com"
@@ -132,7 +131,7 @@ CHANNELNETOPS_EETEST2:
  url: "https://login.salesforce.com/"
  admin_url: "https://login.salesforce.com"
  admin_userName: "devuser-ee4@comitydesigns.com"
- admin_pwd: "passw0rd"
+ 
 
 
 CHANNELMANAGER_EETEST2:
@@ -145,7 +144,7 @@ CHANNELMANAGER_EETEST2:
  partner_pwd: "pass@word1"
  admin_url: "https://login.salesforce.com"
  admin_userName: "devuser-ee4@comitydesigns.com"
- admin_pwd: "passw0rd"
+ 
 
 
 CHANNELPARTNER_EETEST2:
@@ -169,7 +168,7 @@ CHANNELNETOPS_EETEST4:
  url: "https://login.salesforce.com/"
  admin_url: "https://login.salesforce.com"
  admin_userName: "devuser-ee4@comitydesigns.com"
- admin_pwd: "passw0rd"
+ 
 
 CHANNELMANAGER_EETEST4:
  userName: "qa-channelmanager-eetest4@servicesource.com"
@@ -182,7 +181,7 @@ CHANNELMANAGER_EETEST4:
  partner_pwd: "pass@word1"
  admin_url: "https://login.salesforce.com"
  admin_userName: "devuser-ee4@comitydesigns.com"
- admin_pwd: "passw0rd"
+ 
 
 CHANNELPARTNER_EETEST4:
  userName: "qa-channelpartner-eetest4@servicesource.com"

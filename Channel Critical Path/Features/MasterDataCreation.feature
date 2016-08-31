@@ -5,32 +5,36 @@ Background: Login to the Application
 	Given that I navigate to the CRM application 
 	Then I should land on CRM home page 
 	
-#@CreationAsset 
-#Scenario: Channel  :Asset creation 
-#	When I click on "Assets" tab 
-#	Then I create new Asset with Name "My_PES_Asset" and its Product "Product B" and its Status "Installed" and price "2500" and account "PES Channel Account" 
-#	
-#@CreationServiceContracts 
-#Scenario: Channel : Service Contract creation 
-#	When I click on "Service Contracts" tab 
-#	Then I create new Service Contracts with Name "PES_Service_Contract" with Account "PES Channel Account" and Product "Product B" 
-#	
-#@Createsourceopportunity 
-#Scenario: Channel  :Asset creation 
-#	When I click on "Opportunities" tab 
-#	Then I create new opportunity with Name "PES_SplitOpp" with Account "PES Channel Account" and Product "Product B"
-#	
-#@RenewalOpportunityCreation 
-#Scenario: Channel: Generate Renew Opp 
-#	When I create Source Opportunity with Line Items with Account "PES Channel Account" and resolve it and rename it as "PES_Add_Partner" 
-#	When I create Source Opportunity with Line Items with Account "PES Channel Account" and resolve it and rename it as "PES_Split_Target_Opp" 
+@CreationAsset 
+Scenario: Channel  :Asset creation 
+	When I click on "All Tabs" tab
+	When I click on "Assets" tab 
+	Then I create new Asset with Name "My_PES_Asset" and its Product "Product B" and its Status "Installed" and price "2500" and account "PES Channel Account" 
+	
+@CreationServiceContracts 
+Scenario: Channel : Service Contract creation 
+	When I click on "All Tabs" tab
+	When I click on "Service Contracts" tab 
+	Then I create new Service Contracts with Name "PES_Service_Contract" with Account "PES Channel Account" and Product "Product B" 
+	
+@Createsourceopportunity 
+Scenario: Channel  :Asset creation 
+	When I click on "Opportunities" tab 
+	Then I create new opportunity with Name "PES_SplitOpp" with Account "PES Channel Account" and Product "Product B"
+	
+@RenewalOpportunityCreation 
+Scenario: Channel: Generate Renew Opp 
+	When I create Source Opportunity with Line Items with Account "PES Channel Account" and resolve it and rename it as "PES_Add_Partner" 
+	When I create Source Opportunity with Line Items with Account "PES Channel Account" and resolve it and rename it as "PES_Split_Target_Opp" 
 	
 @channelPortalSetting
 Scenario: Channel: Channel Setup
+    When I click on "All Tabs" tab
     When I Navigate to "ServiceSource Setup" tab
 	And I click on "Channel Portal Configuration" link
-	Then I move Sales stages for Partners from "Not Available to Partners" to "Available to Partners"
-	Then I move Sales stages for pipeline from "Hidden from Pipeline" to "Display in Pipeline"
+	Then I move Sales stages for Partners from and add Number of Days Between Updates and Days Before Expiration "Not Available to Partners" to "Available to Partners"
+	Then I move Sales stages for pipeline from and add Number of Days Between Updates and Days Before Expiration "Hidden from Pipeline" to "Display in Pipeline"
+	When I click on "All Tabs" tab
 	When I Navigate to "ServiceSource Setup" tab
 	And I click on "Renewal Partner Data Sync" link
     And I Add Partner Opportunity field "Close Date"
