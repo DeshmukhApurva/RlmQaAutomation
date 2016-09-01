@@ -231,7 +231,8 @@ Then(/^I create new opportunity with Name "(.*?)" with Account "(.*?)" and price
     sleep 6
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[5]/td[5]/span/input").set $endDateOLI
     sleep 6
-    all(:xpath,'//td/input[@value=" Save "]')[0].click
+   
+    all(:xpath,'//td/input[@value="Save"]')[0].click
     puts "Successfully Save product and Source Opp"
 
   rescue Exception => ex
@@ -370,8 +371,8 @@ When(/^I create Source Opportunity with Line Items with Account "(.*?)" and reso
     fill_in "Opportunity Name",:with=>$automationOppName
     sleep 5
     fill_in "Close Date",:with=> $oPPCloseDate
-    sleep 5
-    fill_in "Earliest Expiration Date",:with=> $earliestExpirationDate
+    # sleep 5
+    # fill_in "Earliest Expiration Date",:with=> $earliestExpirationDate
     sleep 5
     select "Qualification", :from => "Stage"
     sleep 5
@@ -432,28 +433,29 @@ When(/^I create Source Opportunity with Line Items with Account "(.*?)" and reso
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[9]/td[5]/span/input").set $endDateOLI
     sleep 5
     find(:xpath,"//*[@id='editPage']/table/tbody/tr[13]/td[5]/span/input").set $endDateOLI
-    sleep 5
-
-    all(:xpath,'//td/input[@value=" Save "]')[0].click
+    sleep 10
+    first(:button,'Save').click
+    # all(:xpath,'//td/input[@value="Save"]')[1].click
+    puts "I save All Product"
     sleep 6
 
-    within(".opportunityLineItemBlock") do
-      within(".list") do
-        sleep 5
-        $first_product = all(".dataRow")[0].all("th")[0].first("a").text
-        puts $first_product
-
-        $second_product = all(".dataRow")[1].all("th")[0].first("a").text
-        puts $second_product
-
-        $third_product = all(".dataRow")[2].all("th")[0].first("a").text
-        puts $third_product
-
-        $fourth_product = all(".dataRow")[3].all("th")[0].first("a").text
-        puts $fourth_product
-        sleep 5
-      end
-    end
+    # within(".opportunityLineItemBlock") do
+      # within(".list") do
+        # sleep 5
+        # $first_product = all(".dataRow")[0].all("th")[0].first("a").text
+        # puts $first_product
+# 
+        # $second_product = all(".dataRow")[1].all("th")[0].first("a").text
+        # puts $second_product
+# 
+        # $third_product = all(".dataRow")[2].all("th")[0].first("a").text
+        # puts $third_product
+# 
+        # $fourth_product = all(".dataRow")[3].all("th")[0].first("a").text
+        # puts $fourth_product
+        # sleep 5
+      # end
+    # end
 
     #Resolve Opportunity
     within("#bottomButtonRow") do
@@ -480,6 +482,7 @@ When(/^I create Source Opportunity with Line Items with Account "(.*?)" and reso
     fill_in "Earliest Expiration Date",:with=> $earliestExpirationDate
     sleep 5
     first(:button,'Save').click
+    puts "Successfully Created Opportunity"
     sleep 8
   rescue Exception => ex
     puts "Error occurred while resolving Opportunities"
@@ -682,7 +685,7 @@ And(/^I rename the quote as "(.*?)"$/) do |arg|
   end
 end
 
-Then(/^I move Sales stages for pipeline from "(.*?)" to "(.*?)"$/) do |item1,item2|
+Then(/^I move Sales stages for pipeline from and add Number of Days Between Updates and Days Before Expiration "(.*?)" to "(.*?)"$/) do |item1,item2|
   begin
     arg1 = getDetails "SalesStages"
     arg2 = getDetails "Number of Days Between Updates"
@@ -766,7 +769,7 @@ Then(/^I move Sales stages for pipeline from "(.*?)" to "(.*?)"$/) do |item1,ite
   end
 end 
  
- Then(/^I move Sales stages for Partners from "(.*?)" to "(.*?)"$/) do |item1,item2|
+ Then(/^I move Sales stages for Partners from and add Number of Days Between Updates and Days Before Expiration "(.*?)" to "(.*?)"$/) do |item1,item2|
   begin
     arg1 = getDetails "SalesStages"
     arg2 = getDetails "Number of Days Between Updates"

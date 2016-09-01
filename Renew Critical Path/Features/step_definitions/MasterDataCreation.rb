@@ -317,11 +317,13 @@ And(/^I select SC and generate Opportunity with Name "(.*?)" with Account "(.*?)
     sleep 8
     within("#pgbtn") do
       click_on 'Save'
+      puts "Successfully Created Opportunity"
     end
+    rescue Exception => ex
+    putstr "Error occurred while creating opportunity"
+    putstr_withScreen ex.message
   end
 end
-
-
 
 And(/^I select contract and generate Opportunity with Name "(.*?)" with Account "(.*?)"$/) do |arg1,arg2|
   begin
@@ -344,7 +346,11 @@ And(/^I select contract and generate Opportunity with Name "(.*?)" with Account 
     sleep 8
     within("#pgbtn") do
       click_on 'Save'
+    puts "Successfully Created Opportunity"
     end
+    rescue Exception => ex
+    putstr "Error occurred while creating opportunity"
+    putstr_withScreen ex.message
   end
 end
 
@@ -361,7 +367,7 @@ Then(/^I resolved the Source Opportunity and rename with name "(.*?)"$/) do |arg
     first(:button,'Save').click
     sleep 8
 
-    find(:xpath, "//th[text()='Contributed To']").find(:xpath, '..').find(:xpath, "following-sibling::tr/td[2]/a").click
+    find(:xpath, "//th[text()='Contributed To']").find(:xpath, '..').find(:xpath, "following-sibling::tr/td[3]/a").click
     sleep 8
 
     # first(:button,'Edit').click
@@ -373,6 +379,7 @@ Then(/^I resolved the Source Opportunity and rename with name "(.*?)"$/) do |arg
     fill_in "Opportunity Name",:with=> arg
     sleep 1
     first(:button,'Save').click
+    puts "Successfully Created Opportunity and Resolve it"
     sleep 8
   rescue Exception => ex
     puts "Error occurred while resolving the opportunity"
@@ -546,6 +553,8 @@ When(/^I create Source Opportunity with Line Items with Account "(.*?)" and reso
     fill_in "Opportunity Name",:with=> arg2
     sleep 1
     first(:button,'Save').click
+    puts "Successfully Created Opportunity and Resolved"
+
     sleep 8
   rescue Exception => ex
     puts "Error occurred while resolving Opportunities"
@@ -1027,6 +1036,9 @@ And(/^I click on create new Batch$/) do
     click_on 'Create New'
     puts "I successfully clicked on Button"
     sleep 10
+    rescue Exception => ex
+    putstr "Error occurred while Batch Activity"
+    putstr_withScreen ex.message
   end
 end
 And(/^I create Asset filter for batch$/) do
@@ -1034,6 +1046,9 @@ And(/^I create Asset filter for batch$/) do
     sleep 6
     first(:xpath,"//input[@value='New']").click
       puts "I successfully clicked Filter Area"
+    rescue Exception => ex
+    putstr "Error occurred while Batch Activity"
+    putstr_withScreen ex.message
    end
 end
 
@@ -1053,7 +1068,9 @@ And(/^I put view Name for Asset Filter "(.*?)" and add criteria$/) do |arg|
       puts "Asset Filter Created"
       sleep 5
     end
-     
+     rescue Exception => ex
+    putstr "Error occurred while Batch Activity"
+    putstr_withScreen ex.message
   end
 end
 
@@ -1078,6 +1095,9 @@ And(/^I put view Name for Asset Filter "(.*?)" with two criteria$/) do |arg|
       puts "Asset Filter Created"
       sleep 5
     end 
+    rescue Exception => ex
+    putstr "Error occurred while Batch Activity"
+    putstr_withScreen ex.message
   end
 end
 
@@ -1087,7 +1107,11 @@ And(/^I create Group Logic for batch$/) do
       first(:xpath,"//*[@id='group-grid-toolbar']/input").click
       puts "I successfully clicked Group Logic"
      sleep 10
-   end
+   
+   rescue Exception => ex
+    putstr "Error occurred while Batch Activity"
+    putstr_withScreen ex.message
+    end
 end
 
 And(/^I put view Name for Asset Filter "(.*?)" and add Row$/) do |arg|
@@ -1106,17 +1130,20 @@ And(/^I put view Name for Asset Filter "(.*?)" and add Row$/) do |arg|
       puts "Group logic created Created"
       sleep 5
     end
+    rescue Exception => ex
+    putstr "Error occurred while Batch Activity"
+    putstr_withScreen ex.message
   end
 end
-
-
 
 And(/^I click "(.*?)" link$/) do |arg|
   begin
     sleep 10
     click_on arg
+    puts "Successfully Click A link"
   end
 end
+
 And(/^I Fill All data for View "(.*?)" with "(.*?)" and "(.*?)" with "(.*?)" with "(.*?)" and "(.*?)"$/) do |arg1,arg2,arg3,arg4,arg5,arg6|
   begin
    sleep 8
@@ -1143,6 +1170,9 @@ And(/^I Fill All data for View "(.*?)" with "(.*?)" and "(.*?)" with "(.*?)" wit
    sleep 8
     first(".pbButtonb").first(".btn").click
     puts "I Successfully Create View"
+    rescue Exception => ex
+    putstr "Error occurred while Creating View"
+    putstr_withScreen ex.message
  end
 end
 
@@ -1179,6 +1209,9 @@ And(/^I Go to next Maping with Value "(.*?)"$/) do |arg|
       click_on "Go"
     end
    end
+   rescue Exception => ex
+    putstr "Error occurred while Creating Mapping"
+    putstr_withScreen ex.message
   end
 end
 
@@ -1200,6 +1233,9 @@ And(/^I Add Mapping Fields "(.*?)" and Mapping Field "(.*?)"$/) do |arg1,arg2|
     click_on 'Save'
     end
     sleep 8
+    rescue Exception => ex
+    putstr "Error occurred while Creating Mapping"
+    putstr_withScreen ex.message
   end 
 end
 
@@ -1219,6 +1255,9 @@ And(/^I Add Mapping Fields on oppTr "(.*?)" and Mapping Field "(.*?)"$/) do |arg
     click_on 'Save'
     end
   sleep 8
+  rescue Exception => ex
+    putstr "Error occurred while Creating Mapping"
+    putstr_withScreen ex.message
   end 
 end
 
@@ -1236,6 +1275,9 @@ And(/^I Add Mapping Fields on oppTorr "(.*?)" and Mapping Field "(.*?)"$/) do |a
     click_on 'Save'
     end
   sleep 8
+  rescue Exception => ex
+    putstr "Error occurred while Creating Mapping"
+    putstr_withScreen ex.message
   end 
 end
 
@@ -1253,6 +1295,9 @@ And(/^I Add Mapping Fields on Asset "(.*?)" and Mapping Field "(.*?)"$/) do |arg
     click_on 'Save'
     end
   sleep 8
+  rescue Exception => ex
+    putstr "Error occurred while Creating Mapping"
+    putstr_withScreen ex.message
   end 
 end
 
@@ -1270,6 +1315,9 @@ And(/^I Add Mapping Fields on oppTosc "(.*?)" and Mapping Field "(.*?)"$/) do |a
     click_on 'Save'
     end
   sleep 8
+  rescue Exception => ex
+    putstr "Error occurred while Creating Mapping"
+    putstr_withScreen ex.message
   end 
 end
 
@@ -1287,6 +1335,9 @@ And(/^I Add Mapping Fields on scTopp "(.*?)" and Mapping Field "(.*?)"$/) do |ar
     click_on 'Save'
     end
   sleep 8
+  rescue Exception => ex
+    putstr "Error occurred while Creating Mapping"
+    putstr_withScreen ex.message
   end 
 end
 
@@ -1298,6 +1349,9 @@ And(/^I Put Sales Stage as "(.*?)"$/) do |arg|
    sleep 6
    find(:xpath,"//*[text()='Stage']/following-sibling::td/input[contains(@id,'FM_DefaultTextField')]").set arg
    puts "Successfully Set Default value to Sales Stage"
+   rescue Exception => ex
+    putstr "Error occurred while Creating Mapping"
+    putstr_withScreen ex.message
     end
 end
 
@@ -1309,6 +1363,9 @@ And(/^I Put Close Date as "(.*?)"$/) do |arg|
    sleep 6
    find(:xpath,"//*[text()='Close Date']/following-sibling::td/input[contains(@id,'FM_DefaultTextField')]").set arg
    puts "Successfully Set Default value to Close Date"
+   rescue Exception => ex
+    putstr "Error occurred while Creating Mapping"
+    putstr_withScreen ex.message
    end 
 end    
 
@@ -1317,6 +1374,9 @@ And(/^I Put Close Date as on Opp "(.*?)"$/) do |arg|
     sleep 8 
    find(:xpath,"//*[text()='Close Date']/following-sibling::td/select[contains(@id,'FDFields')]").select(arg)
    puts "Successfully Set Default value to Close Date"
+   rescue Exception => ex
+    putstr "Error occurred while Creating Mapping"
+    putstr_withScreen ex.message
   end
 end
 
@@ -1325,7 +1385,9 @@ And(/^I Put Owner ID as "(.*?)"$/) do |arg|
     sleep 8 
    find(:xpath,"//*[text()='Owner ID']/following-sibling::td/select[contains(@id,'FDFields')]").select(arg)
    puts "Successfully Set Default value to Owner ID"
-   
+   rescue Exception => ex
+    putstr "Error occurred while Creating Mapping"
+    putstr_withScreen ex.message
   end
 end
 
@@ -1336,17 +1398,18 @@ And(/^I select first Mapping$/) do
      first(:link).click
      puts "Successfully Clicked First mapping"  
     end
+    rescue Exception => ex
+    putstr "Error occurred while Creating Mapping"
+    putstr_withScreen ex.message
     end
   end
   
 And(/^I add criteria for Sale Stage$/) do
   begin
-    
     sleep 10
     first(:xpath,'//input[@value="Add Criteria"]').click
     puts "I successfully clicked On Add criteria"
-    sleep 8
-    
+    sleep 8   
     first(:xpath, "//*[contains(@id, 'slFieldId')]").select("Stage")
     sleep 5
     first(:xpath, "//*[contains(@id, 'outOperator')]").select("=")
@@ -1357,7 +1420,10 @@ And(/^I add criteria for Sale Stage$/) do
     within all(".pbButton ")[0] do
           click_on 'Save'
           sleep 3
-        end
+    end
+    rescue Exception => ex
+    putstr "Error occurred while Creating Mapping"
+    putstr_withScreen ex.message
   end
 end
 
@@ -1371,24 +1437,36 @@ And(/^I delete Product Criteria$/) do
    end
     first(:button,'Save').click
    sleep 10
+   rescue Exception => ex
+    putstr "Error occurred while Creating Mapping"
+    putstr_withScreen ex.message
   end
 end
 
 And(/^I Choose Lost Value with "(.*?)"$/) do |arg|
    begin
      find(:xpath, "//*[text()='Lost']/following-sibling::td/select").select arg
+   rescue Exception => ex
+    putstr "Error occurred while Creating Mapping"
+    putstr_withScreen ex.message
    end
  end 
 
 And(/^I Choose Open Value with "(.*?)"$/) do |arg|
    begin
      find(:xpath, "//*[text()='Open']/following-sibling::td/select").select arg
+   rescue Exception => ex
+    putstr "Error occurred while Creating Mapping"
+    putstr_withScreen ex.message
    end
  end 
  
  And(/^I Choose Won Value with "(.*?)"$/) do |arg|
    begin
      find(:xpath, "//*[text()='Won']/following-sibling::td/select").select arg
+   rescue Exception => ex
+    putstr "Error occurred while Creating Mapping"
+    putstr_withScreen ex.message
    end
  end 
 And(/^I Save All Data$/) do
@@ -1398,6 +1476,9 @@ And(/^I Save All Data$/) do
       click_on 'Save'
       puts "I Succesfully Save Mapping"
     end
+    rescue Exception => ex
+    putstr "Error occurred while Creating Mapping"
+    putstr_withScreen ex.message
   end 
 end
 
