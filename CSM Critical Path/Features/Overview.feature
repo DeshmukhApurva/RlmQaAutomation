@@ -346,11 +346,9 @@ Scenario: Rally Test Case ID: TC5046,TC5047,TC5048,TC5049: Navigate to Focus Cat
 Scenario: Rally Test Case ID: TC5041,TC5042,TC5043: Verify Required/Non-Required Fields on Complete/Dismiss Task's popup window, Verify task complete/dismiss with Required fields input, Verify task complete/dismiss with Non-Required fields input, Error Messages
 	And I click on "Overview" link
 	And I select Task FCG
-	#And I select FCG
-#	And I mark the task as Not Started
-#	And I click on "Overview" link
-#	And I select Task FCG
-	#And I select FCG
+	And I mark the task as Not Started
+	And I click on "Overview" link
+	And I select Task FCG
 	And I click on Complete Action
 	Then I verify Additional Fields Section
 	And I provide Required additional details
@@ -381,7 +379,6 @@ Scenario: Rally Test Case ID: TC5041,TC5042,TC5043: Verify Required/Non-Required
 @ALDisabledTask
 Scenario: Rally Test Case ID: TC5096: Verify the Action links for task created by other user
   When I click on "Overview" link
-  #And I select FCG
   And I select Task FCG
   And I click on Subject link for Active Action link
   And I verify Task page
@@ -409,7 +406,6 @@ Scenario: Rally Test Case ID: TC5183: Availability of Task Object on Global filt
 @TaskStateOverview
 Scenario: Rally Test Case ID: TC5195: Verifying Task State for Task from Overview page
   When I click on "Overview" link
-  #And I select FCG
   And I select Task FCG
   And I click on Subject of any Task
   And I check Task detail page to edit status to Completed
