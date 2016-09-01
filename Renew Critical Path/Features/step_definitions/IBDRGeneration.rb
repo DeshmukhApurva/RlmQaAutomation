@@ -539,7 +539,8 @@ And(/^I verify the service contract get generated$/) do
        sleep 10
     arg = getDetails "InstallBaseDataRules"
    
-        service_contract = find(:xpath,"//table[@class='list']/tbody/tr[2]/td[9]/a").text
+#        service_contract = find(:xpath,"//table[@class='list']/tbody/tr[2]/td[9]/a").text
+        service_contract = find(:xpath, "//th[text()='Service Contract']").find(:xpath, '..').all(:xpath, "following-sibling::tr/td[9]/a")[1].text
         puts service_contract
         sleep 5
         if service_contract == arg["IBDRServiceContractMapping"]

@@ -81,11 +81,19 @@ And (/^I verify the count of all "(.*?)"$/) do |arg|
 		
 		click_on "Accounts"
 		sleep 3
-		select "My Accounts", :from => "fcf"
-		sleep 3
-		within(".fBody") do
-			click_on "Go!"
-		end
+    if page.has_xpath?('//a[@title="ServiceSource Setup Tab"]')
+      select "My Accounts", :from => "fcf"
+    else
+      select "QA Test", :from => "fcf"
+    end
+#		select "My Accounts", :from => "fcf"
+#		sleep 3
+#		within(".fBody") do
+#			click_on "Go!"
+#		end
+    if page.has_xpath?('//input[@name="go"]')
+          first(:button, "Go").click
+    end
 		sleep 5
 		foundCount = ""
 		begin  
