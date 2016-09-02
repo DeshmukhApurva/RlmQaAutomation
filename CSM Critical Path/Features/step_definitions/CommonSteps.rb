@@ -822,8 +822,8 @@ And(/^I create Account using map data "([^"]*)"$/) do |mapName|
     time = Time.new
     accDateTime = time.hour.to_s + time.min.to_s + time.sec.to_s
     $accountName = "AAcc" + accDateTime.to_s
-    setDetails("Details.yml", "SPPBSPPL", 'AccountName', $accountName)  
-    puts $accountName 
+    setDetails("Details.yml", "SPPBSPPL", 'AccountName', $accountName)
+    puts $accountName
     $client.create('Account',Name: $accountName)
     record = $client.query("SELECT Id,Name from Account where Name = \'#{$accountName}\'")
     accRec = record.first
@@ -964,16 +964,16 @@ And(/^I create PLAYBOOK with PLAY using map data "([^"]*)"$/) do |mapName|
 
     record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Playbook__c,ServiceSource1__CSM_Play__c FROM ServiceSource1__CSM_PlaybookPlay__c where ServiceSource1__CSM_Play__c = \'#{$pL2Id}\' and ServiceSource1__CSM_Playbook__c = \'#{$pb2Id}\'")
     pbplRecords = record.first
-    $pbpl2Id = pbplRecords.Id 
+    $pbpl2Id = pbplRecords.Id
     puts "PlayBookPlay1: " + pbplRecords.Id + " " + pbplRecords.Name+ " " + pbplRecords.ServiceSource1__CSM_Playbook__c + " " + pbplRecords.ServiceSource1__CSM_Play__c
 
-#    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Playbook__c,ServiceSource1__CSM_Play__c FROM ServiceSource1__CSM_PlaybookPlay__c where ServiceSource1__CSM_Play__c = \'#{$pL3Id}\' and ServiceSource1__CSM_Playbook__c = \'#{$pb2Id}\'")
-#    pbplRecords = record.first
-#    $pbpl3Id = pbplRecords.Id
-#    puts "PlayBookPlay2: " + pbplRecords.Id + " " + pbplRecords.Name+ " " + pbplRecords.ServiceSource1__CSM_Playbook__c + " " + pbplRecords.ServiceSource1__CSM_Play__c
+    #    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Playbook__c,ServiceSource1__CSM_Play__c FROM ServiceSource1__CSM_PlaybookPlay__c where ServiceSource1__CSM_Play__c = \'#{$pL3Id}\' and ServiceSource1__CSM_Playbook__c = \'#{$pb2Id}\'")
+    #    pbplRecords = record.first
+    #    $pbpl3Id = pbplRecords.Id
+    #    puts "PlayBookPlay2: " + pbplRecords.Id + " " + pbplRecords.Name+ " " + pbplRecords.ServiceSource1__CSM_Playbook__c + " " + pbplRecords.ServiceSource1__CSM_Play__c
     time = Time.new
     puts time
-    
+
     #Create PlayBook_1 for SP/AddPlay3
     $client.create!('ServiceSource1__CSM_Playbook__c', ServiceSource1__CSM_Display_Name__c: arg["APB1"], ServiceSource1__CSM_IsActive__c: true, OwnerId: '005o0000002P4KI')
     record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Playbook__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APB1"]}\'")
@@ -992,7 +992,7 @@ And(/^I create PLAYBOOK with PLAY using map data "([^"]*)"$/) do |mapName|
 
     time = Time.new
     puts time
-    
+
     #Create PlayBook_2 for SP/AddPlay4
     $client.create!('ServiceSource1__CSM_Playbook__c', ServiceSource1__CSM_Display_Name__c: arg["APB2"], ServiceSource1__CSM_IsActive__c: true, OwnerId: '005o0000002P4KI')
     record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Playbook__c where ServiceSource1__CSM_Display_Name__c = \'#{arg["APB2"]}\'")
@@ -1076,18 +1076,18 @@ And(/^I delete Play_PlayBook_SPT using map data "([^"]*)"$/) do |mapName|
     $client.destroy!('ServiceSource1__CSM_Play__c', arg["APL2APB2Id"])
     $client.destroy!('ServiceSource1__CSM_Play__c', arg["APL3APB3Id"])
     $client.destroy!('ServiceSource1__CSM_Play__c', arg["APL4APB4Id"])
-    
-    #Delete Play Books 
-    $client.destroy!('ServiceSource1__CSM_Playbook__c', arg["APB1ASPT1Id"]) 
+
+    #Delete Play Books
+    $client.destroy!('ServiceSource1__CSM_Playbook__c', arg["APB1ASPT1Id"])
     $client.destroy!('ServiceSource1__CSM_Playbook__c', arg["APB2ASPT2Id"])
     $client.destroy!('ServiceSource1__CSM_Playbook__c', arg["APB1Id"])
     $client.destroy!('ServiceSource1__CSM_Playbook__c', arg["APB2Id"])
-    
-    #Delete SPTs 
+
+    #Delete SPTs
     $client.destroy!('ServiceSource1__CSM_Account_Plan_Template__c', arg["ASPT1Id"])
     $client.destroy!('ServiceSource1__CSM_Account_Plan_Template__c', arg["ASPT2Id"])
     $client.destroy!('ServiceSource1__CSM_Account_Plan_Template__c', arg["SPT1Id"])
-    
+
     #Delete Account
     #$client.destroy!('Account', $accId)
     #puts $client.find('Account', $accId)
@@ -1105,7 +1105,7 @@ And(/^I delete Account$/) do
     sleep 5
     time = Time.new
     puts time
-   
+
     #Delete Account
     $client.destroy!('Account', $accId)
     #puts $client.find('Account', $accId)
@@ -1123,7 +1123,7 @@ And(/^I delete Success Plan from DB/) do
     sleep 5
     time = Time.new
     puts time
-   
+
     #Delete Account
     $client.destroy!('ServiceSource1__CSM_Account_Plan__c', $sPlanId)
     #puts $client.find('Account', $accId)
@@ -1161,11 +1161,225 @@ When(/^I click on the "(.*?)" grid tab$/) do |tab|
 end
 
 Then(/^I make call to YML$/) do
-begin
-  sleep 3
-  puts "call YML"
-  arg = setDetails("Details.yml", "Demo", "Name", "Shashi")
-  puts "after call YML"
-  puts arg
+  begin
+    sleep 3
+    puts "call YML"
+    arg = setDetails("Details.yml", "Demo", "Name", "Shashi")
+    puts "after call YML"
+    puts arg
+  end
 end
-end  
+
+When(/^I navigate to Setup$/) do
+  begin
+    sleep 5
+    find("#userNav-arrow").click
+    sleep 6
+    click_on "Setup"
+    sleep 5
+    puts "Successfully navigated to Setup page"
+  rescue Exception => ex
+    putstr_withScreen  ex.message
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+  end
+end
+
+And(/^I search for "([^"]*)" from Quick Find$/) do |searchText|
+  begin
+    sleep 3
+    find("input[placeholder='Quick Find / Search...']").send_keys [:control, 'a'], :backspace
+    find("input[placeholder='Quick Find / Search...']").send_keys searchText
+    sleep 3
+    puts "Entered text #{searchText} to search in Quick search box"
+    #within("#DevToolsIntegrate_child") do  CustomSettings_font
+    click_link(searchText)
+    #end
+  rescue Exception => ex
+    putstr_withScreen  ex.message
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+  end
+end
+
+And(/^I set the value of "([^"]*)" Custom Setting$/) do |customSettingName|
+  begin
+    sleep 3
+    if page.has_content?(customSettingName)
+      click_button 'Edit'
+      sleep 5
+      if page.has_css?(".editPage")
+        puts "Successfully see the edit form"
+        find(:xpath, "//label[contains(text(),'Set new Opportunity as Renewal')]/parent::th/following-sibling::td/input").click
+        sleep 3
+        click_button 'Save'
+        puts "successfully checked the checkbox"
+      else
+        putstr "Failed to see the edit form"
+      end
+    else
+      puts "#{customSettingName} Custom Setting not present on Page"
+    end
+  rescue Exception => ex
+    putstr_withScreen  ex.message
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+  end
+end
+
+And(/^I create Account "([^"]*)" using map data "([^"]*)" and key "([^"]*)"$/) do |accName, mapName, keyName|
+  begin
+    sleep 5
+    owner = getDetails mapName
+    accDateTime = time.hour.to_s + time.min.to_s + time.sec.to_s
+    accountName = accName + accDateTime.to_s
+    setDetails("Details.yml", mapName, keyName, accountName)
+    puts accountName
+    $client.create('Account',Name: accountName, OwnerId: owner["OwnerId"])
+    record = $client.query("SELECT Id,Name from Account where Name = \'#{accountName}\'")
+    accRec = record.first.Id
+    puts accRec.Id
+    accId = accRec.Id
+    setDetails("Details.yml", mapName, 'Account_Id', accId)
+  rescue Exception => ex
+    puts ex.message
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+  end
+end
+
+And(/^I get ownerId of "([^"]*)" using map data "([^"]*)" and key "([^"]*)"$/) do |userRole, mapName, keyName|
+  begin
+    sleep 5
+    puts Time.new
+    arg = getSalesForceAPIinfo userRole
+    record = $client.query("SELECT Id FROM User where Username = \'#{arg["userName"]}\'")
+    userRec = record.first
+    setDetails("Details.yml", mapName, keyName, userRec.Id)
+    puts userRec.Id
+    puts Time.new
+  rescue Exception => ex
+    puts ex.message
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+  end
+end
+
+And(/^I create PLAY "([^"]*)" for object "([^"]*)" using map data "([^"]*)" and key "([^"]*)"$/) do |playName, objectName, mapName, keyName|
+  begin
+    sleep 5
+    puts Time.new
+    arg = getDetails mapName
+    setDetails("Details.yml", mapName, keyName, playName)
+    sleep 2
+    $client.create!('ServiceSource1__CSM_Play__c',ServiceSource1__CSM_Display_Name__c: playName, ServiceSource1__CSM_IsActive__c: true, ServiceSource1__CSM_Object_Name__c: objectName, OwnerId: arg["Owner_Id"])
+    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Play__c where ServiceSource1__CSM_Display_Name__c = \'#{playName}\'")
+    play = record.first
+    setDetails("Details.yml", mapName, playName + "_Id", play.Id)
+    setDetails("Details.yml", mapName, playName + "_Name", play.Name)
+    puts "Play:" + play.Id + " " + play.Name + " " + play.ServiceSource1__CSM_Display_Name__c
+    puts Time.new
+  rescue Exception => ex
+    puts ex.message
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+  end
+end
+
+
+And(/^I create Task "([^"]*)" in PLAY "([^"]*)" using map data "([^"]*)" and key "([^"]*)"$/) do |taskName, playName, mapName, keyName|
+  begin
+    sleep 5
+    puts Time.new
+    arg = getDetails mapName
+    playId = playName + "_Id"
+    setDetails("Details.yml", mapName, keyName, taskName)
+    $client.create!('ServiceSource1__CSM_Play_Task__c',ServiceSource1__CSM_Play__c: playId, Name: taskName, ServiceSource1__CSM_Type__c: 'Meeting', ServiceSource1__CSM_Days_Until_Due__c: '5', ServiceSource1__CSM_IsActive__c: true)
+    
+    record = $client.query("SELECT Id,Name FROM ServiceSource1__CSM_Play_Task__c where ServiceSource1__CSM_Play__c = \'#{playId}\'")
+    task = record.first
+    setDetails("Details.yml", mapName, taskName + "_Id" ,task.Id)
+    setDetails("Details.yml", mapName, taskName + "_Name" ,task.Id)
+    puts "Task:" + task.Id + " " + task.Name
+    
+    puts Time.new
+  rescue Exception => ex
+    puts ex.message
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+  end
+end
+
+And(/^I create PLAYBOOK "([^"]*)" using PLAY "([^"]*)" map data "([^"]*)" and key "([^"]*)"$/) do |playBookName, playId, mapName, keyName|
+  begin
+    sleep 5
+    puts Time.new
+    arg = getDetails mapName
+
+    setDetails("Details.yml", mapName, keyName, playBookName)
+    
+    $client.create!('ServiceSource1__CSM_Playbook__c', ServiceSource1__CSM_Display_Name__c: playBookName, ServiceSource1__CSM_IsActive__c: true, OwnerId: arg["Owner_Id"])
+    
+    record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Playbook__c where ServiceSource1__CSM_Display_Name__c = \'#{playBookName}\'")
+    playBook = record.first
+    setDetails("Details.yml", mapName,  playBookName + "_Id", playBook.Id)
+    setDetails("Details.yml", mapName, playBookName + "_Name", playBook.Name)
+    puts "Play Book: " + playBook.Id + " " + playBook.Name + " " + playBook.ServiceSource1__CSM_Display_Name__c
+    puts Time.new
+  rescue Exception => ex
+    puts ex.message
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+  end
+end
+
+And(/^I add PLAY "([^"]*)" to PLAYBOOk "([^"]*)" using map data "([^"]*)"$/) do |playName, playBookName, mapName|
+  begin
+    sleep 5
+    puts Time.new
+    arg = getDetails mapName
+    playId = playName + "_Id"
+    playBookId = playBookName + "_Id"
+    
+    record = $client.create!('ServiceSource1__CSM_PlaybookPlay__c', ServiceSource1__CSM_Play__c: arg[playId], ServiceSource1__CSM_Playbook__c: arg[playBookId], OwnerId: arg["Owner_Id"])   
+ 
+    puts "PlayBookPlay: " + record
+    puts Time.new
+  rescue Exception => ex
+    puts ex.message
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+  end
+end
+
+And(/^I create SPT "([^"]*)" using map data "([^"]*)" and key "([^"]*)"$/) do |sptName, mapName, keyName|
+  begin
+    sleep 5
+    time = Time.new
+    puts time
+    arg = getDetails mapName
+    setDetails("Details.yml", mapName, keyName, sptName)
+    
+    $client.create!('ServiceSource1__CSM_Account_Plan_Template__c', ServiceSource1__CSM_Template_Name__c: sptName, ServiceSource1__CSM_isActive__c: true, ServiceSource1__CSM_Opp_Date__c: 'CloseDate', OwnerId: arg["Owner_Id"])
+    record = $client.query("SELECT Id,Name FROM ServiceSource1__CSM_Account_Plan_Template__c where ServiceSource1__CSM_Template_Name__c = \'#{sptName}\'")
+    sPT = record.first
+    setDetails("Details.yml", mapName, sptName + "_Id", sPT.Id)
+    setDetails("Details.yml", mapName, sptName + "_Name", sPT.Name)
+    puts "SPT: " + sPT.Id + " " + sPT.Name    
+
+    $client.create!('ServiceSource1__CSM_Account_Plan_Phase__c', ServiceSource1__CSM_Account_Plan_Template__c: sPT.Id, ServiceSource1__CSM_Length__c: '10', ServiceSource1__CSM_Order__c: '1', ServiceSource1__CSM_Phase_Name__c: 'Automation SPT1 Phase')
+    puts Time.new
+  rescue Exception => ex
+    puts ex.message
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+  end
+end
+
+And(/^I add PLAYBOOk "([^"]*)" to SPT "([^"]*)" using map data "([^"]*)"$/) do |playBookName, sPTName, mapName|
+  begin
+    sleep 5
+    puts Time.new
+    arg = getDetails mapName
+    sPTId = sPTName + "_Id"
+    playBookId = playBookName + "_Id"
+    
+    record = $client.create!('ServiceSource1__CSM_Account_Plan_Playbook__c', ServiceSource1__CSM_Account_Plan_Template__c: arg[sPTId], ServiceSource1__CSM_Playbook__c: arg[playBookId], OwnerId: arg["Owner_Id"])   
+    
+    puts "PlayBookPlay: " + record
+    puts Time.new
+  rescue Exception => ex
+    puts ex.message
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+  end
+end
