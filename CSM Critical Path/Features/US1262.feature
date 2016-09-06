@@ -10,12 +10,12 @@ Feature: Followup Tasks related TCs
     When I connect to SalesforceAPI using "SYSTEMADMIN_CSMDEV20" user role
     And I get ownerId of "CSMNetOps_DEV20" using map data "MasterData" and key "Owner_Id"
     And I create Account "ComityAcc" using map data "MasterData" and key "Account"
-    And I create PLAY "ComityPlay#ComityPlayBook#" for object "Account" using map data "MasterData" and key "ComityPlay#ComityPlayBook#"
-    And I create Task "ComiyTask#ComityPlay#" in PLAY "ComityPlay#ComityPlayBook#" using map data "MasterData" and key "ComiyTask#ComityPlay#"
-    And I create PLAYBOOK "ComityPlayBook#ComitySPT#" using map data "MasterData" and key "ComityPlayBook#ComitySPT#"
-    And I add PLAY "ComityPlay#ComityPlayBook#" to PLAYBOOk  "ComityPlayBook#ComitySPT#" using map data "MasterData"
-    And I create SPT "ComitySPT#" using map data "MasterData" and key "ComitySPT#"
-    And I add PLAYBOOk "ComityPlayBook#ComitySPT#" to SPT "ComitySPT#" using map data "MasterData"
+    And I create PLAY "ComityPlay1ComityPlayBook1" for object "Account" using map data "MasterData" and key "ComityPlay1ComityPlayBook1"
+    And I create Task "ComiyTask1ComityPlay1" in PLAY "ComityPlay1ComityPlayBook1" using map data "MasterData" and key "ComiyTask1ComityPlay1"
+    And I create PLAYBOOK "ComityPlayBook1ComitySPT1" using map data "MasterData" and key "ComityPlayBook1ComitySPT1"
+    And I add PLAY "ComityPlay1ComityPlayBook1" to PLAYBOOk "ComityPlayBook1ComitySPT1" using map data "MasterData" 
+    And I create SPT "ComitySPT1" using map data "MasterData" and key "ComitySPT1"
+    And I add PLAYBOOk "ComityPlayBook1ComitySPT1" to SPT "ComitySPT1" using map data "MasterData"
     
 
   @SetSPPLDefaultID

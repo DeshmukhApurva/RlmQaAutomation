@@ -1305,7 +1305,7 @@ And(/^I create Task "([^"]*)" in PLAY "([^"]*)" using map data "([^"]*)" and key
   end
 end
 
-And(/^I create PLAYBOOK "([^"]*)" using PLAY "([^"]*)" map data "([^"]*)" and key "([^"]*)"$/) do |playBookName, playId, mapName, keyName|
+And(/^I create PLAYBOOK "([^"]*)" using map data "([^"]*)" and key "([^"]*)"$/) do |playBookName, mapName, keyName|
   begin
     sleep 5
     puts Time.new
@@ -1380,6 +1380,41 @@ And(/^I add PLAYBOOk "([^"]*)" to SPT "([^"]*)" using map data "([^"]*)"$/) do |
 
     puts "PlayBookPlay: " + record
     puts Time.new
+  rescue Exception => ex
+    puts ex.message
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+  end
+end
+
+And(/^I delete "([^"]*)" using map data "([^"]*)" and key "([^"]*)"$/) do |objectName, mapName, keyName|
+  begin
+    #$accId/$pL1Id/$pL2Id/$pL3Id/$pL4Id/$pb1Id/$pbpl1Id/$pb2Id/$pbpl2Id/$pbpl3Id/$sPT1Id/s$sPT2Id
+    sleep 5
+    time = Time.new
+    puts time
+    arg = getDetails mapName
+    #Delete Plays
+    $client.destroy!('ServiceSource1__CSM_Play__c', arg["APL1APB1Id"])
+    $client.destroy!('ServiceSource1__CSM_Play__c', arg["APL2APB2Id"])
+    $client.destroy!('ServiceSource1__CSM_Play__c', arg["APL3APB3Id"])
+    $client.destroy!('ServiceSource1__CSM_Play__c', arg["APL4APB4Id"])
+
+    #Delete Play Books
+    $client.destroy!('ServiceSource1__CSM_Playbook__c', arg["APB1ASPT1Id"])
+    $client.destroy!('ServiceSource1__CSM_Playbook__c', arg["APB2ASPT2Id"])
+    $client.destroy!('ServiceSource1__CSM_Playbook__c', arg["APB1Id"])
+    $client.destroy!('ServiceSource1__CSM_Playbook__c', arg["APB2Id"])
+
+    #Delete SPTs
+    $client.destroy!('ServiceSource1__CSM_Account_Plan_Template__c', arg["ASPT1Id"])
+    $client.destroy!('ServiceSource1__CSM_Account_Plan_Template__c', arg["ASPT2Id"])
+    $client.destroy!('ServiceSource1__CSM_Account_Plan_Template__c', arg["SPT1Id"])
+
+    #Delete Account
+    #$client.destroy!('Account', $accId)
+    #puts $client.find('Account', $accId)
+    time = Time.new
+    puts time
   rescue Exception => ex
     puts ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
