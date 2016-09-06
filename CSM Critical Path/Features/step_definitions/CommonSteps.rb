@@ -1251,7 +1251,7 @@ And(/^I create Account "([^"]*)" using map data "([^"]*)" and key "([^"]*)"$/) d
     accountName = accName + accDateTime.to_s
     setDetails("Details.yml", mapName, keyName, accountName)
     puts accountName
-    $client.create('Account',Name: accountName, OwnerId: owner["OwnerId"])
+    $client.create('Account',Name: accountName, OwnerId: owner["Owner_Id"])
     record = $client.query("SELECT Id,Name from Account where Name = \'#{accountName}\'")
     accRec = record.first.Id
     puts accRec.Id
