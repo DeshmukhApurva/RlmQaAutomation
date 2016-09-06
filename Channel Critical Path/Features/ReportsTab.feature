@@ -88,10 +88,10 @@ Feature: All features related to Reports - Reports To
     And I user login as a "Admin" user
     Then I should able to see the "Admin" page
     When I click on the "Reports" grid tab
-    And I navigate to "Portal Reports" folder
+    And I navigate to "Portal Reports (Installed Packages: CSM)" folder
     And user logout from "Admin" application
     And I user login in to "Channel Community" application
     Then I should able to see the "Channel Community" page
     And I should able to see the "Reports" tab
     When I click on "Reports" tab
-    Then I should able to see the "Portal Reports" records
+    Then I should able to see the "Portal Reports (Installed Packages: CSM)" records
