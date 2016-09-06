@@ -30,7 +30,9 @@ Feature: All features related to Service Source setup - Install Base Data Rules 
     Then I add update criteria for "OppFields" without values
     Then I clicked on "Add Filter Logic" link "OppFields"
     Then I verify validation message for undefined reference for "OppFields"
-
+    And I delete Product Criteria 
+    
+    
   @auto_generation_verification
   Scenario: Rally Test Case ID: TC3421,TC3426,TC3432,TC3431,TC3435,TC3436,TC3437,TC3438,TC3439,TC3444,TC3445,TC3449 - Auto Generate Assets on Renewal,Asset present on source opportunity
     When I Navigate to "ServiceSource Setup" tab

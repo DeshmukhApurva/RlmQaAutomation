@@ -33,6 +33,8 @@ Rally Test Case ID: TC3389,TC3392,TC3394,TC3403 : Opportunity Generation - Error
 	Then I add update criteria for "ProductFields" without values 
 	Then I clicked on "Add Filter Logic" link "ProductFields" 
 	Then I verify validation message for undefined reference for "ProductFields" 
+	And I delete Product Criteria
+	
 	
 	
 @generate_renewal_opportunity 
