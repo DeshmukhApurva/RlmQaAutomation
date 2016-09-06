@@ -1224,6 +1224,24 @@ And(/^I set the value of "([^"]*)" Custom Setting$/) do |customSettingName|
   end
 end
 
+And(/^I get ownerId of "([^"]*)" using map data "([^"]*)" and key "([^"]*)"$/) do |userRole, mapName, keyName|
+  begin
+    sleep 5
+    puts Time.new
+    arg = getSalesForceAPIinfo userRole
+    puts arg["userName"]
+
+    record = $client.query("SELECT Id FROM User where Username = \'#{arg["userName"]}\'")
+    userRec = record.first.Id.to_s
+    puts userRec
+    setDetails("Details.yml", mapName, keyName, userRec)
+    puts Time.new
+  rescue Exception => ex
+    puts ex.message
+    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
+  end
+end
+
 And(/^I create Account "([^"]*)" using map data "([^"]*)" and key "([^"]*)"$/) do |accName, mapName, keyName|
   begin
     sleep 5
@@ -1239,22 +1257,6 @@ And(/^I create Account "([^"]*)" using map data "([^"]*)" and key "([^"]*)"$/) d
     puts accRec.Id
     accId = accRec.Id
     setDetails("Details.yml", mapName, 'Account_Id', accId)
-  rescue Exception => ex
-    puts ex.message
-    puts ex.backtrace.select { |x| x.match(/step_definitions/) }
-  end
-end
-
-And(/^I get ownerId of "([^"]*)" using map data "([^"]*)" and key "([^"]*)"$/) do |userRole, mapName, keyName|
-  begin
-    sleep 5
-    puts Time.new
-    arg = getSalesForceAPIinfo userRole
-    record = $client.query("SELECT Id FROM User where Username = \'#{arg["userName"]}\'")
-    userRec = record.first
-    setDetails("Details.yml", mapName, keyName, userRec.Id)
-    puts userRec.Id
-    puts Time.new
   rescue Exception => ex
     puts ex.message
     puts ex.backtrace.select { |x| x.match(/step_definitions/) }
@@ -1281,7 +1283,6 @@ And(/^I create PLAY "([^"]*)" for object "([^"]*)" using map data "([^"]*)" and 
   end
 end
 
-
 And(/^I create Task "([^"]*)" in PLAY "([^"]*)" using map data "([^"]*)" and key "([^"]*)"$/) do |taskName, playName, mapName, keyName|
   begin
     sleep 5
@@ -1290,13 +1291,13 @@ And(/^I create Task "([^"]*)" in PLAY "([^"]*)" using map data "([^"]*)" and key
     playId = playName + "_Id"
     setDetails("Details.yml", mapName, keyName, taskName)
     $client.create!('ServiceSource1__CSM_Play_Task__c',ServiceSource1__CSM_Play__c: playId, Name: taskName, ServiceSource1__CSM_Type__c: 'Meeting', ServiceSource1__CSM_Days_Until_Due__c: '5', ServiceSource1__CSM_IsActive__c: true)
-    
+
     record = $client.query("SELECT Id,Name FROM ServiceSource1__CSM_Play_Task__c where ServiceSource1__CSM_Play__c = \'#{playId}\'")
     task = record.first
     setDetails("Details.yml", mapName, taskName + "_Id" ,task.Id)
     setDetails("Details.yml", mapName, taskName + "_Name" ,task.Id)
     puts "Task:" + task.Id + " " + task.Name
-    
+
     puts Time.new
   rescue Exception => ex
     puts ex.message
@@ -1311,9 +1312,9 @@ And(/^I create PLAYBOOK "([^"]*)" using PLAY "([^"]*)" map data "([^"]*)" and ke
     arg = getDetails mapName
 
     setDetails("Details.yml", mapName, keyName, playBookName)
-    
+
     $client.create!('ServiceSource1__CSM_Playbook__c', ServiceSource1__CSM_Display_Name__c: playBookName, ServiceSource1__CSM_IsActive__c: true, OwnerId: arg["Owner_Id"])
-    
+
     record = $client.query("SELECT Id,Name,ServiceSource1__CSM_Display_Name__c FROM ServiceSource1__CSM_Playbook__c where ServiceSource1__CSM_Display_Name__c = \'#{playBookName}\'")
     playBook = record.first
     setDetails("Details.yml", mapName,  playBookName + "_Id", playBook.Id)
@@ -1333,9 +1334,9 @@ And(/^I add PLAY "([^"]*)" to PLAYBOOk "([^"]*)" using map data "([^"]*)"$/) do 
     arg = getDetails mapName
     playId = playName + "_Id"
     playBookId = playBookName + "_Id"
-    
-    record = $client.create!('ServiceSource1__CSM_PlaybookPlay__c', ServiceSource1__CSM_Play__c: arg[playId], ServiceSource1__CSM_Playbook__c: arg[playBookId], OwnerId: arg["Owner_Id"])   
- 
+
+    record = $client.create!('ServiceSource1__CSM_PlaybookPlay__c', ServiceSource1__CSM_Play__c: arg[playId], ServiceSource1__CSM_Playbook__c: arg[playBookId], OwnerId: arg["Owner_Id"])
+
     puts "PlayBookPlay: " + record
     puts Time.new
   rescue Exception => ex
@@ -1351,13 +1352,13 @@ And(/^I create SPT "([^"]*)" using map data "([^"]*)" and key "([^"]*)"$/) do |s
     puts time
     arg = getDetails mapName
     setDetails("Details.yml", mapName, keyName, sptName)
-    
+
     $client.create!('ServiceSource1__CSM_Account_Plan_Template__c', ServiceSource1__CSM_Template_Name__c: sptName, ServiceSource1__CSM_isActive__c: true, ServiceSource1__CSM_Opp_Date__c: 'CloseDate', OwnerId: arg["Owner_Id"])
     record = $client.query("SELECT Id,Name FROM ServiceSource1__CSM_Account_Plan_Template__c where ServiceSource1__CSM_Template_Name__c = \'#{sptName}\'")
     sPT = record.first
     setDetails("Details.yml", mapName, sptName + "_Id", sPT.Id)
     setDetails("Details.yml", mapName, sptName + "_Name", sPT.Name)
-    puts "SPT: " + sPT.Id + " " + sPT.Name    
+    puts "SPT: " + sPT.Id + " " + sPT.Name
 
     $client.create!('ServiceSource1__CSM_Account_Plan_Phase__c', ServiceSource1__CSM_Account_Plan_Template__c: sPT.Id, ServiceSource1__CSM_Length__c: '10', ServiceSource1__CSM_Order__c: '1', ServiceSource1__CSM_Phase_Name__c: 'Automation SPT1 Phase')
     puts Time.new
@@ -1374,9 +1375,9 @@ And(/^I add PLAYBOOk "([^"]*)" to SPT "([^"]*)" using map data "([^"]*)"$/) do |
     arg = getDetails mapName
     sPTId = sPTName + "_Id"
     playBookId = playBookName + "_Id"
-    
-    record = $client.create!('ServiceSource1__CSM_Account_Plan_Playbook__c', ServiceSource1__CSM_Account_Plan_Template__c: arg[sPTId], ServiceSource1__CSM_Playbook__c: arg[playBookId], OwnerId: arg["Owner_Id"])   
-    
+
+    record = $client.create!('ServiceSource1__CSM_Account_Plan_Playbook__c', ServiceSource1__CSM_Account_Plan_Template__c: arg[sPTId], ServiceSource1__CSM_Playbook__c: arg[playBookId], OwnerId: arg["Owner_Id"])
+
     puts "PlayBookPlay: " + record
     puts Time.new
   rescue Exception => ex
