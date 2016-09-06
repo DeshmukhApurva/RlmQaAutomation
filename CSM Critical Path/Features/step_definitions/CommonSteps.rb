@@ -1228,6 +1228,7 @@ And(/^I create Account "([^"]*)" using map data "([^"]*)" and key "([^"]*)"$/) d
   begin
     sleep 5
     owner = getDetails mapName
+    time = Time.new
     accDateTime = time.hour.to_s + time.min.to_s + time.sec.to_s
     accountName = accName + accDateTime.to_s
     setDetails("Details.yml", mapName, keyName, accountName)

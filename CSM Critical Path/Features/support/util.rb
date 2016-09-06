@@ -127,7 +127,8 @@ def setDetails(fileName, mapName, keyName, value)
   begin
     yamlinput = "../features/support/test_data/#{fileName}"
     myoptions = YAML.load_file(yamlinput)
-    myoptions[mapName][keyName] = value
+    #myoptions[mapName][keyName] = value
+    myoptions[mapName] = {keyName=>value}
     File.open("../features/support/test_data/#{fileName}", 'w') {|f| f.write myoptions.to_yaml }
     #File.open("../features/support/test_data/#{fileName}", 'w+') { |f| YAML.dump(myoptions, f) }
   rescue Exception => ex
