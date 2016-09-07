@@ -72,10 +72,10 @@ Scenario: Rally Test Case ID: TC4306,TC4307,TC4308,TC4309,TC4310 : Add attachmen
     And I click on the "Grant Access"
     And I delete the "DataStage.pdf" attachment
     Then I should be able to see the partner opportunity details
-    When I click on the "Opportunities" grid tab
-    And I open the existing opportunity
-    And I set the "Set as Primary" opportunity
-    Then I should able to see the selected "Set as Primary" opportunity
+    #When I click on the "Opportunities" grid tab
+    #And I open the existing opportunity
+    #And I set the "Set as Primary" opportunity
+    #Then I should able to see the selected "Set as Primary" opportunity
 
 
 @opportunity_access_with_parent_account
