@@ -71,7 +71,9 @@ Scenario:
 	Rally Test Case ID : TC2852,TC2856,TC2857,TC2859,TC2862 : Create Success Plan Template 
 	#   	When I click on "All Tabs" tab
 	When I click on "ServiceSource Setup" link 
-	Then I create a new Success Plan Template with Template Name "PES New SPlan Template" PhaseName "PES SP Template Phase" Days "20" Indicator "Health Status" with PlayBook "PES PlayBook" Criteria1 Type: "Success" Criteria2 Type: "Meet" Criteria3 Type: "Fail" Criteria1: "Healthy" Criteria2: "Low Adoption" Criteria3: "Pending Churn" 
+	Then I create a new Success Plan Template with Template Name "TestcccPES New SPlan Template" and Playbook "PES PlayBook"
+	And I Add phase with PhaseName "PES SP Template Phase" with Days "20" 
+	And I Add Indicator "Account Name"  
 	
 	#@SuccessPlanCreation 
 	#Scenario: Rally Test Case ID: TC2895 : Create Success plan 
